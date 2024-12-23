@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap Settings.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
@@ -124,9 +129,11 @@ $ping_bing                 = ! empty( $_view['options']['ping-bing'] );
 					)
 				);
 				if ( $override_native ) {
-					echo $settings_tab; // phpcs:ignore
+					// $settings_tab is escaped in the template file
+					echo $settings_tab; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				} else {
-					printf( '<div style="display: none;">%s</div>', $settings_tab ); // phpcs:ignore
+					/* translators: %s: settings tab */
+					printf( '<div style="display: none;">%s</div>', $settings_tab ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
 				?>
 

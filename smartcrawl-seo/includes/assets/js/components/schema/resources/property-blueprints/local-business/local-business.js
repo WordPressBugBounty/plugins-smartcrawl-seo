@@ -168,7 +168,7 @@ const LocalBusiness = {
 	},
 	geo: {
 		id: id(),
-		label: __('Geo Coordinates'),
+		label: __('Geo Coordinates', 'smartcrawl-seo'),
 		type: 'GeoCoordinates',
 		disallowAddition: true,
 		properties: {
@@ -193,7 +193,8 @@ const LocalBusiness = {
 				value: '',
 				disallowDeletion: true,
 				description: __(
-					'The longitude of the business location. The precision should be at least 5 decimal places.'
+					'The longitude of the business location. The precision should be at least 5 decimal places.',
+					'smartcrawl-seo'
 				),
 				placeholder: __('E.g. -122.08585', 'smartcrawl-seo'),
 			},
@@ -210,7 +211,7 @@ const LocalBusiness = {
 		properties: {
 			0: {
 				id: id(),
-				label: __('Opening Hours'),
+				label: __('Opening Hours', 'smartcrawl-seo'),
 				type: 'OpeningHoursSpecification',
 				disallowAddition: true,
 				properties: LocalOpeningHoursSpecification,

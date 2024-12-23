@@ -52,7 +52,7 @@ class Schema extends Admin_Settings {
 			array( $input, $validated ),
 			'6.4.2',
 			'smartcrawl_after_sanitize_schema',
-			__( 'Please use our new hook `smartcrawl_after_sanitize_schema` in SmartCrawl.' ),
+			__( 'Please use our new hook `smartcrawl_after_sanitize_schema` in SmartCrawl.', 'smartcrawl-seo' ),
 		);
 
 		/**
@@ -84,7 +84,6 @@ class Schema extends Admin_Settings {
 	 */
 	public function defaults() {
 		$options = Settings::get_component_options( $this->name );
-		$options = is_array( $options ) ? $options : array();
 
 		foreach ( $this->get_default_options() as $opt => $default ) {
 			if ( ! isset( $options[ $opt ] ) ) {
@@ -216,8 +215,8 @@ class Schema extends Admin_Settings {
 	/**
 	 * Get the text of a right operand for a condition rule.
 	 *
-	 * @param string $lhs Left operand value for a condition rule.
-	 * @param string $rhs Right operand value for a condition rule.
+	 * @param string     $lhs Left operand value for a condition rule.
+	 * @param string|int $rhs Right operand value for a condition rule.
 	 *
 	 * @return string
 	 */
@@ -283,12 +282,10 @@ class Schema extends Admin_Settings {
 		$results      = array();
 		if ( empty( $search_query ) ) {
 			wp_send_json( array( 'results' => $results ) );
-
-			return;
 		}
 
 		global $wpdb;
-		$meta_keys = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT meta_key from $wpdb->postmeta WHERE meta_key LIKE %s", '%' . $wpdb->esc_like( $search_query ) . '%' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$meta_keys = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT meta_key from $wpdb->postmeta WHERE meta_key LIKE %s", '%' . $wpdb->esc_like( $search_query ) . '%' ) );
 		foreach ( $meta_keys as $meta_key ) {
 			$results[] = array(
 				'id'   => $meta_key,
@@ -338,10 +335,7 @@ class Schema extends Admin_Settings {
 	 */
 	public function options_page() {
 		$options = Settings::get_component_options( $this->name );
-		$options = wp_parse_args(
-			( is_array( $options ) ? $options : array() ),
-			$this->get_default_options()
-		);
+		$options = wp_parse_args( $options, $this->get_default_options() );
 
 		$social_options = Settings::get_component_options( Settings::COMP_SOCIAL );
 		$arguments      = array(
@@ -381,7 +375,7 @@ class Schema extends Admin_Settings {
 			/**
 			 * Post object.
 			 *
-			 * @var $page \WP_Post
+			 * @var \WP_Post $page
 			 */
 			$pages[ $page->ID ] = $page->post_title;
 		}
@@ -503,10 +497,6 @@ class Schema extends Admin_Settings {
 	 */
 	private function validate_setting( $key, $value ) {
 		$validation_method = $this->get_validation_method( $key );
-
-		if ( is_array( $value ) ) {
-			return array_map( $validation_method, $value );
-		}
 
 		return call_user_func( $validation_method, $value );
 	}
@@ -646,7 +636,7 @@ class Schema extends Admin_Settings {
 	 * @return array
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-schema-nonce' ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-schema-nonce' )
 			? $_POST
 			: array();
 	}

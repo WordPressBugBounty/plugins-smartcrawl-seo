@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Onpage Settings section.
+ *
+ * @package Smartcrwal
+ */
+
 $separators = empty( $separators ) ? array() : $separators;
 ?>
 <div class="sui-box-settings-row">

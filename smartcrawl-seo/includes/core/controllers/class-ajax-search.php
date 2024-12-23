@@ -44,8 +44,6 @@ class Ajax_Search extends Controller {
 
 		if ( empty( $search_query ) && empty( $post_id ) ) {
 			wp_send_json( array( 'results' => array() ) );
-
-			return;
 		}
 
 		$results = array();
@@ -87,18 +85,13 @@ class Ajax_Search extends Controller {
 		$request_type = \smartcrawl_get_array_value( $_GET, 'request_type' );
 		$term_id      = \smartcrawl_get_array_value( $_GET, 'id' );
 		// phpcs:enable
+
 		$results = array();
+
 		if ( empty( $search_query ) && empty( $term_id ) ) {
 			wp_send_json( array( 'results' => $results ) );
-
-			return;
 		}
 
-		/**
-		 * Term.
-		 *
-		 * @var $terms \WP_Term
-		 */
 		$args = array(
 			'hide_empty' => false,
 			'taxonomy'   => $taxonomy,
@@ -112,13 +105,16 @@ class Ajax_Search extends Controller {
 			$args['search'] = $search_query;
 			$args['number'] = 10;
 		}
+
 		$terms = get_terms( $args );
+
 		foreach ( $terms as $term ) {
 			$results[] = array(
 				'id'   => $term->term_id,
 				'text' => $term->name,
 			);
 		}
+
 		wp_send_json( array( 'results' => $results ) );
 	}
 
@@ -137,9 +133,11 @@ class Ajax_Search extends Controller {
 			'type'  => '',
 			'date'  => '',
 		);
-		if ( empty( $post ) || empty( $post->ID ) ) {
+
+		if ( empty( $post->ID ) ) {
 			return $result;
 		}
+
 		static $date_format;
 
 		if ( empty( $date_format ) ) {

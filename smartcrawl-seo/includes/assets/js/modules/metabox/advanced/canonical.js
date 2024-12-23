@@ -13,7 +13,7 @@ export default class Canonical extends React.Component {
 				label={__('Canonical', 'smartcrawl-seo')}
 				description={__(
 					'If you have several similar versions of this page you can point search engines to the canonical or "genuine" version to avoid duplicate content issues.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			>
 				<TextInputField
@@ -21,7 +21,7 @@ export default class Canonical extends React.Component {
 					name="wds_canonical"
 					description={__(
 						'Enter the full canonical URL including http:// or https://',
-						'smartcrawl-seo'
+						'wds'
 					)}
 					value={canonical.url ? canonical.url : ''}
 				></TextInputField>

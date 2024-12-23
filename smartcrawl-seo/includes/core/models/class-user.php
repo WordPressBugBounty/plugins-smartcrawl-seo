@@ -1,7 +1,17 @@
 <?php
+/**
+ * User class for managing user-related functionality in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Models;
 
+/**
+ * User class.
+ *
+ * Manages user-related functionality in SmartCrawl.
+ */
 class User extends Model {
 
 	/**
@@ -18,6 +28,13 @@ class User extends Model {
 	 */
 	private $user;
 
+	/**
+	 * Constructor.
+	 *
+	 * Initializes the user object based on the provided user ID.
+	 *
+	 * @param int|string|bool $user_id User ID, or login|email.
+	 */
 	public function __construct( $user_id = false ) {
 		if ( ! empty( $user_id ) && is_numeric( $user_id ) ) {
 			$this->user_id = (int) $user_id;
@@ -60,7 +77,7 @@ class User extends Model {
 	 * @return User Owner user reference.
 	 */
 	public static function owner() {
-		$by_id = get_user_by( 'ID', apply_filters( 'wds-site-owner-id', 1 ) ); // phpcs:ignore
+		$by_id = get_user_by( 'ID', apply_filters( 'wds-site-owner-id', 1 ) );
 		if ( $by_id && in_array( 'administrator', $by_id->roles, true ) ) {
 			return self::get( $by_id );
 		}
@@ -98,6 +115,11 @@ class User extends Model {
 		);
 	}
 
+	/**
+	 * Returns user last name.
+	 *
+	 * @return string Last name.
+	 */
 	public function get_last_name() {
 		return $this->user->user_lastname;
 	}
@@ -120,6 +142,11 @@ class User extends Model {
 		);
 	}
 
+	/**
+	 * Returns user username.
+	 *
+	 * @return string Username.
+	 */
 	public function get_username() {
 		return $this->user->user_login;
 	}
@@ -197,23 +224,50 @@ class User extends Model {
 		return apply_filters( $this->get_filter( 'user_url' ), $url, $this->get_id() );
 	}
 
+	/**
+	 * Gets user URLs.
+	 *
+	 * @return array List of user URLs.
+	 */
 	public function get_user_urls() {
 		// TODO: fetch user URLs.
 		return array();
 	}
 
+	/**
+	 * Returns the type of the model.
+	 *
+	 * @return string Model type.
+	 */
 	public function get_type() {
 		return 'user';
 	}
 
+	/**
+	 * Returns user email.
+	 *
+	 * @return string User email.
+	 */
 	public function get_email() {
 		return $this->user->user_email;
 	}
 
+	/**
+	 * Returns user description.
+	 *
+	 * @return string User description.
+	 */
 	public function get_description() {
 		return get_the_author_meta( 'description', $this->get_id() );
 	}
 
+	/**
+	 * Gets user avatar URL.
+	 *
+	 * @param int $size Avatar size.
+	 *
+	 * @return string Avatar URL.
+	 */
 	public function get_avatar_url( $size ) {
 		return get_avatar_url( $this->get_id(), $size );
 	}

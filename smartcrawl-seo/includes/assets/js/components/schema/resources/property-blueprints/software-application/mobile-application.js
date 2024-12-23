@@ -10,7 +10,7 @@ const MobileApplication = merge({}, SoftwareApplication, {
 		label: __('Carrier Requirements', 'smartcrawl-seo'),
 		description: __(
 			'Specifies specific carrier(s) requirements for the application.',
-			'smartcrawl-seo'
+			'wds'
 		),
 		type: 'Text',
 		source: 'custom_text',

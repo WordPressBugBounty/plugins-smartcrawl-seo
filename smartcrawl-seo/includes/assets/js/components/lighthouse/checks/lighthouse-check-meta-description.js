@@ -132,7 +132,9 @@ export default class LighthouseCheckMetaDescription extends React.Component {
 					</p>
 				</div>
 
-				<LighthouseToggle text={__('Read More - Best practices')}>
+				<LighthouseToggle
+					text={__('Read More - Best practices', 'smartcrawl-seo')}
+				>
 					<strong>
 						{__(
 							'Meta description best practices',
@@ -180,9 +182,9 @@ export default class LighthouseCheckMetaDescription extends React.Component {
 					<div className="wds-lh-highlight-container">
 						<p>
 							<strong className="wds-lh-red-word">
-								{__('Don’t. ')}
+								{__('Don’t. ', 'smartcrawl-seo')}
 							</strong>
-							{__('Too vague.')}
+							{__('Too vague.', 'smartcrawl-seo')}
 						</p>
 						<div className="wds-lh-highlight wds-lh-highlight-error">
 							<LighthouseTag
@@ -201,7 +203,7 @@ export default class LighthouseCheckMetaDescription extends React.Component {
 							<strong className="wds-lh-green-word">
 								{__('Do. ')}
 							</strong>
-							{__('Descriptive yet concise.')}
+							{__('Descriptive yet concise.', 'smartcrawl-seo')}
 						</p>
 						<div className="wds-lh-highlight wds-lh-highlight-success">
 							<LighthouseTag

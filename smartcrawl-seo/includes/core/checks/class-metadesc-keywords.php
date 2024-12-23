@@ -24,24 +24,20 @@ class Metadesc_Keywords extends Post_Check {
 	private $state;
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @since 3.4.0
 	 *
 	 * @return string
 	 */
 	public function get_status_msg() {
-		if ( - 1 === $this->state ) {
-			return __( "We couldn't find a description to check for keywords", 'smartcrawl-seo' );
-		}
-
 		return false === $this->state
 			? __( "The SEO description doesn't contain your focus keywords", 'smartcrawl-seo' )
 			: __( 'The SEO description contains your focus keywords', 'smartcrawl-seo' );
 	}
 
 	/**
-	 * Apply check to the subject.
+	 * Applies check to the subject.
 	 *
 	 * @since 3.4.0
 	 *
@@ -65,7 +61,7 @@ class Metadesc_Keywords extends Post_Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @since 3.6.0
 	 *

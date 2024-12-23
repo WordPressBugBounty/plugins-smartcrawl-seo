@@ -90,7 +90,7 @@ abstract class Module_Controller extends Controller {
 			get_option( $this->module_name, array() ),
 			array_map(
 				function() {
-					return array(); // phpcs:ignore Universal.CodeAnalysis.ConstructorDestructorReturn.ReturnValueFound
+					return array();
 				},
 				$this->submodules
 			)
@@ -135,7 +135,7 @@ abstract class Module_Controller extends Controller {
 			add_filter( 'smartcrawl_admin_bar_menu', array( $this, 'admin_bar_menu' ), 98 );
 		}
 
-		add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
+		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_settings_scripts' ) );
@@ -167,14 +167,14 @@ abstract class Module_Controller extends Controller {
 	/**
 	 * Terminates submodules.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function stop() {
 		foreach ( $this->submodules as $submodule ) {
 			$submodule->stop();
 		}
 
-		return parent::stop();
+		parent::stop();
 	}
 
 	/**
@@ -222,7 +222,7 @@ abstract class Module_Controller extends Controller {
 	/**
 	 * Adds a submenu page for module.
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	public function admin_menu() {
 		$menu_title = apply_filters( 'smartcrawl_admin_settings_submenu_title', $this->module_title, $this->module_name );

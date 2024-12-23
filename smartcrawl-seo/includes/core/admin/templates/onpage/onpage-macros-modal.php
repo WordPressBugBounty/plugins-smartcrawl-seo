@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Macros Modal.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

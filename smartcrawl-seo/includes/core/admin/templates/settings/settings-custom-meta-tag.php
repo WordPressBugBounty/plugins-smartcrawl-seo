@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Settings Custom Meta Tag.
+ *
+ * @package Smartcrwal
+ */
+
 $value = empty( $value ) ? '' : $value;
 ?>
 <div class="wds-custom-meta-tag">

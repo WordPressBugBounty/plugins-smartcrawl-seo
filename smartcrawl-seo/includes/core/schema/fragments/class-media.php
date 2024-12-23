@@ -1,4 +1,9 @@
 <?php
+/**
+ * Media class for handling media schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
@@ -6,26 +11,45 @@ use SmartCrawl\Entities;
 use SmartCrawl\Html;
 use SmartCrawl\Schema;
 
+/**
+ * Class Media
+ *
+ * Handles media schema fragments.
+ */
 class Media extends Fragment {
+
 	/**
+	 * Post entity.
+	 *
 	 * @var Entities\Post
 	 */
 	private $post;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Schema\Utils
 	 */
 	private $utils;
+
 	/**
+	 * Schema data.
+	 *
 	 * @var array
 	 */
 	private $schema = array();
+
 	/**
+	 * Media schema data controller.
+	 *
 	 * @var Media
 	 */
 	private $media_schema_data_controller;
 
 	/**
-	 * @param $post
+	 * Constructor.
+	 *
+	 * @param Entities\Post $post The post entity.
 	 */
 	public function __construct( $post ) {
 		$this->post                         = $post;
@@ -34,7 +58,9 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @return array
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$wp_post = $this->post->get_wp_post();
@@ -54,7 +80,9 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $cache
+	 * Adds oEmbed schema data.
+	 *
+	 * @param array $cache The cache data.
 	 *
 	 * @return void
 	 */
@@ -91,9 +119,11 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $data
+	 * Retrieves audio schema data.
 	 *
-	 * @return array
+	 * @param array $data The audio data.
+	 *
+	 * @return array The audio schema data.
 	 */
 	private function get_audio_schema( $data ) {
 		return $this->media_data_to_schema(
@@ -109,9 +139,11 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $data
+	 * Retrieves video schema data.
 	 *
-	 * @return mixed
+	 * @param array $data The video data.
+	 *
+	 * @return array The video schema data.
 	 */
 	private function get_video_schema( $data ) {
 		$schema = $this->media_data_to_schema(
@@ -137,10 +169,12 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $data
-	 * @param $embed_data
+	 * Retrieves YouTube schema data.
 	 *
-	 * @return mixed
+	 * @param array $data The YouTube data.
+	 * @param array $embed_data The embed data.
+	 *
+	 * @return array The YouTube schema data.
 	 */
 	private function get_youtube_schema( $data, $embed_data ) {
 		$schema = $this->media_data_to_schema(
@@ -168,10 +202,12 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $schema
-	 * @param $embed_data
+	 * Adds embed URL property to schema.
 	 *
-	 * @return mixed
+	 * @param array $schema The schema data.
+	 * @param array $embed_data The embed data.
+	 *
+	 * @return array The updated schema data.
 	 */
 	private function add_embed_url_property( $schema, $embed_data ) {
 		if ( isset( $embed_data['html'] ) ) {
@@ -185,9 +221,11 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $seconds
+	 * Converts seconds to duration format.
 	 *
-	 * @return string
+	 * @param int $seconds The duration in seconds.
+	 *
+	 * @return string The duration in ISO 8601 format.
 	 */
 	private function seconds_to_duration( $seconds ) {
 		$mins = (int) gmdate( 'i', $seconds );
@@ -197,9 +235,11 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $data
+	 * Retrieves duration from data.
 	 *
-	 * @return string
+	 * @param array $data The data containing duration.
+	 *
+	 * @return string The duration in ISO 8601 format.
 	 */
 	private function get_duration( $data ) {
 		$seconds = \smartcrawl_get_array_value( $data, 'duration' );
@@ -211,11 +251,13 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $mapping
-	 * @param $data
-	 * @param $type
+	 * Converts media data to schema format.
 	 *
-	 * @return array
+	 * @param array $mapping The mapping of source keys to target keys.
+	 * @param array $data The media data.
+	 * @param array $type The schema type.
+	 *
+	 * @return array The schema data.
 	 */
 	private function media_data_to_schema( $mapping, $data, $type ) {
 		$schema = array(
@@ -242,10 +284,12 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param       $data
-	 * @param array $schema
+	 * Adds YouTube thumbnail data to schema.
 	 *
-	 * @return array
+	 * @param array $data The YouTube data.
+	 * @param array $schema The schema data.
+	 *
+	 * @return array The updated schema data.
 	 */
 	private function add_youtube_thumbnail_data( $data, array $schema ) {
 		$thumbnails            = \smartcrawl_get_array_value( $data, 'thumbnails' );
@@ -272,7 +316,9 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $post
+	 * Adds attachment schema data.
+	 *
+	 * @param \WP_Post $post The post object.
 	 *
 	 * @return void
 	 */
@@ -302,10 +348,12 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $attachment
-	 * @param $video_element_html
+	 * Retrieves video attachment schema data.
 	 *
-	 * @return array
+	 * @param \WP_Post $attachment The attachment object.
+	 * @param string   $video_element_html The video element HTML.
+	 *
+	 * @return array The video attachment schema data.
 	 */
 	private function get_video_attachment_schema( $attachment, $video_element_html ) {
 		$attachment_url    = wp_get_attachment_url( $attachment->ID );
@@ -321,9 +369,11 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $video_element_html
+	 * Retrieves video poster attribute.
 	 *
-	 * @return mixed|string|null
+	 * @param string $video_element_html The video element HTML.
+	 *
+	 * @return string The poster URL.
 	 */
 	private function get_video_poster_attribute( $video_element_html ) {
 		$poster_values = Html::find_attributes( 'video', 'poster', $video_element_html );
@@ -336,9 +386,11 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $attachment
+	 * Retrieves audio attachment schema data.
 	 *
-	 * @return array
+	 * @param \WP_Post $attachment The attachment object.
+	 *
+	 * @return array The audio attachment schema data.
 	 */
 	private function get_audio_attachment_schema( $attachment ) {
 		return $this->get_attachment_schema(
@@ -349,29 +401,35 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $attachment \WP_Post
+	 * Checks if attachment is a video.
 	 *
-	 * @return bool
+	 * @param \WP_Post $attachment The attachment object.
+	 *
+	 * @return bool True if the attachment is a video, false otherwise.
 	 */
 	private function is_mime_type_video( $attachment ) {
 		return strpos( $attachment->post_mime_type, 'video/' ) !== false;
 	}
 
 	/**
-	 * @param $attachment \WP_Post
+	 * Checks if attachment is an audio.
 	 *
-	 * @return bool
+	 * @param \WP_Post $attachment The attachment object.
+	 *
+	 * @return bool True if the attachment is an audio, false otherwise.
 	 */
 	private function is_mime_type_audio( $attachment ) {
 		return strpos( $attachment->post_mime_type, 'audio/' ) !== false;
 	}
 
 	/**
-	 * @param $type
-	 * @param $attachment \WP_Post
-	 * @param $attachment_url
+	 * Retrieves attachment schema data.
 	 *
-	 * @return array
+	 * @param string   $type The schema type.
+	 * @param \WP_Post $attachment The attachment object.
+	 * @param string   $attachment_url The attachment URL.
+	 *
+	 * @return array The attachment schema data.
 	 */
 	private function get_attachment_schema( $type, $attachment, $attachment_url ) {
 		$description = $attachment->post_excerpt
@@ -388,7 +446,9 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @param $schema
+	 * Adds schema data.
+	 *
+	 * @param array $schema The schema data.
 	 *
 	 * @return void
 	 */
@@ -397,14 +457,18 @@ class Media extends Fragment {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if audio is enabled.
+	 *
+	 * @return bool True if audio is enabled, false otherwise.
 	 */
 	private function is_audio_enabled() {
 		return (bool) $this->utils->get_schema_option( 'schema_enable_audio' );
 	}
 
 	/**
-	 * @return bool
+	 * Checks if video is enabled.
+	 *
+	 * @return bool True if video is enabled, false otherwise.
 	 */
 	private function is_video_enabled() {
 		return (bool) $this->utils->get_schema_option( 'schema_enable_video' );

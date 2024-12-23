@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap Reporting section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

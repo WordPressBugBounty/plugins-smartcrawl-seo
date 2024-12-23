@@ -90,7 +90,7 @@ class Metabox extends Controllers\Controller {
 		add_filter( 'wds-taxonomy-meta-wds_title', array( $this, 'filter_term_meta_title' ), 10, 2 );
 		add_filter( 'wds-taxonomy-meta-wds_desc', array( $this, 'filter_term_meta_desc' ), 10, 2 );
 
-		add_action( 'default_hidden_columns', array( $this, 'hide_robots_column_by_default' ) );
+		add_filter( 'default_hidden_columns', array( $this, 'hide_robots_column_by_default' ) );
 		add_filter( 'page_row_actions', array( $this, 'post_row_actions' ), 10, 2 );
 		add_filter( 'post_row_actions', array( $this, 'post_row_actions' ), 10, 2 );
 	}
@@ -356,33 +356,37 @@ class Metabox extends Controllers\Controller {
 	 *
 	 * @param int $post_id Post ID.
 	 *
-	 * @return int|void
+	 * @return void
 	 */
 	public function save_postdata( $post_id ) {
 		$request_data = $this->get_request_data();
+
 		if ( ! $post_id || empty( $request_data ) ) {
 			return;
 		}
 
 		$post = $this->get_post();
+
 		if ( empty( $post ) ) {
 			$post = get_post( $post_id );
 		}
 
 		// Determine posted type.
 		$post_type_rq = ! empty( $request_data['post_type'] ) ? sanitize_key( $request_data['post_type'] ) : false;
+
 		if ( 'page' === $post_type_rq && ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
+			return;
 		} elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return $post_id;
+			return;
 		}
 
 		$ptype = ! empty( $post_type_rq )
 			? $post_type_rq
 			: ( ! empty( $post->post_type ) ? $post->post_type : false );
+
 		// Do not process post stuff for non-public post types.
 		if ( ! in_array( $ptype, get_post_types( array( 'public' => true ) ), true ) ) {
-			return $post_id;
+			return;
 		}
 
 		if ( ! empty( $request_data['wds-opengraph'] ) ) {
@@ -401,6 +405,7 @@ class Metabox extends Controllers\Controller {
 
 		if ( isset( $request_data['wds_focus'] ) ) {
 			$focus = stripslashes_deep( $request_data['wds_focus'] );
+
 			if ( trim( $focus ) === '' ) {
 				delete_post_meta( $post_id, '_wds_focus-keywords' );
 			} else {
@@ -414,12 +419,14 @@ class Metabox extends Controllers\Controller {
 			if ( in_array( $key, array( 'wds-opengraph', 'wds_focus', 'wds-twitter' ), true ) ) {
 				continue;
 			} // We already handled those.
+
 			if ( ! preg_match( '/^wds_/', $key ) ) {
 				continue;
 			}
 
 			$id   = "_$key";
 			$data = $value;
+
 			if ( is_array( $value ) ) {
 				$data = join( ',', $value );
 			}
@@ -500,26 +507,28 @@ class Metabox extends Controllers\Controller {
 				( \smartcrawl_get_value( 'meta-robots-nofollow', $id ) ? 'nofollow' : 'follow' ),
 			);
 			$meta_robots     = join( ',', $meta_robots_arr );
-			if ( empty( $meta_robots ) ) {
-				$meta_robots = 'index,follow';
-			}
+
 			echo esc_html( ucwords( str_replace( ',', ', ', $meta_robots ) ) );
 
 			// Show additional robots data.
 			$advanced = array_filter( array_map( 'trim', explode( ',', \smartcrawl_get_value( 'meta-robots-adv', $id ) ) ) );
+
 			if ( ! empty( $advanced ) ) {
-				$adv_map    = array(
+				$adv_map = array(
 					'noodp'     => __( 'No ODP', 'smartcrawl-seo' ),
 					'noydir'    => __( 'No YDIR', 'smartcrawl-seo' ),
 					'noarchive' => __( 'No Archive', 'smartcrawl-seo' ),
 					'nosnippet' => __( 'No Snippet', 'smartcrawl-seo' ),
 				);
+
 				$additional = array();
+
 				foreach ( $advanced as $key ) {
 					if ( ! empty( $adv_map[ $key ] ) ) {
 						$additional[] = $adv_map[ $key ];
 					}
 				}
+
 				if ( ! empty( $additional ) ) {
 					echo '<br /><small>' . esc_html( join( ', ', $additional ) ) . '</small>';
 				}
@@ -650,10 +659,10 @@ class Metabox extends Controllers\Controller {
 	/**
 	 * Manage to return value from request params.
 	 *
-	 * @param string $request_param Key parameter of request.
-	 * @param mixed  $default       Default value.
-	 * @param bool   $single        Whether to return only the first value of the specified key.
-	 * @param Entity $entity        Entity to get value.
+	 * @param string      $request_param Key parameter of request.
+	 * @param mixed       $default       Default value.
+	 * @param bool        $single        Whether to return only the first value of the specified key.
+	 * @param Entity|null $entity        Entity to get value.
 	 *
 	 * @return mixed
 	 */
@@ -686,7 +695,7 @@ class Metabox extends Controllers\Controller {
 	 * @return mixed.
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-metabox-nonce' ) ? stripslashes_deep( $_POST ) : array(); // phpcs:ignore
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-metabox-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 
 	/**

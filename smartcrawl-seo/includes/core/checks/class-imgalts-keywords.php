@@ -18,7 +18,7 @@ class Imgalts_Keywords extends Check {
 	/**
 	 * State of the check.
 	 *
-	 * @var $state
+	 * @var bool
 	 */
 	private $state;
 
@@ -37,7 +37,7 @@ class Imgalts_Keywords extends Check {
 	private $images_with_focus_count = 0;
 
 	/**
-	 * Get status text.
+	 * Retrieves status text.
 	 *
 	 * @return string
 	 */
@@ -63,7 +63,7 @@ class Imgalts_Keywords extends Check {
 	}
 
 	/**
-	 * Apply the check to subject.
+	 * Applies the check to subject.
 	 *
 	 * @return bool
 	 */
@@ -120,7 +120,7 @@ class Imgalts_Keywords extends Check {
 	}
 
 	/**
-	 * Get percentage of images with focus keywords.
+	 * Retrieves percentage of images with focus keywords.
 	 *
 	 * @return float|int
 	 */
@@ -136,7 +136,7 @@ class Imgalts_Keywords extends Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @since 3.4.0
 	 *

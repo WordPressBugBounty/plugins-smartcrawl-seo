@@ -247,7 +247,13 @@ class Collection {
 	 * @return bool
 	 */
 	private function delete_config_data_from_storage( $config ) {
-		return delete_option( $this->config_option_id( $config->get_id() ) );
+		$config_id = $config->get_id();
+
+		if ( ! $config_id ) {
+			return false;
+		}
+
+		return delete_option( $this->config_option_id( $config_id ) );
 	}
 
 	/**
@@ -326,7 +332,7 @@ class Collection {
 	/**
 	 * Retrieves config by hub ID.
 	 *
-	 * @param int $hub_id Hub ID.
+	 * @param string $hub_id Hub ID.
 	 *
 	 * @return Model|null
 	 */
@@ -370,15 +376,20 @@ class Collection {
 	 */
 	private function get_hub_configs() {
 		$hub_configs_array = $this->service->get_configs();
-		if ( empty( $hub_configs_array ) && ! is_array( $hub_configs_array ) ) {
+
+		if ( empty( $hub_configs_array ) ) {
 			return false;
 		}
+
 		$hub_configs = array();
+
 		foreach ( $hub_configs_array as $hub_config_data ) {
 			$hub_config = Model::create_from_hub_data( $hub_config_data );
-			if ( ! $hub_config ) {
+
+			if ( ! $hub_config || ! $hub_config->get_hub_id() ) {
 				return false;
 			}
+
 			$hub_configs[ $this->id_to_key( $hub_config->get_hub_id() ) ] = $hub_config;
 		}
 

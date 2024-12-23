@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage 404 section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

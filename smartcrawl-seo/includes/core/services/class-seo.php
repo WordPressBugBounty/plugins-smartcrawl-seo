@@ -1,9 +1,19 @@
 <?php
+/**
+ * Seo_Free class for handling free SEO services in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Services;
 
 use SmartCrawl\Seo_Report;
 
+/**
+ * Class Seo_Free
+ *
+ * Handles free SEO services.
+ */
 class Seo extends Service {
 
 	const ERR_BASE_API_ISSUE = 40;
@@ -16,22 +26,53 @@ class Seo extends Service {
 
 	const ERR_BASE_GENERIC = 59;
 
+	/**
+	 * Retrieves known verbs.
+	 *
+	 * @return array The known verbs.
+	 */
 	public function get_known_verbs() {
 		return array();
 	}
 
+	/**
+	 * Checks if the verb is cacheable.
+	 *
+	 * @param string $verb The verb to check.
+	 *
+	 * @return bool False as no verb is cacheable.
+	 */
 	public function is_cacheable_verb( $verb ) {
 		return false;
 	}
 
+	/**
+	 * Retrieves the service base URL.
+	 *
+	 * @return string|false The service base URL or false if not available.
+	 */
 	public function get_service_base_url() {
 		return false;
 	}
 
+	/**
+	 * Retrieves the request URL for the given verb.
+	 *
+	 * @param string $verb The verb to get the request URL for.
+	 *
+	 * @return string|false The request URL or false if the verb is empty.
+	 */
 	public function get_request_url( $verb ) {
 		return false;
 	}
 
+	/**
+	 * Retrieves the request arguments for the given verb.
+	 *
+	 * @param string $verb The verb to get the request arguments for.
+	 *
+	 * @return array The request arguments.
+	 */
 	public function get_request_arguments( $verb ) {
 		return array();
 	}
@@ -199,6 +240,14 @@ class Seo extends Service {
 		return ! ! update_option( $this->get_filter( 'seo-service-last_runtime' ), $timestamp );
 	}
 
+	/**
+	 * Handles the error response.
+	 *
+	 * @param object $response The response to handle.
+	 * @param string $verb     The verb that caused the error.
+	 *
+	 * @return bool True if the error was handled, false otherwise.
+	 */
 	public function handle_error_response( $response, $verb ) {
 		$body = wp_remote_retrieve_body( $response );
 		$data = json_decode( $body, true );
@@ -226,6 +275,11 @@ class Seo extends Service {
 		return true;
 	}
 
+	/**
+	 * Retrieves the SEO report.
+	 *
+	 * @return Seo_Report The SEO report.
+	 */
 	public function get_report() {
 		return new Seo_Report();
 	}

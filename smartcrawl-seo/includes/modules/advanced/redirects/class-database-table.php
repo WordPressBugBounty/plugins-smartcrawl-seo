@@ -11,8 +11,6 @@ use SmartCrawl\Integration\Maxmind\GeoDB;
 use SmartCrawl\Singleton;
 use stdClass;
 
-// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-
 /**
  * Class to manage redirects db table.
  */

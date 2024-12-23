@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Email Header.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -17,6 +22,7 @@ $alt_text            = sprintf(
 );
 ?>
 
+<?php // phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet ?>
 <link href="https://fonts.bunny.net/css?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" type="text/css">
 <table
 	class="wrapper hero" align="left"

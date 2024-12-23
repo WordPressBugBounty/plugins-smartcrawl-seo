@@ -1,13 +1,34 @@
 <?php
+/**
+ * This file contains the Yoast class for handling the import of Yoast SEO settings.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Third_Party_Import;
 
+/**
+ * Class Yoast
+ *
+ * Handles the import of Yoast SEO settings.
+ */
 class Yoast extends Importer {
 
+	/**
+	 * Flag indicating if the import is in progress.
+	 */
 	const IMPORT_IN_PROGRESS_FLAG = 'wds-yoast-import-in-progress';
 
+	/**
+	 * Count of network sites processed during import.
+	 */
 	const NETWORK_IMPORT_SITES_PROCESSED_COUNT = 'wds-yoast-network-sites-processed';
 
+	/**
+	 * Custom handlers for specific Yoast options.
+	 *
+	 * @var array
+	 */
 	private $custom_handlers = array(
 		'wpseo-premium-redirects-base'             => 'handle_redirects',
 		'_yoast_wpseo_meta-robots-noindex'         => 'handle_robots_noindex_value',
@@ -17,6 +38,11 @@ class Yoast extends Importer {
 		'wpseo_titles/metadesc-ptarchive-POSTTYPE' => 'handle_pt_archive_description',
 	);
 
+	/**
+	 * Check if data exists for import.
+	 *
+	 * @return bool True if data exists, false otherwise.
+	 */
 	public function data_exists() {
 		// Go ahead with the import if.
 		return (
@@ -25,6 +51,11 @@ class Yoast extends Importer {
 		);
 	}
 
+	/**
+	 * Check if the current Yoast version is supported.
+	 *
+	 * @return bool True if the version is supported, false otherwise.
+	 */
 	private function version_supported() {
 		$options = get_option( 'wpseo' );
 		$version = \smartcrawl_get_array_value( $options, 'version' );
@@ -33,9 +64,14 @@ class Yoast extends Importer {
 			return false;
 		}
 
-		return apply_filters( 'wds-import-yoast-data-exists', strpos( $version, '16.' ) === 0 ); // phpcs:ignore
+		return apply_filters( 'wds-import-yoast-data-exists', strpos( $version, '16.' ) === 0 );
 	}
 
+	/**
+	 * Check if the mapped options are available.
+	 *
+	 * @return bool True if the mapped options are available, false otherwise.
+	 */
 	private function mapped_options_available() {
 		$mappings       = $this->expand_mappings( $this->load_option_mappings() );
 		$source_options = $this->get_yoast_options();
@@ -44,6 +80,11 @@ class Yoast extends Importer {
 		return empty( $difference );
 	}
 
+	/**
+	 * Import Yoast options.
+	 *
+	 * @return void
+	 */
 	public function import_options() {
 		$mappings       = $this->expand_mappings( $this->load_option_mappings() );
 		$source_options = $this->get_yoast_options();
@@ -76,10 +117,22 @@ class Yoast extends Importer {
 		$this->save_options( $target_options );
 	}
 
+	/**
+	 * Load option mappings.
+	 *
+	 * @return array The option mappings.
+	 */
 	private function load_option_mappings() {
 		return $this->load_mapping_file( 'yoast-mappings.php' );
 	}
 
+	/**
+	 * Expand mappings.
+	 *
+	 * @param array $mappings The mappings to expand.
+	 *
+	 * @return array The expanded mappings.
+	 */
 	protected function expand_mappings( $mappings ) {
 		$mappings = parent::expand_mappings( $mappings );
 
@@ -121,6 +174,11 @@ class Yoast extends Importer {
 		return $mappings;
 	}
 
+	/**
+	 * Get Yoast options.
+	 *
+	 * @return array The Yoast options.
+	 */
 	private function get_yoast_options() {
 		$all_options = array();
 		$keys        = array( 'wpseo', 'wpseo_titles', 'wpseo_social' );
@@ -138,6 +196,8 @@ class Yoast extends Importer {
 	}
 
 	/**
+	 * Add redirects to the options.
+	 *
 	 * @param array $all_options All options.
 	 *
 	 * @return array
@@ -157,6 +217,13 @@ class Yoast extends Importer {
 		return $all_options;
 	}
 
+	/**
+	 * Activate modules.
+	 *
+	 * @param array $target_options The target options.
+	 *
+	 * @return array
+	 */
 	private function activate_modules( $target_options ) {
 		\smartcrawl_put_array_value( true, $target_options, array( 'wds_settings_options', 'social' ) );
 		\smartcrawl_put_array_value( true, $target_options, array( 'wds_settings_options', 'onpage' ) );
@@ -164,6 +231,13 @@ class Yoast extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Activate social options for types.
+	 *
+	 * @param array $target_options The target options.
+	 *
+	 * @return array
+	 */
 	private function activate_social_options_for_types( $target_options ) {
 		$og_enabled      = \smartcrawl_get_array_value( $target_options, array( 'wds_social_options', 'og-enable' ) );
 		$twitter_enabled = \smartcrawl_get_array_value(
@@ -203,6 +277,11 @@ class Yoast extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Get all supported types.
+	 *
+	 * @return array The supported types.
+	 */
 	private function get_all_supported_types() {
 		return array_merge(
 			array(
@@ -220,6 +299,14 @@ class Yoast extends Importer {
 		);
 	}
 
+	/**
+	 * Wrap Google meta in markup.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The wrapped Google meta.
+	 */
 	public function wrap_google_meta_in_markup( $target_key, $source_value ) {
 		if ( strpos( trim( $source_value ), '<meta' ) === 0 ) {
 			return $source_value;
@@ -232,6 +319,14 @@ class Yoast extends Importer {
 		return sprintf( '<meta name="google-site-verification" content="%s" />', $source_value );
 	}
 
+	/**
+	 * Wrap Bing meta in markup.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The wrapped Bing meta.
+	 */
 	public function wrap_bing_meta_in_markup( $target_key, $source_value ) {
 		if ( strpos( trim( $source_value ), '<meta' ) === 0 ) {
 			return $source_value;
@@ -244,6 +339,14 @@ class Yoast extends Importer {
 		return sprintf( '<meta name="msvalidate.01" content="%s" />', $source_value );
 	}
 
+	/**
+	 * Process separator value.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The processed separator value.
+	 */
 	public function process_separator_value( $target_key, $source_value ) {
 		$mapping      = array(
 			'sc-dash'   => 'dash',
@@ -269,6 +372,15 @@ class Yoast extends Importer {
 		return $mapped_value;
 	}
 
+	/**
+	 * Handle taxonomy noindex.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function handle_taxonomy_noindex( $source_key, $source_value, $target_options ) {
 		$current_taxonomy = null;
 		foreach ( $this->get_taxonomies() as $taxonomy ) {
@@ -293,6 +405,15 @@ class Yoast extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Handle post type noindex.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function handle_post_type_noindex( $source_key, $source_value, $target_options ) {
 		$current_post_type = null;
 		foreach ( $this->get_post_types() as $post_type ) {
@@ -317,6 +438,15 @@ class Yoast extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Handle redirects.
+	 *
+	 * @param string $source_key The source key.
+	 * @param array  $redirects The redirects.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function handle_redirects( $source_key, $redirects, $target_options ) {
 		if ( empty( $redirects ) ) {
 			return $target_options;
@@ -344,6 +474,15 @@ class Yoast extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Handle robots noindex value.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $post_meta The post meta.
+	 *
+	 * @return array The updated post meta.
+	 */
 	public function handle_robots_noindex_value( $source_key, $source_value, $post_meta ) {
 		if ( intval( $source_value ) === 1 ) {
 			\smartcrawl_put_array_value( true, $post_meta, '_wds_meta-robots-noindex' );
@@ -354,10 +493,23 @@ class Yoast extends Importer {
 		return $post_meta;
 	}
 
+	/**
+	 * Process schema type value.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The processed schema type value.
+	 */
 	public function process_schema_type_value( $target_key, $source_value ) {
 		return 'company' === $source_value ? 'Organization' : 'Person';
 	}
 
+	/**
+	 * Import taxonomy meta.
+	 *
+	 * @return void
+	 */
 	public function import_taxonomy_meta() {
 		$mappings             = $this->load_taxonomy_meta_mappings();
 		$taxonomy_meta_option = get_option( 'wpseo_taxonomy_meta', array() );
@@ -394,10 +546,20 @@ class Yoast extends Importer {
 		update_option( 'wds_taxonomy_meta', $wds_meta );
 	}
 
+	/**
+	 * Load taxonomy meta mappings.
+	 *
+	 * @return array The taxonomy meta mappings.
+	 */
 	public function load_taxonomy_meta_mappings() {
 		return $this->load_mapping_file( 'yoast-taxonomy-meta-mappings.php' );
 	}
 
+	/**
+	 * Import post meta.
+	 *
+	 * @return bool
+	 */
 	public function import_post_meta() {
 		$mappings    = $this->load_post_meta_mappings();
 		$batch_size  = apply_filters( 'wds_post_meta_import_batch_size', 300 );
@@ -438,29 +600,59 @@ class Yoast extends Importer {
 		return count( $all_posts ) === count( $batch_posts );
 	}
 
+	/**
+	 * Load post meta mappings.
+	 *
+	 * @return array The post meta mappings.
+	 */
 	private function load_post_meta_mappings() {
 		return $this->load_mapping_file( 'yoast-post-meta-mappings.php' );
 	}
 
 	/**
+	 * Get posts with source metas.
+	 *
 	 * @return int[]
 	 */
 	private function get_posts_with_yoast_metas() {
 		return $this->get_posts_with_source_metas( '_yoast_' );
 	}
 
+	/**
+	 * Add post meta.
+	 *
+	 * @param int   $post_id The post ID.
+	 * @param array $meta The meta data.
+	 *
+	 * @return void
+	 */
 	private function add_post_meta( $post_id, $meta ) {
 		foreach ( $meta as $meta_key => $meta_value ) {
 			update_post_meta( $post_id, $meta_key, $meta_value );
 		}
 	}
 
+	/**
+	 * Handle post type archive title.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function handle_pt_archive_title( $source_key, $source_value, $target_options ) {
 		return $this->add_pt_archive_setting( $source_value, $target_options, 'title-%s' );
 	}
 
 	/**
-	 * @return mixed
+	 * Add post type archive setting.
+	 *
+	 * @param mixed  $source_value The source value.
+	 * @param array  $target_options The target options.
+	 * @param string $setting_key The setting key.
+	 *
+	 * @return array
 	 */
 	private function add_pt_archive_setting( $source_value, $target_options, $setting_key ) {
 		foreach ( \smartcrawl_get_archive_post_types() as $archive_post_type ) {
@@ -477,10 +669,24 @@ class Yoast extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Handle post type archive description.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function handle_pt_archive_description( $source_key, $source_value, $target_options ) {
 		return $this->add_pt_archive_setting( $source_value, $target_options, 'metadesc-%s' );
 	}
 
+	/**
+	 * Get pre-processors.
+	 *
+	 * @return array The pre-processors.
+	 */
 	protected function get_pre_processors() {
 		return array(
 			'wds_onpage_options/preset-separator'          => 'process_separator_value',
@@ -490,18 +696,38 @@ class Yoast extends Importer {
 		);
 	}
 
+	/**
+	 * Get the next network site option ID.
+	 *
+	 * @return string The next network site option ID.
+	 */
 	protected function get_next_network_site_option_id() {
 		return self::NETWORK_IMPORT_SITES_PROCESSED_COUNT;
 	}
 
+	/**
+	 * Get the import in progress option ID.
+	 *
+	 * @return string The import in progress option ID.
+	 */
 	protected function get_import_in_progress_option_id() {
 		return self::IMPORT_IN_PROGRESS_FLAG;
 	}
 
+	/**
+	 * Get custom handlers.
+	 *
+	 * @return array The custom handlers.
+	 */
 	protected function get_custom_handlers() {
 		return $this->custom_handlers;
 	}
 
+	/**
+	 * Get source plugins.
+	 *
+	 * @return array The source plugins.
+	 */
 	protected function get_source_plugins() {
 		return array(
 			'wordpress-seo/wp-seo.php',

@@ -19,7 +19,7 @@ const ProductReview = {
 				required: true,
 				description: __(
 					'Name of the item that is being rated. In this case the product.',
-					'smartcrawl-seo'
+					'wds'
 				),
 			},
 		},
@@ -42,7 +42,7 @@ const ProductReview = {
 		disallowDeletion: true,
 		description: __(
 			'The date that the review was published, in ISO 8601 date format.',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 	author: {

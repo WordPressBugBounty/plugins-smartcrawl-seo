@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file contains the Query class for handling the querying of news items for the sitemap.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps\News;
 
@@ -7,12 +12,22 @@ use SmartCrawl\Singleton;
 use SmartCrawl\Sitemaps\Post_Fetcher;
 use SmartCrawl\Sitemaps;
 
+/**
+ * Class Query
+ *
+ * Handles the querying of news items for the sitemap.
+ */
 class Query extends Sitemaps\Query {
 
 	use Singleton;
 
 	/**
-	 * @return Item[]
+	 * Get items for the sitemap.
+	 *
+	 * @param string $type The type of items to fetch.
+	 * @param int    $page_number The page number for pagination.
+	 *
+	 * @return Item[] The list of items.
 	 */
 	public function get_items( $type = '', $page_number = 0 ) {
 		$posts = $this->make_fetcher(
@@ -36,6 +51,13 @@ class Query extends Sitemaps\Query {
 		return $items;
 	}
 
+	/**
+	 * Get the count of items.
+	 *
+	 * @param string $type The type of items to count.
+	 *
+	 * @return int The count of items.
+	 */
 	public function get_item_count( $type = '' ) {
 		return $this->make_fetcher(
 			0,
@@ -45,7 +67,9 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return mixed|void
+	 * Get the language code.
+	 *
+	 * @return mixed|void The language code.
 	 */
 	private function get_language_code() {
 		$locale = get_locale();
@@ -73,7 +97,13 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return Post_Fetcher
+	 * Create a post fetcher.
+	 *
+	 * @param int          $offset The offset for fetching posts.
+	 * @param int          $limit The limit for fetching posts.
+	 * @param array|string $post_types The post types to fetch.
+	 *
+	 * @return Post_Fetcher The post fetcher instance.
 	 */
 	private function make_fetcher( $offset, $limit, $post_types ) {
 		$fetcher    = new Post_Fetcher();
@@ -98,7 +128,11 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return array
+	 * Get the IDs of posts to include.
+	 *
+	 * @param array $post_types The post types to include.
+	 *
+	 * @return array The list of post IDs to include.
 	 */
 	private function get_include_ids( $post_types ) {
 		$include = apply_filters( 'wds_news_sitemap_include_post_ids', array(), $post_types );
@@ -109,7 +143,11 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return array|int|string
+	 * Get the title of a post.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return array|int|string The post title.
 	 */
 	private function get_post_title( $post ) {
 		return ! empty( $post->post_title )
@@ -118,14 +156,22 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return false|string|\WP_Error
+	 * Get the URL of a post.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return false|string The post URL.
 	 */
 	private function get_post_url( $post ) {
 		return get_permalink( $post->ID );
 	}
 
 	/**
-	 * @return array
+	 * Get custom ignore IDs.
+	 *
+	 * @param array $post_types The post types to ignore.
+	 *
+	 * @return array The list of custom ignore IDs.
 	 */
 	private function get_custom_ignore_ids( $post_types ) {
 		$ignored_ids = array();
@@ -145,7 +191,11 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return array|mixed|null
+	 * Get the IDs of posts to ignore.
+	 *
+	 * @param array $post_types The post types to ignore.
+	 *
+	 * @return array|mixed|null The list of post IDs to ignore.
 	 */
 	public function get_ignore_ids( $post_types ) {
 		$options          = $this->get_sitemap_options();
@@ -186,7 +236,7 @@ class Query extends Sitemaps\Query {
 				'post_type'      => $post_types,
 				'fields'         => 'ids',
 				'posts_per_page' => - 1,
-				'tax_query'      => $tax_query, // phpcs:ignore
+				'tax_query'      => $tax_query, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			)
 		);
 		$ignored_post_ids = array_merge(
@@ -198,7 +248,12 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return array
+	 * Get the excluded term IDs.
+	 *
+	 * @param array $options The sitemap options.
+	 * @param array $post_types The post types to exclude.
+	 *
+	 * @return array The list of excluded term IDs.
 	 */
 	private function get_excluded_term_ids( $options, $post_types ) {
 		$excluded_term_ids = array();
@@ -216,7 +271,11 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return false|int
+	 * Get the timestamp of a post.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return false|int The post timestamp.
 	 */
 	private function get_post_timestamp( $post ) {
 		return ! empty( $post->post_date )
@@ -225,7 +284,9 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return string
+	 * Get the publication name.
+	 *
+	 * @return string The publication name.
 	 */
 	private function get_publication() {
 		$options = $this->get_sitemap_options();
@@ -234,7 +295,9 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return array|mixed
+	 * Get the supported post types.
+	 *
+	 * @return array|mixed The list of supported post types.
 	 */
 	public function get_supported_types() {
 		$options             = $this->get_sitemap_options();
@@ -246,21 +309,30 @@ class Query extends Sitemaps\Query {
 	}
 
 	/**
-	 * @return string
+	 * Get the filter prefix.
+	 *
+	 * @return string The filter prefix.
 	 */
 	public function get_filter_prefix() {
 		return 'wds-sitemap-news-posts';
 	}
 
 	/**
-	 * @return array
+	 * Get the sitemap options.
+	 *
+	 * @return array The sitemap options.
 	 */
 	private function get_sitemap_options() {
 		return Settings::get_component_options( Settings::COMP_SITEMAP );
 	}
 
 	/**
-	 * @return string|void
+	 * Get the URL for the index item.
+	 *
+	 * @param string $type The type of the item.
+	 * @param int    $sitemap_num The sitemap number.
+	 *
+	 * @return string|void The URL for the index item.
 	 */
 	protected function get_index_item_url( $type, $sitemap_num ) {
 		return home_url( "/news-$type-sitemap$sitemap_num.xml" );

@@ -106,7 +106,7 @@ export default class ConflictingPlugins extends React.Component {
 								// translators: %s: plugin title.
 								__(
 									'<strong>We’ve detected one or more SEO plugins on your site.</strong> To avoid SEO issues, please disable the following conflicting plugin(s) or select specific <strong>%s</strong> modules to use alongside the other plugins below.',
-									'smartcrawl-seo'
+									'wds'
 								),
 								ConfigValues.get('plugin_title', 'admin')
 							),
@@ -135,7 +135,7 @@ export default class ConflictingPlugins extends React.Component {
 								// translators: 1: number of plugins conflicting, 2: plugin_title
 								__(
 									'We detected %1$d plugins conflicting with <strong>%2$s</strong> on your site. For best SEO performance, please deactivate the plugins listed below or activate specific <strong>%2$s</strong> modules to use alongside these listed plugins.',
-									'smartcrawl-seo'
+									'wds'
 								),
 								Object.keys(plugins).length,
 								ConfigValues.get('plugin_title', 'admin')

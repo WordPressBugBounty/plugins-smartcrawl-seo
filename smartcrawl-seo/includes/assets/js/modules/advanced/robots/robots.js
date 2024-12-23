@@ -55,13 +55,13 @@ class Robots extends React.Component {
 					<DisabledComponent
 						message={__(
 							'Search engines use web crawlers (bots) to explore and index the internet. A robots.txt file is a critical text file that tells those bots what they can and can’t index, and where things are.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						nonceFields={false}
 						notice={createInterpolateElement(
 							__(
 								"We've detected an existing <a>robots.txt</a> file that we are unable to edit. You will need to remove it before you can enable this feature.",
-								'smartcrawl-seo'
+								'wds'
 							),
 							{
 								a: <a href={fileUrl} />,
@@ -82,11 +82,11 @@ class Robots extends React.Component {
 					<DisabledComponent
 						message={__(
 							'Search engines use web crawlers (bots) to explore and index the internet. A robots.txt file is a critical text file that tells those bots what they can and can’t index, and where things are.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						notice={__(
 							"We've detected your site is installed on a sub-directory. Robots.txt files only work when added to the root directory of a domain, so you'll need to change how your WordPress installation is set up to use this feature.",
-							'smartcrawl-seo'
+							'wds'
 						)}
 						nonceFields={false}
 						inner
@@ -113,20 +113,20 @@ class Robots extends React.Component {
 				activateProps={{
 					message: __(
 						'Search engines use web crawlers (bots) to explore and index the internet. A robots.txt file is a critical text file that tells those bots what they can and can’t index, and where things are.',
-						'smartcrawl-seo'
+						'wds'
 					),
 				}}
 				deactivateProps={{
 					description: __(
 						'No longer need a Robots.txt file? This will deactivate this feature and remove the file.',
-						'smartcrawl-seo'
+						'wds'
 					),
 				}}
 			>
 				<p>
 					{__(
 						'Search engines use web crawlers (bots) to explore and index the internet. A robots.txt file is a critical text file that tells those bots what they can and can’t index, and where things are.',
-						'smartcrawl-seo'
+						'wds'
 					)}
 				</p>
 
@@ -137,7 +137,7 @@ class Robots extends React.Component {
 							// translators: %s: Link to sitemap url.
 							__(
 								'Your robots.txt is active and visible to bots. You can view it at <a>%s</a>',
-								'smartcrawl-seo'
+								'wds'
 							),
 							fileUrl
 						),
@@ -157,7 +157,7 @@ class Robots extends React.Component {
 					label={__('Output', 'smartcrawl-seo')}
 					description={__(
 						'Here’s a preview of your current robots.txt output. Customize your robots.txt file below.',
-						'smartcrawl-seo'
+						'wds'
 					)}
 				>
 					<TextareaInputField
@@ -172,7 +172,7 @@ class Robots extends React.Component {
 					label={__('Include Sitemap', 'smartcrawl-seo')}
 					description={__(
 						"It's really good practice to instruct search engines where to find your sitemap. If enabled, we will automatically add the required code to your robots file.",
-						'smartcrawl-seo'
+						'wds'
 					)}
 				>
 					<Toggle
@@ -199,7 +199,7 @@ class Robots extends React.Component {
 												// translators: %s: plugin title
 												__(
 													"We've detected you're using <strong>%s</strong>'s built in sitemap and will output this for you automatically.",
-													'smartcrawl-seo'
+													'wds'
 												),
 												ConfigValues.get(
 													'plugin_title',
@@ -217,7 +217,7 @@ class Robots extends React.Component {
 								description={createInterpolateElement(
 									__(
 										'Copy and paste the URL to your sitemap. E.g <strong>/sitemap.xml</strong> or <strong>https://example.com/sitemap.xml</strong>',
-										'smartcrawl-seo'
+										'wds'
 									),
 									{ strong: <strong /> }
 								)}
@@ -235,7 +235,7 @@ class Robots extends React.Component {
 					description={createInterpolateElement(
 						__(
 							'Customize the robots.txt output here. We have <a>full documentation</a> on a range of examples and options for your robots.txt file.',
-							'smartcrawl-seo'
+							'wds'
 						),
 						{
 							a: (

@@ -1,16 +1,32 @@
 <?php
+/**
+ * Post_Author class for handling post author schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Models\User;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Post_Author
+ *
+ * Handles post author schema fragments.
+ */
 class Post_Author extends Fragment {
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
+	 * User object.
+	 *
 	 * @var User
 	 */
 	private $user;
@@ -18,7 +34,7 @@ class Post_Author extends Fragment {
 	/**
 	 * Post_Author constructor.
 	 *
-	 * @param $user User
+	 * @param User $user The user object.
 	 */
 	public function __construct( $user ) {
 		$this->user  = $user;
@@ -26,14 +42,18 @@ class Post_Author extends Fragment {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the post author ID.
+	 *
+	 * @return string The post author ID.
 	 */
 	public function get_post_author_id() {
 		return $this->get_author_id( $this->user );
 	}
 
 	/**
-	 * @return mixed|void
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$name = $this->utils->get_user_full_name( $this->user );
@@ -73,27 +93,33 @@ class Post_Author extends Fragment {
 	}
 
 	/**
-	 * @param $user User
+	 * Retrieves the user URL.
 	 *
-	 * @return mixed
+	 * @param User $user The user object.
+	 *
+	 * @return string The user URL.
 	 */
 	private function get_user_url( $user ) {
 		return $this->utils->apply_filters( 'user-url', $user->get_user_url(), $user );
 	}
 
 	/**
-	 * @param $user User
+	 * Retrieves the user URLs.
 	 *
-	 * @return mixed
+	 * @param User $user The user object.
+	 *
+	 * @return array The user URLs.
 	 */
 	public function get_user_urls( $user ) {
 		return $this->utils->apply_filters( 'user-urls', $user->get_user_urls(), $user );
 	}
 
 	/**
-	 * @param $user
+	 * Retrieves the author ID.
 	 *
-	 * @return string
+	 * @param User $user The user object.
+	 *
+	 * @return string The author ID.
 	 */
 	private function get_author_id( $user ) {
 		$url = get_author_posts_url( $user->get_id() );

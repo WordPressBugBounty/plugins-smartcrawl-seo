@@ -1,14 +1,26 @@
 <?php
+/**
+ * Class for checking if the document avoids browser plugins.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Lighthouse\Checks;
 
 use SmartCrawl\Lighthouse\Tables\Table;
 use SmartCrawl\Simple_Renderer;
 
+/**
+ * Plugins class.
+ *
+ * Checks if the document avoids browser plugins.
+ */
 class Plugins extends Check {
 	const ID = 'plugins';
 
 	/**
+	 * Prepares the check by setting success and failure titles.
+	 *
 	 * @return void
 	 */
 	public function prepare() {
@@ -17,6 +29,8 @@ class Plugins extends Check {
 	}
 
 	/**
+	 * Gets the ID of the check.
+	 *
 	 * @return string
 	 */
 	public function get_id() {

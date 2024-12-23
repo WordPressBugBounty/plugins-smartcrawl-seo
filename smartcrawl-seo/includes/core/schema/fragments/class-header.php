@@ -1,31 +1,55 @@
 <?php
+/**
+ * Header class for handling header schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Header
+ *
+ * Handles header schema fragments.
+ */
 class Header extends Fragment {
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
-	 * @var
+	 * The URL of the header.
+	 *
+	 * @var string
 	 */
 	private $url;
+
 	/**
-	 * @var
+	 * The title of the header.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the header.
+	 *
+	 * @var string
 	 */
 	private $description;
 
 	/**
-	 * @param $url
-	 * @param $title
-	 * @param $description
+	 * Header constructor.
+	 *
+	 * @param string $url The URL of the header.
+	 * @param string $title The title of the header.
+	 * @param string $description The description of the header.
 	 */
 	public function __construct( $url, $title, $description ) {
 		$this->url         = $url;
@@ -35,7 +59,9 @@ class Header extends Fragment {
 	}
 
 	/**
-	 * @return array|false
+	 * Retrieves raw schema data.
+	 *
+	 * @return array|false The raw schema data or false if header/footer schema is disabled.
 	 */
 	protected function get_raw() {
 		$enable_header_footer = (bool) $this->utils->get_schema_option( 'schema_wp_header_footer' );

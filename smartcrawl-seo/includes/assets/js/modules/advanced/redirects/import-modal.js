@@ -47,7 +47,7 @@ export class ImportModal extends React.Component {
 				title={__('Import Redirects', 'smartcrawl-seo')}
 				description={__(
 					'Import redirects from a JSON file below.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 				small={true}
 				onClose={onClose}
@@ -88,7 +88,7 @@ export class ImportModal extends React.Component {
 						type="error"
 						message={__(
 							'Oops! The uploaded file is too large, please select a file not larger than 1MB.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					/>
 				)}
@@ -98,7 +98,7 @@ export class ImportModal extends React.Component {
 						type="error"
 						message={__(
 							'Whoops! Only .json or .csv file types are allowed.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					/>
 				)}
@@ -107,7 +107,7 @@ export class ImportModal extends React.Component {
 					<small>
 						{__(
 							'Choose a JSON file (.json) with a max-size of 1MB containing your redirects. Redirects in CSV format without location-based rules are still supported. However, all future imports and exports for redirects with location rules must be in JSON format.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					</small>
 				</p>

@@ -72,32 +72,31 @@ abstract class Controller {
 	/**
 	 * Child controllers can use this method to initialize.
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	abstract protected function init();
 
 	/**
 	 * Terminates running controller.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function stop() {
 		if ( ! $this->is_running() ) {
-			return false;
+			return;
 		}
 
 		$this->is_running = false;
 
-		return $this->terminate();
+		$this->terminate();
 	}
 
 	/**
 	 * Opposite of init.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	protected function terminate() {
-		return true;
 	}
 
 	/**

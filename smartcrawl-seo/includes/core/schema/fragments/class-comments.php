@@ -1,22 +1,40 @@
 <?php
+/**
+ * Comments class for handling comment schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Entities;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Comments
+ *
+ * Handles comment schema fragments.
+ */
 class Comments extends Fragment {
+
 	/**
+	 * The post object.
+	 *
 	 * @var Entities\Post
 	 */
 	private $post;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
 
 	/**
-	 * @param $post
+	 * Constructor.
+	 *
+	 * @param Entities\Post $post The post object.
 	 */
 	public function __construct( $post ) {
 		$this->post  = $post;
@@ -24,11 +42,15 @@ class Comments extends Fragment {
 	}
 
 	/**
-	 * @return array
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		/**
-		 * @var $comments \WP_Comment[]
+		 * Retrieves the comments for the post.
+		 *
+		 * @var \WP_Comment[] $comments The comments array.
 		 */
 		$comments = get_comments(
 			array(
@@ -42,10 +64,12 @@ class Comments extends Fragment {
 	}
 
 	/**
-	 * @param $comments \WP_Comment[]
-	 * @param $post_url
+	 * Converts comments to schema format.
 	 *
-	 * @return array
+	 * @param \WP_Comment[] $comments The comments array.
+	 * @param string        $post_url The post URL.
+	 *
+	 * @return array The comments' schema.
 	 */
 	private function comments_to_schema( $comments, $post_url ) {
 		$schema = array();

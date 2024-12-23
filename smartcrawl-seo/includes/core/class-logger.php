@@ -1,7 +1,19 @@
 <?php
+/**
+ * File containing the Logger class for SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
+/**
+ * Class Logger
+ *
+ * Provides logging utilities for the SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 class Logger {
 
 	use Singleton;
@@ -19,6 +31,13 @@ class Logger {
 	 */
 	const L_DEFAULT = 30;
 
+	/**
+	 * Logs a debug message.
+	 *
+	 * @param string $message Message to log.
+	 *
+	 * @return bool|int Operation status, or (int)log level if we're above listening
+	 */
 	public static function debug( $message ) {
 		return self::get()->log( self::L_DEBUG, $message );
 	}
@@ -57,7 +76,7 @@ class Logger {
 			return false;
 		}
 
-		$timestamp = date( 'Y-m-d H:i:s' ); // phpcs:ignore
+		$timestamp = date( 'Y-m-d H:i:s' ); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
 
 		$line = "[{$timestamp}][{$level}] {$message}\n";
 
@@ -102,7 +121,7 @@ class Logger {
 			? SMARTCRAWL_DEBUG_LOG_LEVEL
 			: self::L_DEFAULT;
 
-		return (int) apply_filters( 'wds-log-level', $level ); // phpcs:ignore
+		return (int) apply_filters( 'wds-log-level', $level );
 	}
 
 	/**
@@ -153,18 +172,46 @@ class Logger {
 		return \smartcrawl_file_put_contents( $file, "<?php die(); ?>\n" );
 	}
 
+	/**
+	 * Logs an info message.
+	 *
+	 * @param string $message Message to log.
+	 *
+	 * @return bool|int Operation status, or (int)log level if we're above listening
+	 */
 	public static function info( $message ) {
 		return self::get()->log( self::L_INFO, $message );
 	}
 
+	/**
+	 * Logs a notice message.
+	 *
+	 * @param string $message Message to log.
+	 *
+	 * @return bool|int Operation status, or (int)log level if we're above listening
+	 */
 	public static function notice( $message ) {
 		return self::get()->log( self::L_NOTICE, $message );
 	}
 
+	/**
+	 * Logs a warning message.
+	 *
+	 * @param string $message Message to log.
+	 *
+	 * @return bool|int Operation status, or (int)log level if we're above listening
+	 */
 	public static function warning( $message ) {
 		return self::get()->log( self::L_WARNING, $message );
 	}
 
+	/**
+	 * Logs an error message.
+	 *
+	 * @param string $message Message to log.
+	 *
+	 * @return bool|int Operation status, or (int)log level if we're above listening
+	 */
 	public static function error( $message ) {
 		return self::get()->log( self::L_ERROR, $message );
 	}
@@ -187,12 +234,15 @@ class Logger {
 		$file = $this->get_log_file_path();
 
 		if ( file_exists( $file ) && is_writable( $file ) ) {
-			return @unlink( $file );  // phpcs:ignore -- We want logger to not make any noise
+			return @unlink( $file );  // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		}
 
 		return true;
 	}
 
+	/**
+	 * Prevents cloning of the instance.
+	 */
 	private function __clone() {
 	}
 }

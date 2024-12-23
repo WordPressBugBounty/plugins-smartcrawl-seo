@@ -33,7 +33,7 @@ export default class EmailRecipients extends React.Component {
 						type="warning"
 						message={__(
 							"You've removed all recipients. If you save without a recipient, we'll automatically turn off reports.",
-							'smartcrawl-seo'
+							'wds-texdomain'
 						)}
 					/>
 				)}
@@ -53,7 +53,7 @@ export default class EmailRecipients extends React.Component {
 					ghost={true}
 					icon="sui-icon-plus"
 					onClick={() => this.toggleModal()}
-					text={__('Add Recipient', 'smartcrawl-seo')}
+					text={__('Add Recipient', 'wds-texdomain')}
 				/>
 				{openDialog && (
 					<EmailRecipientModal
@@ -89,7 +89,7 @@ export default class EmailRecipients extends React.Component {
 						// translators: %s: Recipient's name.
 						__(
 							'%s has been added as a recipient. Please save your changes to set this live.',
-							'smartcrawl-seo'
+							'wds-texdomain'
 						),
 						name
 					),

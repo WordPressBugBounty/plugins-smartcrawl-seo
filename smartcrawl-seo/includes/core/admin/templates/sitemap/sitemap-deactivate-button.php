@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Sitemap Deactivate Button.
+ *
+ * @package Smartcrwal
+ */
+
 $label_description  = empty( $label_description ) ? '' : $label_description;
 $button_description = empty( $button_description ) ? '' : $button_description;
 ?>

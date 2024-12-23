@@ -41,7 +41,7 @@ class ExcludedPosts extends React.Component {
 				label={__('Exclusions', 'smartcrawl-seo')}
 				description={__(
 					'Provide a comma-separated list of keywords that you would like to exclude. You can also select individual posts/pages/URLs for exclusion.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 				direction="column"
 			>

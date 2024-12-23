@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Settings Analysis.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

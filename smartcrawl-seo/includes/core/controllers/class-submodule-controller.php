@@ -130,7 +130,7 @@ abstract class Submodule_Controller extends Controller {
 
 		$old_options = $this->options;
 
-		if ( $this->sanitize_options( $input ) ) {
+		if ( is_callable( array( $this, 'sanitize_options' ) ) && $this->sanitize_options( $input ) ) {
 			$this->options = wp_parse_args( $this->options, $old_options );
 
 			$this->parent->update_option( $this->module_name, $this->options );

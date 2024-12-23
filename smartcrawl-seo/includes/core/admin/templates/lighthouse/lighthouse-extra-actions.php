@@ -1,8 +1,13 @@
 <?php
+/**
+ * Template: Lighthouse Extra Actions.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
-$device = \smartcrawl_get_array_value( $_GET, 'device' );
+$device = \smartcrawl_get_array_value( $_GET, 'device' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 if ( ! in_array( $device, array( 'desktop', 'mobile' ), true ) ) {
 	$device = 'desktop';
 }
@@ -12,9 +17,10 @@ $mobile_url  = $page_url . '&device=mobile';
 /**
  * Report.
  *
- * @var $lighthouse_report \SmartCrawl\Lighthouse\Report
+ * @var \SmartCrawl\Lighthouse\Report|false $lighthouse_report
  */
 $lighthouse_report = empty( $lighthouse_report ) ? false : $lighthouse_report;
+
 if ( ! $lighthouse_report || ! $lighthouse_report->has_data() || $lighthouse_report->has_errors() ) {
 	return;
 }
@@ -22,14 +28,14 @@ if ( ! $lighthouse_report || ! $lighthouse_report->has_data() || $lighthouse_rep
 <div class="wds-lh-device">
 	<a
 		class="<?php echo 'desktop' === $device ? 'active' : 'sui-tooltip'; ?>"
-		data-tooltip="<?php esc_html_e( 'Apply desktop simulation' ); ?>"
+		data-tooltip="<?php esc_html_e( 'Apply desktop simulation', 'smartcrawl-seo' ); ?>"
 		href="<?php echo esc_attr( $desktop_url ); ?>"
 	>
 		<span class="sui-icon-monitor" aria-hidden="true"></span> <?php esc_html_e( 'Desktop', 'smartcrawl-seo' ); ?>
 	</a>
 	<a
 		class="<?php echo 'mobile' === $device ? 'active' : 'sui-tooltip'; ?>"
-		data-tooltip="<?php esc_html_e( 'Apply mobile simulation' ); ?>"
+		data-tooltip="<?php esc_html_e( 'Apply mobile simulation', 'smartcrawl-seo' ); ?>"
 		href="<?php echo esc_attr( $mobile_url ); ?>"
 	>
 		<span class="sui-icon-tablet-portrait" aria-hidden="true"></span> <?php esc_html_e( 'Mobile', 'smartcrawl-seo' ); ?>

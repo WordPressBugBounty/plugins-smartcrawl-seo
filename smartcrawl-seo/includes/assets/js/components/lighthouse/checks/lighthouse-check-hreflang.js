@@ -143,7 +143,9 @@ export default class LighthouseCheckHreflang extends React.Component {
 						</li>
 					</ul>
 				</div>
-				<LighthouseToggle text={__('Read More - Guidelines')}>
+				<LighthouseToggle
+					text={__('Read More - Guidelines', 'smartcrawl-seo')}
+				>
 					<strong>
 						{__('Guidelines for hreflang values', 'smartcrawl-seo')}
 					</strong>

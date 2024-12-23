@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Settings.
+ *
+ * @package Smartcrwal
+ */
+
 $active_tab         = empty( $active_tab ) ? '' : $active_tab;
 $import_available   = is_main_site();
 $show_data_settings = is_main_site();

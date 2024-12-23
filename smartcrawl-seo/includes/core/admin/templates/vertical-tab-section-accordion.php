@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Vertical Tab Accordion section.
+ *
+ * @package Smartcrwal
+ */
+
 $smartcrawl_options  = empty( $_view['options'] ) ? array() : $_view['options'];
 $option_name         = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $section_title       = empty( $section_title ) ? '' : $section_title;

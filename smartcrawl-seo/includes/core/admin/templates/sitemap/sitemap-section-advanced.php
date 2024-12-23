@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap Advanced section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

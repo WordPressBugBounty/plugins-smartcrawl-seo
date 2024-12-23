@@ -1,14 +1,20 @@
 <?php
+/**
+ * Template: Onpage General Settings Inner.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $title_key               = empty( $title_key ) ? '' : $title_key;
 $description_key         = empty( $description_key ) ? '' : $description_key;
 $title_label_desc        = empty( $title_label_desc ) ? '' : $title_label_desc;
 $title_field_desc        = empty( $title_field_desc ) ? '' : $title_field_desc;
 $meta_label_desc         = empty( $meta_label_desc ) ? '' : $meta_label_desc;
 $meta_field_desc         = empty( $meta_field_desc ) ? '' : $meta_field_desc;
-$title                   = empty( $title ) ? '' : $title; // phpcs:ignore
+$title                   = empty( $title ) ? '' : $title;
 $title_placeholder       = empty( $title_placeholder ) ? '' : $title_placeholder;
 $description             = empty( $description ) ? '' : $description;
 $description_placeholder = empty( $description_placeholder ) ? '' : $description_placeholder;

@@ -22,7 +22,7 @@ class Sitemap extends Admin_Settings {
 	use Singleton;
 
 	/**
-	 * Validate submitted options
+	 * Validates submitted options
 	 *
 	 * @param array $input Raw input.
 	 *
@@ -192,6 +192,13 @@ class Sitemap extends Admin_Settings {
 		);
 	}
 
+	/**
+	 * Processes News Sitemap settings.
+	 *
+	 * @param array $input The input data.
+	 *
+	 * @return array The processed news settings.
+	 */
 	private function process_news_settings( $input ) {
 		$json = \smartcrawl_get_array_value( $input, 'news-settings', '' );
 		$data = json_decode( $json, true );
@@ -205,7 +212,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Get a list of post type based options
+	 * Retrieves a list of post type based options
 	 *
 	 * @return array
 	 */
@@ -232,7 +239,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Get a list of taxonomy based options
+	 * Retrieves a list of taxonomy based options
 	 *
 	 * @return array
 	 */
@@ -294,7 +301,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Crawler settings validation
+	 * Crawler settings validation.
 	 *
 	 * @param array $input  Raw input.
 	 * @param array $result Result this far.
@@ -334,7 +341,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Crawler settings validation
+	 * Crawler Auto Update settings validation.
 	 *
 	 * @param array $input  Raw input.
 	 * @param array $result Result this far.
@@ -366,7 +373,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Initialize the handler
+	 * Initializes the handlers.
 	 */
 	public function init() {
 		$this->option_name = 'wds_sitemap_options';
@@ -379,7 +386,7 @@ class Sitemap extends Admin_Settings {
 			\smartcrawl_get_plugin_title()
 		);
 
-		add_action( 'wds-component-activated-sitemap', array( $this, 'trigger_crawl_after_activation' ) );
+		add_action( 'smartcrawl_component_activated_sitemap', array( $this, 'trigger_crawl_after_activation' ) );
 		add_action( 'all_admin_notices', array( $this, 'add_crawl_status_message' ), 10 );
 		add_filter( 'sanitize_option_wds_sitemap_options', array( $this, 'sanitize_option' ), 10, 3 );
 
@@ -399,6 +406,8 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
+	 * Triggers crawl after activation.
+	 *
 	 * @return void
 	 */
 	public function trigger_crawl_after_activation() {
@@ -407,18 +416,24 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * @return false|void
+	 * Processes Crawler run request.
+	 *
+	 * @return bool Whether the crawl was started successfully.
 	 */
 	public function process_run_action() {
-		if ( isset( $_GET['_wds_nonce'], $_GET['run-crawl'] ) && wp_verify_nonce( wp_unslash( $_GET['_wds_nonce'] ), 'wds-crawl-nonce' ) ) { // phpcs:ignore -- No need of sanitization for nonce.
+		if ( isset( $_GET['_wds_nonce'], $_GET['run-crawl'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wds_nonce'] ) ), 'wds-crawl-nonce' ) ) {
 			// Simple presence switch, no value.
-			return $this->run_crawl();
+			$this->run_crawl();
+
+			return true;
 		}
 
 		return false;
 	}
 
 	/**
+	 * Retrieves the URL for crawling.
+	 *
 	 * @return string
 	 */
 	public static function crawl_url() {
@@ -436,7 +451,9 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Runs SEO Audit crawl
+	 * Runs the crawl process.
+	 *
+	 * @return void
 	 */
 	public function run_crawl() {
 		$message     = '';
@@ -474,17 +491,19 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * @return void
+	 * Adds a crawler status message.
 	 */
 	public function add_crawl_status_message() {
-		$crawl_in_progress = \smartcrawl_get_array_value( $_GET, 'crawl-in-progress' ); // phpcs:ignore -- Not needed.
+		$crawl_in_progress = \smartcrawl_get_array_value( $_GET, 'crawl-in-progress' ); // phpcs:ignore WordPress.Security.NonceVerification
+
 		if ( is_null( $crawl_in_progress ) ) {
 			return;
 		}
 
 		$crawl_in_progress = (bool) $crawl_in_progress;
+
 		if ( ! $crawl_in_progress ) {
-			$message = (string) \smartcrawl_get_array_value( $_GET, 'message' ); // phpcs:ignore -- Sanitized below.
+			$message = (string) \smartcrawl_get_array_value( $_GET, 'message' ); // phpcs:ignore WordPress.Security.NonceVerification
 
 			if ( ! empty( $message ) ) {
 				add_settings_error( $this->option_name, 'wds-crawl-not-started', wp_strip_all_tags( $message ) );
@@ -493,7 +512,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Add admin settings page
+	 * Outputs the content for this page.
 	 */
 	public function options_page() {
 		parent::options_page();
@@ -549,7 +568,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Default settings
+	 * Default settings.
 	 */
 	public function defaults() {
 		$this->options = get_option( $this->option_name, array() );
@@ -656,14 +675,18 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * @return array|array[]
+	 * Retrieves the default view options.
+	 *
+	 * @return array The default view options.
 	 */
 	protected function get_view_defaults() {
 		return $this->populate_view_defaults();
 	}
 
 	/**
-	 * @return array[]
+	 * Populates the view defaults with crawl report data.
+	 *
+	 * @return array
 	 */
 	protected function populate_view_defaults() {
 		$args = parent::get_view_defaults();
@@ -676,21 +699,38 @@ class Sitemap extends Admin_Settings {
 		return array( '_view' => $view );
 	}
 
+	/**
+	 * Validates the day of the week value.
+	 *
+	 * @param int $dow The day of the week value.
+	 *
+	 * @return int The validated day of the week value, or 0 if invalid.
+	 */
 	private function validate_dow( $dow ) {
 		return in_array( $dow, range( 0, 6 ), true ) ? $dow : 0;
 	}
 
+	/**
+	 * Validates the date of month value.
+	 *
+	 * @param int $dom The date of month value.
+	 *
+	 * @return int The validated value, or 1 if invalid.
+	 */
 	private function validate_dom( $dom ) {
 		return in_array( $dom, range( 1, 28 ), true ) ? $dom : 1;
 	}
 
 	/**
-	 * @return array|array[]|mixed
+	 * Retrieves a list of email recipients for sitemap notifications.
+	 *
+	 * @return array
 	 */
 	public static function get_email_recipients() {
 		$options           = Settings::get_component_options( self::COMP_SITEMAP );
 		$recipients        = \smartcrawl_get_array_value( $options, 'sitemap-email-recipients' );
 		$dash_profile_data = \smartcrawl_get_dash_profile_data();
+
 		if ( is_null( $recipients ) && $dash_profile_data ) {
 			return array(
 				array(
@@ -703,6 +743,14 @@ class Sitemap extends Admin_Settings {
 		return $recipients ? $recipients : array();
 	}
 
+	/**
+	 * Checks if a recipient exists in the recipient array.
+	 *
+	 * @param array $recipient The recipient to check.
+	 * @param array $recipient_array The array of recipients.
+	 *
+	 * @return bool Whether the recipient exists or not.
+	 */
 	private static function recipient_exists( $recipient, $recipient_array ) {
 		$emails = array_column( $recipient_array, 'email' );
 		$needle = (string) \smartcrawl_get_array_value( $recipient, 'email' );
@@ -711,7 +759,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Sanitize crawler emails.
+	 * Sanitizes crawler emails.
 	 *
 	 * @param array $input  Input.
 	 * @param array $result Result.
@@ -749,7 +797,7 @@ class Sitemap extends Admin_Settings {
 	}
 
 	/**
-	 * Sanitize sitemap options.
+	 * Sanitizes sitemap options.
 	 *
 	 * @since 3.7.0
 	 *

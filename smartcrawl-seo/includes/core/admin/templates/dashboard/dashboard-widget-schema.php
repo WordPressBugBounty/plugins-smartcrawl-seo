@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Schema Widget.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

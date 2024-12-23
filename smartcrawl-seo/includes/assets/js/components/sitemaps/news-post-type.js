@@ -59,7 +59,7 @@ export default class NewsPostType extends React.Component {
 									// translators: %s: Taxonomy label.
 									__(
 										'Search for and select %s that should be excluded from the Google News sitemap.',
-										'smartcrawl-seo'
+										'wds'
 									),
 									taxonomy.label.toLowerCase()
 								)}

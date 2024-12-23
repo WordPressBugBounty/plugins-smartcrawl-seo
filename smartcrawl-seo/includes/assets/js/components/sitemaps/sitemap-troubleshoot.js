@@ -29,7 +29,7 @@ export default class SitemapTroubleshoot extends React.Component {
 					label={__('Troubleshoot Sitemap', 'smartcrawl-seo')}
 					description={__(
 						'If your sitemap is not as expected, you can use this tool to identify the problem.',
-						'smartcrawl-seo'
+						'wds'
 					)}
 				>
 					<FloatingNoticePlaceholder id="wds-troubleshoot-notice" />

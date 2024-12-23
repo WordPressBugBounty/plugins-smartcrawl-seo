@@ -34,25 +34,25 @@ export default class SeoAnalysisCheckSubheadingsKeywords extends React.Component
 				{isNaN(state)
 					? __(
 							"Using subheadings in your content (such as H2's or H3's) will help both the user and search engines quickly figure out what your article is about. It also helps visually section your content which in turn is great user experience. We recommend you have at least one subheading.",
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: state
 					? sprintf(
 							/* translators: %d: Subheading count */
 							__(
 								"You've used this keyword in %d subheading(s), which will help the user and search engines quickly figure out the content on your page. Good work!",
-								'smartcrawl-seo'
+								'wds'
 							),
 							count
 					  )
 					: isPrimary
 					? __(
 							"Using keywords in any of your subheadings (such as H2's or H3's) will help both the user and search engines quickly figure out what your article is about. It's best practice to include your focus keywords in at least one subheading if you can.",
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: __(
 							"You have not used this secondary keyword in any of your subheadings. It's best practice to include your secondary keywords in at least one subheading if possible.",
-							'smartcrawl-seo'
+							'wds'
 					  )}
 			</p>
 		);
@@ -72,7 +72,7 @@ export default class SeoAnalysisCheckSubheadingsKeywords extends React.Component
 					/* translators: 1: primary or secondary, 2: Subheading count */
 					__(
 						'Your %1$s keyword was found in %2$d subheadings',
-						'smartcrawl-seo'
+						'wds'
 					),
 					type,
 					count
@@ -81,7 +81,7 @@ export default class SeoAnalysisCheckSubheadingsKeywords extends React.Component
 					/* translators: %s: primary or secondary */
 					__(
 						"You haven't used your %s keyword in any subheadings",
-						'smartcrawl-seo'
+						'wds'
 					),
 					type
 			  );
@@ -92,7 +92,7 @@ export default class SeoAnalysisCheckSubheadingsKeywords extends React.Component
 			<p>
 				{__(
 					'You should clearly formulate what your post is about in the first paragraph. In printed texts, a writer usually starts off with some kind of teaser, but there is no time for that if you are writing for the web. You only have seconds to gain your reader’s attention. Make sure the first paragraph tells the main message of your post. That way, you make it easy for your reader to figure out what your post is about. Doing this also tells Google what your post is about. Don’t forget to put your focus keyword in that first paragraph!',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

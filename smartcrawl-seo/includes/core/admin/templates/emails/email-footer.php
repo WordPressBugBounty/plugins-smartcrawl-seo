@@ -1,8 +1,8 @@
 <?php
 /**
- * Footer file.
+ * Template: Email Footer.
  *
- * @package Hummingbird
+ * @package SmartCrawl
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,7 +36,7 @@ $hide_branding = \SmartCrawl\Controllers\White_Label::get()->is_hide_wpmudev_bra
 					style="color: #1A1A1A; display: inline-block; font-family: 'Roboto', Arial, sans-serif; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left; text-decoration: none;">
 					<img
 						src="<?php echo esc_url( $logo_url ); ?>"
-						alt="<?php esc_attr_e( 'WPMU DEV', 'wphb' ); ?>"
+						alt="<?php esc_attr_e( 'WPMU DEV', 'smartcrawl-seo' ); ?>"
 						style="-ms-interpolation-mode: bicubic; border: none; clear: both; display: block; max-width: 100%; outline: none; text-decoration: none; width: 168px; height: auto;" width="168" height="auto"/>
 				</a>
 			</td>
@@ -165,7 +165,7 @@ $hide_branding = \SmartCrawl\Controllers\White_Label::get()->is_hide_wpmudev_bra
 						<td
 							class="address-content-inner"
 							style="-moz-hyphens: auto; -webkit-hyphens: auto; border-collapse: collapse !important; color: #AAAAAA; font-family: 'Roboto', Arial, sans-serif; font-size: 10px; font-weight: normal; hyphens: auto; line-height: 30px; margin: 0; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;">
-							<p style="color: #505050; font-family: 'Roboto', Arial, sans-serif; font-size: 10px; font-weight: normal; letter-spacing: -0.25px; line-height: 30px; margin: 0; padding: 0; text-align: center; text-transform: uppercase;"><?php esc_html_e( 'Incsub, PO Box 163 Albert Park, Victoria, 3206, Australia.', 'wphb' ); ?></p>
+							<p style="color: #505050; font-family: 'Roboto', Arial, sans-serif; font-size: 10px; font-weight: normal; letter-spacing: -0.25px; line-height: 30px; margin: 0; padding: 0; text-align: center; text-transform: uppercase;"><?php esc_html_e( 'Incsub, PO Box 163 Albert Park, Victoria, 3206, Australia.', 'smartcrawl-seo' ); ?></p>
 						</td>
 					</tr>
 					</tbody>

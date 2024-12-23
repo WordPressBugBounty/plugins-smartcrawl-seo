@@ -48,7 +48,8 @@ export default class SchemaPropertyAdditionModal extends React.Component {
 	getRequiredMessage() {
 		return createInterpolateElement(
 			__(
-				'You are missing properties that are required by Google ( <span>*</span> ). Make sure you include all of them so that your content will be eligible for display as a rich result. To learn more about schema type properties, see our <a>Schema Documentation</a>.'
+				'You are missing properties that are required by Google ( <span>*</span> ). Make sure you include all of them so that your content will be eligible for display as a rich result. To learn more about schema type properties, see our <a>Schema Documentation</a>.',
+				'smartcrawl-seo'
 			),
 			{
 				span: <span />,

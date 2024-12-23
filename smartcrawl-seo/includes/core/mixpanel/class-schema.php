@@ -11,6 +11,11 @@ namespace SmartCrawl\Mixpanel;
 use SmartCrawl\Singleton;
 use SmartCrawl\Settings;
 
+/**
+ * Schema class.
+ *
+ * Handles mixpanel schema events functionality.
+ */
 class Schema extends Events {
 
 	use Singleton;
@@ -20,7 +25,7 @@ class Schema extends Events {
 	 *
 	 * @var bool
 	 */
-	static $track_general = false;
+	public static $track_general = false;
 
 	/**
 	 * Initialize class.
@@ -29,9 +34,7 @@ class Schema extends Events {
 	 */
 	protected function init() {
 		add_action( 'smartcrawl_after_delete_schema_types', array( $this, 'intercept_schema_types_delete' ), 10, 2 );
-		add_action( 'smartcrawl_after_add_schema_types', array( $this, 'intercept_schema_types_add' ), 10, 3 );
-		// Schema general settings are stored in different options. Handle it properly.
-		//add_action( 'update_option_wds_social_options', array( $this, 'intercept_social_settings_update' ), 10, 2 );
+		add_action( 'smartcrawl_after_add_schema_types', array( $this, 'intercept_schema_types_add' ), 10, 4 );
 		add_action( 'update_option_wds_schema_options', array( $this, 'intercept_general_settings_update' ), 10, 2 );
 		add_action( 'shutdown', array( $this, 'track_general_settings_update' ) );
 	}
@@ -77,12 +80,12 @@ class Schema extends Events {
 	 * @param array $new_types      New schema types.
 	 * @param array $previous_types Old schema types.
 	 * @param array $current_types  Current schema types.
+	 * @param array $post_data      Post data.
 	 *
 	 * @return void
 	 */
-	public function intercept_schema_types_add( $new_types, $previous_types, $current_types ) {
-		if ( ! $this->is_tracking_active() || empty( $_POST['option_page'] )
-		     || 'wds_schema_options' !== $_POST['option_page']
+	public function intercept_schema_types_add( $new_types, $previous_types, $current_types, $post_data ) {
+		if ( ! $this->is_tracking_active() || empty( $post_data['option_page'] ) || 'wds_schema_options' !== $post_data['option_page']
 		) {
 			return;
 		}
@@ -103,49 +106,6 @@ class Schema extends Events {
 				'SMA - Record Schema Type Builder',
 				array( 'schema_type' => wp_json_encode( $types ) )
 			);
-		}
-	}
-
-	/**
-	 * Handle schema social settings update.
-	 *
-	 * @since 3.7.0
-	 *
-	 * @param array $old_value Old options value.
-	 * @param array $new_value New options value.
-	 *
-	 * @return void
-	 */
-	public function intercept_social_settings_update( $old_value, $new_value ) {
-		if ( ! $this->is_tracking_active() || empty( $_POST['option_page'] )
-		     || 'wds_social_options' !== $_POST['option_page']
-		) {
-			return;
-		}
-
-		$old_fields = array();
-		$new_fields = array();
-
-		foreach (
-			array(
-				'twitter_username',
-				'fb-app-id',
-				'facebook_url',
-				'instagram_url',
-				'linkedin_url',
-				'pinterest_url',
-				'youtube_url',
-				'schema_type',
-			)
-			as $field
-		) {
-			$old_fields[ $field ] = $this->get_value( $field, $old_value, '' );
-			$new_fields[ $field ] = $this->get_value( $field, $new_value, '' );
-		}
-
-		// Continue only if values changed.
-		if ( $old_fields !== $new_fields ) {
-			self::$track_general = true;
 		}
 	}
 

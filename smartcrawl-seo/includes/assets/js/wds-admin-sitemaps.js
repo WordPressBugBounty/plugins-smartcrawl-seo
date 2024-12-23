@@ -99,7 +99,7 @@ import SitemapTroubleshoot from './components/sitemaps/sitemap-troubleshoot';
 		$.post(
 			ajaxurl,
 			{
-				action: 'wds_get_crawl_progress',
+				action: 'smartcrawl_crawl_get_progress',
 				_wds_nonce: Wds.get('crawler', 'nonce'),
 			},
 			() => false,

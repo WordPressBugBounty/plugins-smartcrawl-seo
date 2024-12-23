@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Sitemap JS for Dashboard Widget.
+ *
+ * @package Smartcrwal
+ */
+
 $updating  = empty( $updating ) ? '' : $updating;
 $updated   = empty( $updated ) ? '' : $updated;
 $notifying = empty( $notifying ) ? '' : $notifying;

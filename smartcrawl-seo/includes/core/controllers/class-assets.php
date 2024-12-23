@@ -377,6 +377,7 @@ class Assets extends Controller {
 				'nonce'              => wp_create_nonce( 'wds-crawler-nonce' ),
 				'issues'             => $report->get_all_issues_grouped_by_type(),
 				'advanced_tools_url' => Admin_Settings::admin_url( Settings::ADVANCED_MODULE ) . '&tab=' . Settings::REDIRECTS_SUBMODULE,
+				'redirects'          => \smartcrawl_get_array_value( get_option( Settings::ADVANCED_MODULE ), 'redirects', array() ),
 			)
 		);
 
@@ -774,9 +775,7 @@ class Assets extends Controller {
 					}
 				}
 
-				if ( ! empty( $og_args ) ) {
-					$args['opengraph'] = $og_args;
-				}
+				$args['opengraph'] = $og_args;
 			}
 		}
 
@@ -831,9 +830,7 @@ class Assets extends Controller {
 					}
 				}
 
-				if ( ! empty( $twt_args ) ) {
-					$args['twitter'] = $twt_args;
-				}
+				$args['twitter'] = $twt_args;
 			}
 		}
 
@@ -953,7 +950,7 @@ class Assets extends Controller {
 					'loading' => __( 'Loading, please hold on...', 'smartcrawl-seo' ),
 				),
 				'nonce'               => wp_create_nonce( 'wds-metabox-nonce' ),
-				'analyse_posts_delay' => (int) apply_filters( 'wds-list-table-delay', 500 ), // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+				'analyse_posts_delay' => (int) apply_filters( 'wds-list-table-delay', 500 ),
 			)
 		);
 	}
@@ -1431,7 +1428,7 @@ class Assets extends Controller {
 				'metadesc_max_length' => smartcrawl_metadesc_max_length(),
 				'taxonomies'          => $this->get_taxonomies(),
 				'replacements'        => $this->get_replacements(),
-				'omitted_shortcodes'  => apply_filters( 'wds-omitted-shortcodes', array() ), // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+				'omitted_shortcodes'  => apply_filters( 'wds-omitted-shortcodes', array() ),
 			)
 		);
 	}

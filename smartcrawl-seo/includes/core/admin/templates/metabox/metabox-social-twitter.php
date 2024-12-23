@@ -1,11 +1,19 @@
 <?php
+/**
+ * Template: Metabox Social Twitter.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
-$post = empty( $post ) ? null : $post; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$post = empty( $post ) ? null : $post;
+
 if ( ! $post ) {
 	return;
 }
+
 $smartcrawl_post = \SmartCrawl\Cache\Post_Cache::get()->get_post( $post->ID );
 if ( ! $smartcrawl_post ) {
 	return;

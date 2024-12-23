@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap Extra Actions.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
@@ -15,7 +20,7 @@ $service = Service::get( Service::SERVICE_SEO );
 /**
  * Report.
  *
- * @var Seo_Report $crawl_report
+ * @var Seo_Report|null $crawl_report
  */
 $crawl_report = empty( $_view['crawl_report'] ) ? null : $_view['crawl_report'];
 

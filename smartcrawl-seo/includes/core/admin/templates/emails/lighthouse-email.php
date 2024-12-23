@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Lighthouse Email.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -9,14 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Available vars.
- *
- * @var $desktop_report Report
- * @var $mobile_report  Report
- */
 $desktop_report = empty( $desktop_report ) ? false : $desktop_report;
 $mobile_report  = empty( $mobile_report ) ? false : $mobile_report;
+
 if ( ! $desktop_report || ! $mobile_report ) {
 	return;
 }
@@ -59,7 +59,7 @@ $icon_error      = sprintf( '%s/assets/images/icon-error.png', $plugin_url );
 						<p style="color: #333333;font-family: 'Roboto', Arial, sans-serif;font-size: 25px;font-weight: 700;line-height: 34px;margin: 0 0 5px;padding: 0;text-align: left;">
 							<?php
 							printf( /* translators: %s - tested on */
-								__( 'SEO test summary for <br/>%s', 'smartcrawl-seo' ), // phpcs:ignore
+								esc_html__( 'SEO test summary for <br/>%s', 'smartcrawl-seo' ),
 								'<a class="brand" href="' . esc_attr( $lighthouse_url ) . '" target="_blank" style="color: #0059FF;font-family: \'Roboto\', Arial, sans-serif;font-weight: inherit;line-height: 30px;margin: 0;padding: 0;text-align: left;text-decoration: none">' . esc_html( site_url() ) . '</a>'
 							);
 							?>
@@ -70,7 +70,7 @@ $icon_error      = sprintf( '%s/assets/images/icon-error.png', $plugin_url );
 						<p style="color: #1a1a1a;font-family: 'Roboto', Arial, sans-serif;font-size: 18px;font-weight: normal;line-height: 28px;margin: 0 0 30px;padding: 0;text-align: left;letter-spacing: -0.3px;">
 							<?php
 							printf( /* translators: %s - tested on */
-								__( 'Here’s your latest SEO test summary generated on %s.', 'smartcrawl-seo' ),
+								esc_html__( 'Here’s your latest SEO test summary generated on %s.', 'smartcrawl-seo' ),
 								esc_html( $time_string )
 							);
 							?>

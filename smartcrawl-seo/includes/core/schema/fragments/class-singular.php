@@ -1,4 +1,9 @@
 <?php
+/**
+ * Singular class for handling singular schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
@@ -6,20 +11,37 @@ use SmartCrawl\Entities;
 use SmartCrawl\Models\User;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Singular
+ *
+ * Handles singular schema fragments.
+ */
 class Singular extends Fragment {
+
 	/**
+	 * The post entity.
+	 *
 	 * @var Entities\Post
 	 */
 	private $post;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
+	 * The owner user.
+	 *
 	 * @var User
 	 */
 	private $owner;
+
 	/**
+	 * Whether to include article schema.
+	 *
 	 * @var bool
 	 */
 	private $include_article_schema;
@@ -27,8 +49,8 @@ class Singular extends Fragment {
 	/**
 	 * Singular constructor.
 	 *
-	 * @param $post
-	 * @param $include_article_schema
+	 * @param Entities\Post $post The post entity.
+	 * @param bool          $include_article_schema Whether to include article schema.
 	 */
 	public function __construct( $post, $include_article_schema = true ) {
 		$this->post                   = $post;
@@ -38,7 +60,9 @@ class Singular extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed
+	 * Retrieves raw schema data.
+	 *
+	 * @return array|mixed The raw schema data.
 	 */
 	protected function get_raw() {
 		$url         = $this->post->get_permalink();
@@ -113,7 +137,9 @@ class Singular extends Fragment {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the article type.
+	 *
+	 * @return string The article type.
 	 */
 	private function get_article_type() {
 		return $this->show_news_article_schema()
@@ -122,24 +148,30 @@ class Singular extends Fragment {
 	}
 
 	/**
-	 * @return bool|mixed
+	 * Checks if the current page is an about page.
+	 *
+	 * @return bool|mixed True if it is an about page, false otherwise.
 	 */
 	private function is_about_page() {
 		return $this->is_special_page( 'schema_about_page' );
 	}
 
 	/**
-	 * @return bool|mixed
+	 * Checks if the current page is a contact page.
+	 *
+	 * @return bool|mixed True if it is a contact page, false otherwise.
 	 */
 	private function is_contact_page() {
 		return $this->is_special_page( 'schema_contact_page' );
 	}
 
 	/**
-	 * @param $key
-	 * @param $default
+	 * Checks if the current page is a special page.
 	 *
-	 * @return bool|mixed
+	 * @param string $key The key to check.
+	 * @param bool   $default The default value.
+	 *
+	 * @return bool|mixed True if it is a special page, false otherwise.
 	 */
 	private function is_special_page( $key, $default = false ) {
 		$output_page = $this->utils->get_special_page( $key );
@@ -151,7 +183,9 @@ class Singular extends Fragment {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the current page is a publisher output page.
+	 *
+	 * @return bool True if it is a publisher output page, false otherwise.
 	 */
 	private function is_publisher_output_page() {
 		if ( $this->is_special_page( 'schema_output_page', $this->post->is_front_page() ) ) {
@@ -162,7 +196,9 @@ class Singular extends Fragment {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if news article schema should be shown.
+	 *
+	 * @return bool True if news article schema should be shown, false otherwise.
 	 */
 	private function show_news_article_schema() {
 		if ( ! \SmartCrawl\Sitemaps\Utils::get_sitemap_option( 'enable-news-sitemap' ) ) {

@@ -1,11 +1,17 @@
 <?php
+/**
+ * Template: Onpage Post Type section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
 use SmartCrawl\Admin\Settings\Onpage;
 
-$post_type        = empty( $post_type ) ? '' : $post_type; // phpcs:ignore
-$post_type_object = empty( $post_type_object ) ? '' : $post_type_object; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$post_type        = empty( $post_type ) ? '' : $post_type;
+$post_type_object = empty( $post_type_object ) ? '' : $post_type_object;
 $post_type_robots = empty( $post_type_robots ) ? array() : $post_type_robots;
 $singular_name    = empty( $post_type_object->labels->singular_name ) ? 'post' : strtolower( $post_type_object->labels->singular_name );
 /* translators: %s: Singular post type name */

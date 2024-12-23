@@ -1,4 +1,9 @@
 <?php
+/**
+ * Printer class for outputting JSON+LD schema.org data to the page in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema;
 
@@ -9,31 +14,41 @@ use SmartCrawl\Singleton;
 use SmartCrawl\Work_Unit;
 
 /**
- * Outputs JSON+LD schema.org data to the page
+ * Class Printer
+ *
+ * Outputs JSON+LD schema.org data to the page.
  */
 class Printer extends Work_Unit {
 
 	use Singleton;
 
 	/**
+	 * Indicates if the schema injection is running.
+	 *
 	 * @var bool
 	 */
 	private $is_running = false;
 
 	/**
+	 * Indicates if the schema injection is done.
+	 *
 	 * @var bool
 	 */
 	private $is_done = false;
 
 	/**
-	 * Boot the hooking part
+	 * Boot the hooking part.
+	 *
+	 * @return void
 	 */
 	public static function run() {
 		self::get()->add_hooks();
 	}
 
 	/**
-	 * First-line dispatching of schema tags injection
+	 * Dispatches the schema injection.
+	 *
+	 * @return bool True if the schema was injected, false otherwise.
 	 */
 	public function dispatch_schema_injection() {
 		if ( ! ! $this->is_done ) {
@@ -76,14 +91,20 @@ class Printer extends Work_Unit {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the filter prefix.
+	 *
+	 * @return string The filter prefix.
 	 */
 	public function get_filter_prefix() {
 		return 'wds-schema';
 	}
 
 	/**
-	 * @return mixed
+	 * Adds items to the admin bar menu.
+	 *
+	 * @param \WP_Admin_Bar $admin_bar The admin bar instance.
+	 *
+	 * @return \WP_Admin_Bar The updated admin bar instance.
 	 */
 	public function admin_bar_menu_items( $admin_bar ) {
 		$schema_options = Settings::get_component_options( Settings::COMP_SCHEMA );
@@ -105,12 +126,12 @@ class Printer extends Work_Unit {
 			return $admin_bar;
 		}
 
-		$url = esc_url_raw( 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}" ); // phpcs:ignore
+		$url = esc_url_raw( 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}" ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidatedNotSanitized
 		$admin_bar->add_menu(
 			array(
 				'id'    => 'smartcrawl-test-item',
 				'title' => __( 'Test Schema', 'smartcrawl-seo' ),
-				'href'  => sprintf( 'https://search.google.com/test/rich-results?url=%s&user_agent=2', urlencode( $url ) ), // phpcs:ignore
+				'href'  => sprintf( 'https://search.google.com/test/rich-results?url=%s&user_agent=2', urlencode( $url ) ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.urlencode_urlencode
 				'meta'  => array(
 					'title'  => __( 'Test Schema', 'smartcrawl-seo' ),
 					'target' => '_blank',
@@ -122,7 +143,9 @@ class Printer extends Work_Unit {
 	}
 
 	/**
-	 * @return bool|void
+	 * Adds hooks for schema injection.
+	 *
+	 * @return bool True if hooks were added, false otherwise.
 	 */
 	private function add_hooks() {
 		// Do not double-bind.
@@ -139,7 +162,7 @@ class Printer extends Work_Unit {
 			50
 		);
 		add_action(
-			'wds_head-after_output',
+			'smartcrawl_head_after_output',
 			array(
 				$this,
 				'dispatch_schema_injection',
@@ -158,7 +181,9 @@ class Printer extends Work_Unit {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the schema is disabled.
+	 *
+	 * @return bool True if the schema is disabled, false otherwise.
 	 */
 	private function is_schema_disabled() {
 		$social = Settings::get_component_options( Settings::COMP_SOCIAL );

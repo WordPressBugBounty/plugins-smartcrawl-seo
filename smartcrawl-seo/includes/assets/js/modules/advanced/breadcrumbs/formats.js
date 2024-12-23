@@ -25,7 +25,7 @@ class Formats extends React.Component {
 				label={__('Breadcrumbs Label Format', 'smartcrawl-seo')}
 				description={__(
 					'Customize your breadcrumbs label formats across your site. ',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			>
 				<div className="sui-border-frame">

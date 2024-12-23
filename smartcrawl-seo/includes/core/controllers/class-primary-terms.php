@@ -27,7 +27,7 @@ class Primary_Terms extends Controller {
 	 */
 	protected function init() {
 		add_action( 'init', array( $this, 'register_primary_category' ) );
-		add_action( 'save_post', array( $this, 'save_primary_terms' ), 10, 2 );
+		add_action( 'save_post', array( $this, 'save_primary_terms' ), 10 );
 		add_action( 'admin_footer', array( $this, 'include_selection_template' ) );
 		add_filter( 'post_link_category', array( $this, 'post_link_category' ), 10, 3 );
 		add_filter( 'post_type_link', array( $this, 'post_type_link' ), 9, 2 );
@@ -43,25 +43,33 @@ class Primary_Terms extends Controller {
 	}
 
 	/**
-	 * Register WDS Primary meta for REST API.
+	 * Registers WDS Primary meta for REST API.
 	 *
 	 * @return void
 	 */
 	public function register_primary_category() {
-		$post_types     = get_post_types();
-		$excluded_types = apply_filters(
+		$post_types = get_post_types();
+
+		$excluded_types = apply_filters_deprecated(
 			'wds_primary_term_rest_excluded_post_types',
 			array(
-				'attachment',
-				'revision',
-				'nav_menu_item',
-				'custom_css',
-				'customize_changeset',
-				'oembed_cache',
-				'user_request',
-				'wp_block',
-			)
+				array(
+					'attachment',
+					'revision',
+					'nav_menu_item',
+					'custom_css',
+					'customize_changeset',
+					'oembed_cache',
+					'user_request',
+					'wp_block',
+				),
+			),
+			'6.6.1',
+			'smartcrawl_primary_term_excluded_post_types',
+			__( 'Please use our new filter `smartcrawl_primary_term_excluded_post_types` in SmartCrawl.', 'smartcrawl-seo' )
 		);
+
+		$excluded_types = apply_filters( 'smartcrawl_primary_term_excluded_post_types', $excluded_types );
 
 		foreach ( $post_types as $post_type ) {
 			if ( in_array( $post_type, $excluded_types, true ) ) {
@@ -88,13 +96,14 @@ class Primary_Terms extends Controller {
 				}
 			}
 		}
+
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_assets' ) );
 	}
 
 	/**
-	 * Register javascript value and js file.
+	 * Registers scripts and styles.
 	 *
-	 * @param string $hook_name - The name of the action to add the callback to.
+	 * @param string $hook_name The name of the action to add the callback to.
 	 */
 	public function register_assets( $hook_name ) {
 		if ( 'post-new.php' !== $hook_name && 'post.php' !== $hook_name ) {
@@ -108,7 +117,7 @@ class Primary_Terms extends Controller {
 			'_wds_primary',
 			array(
 				'taxonomies_js' => array_map(
-					array( $this, 'get_taxonomies_for_js' ),
+					array( $this, 'get_taxonomy_data' ),
 					$post_taxonomies
 				),
 			)
@@ -116,11 +125,11 @@ class Primary_Terms extends Controller {
 	}
 
 	/**
-	 * Get Post Type Taxonomies.
+	 * Retrieves the taxonomies associated with a post.
 	 *
-	 * @param string $post_id - Post id.
+	 * @param int $post_id The ID of the post. Default is 0.
 	 *
-	 * @return array
+	 * @return \WP_Taxonomy[] An array of taxonomy objects.
 	 */
 	public function get_post_taxonomies( $post_id = 0 ) {
 		if ( ! $post_id ) {
@@ -150,33 +159,33 @@ class Primary_Terms extends Controller {
 	}
 
 	/**
-	 * Get taxonomy data for JS in array.
+	 * Returns taxonomy data for JS.
 	 *
-	 * @param \WP_Taxonomy $taxonomy - WP Taxonomy object.
+	 * @param \WP_Taxonomy $taxonomy WP Taxonomy object.
 	 *
 	 * @return array
 	 */
-	public function get_taxonomies_for_js( $taxonomy ) {
+	public function get_taxonomy_data( $taxonomy ) {
 		return array(
 			'name'     => $taxonomy->name,
 			'title'    => $taxonomy->labels->singular_name,
 			'primary'  => $this->get_primary_term( $taxonomy->name ),
 			'restBase' => $taxonomy->rest_base,
 			'terms'    => array_map(
-				array( $this, 'get_terms_for_js' ),
-				get_terms( $taxonomy->name )
+				array( $this, 'get_term_data' ),
+				get_terms( array( 'taxonomy' => $taxonomy->name ) )
 			),
 		);
 	}
 
 	/**
-	 * Get term data for JS in array.
+	 * Returns term data for JS.
 	 *
-	 * @param \WP_Term $term - WP term object.
+	 * @param \WP_Term $term WP term object.
 	 *
 	 * @return array
 	 */
-	public function get_terms_for_js( $term ) {
+	public function get_term_data( $term ) {
 		return array(
 			'id'   => $term->term_id,
 			'name' => $term->name,
@@ -184,11 +193,13 @@ class Primary_Terms extends Controller {
 	}
 
 	/**
-	 * Returns Primary Term of the editing post.
+	 * Retrieves the primary term for a given taxonomy.
 	 *
-	 * @param string $taxonomy - Taxonomy name.
+	 * @param string $taxonomy The taxonomy name.
 	 *
-	 * @return integer
+	 * @return int|false The ID of the primary term if it exists, otherwise false.
+	 *
+	 * @global WP_Post $post The current post object.
 	 */
 	public function get_primary_term( $taxonomy ) {
 		global $post;
@@ -198,22 +209,22 @@ class Primary_Terms extends Controller {
 		$post_terms = $this->get_post_terms( $taxonomy );
 
 		if (
-			! in_array(
+			in_array(
 				$primary_term,
 				wp_list_pluck( $post_terms, 'term_id' ),
 				true
 			)
 		) {
-			$primary_term = false;
+			return $primary_term;
 		}
 
-		return $primary_term;
+		return false;
 	}
 
 	/**
-	 * Save primary terms on post submit.
+	 * Saves primary terms on post submit.
 	 *
-	 * @param integer $post_id - Post id.
+	 * @param int $post_id Post id.
 	 */
 	public function save_primary_terms( $post_id ) {
 		$post_taxonomies = $this->get_post_taxonomies( $post_id );
@@ -224,10 +235,12 @@ class Primary_Terms extends Controller {
 	}
 
 	/**
-	 * Save Primary Term of a post.
+	 * Saves the primary term for a specific post and taxonomy.
 	 *
-	 * @param integer      $post_id  - Post id.
-	 * @param \WP_Taxonomy $taxonomy - Taxonomy object.
+	 * @param int          $post_id The ID of the post.
+	 * @param \WP_Taxonomy $taxonomy The taxonomy object.
+	 *
+	 * @return void
 	 */
 	public function save_primary_term( $post_id, $taxonomy ) {
 
@@ -257,11 +270,11 @@ class Primary_Terms extends Controller {
 	}
 
 	/**
-	 * Get Post Terms.
+	 * Retrieves terms of a specific taxonomy for current post.
 	 *
-	 * @param string $taxonomy - Taxonomy name.
+	 * @param string $taxonomy Taxonomy name.
 	 *
-	 * @return array
+	 * @return \WP_Term[]
 	 */
 	public function get_post_terms( $taxonomy ) {
 		global $post;
@@ -286,6 +299,7 @@ class Primary_Terms extends Controller {
 	public function post_type_link( $post_link, $post ) {
 		$taxonomies = get_object_taxonomies( $post->post_type, 'objects' );
 		$taxonomies = wp_filter_object_list( $taxonomies, array( 'hierarchical' => true ), 'and', 'name' );
+
 		foreach ( $taxonomies as $taxonomy ) {
 			$this->sanitize_post_type_link( $post_link, $post, $taxonomy );
 		}
@@ -298,7 +312,7 @@ class Primary_Terms extends Controller {
 	 *
 	 * @param string   $post_link The post's permalink.
 	 * @param \WP_Post $post      The post in question.
-	 * @param object   $taxonomy  The post taxonomy.
+	 * @param string   $taxonomy  The post taxonomy.
 	 */
 	public function sanitize_post_type_link( &$post_link, $post, $taxonomy ) {
 		$find = '%' . $taxonomy . '%';
@@ -307,31 +321,29 @@ class Primary_Terms extends Controller {
 			return;
 		}
 
-		$primary_term = $this->get_wds_primary_term( $taxonomy, $post->ID );
-		if ( false !== $primary_term ) {
-			// Get the terms.
+		$primary_term = $this->make_primary_term( $taxonomy, $post->ID );
+
+		if ( $primary_term instanceof \WP_Term ) {
+			// Gets the terms.
 			$parents = $this->get_hierarchical_link( $primary_term );
 
-			// Replace the placeholder rewrite tag with terms.
+			// Replaces the placeholder rewrite tag with terms.
 			$post_link = str_replace( $find, $parents, $post_link );
 		}
 	}
 
 	/**
-	 * Get chain of hierarchical links.
+	 * Returns the hierarchical link for a given term.
 	 *
-	 * @param False | Object $term The term in question.
+	 * @param \WP_Term $term The term object or WordPress error object.
 	 *
-	 * @return string
+	 * @return string The hierarchical link for the given term.
 	 */
 	public function get_hierarchical_link( $term ) {
-		if ( is_wp_error( $term ) ) {
-			return $term->slug;
-		}
-
 		$chain = array();
 		$name  = $term->slug;
-		if ( $term->parent && ( $term->parent !== $term->term_id ) ) {
+
+		if ( $term->parent && $term->parent !== $term->term_id ) {
 			$chain[] = $this->get_hierarchical_link( get_term( $term->parent, $term->taxonomy ) );
 		}
 
@@ -350,7 +362,8 @@ class Primary_Terms extends Controller {
 	 * @return Object $primary_term
 	 */
 	public function post_link_category( $term, $terms, $post ) {
-		$primary_term = $this->get_wds_primary_term( $term->taxonomy, $post->ID );
+		$primary_term = $this->make_primary_term( $term->taxonomy, $post->ID );
+
 		if ( false === $primary_term ) {
 			return $term;
 		}
@@ -364,23 +377,29 @@ class Primary_Terms extends Controller {
 	}
 
 	/**
-	 * Get primary term of the post.
+	 * Generates the primary term for a given taxonomy and post ID if it doesn't exist and returns it.
 	 *
-	 * @param string $taxonomy Taxonomy name.
-	 * @param int    $post_id  Post ID.
+	 * @param string $taxonomy The taxonomy name.
+	 * @param int    $post_id The post ID.
 	 *
-	 * @return object|false Primary term on success, false if there are no terms, WP_Error on failure.
+	 * @return \WP_Term|false The primary term if found, false otherwise.
 	 */
-	public function get_wds_primary_term( $taxonomy, $post_id ) {
+	public function make_primary_term( $taxonomy, $post_id ) {
 		$primary = get_post_meta( $post_id, 'wds_primary_' . $taxonomy, true );
-		$primary = empty( $primary ) ? false : get_term( $primary, $taxonomy );
 
-		// Set first term as primary.
+		if ( ! $primary ) {
+			return false;
+		}
+
+		$primary = get_term( $primary, $taxonomy );
+
+		// Sets first term as primary.
 		if ( ! $primary instanceof \WP_Term ) {
 			$terms = wp_get_object_terms( $post_id, $taxonomy );
+
 			if ( isset( $terms[0] ) && $terms[0] instanceof \WP_Term ) {
 				$primary = $terms[0];
-				// automatically assign first term into primary term.
+				// Automatically assign first term into primary term.
 				update_post_meta( $post_id, 'wds_primary_' . $taxonomy, $primary->term_id );
 			}
 		}

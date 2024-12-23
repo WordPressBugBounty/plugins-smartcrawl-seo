@@ -11,7 +11,7 @@ $smartcrawl_buddypress = empty( $smartcrawl_buddypress ) ? array() : $smartcrawl
 $extra_urls            = empty( $extra_urls ) ? '' : $extra_urls;
 $ignore_urls           = empty( $ignore_urls ) ? '' : $ignore_urls;
 $ignore_post_ids       = empty( $ignore_post_ids ) ? '' : $ignore_post_ids;
-$override_native       = ! empty( $override_native ) && $override_native; // phpcs:ignore
+$override_native       = ! empty( $override_native );
 
 $arguments = array(
 	'post_types'            => $post_types,

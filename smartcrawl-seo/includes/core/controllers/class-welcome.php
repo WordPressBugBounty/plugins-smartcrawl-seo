@@ -7,6 +7,7 @@
 
 namespace SmartCrawl\Controllers;
 
+use SmartCrawl\SmartCrawl;
 use SmartCrawl\Settings;
 use SmartCrawl\Singleton;
 use SmartCrawl\Simple_Renderer;
@@ -65,7 +66,8 @@ class Welcome extends Controller {
 		$dismissed_version = Settings::get_specific_options( self::WELCOME_MODAL_DISMISSED_OPTION, '1.0.0' );
 		$not_dismissed     = version_compare( $dismissed_version, SMARTCRAWL_VERSION, '<' );
 		$onboarding_done   = Settings::get_specific_options( Onboard::ONBOARDING_DONE_OPTION );
-		$is_fresh_install  = ! \SmartCrawl\SmartCrawl::get_last_version();
+		$is_fresh_install  = ! SmartCrawl::get_last_version();
+
 		if ( $onboarding_done && $not_dismissed && ! $is_fresh_install && ! White_Label::get()->is_hide_wpmudev_doc_link() ) {
 			Simple_Renderer::render( 'dashboard/dashboard-welcome-modal' );
 		}
@@ -100,6 +102,6 @@ class Welcome extends Controller {
 	 * @return array|mixed
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array(); // phpcs:ignore
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 }

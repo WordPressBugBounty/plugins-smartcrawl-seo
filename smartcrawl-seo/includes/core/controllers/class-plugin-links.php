@@ -1,21 +1,39 @@
 <?php
+/**
+ * Handles to add links in plugins.php page on Free version.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Controllers;
 
 use SmartCrawl\Singleton;
 use SmartCrawl\Settings;
 
+/**
+ * Plugins Links Controller for Free version.
+ */
 class Plugin_Links extends Controller {
 
 	use Singleton;
 
+	/**
+	 * Initializes action hooks.
+	 *
+	 * @return void
+	 */
 	protected function init() {
 		add_filter( 'plugin_action_links_' . SMARTCRAWL_PLUGIN_BASENAME, array( $this, 'add_settings_link' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
-
-		return true;
 	}
 
+	/**
+	 * Adds links to upgrade, docs, and dashboard in the plugins.php page.
+	 *
+	 * @param array $links The existing settings links array.
+	 *
+	 * @return array The modified settings links array.
+	 */
 	public function add_settings_link( $links ) {
 		if ( ! is_array( $links ) ) {
 			return $links;
@@ -51,6 +69,14 @@ class Plugin_Links extends Controller {
 		return $links;
 	}
 
+	/**
+	 * Modifies the plugin meta data displayed on the plugin row.
+	 *
+	 * @param array  $plugin_meta The array of plugin meta data.
+	 * @param string $plugin_file The path to the main plugin file.
+	 *
+	 * @return array The modified array of plugin meta data.
+	 */
 	public function plugin_row_meta( $plugin_meta, $plugin_file ) {
 		if ( SMARTCRAWL_PLUGIN_BASENAME === $plugin_file ) {
 			if ( isset( $plugin_meta[2] ) ) {

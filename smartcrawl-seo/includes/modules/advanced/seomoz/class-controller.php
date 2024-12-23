@@ -128,6 +128,7 @@ class Controller extends Controllers\Submodule_Controller {
 				add_meta_box(
 					'wds_seomoz_urlmetrics',
 					sprintf(
+						// Translators: %s is the name of the plugin.
 						__( 'Moz URL Metrics - %s', 'smartcrawl-seo' ),
 						\smartcrawl_get_plugin_title()
 					),

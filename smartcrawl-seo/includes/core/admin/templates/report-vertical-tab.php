@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Report Vertical Tab.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

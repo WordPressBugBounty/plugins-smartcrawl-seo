@@ -1,4 +1,9 @@
 <?php
+/**
+ * Controller class for managing Lighthouse checks and related actions.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Lighthouse;
 
@@ -21,6 +26,8 @@ class Controller extends Controllers\Controller {
 	const ERROR_RESULT_NOT_FOUND = 30;
 
 	/**
+	 * Initializes the controller by adding necessary actions.
+	 *
 	 * @return void
 	 */
 	protected function init() {
@@ -55,6 +62,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Displays a notice about the removal of the checkup feature.
+	 *
 	 * @return void
 	 */
 	public function checkup_removal_notice() {
@@ -82,7 +91,7 @@ class Controller extends Controllers\Controller {
 				printf(
 					/* translators: %s: Current user's first name */
 					esc_html__( 'Heads up, %s! SmartCrawl’s SEO Checkup functionality has been removed in favor of SEO Audits powered by Google Lighthouse. We’ve automatically migrated your SEO Checkup settings to Lighthouse SEO Audit.', 'smartcrawl-seo' ),
-					User::current()->get_first_name()
+					esc_html( User::current()->get_first_name() )
 				);
 				?>
 			</p>
@@ -98,6 +107,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Starts the Lighthouse test.
+	 *
 	 * @return void
 	 */
 	public function start_lighthouse_test() {
@@ -106,7 +117,9 @@ class Controller extends Controllers\Controller {
 			wp_send_json_error();
 		}
 		/**
-		 * @var \SmartCrawl\Services\Lighthouse $lighthouse
+		 * Service lighthouse instance.
+		 *
+		 * @var \SmartCrawl\Services\Lighthouse $lighthouse Lighthouse service.
 		 */
 		$lighthouse = Service::get( Service::SERVICE_LIGHTHOUSE );
 		$lighthouse->clear_last_report();
@@ -117,6 +130,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Runs the Lighthouse check.
+	 *
 	 * @return void
 	 */
 	public function run_lighthouse() {
@@ -126,6 +141,8 @@ class Controller extends Controllers\Controller {
 		}
 
 		/**
+		 *  Service lighthouse instance.
+		 *
 		 * @var \SmartCrawl\Services\Lighthouse $lighthouse
 		 */
 		$lighthouse = Service::get( Service::SERVICE_LIGHTHOUSE );
@@ -169,16 +186,22 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Retrieves and sanitizes the request data.
+	 *
 	 * @return array
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( $_POST['_wds_nonce'], 'wds-lighthouse-nonce' )
-			? $_POST
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-lighthouse-nonce' )
+			? stripslashes_deep( $_POST )
 			: array();
 	}
 
 	/**
+	 * Applies the checkup schedule to Lighthouse.
+	 *
 	 * TODO: remove when enough time has passed
+	 *
+	 * @return void
 	 */
 	public function apply_checkup_schedule_to_lighthouse() {
 		$version_with_checkup     = '2.17.1';
@@ -236,6 +259,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Retrieves the checkup recipients.
+	 *
 	 * @return array
 	 */
 	public function get_checkup_recipients() {
@@ -267,7 +292,9 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $user_id
+	 * Retrieves the email recipient details.
+	 *
+	 * @param int $user_id User ID.
 	 *
 	 * @return array
 	 */
@@ -285,8 +312,10 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $recipient
-	 * @param $recipient_array
+	 * Checks if a recipient exists in the recipient array.
+	 *
+	 * @param array $recipient Recipient details.
+	 * @param array $recipient_array Array of recipients.
 	 *
 	 * @return bool
 	 */

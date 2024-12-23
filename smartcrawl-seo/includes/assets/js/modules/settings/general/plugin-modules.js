@@ -12,7 +12,7 @@ const tooltips = {
 			// translators: %s: plugin title
 			__(
 				'<strong>%s</strong> will look for keywords that match posts/pages around your website and automatically link them.',
-				'smartcrawl-seo'
+				'wds'
 			),
 			ConfigValues.get('plugin_title', 'admin')
 		),
@@ -20,23 +20,23 @@ const tooltips = {
 	),
 	redirects: __(
 		'Automatically redirect traffic from one URL to another. Use this tool if you have changed a page’s URL and wish to keep traffic flowing to the new page.',
-		'smartcrawl-seo'
+		'wds'
 	),
 	woocommerce: __(
 		'Add recommended Woo Meta and Product schema to your WooCommerce site.',
-		'smartcrawl-seo'
+		'wds'
 	),
 	seomoz: __(
 		'Moz provides reports that tell you how your site stacks up against the competition with all of the important SEO measurement tools etc.',
-		'smartcrawl-seo'
+		'wds'
 	),
 	robots: __(
 		'A robots.txt file tells bots what to index on your site and where they are.',
-		'smartcrawl-seo'
+		'wds'
 	),
 	breadcrumbs: __(
 		"Add breadcrumb trails to your web pages to indicate the page's position in the site hierarchy and help users understand and explore your site effectively.",
-		'smartcrawl-seo'
+		'wds'
 	),
 };
 const title = ConfigValues.get('title', 'advanced'),
@@ -66,10 +66,7 @@ export default class PluginModules extends React.Component {
 															className="sui-tag sui-tag-pro sui-tooltip"
 															data-tooltip="Upgrade to SmartCrawl Pro"
 														>
-															{__(
-																'Pro',
-																'smartcrawl-seo'
-															)}
+															{__('Pro', 'smartcrawl-seo')}
 														</span>
 													)}
 											</>
@@ -113,7 +110,7 @@ export default class PluginModules extends React.Component {
 						name={`wds_settings_options[hide_disables]`}
 						label={__(
 							'Hide disabled modules from the Dashboard and sub-menu',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						defaultChecked={ConfigValues.get(
 							'hide_disables',

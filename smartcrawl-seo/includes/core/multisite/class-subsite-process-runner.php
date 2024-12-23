@@ -1,4 +1,9 @@
 <?php
+/**
+ * Subsite_Process_Runner class for running processes across network sites in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Multisite;
 
@@ -10,17 +15,27 @@ namespace SmartCrawl\Multisite;
 class Subsite_Process_Runner {
 
 	/**
-	 * @var string To store the number of processed sites
+	 * The option ID for storing the number of processed sites.
+	 *
+	 * @var string To store the number of processed sites.
 	 */
 	private $option_id;
 
 	/**
-	 * @var callable The "process" this class is supposed to run
+	 * The callback function to run for each site.
+	 *
+	 * @var callable The "process" this class is supposed to run.
 	 */
 	private $callback;
 
 	const ALL_NETWORK_SITES = 'wds-all-network-sites-cache';
 
+	/**
+	 * Constructor.
+	 *
+	 * @param string   $option_id Option ID for storing processed site count.
+	 * @param callable $callback Callback function to run for each site.
+	 */
 	public function __construct( $option_id, $callback ) {
 		$this->option_id = $option_id;
 		$this->callback  = $callback;
@@ -71,18 +86,40 @@ class Subsite_Process_Runner {
 		return $processed_sites;
 	}
 
+	/**
+	 * Gets the count of processed sites.
+	 *
+	 * @return int Processed site count.
+	 */
 	private function get_processed_site_count() {
 		return (int) get_site_option( $this->get_option_id(), 0 );
 	}
 
+	/**
+	 * Updates the count of processed sites.
+	 *
+	 * @param int $count Processed site count.
+	 *
+	 * @return void
+	 */
 	private function update_processed_site_count( $count ) {
 		update_site_option( $this->get_option_id(), $count );
 	}
 
+	/**
+	 * Resets the count of processed sites.
+	 *
+	 * @return void
+	 */
 	private function reset_processed_site_count() {
 		delete_site_option( $this->get_option_id() );
 	}
 
+	/**
+	 * Gets the option ID for storing processed site count.
+	 *
+	 * @return string Option ID.
+	 */
 	private function get_option_id() {
 		return $this->option_id;
 	}
@@ -123,6 +160,11 @@ class Subsite_Process_Runner {
 		return empty( $next_site ) ? false : $next_site[0];
 	}
 
+	/**
+	 * Initializes the cache of all sites in the network if not already initialized.
+	 *
+	 * @return bool Status of cache initialization.
+	 */
 	private function maybe_init_all_sites_cache() {
 		if ( ! empty( $this->get_all_sites_cache() ) ) {
 			return false;
@@ -138,10 +180,20 @@ class Subsite_Process_Runner {
 		return update_site_option( self::ALL_NETWORK_SITES, $all_sites );
 	}
 
+	/**
+	 * Gets the cache of all sites in the network.
+	 *
+	 * @return array List of all site IDs.
+	 */
 	private function get_all_sites_cache() {
 		return get_site_option( self::ALL_NETWORK_SITES, array() );
 	}
 
+	/**
+	 * Resets the cache of all sites in the network.
+	 *
+	 * @return bool Status of cache reset.
+	 */
 	private function reset_all_sites_cache() {
 		return delete_site_option( self::ALL_NETWORK_SITES );
 	}

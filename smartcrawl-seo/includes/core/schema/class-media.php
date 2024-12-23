@@ -1,10 +1,20 @@
 <?php
+/**
+ * Media class for handling media schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema;
 
 use SmartCrawl\Singleton;
 use SmartCrawl\Controllers;
 
+/**
+ * Class Media
+ *
+ * Handles media schema fragments.
+ */
 class Media extends Controllers\Controller {
 
 	use Singleton;
@@ -12,16 +22,22 @@ class Media extends Controllers\Controller {
 	const META_KEY = '_wds_post_media_schema_cache';
 
 	/**
+	 * Indicates if the oEmbed provider is enabled.
+	 *
 	 * @var bool
 	 */
 	private $oembed_provider = false;
 
 	/**
+	 * The embed URL.
+	 *
 	 * @var bool
 	 */
 	private $embed_url = false;
 
 	/**
+	 * Initializes the Media class.
+	 *
 	 * @return void
 	 */
 	protected function init() {
@@ -30,7 +46,12 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return mixed
+	 * Intercepts the embed response.
+	 *
+	 * @param mixed  $provider The oEmbed provider.
+	 * @param string $url The URL to be embedded.
+	 *
+	 * @return mixed The provider.
 	 */
 	public function intercept_embed_response( $provider, $url ) {
 		global $post;
@@ -49,7 +70,13 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return mixed
+	 * Saves the intercepted embed response.
+	 *
+	 * @param mixed  $response The oEmbed response.
+	 * @param array  $parsed_args The parsed arguments.
+	 * @param string $provider The oEmbed provider.
+	 *
+	 * @return mixed The response.
 	 */
 	public function save_intercepted_embed_response( $response, $parsed_args, $provider ) {
 		global $post;
@@ -82,6 +109,10 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
+	 * Handles the post save action.
+	 *
+	 * @param int $post_id The ID of the post being saved.
+	 *
 	 * @return void
 	 */
 	public function handle_post_save( $post_id ) {
@@ -137,6 +168,13 @@ class Media extends Controllers\Controller {
 		}
 	}
 
+	/**
+	 * Maybe refreshes the WordPress embeds cache.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return void
+	 */
 	public function maybe_refresh_wp_embeds_cache( $post ) {
 		$supported_urls = $this->extract_supported_urls( $post->post_content );
 		$cache          = $this->get_cache( $post->ID );
@@ -145,6 +183,13 @@ class Media extends Controllers\Controller {
 		}
 	}
 
+	/**
+	 * Refreshes the WordPress embeds cache.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return void
+	 */
 	private function refresh_wp_embeds_cache( $post ) {
 		$zero_oembed_ttl = function () {
 			return 0;
@@ -158,7 +203,11 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return string[]
+	 * Extracts supported URLs from the post content.
+	 *
+	 * @param string $post_content The post content.
+	 *
+	 * @return string[] The supported URLs.
 	 */
 	private function extract_supported_urls( $post_content ) {
 		$urls = wp_extract_urls( $post_content );
@@ -167,14 +216,22 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return string
+	 * Gets the item data key for a URL.
+	 *
+	 * @param string $url The URL.
+	 *
+	 * @return string The item data key.
 	 */
 	private function get_item_data_key( $url ) {
 		return md5( trim( $url ) );
 	}
 
 	/**
-	 * @return array|mixed
+	 * Gets the cache for a post.
+	 *
+	 * @param int $post_id The ID of the post.
+	 *
+	 * @return array The cache data.
 	 */
 	public function get_cache( $post_id ) {
 		$cache = get_post_meta( $post_id, self::META_KEY, true );
@@ -183,21 +240,34 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return bool|int
+	 * Sets the cache for a post.
+	 *
+	 * @param int   $post_id The ID of the post.
+	 * @param mixed $value The cache value.
+	 *
+	 * @return bool|int True on success, false on failure.
 	 */
 	private function set_cache( $post_id, $value ) {
 		return update_post_meta( $post_id, self::META_KEY, $value );
 	}
 
 	/**
-	 * @return bool
+	 * Deletes the cache for a post.
+	 *
+	 * @param int $post_id The ID of the post.
+	 *
+	 * @return bool True on success, false on failure.
 	 */
 	private function delete_cache( $post_id ) {
 		return delete_post_meta( $post_id, self::META_KEY );
 	}
 
 	/**
-	 * @return array
+	 * Fetches oEmbed data for a URL.
+	 *
+	 * @param string $url The URL.
+	 *
+	 * @return array The oEmbed data.
 	 */
 	private function fetch_oembed_data( $url ) {
 		$url       = trim( $url ); // Remove white spaces if any.
@@ -215,7 +285,12 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return array
+	 * Prepares oEmbed data.
+	 *
+	 * @param string $url The URL.
+	 * @param mixed  $data The oEmbed data.
+	 *
+	 * @return array The prepared oEmbed data.
 	 */
 	private function prepare_oembed_data( $url, $data ) {
 		if ( ! $data ) {
@@ -228,7 +303,9 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return \WP_oEmbed
+	 * Gets the oEmbed instance.
+	 *
+	 * @return \WP_oEmbed The oEmbed instance.
 	 */
 	private function get_oembed() {
 		if ( ! class_exists( '\WP_oEmbed' ) ) {
@@ -239,7 +316,12 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if a URL has a specific domain.
+	 *
+	 * @param string       $url The URL.
+	 * @param string|array $domains The domains to check.
+	 *
+	 * @return bool True if the URL has the domain, false otherwise.
 	 */
 	private function url_has_domain( $url, $domains ) {
 		$domains = join( '|', array_map( 'preg_quote', $domains ) );
@@ -248,14 +330,22 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if a URL is a YouTube URL.
+	 *
+	 * @param string $url The URL.
+	 *
+	 * @return bool True if the URL is a YouTube URL, false otherwise.
 	 */
 	private function is_youtube_url( $url ) {
 		return $this->url_has_domain( $url, array( 'youtube.com', 'youtu.be' ) );
 	}
 
 	/**
-	 * @return bool
+	 * Checks if a URL is supported media.
+	 *
+	 * @param string $url The URL.
+	 *
+	 * @return bool True if the URL is supported media, false otherwise.
 	 */
 	private function is_supported_media( $url ) {
 		return $this->url_has_domain(
@@ -268,21 +358,31 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if a URL is supported video.
+	 *
+	 * @param string $url The URL.
+	 *
+	 * @return bool True if the URL is supported video, false otherwise.
 	 */
 	private function is_supported_video( $url ) {
 		return $this->url_has_domain( $url, $this->get_supported_video_domains() );
 	}
 
 	/**
-	 * @return bool
+	 * Checks if a URL is supported audio.
+	 *
+	 * @param string $url The URL.
+	 *
+	 * @return bool True if the URL is supported audio, false otherwise.
 	 */
 	private function is_supported_audio( $url ) {
 		return $this->url_has_domain( $url, $this->get_supported_audio_domains() );
 	}
 
 	/**
-	 * @return string[]
+	 * Gets the supported audio domains.
+	 *
+	 * @return string[] The supported audio domains.
 	 */
 	private function get_supported_audio_domains() {
 		return array(
@@ -293,7 +393,9 @@ class Media extends Controllers\Controller {
 	}
 
 	/**
-	 * @return string[]
+	 * Gets the supported video domains.
+	 *
+	 * @return string[] The supported video domains.
 	 */
 	private function get_supported_video_domains() {
 		return array(

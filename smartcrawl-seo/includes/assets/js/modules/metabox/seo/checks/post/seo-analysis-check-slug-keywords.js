@@ -34,11 +34,11 @@ export default class SeoAnalysisCheckSlugKeywords extends React.Component {
 				{state
 					? __(
 							"You've got your focus keywords in the page slug which can help your page rank as you have a higher chance of matching search terms, and Google does index your page URL, great stuff!",
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: __(
 							'Google does index your page URL. Using your focus keywords in the page slug can help your page rank as you have a higher chance of matching search terms. Try getting your focus keywords in there.',
-							'smartcrawl-seo'
+							'wds'
 					  )}
 			</p>
 		);
@@ -63,7 +63,7 @@ export default class SeoAnalysisCheckSlugKeywords extends React.Component {
 			<p>
 				{__(
 					"The page URL you use for this post will be visible in search engine results, so it's important to also include words that the searcher is looking for (your focus keywords). It's debatable whether keywords in the slug are of any real search engine ranking benefit. One could assume that because the slug does get indexed, the algorithm may favour slugs more closely aligned with the topic being searched.",
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

@@ -1,3 +1,11 @@
+<?php
+/**
+ * Template: Manually updating the sitemap.
+ *
+ * @package SmartCrawl
+ */
+
+?>
 <p class="sui-description">
 	<?php esc_html_e( "Your sitemap isn't being updated automatically. Click Update Sitemap below to regenerate your sitemap.", 'smartcrawl-seo' ); ?>
 

@@ -1,11 +1,17 @@
 <?php
+/**
+ * Template: Schema Advanced Section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $option_name    = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $options        = empty( $options ) ? array() : $options;
 $social_options = empty( $social_options ) ? array() : $social_options;
-$pages          = empty( $pages ) ? array() : $pages; // phpcs:ignore
+$pages          = empty( $pages ) ? array() : $pages;
 
 $schema_about_page           = (int) \smartcrawl_get_array_value( $options, 'schema_about_page' );
 $schema_contact_page         = (int) \smartcrawl_get_array_value( $options, 'schema_contact_page' );

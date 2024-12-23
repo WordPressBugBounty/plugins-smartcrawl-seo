@@ -1,16 +1,24 @@
 <?php
+/**
+ * Template: Schema Youtube API Key Field.
+ *
+ * @package Smartcrwal
+ */
+
 $option_name       = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $schema_yt_api_key = empty( $schema_yt_api_key ) ? '' : $schema_yt_api_key;
 ?>
 <div class="sui-form-field">
 	<p class="sui-description">
 		<?php
-		echo \smartcrawl_format_link(
+		echo wp_kses_post(
+			\smartcrawl_format_link(
 			/* translators: %s: Link to documentation */
-			esc_html__( 'To learn more about how to connect to Youtube, see our %s.', 'smartcrawl-seo' ),
-			'https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=schema-enabling-the-youtube-api#enabling-the-youtube-api',
-			'Documentation',
-			'_blank'
+				__( 'To learn more about how to connect to Youtube, see our %s.', 'smartcrawl-seo' ),
+				'https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=schema-enabling-the-youtube-api#enabling-the-youtube-api',
+				__( 'Documentation', 'smartcrawl-seo' ),
+				'_blank'
+			)
 		);
 		?>
 	</p>

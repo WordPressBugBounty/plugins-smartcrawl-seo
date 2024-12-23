@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap Switch To SmartCrawl Modal.
+ *
+ * @package Smartcrwal
+ */
 
 $this->render_view(
 	'modal',

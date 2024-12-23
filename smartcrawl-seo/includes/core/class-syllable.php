@@ -1,25 +1,51 @@
 <?php
+/**
+ * File containing the Syllable class for SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
 use Smartcrawl_Vendor\Vanderlee\Syllable\Syllable as Syllable_Lib;
 
+/**
+ * Class Syllable
+ *
+ * Provides syllable counting utilities for the SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 class Syllable {
 
+	/**
+	 * Language code for syllable counting.
+	 *
+	 * @var string
+	 */
 	private $language_code;
 
 	/**
+	 * Syllable counting helper library.
+	 *
 	 * @var Syllable_Lib
 	 */
 	private $helper;
 
 	/**
+	 * Syllable count adjustment offsets for different languages.
+	 *
 	 * @var float[]
 	 */
 	private $syllable_offsets = array(
 		'es' => 0.857616824,
 	);
 
+	/**
+	 * Constructor for the Syllable class.
+	 *
+	 * @param string $language_code Language code.
+	 */
 	public function __construct( $language_code ) {
 		$language_code = 'en' === $language_code ? 'en-us' : $language_code;
 
@@ -31,6 +57,13 @@ class Syllable {
 		}
 	}
 
+	/**
+	 * Counts the number of syllables in a string.
+	 *
+	 * @param string $string The string to count syllables in.
+	 *
+	 * @return int Syllable count.
+	 */
 	public function count_syllables( $string ) {
 		if ( empty( $string ) || ! $this->helper ) {
 			return 0;
@@ -70,6 +103,11 @@ class Syllable {
 		return intval( $adjusted );
 	}
 
+	/**
+	 * Checks if the language is supported for syllable counting.
+	 *
+	 * @return bool True if the language is supported, false otherwise.
+	 */
 	public function is_language_supported() {
 		$vendor         = SMARTCRAWL_VENDOR_PREFIXED_DIR;
 		$lang           = $this->language_code;

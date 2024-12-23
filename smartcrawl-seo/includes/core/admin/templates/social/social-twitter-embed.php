@@ -1,5 +1,11 @@
 <?php
-$tweet_url = empty( $tweet_url ) ? '' : $tweet_url;
+/**
+ * Template: Social Twitter Embed.
+ *
+ * @package Smartcrwal
+ */
+
+$tweet_url = empty( $tweet_url ) ? '' : esc_url( $tweet_url );
 $large     = empty( $large ) ? false : $large;
 
 if ( ! $tweet_url ) {
@@ -14,6 +20,7 @@ if ( ! $tweet_url ) {
 	 *
 	 * @var WP_Embed $wp_embed
 	 */
-	echo $wp_embed->autoembed( $tweet_url ); // phpcs:ignore -- The embed won't work if escaped
+	// $tweet_url has been escaped above so it's safe to output and the embed won't work if escaped
+	echo $wp_embed->autoembed( $tweet_url ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	?>
 </div>

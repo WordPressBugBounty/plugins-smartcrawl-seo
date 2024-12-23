@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage General Settings.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
@@ -23,7 +28,8 @@ $meta_field_desc  = empty( $meta_field_desc )
 
 $options = empty( $_view['options'] ) ? array() : $_view['options'];
 
-$title       = $title_key ? \smartcrawl_get_array_value( $options, $title_key ) : ''; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$title       = $title_key ? \smartcrawl_get_array_value( $options, $title_key ) : '';
 $description = $description_key
 	? \smartcrawl_get_array_value( $options, $description_key )
 	: '';

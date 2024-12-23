@@ -1,4 +1,9 @@
 <?php
+/**
+ * Controller class for handling sitemap-related services in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps;
 
@@ -7,12 +12,19 @@ use SmartCrawl\Settings;
 use SmartCrawl\Singleton;
 use SmartCrawl\Controllers;
 
+/**
+ * Class Controller
+ *
+ * Handles sitemap-related services.
+ */
 class Controller extends Controllers\Controller {
 
 	use Singleton;
 
 	/**
-	 * @return bool
+	 * Determines if the sitemap should run.
+	 *
+	 * @return bool True if the sitemap should run, false otherwise.
 	 */
 	public function should_run() {
 		return Settings::get_setting( 'sitemap' )
@@ -20,6 +32,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Initializes the controller.
+	 *
 	 * @return void
 	 */
 	protected function init() {
@@ -119,6 +133,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Invalidates the sitemap cache on plugin update.
+	 *
 	 * @return void
 	 */
 	public function invalidate_sitemap_cache_on_plugin_update() {
@@ -153,6 +169,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Primes the cache on sitemap settings page load.
+	 *
 	 * @return void
 	 */
 	public function prime_cache_on_sitemap_settings_page_load() {
@@ -171,6 +189,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Manually updates the search engines.
+	 *
 	 * @return void
 	 */
 	public function json_manually_update_engines() {
@@ -178,6 +198,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Manually updates the sitemap.
+	 *
 	 * @return void
 	 */
 	public function json_manually_update_sitemap() {
@@ -185,6 +207,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Deactivates the sitemap module.
+	 *
 	 * @return void
 	 */
 	public function json_deactivate_sitemap_module() {
@@ -200,6 +224,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Overrides the native sitemap.
+	 *
 	 * @return void
 	 */
 	public function json_override_native() {
@@ -226,7 +252,9 @@ class Controller extends Controllers\Controller {
 	 * while. So instead, we just invalidate the cache and potentially ping the
 	 * search engines to notify them about the change.
 	 *
-	 * @param $post_id
+	 * @param int $post_id The post ID.
+	 *
+	 * @return void
 	 */
 	public function handle_post_save( $post_id ) {
 		$post = get_post( $post_id );
@@ -248,7 +276,9 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $post_id
+	 * Handles post deletion.
+	 *
+	 * @param int $post_id The post ID.
 	 *
 	 * @return void
 	 */
@@ -262,11 +292,13 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $data
-	 * @param $term_id
-	 * @param $taxonomy
+	 * Handles term slug update.
 	 *
-	 * @return mixed
+	 * @param array  $data     The term data.
+	 * @param int    $term_id  The term ID.
+	 * @param string $taxonomy The taxonomy.
+	 *
+	 * @return mixed The modified term data.
 	 */
 	public function handle_term_slug_update( $data, $term_id, $taxonomy ) {
 		$term              = get_term( $term_id, $taxonomy );
@@ -282,8 +314,10 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $term_id
-	 * @param $taxonomy
+	 * Handles term deletion.
+	 *
+	 * @param int    $term_id  The term ID.
+	 * @param string $taxonomy The taxonomy.
 	 *
 	 * @return void
 	 */
@@ -302,6 +336,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Updates the sitemap via AJAX.
+	 *
 	 * @return void
 	 */
 	public function json_update_sitemap() {
@@ -311,6 +347,8 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
+	 * Updates the search engines via AJAX.
+	 *
 	 * @return void
 	 */
 	public function json_update_engines() {
@@ -319,13 +357,17 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
-	 * @return array|mixed
+	 * Retrieves request data.
+	 *
+	 * @return array|mixed The request data.
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( $_POST['_wds_nonce'], 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array();
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 
 	/**
+	 * Invalidates the sitemap cache.
+	 *
 	 * @return void
 	 */
 	public function invalidate_sitemap_cache() {

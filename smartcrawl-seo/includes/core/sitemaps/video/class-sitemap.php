@@ -7,8 +7,6 @@
 
 namespace SmartCrawl\Sitemaps\Video;
 
-// phpcs:ignoreFile PSR2.Classes.PropertyDeclaration.Underscore
-
 /**
  * Sitemap
  *
@@ -19,11 +17,15 @@ class Sitemap {
 	const VIDEO_SITEMAP_LIMIT = 50000;
 
 	/**
+	 * Provider regex.
+	 *
 	 * @var array
 	 */
 	private $_provider_regex = array();
 
 	/**
+	 * No video oembed.
+	 *
 	 * @var string[]
 	 */
 	private $_no_video_oembed = array(
@@ -36,6 +38,8 @@ class Sitemap {
 	);
 
 	/**
+	 * Items.
+	 *
 	 * @var array
 	 */
 	private $_items = array();
@@ -45,14 +49,19 @@ class Sitemap {
 	 */
 	private function __construct() {
 		if ( ! is_admin() ) {
-			$this->_provider_regex = $this->_get_provider_regexen();
+			$this->_provider_regex = $this->get_provider_regexen();
 		}
 	}
 
-	private function _get_provider_regexen() {
-		$oembed      = $this->_get_oembed_providers();
-		$static      = $this->_get_static_providers();
-		$supplements = $this->_get_supplement_providers();
+	/**
+	 * Get provider regexen.
+	 *
+	 * @return array
+	 */
+	private function get_provider_regexen() {
+		$oembed      = $this->get_oembed_providers();
+		$static      = $this->get_static_providers();
+		$supplements = $this->get_supplement_providers();
 
 		return array_merge(
 			$oembed,
@@ -61,7 +70,12 @@ class Sitemap {
 		);
 	}
 
-	private function _get_oembed_providers() {
+	/**
+	 * Get oEmbed providers.
+	 *
+	 * @return array
+	 */
+	private function get_oembed_providers() {
 		if ( ! class_exists( '\WP_oEmbed' ) ) {
 			// Short out if not available.
 			include ABSPATH . WPINC . '/class-oembed.php';
@@ -88,6 +102,13 @@ class Sitemap {
 		return $providers;
 	}
 
+	/**
+	 * Filter non-video provider callback.
+	 *
+	 * @param string $provider Provider URL.
+	 *
+	 * @return bool
+	 */
 	private function filter_non_video_provider_callback( $provider ) {
 		foreach ( $this->_no_video_oembed as $skip ) {
 			if ( preg_match( '/' . preg_quote( $skip, '/' ) . '/i', $provider ) ) {
@@ -99,9 +120,11 @@ class Sitemap {
 	}
 
 	/**
-	 * Static list - not used yet.
+	 * Get static providers.
+	 *
+	 * @return array
 	 */
-	private function _get_static_providers() {
+	private function get_static_providers() {
 		return array(
 			'//(www\\.)?youtube.com/watch.*',
 			'//youtu.be/.*',
@@ -117,12 +140,20 @@ class Sitemap {
 		);
 	}
 
-	private function _get_supplement_providers() {
+	/**
+	 * Get supplement providers.
+	 *
+	 * @return array
+	 */
+	private function get_supplement_providers() {
 		return array(
-			'//(www\\.)?youtube.com/.*', // For IFRAME embeds
+			'//(www\\.)?youtube.com/.*', // For IFRAME embeds.
 		);
 	}
 
+	/**
+	 * Serve the sitemap.
+	 */
 	public static function serve() {
 		$me = new Sitemap();
 		$me->add_hooks();
@@ -132,17 +163,23 @@ class Sitemap {
 		add_action( 'wp_trash_post', array( $me, 'clean_posts_cache' ) );
 	}
 
+	/**
+	 * Add hooks.
+	 */
 	private function add_hooks() {
 		if ( is_admin() ) {
 			return;
 		}
 
-		if ( preg_match( '~' . preg_quote( '/video-sitemap.xml' ) . '(\.gz)?$~i', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) ) { // phpcs:ignore WordPress.PHP.PregQuoteDelimiter.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+		if ( isset( $_SERVER['REQUEST_URI'] ) && preg_match( '~' . preg_quote( '/video-sitemap.xml', '/' ) . '(\.gz)?$~i', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) ) {
 			$this->update_items_list();
 			$this->serve_video_sitemap();
 		}
 	}
 
+	/**
+	 * Update items list.
+	 */
 	private function update_items_list() {
 		global $wpdb;
 
@@ -151,7 +188,7 @@ class Sitemap {
 			$likes = join( "' OR post_content REGEXP '", $this->_provider_regex );
 			$limit = self::VIDEO_SITEMAP_LIMIT;
 			$sql   = "SELECT * FROM $wpdb->posts WHERE post_status='publish' AND (post_content REGEXP '$likes') LIMIT $limit";
-			$posts = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$posts = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		}
 		wp_cache_add( 'wds-select-items-list', $posts, 'wds-video-sitemaps', 86400 );
 
@@ -160,21 +197,26 @@ class Sitemap {
 			// ...
 			// Exclude by taxonomies.
 			// ...
-			$this->_add_video_item( $post );
+			$this->add_video_item( $post );
 		}
 	}
 
-	private function _add_video_item( $raw ) {
-		$player = $this->_extract_player_loc( $raw->ID, $raw->post_content );
+	/**
+	 * Add video item.
+	 *
+	 * @param object $raw Raw post object.
+	 */
+	private function add_video_item( $raw ) {
+		$player = $this->extract_player_loc( $raw->ID, $raw->post_content );
 		if ( ! $player ) {
 			return;
 		}
 
-		$image = apply_filters( 'wds-video_sitemaps-thumbnail_url-default', '' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+		$image = apply_filters( 'wds-video_sitemaps-thumbnail_url-default', '' );
 		if ( ! $image ) {
-			$image = $this->_extract_thumbnail_from_player_src( $raw->ID, $player );
-			$image = apply_filters( 'wds-video_sitemaps-thumbnail_url', $image, $raw->ID, $player ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
-			$image = $image ? $image : apply_filters( 'wds-video_sitemaps-thumbnail_url-fallback', $image ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			$image = $this->extract_thumbnail_from_player_src( $raw->ID, $player );
+			$image = apply_filters( 'wds-video_sitemaps-thumbnail_url', $image, $raw->ID, $player );
+			$image = $image ? $image : apply_filters( 'wds-video_sitemaps-thumbnail_url-fallback', $image );
 		}
 		if ( ! $image ) {
 			// No thumbnail image, we can't add this item.
@@ -190,7 +232,15 @@ class Sitemap {
 		);
 	}
 
-	private function _extract_player_loc( $post_id, $body ) {
+	/**
+	 * Extract player location.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param string $body    Post content.
+	 *
+	 * @return string|false
+	 */
+	private function extract_player_loc( $post_id, $body ) {
 		$post_id = (int) $post_id;
 		$markup  = false;
 		$src     = false;
@@ -211,7 +261,7 @@ class Sitemap {
 			$matches = array();
 			preg_match( '/src=[\'"](.*?)[\'"]/', $markup, $matches );
 			if ( empty( $matches[1] ) ) {
-				return apply_filters( 'wds-video_sitemaps-player_loc', false, $post_id, $body ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+				return apply_filters( 'wds-video_sitemaps-player_loc', false, $post_id, $body );
 			}
 			$src = $matches[1];
 		} else {
@@ -226,10 +276,18 @@ class Sitemap {
 			}
 		}
 
-		return apply_filters( 'wds-video_sitemaps-player_loc', $src, $post_id, $body ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+		return apply_filters( 'wds-video_sitemaps-player_loc', $src, $post_id, $body );
 	}
 
-	private function _extract_thumbnail_from_player_src( $post_id, $src ) {
+	/**
+	 * Extract thumbnail from player source.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param string $src     Player source URL.
+	 *
+	 * @return string|false
+	 */
+	private function extract_thumbnail_from_player_src( $post_id, $src ) {
 		$host = wp_parse_url( $src, PHP_URL_HOST );
 		$path = wp_parse_url( $src, PHP_URL_PATH );
 
@@ -259,7 +317,6 @@ class Sitemap {
 			if ( 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
 				return false;
 			}
-			// $body = unserialize( wp_remote_retrieve_body( $response ) );
 			if ( ! empty( $body[0]['thumbnail_medium'] ) ) {
 				$thumbnail = $body[0]['thumbnail_medium'];
 				update_post_meta( $post_id, '_vimeo_thumbnail_id-' . $video_id, $thumbnail );
@@ -329,15 +386,18 @@ class Sitemap {
 		}
 
 		// Default.
-		return apply_filters( 'wds-video_sitemaps-thumbnail_url-' . $host, '', $src, $post_id ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+		return apply_filters( 'wds-video_sitemaps-thumbnail_url-' . $host, '', $src, $post_id );
 	}
 
+	/**
+	 * Serve video sitemap.
+	 */
 	private function serve_video_sitemap() {
 		if ( ! $this->_items ) {
 			return false;
 		}
 
-		$map = $this->_prepare_sitemap();
+		$map = $this->prepare_sitemap();
 
 		if ( ! $map ) {
 			return false;
@@ -348,12 +408,17 @@ class Sitemap {
 		die;
 	}
 
-	private function _prepare_sitemap() {
+	/**
+	 * Prepare sitemap.
+	 *
+	 * @return string|false
+	 */
+	private function prepare_sitemap() {
 		if ( ! $this->_items ) {
 			return false;
 		}
 
-		$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+		$xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">' . "\n";
 
 		foreach ( $this->_items as $loc => $item ) {
@@ -361,10 +426,10 @@ class Sitemap {
 			$xml .= "<loc>$loc</loc>";
 
 			$keys = array_keys( $item );
-			$xml  .= '<video>';
+			$xml .= '<video>';
 			foreach ( $keys as $key ) {
 				$value = empty( $item[ $key ] ) ? '' : htmlspecialchars( $item[ $key ] );
-				$xml   .= "<video:$key>$value</video:$key>\n";
+				$xml  .= "<video:$key>$value</video:$key>\n";
 			}
 			$xml .= '</video>';
 
@@ -376,6 +441,9 @@ class Sitemap {
 		return $xml;
 	}
 
+	/**
+	 * Clean posts cache.
+	 */
 	public function clean_posts_cache() {
 		wp_cache_delete( 'wds-select-items-list', 'wds-video-sitemaps' );
 	}

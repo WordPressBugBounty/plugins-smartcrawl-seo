@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Report on Full version.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

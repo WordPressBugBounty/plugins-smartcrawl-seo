@@ -210,9 +210,7 @@ class SchemaType extends React.Component {
 
 	duplicateType() {
 		this.props.duplicateType();
-		showNotice(
-			__('The type has been duplicated successfully.', 'smartcrawl-seo')
-		);
+		showNotice(__('The type has been duplicated successfully.', 'smartcrawl-seo'));
 	}
 }
 

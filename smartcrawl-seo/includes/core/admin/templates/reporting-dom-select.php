@@ -1,5 +1,12 @@
 <?php
+/**
+ * Template: Reporting Date of Month Select.
+ *
+ * @package Smartcrwal
+ */
+
 $component = empty( $component ) ? '' : $component;
+
 if ( ! $component ) {
 	return;
 }
@@ -31,9 +38,9 @@ $time_label = empty( $timezone ) ? '' : sprintf( '%s (%s)', wp_date( 'h:i A' ), 
 	name="<?php echo esc_attr( $select_name ); ?>"
 >
 	<?php foreach ( $dom_range as $dom ) : ?>
-		<option value="<?php echo esc_attr( $dom ); ?>"
+		<option value="<?php echo esc_attr( (string) $dom ); ?>"
 			<?php selected( $dom, $dom_value ); ?>>
-			<?php echo esc_html( $dom ); ?>
+			<?php echo esc_html( (string) $dom ); ?>
 		</option>
 	<?php endforeach; ?>
 </select>

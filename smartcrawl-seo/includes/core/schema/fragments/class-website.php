@@ -1,24 +1,41 @@
 <?php
+/**
+ * Website class for handling website schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Website
+ *
+ * Handles website schema fragments.
+ */
 class Website extends Fragment {
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
 
 	/**
+	 * Website constructor.
 	 *
+	 * Initializes the schema utilities.
 	 */
 	public function __construct() {
 		$this->utils = Utils::get();
 	}
 
 	/**
-	 * @return mixed|void
+	 * Retrieves raw schema data for the website.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$website_name = $this->utils->get_social_option( 'sitename' );

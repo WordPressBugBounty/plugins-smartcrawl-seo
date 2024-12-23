@@ -55,7 +55,7 @@ const schemaTypesData = {
 		subText: createInterpolateElement(
 			__(
 				'Note: Rich Results Test supports the Books Schema type for a limited number of sites for the time being, so please go to the <a>Structured Data testing tool</a> to check your book type.',
-				'smartcrawl-seo'
+				'wds'
 			),
 			{
 				a: (

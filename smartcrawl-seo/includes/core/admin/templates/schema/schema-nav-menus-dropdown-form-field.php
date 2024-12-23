@@ -1,11 +1,17 @@
 <?php
+/**
+ * Template: Schema Nav Menus Dropdown Form Field.
+ *
+ * @package Smartcrwal
+ */
+
 $option_name                 = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $schema_main_navigation_menu = empty( $schema_main_navigation_menu ) ? '' : $schema_main_navigation_menu;
 
 /**
- * Term.
+ * An array of menu objects.
  *
- * @var $nav_menus \WP_Term[]
+ * @var \WP_Term[] $nav_menus
  */
 $nav_menus = wp_get_nav_menus();
 ?>

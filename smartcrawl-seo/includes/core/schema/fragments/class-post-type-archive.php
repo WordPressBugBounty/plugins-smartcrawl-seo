@@ -1,32 +1,63 @@
 <?php
+/**
+ * Post_Type_Archive class for handling post type archive schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Post_Type_Archive
+ *
+ * Handles post type archive schema fragments.
+ */
 class Post_Type_Archive extends Fragment {
-	private $post_type;
-	private $posts;
+
 	/**
+	 * The post type.
+	 *
+	 * @var \WP_Post_Type
+	 */
+	private $post_type;
+
+	/**
+	 * The posts related to the post type archive.
+	 *
+	 * @var \WP_Post[]
+	 */
+	private $posts;
+
+	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
-	 * @var
+	 * The title of the post type archive.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the post type archive.
+	 *
+	 * @var string
 	 */
 	private $description;
 
 	/**
 	 * Post_Type_Archive constructor.
 	 *
-	 * @param $post_type \WP_Post_Type
-	 * @param $posts \WP_Post[]
-	 * @param $title
-	 * @param $description
+	 * @param \WP_Post_Type $post_type The post type.
+	 * @param \WP_Post[]    $posts The posts related to the post type archive.
+	 * @param string        $title The title of the post type archive.
+	 * @param string        $description The description of the post type archive.
 	 */
 	public function __construct( $post_type, $posts, $title, $description ) {
 		$this->post_type   = $post_type;
@@ -37,7 +68,9 @@ class Post_Type_Archive extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed|Archive
+	 * Retrieves raw schema data.
+	 *
+	 * @return array|mixed|Archive The raw schema data.
 	 */
 	protected function get_raw() {
 		$enabled                = (bool) $this->utils->get_schema_option( 'schema_enable_post_type_archives' );

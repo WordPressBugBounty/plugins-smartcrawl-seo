@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Lighthouse Reporting.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

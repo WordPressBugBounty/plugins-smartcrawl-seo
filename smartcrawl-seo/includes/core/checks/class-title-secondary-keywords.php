@@ -17,7 +17,7 @@ namespace SmartCrawl\Checks;
 class Title_Secondary_Keywords extends Title_Keywords {
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @since 3.4.0
 	 *
@@ -34,7 +34,7 @@ class Title_Secondary_Keywords extends Title_Keywords {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @return array
 	 */

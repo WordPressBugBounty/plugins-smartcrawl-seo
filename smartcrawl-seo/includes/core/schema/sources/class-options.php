@@ -1,22 +1,39 @@
 <?php
+/**
+ * Options class for handling options schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Options
+ *
+ * Handles options schema fragments.
+ */
 class Options extends Property {
 	const ID = 'options';
 
 	/**
-	 * @var
+	 * The option value.
+	 *
+	 * @var mixed
 	 */
 	private $option;
+
 	/**
-	 * @var
+	 * The type of the option.
+	 *
+	 * @var string
 	 */
 	private $type;
 
 	/**
-	 * @param $option
-	 * @param $type
+	 * Options constructor.
+	 *
+	 * @param mixed  $option The option value.
+	 * @param string $type The type of the option.
 	 */
 	public function __construct( $option, $type ) {
 		parent::__construct();
@@ -26,7 +43,9 @@ class Options extends Property {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the value of the option.
+	 *
+	 * @return string The value of the option.
 	 */
 	public function get_value() {
 		if ( 'Array' !== $this->type && is_array( $this->option ) ) {

@@ -80,7 +80,7 @@ class Modules extends Events {
 		// Get from action.
 		$action = $this->get_current_action();
 		switch ( $action ) {
-			case 'wds-boarding-toggle':
+			case 'smartcrawl_onboard_toggle':
 				$from = 'Quick Setup';
 				break;
 			case 'wds-activate-component':
@@ -156,8 +156,8 @@ class Modules extends Events {
 	 * @return string
 	 */
 	private function get_module_from_page() {
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$page = isset( $_REQUEST['option_page'] ) ? wp_unslash( $_REQUEST['option_page'] ) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page = isset( $_REQUEST['option_page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['option_page'] ) ) : '';
 
 		$modules = $this->get_modules();
 		// Include general settings.
@@ -184,8 +184,8 @@ class Modules extends Events {
 	 * @return string
 	 */
 	private function get_module_from_activation() {
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$page = isset( $_REQUEST['wds-activate-component'] ) ? wp_unslash( $_REQUEST['wds-activate-component'] ) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page = isset( $_REQUEST['wds-activate-component'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wds-activate-component'] ) ) : '';
 
 		$modules = $this->get_modules();
 

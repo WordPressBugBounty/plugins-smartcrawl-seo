@@ -1,8 +1,14 @@
 <?php
+/**
+ * Template: Url Crawl Master.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
 use SmartCrawl\Services\Service;
+use SmartCrawl\Services\Seo;
 
 $ready_template = empty( $ready_template ) ? '' : $ready_template;
 $ready_args     = empty( $ready_args ) ? array() : $ready_args;
@@ -16,7 +22,7 @@ $progress_args     = empty( $progress_args ) ? array() : $progress_args;
 /**
  * Service.
  *
- * @var Service $service
+ * @var Seo $service
  */
 $service      = Service::get( Service::SERVICE_SEO );
 $crawl_report = $service->get_report();

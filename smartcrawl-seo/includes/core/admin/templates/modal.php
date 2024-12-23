@@ -1,6 +1,13 @@
 <?php
-$id                      = empty( $id ) ? '' : $id; // phpcs:ignore
-$title                   = empty( $title ) ? '' : $title; // phpcs:ignore
+/**
+ * Template: Modal.
+ *
+ * @package Smartcrwal
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$id                      = empty( $id ) ? '' : $id;
+$title                   = empty( $title ) ? '' : $title;
 $description             = empty( $description ) ? '' : $description;
 $header_actions_template = empty( $header_actions_template ) ? '' : $header_actions_template;
 $body_template           = empty( $body_template ) ? '' : $body_template;

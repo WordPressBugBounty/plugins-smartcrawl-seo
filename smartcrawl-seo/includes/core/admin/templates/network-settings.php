@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Network Settings.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -132,12 +137,14 @@ $this->render_view( 'before-page-container' );
 								</label>
 								<p class="sui-description">
 									<?php
-									echo \smartcrawl_format_link(
+									echo wp_kses_post(
+										\smartcrawl_format_link(
 										/* translators: %s: Link to Configs page */
-										esc_html__( 'Select a config that you would like to apply to new sub-sites. Visit the %s page to manage all your configs.', 'smartcrawl-seo' ),
-										admin_url( 'admin.php?page=wds_settings&tab=tab_configs' ),
-										esc_html__( 'Configs', 'smartcrawl-seo' ),
-										'_blank'
+											esc_html__( 'Select a config that you would like to apply to new sub-sites. Visit the %s page to manage all your configs.', 'smartcrawl-seo' ),
+											admin_url( 'admin.php?page=wds_settings&tab=tab_configs' ),
+											esc_html__( 'Configs', 'smartcrawl-seo' ),
+											'_blank'
+										)
 									);
 									?>
 								</p>
@@ -154,9 +161,9 @@ $this->render_view( 'before-page-container' );
 									</option>
 
 									<?php foreach ( $collection->get_sorted_configs() as $config ) : ?>
-										<option <?php selected( $subsite_config_id, $config->get_id() ); ?>
-											value="<?php echo esc_attr( $config->get_id() ); ?>">
-
+										<?php $config_id = $config->get_id(); ?>
+										<option <?php selected( $subsite_config_id, $config_id ); ?>
+											value="<?php echo $config_id ? esc_attr( (string) $config_id ) : ''; ?>">
 											<?php echo esc_html( $config->get_name() ); ?>
 										</option>
 									<?php endforeach; ?>

@@ -90,7 +90,7 @@ class Slug_Keywords extends Post_Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @since 3.6.0
 	 *

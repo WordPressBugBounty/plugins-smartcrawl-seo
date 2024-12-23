@@ -1,4 +1,9 @@
 <?php
+/**
+ * Handles Third-party compatibility.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Controllers;
 
@@ -7,9 +12,7 @@ use SmartCrawl\Singleton;
 use SmartCrawl\Sitemaps;
 
 /**
- * Class Compatibility
- *
- * Fixes third-party compatibility issues
+ * Compatibility Controller.
  */
 class Compatibility extends Controller {
 
@@ -24,6 +27,11 @@ class Compatibility extends Controller {
 		'forminator_forms' => false,
 	);
 
+	/**
+	 * Initializes action hooks.
+	 *
+	 * @return void
+	 */
 	protected function init() {
 		add_filter( 'wds-omitted-shortcodes', array( $this, 'avada_omitted_shortcodes' ) );
 		add_filter( 'wds-omitted-shortcodes', array( $this, 'divi_omitted_shortcodes' ) );
@@ -38,14 +46,12 @@ class Compatibility extends Controller {
 		add_filter( 'the_content', array( $this, 'forminator_shortcode_check' ), -1 );
 		add_filter( 'wds_autolinks_can_cache_content', array( $this, 'skip_form_cache' ) );
 		// Disable defender login redirect because we are not entirely sure about its security implications
-		// add_filter( 'wds-report-admin-url', array( $this, 'ensure_defender_login_redirect' ) );.
+		// add_filter( 'smartcrawl_report_admin_url', array( $this, 'ensure_defender_login_redirect' ) );.
 		add_action( 'wu_domain_post_save', array( $this, 'wp_ultimo_clear_sitemap_cache' ) );
-
-		return true;
 	}
 
 	/**
-	 * Clear sitemap cache when WP Ultimo domain is updated.
+	 * Clears sitemap cache when WP Ultimo domain is updated.
 	 *
 	 * @since 3.6.3
 	 *
@@ -66,7 +72,7 @@ class Compatibility extends Controller {
 	}
 
 	/**
-	 * Set a flag for Forminator form shortcode.
+	 * Sets a flag for Forminator form shortcode.
 	 *
 	 * If a form shortcode is found on the page, we need to skip
 	 * cache. Otherwise some form scripts may not work.
@@ -88,7 +94,7 @@ class Compatibility extends Controller {
 	}
 
 	/**
-	 * Skip auto link object cache if forms found.
+	 * Skips auto link object cache if forms found.
 	 *
 	 * If Forminator forms found on the page, skip the object cache
 	 * for the auto linking.
@@ -107,14 +113,25 @@ class Compatibility extends Controller {
 		return $can_cache;
 	}
 
+	/**
+	 * Enables access to sitemap for certain requests.
+	 *
+	 * @param array $args The current arguments.
+	 *
+	 * @return array The updated arguments.
+	 */
 	public function allow_sitemap_access( $args ) {
-		$request            = parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH );
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return $args;
+		}
+
+		$request            = wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH );
 		$is_sitemap_request = strpos( $request, '/sitemap.xml' ) === strlen( $request ) - strlen( '/sitemap.xml' );
 
-		// Strip numbers from request
+		// Strips numbers from request.
 		$sitemap = preg_replace( '/[0-9]+/', '', $request );
 
-		// Check if one of bbp sitemaps
+		// Checks if one of bbp sitemaps.
 		if ( in_array(
 			$sitemap,
 			array(
@@ -122,7 +139,8 @@ class Compatibility extends Controller {
 				'/topic-sitemap.xml',
 				'/reply-sitemap.xml',
 				'/topic-tag-sitemap.xml',
-			)
+			),
+			true
 		) ) {
 			$is_sitemap_request = true;
 		}
@@ -135,6 +153,13 @@ class Compatibility extends Controller {
 		return $args;
 	}
 
+	/**
+	 * Adds shortcodes to the omitted list.
+	 *
+	 * @param array $omitted The current omitted shortcodes.
+	 *
+	 * @return array The updated omitted shortcodes.
+	 */
 	public function avada_omitted_shortcodes( $omitted ) {
 		return array_merge(
 			$omitted,
@@ -147,6 +172,13 @@ class Compatibility extends Controller {
 		);
 	}
 
+	/**
+	 * Adds Divi omitted shortcodes to the omitted list.
+	 *
+	 * @param array $omitted The current array of omitted shortcodes.
+	 *
+	 * @return array The updated array of omitted shortcodes.
+	 */
 	public function divi_omitted_shortcodes( $omitted ) {
 		return array_merge(
 			$omitted,
@@ -157,6 +189,13 @@ class Compatibility extends Controller {
 		);
 	}
 
+	/**
+	 * Adds WPBakery shortcodes to the omitted list.
+	 *
+	 * @param array $omitted The current omitted shortcodes.
+	 *
+	 * @return array The updated omitted shortcodes.
+	 */
 	public function wpbakery_omitted_shortcodes( $omitted ) {
 		return array_merge(
 			$omitted,
@@ -167,6 +206,13 @@ class Compatibility extends Controller {
 		);
 	}
 
+	/**
+	 * Adds Swift shortcodes to the omitted list.
+	 *
+	 * @param array $omitted The current omitted shortcodes array.
+	 *
+	 * @return array The updated omitted shortcodes array.
+	 */
 	public function swift_omitted_shortcodes( $omitted ) {
 		return array_merge(
 			$omitted,
@@ -177,6 +223,13 @@ class Compatibility extends Controller {
 		);
 	}
 
+	/**
+	 * Ensures login redirect for Defender.
+	 *
+	 * @param string $url The current URL.
+	 *
+	 * @return string The updated URL.
+	 */
 	public function ensure_defender_login_redirect( $url ) {
 		if (
 			is_user_logged_in()
@@ -188,6 +241,13 @@ class Compatibility extends Controller {
 		return \WP_Defender\Module\Advanced_Tools\Component\Mask_Api::maybeAppendTicketToUrl( $url );
 	}
 
+	/**
+	 * Changes the sitemap URL for domain map.
+	 *
+	 * @param string $sitemap_url The current sitemap URL.
+	 *
+	 * @return string The updated sitemap URL.
+	 */
 	public function change_sitemap_url_for_domain_map( $sitemap_url ) {
 		if (
 			is_multisite()

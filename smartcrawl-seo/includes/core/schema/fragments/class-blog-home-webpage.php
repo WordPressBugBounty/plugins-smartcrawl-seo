@@ -1,32 +1,56 @@
 <?php
+/**
+ * Blog_Home_Webpage class for handling the schema of the blog home webpage in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 use SmartCrawl\Cache\Object_Cache;
 
+/**
+ * Class Blog_Home_Webpage
+ *
+ * Handles the schema of the blog home webpage.
+ */
 class Blog_Home_Webpage extends Fragment {
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
-	 * @var
+	 * The publisher ID.
+	 *
+	 * @var int
 	 */
 	private $publisher_id;
+
 	/**
-	 * @var
+	 * The title of the webpage.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the webpage.
+	 *
+	 * @var string
 	 */
 	private $description;
 
 	/**
-	 * @param $title
-	 * @param $description
-	 * @param $publisher_id
+	 * Blog_Home_Webpage constructor.
+	 *
+	 * @param string $title The title of the webpage.
+	 * @param string $description The description of the webpage.
+	 * @param int    $publisher_id The publisher ID.
 	 */
 	public function __construct( $title, $description, $publisher_id ) {
 		$this->title        = $title;
@@ -36,7 +60,9 @@ class Blog_Home_Webpage extends Fragment {
 	}
 
 	/**
-	 * @return array
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$site_url = get_site_url();

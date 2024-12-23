@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Settings Sidenav.
+ *
+ * @package Smartcrwal
+ */
+
 $show_data_settings = empty( $show_data_settings ) ? false : $show_data_settings;
 $active_tab         = empty( $active_tab ) ? '' : $active_tab;
 $configs_available  = empty( $configs_available ) ? false : $configs_available;

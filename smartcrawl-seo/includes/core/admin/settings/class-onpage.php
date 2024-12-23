@@ -338,7 +338,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get other type context.
+	 * Retrieves other type context.
 	 *
 	 * @param string $prefix Prefix.
 	 *
@@ -391,7 +391,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get the title.
+	 * Retrieves the title.
 	 *
 	 * @return string
 	 */
@@ -477,13 +477,8 @@ class Onpage extends Admin_Settings {
 			esc_html__( 'search page', 'smartcrawl-seo' )
 		);
 
-		// Allow for post type options.
+		// Allows for post type options.
 		foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $post_type ) {
-			/**
-			 * Post type.
-			 *
-			 * @var $post_type \WP_Post_Type
-			 */
 			$arguments['post_robots'][ $post_type->name ] = self::get_robots_options_for( $post_type->name, false, strtolower( $post_type->label ) );
 		}
 
@@ -529,7 +524,7 @@ class Onpage extends Admin_Settings {
 	/**
 	 * Static front page notice.
 	 *
-	 * @param int $front_page Page ID.
+	 * @param \WP_Post|null $front_page Page ID.
 	 *
 	 * @return false|mixed
 	 */
@@ -558,7 +553,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get singular macros.
+	 * Retrieves singular macros.
 	 *
 	 * @param string $post_type Post type.
 	 *
@@ -590,7 +585,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get term macros.
+	 * Retrieves term macros.
 	 *
 	 * @param string $taxonomy Taxonomy.
 	 *
@@ -617,7 +612,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get general macros.
+	 * Retrieves general macros.
 	 *
 	 * @return array
 	 */
@@ -640,7 +635,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get BP profile macros.
+	 * Retrieves BP profile macros.
 	 *
 	 * @return array
 	 */
@@ -652,7 +647,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get BP group macros.
+	 * Retrieves BP group macros.
 	 *
 	 * @return array
 	 */
@@ -664,6 +659,8 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
+	 * Retrieves post type archive macros.
+	 *
 	 * @return array
 	 */
 	public static function get_pt_archive_macros() {
@@ -674,7 +671,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get search macros.
+	 * Retrieves search macros.
 	 *
 	 * @return array
 	 */
@@ -685,7 +682,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get author macros.
+	 * Retrieves author macros.
 	 *
 	 * @return array
 	 */
@@ -698,7 +695,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get date macros.
+	 * Retrieves date macros.
 	 *
 	 * @return array
 	 */
@@ -837,16 +834,16 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get request data.
+	 * Retrieves request data.
 	 *
 	 * @return array
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-onpage-nonce' ) ? $_POST : array(); // phpcs:ignore
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-onpage-nonce' ) ? $_POST : array();
 	}
 
 	/**
-	 * Get random post data.
+	 * Retrieves random post data.
 	 *
 	 * @return array
 	 */
@@ -854,7 +851,7 @@ class Onpage extends Admin_Settings {
 		/**
 		 * Post type.
 		 *
-		 * @var $post_types \WP_Post_Type
+		 * @var \WP_Post_Type[] $post_types
 		 */
 		$post_types = get_post_types(
 			array(
@@ -865,6 +862,7 @@ class Onpage extends Admin_Settings {
 		);
 
 		$data = array();
+
 		foreach ( $post_types as $post_type ) {
 			$posts = get_posts(
 				array(
@@ -891,7 +889,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get post data.
+	 * Retrieves post data.
 	 *
 	 * @param \WP_Post $post Post data.
 	 *
@@ -913,7 +911,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get random terms.
+	 * Retrieves random terms.
 	 *
 	 * @return array
 	 */
@@ -942,12 +940,13 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get random BuddyPress data.
+	 * Retrieves random BuddyPress data.
 	 *
 	 * @return array
 	 */
 	public static function get_random_buddypress() {
 		$buddypress_api = new \SmartCrawl\BuddyPress\Api();
+
 		if ( ! $buddypress_api->buddypress() ) {
 			return array();
 		}
@@ -973,7 +972,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get random archives.
+	 * Retrieves random archives.
 	 *
 	 * @return array
 	 */
@@ -994,7 +993,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get author archive data.
+	 * Retrieves author archive data.
 	 *
 	 * @return array
 	 */
@@ -1008,7 +1007,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get 404 archive data.
+	 * Retrieves 404 archive data.
 	 *
 	 * @return array
 	 */
@@ -1020,7 +1019,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get search archive data.
+	 * Retrieves search archive data.
 	 *
 	 * @return array
 	 */
@@ -1035,13 +1034,13 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get date archive data.
+	 * Retrieves date archive data.
 	 *
 	 * @return array
 	 */
 	private static function get_date_archive_data() {
-		$month = date( 'n' ); // phpcs:ignore
-		$year  = date( 'Y' ); // phpcs:ignore
+		$month = date( 'n' ); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
+		$year  = date( 'Y' ); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
 		$date  = new Entities\Date_Archive( $year, $month );
 
 		return array(
@@ -1051,7 +1050,7 @@ class Onpage extends Admin_Settings {
 	}
 
 	/**
-	 * Get post type archive data.
+	 * Retrieves post type archive data.
 	 *
 	 * @param \WP_Post_Type $post_type_object Post type.
 	 *
@@ -1075,13 +1074,13 @@ class Onpage extends Admin_Settings {
 	 */
 	public function deactivate_onpage_module() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		Settings::deactivate_component( Settings::COMP_ONPAGE );
+
 		wp_send_json_success();
 	}
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * @var string $for_type
+ * Template: Onpage Social Meta Tags.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 $section_enabled_field_id = empty( $section_enabled_field_id ) ? '' : $section_enabled_field_id;

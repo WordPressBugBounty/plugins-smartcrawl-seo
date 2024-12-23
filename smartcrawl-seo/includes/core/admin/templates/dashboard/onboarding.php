@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Onboarding.
+ *
+ * @package SmartCrawl
+ */
+
 $this->render_view(
 	'modal',
 	array(

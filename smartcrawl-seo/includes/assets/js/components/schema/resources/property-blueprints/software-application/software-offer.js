@@ -13,7 +13,7 @@ const SoftwareOffer = {
 		value: '',
 		description: __(
 			'The price of the software application. If the app is free of charge, set price to 0.',
-			'smartcrawl-seo'
+			'wds'
 		),
 		disallowDeletion: true,
 	},
@@ -25,7 +25,7 @@ const SoftwareOffer = {
 		value: '',
 		description: __(
 			'The 3-letter ISO 4217 currency code. If the app has a price greater than 0, you must include currency.',
-			'smartcrawl-seo'
+			'wds'
 		),
 		disallowDeletion: true,
 		customSources: {

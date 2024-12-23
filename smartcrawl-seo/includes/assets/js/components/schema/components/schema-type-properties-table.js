@@ -113,10 +113,7 @@ class SchemaTypePropertiesTable extends React.Component {
 										onClick={() =>
 											this.startAddingProperty()
 										}
-										text={__(
-											'Add Property',
-											'smartcrawl-seo'
-										)}
+										text={__('Add Property', 'smartcrawl-seo')}
 									/>
 								</React.Fragment>
 							</div>
@@ -135,9 +132,7 @@ class SchemaTypePropertiesTable extends React.Component {
 
 	resetProperties() {
 		this.props.resetProperties();
-		showNotice(
-			__('Properties have been reset to default', 'smartcrawl-seo')
-		);
+		showNotice(__('Properties have been reset to default', 'smartcrawl-seo'));
 		this.stopResetting();
 	}
 

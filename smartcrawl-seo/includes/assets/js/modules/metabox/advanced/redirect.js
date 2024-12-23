@@ -25,7 +25,7 @@ export default class Redirect extends React.Component {
 					name="wds_redirect"
 					description={__(
 						'Enter the URL to send traffic to including http:// or https://',
-						'smartcrawl-seo'
+						'wds'
 					)}
 					value={redirect.url ? redirect.url : ''}
 				></TextInputField>

@@ -102,9 +102,7 @@ export default class LighthouseCheckTapTargets extends React.Component {
 				</div>
 
 				<div className="wds-lh-section">
-					<strong>
-						{__('How to fix your tap targets', 'smartcrawl-seo')}
-					</strong>
+					<strong>{__('How to fix your tap targets', 'smartcrawl-seo')}</strong>
 					<ul>
 						<li>
 							{createInterpolateElement(

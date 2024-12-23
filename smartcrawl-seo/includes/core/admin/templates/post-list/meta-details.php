@@ -1,17 +1,26 @@
 <?php
+/**
+ * Template: Post List Meta Details.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
-$post = empty( $post ) ? null : $post; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$post = empty( $post ) ? null : $post;
+
 if ( ! $post ) {
 	return;
 }
+
 $smartcrawl_post = \SmartCrawl\Cache\Post_Cache::get()->get_post( $post->ID );
+
 if ( ! $smartcrawl_post ) {
 	return;
 }
 
-$title           = $smartcrawl_post->get_meta_title(); // phpcs:ignore
+$title           = $smartcrawl_post->get_meta_title();
 $title_length    = mb_strlen( trim( $title ) );
 $title_tag_class = $title_length >= \smartcrawl_title_min_length() && $title_length <= \smartcrawl_title_max_length() ? 'wds-tag-success' : 'wds-tag-warning';
 

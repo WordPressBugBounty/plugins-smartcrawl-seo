@@ -1,9 +1,19 @@
 <?php
+/**
+ * Service class for handling various services in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Services;
 
 use SmartCrawl\Logger;
 
+/**
+ * Abstract class Service
+ *
+ * Provides a base for all service classes.
+ */
 abstract class Service {
 
 	const INTERMEDIATE_CACHE_EXPIRY = 300;
@@ -16,6 +26,11 @@ abstract class Service {
 
 	const SERVICE_LIGHTHOUSE = 'lighthouse';
 
+	/**
+	 * Array of error messages.
+	 *
+	 * @var array
+	 */
 	private $errors = array();
 
 	/**
@@ -283,7 +298,7 @@ abstract class Service {
 		$response = $this->remote_call( $verb );
 
 		return apply_filters(
-			$this->get_filter( "request-{$verb}" ), // phpcs:ignore
+			$this->get_filter( "request-{$verb}" ),
 			apply_filters(
 				$this->get_filter( 'request' ),
 				$response,
@@ -343,7 +358,7 @@ abstract class Service {
 
 		Logger::debug( "Sending a remote request to [{$remote_url}] ({$verb})" );
 		$response = wp_remote_request( $remote_url, $request_arguments );
-		Logger::debug( "Received a response from [{$remote_url}] ({$verb})" . var_export( $response, true ) ); // phpcs:ignore
+		Logger::debug( "Received a response from [{$remote_url}] ({$verb})" . var_export( $response, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
 		if ( is_wp_error( $response ) ) {
 			Logger::error( "We were not able to communicate with [{$remote_url}] ({$verb})." );
 			if ( is_callable( array( $response, 'get_error_messages' ) ) ) {
@@ -556,6 +571,11 @@ abstract class Service {
 		$this->errors = $errs;
 	}
 
+	/**
+	 * Gets the timeout value for service requests.
+	 *
+	 * @return int The timeout value in seconds.
+	 */
 	protected function get_timeout() {
 		return defined( 'SMARTCRAWL_SERVICE_REQUEST_TIMEOUT' )
 			? \SMARTCRAWL_SERVICE_REQUEST_TIMEOUT

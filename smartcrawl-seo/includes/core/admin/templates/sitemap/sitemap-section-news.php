@@ -1,3 +1,12 @@
+<?php
+/**
+ * Template: Sitemap News section.
+ *
+ * @package Smartcrwal
+ */
+
+?>
+
 <div
 	class="wds-vertical-tab-section sui-box tab_news
 	<?php echo $is_active ? '' : 'hidden'; ?>"
@@ -12,11 +21,13 @@
 			<div class="sui-box-body">
 				<p>
 					<?php
-					echo \smartcrawl_format_link(
+					echo esc_html(
+						\smartcrawl_format_link(
 						/* translators: %s: Link to News sitemap documentation */
-						esc_html__( 'Are you publishing newsworthy content? Use the Google News Sitemap to list news articles and posts published in the last 48 hours so that they show up in Google News. %s', 'smartcrawl-seo' ),
-						'https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/#news-sitemap',
-						esc_html__( 'Learn More', 'smartcrawl-seo' )
+							esc_html__( 'Are you publishing newsworthy content? Use the Google News Sitemap to list news articles and posts published in the last 48 hours so that they show up in Google News. %s', 'smartcrawl-seo' ),
+							'https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/#news-sitemap',
+							esc_html__( 'Learn More', 'smartcrawl-seo' )
+						)
 					);
 					?>
 				</p>

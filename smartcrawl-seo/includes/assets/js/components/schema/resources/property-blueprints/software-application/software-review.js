@@ -45,7 +45,7 @@ const SoftwareReview = {
 		disallowDeletion: true,
 		description: __(
 			'The date that the review was published, in ISO 8601 date format.',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 	author: {
@@ -64,7 +64,7 @@ const SoftwareReview = {
 				required: true,
 				description: __(
 					"The author of the review. The reviewer's name must be a valid name.",
-					'smartcrawl-seo'
+					'wds'
 				),
 				isAnAltVersion: true,
 			},
@@ -78,7 +78,7 @@ const SoftwareReview = {
 				required: true,
 				description: __(
 					"The author of the review. The reviewer's name must be a valid name.",
-					'smartcrawl-seo'
+					'wds'
 				),
 				isAnAltVersion: true,
 			},

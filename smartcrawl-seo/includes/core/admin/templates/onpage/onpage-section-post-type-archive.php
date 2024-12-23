@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Post Type Archive section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

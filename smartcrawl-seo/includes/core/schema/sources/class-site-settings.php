@@ -1,7 +1,17 @@
 <?php
+/**
+ * Site_Settings class for handling site settings schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Site_Settings
+ *
+ * Handles site settings schema fragments.
+ */
 class Site_Settings extends Property {
 	const ID          = 'site_settings';
 	const NAME        = 'site_name';
@@ -10,12 +20,16 @@ class Site_Settings extends Property {
 	const ADMIN_EMAIL = 'site_admin_email';
 
 	/**
-	 * @var
+	 * The site setting.
+	 *
+	 * @var string
 	 */
 	private $setting;
 
 	/**
-	 * @param $setting
+	 * Site_Settings constructor.
+	 *
+	 * @param string $setting The site setting.
 	 */
 	public function __construct( $setting ) {
 		parent::__construct();
@@ -24,7 +38,9 @@ class Site_Settings extends Property {
 	}
 
 	/**
-	 * @return mixed|string|void
+	 * Retrieves the value of the site setting.
+	 *
+	 * @return mixed|string|void The value of the site setting.
 	 */
 	public function get_value() {
 		$setting = str_replace( 'site_', '', $this->setting );

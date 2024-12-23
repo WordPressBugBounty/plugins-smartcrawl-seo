@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Settings User Roles section.
+ *
+ * @package Smartcrwal
+ */
+
 $seo_metabox_permission_level        = empty( $seo_metabox_permission_level ) ? array() : $seo_metabox_permission_level;
 $seo_metabox_301_permission_level    = empty( $seo_metabox_301_permission_level ) ? array() : $seo_metabox_301_permission_level;
 $urlmetrics_metabox_permission_level = empty( $urlmetrics_metabox_permission_level ) ? array() : $urlmetrics_metabox_permission_level;

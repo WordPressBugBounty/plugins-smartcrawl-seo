@@ -1,6 +1,12 @@
 <?php
-$show_onpage_tabs = ! empty( $show_onpage_tabs ) && $show_onpage_tabs;
-$show_social_tab  = ! empty( $show_social_tab ) && $show_social_tab;
+/**
+ * Template: Term Nav.
+ *
+ * @package Smartcrwal
+ */
+
+$show_onpage_tabs = ! empty( $show_onpage_tabs );
+$show_social_tab  = ! empty( $show_social_tab );
 
 $tab_items = array();
 if ( $show_onpage_tabs ) {

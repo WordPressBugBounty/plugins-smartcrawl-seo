@@ -16,13 +16,13 @@ export default class Breadcrumbs extends React.Component {
 				activateProps={{
 					message: __(
 						"Breadcrumbs provide an organized trail of links showing a visitor's journey on a website, improving the user experience and aiding search engines in understanding the site's structure for enhanced SEO.",
-						'smartcrawl-seo'
+						'wds'
 					),
 				}}
 				deactivateProps={{
 					description: __(
 						'No longer need breadcrumbs? This will deactivate this feature.',
-						'smartcrawl-seo'
+						'wds'
 					),
 				}}
 			>

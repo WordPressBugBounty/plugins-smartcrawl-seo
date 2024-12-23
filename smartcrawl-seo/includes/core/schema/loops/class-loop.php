@@ -1,13 +1,26 @@
 <?php
+/**
+ * Loop class for handling different types of loops in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Loops;
 
+/**
+ * Class Loop
+ *
+ * Abstract class for handling different types of loops.
+ */
 abstract class Loop {
+
 	/**
-	 * @param $id
-	 * @param $post
+	 * Creates a loop instance based on the given ID.
 	 *
-	 * @return Loop
+	 * @param string   $id The ID of the loop type.
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return Loop|null The created loop instance or null if the ID is not recognized.
 	 */
 	public static function create( $id, $post ) {
 		switch ( $id ) {
@@ -23,9 +36,11 @@ abstract class Loop {
 	}
 
 	/**
-	 * @param $property
+	 * Retrieves the value of the specified property.
 	 *
-	 * @return mixed
+	 * @param string $property The property to retrieve the value for.
+	 *
+	 * @return mixed The value of the specified property.
 	 */
 	abstract public function get_property_value( $property );
 }

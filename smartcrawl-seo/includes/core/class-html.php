@@ -1,7 +1,19 @@
 <?php
+/**
+ * File containing the Html class for SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
+/**
+ * Class Html
+ *
+ * Provides various HTML manipulation utilities.
+ *
+ * @package SmartCrawl
+ */
 class Html {
 
 	const NODE_CONTENT = 'innertext';
@@ -209,11 +221,19 @@ class Html {
 		return '' . $node->$attr;
 	}
 
+	/**
+	 * Removes specified tags from the markup
+	 *
+	 * @param string $markup HTML markup.
+	 * @param array  $tags   List of tags to remove.
+	 *
+	 * @return string Markup with specified tags removed.
+	 */
 	public static function remove_tags( $markup, $tags ) {
 		$document                     = new \DOMDocument();
 		$internal_errors              = libxml_use_internal_errors( true );
 		$document->encoding           = 'UTF-8';
-		$document->substituteEntities = true; // phpcs:ignore
+		$document->substituteEntities = true; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 		$document->loadHTML(
 			htmlspecialchars_decode( htmlentities( $markup ) ),
 			LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
@@ -226,10 +246,10 @@ class Html {
 
 			for ( $i = $element_count - 1; $i >= 0; $i-- ) {
 				$element = $elements->item( $i );
-				$element->parentNode->removeChild( $element ); // phpcs:ignore
+				$element->parentNode->removeChild( $element ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 			}
 		}
 
-		return trim( $document->saveHTML( $document->documentElement ) ); // phpcs:ignore
+		return trim( $document->saveHTML( $document->documentElement ) ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 	}
 }

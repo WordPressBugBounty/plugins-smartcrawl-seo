@@ -36,9 +36,9 @@ class Lighthouse extends Service {
 			$base_url = trailingslashit( WPMUDEV_CUSTOM_API_SERVER );
 		}
 
-		$api = apply_filters( $this->get_filter( 'api-endpoint' ), 'api' ); // phpcs:ignore
+		$api = apply_filters( $this->get_filter( 'api-endpoint' ), 'api' );
 
-		$namespace = apply_filters( $this->get_filter( 'api-namespace' ), 'performance/v2' ); // phpcs:ignore
+		$namespace = apply_filters( $this->get_filter( 'api-namespace' ), 'performance/v2' );
 
 		return trailingslashit( $base_url ) . trailingslashit( $api ) . trailingslashit( $namespace );
 	}
@@ -125,7 +125,7 @@ class Lighthouse extends Service {
 			$args['headers']['Authorization'] = "Basic $key";
 		}
 
-		return apply_filters( $this->get_filter( 'lighthouse-args' ), $args, $verb ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+		return apply_filters( $this->get_filter( 'lighthouse-args' ), $args, $verb );
 	}
 
 	/**
@@ -155,7 +155,7 @@ class Lighthouse extends Service {
 	public function start() {
 		update_option(
 			self::OPTION_ID_START_TIME,
-			current_time( 'timestamp' ), // phpcs:ignore
+			current_time( 'timestamp' ), // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
 			false
 		);
 

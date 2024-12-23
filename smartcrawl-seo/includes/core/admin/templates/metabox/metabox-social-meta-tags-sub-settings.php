@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Metabox Social Meta Tags Sub Settings.
+ *
+ * @package Smartcrwal
+ */
+
 $field_name              = empty( $field_name ) ? '' : $field_name;
 $current_title           = empty( $current_title ) ? '' : $current_title;
 $title_placeholder       = empty( $title_placeholder ) ? '' : $title_placeholder;

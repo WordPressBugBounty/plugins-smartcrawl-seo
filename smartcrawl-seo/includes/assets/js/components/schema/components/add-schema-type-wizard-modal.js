@@ -227,10 +227,7 @@ export default class AddSchemaTypeWizardModal extends React.Component {
 							/>
 							<input
 								type="text"
-								placeholder={__(
-									'Search subtypes',
-									'smartcrawl-seo'
-								)}
+								placeholder={__('Search subtypes', 'smartcrawl-seo')}
 								className="sui-form-control"
 								value={this.state.searchTerm}
 								onChange={(e) =>

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Upgrade Widget.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

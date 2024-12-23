@@ -1,29 +1,53 @@
 <?php
+/**
+ * Type class for handling schema types in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Types;
 
+/**
+ * Class Type
+ *
+ * Handles schema types.
+ */
 class Type {
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var \SmartCrawl\Schema\Utils
 	 */
 	protected $utils;
+
 	/**
+	 * The post object.
+	 *
 	 * @var \WP_Post
 	 */
 	protected $post;
+
 	/**
+	 * The schema type.
+	 *
 	 * @var array
 	 */
 	protected $type;
 
+	/**
+	 * Whether the post is the front page.
+	 *
+	 * @var bool
+	 */
 	private $is_front_page;
 
 	/**
 	 * Type constructor.
 	 *
-	 * @param $type array
-	 * @param $post \WP_Post
-	 * @param $is_front_page
+	 * @param array    $type The schema type.
+	 * @param \WP_Post $post The post object.
+	 * @param bool     $is_front_page Whether the post is the front page.
 	 */
 	private function __construct( $type, $post, $is_front_page ) {
 		$this->utils         = \SmartCrawl\Schema\Utils::get();
@@ -33,7 +57,9 @@ class Type {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the conditions are met.
+	 *
+	 * @return bool True if conditions are met, false otherwise.
 	 */
 	public function conditions_met() {
 		$conditions = \smartcrawl_get_array_value( $this->type, 'conditions' );
@@ -47,14 +73,18 @@ class Type {
 	}
 
 	/**
-	 * @return mixed|null
+	 * Retrieves the schema type.
+	 *
+	 * @return mixed|null The schema type.
 	 */
 	public function get_type() {
 		return \smartcrawl_get_array_value( $this->type, 'type' );
 	}
 
 	/**
-	 * @return array
+	 * Retrieves the schema data.
+	 *
+	 * @return array The schema data.
 	 */
 	public function get_schema() {
 		$type       = $this->get_type();
@@ -79,18 +109,22 @@ class Type {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the schema type is active.
+	 *
+	 * @return bool True if active, false otherwise.
 	 */
 	public function is_active() {
 		return ! \smartcrawl_get_array_value( $this->type, 'disabled' );
 	}
 
 	/**
-	 * @param $data
-	 * @param $post
-	 * @param $is_front_page
+	 * Creates a new schema type instance.
 	 *
-	 * @return Type|Woo_Product
+	 * @param array    $data The schema type data.
+	 * @param \WP_Post $post The post object.
+	 * @param bool     $is_front_page Whether the post is the front page.
+	 *
+	 * @return Type|Woo_Product The schema type instance.
 	 */
 	public static function create( $data, $post, $is_front_page ) {
 		$type = \smartcrawl_get_array_value( $data, 'type' );

@@ -15,7 +15,7 @@ class CustomKeywordPairs extends React.Component {
 
 		this.state = {
 			addingPair: false,
-			editingPair: false,
+			editingPair: null,
 			pageNumber: 1,
 		};
 
@@ -38,7 +38,7 @@ class CustomKeywordPairs extends React.Component {
 				label={__('Custom Links', 'smartcrawl-seo')}
 				description={__(
 					'Choose additional custom keywords you want to target, and where to link them to.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 				direction="column"
 			>
@@ -56,10 +56,11 @@ class CustomKeywordPairs extends React.Component {
 									</th>
 								</tr>
 
-								{Object.keys(pagedPairs).map((key) => {
-									const pair = pagedPairs[key];
+								{pagedPairs.map((pair, idx) => {
+									const absoluteIndex =
+										(pageNumber - 1) * this.perPage + idx;
 									return (
-										<tr key={key}>
+										<tr key={absoluteIndex}>
 											<td>{pair.keyword}</td>
 											<td>
 												<a
@@ -78,26 +79,26 @@ class CustomKeywordPairs extends React.Component {
 															key={0}
 															onClick={() =>
 																this.startEditingPair(
-																	key
+																	absoluteIndex
 																)
 															}
 															icon="sui-icon-pencil"
 															text={__(
 																'Edit',
-																'smartcrawl-seo'
+																'wds'
 															)}
 														/>,
 														<DropdownButton
 															key={1}
 															onClick={() =>
 																this.deletePair(
-																	key
+																	absoluteIndex
 																)
 															}
 															icon="sui-icon-trash"
 															text={__(
 																'Delete',
-																'smartcrawl-seo'
+																'wds'
 															)}
 															red={true}
 														/>,
@@ -106,7 +107,7 @@ class CustomKeywordPairs extends React.Component {
 												/>
 
 												{this.state.editingPair ===
-													key && (
+													absoluteIndex && (
 													<CustomKeywordModal
 														keyword={pair.keyword}
 														url={pair.url}
@@ -119,7 +120,7 @@ class CustomKeywordPairs extends React.Component {
 															url
 														) =>
 															this.editPair(
-																key,
+																absoluteIndex,
 																keyword,
 																url
 															)
@@ -235,13 +236,13 @@ class CustomKeywordPairs extends React.Component {
 		updateOption('customkey', this.pairsToText(pairs));
 
 		this.setState({
-			editingPair: false,
+			editingPair: null,
 		});
 	}
 
 	stopEditingPair() {
 		this.setState({
-			editingPair: false,
+			editingPair: null,
 		});
 	}
 

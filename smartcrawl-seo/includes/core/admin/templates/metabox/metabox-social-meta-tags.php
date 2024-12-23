@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Metabox Social Media Tags.
+ *
+ * @package Smartcrwal
+ */
+
 $main_title              = empty( $main_title ) ? '' : $main_title;
 $main_description        = empty( $main_description ) ? '' : $main_description;
 $field_name              = empty( $field_name ) ? '' : $field_name;

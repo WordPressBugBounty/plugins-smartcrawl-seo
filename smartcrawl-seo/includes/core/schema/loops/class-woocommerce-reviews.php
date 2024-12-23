@@ -1,25 +1,42 @@
 <?php
+/**
+ * Woocommerce_Reviews class for handling WooCommerce reviews schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Loops;
 
+/**
+ * Class Woocommerce_Reviews
+ *
+ * Handles WooCommerce reviews schema fragments.
+ */
 class Woocommerce_Reviews extends Loop {
 	const ID = 'woocommerce-reviews';
+
 	/**
-	 * @var
+	 * The post object.
+	 *
+	 * @var \WP_Post
 	 */
 	private $post;
 
 	/**
-	 * @param $post
+	 * Woocommerce_Reviews constructor.
+	 *
+	 * @param \WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
 		$this->post = $post;
 	}
 
 	/**
-	 * @param $property
+	 * Retrieves the property value for the given property.
 	 *
-	 * @return array
+	 * @param string $property The property to retrieve the value for.
+	 *
+	 * @return array The property values.
 	 */
 	public function get_property_value( $property ) {
 		if ( empty( $this->post ) ) {
@@ -37,7 +54,9 @@ class Woocommerce_Reviews extends Loop {
 	}
 
 	/**
-	 * @return array|int
+	 * Retrieves the comments for the post.
+	 *
+	 * @return array|int The comments for the post.
 	 */
 	private function get_comments() {
 		return get_comments(
@@ -47,7 +66,7 @@ class Woocommerce_Reviews extends Loop {
 				'status'     => 'approve',
 				'post_type'  => 'product',
 				'parent'     => 0,
-				'meta_query' => array(
+				'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					array(
 						'key'     => 'rating',
 						'type'    => 'NUMERIC',

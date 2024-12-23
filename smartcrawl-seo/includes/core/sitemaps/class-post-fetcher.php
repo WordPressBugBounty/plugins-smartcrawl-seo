@@ -1,51 +1,80 @@
 <?php
+/**
+ * Post_Fetcher class for handling post fetching in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps;
 
 use SmartCrawl\Logger;
 
+/**
+ * Class Post_Fetcher
+ *
+ * Handles the retrieval of posts for sitemaps.
+ */
 class Post_Fetcher {
+
 	/**
+	 * Offset for the query.
+	 *
 	 * @var int
 	 */
 	private $offset = 0;
 
 	/**
+	 * Limit for the query.
+	 *
 	 * @var int
 	 */
 	private $limit = 10;
 
 	/**
+	 * Post types to include in the query.
+	 *
 	 * @var string[]
 	 */
 	private $post_types = array( 'post' );
 
 	/**
+	 * Extra columns to include in the query.
+	 *
 	 * @var array
 	 */
 	private $extra_columns = array();
 
 	/**
+	 * IDs to ignore in the query.
+	 *
 	 * @var array
 	 */
 	private $ignore_ids = array();
 
 	/**
+	 * IDs to include in the query.
+	 *
 	 * @var array
 	 */
 	private $include_ids = array();
 
 	/**
+	 * Date query parameters.
+	 *
 	 * @var array
 	 */
 	private $date_query = array();
 
 	/**
+	 * Column to order by.
+	 *
 	 * @var string
 	 */
 	private $order_by = 'post_modified';
 
 	/**
+	 * Fetches the posts based on the set parameters.
+	 *
 	 * @return array|mixed
 	 */
 	public function fetch() {
@@ -78,7 +107,11 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @depecated
+	 * Counts the posts based on the set parameters.
+	 *
+	 * @deprecated
+	 *
+	 * @return int
 	 */
 	public function count() {
 		global $wpdb;
@@ -90,10 +123,8 @@ class Post_Fetcher {
 			return 0;
 		}
 
-		$posts_with_canonical = $wpdb->get_results(
-			"SELECT posts.*, canonical.meta_value AS canonical FROM ($posts_query) AS posts " .
-			"JOIN $wpdb->postmeta AS canonical ON ID = canonical.post_id AND canonical.meta_key = '_wds_canonical' AND canonical.meta_value != ''"
-		);
+		$post_query           = "SELECT posts.*, canonical.meta_value AS canonical FROM ($posts_query) AS posts JOIN $wpdb->postmeta AS canonical ON ID = canonical.post_id AND canonical.meta_key = '_wds_canonical' AND canonical.meta_value != ''";
+		$posts_with_canonical = $wpdb->get_results( $post_query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		$posts_with_external_canonical = array();
 		if ( is_null( $posts_with_canonical ) ) {
@@ -112,15 +143,15 @@ class Post_Fetcher {
 			$count_query = "$count_query WHERE posts.ID NOT IN ($not_in)";
 		}
 
-		return (int) $wpdb->get_var( $count_query );
+		return (int) $wpdb->get_var( $count_query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}
 
 	/**
-	 * Posts which have a canonical pointing to some other URL should not be in the sitemap.
+	 * Removes posts with external canonicals from the list.
 	 *
-	 * @param $posts
+	 * @param array $posts The list of posts.
 	 *
-	 * @return array|mixed
+	 * @return array
 	 */
 	private function remove_posts_with_external_canonicals( $posts ) {
 		$posts = $posts ?: array();
@@ -133,6 +164,13 @@ class Post_Fetcher {
 		);
 	}
 
+	/**
+	 * Checks if a post has an external canonical URL.
+	 *
+	 * @param object $post The post object.
+	 *
+	 * @return bool
+	 */
 	private function is_post_with_external_canonical( $post ) {
 		if ( ! $post->canonical ) {
 			return false;
@@ -141,6 +179,13 @@ class Post_Fetcher {
 		return $this->normalize_url( $post->canonical ) !== $this->normalize_url( get_permalink( $post->ID ) );
 	}
 
+	/**
+	 * Normalizes a URL by removing protocol and trailing slash.
+	 *
+	 * @param string $url The URL to normalize.
+	 *
+	 * @return string
+	 */
 	private function normalize_url( $url ) {
 		return str_replace(
 			array(
@@ -153,6 +198,13 @@ class Post_Fetcher {
 		);
 	}
 
+	/**
+	 * Prepares the SQL query for fetching posts.
+	 *
+	 * @param array $columns The columns to select in the query.
+	 *
+	 * @return string|false The prepared SQL query or false on failure.
+	 */
 	protected function prepare_posts_query( $columns ) {
 		global $wpdb;
 
@@ -202,24 +254,30 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @param $items
-	 * @param $single_placeholder
+	 * Get database placeholders for the given items.
 	 *
-	 * @return string
+	 * @param array  $items The items to get placeholders for.
+	 * @param string $single_placeholder The placeholder to use for each item.
+	 *
+	 * @return string The placeholders for the items.
 	 */
 	private function get_db_placeholders( $items, $single_placeholder = '%s' ) {
 		return join( ',', array_fill( 0, count( $items ), $single_placeholder ) );
 	}
 
 	/**
-	 * @return int
+	 * Get the offset for the query.
+	 *
+	 * @return int The offset for the query.
 	 */
 	public function get_offset() {
 		return $this->offset;
 	}
 
 	/**
-	 * @param int $offset
+	 * Set the offset for the query.
+	 *
+	 * @param int $offset The offset for the query.
 	 *
 	 * @return Post_Fetcher
 	 */
@@ -230,14 +288,18 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @return int
+	 * Get the limit for the query.
+	 *
+	 * @return int The limit for the query.
 	 */
 	public function get_limit() {
 		return $this->limit;
 	}
 
 	/**
-	 * @param int $limit
+	 * Set the limit for the query.
+	 *
+	 * @param int $limit The limit for the query.
 	 *
 	 * @return Post_Fetcher
 	 */
@@ -248,14 +310,18 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @return string[]
+	 * Get the post types to include in the query.
+	 *
+	 * @return array The post types to include in the query.
 	 */
 	public function get_post_types() {
 		return $this->post_types;
 	}
 
 	/**
-	 * @param string[] $post_types
+	 * Set the post types to include in the query.
+	 *
+	 * @param array $post_types The post types to include in the query.
 	 *
 	 * @return Post_Fetcher
 	 */
@@ -266,14 +332,18 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @return string[]
+	 * Get the extra columns to include in the query.
+	 *
+	 * @return array The extra columns to include in the query.
 	 */
 	public function get_extra_columns() {
 		return $this->extra_columns;
 	}
 
 	/**
-	 * @param string[] $extra_columns
+	 * Set the extra columns to include in the query.
+	 *
+	 * @param array $extra_columns The extra columns to include in the query.
 	 *
 	 * @return Post_Fetcher
 	 */
@@ -284,14 +354,18 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @return array
+	 * Get the IDs to ignore in the query.
+	 *
+	 * @return array The IDs to ignore in the query.
 	 */
 	public function get_ignore_ids() {
 		return $this->ignore_ids;
 	}
 
 	/**
-	 * @param array $ignore_ids
+	 * Set the IDs to ignore in the query.
+	 *
+	 * @param array $ignore_ids The IDs to ignore in the query.
 	 *
 	 * @return Post_Fetcher
 	 */
@@ -302,14 +376,18 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @return array
+	 * Get the IDs to include in the query.
+	 *
+	 * @return array The IDs to include in the query.
 	 */
 	public function get_include_ids() {
 		return $this->include_ids;
 	}
 
 	/**
-	 * @param array $include_ids
+	 * Set the IDs to include in the query.
+	 *
+	 * @param array $include_ids The IDs to include in the query.
 	 *
 	 * @return Post_Fetcher
 	 */
@@ -320,14 +398,18 @@ class Post_Fetcher {
 	}
 
 	/**
-	 * @return array
+	 * Get the date query parameters.
+	 *
+	 * @return array The date query parameters.
 	 */
 	public function get_date_query() {
 		return $this->date_query;
 	}
 
 	/**
-	 * @param array $date_query
+	 * Set the date query parameters.
+	 *
+	 * @param array $date_query The date query parameters.
 	 *
 	 * @return Post_Fetcher
 	 */
@@ -337,6 +419,11 @@ class Post_Fetcher {
 		return $this;
 	}
 
+	/**
+	 * Get the date where clause for the query.
+	 *
+	 * @return string The date where clause for the query.
+	 */
 	private function get_date_where() {
 		$date_query_args = $this->get_date_query();
 		if ( $date_query_args && is_array( $date_query_args ) ) {
@@ -348,10 +435,22 @@ class Post_Fetcher {
 		return '';
 	}
 
+	/**
+	 * Get the column to order by.
+	 *
+	 * @return string The column to order by.
+	 */
 	public function get_order_by() {
 		return $this->order_by;
 	}
 
+	/**
+	 * Set the column to order by.
+	 *
+	 * @param string $order_by The column to order by.
+	 *
+	 * @return Post_Fetcher
+	 */
 	public function set_order_by( $order_by ) {
 		$this->order_by = $order_by;
 

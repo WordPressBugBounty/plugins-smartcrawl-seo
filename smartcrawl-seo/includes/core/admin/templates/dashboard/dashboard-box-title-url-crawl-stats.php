@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Dashboard Crawl Stats box title url.
+ *
+ * @package SmartCrawl
+ */
+
 $report = empty( $report ) ? null : $report;
 
 if ( is_null( $report ) ) {

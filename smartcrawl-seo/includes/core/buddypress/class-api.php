@@ -1,6 +1,6 @@
 <?php
 /**
- * Class Api
+ * BuddyPress Api Provider.
  *
  * @package SmartCrawl
  */
@@ -8,9 +8,9 @@
 namespace SmartCrawl\BuddyPress;
 
 /**
- * Class Api
+ * BuddyPress Api.
  *
- * @method object buddypress()
+ * @method object|null buddypress()
  * @method string bp_current_component()
  * @method \BP_Groups_Group groups_get_current_group()
  * @method string bp_core_get_user_domain( int $user_id )

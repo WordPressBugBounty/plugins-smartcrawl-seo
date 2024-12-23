@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Settings Accessibility section.
+ *
+ * @package Smartcrwal
+ */
+
 $option_name          = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $high_contrast_option = "{$option_name}[high-contrast]";
 $enabled              = ! empty( $_view['options']['high-contrast'] );

@@ -40,7 +40,8 @@ export default class LighthouseCheckImageAlt extends React.Component {
 					<strong>{__('Overview', 'smartcrawl-seo')}</strong>
 					<p>
 						{__(
-							'Informative elements should aim for short, descriptive alternate text. Decorative elements can be ignored with an empty alt attribute.'
+							'Informative elements should aim for short, descriptive alternate text. Decorative elements can be ignored with an empty alt attribute.',
+							'smartcrawl-seo'
 						)}
 					</p>
 				</div>
@@ -175,10 +176,7 @@ export default class LighthouseCheckImageAlt extends React.Component {
 		return (
 			<LighthouseTable
 				id={this.props.id}
-				header={[
-					__('Failing Elements', 'smartcrawl-seo'),
-					__('Selector', 'smartcrawl-seo'),
-				]}
+				header={[__('Failing Elements', 'smartcrawl-seo'), __('Selector', 'smartcrawl-seo')]}
 				rows={this.getRows()}
 			/>
 		);
@@ -205,10 +203,7 @@ export default class LighthouseCheckImageAlt extends React.Component {
 			) +
 			'\n\n' +
 			this.getFlattenedDetails(
-				[
-					__('Failing Elements', 'smartcrawl-seo'),
-					__('Selector', 'smartcrawl-seo'),
-				],
+				[__('Failing Elements', 'smartcrawl-seo'), __('Selector', 'smartcrawl-seo')],
 				this.getRows()
 			) +
 			__('Overview:', 'smartcrawl-seo') +

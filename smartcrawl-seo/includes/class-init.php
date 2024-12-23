@@ -18,7 +18,10 @@ class Init {
 	 * @return  void
 	 */
 	public function __construct() {
-		$this->textdomain();
+
+		// Load the plugin text domain.
+		add_action( 'after_setup_theme', array( $this, 'textdomain' ) );
+
 		$this->functions();
 		$this->init();
 	}
@@ -96,7 +99,6 @@ class Init {
 		Controllers\Analysis::get()->run();
 		Controllers\Assets::get()->run();
 		Controllers\White_Label::get()->run();
-		Controllers\Pointers::get()->run();
 		Admin\Conflict_Detector::get()->run();
 		Admin\Survey::get()->run();
 		Admin\Metabox::get()->run();
@@ -156,7 +158,7 @@ class Init {
 	 *
 	 * @return void
 	 */
-	private function textdomain() {
+	public function textdomain() {
 		if ( defined( '\WPMU_PLUGIN_DIR' ) && file_exists( \WPMU_PLUGIN_DIR . '/wpmu-dev-seo.php' ) ) {
 			load_muplugin_textdomain( 'wds', dirname( \SMARTCRAWL_PLUGIN_BASENAME ) . '/languages' );
 		} else {

@@ -1,6 +1,13 @@
 <?php
+/**
+ * Template: Term SEO Tab.
+ *
+ * @package Smartcrwal
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $tax_meta  = empty( $tax_meta ) ? array() : $tax_meta;
-$term      = empty( $term ) ? null : $term; // phpcs:ignore
+$term      = empty( $term ) ? null : $term;
 $is_active = empty( $is_active ) ? false : $is_active;
 $title_key = empty( $title_key ) ? '' : $title_key;
 $desc_key  = empty( $desc_key ) ? '' : $desc_key;

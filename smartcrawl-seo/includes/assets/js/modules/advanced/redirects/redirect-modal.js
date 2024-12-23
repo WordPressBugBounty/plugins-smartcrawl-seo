@@ -31,7 +31,7 @@ class RedirectModal extends React.Component {
 						// translators: %s: Home url.
 						__(
 							'Allowed formats include relative URLs like <strong>/cats</strong> or absolute URLs such as <strong>%s/cats</strong>.',
-							'smartcrawl-seo'
+							'wds'
 						),
 						homeUrl
 					),

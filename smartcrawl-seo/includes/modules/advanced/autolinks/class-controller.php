@@ -76,7 +76,7 @@ class Controller extends Controllers\Submodule_Controller {
 						esc_html__( 'Configure %1$s%3$s%2$s to automatically link certain key words to a page on your blog or even a whole new site all together.', 'smartcrawl-seo' ),
 						'<strong>',
 						'</strong>',
-						\smartcrawl_get_plugin_title()
+						esc_html( \smartcrawl_get_plugin_title() )
 					);
 					?>
 				</small>

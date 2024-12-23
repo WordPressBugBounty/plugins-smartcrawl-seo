@@ -25,7 +25,7 @@ export default class CodeType extends React.Component {
 				label={__('Add Breadcrumbs to your Webpage', 'smartcrawl-seo')}
 				description={__(
 					'You can add breadcrumbs to any page on your website using the ‘shortcode’ on the post editor, or the ‘PHP code’ on the template page.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			>
 				<FloatingNoticePlaceholder id="smartcrawl-breadcrumb-copied" />

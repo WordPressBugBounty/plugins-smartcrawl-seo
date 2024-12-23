@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Term Advanced Tab.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

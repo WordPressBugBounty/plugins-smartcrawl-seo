@@ -1,4 +1,9 @@
 <?php
+/**
+ * Network_Configs class for managing network configurations in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Multisite;
 
@@ -6,19 +11,39 @@ use SmartCrawl\Configs;
 use SmartCrawl\Singleton;
 use SmartCrawl\Controllers;
 
+/**
+ * Network_Configs class.
+ *
+ * Manages network configurations in SmartCrawl.
+ */
 class Network_Configs extends Controllers\Controller {
 
 	use Singleton;
 
+	/**
+	 * Checks if the current environment is multisite.
+	 *
+	 * @return bool
+	 */
 	public function should_run() {
 		return is_multisite();
 	}
 
+	/**
+	 * Initializes the class by adding necessary actions.
+	 *
+	 * @return void
+	 */
 	protected function init() {
 		add_action( 'wp_initialize_site', array( $this, 'apply_config' ), 99 );
 		add_action( 'activate_blog', array( $this, 'apply_config' ) );
 	}
 
+	/**
+	 * Gets the subsite configuration ID.
+	 *
+	 * @return string
+	 */
 	private function get_subsite_config_id() {
 		return get_site_option( 'wds_subsite_config_id', '' );
 	}

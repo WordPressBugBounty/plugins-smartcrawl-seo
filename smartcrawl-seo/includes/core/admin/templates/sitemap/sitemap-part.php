@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Sitemap Part.
+ *
+ * @package Smartcrwal
+ */
+
 $option_name   = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $item_label    = empty( $item_label ) ? '' : $item_label;
 $part_excluded = ! empty( $_view['options'][ $item ] );

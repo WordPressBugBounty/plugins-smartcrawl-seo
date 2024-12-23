@@ -101,7 +101,7 @@ export default class FocusKeywords extends React.Component {
 					{createInterpolateElement(
 						__(
 							'You can analyze the post content for up to 3 focus keywords. The SEO recommendations for each keyword will be displayed in separate tabs below. Enter each keyword you want to analyze and click the <strong>Add Keyword</strong> button, or enter multiple keywords separated by commas and click the <strong>Add Keyword</strong> button only once.',
-							'smartcrawl-seo'
+							'wds'
 						),
 						{ strong: <strong /> }
 					)}
@@ -168,7 +168,7 @@ export default class FocusKeywords extends React.Component {
 						icon="sui-icon-info"
 						message={__(
 							'You need to add focus keywords to see recommendations for this article.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					></Notice>
 				)}

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Url Metrics Metabox.
+ *
+ * @package Smartcrwal
+ */
+
 $attribution = empty( $attribution ) ? '#' : $attribution;
 $urlmetrics  = empty( $urlmetrics ) ? new stdClass() : $urlmetrics;
 ?>

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Notice.
+ *
+ * @package SmartCrawl
+ */
+
 $message = empty( $message ) ? '' : $message;
 $class   = empty( $class ) ? 'sui-notice-warning' : $class;
 $loading = ! empty( $loading );

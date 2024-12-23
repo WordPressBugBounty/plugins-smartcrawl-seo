@@ -74,7 +74,6 @@ return array(
     'SmartCrawl\\Controllers\\OnPage' => $baseDir . '/includes/core/controllers/class-onpage.php',
     'SmartCrawl\\Controllers\\Onboard' => $baseDir . '/includes/core/controllers/class-onboard.php',
     'SmartCrawl\\Controllers\\Plugin_Links' => $baseDir . '/includes/core/controllers/class-plugin-links.php',
-    'SmartCrawl\\Controllers\\Pointers' => $baseDir . '/includes/core/controllers/class-pointers.php',
     'SmartCrawl\\Controllers\\Primary_Terms' => $baseDir . '/includes/core/controllers/class-primary-terms.php',
     'SmartCrawl\\Controllers\\Recommended_Plugins' => $baseDir . '/includes/core/controllers/class-recommended-plugins.php',
     'SmartCrawl\\Controllers\\Report_Permalinks' => $baseDir . '/includes/core/controllers/class-report-permalinks.php',

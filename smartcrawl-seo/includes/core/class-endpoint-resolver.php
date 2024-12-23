@@ -63,6 +63,8 @@ class Endpoint_Resolver {
 	private $location;
 
 	/**
+	 * Queried entity
+	 *
 	 * @var Entity
 	 */
 	private $queried;
@@ -82,6 +84,8 @@ class Endpoint_Resolver {
 	}
 
 	/**
+	 * Gets the queried entity.
+	 *
 	 * @return Entity
 	 */
 	public function get_queried_entity() {
@@ -89,6 +93,8 @@ class Endpoint_Resolver {
 	}
 
 	/**
+	 * Sets the queried entity.
+	 *
 	 * @param Entity $queried Entity.
 	 */
 	public function set_queried_entity( $queried ) {
@@ -185,7 +191,7 @@ class Endpoint_Resolver {
 			$this->set_queried_entity(
 				new Entities\BuddyPress_Profile( get_user_by( 'id', $displayed_user->id ) )
 			);
-		} elseif (
+		} elseif ( // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedElseif
 			$buddypress_api->bp_current_component() &&
 			'profile' !== $buddypress_api->bp_current_component()
 		) {
@@ -273,7 +279,11 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Sets the query context.
+	 *
+	 * @deprecated
+	 *
+	 * @param mixed $qobj Query object.
 	 */
 	public function set_query_context( $qobj ) {
 		$this->mark_deprecated( __METHOD__ );
@@ -282,7 +292,11 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Simulates a post.
+	 *
+	 * @deprecated
+	 *
+	 * @param int $pid Post ID.
 	 */
 	public function simulate_post( $pid ) {
 		$this->mark_deprecated( __METHOD__ );
@@ -291,7 +305,11 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Simulates a taxonomy term.
+	 *
+	 * @deprecated
+	 *
+	 * @param int $term_id Term ID.
 	 */
 	public function simulate_taxonomy_term( $term_id ) {
 		$this->mark_deprecated( __METHOD__ );
@@ -300,14 +318,24 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Simulates a post type.
+	 *
+	 * @deprecated
+	 *
+	 * @param string $post_type Post type.
 	 */
 	public function simulate_post_type( $post_type ) {
 		$this->mark_deprecated( __METHOD__ );
 	}
 
 	/**
-	 * @depreacted
+	 * Simulates a location.
+	 *
+	 * @deprecated
+	 *
+	 * @param string $location Location.
+	 * @param mixed  $context Context.
+	 * @param mixed  $query_context Query context.
 	 */
 	public function simulate( $location, $context, $query_context = null ) {
 		$this->mark_deprecated( __METHOD__ );
@@ -316,7 +344,9 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Gets the context.
+	 *
+	 * @deprecated
 	 */
 	public function get_context() {
 		$this->mark_deprecated( __METHOD__ );
@@ -325,7 +355,11 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Sets the context.
+	 *
+	 * @deprecated
+	 *
+	 * @param mixed $pobj Context object.
 	 */
 	public function set_context( $pobj ) {
 		$this->mark_deprecated( __METHOD__ );
@@ -334,7 +368,9 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Stops the simulation.
+	 *
+	 * @deprecated
 	 */
 	public function stop_simulation() {
 		$this->mark_deprecated( __METHOD__ );
@@ -343,14 +379,20 @@ class Endpoint_Resolver {
 	}
 
 	/**
-	 * @depreacted
+	 * Resets the environment.
+	 *
+	 * @deprecated
 	 */
 	public function reset_env() {
 		$this->mark_deprecated( __METHOD__ );
 	}
 
 	/**
-	 * @depreacted
+	 * Checks if the location is singular.
+	 *
+	 * @deprecated
+	 *
+	 * @param string $location Location.
 	 */
 	public function is_singular( $location = false ) {
 		$this->mark_deprecated( __METHOD__ );
@@ -359,10 +401,12 @@ class Endpoint_Resolver {
 	}
 
 	/**
+	 * Marks a method as deprecated.
+	 *
 	 * @param string $method Method name.
 	 */
 	private function mark_deprecated( $method ) {
 		$class = __CLASS__;
-		_deprecated_function( "$class::$method", '2.18.0' ); // phpcs:ignore
+		_deprecated_function( "$class::$method", '2.18.0' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

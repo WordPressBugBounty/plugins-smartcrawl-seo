@@ -2,8 +2,6 @@
 /**
  * Metabox entry point template
  *
- * phpcs:disable WordPress.NamingConventions.ValidHookName.UseUnderscores
- *
  * @package SmartCrawl
  */
 

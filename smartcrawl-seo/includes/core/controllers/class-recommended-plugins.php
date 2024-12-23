@@ -30,7 +30,7 @@ class Recommended_Plugins extends Controller {
 	 */
 	protected function init() {
 		do_action(
-			'wpmudev-recommended-plugins-register-notice', // phpcs:ignore
+			'wpmudev-recommended-plugins-register-notice',
 			SMARTCRAWL_PLUGIN_BASENAME,
 			'SmartCrawl', // Plugin Name.
 			array(

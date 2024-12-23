@@ -1,7 +1,14 @@
 <?php
+/**
+ * Template: Email body.
+ *
+ * @package SmartCrawl
+ */
+
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
 $email_template      = empty( $email_template ) ? '' : $email_template;
 $email_template_args = empty( $email_template_args ) ? array() : $email_template_args;
 ?>

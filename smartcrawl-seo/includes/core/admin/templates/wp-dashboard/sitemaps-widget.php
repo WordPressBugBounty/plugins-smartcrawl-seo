@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Sitemap Dashboard Widget.
+ *
+ * @package Smartcrwal
+ */
+
 $last_update_date      = empty( $last_update_date ) ? '' : $last_update_date;
 $last_update_time      = empty( $last_update_time ) ? '' : $last_update_time;
 $last_update_timestamp = empty( $last_update_timestamp ) ? '' : $last_update_timestamp;

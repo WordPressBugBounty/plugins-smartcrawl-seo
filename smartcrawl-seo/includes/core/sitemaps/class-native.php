@@ -1,4 +1,9 @@
 <?php
+/**
+ * Native class for handling native sitemap-related services in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps;
 
@@ -6,27 +11,46 @@ use SmartCrawl\Singleton;
 use SmartCrawl\Controllers;
 use SmartCrawl\Sitemaps\General\Queries;
 
+/**
+ * Class Native
+ *
+ * Handles native sitemap-related services.
+ */
 class Native extends Controllers\Controller {
 
 	use Singleton;
 
 	/**
+	 * Query object for handling posts.
+	 *
 	 * @var Queries\Posts
 	 */
 	private $posts_query;
+
 	/**
+	 * Query object for handling terms.
+	 *
 	 * @var Queries\Terms
 	 */
 	private $terms_query;
+
 	/**
+	 * Query object for handling BuddyPress profiles.
+	 *
 	 * @var Queries\BP_Profile
 	 */
 	private $bp_profile_query;
+
 	/**
+	 * Query object for handling BuddyPress groups.
+	 *
 	 * @var Queries\BP_Groups
 	 */
 	private $bp_groups_query;
+
 	/**
+	 * Query object for handling extra queries.
+	 *
 	 * @var Queries\Extras
 	 */
 	private $extras_query;
@@ -45,13 +69,17 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @return bool
+	 * Determines if the native sitemap should run.
+	 *
+	 * @return bool True if the native sitemap should run, false otherwise.
 	 */
 	public function should_run() {
 		return ! Utils::override_native();
 	}
 
 	/**
+	 * Initializes the native sitemap.
+	 *
 	 * @return void
 	 */
 	protected function init() {
@@ -59,6 +87,8 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
+	 * Hooks into WordPress actions and filters.
+	 *
 	 * @return void
 	 */
 	public function hook() {
@@ -80,9 +110,11 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $post_types
+	 * Filters the post types for the sitemap.
 	 *
-	 * @return array
+	 * @param array $post_types The post types to filter.
+	 *
+	 * @return array The filtered post types.
 	 */
 	public function filter_post_types( $post_types ) {
 		return array_filter(
@@ -93,10 +125,12 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $query_args
-	 * @param $post_type
+	 * Excludes specific post IDs from the sitemap.
 	 *
-	 * @return mixed
+	 * @param array  $query_args The query arguments.
+	 * @param string $post_type  The post type.
+	 *
+	 * @return array The modified query arguments.
 	 */
 	public function exclude_post_ids( $query_args, $post_type ) {
 		$query_args['post__not_in'] = array_merge(
@@ -108,16 +142,18 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $types
+	 * Retrieves post IDs that are redirected or noindex.
 	 *
-	 * @return int[]|\WP_Post[]
+	 * @param string $types The post types.
+	 *
+	 * @return int[]|\WP_Post[] The post IDs.
 	 */
 	private function get_redirected_and_noindex_post_ids( $types ) {
 		return get_posts(
 			array(
 				'fields'     => 'ids',
 				'post_type'  => $types,
-				'meta_query' => array(
+				'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					'relation' => 'OR',
 					array(
 						'key'     => '_wds_redirect',
@@ -135,10 +171,12 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_entry
-	 * @param $post
+	 * Replaces the post URL with the canonical URL in the sitemap entry.
 	 *
-	 * @return mixed
+	 * @param array    $sitemap_entry The sitemap entry.
+	 * @param \WP_Post $post          The post object.
+	 *
+	 * @return array The modified sitemap entry.
 	 */
 	public function replace_post_url_with_canonical( $sitemap_entry, $post ) {
 		$canonical = \smartcrawl_get_value( 'canonical', $post->ID );
@@ -150,9 +188,11 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $taxonomies
+	 * Filters the taxonomies for the sitemap.
 	 *
-	 * @return array
+	 * @param array $taxonomies The taxonomies to filter.
+	 *
+	 * @return array The filtered taxonomies.
 	 */
 	public function filter_taxonomies( $taxonomies ) {
 		return array_filter(
@@ -163,10 +203,12 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $args
-	 * @param $taxonomy
+	 * Excludes specific term IDs from the sitemap.
 	 *
-	 * @return mixed
+	 * @param array  $args     The query arguments.
+	 * @param string $taxonomy The taxonomy.
+	 *
+	 * @return array The modified query arguments.
 	 */
 	public function exclude_term_ids( $args, $taxonomy ) {
 		$ignored_ids = $this->terms_query->get_ignored_ids( $taxonomy );
@@ -179,11 +221,13 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_entry
-	 * @param $term     \WP_Term|int
-	 * @param $taxonomy string
+	 * Replaces the term URL with the canonical URL in the sitemap entry.
 	 *
-	 * @return array
+	 * @param array    $sitemap_entry The sitemap entry.
+	 * @param \WP_Term $term          The term object or ID.
+	 * @param string   $taxonomy      The taxonomy.
+	 *
+	 * @return array The modified sitemap entry.
 	 */
 	public function replace_term_url_with_canonical( $sitemap_entry, $term, $taxonomy ) {
 		if ( is_numeric( $term ) ) {
@@ -199,6 +243,8 @@ class Native extends Controllers\Controller {
 	}
 
 	/**
+	 * Registers sitemap providers.
+	 *
 	 * @return void
 	 */
 	public function register_providers() {

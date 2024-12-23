@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file contains the Posts class for handling the querying of general posts for the sitemap.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps\General\Queries;
 
@@ -9,12 +14,22 @@ use SmartCrawl\Sitemaps\Post_Fetcher;
 use SmartCrawl\Sitemaps\Query;
 use SmartCrawl\Sitemaps\Utils;
 
+/**
+ * Class Posts
+ *
+ * Handles the querying of general posts for the sitemap.
+ */
 class Posts extends Query {
 
 	use Singleton;
 
 	/**
-	 * @return array|Item[]
+	 * Get items for the sitemap.
+	 *
+	 * @param string $type The type of items to fetch.
+	 * @param int    $page_number The page number for pagination.
+	 *
+	 * @return array|Item[] The list of items.
 	 */
 	public function get_items( $type = '', $page_number = 0 ) {
 		$items = array();
@@ -33,7 +48,11 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return array
+	 * Get images for a post.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return array The list of images.
 	 */
 	private function get_post_images( $post ) {
 		if ( ! Utils::sitemap_images_enabled() ) {
@@ -71,14 +90,22 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return false|string|\WP_Error
+	 * Get the URL of a post.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return false|string The post URL.
 	 */
 	private function get_post_url( $post ) {
 		return get_permalink( $post->ID );
 	}
 
 	/**
-	 * @return false|int
+	 * Get the last modified time of a post.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return false|int The post modified time.
 	 */
 	private function get_post_modified_time( $post ) {
 		return ! empty( $post->post_modified )
@@ -87,14 +114,18 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return string
+	 * Get the filter prefix.
+	 *
+	 * @return string The filter prefix.
 	 */
 	public function get_filter_prefix() {
 		return 'wds-sitemap-posts';
 	}
 
 	/**
-	 * @return array
+	 * Get ignored URL IDs.
+	 *
+	 * @return array The list of ignored URL IDs.
 	 */
 	private function get_ignored_url_ids() {
 		$ignore_urls = Utils::get_ignore_urls();
@@ -112,7 +143,13 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return Post_Fetcher
+	 * Create a post fetcher.
+	 *
+	 * @param int          $offset The offset for fetching posts.
+	 * @param int          $limit The limit for fetching posts.
+	 * @param array|string $post_types The post types to fetch.
+	 *
+	 * @return Post_Fetcher The post fetcher instance.
 	 */
 	private function make_fetcher( $offset, $limit, $post_types ) {
 		$post_types = is_array( $post_types )
@@ -129,7 +166,11 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return array
+	 * Get the IDs of posts to include.
+	 *
+	 * @param array $post_types The post types to include.
+	 *
+	 * @return array The list of post IDs to include.
 	 */
 	private function get_include_ids( $post_types ) {
 		$include = apply_filters( 'wds_posts_sitemap_include_post_ids', array(), $post_types );
@@ -140,7 +181,11 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return bool
+	 * Check if a post is included in the sitemap.
+	 *
+	 * @param \WP_Post $post The post object.
+	 *
+	 * @return bool True if the post is included, false otherwise.
 	 */
 	public function is_post_included( $post ) {
 		if ( ! is_a( $post, '\WP_Post' ) ) {
@@ -164,7 +209,12 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return array|mixed
+	 * Fetch full data for posts.
+	 *
+	 * @param string $type The type of items to fetch.
+	 * @param int    $page_number The page number for pagination.
+	 *
+	 * @return array The list of posts with full data.
 	 */
 	private function fetch_full_data( $type, $page_number ) {
 		$extra_columns = Utils::sitemap_images_enabled()
@@ -181,7 +231,11 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return array
+	 * Get custom ignore IDs.
+	 *
+	 * @param string $post_type The post type to ignore.
+	 *
+	 * @return array The list of custom ignore IDs.
 	 */
 	private function get_custom_ignore_ids( $post_type ) {
 		$post_types = is_string( $post_type )
@@ -202,7 +256,11 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return array
+	 * Get the IDs of posts to ignore.
+	 *
+	 * @param array $post_types The post types to ignore.
+	 *
+	 * @return array The list of post IDs to ignore.
 	 */
 	public function get_ignore_ids( $post_types ) {
 		$custom_ignored_ids = $this->get_custom_ignore_ids( $post_types );
@@ -218,7 +276,9 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return array
+	 * Get the supported post types.
+	 *
+	 * @return array The list of supported post types.
 	 */
 	public function get_supported_types() {
 		$options = Settings::get_options();
@@ -240,7 +300,11 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return int
+	 * Get the count of items.
+	 *
+	 * @param string $type The type of items to count.
+	 *
+	 * @return int The count of items.
 	 */
 	public function get_item_count( $type = '' ) {
 		return $this->make_fetcher(
@@ -251,7 +315,9 @@ class Posts extends Query {
 	}
 
 	/**
-	 * @return array
+	 * Get the front page ID.
+	 *
+	 * @return array The list of front page IDs.
 	 */
 	private function get_front_page_id() {
 		return 'page' === get_option( 'show_on_front' )

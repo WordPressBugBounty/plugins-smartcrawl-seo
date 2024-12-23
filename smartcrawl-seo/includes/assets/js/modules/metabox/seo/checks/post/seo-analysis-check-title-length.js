@@ -40,7 +40,7 @@ export default class SeoAnalysisCheckTitleLength extends React.Component {
 							/* translators: 1: Current length, 2,3: min/max length */
 							__(
 								'Your SEO title is %1$d characters which is between the recommended best practice of %2$d-%3$d characters.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							length,
 							minLength,
@@ -51,7 +51,7 @@ export default class SeoAnalysisCheckTitleLength extends React.Component {
 							/* translators: 1: Current length, 2,3: min/max length */
 							__(
 								'Your SEO title is %1$d characters which is greater than the recommended %3$d characters. Best practice is between %2$d and %3$d characters, with 60 being the sweet spot.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							length,
 							minLength,
@@ -62,7 +62,7 @@ export default class SeoAnalysisCheckTitleLength extends React.Component {
 							/* translators: 1: Current length, 2,3: min/max length */
 							__(
 								'Your SEO title is %1$d characters which is less than the recommended %2$d characters. Best practice is between %2$d and %3$d characters, with 60 being the sweet spot.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							length,
 							minLength,
@@ -73,7 +73,7 @@ export default class SeoAnalysisCheckTitleLength extends React.Component {
 							/* translators: 1: Current length, 2,3: min/max length */
 							__(
 								'You have NOT written an SEO specific title for this article. We recommend an SEO specific title between %2$d and %3$d characters, optimized with your focus keywords.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							length,
 							minLength,

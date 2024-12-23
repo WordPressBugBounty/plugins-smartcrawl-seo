@@ -1,7 +1,17 @@
 <?php
+/**
+ * Post class for handling post schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Post
+ *
+ * Handles post schema fragments.
+ */
 class Post extends Property {
 	const ID = 'post_data';
 
@@ -18,17 +28,24 @@ class Post extends Property {
 	const THUMBNAIL_URL      = 'post_thumbnail_url';
 
 	/**
-	 * @var
+	 * The post object.
+	 *
+	 * @var \WP_Post
 	 */
 	private $post;
+
 	/**
-	 * @var
+	 * The post field.
+	 *
+	 * @var string
 	 */
 	private $post_field;
 
 	/**
-	 * @param $post
-	 * @param $field
+	 * Post constructor.
+	 *
+	 * @param \WP_Post $post The post object.
+	 * @param string   $field The post field.
 	 */
 	public function __construct( $post, $field ) {
 		parent::__construct();
@@ -38,7 +55,9 @@ class Post extends Property {
 	}
 
 	/**
-	 * @return array|false|int|mixed|string|\WP_Error|null
+	 * Retrieves the value of the post field.
+	 *
+	 * @return array|false|int|mixed|string|\WP_Error|null The value of the post field.
 	 */
 	public function get_value() {
 		$post_permalink = get_permalink( $this->post );

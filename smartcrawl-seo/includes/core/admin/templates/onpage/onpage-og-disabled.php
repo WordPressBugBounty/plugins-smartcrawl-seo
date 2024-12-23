@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage OpenGraph Disabled.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

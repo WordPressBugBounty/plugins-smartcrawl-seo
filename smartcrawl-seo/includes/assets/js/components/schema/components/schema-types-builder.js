@@ -103,16 +103,12 @@ class SchemaTypesBuilder extends React.Component {
 					<div className="sui-row">
 						<div className="sui-col-xs-6 sui-col-sm-5">
 							<small>
-								<strong>
-									{__('Schema Type', 'smartcrawl-seo')}
-								</strong>
+								<strong>{__('Schema Type', 'smartcrawl-seo')}</strong>
 							</small>
 						</div>
 						<div className="sui-col-xs-6 sui-col-sm-7">
 							<small>
-								<strong>
-									{__('Location', 'smartcrawl-seo')}
-								</strong>
+								<strong>{__('Location', 'smartcrawl-seo')}</strong>
 							</small>
 						</div>
 					</div>

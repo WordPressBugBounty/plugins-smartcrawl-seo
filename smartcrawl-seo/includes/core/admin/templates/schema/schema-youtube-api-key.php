@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Schema Youtube API Key.
+ *
+ * @package Smartcrwal
+ */
+
 $option_name          = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $schema_enable_yt_api = empty( $schema_enable_yt_api ) ? false : $schema_enable_yt_api;
 $schema_yt_api_key    = empty( $schema_yt_api_key ) ? '' : $schema_yt_api_key;

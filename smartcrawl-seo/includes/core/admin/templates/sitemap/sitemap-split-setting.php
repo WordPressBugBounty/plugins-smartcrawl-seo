@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap Split Settings.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

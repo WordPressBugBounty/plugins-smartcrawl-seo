@@ -1,9 +1,19 @@
 <?php
+/**
+ * Woocommerce class for handling WooCommerce schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
 use SmartCrawl\Integration\Woocommerce\Data;
 
+/**
+ * Class Woocommerce
+ *
+ * Handles WooCommerce schema fragments.
+ */
 class Woocommerce extends Property {
 	const ID = 'woocommerce';
 
@@ -26,21 +36,31 @@ class Woocommerce extends Property {
 	const PRODUCT_TAG_URL        = 'product_tag_url';
 
 	/**
-	 * @var \WC_Product
+	 * The WooCommerce product.
+	 *
+	 * @var \WC_Product|false
 	 */
 	private $product = false;
+
 	/**
-	 * @var
+	 * The field to retrieve.
+	 *
+	 * @var string
 	 */
 	private $field;
+
 	/**
+	 * WooCommerce data handler.
+	 *
 	 * @var Data
 	 */
 	private $woo_data;
 
 	/**
-	 * @param $post
-	 * @param $field
+	 * Woocommerce constructor.
+	 *
+	 * @param \WP_Post $post The post object.
+	 * @param string   $field The field to retrieve.
 	 */
 	public function __construct( $post, $field ) {
 		parent::__construct();
@@ -55,7 +75,9 @@ class Woocommerce extends Property {
 	}
 
 	/**
-	 * @return array|false|int|string|\WP_Error|\WP_Term|null
+	 * Retrieves the value of the specified field.
+	 *
+	 * @return mixed The value of the field.
 	 */
 	public function get_value() {
 		if ( ! $this->woocommerce_active() || ! $this->product ) {
@@ -143,34 +165,40 @@ class Woocommerce extends Property {
 	}
 
 	/**
-	 * @param $price
+	 * Formats the price.
 	 *
-	 * @return mixed
+	 * @param float $price The price to format.
+	 * @return string The formatted price.
 	 */
 	private function format_price( $price ) {
 		return wc_format_decimal( $price, wc_get_price_decimals() );
 	}
 
 	/**
-	 * @param $date WC_DateTime
+	 * Formats the date.
 	 *
-	 * @return string
+	 * @param object $date The date to format.
+	 *
+	 * @return string The formatted date.
 	 */
 	private function format_date( $date ) {
 		return $date ? gmdate( 'Y-m-d', $date->getTimestamp() ) : '';
 	}
 
 	/**
-	 * @return bool
+	 * Checks if WooCommerce is active.
+	 *
+	 * @return bool True if WooCommerce is active, false otherwise.
 	 */
 	private function woocommerce_active() {
 		return \smartcrawl_woocommerce_active();
 	}
 
 	/**
-	 * @param $taxonomy
+	 * Retrieves the object term for the specified taxonomy.
 	 *
-	 * @return \WP_Term|null
+	 * @param string $taxonomy The taxonomy to retrieve.
+	 * @return array The object term.
 	 */
 	private function get_object_term( $taxonomy ) {
 		$terms = wp_get_object_terms( $this->product->get_id(), $taxonomy );
@@ -181,7 +209,9 @@ class Woocommerce extends Property {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the global ID.
+	 *
+	 * @return string The global ID.
 	 */
 	private function get_global_id() {
 		$options        = $this->woo_data->get_options();

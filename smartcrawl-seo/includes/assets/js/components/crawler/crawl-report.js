@@ -27,6 +27,7 @@ export default class CrawlReport extends React.Component {
 
 		this.state = {
 			issues: ConfigValues.get('issues', 'crawler') || {},
+			redirects: ConfigValues.get('redirects', 'crawler') || [],
 			redirectInProgress: false,
 			requestInProgress: false,
 		};
@@ -153,6 +154,7 @@ export default class CrawlReport extends React.Component {
 				onRedirect={() => this.startRedirecting(key)}
 				onIgnore={() => this.ignoreItem(key)}
 				onRestore={() => this.restoreItem(key)}
+				redirects={this.state.redirects}
 			/>
 		);
 	}
@@ -294,11 +296,7 @@ export default class CrawlReport extends React.Component {
 			<Button
 				id={'wds-ignore-all-' + type}
 				icon="sui-icon-eye-hide"
-				text={
-					count > 1
-						? __('Ignore All', 'smartcrawl-seo')
-						: __('Ignore', 'smartcrawl-seo')
-				}
+				text={count > 1 ? __('Ignore All', 'smartcrawl-seo') : __('Ignore', 'smartcrawl-seo')}
 				ghost={true}
 				loading={this.state.requestInProgress === type}
 				disabled={this.state.requestInProgress}

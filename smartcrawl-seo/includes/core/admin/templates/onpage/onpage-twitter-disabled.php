@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Twitter Disabled.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

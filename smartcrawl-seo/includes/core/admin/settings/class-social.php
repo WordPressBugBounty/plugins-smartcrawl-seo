@@ -210,10 +210,7 @@ class Social extends Admin_Settings {
 		parent::options_page();
 
 		$options = Settings::get_component_options( $this->name );
-		$options = wp_parse_args(
-			( is_array( $options ) ? $options : array() ),
-			$this->get_default_options()
-		);
+		$options = wp_parse_args( $options, $this->get_default_options() );
 
 		$arguments               = array(
 			'options' => $options,
@@ -262,7 +259,6 @@ class Social extends Admin_Settings {
 	 */
 	public function defaults() {
 		$options = Settings::get_component_options( $this->name );
-		$options = is_array( $options ) ? $options : array();
 
 		foreach ( $this->get_default_options() as $opt => $default ) {
 			if ( ! isset( $options[ $opt ] ) ) {

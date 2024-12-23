@@ -1,7 +1,14 @@
 <?php
+/**
+ * Template: Floating Notice.
+ *
+ * @package SmartCrawl
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $code      = empty( $code ) ? '' : $code;
 $message   = empty( $message ) ? '' : $message;
-$type      = empty( $type ) ? 'error' : $type; // phpcs:ignore
+$type      = empty( $type ) ? 'error' : $type;
 $autoclose = empty( $autoclose ) ? false : $autoclose;
 $dismiss   = ! $autoclose;
 ?>

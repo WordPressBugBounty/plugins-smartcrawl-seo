@@ -89,16 +89,10 @@ abstract class Check {
 	 *
 	 * @param string|\WP_Post $subject Markup to work with.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function set_subject( $subject = '' ) {
-		if ( is_string( $subject ) || $subject instanceof \WP_Post ) {
-			$this->subject = $subject;
-
-			return true;
-		}
-
-		return false;
+		$this->subject = $subject;
 	}
 
 	/**
@@ -204,7 +198,7 @@ abstract class Check {
 	}
 
 	/**
-	 * Get keyword label based on primary or secondary.
+	 * Retrieves keyword label based on primary or secondary.
 	 *
 	 * @since 3.4.0
 	 *
@@ -252,9 +246,11 @@ abstract class Check {
 		$kws      = $string->get_keywords();
 		$expected = $this->get_focus();
 
+		// We don't seem to have any focus keywords, so... yeah.
 		if ( empty( $expected ) ) {
 			return true;
-		} // We don't seem to have any focus keywords, so... yeah.
+		}
+
 		$diff = array_diff( $expected, array_keys( $kws ) );
 
 		return count( $expected ) !== count( $diff );
@@ -316,7 +312,7 @@ abstract class Check {
 	}
 
 	/**
-	 * Get current check language.
+	 * Retrieves current check language.
 	 *
 	 * @return string
 	 */

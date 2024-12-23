@@ -17,7 +17,7 @@ const RecipientNameField = fieldWithValidation(TextInputField, [
 ]);
 const recipientEmailValidator = new Validator(
 	isEmailValid,
-	__('Email is invalid.', 'smartcrawl-seo')
+	__('Email is invalid.', 'wds-texdomain')
 );
 const RecipientEmailField = fieldWithValidation(TextInputField, [
 	isNonEmpty,
@@ -65,13 +65,13 @@ export default class EmailRecipientModal extends React.Component {
 						<Button
 							className="wds-cancel-button"
 							ghost={true}
-							text={__('Cancel', 'smartcrawl-seo')}
+							text={__('Cancel', 'wds-texdomain')}
 							onClick={onClose}
 						/>
 						<div className="sui-actions-right">
 							<Button
 								id="wds-add-email-recipient"
-								text={__('Add', 'smartcrawl-seo')}
+								text={__('Add', 'wds-texdomain')}
 								onClick={() => this.handleSubmit()}
 								disabled={disabled}
 							/>
@@ -81,8 +81,8 @@ export default class EmailRecipientModal extends React.Component {
 			>
 				<RecipientNameField
 					id="wds-recipient-name"
-					label={__('First name', 'smartcrawl-seo')}
-					placeholder={__('E.g. John', 'smartcrawl-seo')}
+					label={__('First name', 'wds-texdomain')}
+					placeholder={__('E.g. John', 'wds-texdomain')}
 					value={name}
 					onChange={(value, isValid) =>
 						this.handleChangeName(value, isValid)
@@ -91,8 +91,8 @@ export default class EmailRecipientModal extends React.Component {
 				/>
 				<RecipientEmailField
 					id="wds-recipient-email"
-					label={__('Email address', 'smartcrawl-seo')}
-					placeholder={__('E.g. john@doe.com', 'smartcrawl-seo')}
+					label={__('Email address', 'wds-texdomain')}
+					placeholder={__('E.g. john@doe.com', 'wds-texdomain')}
 					value={email}
 					onChange={(value, isValid) =>
 						this.handleChangeEmail(value, isValid)

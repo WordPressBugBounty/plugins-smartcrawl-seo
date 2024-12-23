@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Dashboard Sitemap Crawl Stats.
+ *
+ * @package SmartCrawl
+ */
+
 $report = empty( $report ) ? null : $report;
 
 if ( is_null( $report ) ) {

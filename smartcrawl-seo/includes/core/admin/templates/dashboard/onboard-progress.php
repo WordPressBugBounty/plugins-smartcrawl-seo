@@ -1,3 +1,12 @@
+<?php
+/**
+ * Template: Onboard Progress Content.
+ *
+ * @package SmartCrawl
+ */
+
+?>
+
 <p><?php esc_html_e( 'Please wait a few moments while we activate those services', 'smartcrawl-seo' ); ?></p>
 <?php
 $this->render_view(

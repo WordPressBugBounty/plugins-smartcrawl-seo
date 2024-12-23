@@ -7,65 +7,80 @@ import { connect } from 'react-redux';
 
 const optionalSettings = {
 	allow_empty_tax: {
-		label: __('Allow autolinks to empty taxonomies', 'wds'),
+		label: __('Allow autolinks to empty taxonomies', 'smartcrawl-seo'),
 		description: __(
 			'Allows autolinking to taxonomies that have no posts assigned to them.',
 			'wds'
 		),
 	},
 	excludeheading: {
-		label: __('Prevent linking in heading tags', 'wds'),
-		description: __('Excludes headings from autolinking.', 'wds'),
+		label: __('Prevent linking in heading tags', 'smartcrawl-seo'),
+		description: __(
+			'Excludes headings from autolinking.',
+			'smartcrawl-seo'
+		),
 	},
 	onlysingle: {
-		label: __('Process only single posts and pages', 'wds'),
-		description: __('Process only single posts and pages', 'wds'),
+		label: __('Process only single posts and pages', 'smartcrawl-seo'),
+		description: __(
+			'Process only single posts and pages',
+			'smartcrawl-seo'
+		),
 	},
 	allowfeed: {
-		label: __('Process RSS feeds', 'wds'),
-		description: __('Autolinking will also occur in RSS feeds.', 'wds'),
+		label: __('Process RSS feeds', 'smartcrawl-seo'),
+		description: __(
+			'Autolinking will also occur in RSS feeds.',
+			'smartcrawl-seo'
+		),
 	},
 	casesens: {
-		label: __('Case sensitive matching', 'wds'),
-		description: __('Only autolink the exact string match.', 'wds'),
+		label: __('Case sensitive matching', 'smartcrawl-seo'),
+		description: __(
+			'Only autolink the exact string match.',
+			'smartcrawl-seo'
+		),
 	},
 	customkey_preventduplicatelink: {
-		label: __('Prevent duplicate links', 'wds'),
+		label: __('Prevent duplicate links', 'smartcrawl-seo'),
 		description: __(
 			'Only link to a specific URL once per page/post.',
-			'wds'
+			'smartcrawl-seo'
 		),
 	},
 	target_blank: {
-		label: __('Open links in new tab', 'wds'),
+		label: __('Open links in new tab', 'smartcrawl-seo'),
 		description: __(
 			'Adds the target=“_blank” tag to links to open a new tab when clicked.',
-			'wds'
+			'smartcrawl-seo'
 		),
 	},
 	rel_nofollow: {
-		label: __('Nofollow autolinks', 'wds'),
+		label: __('Nofollow autolinks', 'smartcrawl-seo'),
 		description: __(
 			'Adds the nofollow meta tag to autolinks to prevent search engines following those URLs when crawling your website.',
-			'wds'
+			'smartcrawl-seo'
 		),
 	},
 	exclude_no_index: {
-		label: __('Prevent linking on no-index pages', 'wds'),
-		description: __('Prevent autolinking on no-index pages.', 'wds'),
+		label: __('Prevent linking on no-index pages', 'smartcrawl-seo'),
+		description: __(
+			'Prevent autolinking on no-index pages.',
+			'smartcrawl-seo'
+		),
 	},
 	exclude_image_captions: {
-		label: __('Prevent linking on image captions', 'wds'),
+		label: __('Prevent linking on image captions', 'smartcrawl-seo'),
 		description: __(
 			'Prevent links from being added to image captions.',
-			'wds'
+			'smartcrawl-seo'
 		),
 	},
 	disable_content_cache: {
-		label: __('Prevent caching for autolinked content', 'wds'),
+		label: __('Prevent caching for autolinked content', 'smartcrawl-seo'),
 		description: __(
 			'Some page builder plugins and themes conflict with object cache when automatic linking is enabled. Enable this option to disable object cache for autolinked content.',
-			'wds'
+			'smartcrawl-seo'
 		),
 	},
 };

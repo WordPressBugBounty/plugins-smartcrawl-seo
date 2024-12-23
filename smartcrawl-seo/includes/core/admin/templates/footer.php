@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Footer.
+ *
+ * @package SmartCrawl
+ */
+
 namespace SmartCrawl;
 
 $is_member = (bool) \smartcrawl_get_array_value( $_view, 'is_member' );

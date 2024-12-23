@@ -1,7 +1,17 @@
 <?php
+/**
+ * Type_Constants class for defining schema type constants in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema;
 
+/**
+ * Class Type_Constants
+ *
+ * Defines constants for various schema types.
+ */
 class Type_Constants {
 
 	const TYPE_ORGANIZATION = 'Organization';

@@ -1,13 +1,43 @@
 <?php
+/**
+ * File containing the Youtube_Data_Fetcher class for SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
+/**
+ * Class Youtube_Data_Fetcher
+ *
+ * Provides utilities to fetch data from YouTube.
+ *
+ * @package SmartCrawl
+ */
 class Youtube_Data_Fetcher {
 
-	static $api_base = 'https://www.googleapis.com/youtube/v3';
+	/**
+	 * Base URL for YouTube API.
+	 *
+	 * @var string
+	 */
+	public static $api_base = 'https://www.googleapis.com/youtube/v3';
 
-	static $thumbnail_base = 'https://i.ytimg.com/vi/';
+	/**
+	 * Base URL for YouTube thumbnails.
+	 *
+	 * @var string
+	 */
+	public static $thumbnail_base = 'https://i.ytimg.com/vi/';
 
+	/**
+	 * Fetches video information from YouTube.
+	 *
+	 * @param string      $url YouTube video URL.
+	 * @param string|bool $api_key API key for YouTube Data API.
+	 *
+	 * @return array|false Video information on success, false on failure.
+	 */
 	public static function get_video_info( $url, $api_key = false ) {
 		if ( empty( $api_key ) ) {
 			$api_key = self::get_api_key();
@@ -106,6 +136,11 @@ class Youtube_Data_Fetcher {
 		return $result;
 	}
 
+	/**
+	 * Retrieves the API key for YouTube Data API.
+	 *
+	 * @return string|false API key on success, false on failure.
+	 */
 	private static function get_api_key() {
 		$options    = Settings::get_component_options( Settings::COMP_SCHEMA );
 		$connect_yt = (bool) \smartcrawl_get_array_value( $options, 'schema_enable_yt_api' );
@@ -117,6 +152,13 @@ class Youtube_Data_Fetcher {
 		return false;
 	}
 
+	/**
+	 * Checks if the URL is a shortened YouTube URL.
+	 *
+	 * @param string $url YouTube URL.
+	 *
+	 * @return bool True if the URL is a shortened YouTube URL, false otherwise.
+	 */
 	private static function is_short_url( $url ) {
 		return wp_parse_url( $url, PHP_URL_HOST ) === 'youtu.be';
 	}
@@ -138,6 +180,13 @@ class Youtube_Data_Fetcher {
 		return false;
 	}
 
+	/**
+	 * Retrieves video ID from YouTube URL.
+	 *
+	 * @param string $url YouTube URL.
+	 *
+	 * @return string|false Video ID on success, false on failure.
+	 */
 	private static function get_video_id( $url ) {
 		if ( self::is_short_url( $url ) ) {
 			$url_parts = explode( '/', $url );

@@ -1,11 +1,17 @@
 <?php
+/**
+ * Template: Schema Person Settings.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $option_name    = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $options        = empty( $options ) ? array() : $options;
 $social_options = empty( $social_options ) ? array() : $social_options;
-$pages          = empty( $pages ) ? array() : $pages; // phpcs:ignore
+$pages          = empty( $pages ) ? array() : $pages;
 
 $person_name         = (string) \smartcrawl_get_array_value( $social_options, 'override_name' );
 $person_job_title    = (string) \smartcrawl_get_array_value( $options, 'person_job_title' );
@@ -58,7 +64,7 @@ $owner = \SmartCrawl\Models\User::owner();
 		class="sui-form-control"
 		type="text"
 		name="<?php echo esc_attr( $option_name ); ?>[person_bio]"
-		placeholder="<?php echo $owner->get_description(); // phpcs:ignore ?>"
+		placeholder="<?php echo esc_attr( $owner->get_description() ); ?>"
 	><?php echo esc_textarea( $person_bio ); ?></textarea>
 </div>
 

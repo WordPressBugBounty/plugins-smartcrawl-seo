@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Settings.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
@@ -109,8 +114,9 @@ $onpage_enabled            = Settings::get_setting( 'onpage' );
 				/*
 				 * Post types tab
 				 */
+				// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 				$post_type_sections = array();
-				foreach ( get_post_types( array( 'public' => true ) ) as $post_type ) { // phpcs:ignore
+				foreach ( get_post_types( array( 'public' => true ) ) as $post_type ) {
 					if ( in_array( $post_type, array( 'revision', 'nav_menu_item' ), true ) ) {
 						continue;
 					}
@@ -228,7 +234,7 @@ $onpage_enabled            = Settings::get_setting( 'onpage' );
 				/**
 				 * Post types.
 				 *
-				 * @var $archive_post_types array
+				 * @var array $archive_post_types
 				 */
 				foreach ( $archive_post_types as $archive_post_type => $archive_post_type_label ) {
 
@@ -297,17 +303,15 @@ $onpage_enabled            = Settings::get_setting( 'onpage' );
 						),
 					);
 
-					if ( $buddypress_sections ) {
-						$this->render_view(
-							'vertical-tab',
-							array(
-								'tab_id'       => 'tab_buddypress',
-								'tab_name'     => esc_html__( 'BuddyPress', 'smartcrawl-seo' ),
-								'is_active'    => 'tab_buddypress' === $active_tab,
-								'tab_sections' => $buddypress_sections,
-							)
-						);
-					}
+					$this->render_view(
+						'vertical-tab',
+						array(
+							'tab_id'       => 'tab_buddypress',
+							'tab_name'     => esc_html__( 'BuddyPress', 'smartcrawl-seo' ),
+							'is_active'    => 'tab_buddypress' === $active_tab,
+							'tab_sections' => $buddypress_sections,
+						)
+					);
 				}
 				?>
 

@@ -93,9 +93,7 @@ export default class LighthouseCheckFontSize extends React.Component {
 				</div>
 
 				<div className="wds-lh-section">
-					<strong>
-						{__('How to fix illegible fonts', 'smartcrawl-seo')}
-					</strong>
+					<strong>{__('How to fix illegible fonts', 'smartcrawl-seo')}</strong>
 					<p>
 						{__(
 							'If Lighthouse reports Text is illegible because of a missing viewport config, add a <meta name="viewport" content="width=device-width, initial-scale=1"> tag to the <head> of your document.',

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Metabox Advanced Indexing.
+ *
+ * @package Smartcrwal
+ */
+
 $robots_index_value    = ! empty( $robots_index_value );
 $robots_follow_value   = ! empty( $robots_follow_value );
 $robots_noindex_value  = empty( $robots_noindex_value ) ? false : $robots_noindex_value;
@@ -6,9 +12,8 @@ $robots_nofollow_value = empty( $robots_nofollow_value ) ? false : $robots_nofol
 $advanced_value        = empty( $advanced_value ) ? array() : $advanced_value;
 $post_type_noindexed   = ! empty( $post_type_noindexed );
 $post_type_nofollowed  = ! empty( $post_type_nofollowed );
-?>
 
-<?php if ( apply_filters( 'wds-metabox-visible_parts-robots_area', true ) ) : // phpcs:ignore ?>
+if ( apply_filters( 'smartcrawl_metabox_visible_parts_robots_area', true ) ) : ?>
 	<div class="sui-box-settings-row">
 		<div class="sui-box-settings-col-1">
 			<label class="sui-settings-label"><?php esc_html_e( 'Indexing', 'smartcrawl-seo' ); ?></label>

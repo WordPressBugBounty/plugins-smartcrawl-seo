@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Onpage Disabled.
+ *
+ * @package Smartcrwal
+ */
+
 $this->render_view(
 	'disabled-component',
 	array(

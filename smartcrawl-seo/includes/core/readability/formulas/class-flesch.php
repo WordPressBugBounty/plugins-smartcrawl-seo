@@ -1,11 +1,26 @@
 <?php
+/**
+ * Flesch readability formula class.
+ *
+ * @package SmartCrawl\Readability\Formulas
+ */
 
 namespace SmartCrawl\Readability\Formulas;
 
 use SmartCrawl\SmartCrawl_String;
 
+/**
+ * Class Flesch
+ *
+ * Calculates the Flesch readability score for a given text.
+ */
 class Flesch extends Formula {
 
+	/**
+	 * Supported languages and their respective weights.
+	 *
+	 * @var array
+	 */
 	private $languages = array(
 		'cs' => array(
 			'base' => 206.835,
@@ -50,20 +65,35 @@ class Flesch extends Formula {
 	);
 
 	/**
+	 * String object for readability analysis.
+	 *
 	 * @var SmartCrawl_String
 	 */
 	private $string;
 
 	/**
+	 * Language code for the text.
+	 *
 	 * @var string
 	 */
 	private $language_code;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param SmartCrawl_String $string        String object for analysis.
+	 * @param string            $language_code Language code for the text.
+	 */
 	public function __construct( SmartCrawl_String $string, $language_code ) {
 		$this->string        = $string;
 		$this->language_code = $language_code;
 	}
 
+	/**
+	 * Retrieves the language configuration.
+	 *
+	 * @return array|null Language configuration or null if not found.
+	 */
 	private function get_language() {
 		return \smartcrawl_get_array_value(
 			$this->languages,
@@ -71,10 +101,20 @@ class Flesch extends Formula {
 		);
 	}
 
+	/**
+	 * Checks if the language is supported.
+	 *
+	 * @return bool True if the language is supported, false otherwise.
+	 */
 	public function is_language_supported() {
 		return ! empty( $this->get_language() );
 	}
 
+	/**
+	 * Calculates the Flesch readability score.
+	 *
+	 * @return int|false The readability score or false if calculation fails.
+	 */
 	public function get_score() {
 		$language = $this->get_language();
 
@@ -89,6 +129,15 @@ class Flesch extends Formula {
 		);
 	}
 
+	/**
+	 * Performs the Flesch readability score calculation.
+	 *
+	 * @param float $base                   Base score.
+	 * @param float $sentence_length_weight Weight for sentence length.
+	 * @param float $syllable_weight        Weight for syllables.
+	 *
+	 * @return int|false The readability score or false if calculation fails.
+	 */
 	protected function calculate_score( $base, $sentence_length_weight, $syllable_weight ) {
 		$sentence_count = $this->string->get_sentence_count();
 		$word_count     = $this->string->get_word_count();

@@ -38,7 +38,7 @@ const UrlField = fieldWithValidation(TextInputField, [
 			isAbsoluteUrlValid(value),
 		__(
 			'Please use an absolute URL like https://domain.com/new-url or start with a slash /new-url.',
-			'smartcrawl-seo'
+			'wds'
 		)
 	),
 ]);
@@ -147,7 +147,7 @@ export default class CustomKeywordModal extends React.Component {
 					label={createInterpolateElement(
 						__(
 							'Link URL <span>Both internal and external links are supported</span>',
-							'smartcrawl-seo'
+							'wds'
 						),
 						{
 							span: <span />,
@@ -158,7 +158,7 @@ export default class CustomKeywordModal extends React.Component {
 					description={createInterpolateElement(
 						__(
 							'Formats include relative (E.g. <strong>/cats</strong>) or absolute URLs (E.g. <strong>https://www.website.com/cats</strong> or <strong>https://website.com/cats</strong>).',
-							'smartcrawl-seo'
+							'wds'
 						),
 						{
 							strong: <strong />,

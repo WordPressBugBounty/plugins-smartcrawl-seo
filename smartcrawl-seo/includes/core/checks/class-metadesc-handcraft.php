@@ -21,7 +21,7 @@ class Metadesc_Handcraft extends Post_Check {
 	private $state;
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @since 3.4.0
 	 *
@@ -34,7 +34,7 @@ class Metadesc_Handcraft extends Post_Check {
 	}
 
 	/**
-	 * Apply check to the subject.
+	 * Applies check to the subject.
 	 *
 	 * @since 3.4.0
 	 *
@@ -50,7 +50,7 @@ class Metadesc_Handcraft extends Post_Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @since 3.4.0
 	 *

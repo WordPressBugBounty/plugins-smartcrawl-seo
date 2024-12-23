@@ -1,3 +1,12 @@
+<?php
+/**
+ * Template for displaying the OpenGraph support section.
+ *
+ * @package SmartCrawl
+ */
+
+?>
+
 <div class="wds-separator-top">
 	<?php
 	$this->render_view(

@@ -189,7 +189,7 @@ class Controller extends Controllers\Submodule_Controller {
 			array( $contents ),
 			'6.4.2',
 			'smartcrawl_robots_txt_content',
-			__( 'Please use our new filter `smartcrawl_robots_txt_content` in SmartCrawl.' )
+			__( 'Please use our new filter `smartcrawl_robots_txt_content` in SmartCrawl.', 'smartcrawl-seo' )
 		);
 
 		return apply_filters( 'smartcrawl_robots_txt_content', $contents );

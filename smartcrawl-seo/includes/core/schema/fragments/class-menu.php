@@ -1,21 +1,39 @@
 <?php
+/**
+ * Menu class for handling menu schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Menu
+ *
+ * Handles menu schema fragments.
+ */
 class Menu extends Fragment {
+
 	/**
-	 * @var
+	 * The URL of the menu.
+	 *
+	 * @var string
 	 */
 	private $url;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
 
 	/**
-	 * @param $url
+	 * Menu constructor.
+	 *
+	 * @param string $url The URL of the menu.
 	 */
 	public function __construct( $url ) {
 		$this->url   = $url;
@@ -23,7 +41,9 @@ class Menu extends Fragment {
 	}
 
 	/**
-	 * @return array|false
+	 * Retrieves raw schema data.
+	 *
+	 * @return array|false The raw schema data or false if the main menu is not set.
 	 */
 	protected function get_raw() {
 		$main_menu_slug = $this->utils->get_schema_option( 'schema_main_navigation_menu' );
@@ -39,6 +59,8 @@ class Menu extends Fragment {
 		$schema = array();
 		foreach ( $menu_items as $menu_item ) {
 			/**
+			 * Menu item object.
+			 *
 			 * @var $menu_item \WP_Post
 			 */
 			$schema[] = array(

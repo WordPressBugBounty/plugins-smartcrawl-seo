@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Term Meta Edit Form.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

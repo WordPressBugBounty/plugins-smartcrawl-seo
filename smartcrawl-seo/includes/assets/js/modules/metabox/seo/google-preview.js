@@ -61,7 +61,13 @@ export default class GooglePreview extends React.Component {
 	}
 
 	componentDidMount() {
-		this.refresh();
+		if (window._wpLoadBlockEditor) {
+			wp.data.subscribe(() => {
+				this.refresh();
+			});
+		} else {
+			this.refresh();
+		}
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -225,7 +231,7 @@ export default class GooglePreview extends React.Component {
 						<p className="wds-preview-description">
 							{__(
 								'A preview of how your title and meta will appear in Google Search.',
-								'smartcrawl-seo'
+								'wds'
 							)}
 						</p>
 					</div>

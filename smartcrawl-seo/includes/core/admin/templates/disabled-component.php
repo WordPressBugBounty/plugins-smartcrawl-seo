@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Disabled Component.
+ *
+ * @package SmartCrawl
+ */
+
 $content     = empty( $content ) ? '' : $content;
 $image       = empty( $image ) ? '' : $image;
 $component   = empty( $component ) ? '' : $component;

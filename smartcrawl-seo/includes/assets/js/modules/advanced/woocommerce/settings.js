@@ -28,7 +28,7 @@ class Settings extends React.Component {
 					<p>
 						{__(
 							'Use the WooCommerce SEO configurations below to add recommended Woo metadata and Product Schema to your WooCommerce site, helping you stand out in search results pages.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					</p>
 				</SettingsRow>

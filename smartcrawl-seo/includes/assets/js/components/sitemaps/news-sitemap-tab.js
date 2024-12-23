@@ -50,7 +50,7 @@ export default class NewsSitemapTab extends React.Component {
 						{createInterpolateElement(
 							__(
 								'Are you publishing newsworthy content? Use the Google News Sitemap to list news articles and posts published in the last 48 hours so that they show up in Google News. <a>Learn More</a>',
-								'smartcrawl-seo'
+								'wds'
 							),
 							{
 								a: (
@@ -71,7 +71,7 @@ export default class NewsSitemapTab extends React.Component {
 							message={createInterpolateElement(
 								__(
 									'Your sitemap is available at <a>/news-sitemap.xml</a>',
-									'smartcrawl-seo'
+									'wds'
 								),
 								{
 									a: (
@@ -90,7 +90,7 @@ export default class NewsSitemapTab extends React.Component {
 						label={__('Enable News Sitemap', 'smartcrawl-seo')}
 						description={__(
 							'Use this option to enable or disable the Google News Sitemap feature.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					>
 						<div
@@ -117,7 +117,7 @@ export default class NewsSitemapTab extends React.Component {
 										// translators: %s: plugin title
 										__(
 											'<strong>%s</strong> automatically changes the schema to <strong>NewsArticle</strong> for all included posts/pages to ensure your newsworthy content is properly crawled and indexed. Note that if some schema types have been added using the Types Builder, the <strong>NewsArticle</strong> schema will not be displayed.',
-											'smartcrawl-seo'
+											'wds'
 										),
 										ConfigValues.get(
 											'plugin_title',
@@ -135,7 +135,7 @@ export default class NewsSitemapTab extends React.Component {
 							label={__('News Publication', 'smartcrawl-seo')}
 							description={__(
 								'Enter your Google News publication name.',
-								'smartcrawl-seo'
+								'wds'
 							)}
 						>
 							<TextInputField
@@ -143,7 +143,7 @@ export default class NewsSitemapTab extends React.Component {
 								description={createInterpolateElement(
 									__(
 										'The publication name must match your publication name on <span>news.google.com</span>',
-										'smartcrawl-seo'
+										'wds'
 									),
 									{
 										span: (
@@ -165,7 +165,7 @@ export default class NewsSitemapTab extends React.Component {
 							label={__('Inclusions', 'smartcrawl-seo')}
 							description={__(
 								'Select Post Types to include in your news sitemap.',
-								'smartcrawl-seo'
+								'wds'
 							)}
 						>
 							<strong>
@@ -177,7 +177,7 @@ export default class NewsSitemapTab extends React.Component {
 							>
 								{__(
 									'Select post types to be included in the Google News sitemap. Expand a post type to exclude specific items or groups.',
-									'smartcrawl-seo'
+									'wds'
 								)}
 							</p>
 

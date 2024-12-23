@@ -1,10 +1,16 @@
 <?php
+/**
+ * Template: Onpage Taxonomy section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
 use SmartCrawl\Admin\Settings\Onpage;
 
-$taxonomy      = empty( $taxonomy ) ? new stdClass() : $taxonomy;
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$taxonomy      = empty( $taxonomy ) ? new \stdClass() : $taxonomy;
 $meta_robots   = empty( $meta_robots ) ? array() : $meta_robots;
 $singular_name = empty( $taxonomy->labels->singular_name ) ? 'post' : strtolower( $taxonomy->labels->singular_name );
 /* translators: %s: Singular post type name */

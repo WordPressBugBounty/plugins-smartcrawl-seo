@@ -204,10 +204,7 @@ export default class CustomSchemaPropertyAdditionModal extends React.Component {
 		const { properties, onAdd } = this.props;
 		const { label, property, structure, type } = this.state;
 		if (properties.hasOwnProperty(property)) {
-			showNotice(
-				__('That property already exists!', 'smartcrawl-seo'),
-				'error'
-			);
+			showNotice(__('That property already exists!', 'smartcrawl-seo'), 'error');
 		} else {
 			onAdd(label, property, structure, type);
 		}

@@ -9,8 +9,8 @@
 /**
  * Internal constants, not to be overridden
  */
-const SMARTCRAWL_VERSION     = '3.11.0';
-const SMARTCRAWL_BUILD       = '1725348890916';
+const SMARTCRAWL_VERSION     = '3.12.2';
+const SMARTCRAWL_BUILD       = '1734514952605';
 const SMARTCRAWL_BUILD_TYPE  = 'free';
 const SMARTCRAWL_SUI_VERSION = '2.12.23';
 const SMARTCRAWL_PACKAGE_ID  = 167;

@@ -37,12 +37,11 @@ class Types extends Controllers\Controller {
 	 */
 	public function save_settings() {
 		// Not sanitizing nonce as it might alter the value.
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		if ( ! current_user_can( 'manage_options' ) || empty( $_POST['_wpnonce'] ) || wp_verify_nonce( wp_unslash( $_POST['_wpnonce'] ), '_wpnonce' ) ) {
+		if ( ! current_user_can( 'manage_options' ) || empty( $_POST['_wpnonce'] ) || wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), '_wpnonce' ) ) {
 			return;
 		}
 
-		$types_json = \smartcrawl_get_array_value( $_POST, self::SCHEMA_TYPES_OPTION_ID ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$types_json = \smartcrawl_get_array_value( $_POST, self::SCHEMA_TYPES_OPTION_ID );
 
 		if ( ! $types_json ) {
 			return;
@@ -67,8 +66,9 @@ class Types extends Controllers\Controller {
 			 * @param array $new_types      New schema types.
 			 * @param array $previous_types Old schema types.
 			 * @param array $current_types  Current schema types.
+			 * @param array $_POST          Post data.
 			 */
-			do_action( 'smartcrawl_after_add_schema_types', $new_types, $previous_types, $current_types );
+			do_action( 'smartcrawl_after_add_schema_types', $new_types, $previous_types, $current_types, $_POST );
 		}
 
 		if ( ! empty( $deleted_types ) ) {

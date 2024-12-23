@@ -64,7 +64,7 @@ class MaxmindConfigDeactivation extends React.Component {
 							// translators: %s: plugin title
 							__(
 								'Your site is connected to above Maxmind license key. <strong>%s</strong> automatically downloads latest GeoLite2 data weekly. You can use the disconnect button above to change the license key.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							ConfigValues.get('plugin_title', 'admin')
 						),

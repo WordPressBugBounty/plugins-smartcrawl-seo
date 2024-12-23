@@ -1,8 +1,8 @@
 <?php
 /**
- * @var string $for_type
+ * Template: Onpage Opengraph Twitter.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 namespace SmartCrawl;

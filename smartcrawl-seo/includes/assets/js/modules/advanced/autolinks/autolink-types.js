@@ -28,7 +28,7 @@ class AutolinkTypes extends React.Component {
 						label={__('Insert Links', 'smartcrawl-seo')}
 						description={__(
 							'Select the post types to insert links in.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						selectedValue={options.insert}
 						multiple={true}
@@ -40,7 +40,7 @@ class AutolinkTypes extends React.Component {
 						label={__('Link To', 'smartcrawl-seo')}
 						description={__(
 							'Select the post types & taxonomies that can be linked to.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						selectedValue={options.link_to}
 						multiple={true}

@@ -1,4 +1,9 @@
 <?php
+/**
+ * WooCommerce Shop Page Entity.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Entities;
 
@@ -7,23 +12,29 @@ use SmartCrawl\Integration\Woocommerce\Api;
 /**
  * TODO: woo shop is not just a page, product post type archive can also be a shop
  */
-class Woo_Shop_Page extends Post {
 
+/**
+ * Woo_Shop_Page Entity class.
+ */
+class Woo_Shop_Page extends Post {
 	/**
-	 * @var \SmartCrawl\Integration\Woocommerce\Api
+	 * WooCommerce API provider.
+	 *
+	 * @var Api
 	 */
 	private $woo_api;
-
 	/**
+	 * WP Post objects.
+	 *
 	 * @var array
 	 */
 	private $posts;
 
 	/**
-	 * Woo_Shop_Page constructor.
+	 * Constructor.
 	 *
-	 * @param array $posts   Posts.
-	 * @param null  $woo_api Woo API.
+	 * @param \WP_Post[] $posts   Posts.
+	 * @param Api        $woo_api Woo API.
 	 */
 	public function __construct( $posts = array(), $woo_api = null ) {
 		if ( ! $woo_api ) {
@@ -36,8 +47,14 @@ class Woo_Shop_Page extends Post {
 		$this->posts   = $posts;
 	}
 
+	/**
+	 * Loads schema.
+	 *
+	 * @return array The schema.
+	 */
 	protected function load_schema() {
 		$wp_posts = $this->get_wp_post();
+
 		if ( ! $wp_posts ) {
 			return array();
 		}

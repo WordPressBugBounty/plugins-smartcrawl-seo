@@ -26,7 +26,7 @@ class OnPage extends Controller {
 	/**
 	 * Queried entity.
 	 *
-	 * @var Entity $queried_entity
+	 * @var Entity|null
 	 */
 	private $queried_entity;
 
@@ -71,10 +71,9 @@ class OnPage extends Controller {
 		add_action( 'wp_head', array( $this, 'smartcrawl_head' ), 10, 1 );
 
 		// wp_title isn't enough. We'll do it anyway: suspenders and belt approach.
-		add_filter( 'wp_title', array( $this, 'smartcrawl_title' ), 100, 3 );
+		add_filter( 'wp_title', array( $this, 'smartcrawl_title' ), 100 );
 
 		// For newer themes using wp_get_document_title().
-		// TODO: instead of pre_get_document_title use the document_title filter so that if our value is empty we can let the original title get printed.
 		add_filter( 'pre_get_document_title', array( $this, 'smartcrawl_title' ), 100 );
 
 		// Buffer the header output and process it instead.
@@ -83,7 +82,7 @@ class OnPage extends Controller {
 		}
 
 		// This should now work with BuddyPress as well.
-		add_filter( 'bp_page_title', array( $this, 'smartcrawl_title' ), 10, 3 );
+		add_filter( 'bp_page_title', array( $this, 'smartcrawl_title' ), 10 );
 
 		if ( $this->wp_robots_api_available() ) {
 			remove_filter( 'wp_robots', 'wp_robots_noindex_search' ); // SmartCrawl is going to handle the search archive.
@@ -133,7 +132,7 @@ class OnPage extends Controller {
 			return $head;
 		}
 
-		$title_rx = '<title[^>]*?>.*?' . preg_quote( '</title>', null );
+		$title_rx = '<title[^>]*?>.*?' . preg_quote( '</title>', '' );
 		$head_rx  = '<head [^>]*? >';
 		$head     = preg_replace( '/\n/', '__SMARTCRAWL_NL__', $head );
 		// Dollar signs throw off replacement...
@@ -147,7 +146,7 @@ class OnPage extends Controller {
 	}
 
 	/**
-	 * Get queried entity.
+	 * Retrieves queried entity.
 	 *
 	 * @return Entity
 	 */
@@ -169,9 +168,11 @@ class OnPage extends Controller {
 	public function smartcrawl_title( $title ) {
 		$entity = $this->get_queried_entity();
 
-		return $entity
-			? esc_html( wp_strip_all_tags( stripslashes( $entity->get_meta_title() ) ) )
-			: $title;
+		if ( $entity && method_exists( $entity, 'get_meta_title' ) ) {
+			return esc_html( wp_strip_all_tags( stripslashes( $entity->get_meta_title() ) ) );
+		}
+
+		return $title;
 	}
 
 	/**
@@ -261,9 +262,8 @@ class OnPage extends Controller {
 		}
 		if ( count( $active_handlers ) > 0 ) {
 			$offset  = count( $active_handlers ) - 1;
-			$handler = ! empty( $active_handlers[ $offset ] ) && is_string( $active_handlers[ $offset ] )
-				? trim( $active_handlers[ $offset ] )
-				: '';
+			$handler = ! empty( $active_handlers[ $offset ] ) ? trim( $active_handlers[ $offset ] ) : '';
+
 			if ( preg_match( '/::smartcrawl_process_title_buffer$/', $handler ) ) {
 				ob_end_flush();
 			}
@@ -294,7 +294,9 @@ class OnPage extends Controller {
 		// Let's check if we're dealing with the redundant canonical.
 		if ( \smartcrawl_is_switch_active( 'SMARTCRAWL_SUPPRESS_REDUNDANT_CANONICAL' ) ) {
 			global $wp;
-			$current_url = add_query_arg( $_GET, trailingslashit( home_url( $wp->request ) ) ); // phpcs:ignore -- Nonce not applicable.
+
+			$current_url = add_query_arg( $_GET, trailingslashit( home_url( $wp->request ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 			if ( $current_url === $canonical ) {
 				$canonical = false;
 			}
@@ -308,16 +310,18 @@ class OnPage extends Controller {
 	}
 
 	/**
-	 * Get canonical URL.
+	 * Retrieves canonical URL.
 	 *
 	 * @return bool|mixed|string|\WP_Error
 	 */
 	public function get_canonical_url() {
 		$entity = $this->get_queried_entity();
 
-		return $entity
-			? $entity->get_canonical_url()
-			: '';
+		if ( $entity && method_exists( $entity, 'get_canonical_url' ) ) {
+			return $entity->get_canonical_url();
+		}
+
+		return '';
 	}
 
 	/**
@@ -360,8 +364,10 @@ class OnPage extends Controller {
 				$prev = esc_attr( trailingslashit( $prev ) );
 				$this->print_html_tag( "<link rel='prev' href='{$prev}' />\n" );
 			}
+
 			$is_paged = (int) $paged ? (int) $paged : 1;
-			if ( $is_paged && $is_paged < $wp_query->max_num_pages ) {
+
+			if ( $is_paged < $wp_query->max_num_pages ) {
 				$next      = is_home() ? home_url() : (
 				$is_date
 					? $date_callback( $requested_year, $requested_month )
@@ -380,17 +386,19 @@ class OnPage extends Controller {
 	}
 
 	/**
-	 * Get robots string.
+	 * Retrieves robots string.
 	 *
 	 * @return string
 	 */
 	private function get_robots_string() {
 		$entity = $this->get_queried_entity();
-		$robots = $entity
-			? $entity->get_robots()
-			: '';
 
-		// Clean up, index, follow is the default and doesn't need to be in output. All other combinations should be.
+		if ( ! is_object( $entity ) || ! property_exists( $entity, 'get_robots' ) ) {
+			return '';
+		}
+		$robots = $entity->get_robots();
+
+		// Cleans up, index, follow is the default and doesn't need to be in output. All other combinations should be.
 		if ( 'index,follow' === $robots ) {
 			$robots = '';
 		}
@@ -402,7 +410,7 @@ class OnPage extends Controller {
 	}
 
 	/**
-	 * Output meta robots tag
+	 * Outputs meta robots tag
 	 *
 	 * @return bool
 	 */
@@ -420,7 +428,7 @@ class OnPage extends Controller {
 	}
 
 	/**
-	 * Add items to robots.
+	 * Adds items to robots.
 	 *
 	 * @param array $wp_robots Robots.
 	 *
@@ -459,14 +467,10 @@ class OnPage extends Controller {
 		}
 
 		$entity   = $this->get_queried_entity();
-		$metadesc = $entity
+		$metadesc = $entity && method_exists( $entity, 'get_meta_description' )
 			? $entity->get_meta_description()
 			: '';
-		$metadesc = wp_kses(
-			strip_tags( stripslashes( $metadesc ) ), // phpcs:ignore
-			array(),
-			array()
-		);
+		$metadesc = wp_kses( wp_strip_all_tags( stripslashes( $metadesc ) ), array(), array() );
 
 		if ( ! empty( $metadesc ) ) {
 			echo '<meta name="description" content="' . esc_attr( $metadesc ) . '" />' . "\n";
@@ -548,7 +552,7 @@ class OnPage extends Controller {
 	 * @return void
 	 */
 	private function head_end() {
-		do_action( 'wds_head-after_output' ); // phpcs:ignore
+		do_action( 'smartcrawl_head_after_output' );
 
 		if ( ! \smartcrawl_is_switch_active( 'SMARTCRAWL_WHITELABEL_ON' ) ) {
 			echo "<!-- /SEO -->\n";

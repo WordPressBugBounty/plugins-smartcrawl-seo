@@ -66,12 +66,30 @@ class String_Utils {
 			: strlen( $str );
 	}
 
+	/**
+	 * Splits a string by a regular expression pattern.
+	 *
+	 * @param string $pattern The pattern to search for, as a string.
+	 * @param string $string The input string.
+	 * @param int    $limit If specified, then only substrings up to limit are returned.
+	 *
+	 * @return array The array of strings.
+	 */
 	public static function split( $pattern, $string, $limit = - 1 ) {
 		return function_exists( 'mb_split' )
 			? mb_split( $pattern, $string, $limit )
 			: preg_split( $pattern, $string, $limit );
 	}
 
+	/**
+	 * Finds the position of the first occurrence of a substring in a string.
+	 *
+	 * @param string $haystack The string to search in.
+	 * @param string $needle The substring to search for.
+	 * @param int    $offset The search offset. If it is not specified, 0 is used.
+	 *
+	 * @return int|false The position of where the needle exists relative to the beginning of the haystack string (independent of offset). Also note that string positions start at 0, and not 1.
+	 */
 	public static function pos( $haystack, $needle, $offset = 0 ) {
 		return function_exists( 'mb_strpos' )
 			? mb_strpos( $haystack, $needle, $offset )
@@ -133,6 +151,13 @@ class String_Utils {
 		return $words;
 	}
 
+	/**
+	 * Counts the number of words in a string.
+	 *
+	 * @param string $text The string to count words in.
+	 *
+	 * @return int The number of words in the string.
+	 */
 	public static function word_count( $text = '' ) {
 		return count( self::words( $text ) );
 	}
@@ -190,6 +215,14 @@ class String_Utils {
 			: strtolower( $str );
 	}
 
+	/**
+	 * Checks if a string starts with a given substring.
+	 *
+	 * @param string $haystack The string to search in.
+	 * @param string $needle The substring to search for.
+	 *
+	 * @return bool True if haystack starts with needle, false otherwise.
+	 */
 	public static function starts_with( $haystack, $needle ) {
 		if ( '' === $needle ) {
 			return true;
@@ -198,6 +231,14 @@ class String_Utils {
 		return 0 === self::pos( $haystack, $needle );
 	}
 
+	/**
+	 * Checks if a string ends with a given substring.
+	 *
+	 * @param string $haystack The string to search in.
+	 * @param string $needle The substring to search for.
+	 *
+	 * @return bool True if haystack ends with needle, false otherwise.
+	 */
 	public static function ends_with( $haystack, $needle ) {
 		$length = self::len( $needle );
 		if ( 0 === $length ) {

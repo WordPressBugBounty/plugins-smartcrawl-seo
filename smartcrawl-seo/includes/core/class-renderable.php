@@ -1,9 +1,26 @@
 <?php
+/**
+ * File containing the Renderable class for SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
+/**
+ * Class Renderable
+ *
+ * Provides an abstract base class for rendering views in the SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 abstract class Renderable {
 
+	/**
+	 * Default view arguments.
+	 *
+	 * @var array|null
+	 */
 	private $view_defaults = null;
 
 	/**
@@ -17,7 +34,7 @@ abstract class Renderable {
 	protected function render_view( $view, $args = array() ) {
 		$view = $this->load_view( $view, $args );
 		if ( ! empty( $view ) ) {
-			echo $view;  // phpcs:ignore -- The template being rendered could contain anything
+			echo $view;  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		return ! empty( $view );
@@ -53,7 +70,7 @@ abstract class Renderable {
 		$args = wp_parse_args( $args, $this->view_defaults );
 
 		if ( ! empty( $args ) ) {
-			extract( $args );  // phpcs:ignore -- extract method is necessary here for making variables available to template
+			extract( $args );  // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 		}
 
 		ob_start();
@@ -62,5 +79,10 @@ abstract class Renderable {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Gets the default view arguments.
+	 *
+	 * @return array Default view arguments.
+	 */
 	abstract protected function get_view_defaults();
 }

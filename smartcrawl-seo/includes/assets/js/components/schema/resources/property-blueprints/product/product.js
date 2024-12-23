@@ -70,7 +70,7 @@ const Product = {
 		optional: true,
 		description: __(
 			'The GTIN-12 code of the product. The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. Company Prefix, Item Reference, and Check Digit used to identify trade items.',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 	gtin13: {
@@ -82,7 +82,7 @@ const Product = {
 		optional: true,
 		description: __(
 			'The GTIN-13 code of the product. This is equivalent to 13-digit ISBN codes and EAN UCC-13.',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 	gtin14: {
@@ -103,7 +103,7 @@ const Product = {
 		optional: true,
 		description: __(
 			'The Manufacturer Part Number (MPN) of the product.',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 	image: {

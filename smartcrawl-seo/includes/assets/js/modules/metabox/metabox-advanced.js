@@ -13,7 +13,7 @@ export default class MetaboxAdvanced extends React.Component {
 					<p>
 						{__(
 							'Configure the advanced settings for this post.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					</p>
 

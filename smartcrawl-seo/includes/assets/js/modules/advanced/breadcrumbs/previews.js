@@ -28,7 +28,7 @@ class Previews extends React.Component {
 				description={createInterpolateElement(
 					__(
 						'See how breadcrumbs will appear on your web page. Click “<strong>Show more</strong>” to reveal the preview of breadcrumbs on all page types.',
-						'smartcrawl-seo'
+						'wds'
 					),
 					{ strong: <strong /> }
 				)}
@@ -112,8 +112,7 @@ class Previews extends React.Component {
 									target="_blank"
 									rel="noreferrer"
 								>
-									{options.home_label ||
-										__('Home', ' smartcrawl-seo')}
+									{options.home_label || __('Home', ' ')}
 								</a>
 							</strong>
 							<span className="sui-icon">

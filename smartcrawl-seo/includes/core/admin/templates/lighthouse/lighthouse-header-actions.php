@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Lighthouse Header Actions.
+ *
+ * @package SmartCrawl
+ */
+
 $lighthouse_report = empty( $lighthouse_report ) ? false : $lighthouse_report;
 if ( ! $lighthouse_report ) {
 	return;

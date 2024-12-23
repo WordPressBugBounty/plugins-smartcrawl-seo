@@ -27,8 +27,21 @@ class Module_Settings extends Admin_Settings {
 		$this->render_view( $view, $args );
 	}
 
-	public function validate( $input ) {}
+	/**
+	 * Sanitizes the given input of module settings value.
+	 *
+	 * @param array $input The input to validate.
+	 *
+	 * @return array
+	 */
+	public function validate( $input ) {
+		return array();
+	}
 
+	/**
+	 * Retrieves the title of module settings.
+	 *
+	 * @return void
+	 */
 	public function get_title() {}
 }
-

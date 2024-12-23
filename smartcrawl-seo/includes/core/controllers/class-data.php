@@ -1,4 +1,9 @@
 <?php
+/**
+ * Controls Data & Settings.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Controllers;
 
@@ -9,11 +14,18 @@ use SmartCrawl\Services\Service;
 use SmartCrawl\Settings;
 use SmartCrawl\Singleton;
 
-// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+/**
+ * Data Controller
+ */
 class Data extends Controller {
 
 	use Singleton;
 
+	/**
+	 * Service instance.
+	 *
+	 * @var Service
+	 */
 	private $site_service;
 
 	const PROGRESS_OPTION_ID = 'wds-multisite-data-reset-progress';
@@ -25,6 +37,11 @@ class Data extends Controller {
 		$this->site_service = Service::get( Service::SERVICE_SITE );
 	}
 
+	/**
+	 * Checks if the current user has permission to manage plugin settings.
+	 *
+	 * @return bool True if the user has permission, false otherwise.
+	 */
 	public function user_has_permission() {
 		if ( is_multisite() ) {
 			return current_user_can( 'manage_network_options' );
@@ -33,11 +50,19 @@ class Data extends Controller {
 		return current_user_can( 'manage_options' );
 	}
 
+	/**
+	 * Initializes action hooks.
+	 */
 	protected function init() {
-		add_action( 'wp_ajax_wds_data_reset', array( $this, 'json_reset' ) );
-		add_action( 'wp_ajax_wds_multisite_data_reset', array( $this, 'json_reset_multisite' ) );
+		add_action( 'wp_ajax_wds_data_reset', array( $this, 'ajax_reset' ) );
+		add_action( 'wp_ajax_wds_multisite_data_reset', array( $this, 'ajax_reset_multisite' ) );
 	}
 
+	/**
+	 * Resets all multisite settings and data.
+	 *
+	 * @return array An array containing total sites, completed sites, and progress message.
+	 */
 	public function reset_multisite() {
 		$runner          = new Subsite_Process_Runner(
 			self::PROGRESS_OPTION_ID,
@@ -56,10 +81,12 @@ class Data extends Controller {
 	}
 
 	/**
-	 * @param int  $next_site_id Next site id.
-	 * @param bool $finished     Is finished.
+	 * Retrieves the progress message for the next site in the reset process.
 	 *
-	 * @return string
+	 * @param int  $next_site_id The ID of the next site to reset.
+	 * @param bool $finished Whether the reset process has finished.
+	 *
+	 * @return string The progress message.
 	 */
 	private function get_progress_message( $next_site_id, $finished ) {
 		if ( $finished ) {
@@ -75,23 +102,45 @@ class Data extends Controller {
 
 		return empty( $next_site->blogname )
 			? ''
-			/* translators: %s: Site name */
-			: sprintf( esc_html__( 'Resetting %s', 'smartcrawl-seo' ), "<strong>{$next_site->blogname}</strong>" );
+			: sprintf(
+			/* translators: 1: Open strong tag, 2: Site name, 3: Close strong tag. */
+				esc_html__( 'Resetting %1$s%2$s%3$s', 'smartcrawl-seo' ),
+				'<strong>',
+				$next_site->blogname,
+				'</strong>'
+			);
 	}
 
-	public function json_reset_multisite() {
+	/**
+	 * Ajax handler to reset multisite data.
+	 *
+	 * This function is responsible for resetting the multisite data
+	 * only if the user has the required permission.
+	 *
+	 * @return void
+	 */
+	public function ajax_reset_multisite() {
 		if ( ! $this->user_has_permission() ) {
-			return;
+			wp_send_json_error();
 		}
+
 		check_admin_referer( 'wds-multisite-data-reset-nonce', '_wds_nonce' );
 
 		wp_send_json_success( $this->reset_multisite() );
 	}
 
-	public function json_reset() {
+	/**
+	 * Ajax handler to reset data.
+	 *
+	 * Resets the data if the user has permission.
+	 *
+	 * @return void
+	 */
+	public function ajax_reset() {
 		if ( ! $this->user_has_permission() ) {
-			return;
+			wp_send_json_error();
 		}
+
 		check_admin_referer( 'wds-data-reset-nonce', '_wds_nonce' );
 
 		$this->reset();
@@ -129,7 +178,7 @@ class Data extends Controller {
 	}
 
 	/**
-	 * Reset all settings and data.
+	 * Resets all settings and data.
 	 */
 	public function reset() {
 		$old_options = Settings::get_options();
@@ -154,12 +203,13 @@ class Data extends Controller {
 	}
 
 	/**
-	 * Settings include options, post meta and taxonomy meta
+	 * Settings include options, post meta and taxonomy meta.
 	 */
 	public function reset_settings() {
 		$old_options = Settings::get_options();
 
 		$this->remove_options();
+
 		if ( is_multisite() && is_main_site() ) {
 			$this->remove_site_options();
 		}
@@ -178,10 +228,11 @@ class Data extends Controller {
 	}
 
 	/**
-	 * Data includes audit/crawl results, redirects and all files stored by the plugin
+	 * Resets data including audit/crawl results, redirects and all files stored by the plugin.
 	 */
 	public function reset_data() {
 		$this->remove_service_results();
+
 		if ( is_multisite() && is_main_site() ) {
 			$this->remove_site_service_results();
 		}
@@ -189,7 +240,7 @@ class Data extends Controller {
 		$this->remove_files();
 		Database_Table::get()->drop_table();
 
-		// Clear Lighthouse report.
+		// Clears Lighthouse report.
 		Service::get( Service::SERVICE_LIGHTHOUSE )->clear_last_report();
 
 		/**
@@ -200,8 +251,14 @@ class Data extends Controller {
 		do_action( 'smartcrawl_after_reset_data' );
 	}
 
+	/**
+	 * Removes site options from the database in multisite.
+	 *
+	 * @return int|false Number of rows affected or false on query failure.
+	 */
 	private function remove_site_options() {
 		global $wpdb;
+
 		$service_model_key = $this->get_service_model_key();
 
 		return $wpdb->query(
@@ -214,6 +271,11 @@ class Data extends Controller {
 		);
 	}
 
+	/**
+	 * Removes options from the database.
+	 *
+	 * @return int|false The number of rows affected or false on failure.
+	 */
 	private function remove_options() {
 		global $wpdb;
 		$service_model_key = $this->get_service_model_key();
@@ -228,41 +290,80 @@ class Data extends Controller {
 		);
 	}
 
+	/**
+	 * Removes post meta data.
+	 *
+	 * Removes post meta data with meta keys that start with '_wds'.
+	 *
+	 * @return int|false The number of rows affected or false on failure.
+	 */
 	private function remove_post_meta() {
 		global $wpdb;
 
 		return $wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE '_wds%'" );
 	}
 
+	/**
+	 * Removes user meta data from the database.
+	 *
+	 * This function will delete user meta data that has a meta key starting with 'wds_' from the database.
+	 *
+	 * @return int|false On success, the number of rows affected. False on failure.
+	 */
 	private function remove_user_meta() {
 		global $wpdb;
 
 		return $wpdb->query( "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE 'wds_%'" );
 	}
 
+	/**
+	 * Retrieves the service model key.
+	 *
+	 * @return string The service model key.
+	 */
 	private function get_service_model_key() {
 		return $this->site_service->get_filter( '%' );
 	}
 
+	/**
+	 * Removes the site service results.
+	 *
+	 * @return void
+	 */
 	private function remove_site_service_results() {
 		global $wpdb;
+
 		$key = $this->get_service_model_key();
 
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->sitemeta} WHERE meta_key LIKE %s", "$key" ) );
 	}
 
+	/**
+	 * Removes service results from the options table.
+	 *
+	 * @return void
+	 */
 	private function remove_service_results() {
 		global $wpdb;
+
 		$key = $this->get_service_model_key();
 
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", "$key" ) );
 	}
 
+	/**
+	 * Removes SmartCrawl's upload directory recursively.
+	 */
 	private function remove_files() {
 		$file_system = $this->fs_direct();
 		$file_system->rmdir( \smartcrawl_uploads_dir(), true );
 	}
 
+	/**
+	 * Retrieves the WordPress filesystem object.
+	 *
+	 * @return \WP_Filesystem_Direct The WordPress filesystem object.
+	 */
 	private function fs_direct() {
 		if ( ! class_exists( '\WP_Filesystem_Direct', false ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';

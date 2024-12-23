@@ -1,3 +1,11 @@
+<?php
+/**
+ * Template: Manually notifying search engines about the sitemap.
+ *
+ * @package SmartCrawl
+ */
+
+?>
 <p class="sui-description">
 	<?php esc_html_e( "Search engines aren't being notified automatically. Click the button below to submit your sitemap to search engines.", 'smartcrawl-seo' ); ?>
 

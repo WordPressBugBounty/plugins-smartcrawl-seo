@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: SEO Health Settings.
+ *
+ * @package SmartCrawl
+ */
+
 $active_tab = empty( $active_tab ) ? '' : $active_tab;
 ?>
 <form id="wds-settings-form">

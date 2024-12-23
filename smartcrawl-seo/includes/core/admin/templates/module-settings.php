@@ -16,7 +16,7 @@ $this->render_view( 'before-page-container' );
 		array(),
 		'6.4.2',
 		'smartcrawl_admin_notices',
-		__( 'Please use our new hook `smartcrawl_admin_notices` in SmartCrawl.' )
+		__( 'Please use our new hook `smartcrawl_admin_notices` in SmartCrawl.', 'smartcrawl-seo' )
 	);
 
 	do_action( 'smartcrawl_admin_notices' );

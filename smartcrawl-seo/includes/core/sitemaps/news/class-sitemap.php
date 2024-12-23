@@ -1,19 +1,30 @@
 <?php
+/**
+ * Sitemap class for handling news sitemaps in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps\News;
 
 use SmartCrawl\Simple_Renderer;
 use SmartCrawl\Sitemaps;
 
+/**
+ * Class Sitemap
+ *
+ * Handles the creation and serving of news sitemaps.
+ */
 class Sitemap extends Sitemaps\Sitemap {
+
 	/**
+	 * Adds rewrite rules for news sitemaps.
+	 *
 	 * @return void
 	 */
 	public function add_rewrites() {
 		/**
 		 * WP.
-		 *
-		 * @var $wp \WP
 		 */
 		global $wp;
 
@@ -27,7 +38,9 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the news sitemap is enabled.
+	 *
+	 * @return bool True if the news sitemap is enabled, false otherwise.
 	 */
 	public function is_enabled() {
 		return parent::is_enabled()
@@ -35,13 +48,17 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the request can be handled.
+	 *
+	 * @return bool True if the request can be handled, false otherwise.
 	 */
 	public function can_handle_request() {
 		return (bool) get_query_var( 'wds_news_sitemap' );
 	}
 
 	/**
+	 * Handles fallback for the news sitemap.
+	 *
 	 * @return void
 	 */
 	public function do_fallback() {
@@ -49,13 +66,19 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Generates the cache type for the given sitemap type.
+	 *
+	 * @param string $type The sitemap type.
+	 *
+	 * @return string The cache type.
 	 */
 	private function cache_type( $type ) {
 		return "news-{$type}";
 	}
 
 	/**
+	 * Serves the news sitemap.
+	 *
 	 * @return void
 	 */
 	public function serve() {
@@ -92,7 +115,12 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return false|string
+	 * Builds a partial sitemap for the given type and page.
+	 *
+	 * @param string $type The sitemap type.
+	 * @param int    $page The sitemap page number.
+	 *
+	 * @return false|string The partial sitemap XML or false if no items.
 	 */
 	private function build_partial_sitemap( $type, $page ) {
 		$items = array();
@@ -116,6 +144,8 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
+	 * Post-processes the news sitemap.
+	 *
 	 * @return void
 	 */
 	private function post_process() {
@@ -123,7 +153,9 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Builds the index sitemap.
+	 *
+	 * @return string The index sitemap XML.
 	 */
 	private function build_index() {
 		$index_items = array();
@@ -141,21 +173,27 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the sitemap type query variable.
+	 *
+	 * @return string The sitemap type query variable.
 	 */
 	private function get_sitemap_type_var() {
 		return (string) get_query_var( 'wds_news_sitemap_type' );
 	}
 
 	/**
-	 * @return int
+	 * Retrieves the sitemap page query variable.
+	 *
+	 * @return int The sitemap page query variable.
 	 */
 	private function get_sitemap_page_var() {
 		return (int) get_query_var( 'wds_news_sitemap_page' );
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the request is for a gzip sitemap.
+	 *
+	 * @return bool True if the request is for a gzip sitemap, false otherwise.
 	 */
 	private function is_gzip_request() {
 		$query_var = get_query_var( 'wds_news_sitemap_gzip' );
@@ -164,7 +202,9 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return Query[]
+	 * Retrieves the queries for the news sitemap.
+	 *
+	 * @return Query[] The queries.
 	 */
 	private function get_queries() {
 		return array(
@@ -173,7 +213,11 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Builds the XML for the given items.
+	 *
+	 * @param array $items The items to include in the sitemap.
+	 *
+	 * @return string The sitemap XML.
 	 */
 	public function build_xml( $items ) {
 		return Simple_Renderer::load(
@@ -185,7 +229,11 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Builds the index XML for the given index items.
+	 *
+	 * @param array $index_items The index items to include in the sitemap.
+	 *
+	 * @return string The index sitemap XML.
 	 */
 	private function build_index_xml( $index_items ) {
 		return Simple_Renderer::load(

@@ -166,9 +166,9 @@ class Controller extends Controllers\Controller {
 	/**
 	 * Upgrades pre v3.10.0 advanced module db settings to latest structure.
 	 *
-	 * @param string $new_version New version.
-	 * @param string $old_version Old version.
-	 * @param bool   $override If true, overrides existing values. Otherwise, skip.
+	 * @param string      $new_version New version.
+	 * @param string|true $old_version Old version.
+	 * @param bool        $override If true, overrides existing values. Otherwise, skip.
 	 *
 	 * @return void
 	 */

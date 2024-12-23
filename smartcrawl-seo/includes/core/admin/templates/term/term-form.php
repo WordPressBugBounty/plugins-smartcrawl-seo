@@ -1,11 +1,17 @@
 <?php
+/**
+ * Template: Term Form.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
 use SmartCrawl\Admin\Settings\Admin_Settings;
 
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $tax_meta        = empty( $tax_meta ) ? array() : $tax_meta;
-$term            = empty( $term ) ? null : $term; // phpcs:ignore
+$term            = empty( $term ) ? null : $term;
 $global_noindex  = empty( $global_noindex ) ? false : $global_noindex;
 $global_nofollow = empty( $global_nofollow ) ? false : $global_nofollow;
 $title_key       = empty( $title_key ) ? '' : $title_key;
@@ -29,7 +35,7 @@ if ( ! $show_social_tab && ! $show_onpage_tabs ) {
 
 		<div class="sui-box">
 			<div class="sui-box-header">
-				<h2 class="sui-box-title"><?php echo \smartcrawl_get_plugin_title(); ?></h2>
+				<h2 class="sui-box-title"><?php echo esc_html( \smartcrawl_get_plugin_title() ); ?></h2>
 			</div>
 
 			<div>

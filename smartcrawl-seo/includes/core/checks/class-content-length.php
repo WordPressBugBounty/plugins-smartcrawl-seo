@@ -19,7 +19,7 @@ class Content_Length extends Check {
 	/**
 	 * Holds check state
 	 *
-	 * @var int
+	 * @var int|bool
 	 */
 	private $state;
 
@@ -31,7 +31,7 @@ class Content_Length extends Check {
 	private $word_count = null;
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @since 3.4.0
 	 *
@@ -50,7 +50,7 @@ class Content_Length extends Check {
 	}
 
 	/**
-	 * Get min value.
+	 * Retrieves min value.
 	 *
 	 * @return int
 	 */
@@ -59,7 +59,7 @@ class Content_Length extends Check {
 	}
 
 	/**
-	 * Apply check to the subject.
+	 * Applies check to the subject.
 	 *
 	 * @since 3.4.0
 	 *
@@ -85,7 +85,7 @@ class Content_Length extends Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @since 3.6.0
 	 *

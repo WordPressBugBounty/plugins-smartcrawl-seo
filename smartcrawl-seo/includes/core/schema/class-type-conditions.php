@@ -1,23 +1,46 @@
 <?php
+/**
+ * Type_Conditions class for handling type conditions in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema;
 
+/**
+ * Class Type_Conditions
+ *
+ * Handles type conditions for schema generation.
+ */
 class Type_Conditions {
 
+	/**
+	 * The conditions array.
+	 *
+	 * @var array
+	 */
 	private $conditions;
 
 	/**
+	 * The post object.
+	 *
 	 * @var \WP_Post
 	 */
 	private $post;
 
 	/**
+	 * Indicates if the current page is the front page.
+	 *
 	 * @var bool
 	 */
 	private $is_front_page;
 
 	/**
-	 * Type_Condition constructor.
+	 * Type_Conditions constructor.
+	 *
+	 * @param array    $rules         The conditions rules.
+	 * @param \WP_Post $post          The post object.
+	 * @param bool     $is_front_page Indicates if the current page is the front page.
 	 */
 	public function __construct( $rules, $post, $is_front_page ) {
 		$this->conditions    = $rules;
@@ -26,7 +49,9 @@ class Type_Conditions {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the conditions are met.
+	 *
+	 * @return bool True if conditions are met, false otherwise.
 	 */
 	public function met() {
 		$met = false;
@@ -81,7 +106,11 @@ class Type_Conditions {
 	}
 
 	/**
-	 * @return array|bool|int|string|string[]|\WP_Error|\WP_Term[]
+	 * Retrieves the left-hand side value for a condition.
+	 *
+	 * @param string $lhs The left-hand side identifier.
+	 *
+	 * @return array|bool|int|string|string[]|\WP_Error|\WP_Term[] The left-hand side value.
 	 */
 	private function lhs_value( $lhs ) {
 		switch ( $lhs ) {
@@ -133,7 +162,9 @@ class Type_Conditions {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the product class name.
+	 *
+	 * @return string The product class name.
 	 */
 	private function get_product_class_name() {
 		if ( ! function_exists( '\wc_get_product' ) ) {
@@ -149,7 +180,11 @@ class Type_Conditions {
 	}
 
 	/**
-	 * @return array|\WP_Error|\WP_Term[]
+	 * Retrieves the post terms for a given taxonomy.
+	 *
+	 * @param string $taxonomy The taxonomy name.
+	 *
+	 * @return array|\WP_Error|\WP_Term[] The post terms.
 	 */
 	private function get_post_terms( $taxonomy ) {
 		if ( ! $this->post ) {

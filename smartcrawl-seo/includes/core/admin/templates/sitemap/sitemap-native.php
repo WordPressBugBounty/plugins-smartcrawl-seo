@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap Native.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
@@ -20,7 +25,7 @@ $this->render_view(
 		'message' => sprintf(
 			/* translators: 1: Link to WordPress native sitemap.xml, 2,3: strong tag, 4: plugin title */
 			esc_html__( 'Your sitemap is available at %1$s. Note that you\'re using the default WordPress sitemap but can switch to %2$s%4$s%3$s\'s advanced sitemaps at any time.', 'smartcrawl-seo' ),
-			\smartcrawl_format_link( '%s', home_url( '/wp-sitemap.xml' ), '/wp-sitemap.xml', '_blank'),
+			\smartcrawl_format_link( '%s', home_url( '/wp-sitemap.xml' ), '/wp-sitemap.xml', '_blank' ),
 			'<strong>',
 			'</strong>',
 			\smartcrawl_get_plugin_title()

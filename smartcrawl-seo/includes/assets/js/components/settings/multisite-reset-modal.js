@@ -77,7 +77,7 @@ export default class MultisiteResetModal extends React.Component {
 		const description = this.isModalState('progress')
 			? __(
 					'Resetting your subsite settings, please keep this window open …',
-					'smartcrawl-seo'
+					'wds'
 			  )
 			: __(
 					'Are you sure you want to reset all the subsites?',

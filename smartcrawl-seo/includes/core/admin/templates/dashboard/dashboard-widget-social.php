@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Social Widget.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -103,7 +108,7 @@ if ( ! $social_enabled && $hide_disables ) {
 					</a>
 				<?php else : ?>
 					<div class="wds-right">
-						<small><?php esc_html_e( 'Verification tag added' ); ?></small>
+						<small><?php esc_html_e( 'Verification tag added', 'smartcrawl-seo' ); ?></small>
 					</div>
 				<?php endif; ?>
 			</div>

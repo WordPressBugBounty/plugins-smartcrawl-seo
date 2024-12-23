@@ -1,41 +1,71 @@
 <?php
+/**
+ * Woo\_Shop class for handling WooCommerce shop schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Integration\Woocommerce\Data;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Woo\_Shop
+ *
+ * Handles WooCommerce shop schema fragments.
+ */
 class Woo_Shop extends Fragment {
+
 	/**
-	 * @var
+	 * The URL of the shop.
+	 *
+	 * @var string
 	 */
 	private $url;
+
 	/**
-	 * @var
+	 * The posts related to the shop.
+	 *
+	 * @var array
 	 */
 	private $posts;
+
 	/**
-	 * @var
+	 * The title of the shop.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the shop.
+	 *
+	 * @var string
 	 */
 	private $description;
+
 	/**
+	 * WooCommerce data handler.
+	 *
 	 * @var Data
 	 */
 	private $data;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
 
 	/**
-	 * @param $url
-	 * @param $posts
-	 * @param $title
-	 * @param $description
+	 * Woo\_Shop constructor.
+	 *
+	 * @param string $url The URL of the shop.
+	 * @param array  $posts The posts related to the shop.
+	 * @param string $title The title of the shop.
+	 * @param string $description The description of the shop.
 	 */
 	public function __construct( $url, $posts, $title, $description ) {
 		$this->url         = $url;
@@ -47,14 +77,18 @@ class Woo_Shop extends Fragment {
 	}
 
 	/**
-	 * @return array
+	 * Retrieves the WooCommerce options.
+	 *
+	 * @return array The WooCommerce options.
 	 */
 	private function get_options() {
 		return $this->data->get_options();
 	}
 
 	/**
-	 * @return array|mixed|Archive
+	 * Retrieves raw schema data.
+	 *
+	 * @return array|mixed|Archive The raw schema data.
 	 */
 	protected function get_raw() {
 		$woo_enabled = (bool) \smartcrawl_get_array_value( $this->get_options(), 'active' );

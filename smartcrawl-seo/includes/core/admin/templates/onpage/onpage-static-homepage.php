@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Static Homepage.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

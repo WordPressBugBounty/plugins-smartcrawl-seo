@@ -128,7 +128,7 @@ const Recipe = {
 					'The number of calories in each serving produced with this recipe. If calories is defined, recipeYield must be defined with the number of servings.',
 					'smartcrawl-seo'
 				),
-				placeholder: __('E.g. 270 calories'),
+				placeholder: __('E.g. 270 calories', 'smartcrawl-seo'),
 			},
 		},
 	},

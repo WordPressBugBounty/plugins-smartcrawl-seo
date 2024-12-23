@@ -1,23 +1,40 @@
 <?php
+/**
+ * Media class for handling media schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Media
+ *
+ * Handles media schema fragments.
+ */
 class Media extends Property {
 	const OBJECT = 'image';
 	const URL    = 'image_url';
 
 	/**
-	 * @var
+	 * The ID of the media item.
+	 *
+	 * @var int
 	 */
 	private $media_id;
+
 	/**
-	 * @var
+	 * The field to retrieve the media data for.
+	 *
+	 * @var string
 	 */
 	private $field;
 
 	/**
-	 * @param $media_id
-	 * @param $field
+	 * Media constructor.
+	 *
+	 * @param int    $media_id The ID of the media item.
+	 * @param string $field The field to retrieve the media data for.
 	 */
 	public function __construct( $media_id, $field ) {
 		parent::__construct();
@@ -27,7 +44,9 @@ class Media extends Property {
 	}
 
 	/**
-	 * @return array|mixed|string
+	 * Retrieves the value of the media data.
+	 *
+	 * @return array|mixed|string The value of the media data.
 	 */
 	public function get_value() {
 		if ( self::URL === $this->field ) {

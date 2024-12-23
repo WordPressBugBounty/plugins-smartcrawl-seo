@@ -13,7 +13,7 @@ const RecipeInstructionsHowToStep = {
 		value: '',
 		description: __(
 			'The word or short phrase summarizing the step (for example, "Preheat").',
-			'smartcrawl-seo'
+			'wds'
 		),
 		disallowDeletion: true,
 	},

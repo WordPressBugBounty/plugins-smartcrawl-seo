@@ -1,9 +1,19 @@
 <?php
+/**
+ * Schema_Settings class for handling schema settings in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Schema_Settings
+ *
+ * Handles schema settings.
+ */
 class Schema_Settings extends Property {
 	const ID = 'schema_settings';
 
@@ -19,12 +29,16 @@ class Schema_Settings extends Property {
 	const ORGANIZATION_PHONE_NUMBER = 'organization_phone_number';
 
 	/**
-	 * @var
+	 * The setting key.
+	 *
+	 * @var string
 	 */
 	private $setting_key;
 
 	/**
-	 * @param $setting_key
+	 * Schema_Settings constructor.
+	 *
+	 * @param string $setting_key The setting key.
 	 */
 	public function __construct( $setting_key ) {
 		parent::__construct();
@@ -33,9 +47,11 @@ class Schema_Settings extends Property {
 	}
 
 	/**
+	 * Retrieves the value of the specified setting.
+	 *
 	 * TODO: maybe return default values when setting value not available? For example site name when organization name is not available
 	 *
-	 * @return array|mixed|string|null
+	 * @return array|mixed|string|null The value of the setting.
 	 */
 	public function get_value() {
 		$schema_option_value = $this->utils->get_schema_option( $this->setting_key );

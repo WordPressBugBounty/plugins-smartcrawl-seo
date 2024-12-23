@@ -48,7 +48,7 @@ export default class DataResetModal extends React.Component {
 						// translators: %s: plugin title
 						__(
 							"Are you sure you want to reset <strong>%s</strong>'s settings and data back to the factory defaults?",
-							'smartcrawl-seo'
+							'wds'
 						),
 						ConfigValues.get('plugin_title', 'admin')
 					),

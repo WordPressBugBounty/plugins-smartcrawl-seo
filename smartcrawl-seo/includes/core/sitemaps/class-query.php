@@ -1,29 +1,50 @@
 <?php
+/**
+ * Abstract class Query for handling sitemap queries in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps;
 
 use SmartCrawl\Work_Unit;
 
+/**
+ * Class Query
+ *
+ * Abstract class for handling sitemap queries.
+ */
 abstract class Query extends Work_Unit {
 
 	const NO_LIMIT = PHP_INT_MAX;
 
 	/**
-	 * @param string $type
-	 * @param int    $page_number
+	 * Retrieves the items for the given type and page number.
 	 *
-	 * @return General\Item[] Array of sitemap items
+	 * @param string $type The type of items to retrieve.
+	 * @param int    $page_number The page number for pagination.
+	 *
+	 * @return General\Item[] Array of sitemap items.
 	 */
 	abstract public function get_items( $type = '', $page_number = 0 );
 
+	/**
+	 * Retrieves the item count for the given type.
+	 *
+	 * @param string $type The type of items to count.
+	 *
+	 * @return int The item count.
+	 */
 	public function get_item_count( $type = '' ) {
 		return count( $this->get_items( $type ) );
 	}
 
 	/**
-	 * @param $type
+	 * Checks if the type can be handled.
 	 *
-	 * @return bool
+	 * @param string $type The type to check.
+	 *
+	 * @return bool True if the type can be handled, false otherwise.
 	 */
 	public function can_handle_type( $type ) {
 		$allowed = $this->get_supported_types();
@@ -32,14 +53,18 @@ abstract class Query extends Work_Unit {
 	}
 
 	/**
-	 * @return mixed
+	 * Retrieves the supported types.
+	 *
+	 * @return mixed The supported types.
 	 */
 	abstract public function get_supported_types();
 
 	/**
-	 * @param $page_number
+	 * Retrieves the limit for the given page number.
 	 *
-	 * @return int
+	 * @param int $page_number The page number for pagination.
+	 *
+	 * @return int The limit.
 	 */
 	protected function get_limit( $page_number ) {
 		if ( 0 === $page_number ) { // 0 means all items are requested.
@@ -51,9 +76,11 @@ abstract class Query extends Work_Unit {
 	}
 
 	/**
-	 * @param $page_number
+	 * Retrieves the offset for the given page number.
 	 *
-	 * @return float|int
+	 * @param int $page_number The page number for pagination.
+	 *
+	 * @return float|int The offset.
 	 */
 	protected function get_offset( $page_number ) {
 		return $page_number > 1
@@ -62,9 +89,11 @@ abstract class Query extends Work_Unit {
 	}
 
 	/**
-	 * @param $haystack string
+	 * Finds images in the given haystack.
 	 *
-	 * @return array
+	 * @param string $haystack The string to search for images.
+	 *
+	 * @return array The found images.
 	 */
 	protected function find_images( $haystack ) {
 		preg_match_all( '|(<img [^>]+?>)|', $haystack, $matches, PREG_SET_ORDER );
@@ -99,7 +128,9 @@ abstract class Query extends Work_Unit {
 	}
 
 	/**
-	 * @return Index_Item[]
+	 * Retrieves the index items.
+	 *
+	 * @return Index_Item[] The index items.
 	 */
 	public function get_index_items() {
 		$types       = $this->get_supported_types();
@@ -117,28 +148,34 @@ abstract class Query extends Work_Unit {
 	}
 
 	/**
-	 * @param $type
+	 * Retrieves the index items for the given type.
 	 *
-	 * @return array
+	 * @param string $type The type of items.
+	 *
+	 * @return array The index items.
 	 */
 	protected function get_index_items_for_type( $type ) {
 		return $this->make_index_items( $type );
 	}
 
 	/**
-	 * @param $type
-	 * @param $sitemap_num
+	 * Retrieves the index item URL for the given type and sitemap number.
 	 *
-	 * @return string|void
+	 * @param string $type The type of items.
+	 * @param int    $sitemap_num The sitemap number.
+	 *
+	 * @return string The index item URL.
 	 */
 	protected function get_index_item_url( $type, $sitemap_num ) {
 		return home_url( "/$type-sitemap$sitemap_num.xml" );
 	}
 
 	/**
-	 * @param $type string
+	 * Creates index items for the given type.
 	 *
-	 * @return array
+	 * @param string $type The type of items.
+	 *
+	 * @return array The index items.
 	 */
 	protected function make_index_items( $type ) {
 		$per_sitemap = Utils::get_items_per_sitemap();

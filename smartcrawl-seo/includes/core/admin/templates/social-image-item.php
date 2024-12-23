@@ -1,15 +1,24 @@
 <?php
+/**
+ * Template: SideNavs.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
-$id = empty( $id ) ? '' : $id; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$id = empty( $id ) ? '' : $id;
+
 if ( empty( $url ) ) {
 	$url = is_numeric( $id )
 		? \smartcrawl_get_array_value( wp_get_attachment_image_src( $id, 'thumbnail' ), 0 )
 		: $id;
 }
+
 $field_name = empty( $field_name ) ? '' : $field_name;
 ?>
+
 <div class="og-image item">
 	<img src="<?php echo esc_attr( $url ); ?>"/>
 	<input

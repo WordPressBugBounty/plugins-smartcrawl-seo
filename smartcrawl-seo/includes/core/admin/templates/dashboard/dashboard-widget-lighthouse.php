@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Lighhouse Widget.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -6,15 +11,17 @@ use SmartCrawl\Admin\Settings\Dashboard;
 use SmartCrawl\Lighthouse\Options;
 use SmartCrawl\Services\Service;
 
-$lighthouse_available = is_main_site();
-if ( ! $lighthouse_available ) {
+if ( ! is_main_site() ) {
 	return;
 }
 
 $lighthouse_start_time = empty( $lighthouse_start_time ) ? false : $lighthouse_start_time;
-$error                 = $lighthouse_report->has_errors() ? $lighthouse_report->get_error_message() : '';
+$lighthouse_error      = $lighthouse_report->has_errors() ? $lighthouse_report->get_error_message() : '';
+
 /**
- * @var $lighthouse_report \SmartCrawl\Lighthouse\Report|\WP_Error|false
+ * Lighthouse Report.
+ *
+ * @var \SmartCrawl\Lighthouse\Report|\WP_Error|false $lighthouse_report
  */
 $lighthouse_report = empty( $lighthouse_report ) || ! $lighthouse_report->has_data() || $lighthouse_report->has_errors()
 	? false
@@ -99,12 +106,12 @@ $tooltip_text      = $lighthouse_report && $lighthouse_report->is_cooling_down()
 			<p><?php esc_html_e( 'Ensure that your page is optimized for search engine results ranking. We recommend actioning as many checks as possible.', 'smartcrawl-seo' ); ?></p>
 
 			<?php $this->render_view( 'dashboard/dashboard-mini-lighthouse-report' ); ?>
-		<?php elseif ( $error ) : ?>
+		<?php elseif ( $lighthouse_error ) : ?>
 			<?php
 			$this->render_view(
 				'notice',
 				array(
-					'message' => $error,
+					'message' => $lighthouse_error,
 					'class'   => 'sui-notice-error',
 				)
 			);

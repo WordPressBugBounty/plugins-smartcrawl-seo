@@ -1,4 +1,9 @@
 <?php
+/**
+ * Class for checking if the page is crawlable.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Lighthouse\Checks;
 
@@ -9,10 +14,17 @@ use SmartCrawl\Settings;
 use SmartCrawl\Simple_Renderer;
 use SmartCrawl\Admin\Settings\Admin_Settings;
 
+/**
+ * Is_Crawlable class.
+ *
+ * Checks if the page is crawlable.
+ */
 class Is_Crawlable extends Check {
 	const ID = 'is-crawlable';
 
 	/**
+	 * Prepares the check by setting success and failure titles.
+	 *
 	 * @return void
 	 */
 	public function prepare() {
@@ -21,6 +33,8 @@ class Is_Crawlable extends Check {
 	}
 
 	/**
+	 * Gets the ID of the check.
+	 *
 	 * @return string
 	 */
 	public function get_id() {

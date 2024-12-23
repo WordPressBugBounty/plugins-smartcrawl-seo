@@ -79,36 +79,37 @@ class Analysis extends Controller {
 	 *
 	 * @param object $query Query to augment.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function apply_analysis_post_list_filter( $query ) {
 		$data = $_GET; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if (
-			! isset( $data['wds_analysis_threshold'] )
-			&&
-			! isset( $data['wds_readability_threshold'] )
-		) {
-			return false;
+		if ( ! isset( $data['wds_analysis_threshold'] ) && ! isset( $data['wds_readability_threshold'] ) ) {
+			return;
 		}
+
 		if ( ! is_admin() ) {
-			return false;
+			return;
 		}
+
 		if ( ! function_exists( 'get_current_screen' ) ) {
-			return false;
+			return;
 		}
 
 		$screen = get_current_screen();
+
 		if ( ! is_object( $screen ) || empty( $screen->base ) ) {
-			return false;
+			return;
 		}
+
 		if ( 'edit' !== $screen->base ) {
-			return false;
+			return;
 		}
 
 		$pt = ! empty( $screen->post_type ) ? $screen->post_type : false;
+
 		if ( $query->get( 'post_type' ) !== $pt ) {
-			return false;
+			return;
 		}
 
 		$meta_queries = $query->get( 'meta_query', array() );
@@ -118,8 +119,9 @@ class Analysis extends Controller {
 			$raw = ! empty( $data['wds_analysis_threshold'] ) && is_numeric( $data['wds_analysis_threshold'] )
 				? (int) $data['wds_analysis_threshold'] . ''
 				: '69';
+
 			if ( empty( $raw ) ) {
-				return false;
+				return;
 			}
 
 			$rx = '';
@@ -150,8 +152,6 @@ class Analysis extends Controller {
 		if ( ! empty( $meta_queries ) ) {
 			$query->set( 'meta_query', $meta_queries );
 		}
-
-		return true;
 	}
 
 	/**
@@ -159,17 +159,15 @@ class Analysis extends Controller {
 	 *
 	 * @param string $hook Page hook.
 	 *
-	 * @return bool Status
+	 * @return void
 	 */
 	public function inject_script_dependencies( $hook ) {
 		if ( 'edit.php' !== $hook ) {
-			return false;
+			return;
 		}
 
 		wp_enqueue_script( Assets::WP_POST_LIST_TABLE_JS );
 		wp_enqueue_style( Assets::WP_POST_LIST_TABLE_CSS );
-
-		return true;
 	}
 
 	/**
@@ -226,11 +224,11 @@ class Analysis extends Controller {
 	 * @param string $cid     Column ID.
 	 * @param int    $post_id Post ID.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function add_analysis_column_data( $cid, $post_id ) {
 		if ( ! in_array( $cid, array( 'seo', 'readability' ), true ) ) {
-			return false;
+			return;
 		}
 
 		$result = $this->get_post_analysis_result_markup( $post_id );
@@ -242,8 +240,6 @@ class Analysis extends Controller {
 		if ( 'readability' === $cid ) {
 			echo wp_kses_post( $result['readability'] );
 		}
-
-		return true;
 	}
 
 	/**
@@ -322,15 +318,13 @@ class Analysis extends Controller {
 	 */
 	public function json_set_ignore_check() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
+
 		if ( empty( $data['check_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		Checks::add_ignored_check( (int) $data['post_id'], sanitize_text_field( $data['check_id'] ) );
@@ -348,15 +342,13 @@ class Analysis extends Controller {
 	 */
 	public function json_unset_ignore_check() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
+
 		if ( empty( $data['check_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		Checks::remove_ignored_check( (int) $data['post_id'], sanitize_text_field( $data['check_id'] ) );
@@ -376,10 +368,9 @@ class Analysis extends Controller {
 	 */
 	public function add_post_keyword() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) || empty( $data['keyword'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		// Get required data.
@@ -389,11 +380,10 @@ class Analysis extends Controller {
 		// Permission check.
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		$smartcrawl_post = Post_Cache::get()->get_post( $post_id );
+
 		if ( empty( $smartcrawl_post ) ) {
 			wp_send_json_error();
 		} else {
@@ -412,10 +402,9 @@ class Analysis extends Controller {
 	 */
 	public function remove_post_keyword() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) || empty( $data['keyword'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		// Get required data.
@@ -425,11 +414,10 @@ class Analysis extends Controller {
 		// Permission check.
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		$smartcrawl_post = Post_Cache::get()->get_post( $post_id );
+
 		if ( empty( $smartcrawl_post ) ) {
 			wp_send_json_error();
 		} else {
@@ -446,10 +434,9 @@ class Analysis extends Controller {
 	 */
 	public function retrieve_post_analysis() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		$post_id = (int) \smartcrawl_get_array_value( $data, 'post_id' );
@@ -734,10 +721,9 @@ class Analysis extends Controller {
 	 */
 	public function retrieve_post_analysis_data() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		$this->maybe_analyze_post( (int) $data['post_id'] );
@@ -762,10 +748,9 @@ class Analysis extends Controller {
 	 */
 	public function retrieve_post_analysis_markup() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		$this->maybe_analyze_post( (int) $data['post_id'] );
@@ -781,14 +766,14 @@ class Analysis extends Controller {
 	 */
 	public function retrieve_post_analysis_recheck() {
 		$data = $this->get_request_data();
+
 		if ( empty( $data['post_id'] ) || ! is_numeric( $data['post_id'] ) ) {
 			wp_send_json_error();
-
-			return;
 		}
 
 		$this->analyze_post( (int) $data['post_id'] );
 		$result = $this->get_post_analysis_result_markup( (int) $data['post_id'] );
+
 		wp_send_json_success( $result );
 	}
 
@@ -798,6 +783,6 @@ class Analysis extends Controller {
 	 * @return array|mixed
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-metabox-nonce' ) ? stripslashes_deep( $_POST ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-metabox-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 }

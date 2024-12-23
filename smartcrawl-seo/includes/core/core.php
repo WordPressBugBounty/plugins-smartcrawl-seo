@@ -296,7 +296,7 @@ function smartcrawl_extract_shortcode_contents( $matches ) {
 		return substr( $matches[0], 1, - 1 );
 	}
 
-	$omitted = apply_filters( 'wds-omitted-shortcodes', array() ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	$omitted = apply_filters( 'wds-omitted-shortcodes', array() );
 
 	if (
 		! empty( $matches[5] )
@@ -375,7 +375,7 @@ function smartcrawl_get_term_meta( $term, $taxonomy, $meta_key ) {
 	$tax_meta   = get_option( 'wds_taxonomy_meta' );
 	$meta_value = smartcrawl_get_array_value( $tax_meta, array( $taxonomy, $term_id, $meta_key ) );
 
-	return apply_filters( "wds-taxonomy-meta-$meta_key", $meta_value, $term_id, $taxonomy ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	return apply_filters( "wds-taxonomy-meta-$meta_key", $meta_value, $term_id, $taxonomy );
 }
 
 /**
@@ -386,8 +386,6 @@ function smartcrawl_get_term_meta( $term, $taxonomy, $meta_key ) {
  * @return string
  */
 function smartcrawl_blog_template_settings( $and_clause ) {
-	// phpcs:ignore
-	// $and .= " AND `option_name` != 'wds_sitemaps_options'"; // Removed plural
 	$and_clause .= " AND `option_name` != 'wds_sitemap_options'"; // Added singular.
 
 	return $and_clause;
@@ -407,7 +405,7 @@ function user_can_see_seo_metabox() {
 	$capability         = ( defined( 'SMARTCRAWL_SEO_METABOX_ROLE' ) && SMARTCRAWL_SEO_METABOX_ROLE )
 		? SMARTCRAWL_SEO_METABOX_ROLE
 		: ( ! empty( $smartcrawl_options['seo_metabox_permission_level'] ) ? $smartcrawl_options['seo_metabox_permission_level'] : false );
-	$capability         = apply_filters( 'wds-capabilities-seo_metabox', $capability ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	$capability         = apply_filters( 'wds-capabilities-seo_metabox', $capability );
 	$able               = false;
 
 	if ( is_array( $capability ) ) {
@@ -435,7 +433,7 @@ function user_can_see_urlmetrics_metabox() {
 	$capability         = ( defined( 'SMARTCRAWL_URLMETRICS_METABOX_ROLE' ) && SMARTCRAWL_URLMETRICS_METABOX_ROLE )
 		? SMARTCRAWL_URLMETRICS_METABOX_ROLE
 		: ( ! empty( $smartcrawl_options['urlmetrics_metabox_permission_level'] ) ? $smartcrawl_options['urlmetrics_metabox_permission_level'] : false );
-	$capability         = apply_filters( 'wds-capabilities-urlmetrics_metabox', $capability ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	$capability         = apply_filters( 'wds-capabilities-urlmetrics_metabox', $capability );
 	$able               = false;
 
 	if ( is_array( $capability ) ) {
@@ -463,7 +461,7 @@ function user_can_see_seo_metabox_301_redirect() {
 	$capability         = ( defined( 'SMARTCRAWL_SEO_METABOX_301_ROLE' ) && SMARTCRAWL_SEO_METABOX_301_ROLE )
 		? SMARTCRAWL_SEO_METABOX_301_ROLE
 		: ( ! empty( $smartcrawl_options['seo_metabox_301_permission_level'] ) ? $smartcrawl_options['seo_metabox_301_permission_level'] : false );
-	$capability         = apply_filters( 'wds-capabilities-seo_metabox_301_redirect', $capability ); // phpcs:ignore
+	$capability         = apply_filters( 'wds-capabilities-seo_metabox_301_redirect', $capability );
 	$able               = false;
 
 	if ( is_array( $capability ) ) {
@@ -675,7 +673,7 @@ function smartcrawl_autolinks_construct_attributes( $args = array() ) {
 		array( $attrs_str ),
 		'6.4.2',
 		'smartcrawl_autolinks_attributes',
-		__( 'Please use our new filter `smartcrawl_autolinks_attributes` in SmartCrawl.' )
+		__( 'Please use our new filter `smartcrawl_autolinks_attributes` in SmartCrawl.', 'smartcrawl-seo' )
 	);
 
 	return apply_filters( 'smartcrawl_autolinks_attributes', $attrs_str );
@@ -684,9 +682,9 @@ function smartcrawl_autolinks_construct_attributes( $args = array() ) {
 /**
  * Get a value from an array. If nothing is found for the provided keys, returns null by default.
  *
- * @param array        $haystack The array to search (haystack).
- * @param array|string $key   The key to use for the search.
- * @param array|string $default_value   The default value.
+ * @param array            $haystack The array to search (haystack).
+ * @param array|string|int $key   The key to use for the search.
+ * @param mixed            $default_value   The default value.
  *
  * @return mixed|null The array value found or null if nothing found.
  */
@@ -861,7 +859,7 @@ function smartcrawl_get_archive_post_type_labels() {
  * @return string Sitemap URL
  */
 function smartcrawl_get_sitemap_url() {
-	return apply_filters( 'wds-sitemaps-sitemap_url', home_url( 'sitemap.xml' ) ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+	return apply_filters( 'wds-sitemaps-sitemap_url', home_url( 'sitemap.xml' ) );
 }
 
 /**
@@ -955,7 +953,7 @@ function smartcrawl_file_put_contents( $file, $contents, $flags = 0 ) {
 
 	return ! is_null( $pre )
 		? $pre
-		: (bool) file_put_contents( $file, $contents, $flags ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		: (bool) file_put_contents( $file, $contents, $flags ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
 }
 
 /**

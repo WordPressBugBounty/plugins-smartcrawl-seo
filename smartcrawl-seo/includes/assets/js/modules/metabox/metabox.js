@@ -179,7 +179,7 @@ export default class Metabox extends React.Component {
 				label: (
 					<React.Fragment>
 						{__('SEO', 'smartcrawl-seo')}
-						{this.renderIssueCount('seo')}
+						{this.renderIssueCount('seo-textdomain')}
 					</React.Fragment>
 				),
 				component: (

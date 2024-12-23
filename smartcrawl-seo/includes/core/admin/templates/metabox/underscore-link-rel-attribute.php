@@ -1,3 +1,12 @@
+<?php
+/**
+ * Template: Anchor rel attribute template for underscore.
+ *
+ * @package Smartcrwal
+ */
+
+?>
+
 <div class="wp-link-text-field wp-link-rel-attribute">
 	<label>
 		<span><?php esc_html_e( 'Rel Attributes', 'smartcrawl-seo' ); ?></span>

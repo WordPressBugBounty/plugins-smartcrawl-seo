@@ -63,7 +63,7 @@ class MaxmindConfigActivation extends React.Component {
 							errMsg === 'Unauthorized'
 								? __(
 										'Invalid license key. Please check that you have entered the correct key and try again.',
-										'smartcrawl-seo'
+										'wds'
 								  )
 								: errMsg,
 					});
@@ -85,7 +85,7 @@ class MaxmindConfigActivation extends React.Component {
 					message={createInterpolateElement(
 						__(
 							'<a>Unlock with SmartCrawl Pro</a> to unlock the Location-Based Redirects feature.',
-							'smartcrawl-seo'
+							'wds'
 						),
 						{
 							a: (
@@ -110,7 +110,7 @@ class MaxmindConfigActivation extends React.Component {
 					message={createInterpolateElement(
 						__(
 							'Location-based redirection uses Maxmind’s GeoLite2 Database. <a1>Create a free account</a1> and get the <a2>license key</a2> to download the latest Geo IP Database.',
-							'smartcrawl-seo'
+							'wds'
 						),
 						{
 							a1: (

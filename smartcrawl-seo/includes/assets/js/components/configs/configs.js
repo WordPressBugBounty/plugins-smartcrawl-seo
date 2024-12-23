@@ -173,10 +173,7 @@ export default class Configs extends React.Component {
 					})
 					.catch(() => {
 						this.showErrorNotice(
-							__(
-								'There was an error deleting the config.',
-								'smartcrawl-seo'
-							)
+							__('There was an error deleting the config.', 'smartcrawl-seo')
 						);
 					})
 					.finally(() => {
@@ -258,10 +255,7 @@ export default class Configs extends React.Component {
 					})
 					.catch(() => {
 						this.showErrorNotice(
-							__(
-								'There was an error updating the config.',
-								'smartcrawl-seo'
-							)
+							__('There was an error updating the config.', 'smartcrawl-seo')
 						);
 					})
 					.finally(() => {
@@ -320,10 +314,7 @@ export default class Configs extends React.Component {
 					})
 					.catch(() => {
 						this.showErrorNotice(
-							__(
-								'There was an error creating the config.',
-								'smartcrawl-seo'
-							)
+							__('There was an error creating the config.', 'smartcrawl-seo')
 						);
 					})
 					.finally(() => {

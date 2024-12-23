@@ -1,5 +1,12 @@
 <?php
+/**
+ * Template: Reporting Day of Week Select.
+ *
+ * @package Smartcrwal
+ */
+
 $component = empty( $component ) ? '' : $component;
+
 if ( ! $component ) {
 	return;
 }
@@ -41,7 +48,7 @@ $time_label = empty( $timezone ) ? '' : sprintf( '%s (%s)', wp_date( 'h:i A' ), 
 	name="<?php echo esc_attr( $select_name ); ?>"
 >
 	<?php foreach ( $dow_range as $dow ) : ?>
-		<option value="<?php echo esc_attr( $dow ); ?>"
+		<option value="<?php echo esc_attr( (string) $dow ); ?>"
 			<?php selected( $dow, $dow_value ); ?>>
 			<?php
 			$day_number = gmdate( 'w', $monday + ( $dow * DAY_IN_SECONDS ) );

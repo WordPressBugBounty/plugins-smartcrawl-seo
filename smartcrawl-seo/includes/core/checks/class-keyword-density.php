@@ -18,7 +18,7 @@ class Keyword_Density extends Check {
 	/**
 	 * Holds check state
 	 *
-	 * @var int
+	 * @var bool
 	 */
 	private $state;
 
@@ -30,7 +30,7 @@ class Keyword_Density extends Check {
 	private $density = null;
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @return string
 	 */
@@ -73,7 +73,7 @@ class Keyword_Density extends Check {
 	}
 
 	/**
-	 * Get minimum recommended density.
+	 * Retrieves minimum recommended density.
 	 *
 	 * @return int
 	 */
@@ -82,7 +82,7 @@ class Keyword_Density extends Check {
 	}
 
 	/**
-	 * Get maximum recommended density.
+	 * Retrieves maximum recommended density.
 	 *
 	 * @return int
 	 */
@@ -91,7 +91,7 @@ class Keyword_Density extends Check {
 	}
 
 	/**
-	 * Apply check to the subject.
+	 * Applies check to the subject.
 	 *
 	 * @return bool
 	 */
@@ -131,7 +131,7 @@ class Keyword_Density extends Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @return array
 	 */

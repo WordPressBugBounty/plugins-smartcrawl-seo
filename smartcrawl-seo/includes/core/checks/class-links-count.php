@@ -18,7 +18,7 @@ class Links_Count extends Check {
 	/**
 	 * Holds check state
 	 *
-	 * @var int
+	 * @var bool
 	 */
 	private $state;
 
@@ -37,7 +37,7 @@ class Links_Count extends Check {
 	private $internal_link_count;
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @since 3.4.0
 	 *
@@ -79,7 +79,7 @@ class Links_Count extends Check {
 	}
 
 	/**
-	 * Apply check to the subject.
+	 * Applies check to the subject.
 	 *
 	 * @since 3.4.0
 	 *
@@ -106,7 +106,7 @@ class Links_Count extends Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @since 3.6.0
 	 *

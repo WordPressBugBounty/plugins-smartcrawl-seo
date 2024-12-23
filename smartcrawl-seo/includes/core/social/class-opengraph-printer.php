@@ -46,12 +46,12 @@ class OpenGraph_Printer {
 	 */
 	private function add_hooks() {
 		// Do not double-bind.
-		if ( apply_filters( 'wds-opengraph-is_running', $this->is_running ) ) { // phpcs:ignore
+		if ( apply_filters( 'wds-opengraph-is_running', $this->is_running ) ) {
 			return;
 		}
 
 		add_action( 'wp_head', array( $this, 'dispatch_og_tags_injection' ), 50 );
-		add_action( 'wds_head-after_output', array( $this, 'dispatch_og_tags_injection' ) );
+		add_action( 'smartcrawl_head_after_output', array( $this, 'dispatch_og_tags_injection' ) );
 
 		$this->is_running = true;
 	}

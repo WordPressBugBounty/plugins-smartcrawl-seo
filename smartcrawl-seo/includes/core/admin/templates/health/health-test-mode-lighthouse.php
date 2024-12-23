@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: SEO Health Lighthouse mode test.
+ *
+ * @package SmartCrawl
+ */
+
 namespace SmartCrawl;
 
 use SmartCrawl\Lighthouse\Options;

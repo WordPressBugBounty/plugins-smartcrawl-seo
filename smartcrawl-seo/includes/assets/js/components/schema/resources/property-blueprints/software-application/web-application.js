@@ -10,7 +10,7 @@ const WebApplication = merge({}, SoftwareApplication, {
 		label: __('Browser Requirements', 'smartcrawl-seo'),
 		description: __(
 			'Specifies browser requirements in human-readable text.',
-			'smartcrawl-seo'
+			'wds'
 		),
 		type: 'Text',
 		source: 'custom_text',

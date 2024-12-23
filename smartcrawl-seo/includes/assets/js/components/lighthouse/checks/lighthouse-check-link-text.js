@@ -144,7 +144,9 @@ export default class LighthouseCheckLinkText extends React.Component {
 					</p>
 				</div>
 
-				<LighthouseToggle text={__('Read More - Best practices')}>
+				<LighthouseToggle
+					text={__('Read More - Best practices', 'smartcrawl-seo')}
+				>
 					<strong>
 						{__('Link text best practices', 'smartcrawl-seo')}
 					</strong>
@@ -178,7 +180,7 @@ export default class LighthouseCheckLinkText extends React.Component {
 					<div className="wds-lh-highlight-container">
 						<p>
 							<strong className="wds-lh-red-word">
-								{__('Don’t. ')}
+								{__('Don’t. ', 'smartcrawl-seo')}
 							</strong>
 							{__(
 								'"Click here" doesn\'t convey where the hyperlink will take users.',
@@ -212,10 +214,11 @@ export default class LighthouseCheckLinkText extends React.Component {
 
 						<p>
 							<strong className="wds-lh-green-word">
-								{__('Do. ')}
+								{__('Do. ', 'smartcrawl-seo')}
 							</strong>
 							{__(
-								'"Basketball videos" clearly conveys that the hyperlink will take users to a page of videos.'
+								'"Basketball videos" clearly conveys that the hyperlink will take users to a page of videos.',
+								'smartcrawl-seo'
 							)}
 						</p>
 						<div className="wds-lh-highlight wds-lh-highlight-success">
@@ -324,10 +327,7 @@ export default class LighthouseCheckLinkText extends React.Component {
 			) +
 			'\n\n' +
 			LighthouseUtil.getFlattenedDetails(
-				[
-					__('Link Text', 'smartcrawl-seo'),
-					__('Link Destination', 'smartcrawl-seo'),
-				],
+				[__('Link Text', 'smartcrawl-seo'), __('Link Destination', 'smartcrawl-seo')],
 				this.getRows()
 			) +
 			__('Overview:', 'smartcrawl-seo') +

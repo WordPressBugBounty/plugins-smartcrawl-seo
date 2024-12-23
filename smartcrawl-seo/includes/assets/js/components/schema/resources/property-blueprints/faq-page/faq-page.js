@@ -31,7 +31,8 @@ const FAQPage = {
 		type: 'Comment',
 		loop: 'post-comments',
 		loopDescription: __(
-			'The following block will be repeated for each post comment'
+			'The following block will be repeated for each post comment',
+			'smartcrawl-seo'
 		),
 		properties: FAQComment,
 		optional: true,

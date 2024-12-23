@@ -14,20 +14,20 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 	};
 
 	levelDescription(level) {
-		const veryEasy = __('Very easy to read', 'wds'),
-			easy = __('Easy to read', 'wds'),
-			fairlyEasy = __('Fairly easy to read', 'wds'),
-			plain = __('Standard', 'wds'),
-			fairlyDifficult = __('Fairly difficult to read', 'wds'),
-			difficult = __('Difficult to read', 'wds'),
-			confusing = __('Very difficult to read', 'wds');
+		const veryEasy = __('Very easy to read', 'smartcrawl-seo'),
+			easy = __('Easy to read', 'smartcrawl-seo'),
+			fairlyEasy = __('Fairly easy to read', 'smartcrawl-seo'),
+			plain = __('Standard', 'smartcrawl-seo'),
+			fairlyDifficult = __('Fairly difficult to read', 'smartcrawl-seo'),
+			difficult = __('Difficult to read', 'smartcrawl-seo'),
+			confusing = __('Very difficult to read', 'smartcrawl-seo');
 
 		const map = {};
 
 		map[veryEasy] = veryEasy.toLowerCase();
 		map[easy] = easy.toLowerCase();
 		map[fairlyEasy] = fairlyEasy.toLowerCase();
-		map[plain] = __('in plain language', 'wds');
+		map[plain] = __('in plain language', 'smartcrawl-seo');
 		map[fairlyDifficult] = fairlyDifficult.toLowerCase();
 		map[difficult] = difficult.toLowerCase();
 		map[confusing] = confusing.toLowerCase();
@@ -36,7 +36,10 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 			? createInterpolateElement(
 					sprintf(
 						/* translators: %s: Level description */
-						__('Your content is <strong>%s</strong>.', 'wds'),
+						__(
+							'Your content is <strong>%s</strong>.',
+							'smartcrawl-seo'
+						),
 						map[level]
 					),
 					{ strong: <strong /> }

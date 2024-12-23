@@ -1,41 +1,71 @@
 <?php
+/**
+ * Date_Archive class for handling date archive schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Date_Archive
+ *
+ * Handles date archive schema fragments.
+ */
 class Date_Archive extends Fragment {
+
 	/**
-	 * @var
+	 * The year of the archive.
+	 *
+	 * @var int
 	 */
 	private $year;
+
 	/**
-	 * @var
+	 * The month of the archive.
+	 *
+	 * @var int
 	 */
 	private $month;
+
 	/**
-	 * @var
+	 * The posts in the archive.
+	 *
+	 * @var array
 	 */
 	private $posts;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
-	 * @var
+	 * The title of the archive.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the archive.
+	 *
+	 * @var string
 	 */
 	private $description;
 
 	/**
-	 * @param $year
-	 * @param $month
-	 * @param $posts
-	 * @param $title
-	 * @param $description
+	 * Date_Archive constructor.
+	 *
+	 * @param int    $year The year of the archive.
+	 * @param int    $month The month of the archive.
+	 * @param array  $posts The posts in the archive.
+	 * @param string $title The title of the archive.
+	 * @param string $description The description of the archive.
 	 */
 	public function __construct( $year, $month, $posts, $title, $description ) {
 		$this->year        = $year;
@@ -47,7 +77,9 @@ class Date_Archive extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed|Archive
+	 * Retrieves raw schema data for the date archive.
+	 *
+	 * @return array|mixed|Archive The raw schema data.
 	 */
 	protected function get_raw() {
 		$enabled          = (bool) $this->utils->get_schema_option( 'schema_enable_date_archives' );

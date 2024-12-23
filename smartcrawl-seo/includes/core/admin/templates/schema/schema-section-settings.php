@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Schema Settings section.
+ *
+ * @package Smartcrwal
+ */
+
 $option_name    = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $options        = empty( $options ) ? array() : $options;
 $social_options = empty( $social_options ) ? array() : $social_options;

@@ -1,8 +1,8 @@
 <?php
 /**
- * @var string $for_type
+ * Template: Onpage Twitter Settings.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 $section_enabled_field_id = 'twitter-active-' . $for_type;

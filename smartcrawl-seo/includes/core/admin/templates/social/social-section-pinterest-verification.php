@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Social Pinterest Verification section.
+ *
+ * @package Smartcrwal
+ */
+
 $options = empty( $options ) ? $_view['options'] : $options;
 
 if ( isset( $options['pinterest-verification-status'] ) ) {

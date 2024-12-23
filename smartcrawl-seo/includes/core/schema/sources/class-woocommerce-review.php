@@ -1,22 +1,39 @@
 <?php
+/**
+ * Woocommerce_Review class for handling WooCommerce review properties in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Woocommerce_Review
+ *
+ * Handles WooCommerce review properties.
+ */
 class Woocommerce_Review extends Property {
 	const ID = 'woocommerce_review';
 
 	/**
-	 * @var
+	 * The comment object.
+	 *
+	 * @var \WP_Comment
 	 */
 	private $comment;
+
 	/**
-	 * @var
+	 * The field to retrieve.
+	 *
+	 * @var string
 	 */
 	private $field;
 
 	/**
-	 * @param $comment
-	 * @param $field
+	 * Constructor.
+	 *
+	 * @param \WP_Comment $comment The comment object.
+	 * @param string      $field   The field to retrieve.
 	 */
 	public function __construct( $comment, $field ) {
 		parent::__construct();
@@ -26,7 +43,9 @@ class Woocommerce_Review extends Property {
 	}
 
 	/**
-	 * @return mixed|string
+	 * Retrieves the value of the specified field.
+	 *
+	 * @return mixed|string The value of the field or an empty string if the field is not found.
 	 */
 	public function get_value() {
 		if ( empty( $this->comment ) ) {

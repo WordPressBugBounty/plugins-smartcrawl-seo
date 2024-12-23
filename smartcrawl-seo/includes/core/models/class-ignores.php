@@ -1,15 +1,45 @@
 <?php
+/**
+ * Ignores class for managing ignored items in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Models;
 
+/**
+ * Ignores class.
+ *
+ * Manages the list of ignored items in SmartCrawl.
+ */
 class Ignores extends Model {
 
+	/**
+	 * Storage key for ignores.
+	 *
+	 * @var string
+	 */
 	const IGNORES_SEO_STORAGE = 'wds-ignores';
 
+	/**
+	 * List of ignored items.
+	 *
+	 * @var array
+	 */
 	private $ignores = array();
 
+	/**
+	 * Storage key for ignores.
+	 *
+	 * @var string
+	 */
 	private $ignores_storage;
 
+	/**
+	 * Constructor.
+	 *
+	 * Initializes the ignores list.
+	 */
 	public function __construct() {
 		$this->ignores_storage = self::IGNORES_SEO_STORAGE;
 
@@ -35,6 +65,11 @@ class Ignores extends Model {
 		return false;
 	}
 
+	/**
+	 * Returns the type of the model.
+	 *
+	 * @return string
+	 */
 	public function get_type() {
 		return 'ignores';
 	}
@@ -68,6 +103,13 @@ class Ignores extends Model {
 		return $this->set_ignores( $this->ignores );
 	}
 
+	/**
+	 * Adds ignored item to ignores list.
+	 *
+	 * @param array $keys List of keys to ignore.
+	 *
+	 * @return bool Status
+	 */
 	public function set_ignores( $keys ) {
 		$this->ignores = array_filter( array_unique( $keys ) );
 
@@ -125,6 +167,13 @@ class Ignores extends Model {
 		return (bool) in_array( $key, $this->get_all(), true );
 	}
 
+	/**
+	 * Checks if an issue is not to be ignored.
+	 *
+	 * @param string $key Key.
+	 *
+	 * @return bool
+	 */
 	public function is_not_ignored( $key ) {
 		return ! $this->is_ignored( $key );
 	}
@@ -138,6 +187,11 @@ class Ignores extends Model {
 		return array_unique( $this->ignores );
 	}
 
+	/**
+	 * Gets the storage key for ignores.
+	 *
+	 * @return string
+	 */
 	private function get_ignores_storage() {
 		return $this->ignores_storage;
 	}

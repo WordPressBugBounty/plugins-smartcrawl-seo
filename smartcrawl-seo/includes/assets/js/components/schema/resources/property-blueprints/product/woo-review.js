@@ -43,7 +43,7 @@ const WooReview = merge({}, ProductReview, {
 								values: {
 									comment_author_name: __(
 										'Author Name',
-										'smartcrawl-seo'
+										'wds'
 									),
 								},
 							},

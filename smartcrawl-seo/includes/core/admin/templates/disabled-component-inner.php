@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Disabled Component Inner.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

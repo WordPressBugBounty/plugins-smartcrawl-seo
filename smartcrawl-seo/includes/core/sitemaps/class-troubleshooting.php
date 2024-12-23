@@ -1,4 +1,9 @@
 <?php
+/**
+ * Troubleshooting class for handling sitemap-related troubleshooting in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps;
 
@@ -9,6 +14,11 @@ use SmartCrawl\Services\Service;
 use SmartCrawl\Controllers;
 use SmartCrawl\Admin\Settings\Admin_Settings;
 
+/**
+ * Class Troubleshooting
+ *
+ * Handles various troubleshooting tasks for sitemaps.
+ */
 class Troubleshooting extends Controllers\Controller {
 
 	use Singleton;
@@ -26,16 +36,22 @@ class Troubleshooting extends Controllers\Controller {
 	const ERRORS_FOUND_OPTION_ID       = 'wds_sitemap_errors_found';
 
 	/**
-	 * @var
+	 * Sub sitemap URL.
+	 *
+	 * @var string
 	 */
 	private $sub_sitemap_url;
 
 	/**
-	 * @var \WP_Error
+	 * WP Error object.
+	 *
+	 * @var \WP_Error|null
 	 */
 	private $wp_error = null;
 
 	/**
+	 * Determines if the troubleshooting should run.
+	 *
 	 * @return bool
 	 */
 	public function should_run() {
@@ -44,6 +60,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Initializes the troubleshooting process.
+	 *
 	 * @return void
 	 */
 	protected function init() {
@@ -73,7 +91,7 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * Terminates submodules.
+	 * Stops the troubleshooting process.
 	 *
 	 * @return bool
 	 */
@@ -84,7 +102,7 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * Removes action hooks when the controller stops running.
+	 * Terminates the troubleshooting process.
 	 *
 	 * @return void
 	 */
@@ -116,6 +134,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Shows a notice related to the troubleshooting process.
+	 *
 	 * @return void
 	 */
 	public function show_notice() {
@@ -145,6 +165,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Schedules a cron job for sitemap validity check.
+	 *
 	 * @return void
 	 */
 	public function schedule_cron() {
@@ -154,6 +176,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Executes the sitemap validity check cron job.
+	 *
 	 * @return void
 	 */
 	public function do_sitemap_validity_check_cron() {
@@ -167,6 +191,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Troubleshoots the sitemap.
+	 *
 	 * @return void
 	 */
 	public function troubleshoot_sitemap() {
@@ -200,7 +226,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @return bool
+	 * Rechecks the sitemaps.
+	 *
+	 * @return bool|null
 	 */
 	public function recheck_sitemaps() {
 		$data = $this->get_request_data();
@@ -251,11 +279,13 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $fixed
-	 * @param $issue
-	 * @param $message
-	 * @param $action_text
-	 * @param $action_url
+	 * Sends a response after troubleshooting.
+	 *
+	 * @param bool   $fixed       Whether the issue was fixed.
+	 * @param string $issue       The issue encountered.
+	 * @param string $message     The message to send.
+	 * @param string $action_text The action text.
+	 * @param string $action_url  The action URL.
 	 *
 	 * @return bool
 	 */
@@ -276,6 +306,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Checks if the server is Nginx.
+	 *
 	 * @return bool
 	 */
 	private function is_nginx_server() {
@@ -288,7 +320,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $status
+	 * Gets the issue details based on status.
+	 *
+	 * @param int $status The status code.
 	 *
 	 * @return array
 	 */
@@ -346,7 +380,7 @@ class Troubleshooting extends Controllers\Controller {
 						? __( "Pretty permalinks are not working for your sitemap###SITEMAP_URL###. Since you are hosting your website on an Nginx server, you may have to manually include some rewrite rules to your server's configuration files. Check our documentation for details on how to fix this issue.", 'smartcrawl-seo' )
 						: sprintf(
 								/* translators: 1,2: strong tag, 3: plugin title */
-								__( 'Pretty permalinks are not working for your sitemap###SITEMAP_URL###. You may have to manually include some rewrite rules to your server\'s configuration files. Visit %1$s%3$s%2$s\'s documentation for details on how to fix this issue.', 'smartcrawl-seo' ),
+							__( 'Pretty permalinks are not working for your sitemap###SITEMAP_URL###. You may have to manually include some rewrite rules to your server\'s configuration files. Visit %1$s%3$s%2$s\'s documentation for details on how to fix this issue.', 'smartcrawl-seo' ),
 							'<strong>',
 							'</strong>',
 							\smartcrawl_get_plugin_title()
@@ -404,24 +438,28 @@ class Troubleshooting extends Controllers\Controller {
 					__( 'Unknown Error', 'smartcrawl-seo' ),
 					__( "We found an issue with your sitemap###SITEMAP_URL###, but unfortunately, we couldn't fix it. Please contact our support.", 'smartcrawl-seo' ),
 					__( 'We found an unknown issue with your sitemap###SITEMAP_URL###, but clearing the cache seems to have fixed it.', 'smartcrawl-seo' ),
-					__( 'Contact Support' ),
+					__( 'Contact Support', 'smartcrawl-seo' ),
 					$support_url,
 				);
 		}
 	}
 
 	/**
-	 * @param $message
-	 * @param $sitemap_name
+	 * Includes the sitemap name in the message.
+	 *
+	 * @param string $message      The message.
+	 * @param string $sitemap_name The sitemap name.
 	 *
 	 * @return string
 	 */
 	private function include_sitemap_name( $message, $sitemap_name ) {
-		return str_replace('###SITEMAP_URL###', empty( $sitemap_name )? " <code>$sitemap_name</code>" : '', $message );
+		return str_replace( '###SITEMAP_URL###', empty( $sitemap_name ) ? " <code>$sitemap_name</code>" : '', $message );
 	}
 
 	/**
-	 * @param $response
+	 * Gets the sitemap XML from the response.
+	 *
+	 * @param mixed $response The response.
 	 *
 	 * @return string
 	 */
@@ -430,9 +468,11 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_url
+	 * Gets the sitemap response.
 	 *
-	 * @return array|\WP_Error
+	 * @param string $sitemap_url The sitemap URL.
+	 *
+	 * @return mixed
 	 */
 	private function get_sitemap_response( $sitemap_url ) {
 		return wp_remote_get(
@@ -444,7 +484,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_xml
+	 * Checks if the XML has whitespace.
+	 *
+	 * @param string $sitemap_xml The sitemap XML.
 	 *
 	 * @return bool
 	 */
@@ -453,7 +495,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_xml
+	 * Checks if the XML is valid.
+	 *
+	 * @param string $sitemap_xml The sitemap XML.
 	 *
 	 * @return bool
 	 */
@@ -462,6 +506,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Primes all sitemap caches.
+	 *
 	 * @return void
 	 */
 	private function prime_all_sitemap_caches() {
@@ -479,6 +525,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Checks all sitemaps.
+	 *
 	 * @return array|int[]
 	 */
 	private function check_all_sitemaps() {
@@ -486,6 +534,8 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Gets the sitemap URLs.
+	 *
 	 * @return array[]
 	 */
 	private function get_sitemap_urls() {
@@ -512,7 +562,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemaps
+	 * Checks the sitemaps.
+	 *
+	 * @param array $sitemaps The sitemaps.
 	 *
 	 * @return array|int[]
 	 */
@@ -541,7 +593,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_response
+	 * Validates the sitemap response.
+	 *
+	 * @param mixed $sitemap_response The sitemap response.
 	 *
 	 * @return bool|int
 	 */
@@ -571,8 +625,10 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $pretty_url
-	 * @param $plain_url
+	 * Checks the sitemap.
+	 *
+	 * @param string $pretty_url The pretty URL.
+	 * @param string $plain_url  The plain URL.
 	 *
 	 * @return bool|int
 	 */
@@ -618,7 +674,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $response
+	 * Checks if the response is unauthorized.
+	 *
+	 * @param mixed $response The response.
 	 *
 	 * @return bool
 	 */
@@ -629,7 +687,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_url
+	 * Gets the sitemap name from the URL.
+	 *
+	 * @param string $sitemap_url The sitemap URL.
 	 *
 	 * @return mixed|string|null
 	 */
@@ -640,7 +700,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_name
+	 * Checks if the physical sitemap file exists.
+	 *
+	 * @param string $sitemap_name The sitemap name.
 	 *
 	 * @return bool
 	 */
@@ -649,7 +711,9 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
-	 * @param $sitemap_xml
+	 * Checks if the sitemap is foreign.
+	 *
+	 * @param string $sitemap_xml The sitemap XML.
 	 *
 	 * @return bool
 	 */
@@ -658,13 +722,17 @@ class Troubleshooting extends Controllers\Controller {
 	}
 
 	/**
+	 * Gets the request data.
+	 *
 	 * @return array|mixed
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( $_POST['_wds_nonce'], 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array();
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 
 	/**
+	 * Clears the errors found option.
+	 *
 	 * @return void
 	 */
 	private function clear_errors_found_option() {

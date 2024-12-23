@@ -1,8 +1,8 @@
 <?php
 /**
- * @var Seo_Report $crawl_report
+ * Template: Sitemap Crawl Content.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 namespace SmartCrawl;

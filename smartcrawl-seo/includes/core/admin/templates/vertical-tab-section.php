@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Vertical Tab section.
+ *
+ * @package Smartcrwal
+ */
+
 $section_description        = empty( $section_description ) ? '' : $section_description;
 $section_template           = empty( $section_template ) ? '' : $section_template;
 $section_args               = empty( $section_args ) ? array() : $section_args;

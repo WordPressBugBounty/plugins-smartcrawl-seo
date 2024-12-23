@@ -25,7 +25,7 @@ class BulkUpdateModal extends React.Component {
 						/* translators: %s: number of bulk items count */
 						__(
 							'Enable the bulk update actions you wish to perform. This will override the existing values for the <strong>%s</strong> selected item(s).',
-							'smartcrawl-seo'
+							'wds'
 						),
 						count
 					),

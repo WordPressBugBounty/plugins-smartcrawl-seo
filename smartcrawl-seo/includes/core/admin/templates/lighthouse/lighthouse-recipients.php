@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Lighthouse Recipients.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -53,8 +58,8 @@ $this->render_view(
 		>
 			<option></option>
 			<?php foreach ( array( 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 ) as $value ) : ?>
-				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $value, $reporting_condition ); ?>>
-					<?php echo esc_html( $value ) . '%'; ?>
+				<option value="<?php echo esc_attr( (string) $value ); ?>" <?php selected( $value, $reporting_condition ); ?>>
+					<?php echo esc_html( (string) $value ) . '%'; ?>
 				</option>
 			<?php endforeach; ?>
 		</select>

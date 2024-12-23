@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Vertical Tab Upsell.
+ *
+ * @package Smartcrwal
+ */
+
 // Required.
 $tab_id             = empty( $tab_id ) ? '' : $tab_id;
 $tab_name           = empty( $tab_name ) ? '' : $tab_name;

@@ -228,7 +228,8 @@ const WooProduct = {
 				labelSingle: __('WooCommerce Review', 'smartcrawl-seo'),
 				loop: 'woocommerce-reviews',
 				loopDescription: __(
-					'The following block will be repeated for each Review in a WooCommerce product'
+					'The following block will be repeated for each Review in a WooCommerce product',
+					'smartcrawl-seo'
 				),
 				type: 'Review',
 				properties: WooReviewLoop,

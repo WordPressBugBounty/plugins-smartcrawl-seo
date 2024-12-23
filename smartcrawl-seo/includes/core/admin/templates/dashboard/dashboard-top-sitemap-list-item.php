@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Top bar Sitemap summary.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

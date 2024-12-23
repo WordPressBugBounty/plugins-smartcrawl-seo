@@ -1,6 +1,6 @@
 <?php
 /**
- * Class Upgrade
+ * Handles the plugin's upgrade page on Free version.
  *
  * @package SmartCrawl
  */
@@ -12,7 +12,7 @@ use SmartCrawl\Simple_Renderer;
 use SmartCrawl\Singleton;
 
 /**
- * Upgrade page
+ * Upgrade page controller
  */
 class Upgrade extends Page {
 
@@ -21,7 +21,7 @@ class Upgrade extends Page {
 	const MENU_SLUG = 'wds_upgrade';
 
 	/**
-	 * Upgrade constructor.
+	 * Defines action hooks for this controller.
 	 */
 	protected function init() {
 		parent::init();
@@ -31,7 +31,9 @@ class Upgrade extends Page {
 	}
 
 	/**
-	 * Add page
+	 * Adds a submenu page under the main menu.
+	 *
+	 * @return void
 	 */
 	public function add_page() {
 		add_submenu_page(
@@ -44,7 +46,7 @@ class Upgrade extends Page {
 	}
 
 	/**
-	 * Add custom style to the menu item
+	 * Adds custom style to the menu item.
 	 */
 	public function menu_style() {
 		echo '<style>
@@ -56,7 +58,7 @@ class Upgrade extends Page {
 	}
 
 	/**
-	 * Get menu slug
+	 * Retrieves the menu slug.
 	 *
 	 * @return string
 	 */

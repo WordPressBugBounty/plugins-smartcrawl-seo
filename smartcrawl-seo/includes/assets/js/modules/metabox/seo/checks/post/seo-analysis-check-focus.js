@@ -33,11 +33,11 @@ export default class SeoAnalysisCheckFocus extends React.Component {
 				{!state
 					? __(
 							'In order to give your content the best possible chance to be discovered, it is best to select some focus keywords or key phrases, to give it some context.',
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: __(
 							'Nice work, now that we know what your article is about we can be more specific in analysis.',
-							'smartcrawl-seo'
+							'wds'
 					  )}
 			</p>
 		);
@@ -56,7 +56,7 @@ export default class SeoAnalysisCheckFocus extends React.Component {
 			<p>
 				{__(
 					'Selecting focus keywords helps describe what your content is about.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

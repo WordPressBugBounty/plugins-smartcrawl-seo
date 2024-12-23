@@ -1,22 +1,39 @@
 <?php
+/**
+ * Post_Meta class for handling post meta schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Post_Meta
+ *
+ * Handles post meta schema fragments.
+ */
 class Post_Meta extends Property {
 	const ID = 'post_meta';
 
 	/**
-	 * @var
+	 * The meta key.
+	 *
+	 * @var string
 	 */
 	private $meta_key;
+
 	/**
-	 * @var
+	 * The post object.
+	 *
+	 * @var \WP_Post
 	 */
 	private $post;
 
 	/**
-	 * @param $post
-	 * @param $meta_key
+	 * Post_Meta constructor.
+	 *
+	 * @param \WP_Post $post The post object.
+	 * @param string   $meta_key The meta key.
 	 */
 	public function __construct( $post, $meta_key ) {
 		parent::__construct();
@@ -26,7 +43,9 @@ class Post_Meta extends Property {
 	}
 
 	/**
-	 * @return bool|float|int|string
+	 * Retrieves the value of the post meta.
+	 *
+	 * @return bool|float|int|string The value of the post meta.
 	 */
 	public function get_value() {
 		$meta_value = get_post_meta( $this->post->ID, $this->meta_key, true );

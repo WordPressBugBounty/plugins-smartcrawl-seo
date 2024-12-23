@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Toggle Group.
+ *
+ * @package Smartcrwal
+ */
+
 $label            = empty( $label ) ? '' : $label;
 $description      = empty( $description ) ? '' : $description;
 $items            = empty( $items ) ? array() : $items;

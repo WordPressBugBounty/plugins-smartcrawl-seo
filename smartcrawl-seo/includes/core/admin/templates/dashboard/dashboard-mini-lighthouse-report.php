@@ -1,6 +1,8 @@
 <?php
 /**
- * @var $lighthouse_report Report
+ * Template: Dashboard Lighthouse Report
+ *
+ * @package SmartCrawl
  */
 
 namespace SmartCrawl;

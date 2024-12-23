@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage List Homepage.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

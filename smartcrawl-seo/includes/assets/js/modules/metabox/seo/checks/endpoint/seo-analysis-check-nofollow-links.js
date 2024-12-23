@@ -34,11 +34,11 @@ export default class SeoAnalysisCheckNofollowLinks extends React.Component {
 				{state
 					? __(
 							'At least one dofollow external link was found on the content of this page. Good job!',
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: __(
 							'We detected that all external links on this page are nofollow links. We recommend adding at least one external dofollow link to your content.',
-							'smartcrawl-seo'
+							'wds'
 					  )}
 			</p>
 		);
@@ -57,7 +57,7 @@ export default class SeoAnalysisCheckNofollowLinks extends React.Component {
 			<p>
 				{__(
 					'It might feel absurd to link to external web pages as it will redirect your traffic to another site. However, adding relevant outbound links helps improve your credibility, gives your user more value, and helps search engines determine the usefulness and quality of your content.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

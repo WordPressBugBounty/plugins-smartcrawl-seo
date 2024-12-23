@@ -66,7 +66,7 @@ class RedirectRulesGeo extends React.Component {
 										className="sui-tag sui-tag-pro sui-tooltip"
 										data-tooltip={__(
 											'Unlock with SmartCrawl Pro to gain access to location-based redirections rules.',
-											'smartcrawl-seo'
+											'wds'
 										)}
 									>
 										{__('Pro', 'smartcrawl-seo')}
@@ -84,7 +84,7 @@ class RedirectRulesGeo extends React.Component {
 						message={createInterpolateElement(
 							__(
 								'<a>Unlock with SmartCrawl Pro</a> to unlock the Location-Based Redirects feature.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							{
 								a: (
@@ -120,7 +120,7 @@ class RedirectRulesGeo extends React.Component {
 						type="success"
 						message={__(
 							'Successfully connected to Maxmind’s GeoLite2 database.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					/>
 				)}

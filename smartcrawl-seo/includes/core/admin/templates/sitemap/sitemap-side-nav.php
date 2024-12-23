@@ -1,8 +1,8 @@
 <?php
 /**
- * Report.
+ * Template: Sitemap Sidenav.
  *
- * @var Seo_Report $crawl_report
+ * @package Smartcrwal
  */
 
 namespace SmartCrawl;

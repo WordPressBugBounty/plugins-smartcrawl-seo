@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage BuddyPress Profile section.
+ *
+ * @package Smartcrwal
+ */
 
 use SmartCrawl\Admin\Settings\Onpage;
 

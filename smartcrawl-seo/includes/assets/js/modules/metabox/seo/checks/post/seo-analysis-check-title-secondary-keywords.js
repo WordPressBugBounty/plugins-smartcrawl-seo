@@ -31,7 +31,7 @@ export default class SeoAnalysisCheckTitleSecondaryKeywords extends React.Compon
 			<p>
 				{__(
 					"It's recommended to use your secondary keywords in the title of your page if possible. However, it has a minor impact on improving SEO.",
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Author Archive section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

@@ -61,8 +61,8 @@ class Survey extends Events {
 				$props['activate_specific_modules'] = Settings::get_specific_options( 'wds-from-survey', 0 );
 			}
 
-			$selected = stripslashes_deep( $_POST['selected'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$message  = isset( $_POST['message'] ) ? stripslashes_deep( $_POST['message'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$selected = sanitize_text_field( stripslashes_deep( $_POST['selected'] ) );
+			$message  = isset( $_POST['message'] ) ? wp_kses_post( stripslashes_deep( $_POST['message'] ) ) : array();
 
 			$options = array(
 				'not-needed' => __( 'I no longer need the plugin', 'smartcrawl-seo' ),

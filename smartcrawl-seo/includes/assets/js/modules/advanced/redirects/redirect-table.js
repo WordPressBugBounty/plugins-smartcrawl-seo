@@ -127,7 +127,7 @@ class RedirectTable extends React.Component {
 				<p>
 					{__(
 						'Automatically redirect traffic from one URL to another. Use this tool if you have changed a page’s URL and wish to keep traffic flowing to the new page.',
-						'smartcrawl-seo'
+						'wds'
 					)}
 				</p>
 
@@ -139,7 +139,7 @@ class RedirectTable extends React.Component {
 								{createInterpolateElement(
 									__(
 										'<strong>New</strong>: You can now add Geolocation-based rules to redirects. This will ensure users are redirected to the most relevant content based on their locations. <a>Add a new redirect</a> to set location rules.',
-										'smartcrawl-seo'
+										'wds'
 									),
 									{
 										strong: <strong />,
@@ -230,10 +230,7 @@ class RedirectTable extends React.Component {
 								</>
 							)}
 							<Search
-								placeholder={__(
-									'Search Redirects',
-									'smartcrawl-seo'
-								)}
+								placeholder={__('Search Redirects', 'smartcrawl-seo')}
 								onChange={(kw) => this.handleSearch(kw)}
 							/>
 						</div>
@@ -245,25 +242,19 @@ class RedirectTable extends React.Component {
 
 									<div className="wds-redirect-item-source">
 										<small>
-											<strong>
-												{__('From', 'smartcrawl-seo')}
-											</strong>
+											<strong>{__('From', 'smartcrawl-seo')}</strong>
 										</small>
 									</div>
 
 									<div className="wds-redirect-item-destination">
 										<small>
-											<strong>
-												{__('To', 'smartcrawl-seo')}
-											</strong>
+											<strong>{__('To', 'smartcrawl-seo')}</strong>
 										</small>
 									</div>
 
 									<div className="wds-redirect-item-options">
 										<small>
-											<strong>
-												{__('Type', 'smartcrawl-seo')}
-											</strong>
+											<strong>{__('Type', 'smartcrawl-seo')}</strong>
 										</small>
 									</div>
 
@@ -292,7 +283,7 @@ class RedirectTable extends React.Component {
 										// translators: %s: Keyword.
 										__(
 											'No results found for the keyword <strong>%s</strong>.',
-											'smartcrawl-seo'
+											'wds'
 										),
 										keyword
 									),
@@ -314,7 +305,7 @@ class RedirectTable extends React.Component {
 								<small>
 									{__(
 										'You can add as many redirects as you like. Add your first above!',
-										'smartcrawl-seo'
+										'wds'
 									)}
 								</small>
 							</p>
@@ -353,7 +344,7 @@ class RedirectTable extends React.Component {
 							'Are you sure?',
 							'Bulk Delete Redirect?',
 							deleting.length,
-							'smartcrawl-seo'
+							'wds'
 						)}
 						description={
 							deleting.length > 1
@@ -361,13 +352,13 @@ class RedirectTable extends React.Component {
 										// translators: %s: number of items being deleted.
 										__(
 											'Are you sure you want to delete the %s selected redirects? This action is irreversible.',
-											'smartcrawl-seo'
+											'wds'
 										),
 										deleting.length
 								  )
 								: __(
 										'Are you sure you want to delete this redirect? This action is irreversible.',
-										'smartcrawl-seo'
+										'wds'
 								  )
 						}
 						loading={loading}
@@ -472,7 +463,7 @@ class RedirectTable extends React.Component {
 								'%d redirect inserted successfully!',
 								'%d redirects inserted successfully!',
 								insertedCount,
-								'smartcrawl-seo'
+								'wds'
 							),
 							insertedCount
 						)
@@ -562,10 +553,7 @@ class RedirectTable extends React.Component {
 				);
 			}).length > 0
 		) {
-			return __(
-				'That URL already exists, please try again.',
-				'smartcrawl-seo'
-			);
+			return __('That URL already exists, please try again.', 'smartcrawl-seo');
 		}
 
 		if (isNonRedirectType(data.type)) {
@@ -753,8 +741,7 @@ class RedirectTable extends React.Component {
 			})
 			.catch((message) => {
 				this.showErrorNotice(
-					message ||
-						__('Failed to update redirects.', 'smartcrawl-seo')
+					message || __('Failed to update redirects.', 'smartcrawl-seo')
 				);
 			})
 			.finally(() => {

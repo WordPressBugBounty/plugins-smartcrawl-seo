@@ -1,7 +1,14 @@
 <?php
+/**
+ * Template: Metabox Social Opengraph.
+ *
+ * @package Smartcrwal
+ */
+
 namespace SmartCrawl;
 
-$post = empty( $post ) ? null : $post; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$post = empty( $post ) ? null : $post;
 if ( ! $post ) {
 	return;
 }

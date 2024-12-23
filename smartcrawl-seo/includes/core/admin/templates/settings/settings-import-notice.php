@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Settings Import Notice.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
@@ -6,7 +11,7 @@ $settings_errors = \SmartCrawl\Third_Party_Import\Controller::get()->get_errors(
 ?>
 <div class="sui-floating-notices">
 	<?php
-	if ( 'success' === \smartcrawl_get_array_value( $_GET, 'import' ) ) { // phpcs:ignore
+	if ( 'success' === \smartcrawl_get_array_value( $_GET, 'import' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$this->render_view(
 			'floating-notice',
 			array(

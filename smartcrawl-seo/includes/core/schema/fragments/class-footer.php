@@ -1,31 +1,55 @@
 <?php
+/**
+ * Footer class for handling footer schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Footer
+ *
+ * Handles footer schema fragments.
+ */
 class Footer extends Fragment {
+
 	/**
-	 * @var
+	 * The URL of the footer.
+	 *
+	 * @var string
 	 */
 	private $url;
+
 	/**
-	 * @var
+	 * The title of the footer.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the footer.
+	 *
+	 * @var string
 	 */
 	private $description;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
 
 	/**
-	 * @param $url
-	 * @param $title
-	 * @param $description
+	 * Footer constructor.
+	 *
+	 * @param string $url The URL of the footer.
+	 * @param string $title The title of the footer.
+	 * @param string $description The description of the footer.
 	 */
 	public function __construct( $url, $title, $description ) {
 		$this->url         = $url;
@@ -35,7 +59,9 @@ class Footer extends Fragment {
 	}
 
 	/**
-	 * @return array|false
+	 * Retrieves raw schema data.
+	 *
+	 * @return array|false The raw schema data.
 	 */
 	protected function get_raw() {
 		$enable_header_footer = (bool) $this->utils->get_schema_option( 'schema_wp_header_footer' );

@@ -39,19 +39,19 @@ export default class SeoAnalysisCheckImgaltsKeywords extends React.Component {
 		if (state) {
 			message = __(
 				"Alternative attribute text for images help search engines correctly index images and aid visually impaired readers. The text is also used in place of the image if it's unable to load. You should add alternative text for all images in your content.",
-				'smartcrawl-seo'
+				'wds'
 			);
 		} else if (0 === imgCnt) {
 			message = __(
 				'Images are a great addition to any piece of content and it’s highly recommended to have imagery on your pages. Consider adding a few images that relate to your body content to enhance the reading experience of your article. Where possible, it’s also a great opportunity to include your focus keyword(s) to further associate the article with the topic you’re writing about.',
-				'smartcrawl-seo'
+				'wds'
 			);
 		} else if (percent > 75) {
 			message = sprintf(
 				// translators: %d images with focus count, %d image count.
 				__(
 					'%1$d/%2$d images on this page have alt text with your keyword(s) which is too much. Whilst it’s great that you have image alternative text with your focus keyword(s), you can also get penalized for having too many keywords on a page. Try to include your keyword(s) in image alt texts only when it makes sense.',
-					'smartcrawl-seo'
+					'wds'
 				),
 				focusImgCnt,
 				imgCnt
@@ -59,14 +59,14 @@ export default class SeoAnalysisCheckImgaltsKeywords extends React.Component {
 		} else if (percent === 0) {
 			message = __(
 				'None of the images on this page have alt text containing your focus keyword. It’s recommended practice to have your topic keywords in a few of your images to further associate the article with the topic you’re writing about. Add your keyword to one or more of your images, but be careful not to overdo it.',
-				'smartcrawl-seo'
+				'wds'
 			);
 		} else {
 			message = sprintf(
 				// translators: %d images with focus count, %d image count.
 				__(
 					'%1$d/%2$d images on this page have alt text with your chosen keyword(s). Alternative attribute text for images helps search engines correctly index images and aid visually impaired readers. It’s recommended practice to have your topic keywords in a good number of your images to further associate the article with the topic you’re writing about. Add your keyword(s) to a few more of your images, but be careful not to overdo it.',
-					'smartcrawl-seo'
+					'wds'
 				),
 				focusImgCnt,
 				imgCnt
@@ -89,7 +89,7 @@ export default class SeoAnalysisCheckImgaltsKeywords extends React.Component {
 		if (state) {
 			message = __(
 				'A good balance of images contain the focus keyword(s) in their alt attribute text',
-				'smartcrawl-seo'
+				'wds'
 			);
 		} else if (imgCnt && !hasFeatured) {
 			message = __("You haven't added any images", 'smartcrawl-seo');
@@ -101,12 +101,12 @@ export default class SeoAnalysisCheckImgaltsKeywords extends React.Component {
 		} else if (0 === percent) {
 			message = __(
 				'None of your image alt texts contain the focus keyword(s)',
-				'smartcrawl-seo'
+				'wds'
 			);
 		} else {
 			message = __(
 				'Too few of your image alt texts contain the focus keyword(s)',
-				'smartcrawl-seo'
+				'wds'
 			);
 		}
 
@@ -118,7 +118,7 @@ export default class SeoAnalysisCheckImgaltsKeywords extends React.Component {
 			<p>
 				{__(
 					"Image alternative text attributes help search engines correctly index images, aid visually impaired readers, and the text is used in place of the image if it's unable to load. You should add alternative text for all images in your content.",
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

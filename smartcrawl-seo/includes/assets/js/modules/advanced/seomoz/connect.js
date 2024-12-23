@@ -112,7 +112,10 @@ class Connect extends React.Component {
 
 						<TextInputField
 							label={__('Access ID', 'smartcrawl-seo')}
-							placeholder="Enter your Moz Access ID"
+							placeholder={__(
+								'Enter your Moz Access ID',
+								'smartcrawl-seo'
+							)}
 							errorMessage={__(
 								'Please enter a valid Moz Access ID',
 								'smartcrawl-seo'
@@ -126,7 +129,10 @@ class Connect extends React.Component {
 
 						<TextInputField
 							label={__('Secret Key', 'smartcrawl-seo')}
-							placeholder="Enter your Moz Secret Key"
+							placeholder={__(
+								'Enter your Moz Secret Key',
+								'smartcrawl-seo'
+							)}
 							errorMessage={__(
 								'Please enter a valid Moz Secret Key',
 								'smartcrawl-seo'

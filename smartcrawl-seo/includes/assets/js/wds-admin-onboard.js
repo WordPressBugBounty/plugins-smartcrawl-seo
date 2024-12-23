@@ -1,5 +1,4 @@
-;(function ($, undefined) {
-
+(function ($, undefined) {
 	Wds.Onboard = Wds.Onboard || {
 		dialog: false,
 		open_dialog: function () {
@@ -19,10 +18,10 @@
 			return 'wds-onboarding';
 		},
 		get_root: function () {
-			return $("#wds-onboarding");
+			return $('#wds-onboarding');
 		},
 		get_checks: function () {
-			return Wds.Onboard.get_root().find(":checkbox");
+			return Wds.Onboard.get_root().find(':checkbox');
 		},
 		process_all: function () {
 			var $checks = Wds.Onboard.get_checks();
@@ -35,7 +34,9 @@
 		},
 		process_next: function ($items, total, processed) {
 			if (!$items.length) {
-				Wds.Onboard.get_box_content().find(".sui-progress-state").text(Wds.l10n('onboard', 'All done'));
+				Wds.Onboard.get_box_content()
+					.find('.sui-progress-state')
+					.text(Wds.l10n('onboard', 'All done'));
 				Wds.Onboard.done();
 				return false;
 			}
@@ -43,20 +44,22 @@
 			var $item = $($items.pop()),
 				processed = processed || 0,
 				pct = 0,
-				dfr = $.Deferred()
-			;
+				dfr = $.Deferred();
 			processed++;
 			pct = (processed / total) * 100;
-			Wds.update_progress_bar(Wds.Onboard.get_box_content().find(".wds-progress"), pct);
-
-			Wds.Onboard.get_box_content().find(".sui-progress-state").text(
-				$item.attr("data-processing")
+			Wds.update_progress_bar(
+				Wds.Onboard.get_box_content().find('.wds-progress'),
+				pct
 			);
+
+			Wds.Onboard.get_box_content()
+				.find('.sui-progress-state')
+				.text($item.attr('data-processing'));
 			$.post(ajaxurl, {
-				action: "wds-boarding-toggle",
-				target: $item.attr("name"),
-				enable: $item.is(":checked") ? 1 : 0,
-				_wds_nonce: _wds_onboard.nonce
+				action: 'smartcrawl_onboard_toggle',
+				target: $item.attr('name'),
+				enable: $item.is(':checked') ? 1 : 0,
+				_wds_nonce: _wds_onboard.nonce,
 			}).always(dfr.resolve);
 
 			dfr.done(function () {
@@ -68,7 +71,7 @@
 
 			$(this).html('&hellip;');
 			$.post(ajaxurl, {
-				action: "wds-boarding-skip"
+				action: 'smartcrawl_onboard_skip',
 			}).always(function () {
 				window.location.reload();
 				SUI.closeModal();
@@ -76,15 +79,18 @@
 		},
 		done: function () {
 			$.post(ajaxurl, {
-				action: "wds-boarding-done"
+				action: 'smartcrawl_onboard_done',
 			}).always(function () {
 				window.location.reload();
 			});
 		},
 	};
 
-	$(document).on("click", "button.wds-onboarding-setup", Wds.Onboard.process_all);
-	$(document).on("click", "a.onboard-skip", Wds.Onboard.skip);
+	$(document).on(
+		'click',
+		'button.wds-onboarding-setup',
+		Wds.Onboard.process_all
+	);
+	$(document).on('click', 'a.onboard-skip', Wds.Onboard.skip);
 	$(Wds.Onboard.open_dialog);
-
 })(jQuery);

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Blog_Home class for handling blog home schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
@@ -10,26 +15,40 @@ use SmartCrawl\Schema\Utils;
  * Schema for traditional blog style home page
  */
 class Blog_Home extends Fragment {
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
+	 * The URL of the site.
+	 *
 	 * @var string
 	 */
 	private $url;
+
 	/**
-	 * @var
+	 * The title of the blog home page.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the blog home page.
+	 *
+	 * @var string
 	 */
 	private $description;
 
 	/**
-	 * @param $title
-	 * @param $description
+	 * Blog_Home constructor.
+	 *
+	 * @param string $title The title of the blog home page.
+	 * @param string $description The description of the blog home page.
 	 */
 	public function __construct( $title, $description ) {
 		$this->title       = $title;
@@ -39,7 +58,9 @@ class Blog_Home extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$is_publisher_page = $this->is_publisher_output_page();
@@ -83,7 +104,9 @@ class Blog_Home extends Fragment {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the current page is the publisher output page.
+	 *
+	 * @return bool True if the current page is the publisher output page, false otherwise.
 	 */
 	private function is_publisher_output_page() {
 		$publisher_output_page = $this->utils->get_special_page( 'schema_output_page' );

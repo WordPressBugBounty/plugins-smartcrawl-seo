@@ -27,7 +27,7 @@ class Keywords_Used extends Post_Check {
 	private $used_ids;
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @return string
 	 */
@@ -38,7 +38,7 @@ class Keywords_Used extends Post_Check {
 	}
 
 	/**
-	 * Apply check to the subject.
+	 * Applies check to the subject.
 	 *
 	 * @return bool
 	 */
@@ -61,7 +61,7 @@ class Keywords_Used extends Post_Check {
 
 		$likes     = join( ' AND ', $likes_array );
 		$query     = "SELECT post_id, meta_value FROM $wpdb->postmeta WHERE meta_key = '_wds_focus-keywords' AND post_id != $subject_id AND $likes ORDER BY post_id DESC";
-		$meta_rows = $wpdb->get_results( $wpdb->prepare( $query, ...$kws ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+		$meta_rows = $wpdb->get_results( $wpdb->prepare( $query, ...$kws ), ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		$meta_rows = empty( $meta_rows ) ? array() : $meta_rows;
 		$post_ids  = $this->filter_out_supersets( $meta_rows );
@@ -95,7 +95,7 @@ class Keywords_Used extends Post_Check {
 	}
 
 	/**
-	 * Get post id if subject is post.
+	 * Retrieves post id if subject is post.
 	 *
 	 * @return int|\WP_Post
 	 */
@@ -132,15 +132,16 @@ class Keywords_Used extends Post_Check {
 	}
 
 	/**
-	 * Get subject post id.
+	 * Retrieves subject post id.
 	 *
-	 * @param string $subject Subject.
+	 * @param mixed $subject Subject.
 	 *
 	 * @return int
 	 */
 	private function get_subject_post_id( $subject ) {
 		if ( is_a( $subject, '\WP_Post' ) ) {
 			$post_parent = wp_is_post_revision( $subject->ID );
+
 			if ( $post_parent ) {
 				$subject_id = $post_parent;
 			} else {

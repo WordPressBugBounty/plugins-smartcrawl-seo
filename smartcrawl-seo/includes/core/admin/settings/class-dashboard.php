@@ -82,10 +82,8 @@ class Dashboard extends Admin_Settings {
 		$flag      = sanitize_key( \smartcrawl_get_array_value( $data, 'flag' ) );
 		$value     = (bool) \smartcrawl_get_array_value( $data, 'value' );
 
-		if ( is_null( $option_id ) || is_null( $flag ) ) {
+		if ( ! $option_id || ! $flag ) {
 			wp_send_json( $result );
-
-			return;
 		}
 
 		$options          = self::get_specific_options( $option_id );
@@ -109,8 +107,6 @@ class Dashboard extends Admin_Settings {
 
 		if ( is_null( $box_id ) ) {
 			wp_send_json( $result );
-
-			return;
 		}
 
 		if ( ! is_array( $box_id ) ) {
@@ -271,6 +267,6 @@ class Dashboard extends Admin_Settings {
 	 * TODO: replace with check_ajax_referer
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-admin-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 }

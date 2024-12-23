@@ -1,6 +1,13 @@
 <?php
+/**
+ * Template: Post SEO Analysis Errors.
+ *
+ * @package Smartcrwal
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $focus_missing = empty( $focus_missing ) ? false : $focus_missing;
-$errors        = empty( $errors ) ? array() : $errors; // phpcs:ignore
+$errors        = empty( $errors ) ? array() : $errors;
 $status_class  = empty( $status_class ) ? 'wds-status-warning' : $status_class;
 ?>
 
@@ -9,12 +16,12 @@ $status_class  = empty( $status_class ) ? 'wds-status-warning' : $status_class;
 		<?php
 		echo $focus_missing
 			? esc_html__( 'N/A', 'smartcrawl-seo' )
-			: esc_html( count( $errors ) );
+			: esc_html( (string) count( $errors ) );
 		?>
 	</span>
 </div>
 <div class="wds-analysis-details">
-	<?php foreach ( $errors as $key => $error ) : // phpcs:ignore ?>
+	<?php foreach ( $errors as $key => $error ) : ?>
 		<div class="wds-error <?php echo esc_attr( $key ); ?>">
 			<?php echo esc_html( $error ); ?>
 		</div>

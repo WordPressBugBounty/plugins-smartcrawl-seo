@@ -27,7 +27,8 @@ class Taxonomy extends Controllers\Controller {
 	 * @return void
 	 */
 	protected function init() {
-		$taxonomy = \smartcrawl_get_array_value( $_GET, 'taxonomy' ); // phpcs:ignore -- Can't add nonce to the request
+		$taxonomy = \smartcrawl_get_array_value( $_GET, 'taxonomy' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 		if ( is_admin() && ! empty( $taxonomy ) ) {
 			add_action( sanitize_key( $taxonomy ) . '_edit_form', array( &$this, 'term_additions_form' ), 10, 2 );
 		}
@@ -138,8 +139,6 @@ class Taxonomy extends Controllers\Controller {
 
 		if ( empty( $term_id ) ) {
 			wp_send_json( $result );
-
-			return;
 		}
 
 		$result['success'] = true;
@@ -159,7 +158,7 @@ class Taxonomy extends Controllers\Controller {
 	 * @return array|mixed
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-metabox-nonce' ) ? stripslashes_deep( $_POST ) : array(); // phpcs:ignore
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-metabox-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 
 	/**
@@ -230,7 +229,7 @@ class Taxonomy extends Controllers\Controller {
 		$smartcrawl_options = Settings::get_options();
 
 		$tax_meta  = get_option( 'wds_taxonomy_meta' );
-		$post_data = isset( $_POST['_wpnonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wpnonce'] ), 'update-tag_' . $term_id ) // phpcs:ignore
+		$post_data = isset( $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'update-tag_' . $term_id )
 			? stripslashes_deep( $_POST )
 			: array();
 
@@ -245,9 +244,7 @@ class Taxonomy extends Controllers\Controller {
 		}
 
 		foreach ( array( 'noindex', 'nofollow' ) as $key ) {
-			$global = ! empty( $smartcrawl_options[ 'meta_robots-' . $key . '-' . $taxonomy ] ) && (bool) $smartcrawl_options[ 'meta_robots-' . $key . '-' . $taxonomy ];
-
-			if ( ! $global ) {
+			if ( empty( $smartcrawl_options[ 'meta_robots-' . $key . '-' . $taxonomy ] ) ) {
 				$tax_meta[ $taxonomy ][ $term_id ][ 'wds_' . $key ] = isset( $post_data[ 'wds_' . $key ] ) && (bool) $post_data[ 'wds_' . $key ];
 			} else {
 				$tax_meta[ $taxonomy ][ $term_id ][ 'wds_override_' . $key ] = isset( $post_data[ 'wds_override_' . $key ] ) && (bool) $post_data[ 'wds_override_' . $key ];
@@ -297,7 +294,7 @@ class Taxonomy extends Controllers\Controller {
 		if ( function_exists( '\w3tc_flush_all' ) ) {
 			// Use W3TC API v0.9.5+.
 			\w3tc_flush_all();
-		} elseif ( defined( '\W3TC_DIR' ) && is_readable( \W3TC_DIR . '/lib/W3/ObjectCache.php' ) ) {
+		} elseif ( defined( 'W3TC_DIR' ) && is_readable( \W3TC_DIR . '/lib/W3/ObjectCache.php' ) ) {
 			// Old (very old) API.
 			require_once \W3TC_DIR . '/lib/W3/ObjectCache.php';
 			$w3_objectcache = &\W3_ObjectCache::instance();

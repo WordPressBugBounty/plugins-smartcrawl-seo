@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4a186eca38aa0f48ad6529cc3ceb1d69
+class ComposerStaticInit1ff5b05dd4641f3948f1faf5fc7ac913
 {
     public static $classMap = array (
         'SmartCrawl\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/core/admin/class-admin.php',
@@ -75,7 +75,6 @@ class ComposerStaticInit4a186eca38aa0f48ad6529cc3ceb1d69
         'SmartCrawl\\Controllers\\OnPage' => __DIR__ . '/../..' . '/includes/core/controllers/class-onpage.php',
         'SmartCrawl\\Controllers\\Onboard' => __DIR__ . '/../..' . '/includes/core/controllers/class-onboard.php',
         'SmartCrawl\\Controllers\\Plugin_Links' => __DIR__ . '/../..' . '/includes/core/controllers/class-plugin-links.php',
-        'SmartCrawl\\Controllers\\Pointers' => __DIR__ . '/../..' . '/includes/core/controllers/class-pointers.php',
         'SmartCrawl\\Controllers\\Primary_Terms' => __DIR__ . '/../..' . '/includes/core/controllers/class-primary-terms.php',
         'SmartCrawl\\Controllers\\Recommended_Plugins' => __DIR__ . '/../..' . '/includes/core/controllers/class-recommended-plugins.php',
         'SmartCrawl\\Controllers\\Report_Permalinks' => __DIR__ . '/../..' . '/includes/core/controllers/class-report-permalinks.php',
@@ -304,7 +303,7 @@ class ComposerStaticInit4a186eca38aa0f48ad6529cc3ceb1d69
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit4a186eca38aa0f48ad6529cc3ceb1d69::$classMap;
+            $loader->classMap = ComposerStaticInit1ff5b05dd4641f3948f1faf5fc7ac913::$classMap;
 
         }, null, ClassLoader::class);
     }

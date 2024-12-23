@@ -1,16 +1,34 @@
 <?php
+/**
+ * Comment_Factory class for creating comment-related schema sources in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+use WP_Comment;
+use WP_Post;
+
+/**
+ * Class Comment_Factory
+ *
+ * Handles the creation of comment-related schema sources.
+ */
 class Comment_Factory extends Factory {
+
 	/**
-	 * @var
+	 * The comment object.
+	 *
+	 * @var WP_Comment
 	 */
 	private $comment;
 
 	/**
-	 * @param $post
-	 * @param $comment
+	 * Constructor.
+	 *
+	 * @param WP_Post    $post    The post object.
+	 * @param WP_Comment $comment The comment object.
 	 */
 	public function __construct( $post, $comment ) {
 		parent::__construct( $post );
@@ -18,11 +36,13 @@ class Comment_Factory extends Factory {
 	}
 
 	/**
-	 * @param $source
-	 * @param $field
-	 * @param $type
+	 * Creates a schema source.
 	 *
-	 * @return Comment|Text
+	 * @param string $source The source identifier.
+	 * @param string $field  The field to retrieve.
+	 * @param string $type   The type of the source.
+	 *
+	 * @return Comment|Text The created schema source.
 	 */
 	public function create( $source, $field, $type ) {
 		if ( empty( $this->comment ) ) {

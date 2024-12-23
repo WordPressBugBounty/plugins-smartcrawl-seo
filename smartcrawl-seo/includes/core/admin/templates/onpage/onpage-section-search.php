@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Search section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

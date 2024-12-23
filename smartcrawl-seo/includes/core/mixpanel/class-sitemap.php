@@ -63,7 +63,7 @@ class Sitemap extends Events {
 		) {
 			$old = $this->get_value( $field, $old_value );
 			$new = $this->get_value( $field, $new_value );
-			if ( $old != $new ) {
+			if ( $old !== $new ) {
 				$track = true;
 				break;
 			}
@@ -211,7 +211,7 @@ class Sitemap extends Events {
 		}
 
 		// If auto generation settings not changed, don't continue.
-		if ( $old_fields == $new_fields ) {
+		if ( $old_fields === $new_fields ) {
 			return;
 		}
 

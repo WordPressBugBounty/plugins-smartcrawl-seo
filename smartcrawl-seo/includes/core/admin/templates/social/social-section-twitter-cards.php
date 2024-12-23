@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Social Twitter Cards section.
+ *
+ * @package Smartcrwal
+ */
+
 $options = empty( $options ) ? $_view['options'] : $options;
 ?>
 

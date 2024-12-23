@@ -165,7 +165,7 @@ abstract class Settings extends Renderable {
 
 		$options_key = "wds_{$component}_options";
 
-		return self::get_specific_options( $options_key );
+		return (array) self::get_specific_options( $options_key );
 	}
 
 	/**

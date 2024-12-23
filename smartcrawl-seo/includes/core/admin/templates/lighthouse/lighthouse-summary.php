@@ -13,7 +13,7 @@ $lighthouse_start_time = empty( $lighthouse_start_time ) ? false : $lighthouse_s
 /**
  * Report.
  *
- * @var $lighthouse_report Report
+ * @var Report|false $lighthouse_report
  */
 $lighthouse_report = empty( $lighthouse_report ) ? false : $lighthouse_report;
 if ( ! $lighthouse_report || ! $lighthouse_report->has_data() || $lighthouse_report->has_errors() ) {
@@ -52,7 +52,7 @@ $whitelabel_class = \SmartCrawl\Controllers\White_Label::get()->summary_class();
 					>
 						<div
 							class="sui-circle-score sui-circle-score-lg sui-grade-<?php echo esc_attr( $grade ); ?>"
-							data-score="<?php echo esc_attr( $score ); ?>"
+							data-score="<?php echo esc_attr( (string) $score ); ?>"
 						></div>
 					</div>
 
@@ -83,7 +83,7 @@ $whitelabel_class = \SmartCrawl\Controllers\White_Label::get()->summary_class();
 				<span class="sui-list-detail">
 					<?php if ( $content_warnings ) : ?>
 						<span class="sui-tag sui-tag-warning">
-							<?php echo esc_html( $content_warnings ); ?>
+							<?php echo esc_html( (string) $content_warnings ); ?>
 						</span>
 					<?php else : ?>
 						<span class="sui-icon-check-tick sui-md sui-success" aria-hidden="true"></span>
@@ -95,7 +95,7 @@ $whitelabel_class = \SmartCrawl\Controllers\White_Label::get()->summary_class();
 				<span class="sui-list-label"><?php esc_html_e( 'Indexing audits', 'smartcrawl-seo' ); ?></span>
 				<span class="sui-list-detail">
 					<?php if ( $visibility_warnings ) : ?>
-						<span class="sui-tag sui-tag-warning"><?php echo esc_html( $visibility_warnings ); ?></span>
+						<span class="sui-tag sui-tag-warning"><?php echo esc_html( (string) $visibility_warnings ); ?></span>
 					<?php else : ?>
 						<span class="sui-icon-check-tick sui-md sui-success" aria-hidden="true"></span>
 					<?php endif; ?>
@@ -108,7 +108,7 @@ $whitelabel_class = \SmartCrawl\Controllers\White_Label::get()->summary_class();
 				</span>
 				<span class="sui-list-detail">
 					<?php if ( $responsive_warnings ) : ?>
-						<span class="sui-tag sui-tag-warning"><?php echo esc_html( $responsive_warnings ); ?></span>
+						<span class="sui-tag sui-tag-warning"><?php echo esc_html( (string) $responsive_warnings ); ?></span>
 					<?php else : ?>
 						<span class="sui-icon-check-tick sui-md sui-success" aria-hidden="true"></span>
 					<?php endif; ?>

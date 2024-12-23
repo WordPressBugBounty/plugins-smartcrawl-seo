@@ -1,14 +1,21 @@
 <?php
+/**
+ * Template: Post Search Dropdown Form Field.
+ *
+ * @package Smartcrwal
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $option_name       = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $field_name        = empty( $field_name ) ? '' : $field_name;
 $field_label       = empty( $field_label ) ? '' : $field_label;
 $field_description = empty( $field_description ) ? '' : $field_description;
 $selected_post_id  = empty( $selected_post_id ) ? '' : $selected_post_id;
-$post_type         = empty( $post_type ) ? '' : $post_type; // phpcs:ignore
+$post_type         = empty( $post_type ) ? '' : $post_type;
 $placeholder       = empty( $placeholder ) ? '' : $placeholder;
 $allow_clear       = empty( $allow_clear ) ? false : $allow_clear;
 $first_option      = empty( $first_option ) ? '' : $first_option;
-$pages             = empty( $pages ) ? array() : $pages; // phpcs:ignore
+$pages             = empty( $pages ) ? array() : $pages;
 ?>
 
 <div class="sui-form-field">

@@ -1,37 +1,64 @@
 <?php
+/**
+ * Post class for handling post schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Entities;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Post
+ *
+ * Handles post schema fragments.
+ */
 class Post extends Fragment {
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
+	 * The post object.
+	 *
 	 * @var Entities\Post
 	 */
 	private $post;
+
 	/**
-	 * @var
+	 * The author ID.
+	 *
+	 * @var string
 	 */
 	private $author_id;
+
 	/**
-	 * @var
+	 * Indicates if comments should be included.
+	 *
+	 * @var bool
 	 */
 	private $include_comments;
+
 	/**
-	 * @var
+	 * The publisher ID.
+	 *
+	 * @var string
 	 */
 	private $publisher_id;
 
 	/**
-	 * @param $post
-	 * @param $author_id
-	 * @param $publisher_id
-	 * @param $include_comments
+	 * Post constructor.
+	 *
+	 * @param Entities\Post $post The post object.
+	 * @param string        $author_id The author ID.
+	 * @param string        $publisher_id The publisher ID.
+	 * @param bool          $include_comments Indicates if comments should be included.
 	 */
 	public function __construct( $post, $author_id, $publisher_id, $include_comments ) {
 		$this->post             = $post;
@@ -42,7 +69,9 @@ class Post extends Fragment {
 	}
 
 	/**
-	 * @return mixed
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$wp_post = $this->utils->apply_filters(
@@ -77,9 +106,11 @@ class Post extends Fragment {
 	}
 
 	/**
-	 * @param $schema
+	 * Adds the article image to the schema.
 	 *
-	 * @return mixed
+	 * @param array $schema The schema array.
+	 *
+	 * @return array The updated schema array.
 	 */
 	private function add_article_image( $schema ) {
 		$thumbnail_id = $this->post->get_thumbnail_id();
@@ -106,9 +137,11 @@ class Post extends Fragment {
 	}
 
 	/**
-	 * @param $schema_image
+	 * Filters the post data image.
 	 *
-	 * @return mixed|void
+	 * @param array $schema_image The schema image array.
+	 *
+	 * @return array The filtered schema image array.
 	 */
 	private function filter_post_data_image( $schema_image ) {
 		return $this->utils->apply_filters( 'post-data-image', $schema_image );

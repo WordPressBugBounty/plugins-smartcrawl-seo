@@ -1,20 +1,30 @@
 <?php
+/**
+ * Template: Floating Notices.
+ *
+ * @package SmartCrawl
+ */
+
 namespace SmartCrawl;
 
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $keys            = empty( $keys ) ? array() : $keys;
 $settings_errors = empty( $this->option_name ) ? array() : get_settings_errors( $this->option_name );
-$errors          = array(); // phpcs:ignore
+$errors          = array();
+
 foreach ( $settings_errors as $settings_error ) {
 	$code = \smartcrawl_get_array_value( $settings_error, 'code' );
+
 	if ( $code ) {
-		$errors[ $code ] = \smartcrawl_get_array_value( $settings_error, 'message' ); // phpcs:ignore
+		$errors[ $code ] = \smartcrawl_get_array_value( $settings_error, 'message' );
 	}
 }
+
 $message = empty( $message ) ? esc_html__( 'Settings updated', 'smartcrawl-seo' ) : $message;
 ?>
 <div class="sui-floating-notices">
 	<?php
-	if ( isset( $_GET['settings-updated'] ) ) { // phpcs:ignore
+	if ( isset( $_GET['settings-updated'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$this->render_view(
 			'floating-notice',
 			array(

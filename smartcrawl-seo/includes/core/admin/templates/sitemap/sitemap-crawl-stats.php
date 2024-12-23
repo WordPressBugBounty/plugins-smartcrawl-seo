@@ -1,8 +1,8 @@
 <?php
 /**
- * @var Seo_Report $crawl_report
+ * Template: Sitemap Crawl Stats.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 namespace SmartCrawl;
@@ -31,7 +31,7 @@ $override_native  = empty( $override_native ) ? false : $override_native;
 				<?php if ( $in_progress ) : ?>
 					<span class="sui-icon-loader sui-loading" aria-hidden="true"></span>
 				<?php else : ?>
-					<span class="sui-summary-large"><?php echo esc_html( $issue_count ); ?></span>
+					<span class="sui-summary-large"><?php echo esc_html( (string) $issue_count ); ?></span>
 					<span class="<?php echo esc_attr( $score_class ); ?>"></span>
 				<?php endif; ?>
 				<span class="sui-summary-sub"><?php echo esc_html( _n( 'Sitemap Issue', 'Sitemap Issues', $issue_count, 'smartcrawl-seo' ) ); ?></span>

@@ -1,37 +1,97 @@
 <?php
+/**
+ * File containing the Seo_Report class for SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
 use SmartCrawl\Modules\Advanced\Redirects\Database_Table;
 use SmartCrawl\Models\Ignores;
 
+/**
+ * Class Seo_Report
+ *
+ * Provides SEO report generation and management for the SmartCrawl plugin.
+ *
+ * @package SmartCrawl
+ */
 class Seo_Report {
 
+	/**
+	 * Indicates if a report is in progress.
+	 *
+	 * @var bool
+	 */
 	private $in_progress = false;
 
+	/**
+	 * Progress of the report generation.
+	 *
+	 * @var int
+	 */
 	private $progress = 0;
 
+	/**
+	 * Timestamp when the report generation started.
+	 *
+	 * @var int
+	 */
 	private $start_timestamp = 0;
 
+	/**
+	 * List of report items.
+	 *
+	 * @var array
+	 */
 	private $items = array();
 
+	/**
+	 * Report items grouped by type.
+	 *
+	 * @var array
+	 */
 	private $by_type = array();
 
+	/**
+	 * State messages of the report.
+	 *
+	 * @var array
+	 */
 	private $state_messages = array();
 
+	/**
+	 * Meta information of the report.
+	 *
+	 * @var array
+	 */
 	private $meta = array();
 
 	/**
+	 * Ignored items manager.
+	 *
 	 * @var Ignores
 	 */
 	private $ignores;
 
-	private $sitemap_issues = 0;
 	/**
+	 * Number of sitemap issues.
+	 *
+	 * @var int
+	 */
+	private $sitemap_issues = 0;
+
+	/**
+	 * Redirects table.
+	 *
 	 * @var Database_Table
 	 */
 	private $redirects_table;
 
+	/**
+	 * Constructor for the Seo_Report class.
+	 */
 	public function __construct() {
 		$this->ignores         = new Ignores();
 		$this->redirects_table = Database_Table::get();
@@ -128,7 +188,7 @@ class Seo_Report {
 			}
 		}
 
-		// Special case sitemap issues reporting
+		// Special case sitemap issues reporting.
 		if ( ! empty( $raw['sitemap'] ) && is_numeric( $raw['sitemap'] ) ) {
 			$this->sitemap_issues = (int) $raw['sitemap'];
 		}
@@ -261,6 +321,11 @@ class Seo_Report {
 		return $result;
 	}
 
+	/**
+	 * Gets all issues grouped by type.
+	 *
+	 * @return array List of issues grouped by type
+	 */
 	public function get_all_issues_grouped_by_type() {
 		return empty( $this->by_type )
 			? array()
@@ -341,6 +406,8 @@ class Seo_Report {
 	}
 
 	/**
+	 * Gets the start timestamp.
+	 *
 	 * @return int
 	 */
 	public function get_start_timestamp() {
@@ -348,31 +415,61 @@ class Seo_Report {
 	}
 
 	/**
+	 * Sets the start timestamp.
+	 *
 	 * @param int $start_timestamp Start timestamp.
 	 */
 	public function set_start_timestamp( $start_timestamp ) {
 		$this->start_timestamp = $start_timestamp;
 	}
 
+	/**
+	 * Prevents cloning of the instance.
+	 */
 	private function __clone() {
 	}
 
+	/**
+	 * Checks if a report is in progress.
+	 *
+	 * @return bool
+	 */
 	public function is_in_progress() {
 		return $this->in_progress;
 	}
 
+	/**
+	 * Sets the in-progress state of the report.
+	 *
+	 * @param bool $in_progress In-progress state.
+	 */
 	public function set_in_progress( $in_progress ) {
 		$this->in_progress = $in_progress;
 	}
 
+	/**
+	 * Gets the progress of the report.
+	 *
+	 * @return int
+	 */
 	public function get_progress() {
 		return $this->progress;
 	}
 
+	/**
+	 * Sets the progress of the report.
+	 *
+	 * @param int $progress Progress value.
+	 */
 	public function set_progress( $progress ) {
 		$this->progress = $progress;
 	}
 
+	/**
+	 * Checks if the report has data.
+	 *
+	 * @return bool
+	 */
 	public function has_data() {
 		// Check if the meta has been set already or we have some error messages to show.
 		return (bool) (
@@ -381,6 +478,13 @@ class Seo_Report {
 		);
 	}
 
+	/**
+	 * Gets the redirect for a given path.
+	 *
+	 * @param string $path Path to check for redirect.
+	 *
+	 * @return string Redirect destination
+	 */
 	private function get_redirect( $path ) {
 		$redirect = $this->redirects_table->get_redirect_by_source( $path );
 

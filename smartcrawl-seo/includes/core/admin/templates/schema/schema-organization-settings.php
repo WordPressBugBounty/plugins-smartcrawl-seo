@@ -1,8 +1,15 @@
 <?php
+/**
+ * Template: Schema Organization Settings.
+ *
+ * @package Smartcrwal
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $option_name    = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $options        = empty( $options ) ? array() : $options;
 $social_options = empty( $social_options ) ? array() : $social_options;
-$pages          = empty( $pages ) ? array() : $pages; // phpcs:ignore
+$pages          = empty( $pages ) ? array() : $pages;
 
 $organization_type         = (string) \smartcrawl_get_array_value( $options, 'organization_type' );
 $organization_name         = (string) \smartcrawl_get_array_value( $social_options, 'organization_name' );
@@ -33,7 +40,7 @@ $this->render_view(
 		class="sui-form-control"
 		type="text"
 		name="<?php echo esc_attr( $option_name ); ?>[organization_name]"
-		placeholder="<?php echo get_bloginfo( 'name' ); // phpcs:ignore ?>"
+		placeholder="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
 		value="<?php echo esc_attr( $organization_name ); ?>"
 	/>
 </div>
@@ -46,7 +53,7 @@ $this->render_view(
 		id="organization_description"
 		class="sui-form-control"
 		type="text"
-		placeholder="<?php echo get_bloginfo( 'description' ); // phpcs:ignore ?>"
+		placeholder="<?php echo esc_attr( get_bloginfo( 'description' ) ); ?>"
 		name="<?php echo esc_attr( $option_name ); ?>[organization_description]"
 	><?php echo esc_textarea( $organization_description ); ?></textarea>
 </div>

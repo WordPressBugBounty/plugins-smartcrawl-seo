@@ -162,9 +162,7 @@ export default class LighthouseCheckCanonical extends React.Component {
 				</div>
 
 				<LighthouseToggle text={__('Read More - Guidelines')}>
-					<strong>
-						{__('General guidelines', 'smartcrawl-seo')}
-					</strong>
+					<strong>{__('General guidelines', 'smartcrawl-seo')}</strong>
 					<ul>
 						<li>
 							{__(

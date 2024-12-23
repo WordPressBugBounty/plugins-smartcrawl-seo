@@ -1,3 +1,12 @@
+<?php
+/**
+ * Template: Native Dismissible Notice Script and Style.
+ *
+ * @package SmartCrawl
+ */
+
+?>
+
 <style type="text/css">
 	.wds-native-dismiss,
 	.wds-inline-notice-link {

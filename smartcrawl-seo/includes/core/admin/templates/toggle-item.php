@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Toggle Item.
+ *
+ * @package Smartcrwal
+ */
+
 $inverted                   = empty( $inverted ) ? false : $inverted;
 $field_name                 = empty( $field_name ) ? '' : $field_name;
 $field_id                   = empty( $field_id ) ? $field_name : $field_id;
@@ -40,7 +46,7 @@ $checkbox_checked = ( $inverted && ! $checked ) || ( ! $inverted && $checked );
 			<?php if ( $sub_settings_template ) : ?>
 				aria-controls="sub-settings-<?php echo esc_attr( $field_id ); ?>"
 			<?php endif; ?>
-			<?php echo $attr_string; // phpcs:ignore -- Built escaped. ?>
+			<?php echo wp_kses_post( $attr_string ); ?>
 		/>
 
 		<span class="sui-toggle-slider" aria-hidden="true"></span>

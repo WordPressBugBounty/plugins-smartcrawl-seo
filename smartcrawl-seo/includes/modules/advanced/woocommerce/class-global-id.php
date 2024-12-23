@@ -71,7 +71,7 @@ class Global_Id extends Controllers\Controller {
 					'desc_tip'    => true,
 					'description' => sprintf(
 						/* translators: 1: Meta key label, 2: plugin title */
-						esc_html__( '%1$s value to use in the $2%s Product schema.', 'smartcrawl-seo' ),
+						esc_html__( '%1$s value to use in the %2$s Product schema.', 'smartcrawl-seo' ),
 						$label,
 						\smartcrawl_get_plugin_title()
 					),

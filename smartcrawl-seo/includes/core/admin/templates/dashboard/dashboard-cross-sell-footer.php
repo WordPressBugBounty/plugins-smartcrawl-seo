@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Cross Sell Footer.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

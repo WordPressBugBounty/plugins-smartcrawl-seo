@@ -1,24 +1,41 @@
 <?php
+/**
+ * Factory class for creating schema sources in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Factory
+ *
+ * Handles the creation of schema sources.
+ */
 class Factory {
+
 	/**
-	 * @var
+	 * The post object.
+	 *
+	 * @var \WP_Post
 	 */
 	private $post;
 
 	/**
-	 * @param $post
+	 * Constructor.
+	 *
+	 * @param \WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
 		$this->post = $post;
 	}
 
 	/**
-	 * @param $source
-	 * @param $value
-	 * @param $type
+	 * Creates a schema source.
+	 *
+	 * @param string $source The source identifier.
+	 * @param mixed  $value  The value for the source.
+	 * @param string $type   The type of the source.
 	 *
 	 * @return Author|Media|Options|Post|Post_Meta|Schema_Settings|SEO_Meta|Site_Settings|Text|Woocommerce
 	 */
@@ -60,8 +77,10 @@ class Factory {
 	}
 
 	/**
-	 * @param $source
-	 * @param $value
+	 * Creates a post-dependent schema source.
+	 *
+	 * @param string $source The source identifier.
+	 * @param mixed  $value  The value for the source.
 	 *
 	 * @return Author|Post|Post_Meta|Text|Woocommerce
 	 */
@@ -89,6 +108,8 @@ class Factory {
 	}
 
 	/**
+	 * Creates a default schema source.
+	 *
 	 * @return Text
 	 */
 	protected function create_default_source() {

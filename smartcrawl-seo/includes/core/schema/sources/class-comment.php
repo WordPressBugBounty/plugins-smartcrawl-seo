@@ -1,21 +1,40 @@
 <?php
+/**
+ * Comment class for handling comment schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class Comment
+ *
+ * Handles comment schema fragments.
+ */
 class Comment extends Property {
+
 	const ID = 'comment';
+
 	/**
-	 * @var
+	 * The comment object.
+	 *
+	 * @var \WP_Comment
 	 */
 	private $comment;
+
 	/**
-	 * @var
+	 * The field to retrieve the comment data for.
+	 *
+	 * @var string
 	 */
 	private $field;
 
 	/**
-	 * @param $comment
-	 * @param $field
+	 * Comment constructor.
+	 *
+	 * @param \WP_Comment $comment The comment object.
+	 * @param string      $field The field to retrieve the comment data for.
 	 */
 	public function __construct( $comment, $field ) {
 		parent::__construct();
@@ -25,7 +44,9 @@ class Comment extends Property {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the value of the comment data.
+	 *
+	 * @return string The value of the comment data.
 	 */
 	public function get_value() {
 		if ( empty( $this->comment ) ) {

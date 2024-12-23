@@ -38,7 +38,7 @@ const Course = {
 			'The identifier for the Course used by the course provider.',
 			'smartcrawl-seo'
 		),
-		placeholder: __('E.g. CS101'),
+		placeholder: __('E.g. CS101', 'smartcrawl-seo'),
 	},
 	numberOfCredits: {
 		id: id(),

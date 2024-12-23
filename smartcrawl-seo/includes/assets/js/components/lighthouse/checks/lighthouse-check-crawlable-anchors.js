@@ -147,9 +147,7 @@ export default class LighthouseCheckCrawlableAnchors extends React.Component {
 				</div>
 
 				<div className="wds-lh-section">
-					<strong>
-						{__('Link to resolvable URLs', 'smartcrawl-seo')}
-					</strong>
+					<strong>{__('Link to resolvable URLs', 'smartcrawl-seo')}</strong>
 					<p>
 						{__(
 							'Ensure that the URL linked to by your <a> tag is an actual web address that Googlebot can send requests to, for example:',
@@ -257,10 +255,7 @@ export default class LighthouseCheckCrawlableAnchors extends React.Component {
 			) +
 			'\n\n' +
 			LighthouseUtil.getFlattenedDetails(
-				[
-					__('Failing links', 'smartcrawl-seo'),
-					__('Link Text', 'smartcrawl-seo'),
-				],
+				[__('Failing links', 'smartcrawl-seo'), __('Link Text', 'smartcrawl-seo')],
 				this.getRows()
 			) +
 			__('Overview:', 'smartcrawl-seo') +

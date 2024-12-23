@@ -1,10 +1,25 @@
 <?php
+/**
+ * Data class for handling news sitemap-related data transformations in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps\News;
 
+/**
+ * Class Data
+ *
+ * Handles the transformation of settings to data and vice versa for the news sitemap.
+ */
 class Data {
+
 	/**
-	 * @return array
+	 * Transforms settings to data for the news sitemap.
+	 *
+	 * @param array $settings The settings array.
+	 *
+	 * @return array The transformed data.
 	 */
 	public function settings_to_data( $settings ) {
 		$news_sitemap_enabled = (bool) \smartcrawl_get_array_value( $settings, 'enable-news-sitemap' );
@@ -82,6 +97,13 @@ class Data {
 		);
 	}
 
+	/**
+	 * Transforms data to settings for the news sitemap.
+	 *
+	 * @param array $data The data array.
+	 *
+	 * @return array The transformed settings.
+	 */
 	public function data_to_settings( $data ) {
 		$included_post_types = array();
 		$excluded_post_ids   = array();

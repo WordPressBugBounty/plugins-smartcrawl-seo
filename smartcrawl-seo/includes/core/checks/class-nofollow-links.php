@@ -23,7 +23,7 @@ class Nofollow_Links extends Check {
 	private $state;
 
 	/**
-	 * Get the message for the check.
+	 * Retrieves the message for the check.
 	 *
 	 * @since 3.4.0
 	 *
@@ -36,7 +36,7 @@ class Nofollow_Links extends Check {
 	}
 
 	/**
-	 * Apply the check to subject.
+	 * Applies the check to subject.
 	 *
 	 * @return bool
 	 */
@@ -82,7 +82,7 @@ class Nofollow_Links extends Check {
 	}
 
 	/**
-	 * Get check result.
+	 * Retrieves check result.
 	 *
 	 * @since 3.6.0
 	 *

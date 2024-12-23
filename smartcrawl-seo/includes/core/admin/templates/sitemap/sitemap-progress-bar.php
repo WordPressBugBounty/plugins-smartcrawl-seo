@@ -1,8 +1,8 @@
 <?php
 /**
- * @var Seo_Report $crawl_report
+ * Template: Sitemap Progress Bar.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 namespace SmartCrawl;

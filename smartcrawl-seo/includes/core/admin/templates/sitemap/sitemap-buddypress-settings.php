@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Sitemap BuddyPress Settings.
+ *
+ * @package Smartcrwal
+ */
+
 $groups_enabled   = ! empty( $_view['options']['sitemap-buddypress-groups'] );
 $profiles_enabled = ! empty( $_view['options']['sitemap-buddypress-profiles'] );
 

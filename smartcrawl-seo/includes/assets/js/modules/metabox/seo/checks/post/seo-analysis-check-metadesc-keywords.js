@@ -34,11 +34,11 @@ export default class SeoAnalysisCheckMetadescKeywords extends React.Component {
 				{state
 					? __(
 							'The focus keyword for this article appears in the SEO description which means it has a better chance of matching what your visitors will search for, brilliant!',
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: __(
 							"An SEO description without your focus keywords has less chance of matching what your visitors are searching for, versus a description that does. It's worth trying to get your focus keywords in there, just remember to keep it readable and natural.",
-							'smartcrawl-seo'
+							'wds'
 					  )}
 			</p>
 		);

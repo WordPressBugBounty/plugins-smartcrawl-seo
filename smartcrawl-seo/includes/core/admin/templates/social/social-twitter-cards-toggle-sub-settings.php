@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Social Twitter Cards Toggle Sub-settings.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

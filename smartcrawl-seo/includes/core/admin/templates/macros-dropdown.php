@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Macros Dropdown.
+ *
+ * @package SmartCrawl
+ */
+
 $macros = empty( $macros ) ? array() : $macros;
 ?>
 

@@ -44,7 +44,7 @@ export default class SeoAnalysisContainer extends React.Component {
 								// translators: %s: plugin title
 								__(
 									'This tool helps you optimize your content to give it the best chance of being found in search engines when people are looking for it. Start by choosing a few focus keywords that best describe your article, then <strong>%s</strong> will give you recommendations to make sure your content is highly optimized.',
-									'smartcrawl-seo'
+									'wds'
 								),
 								ConfigValues.get('plugin_title', 'admin')
 							),
@@ -66,7 +66,7 @@ export default class SeoAnalysisContainer extends React.Component {
 						loading={loading}
 						message={__(
 							'Analyzing content. Please wait a few moments.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					></Notice>
 				)}

@@ -56,7 +56,7 @@ class Twitter_Printer extends Work_Unit {
 		}
 
 		add_action( 'wp_head', array( $this, 'dispatch_tags_injection' ), 50 );
-		add_action( 'wds_head-after_output', array( $this, 'dispatch_tags_injection' ) );
+		add_action( 'smartcrawl_head_after_output', array( $this, 'dispatch_tags_injection' ) );
 
 		$this->is_running = true;
 	}

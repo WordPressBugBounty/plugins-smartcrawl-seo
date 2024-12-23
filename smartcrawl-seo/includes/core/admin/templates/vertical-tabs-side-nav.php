@@ -1,13 +1,19 @@
 <?php
+/**
+ * Template: Vertical Tabs SideNav.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
-$tabs       = empty( $tabs ) || ! is_array( $tabs ) ? array() : $tabs; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$tabs       = empty( $tabs ) || ! is_array( $tabs ) ? array() : $tabs;
 $active_tab = empty( $active_tab ) ? '' : $active_tab;
 ?>
 <div class="wds-vertical-tabs sui-sidenav">
 	<ul class="sui-vertical-tabs">
-		<?php foreach ( $tabs as $tab ) : // phpcs:ignore ?>
+		<?php foreach ( $tabs as $tab ) : ?>
 			<?php
 			$tab_id     = \smartcrawl_get_array_value( $tab, 'id' );
 			$tab_name   = apply_filters( 'smartcrawl_vertical_side_nav_name', \smartcrawl_get_array_value( $tab, 'name' ), $tab_id );

@@ -1,4 +1,9 @@
 <?php
+/**
+ * BP_Groups class for handling BuddyPress groups in SmartCrawl sitemaps.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps\General\Queries;
 
@@ -8,6 +13,11 @@ use SmartCrawl\Singleton;
 use SmartCrawl\Sitemaps\Utils;
 use SmartCrawl\Sitemaps\General\Item;
 
+/**
+ * Class BP_Groups
+ *
+ * Handles the retrieval and processing of BuddyPress groups for sitemaps.
+ */
 class BP_Groups extends Query {
 
 	use Singleton;
@@ -15,14 +25,21 @@ class BP_Groups extends Query {
 	const TYPE = 'bp_groups';
 
 	/**
-	 * @return string[]
+	 * Returns the supported types.
+	 *
+	 * @return string[] The supported types.
 	 */
 	public function get_supported_types() {
 		return array( self::TYPE );
 	}
 
 	/**
-	 * @return array|Item[]
+	 * Retrieves the items for the given type and page number.
+	 *
+	 * @param string $type The type of items to retrieve.
+	 * @param int    $page_number The page number for pagination.
+	 *
+	 * @return array|Item[] The retrieved items.
 	 */
 	public function get_items( $type = '', $page_number = 0 ) {
 		if ( ! $this->can_return_items() ) {
@@ -50,7 +67,11 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return array Images
+	 * Retrieves the images associated with a group.
+	 *
+	 * @param object $group The group object.
+	 *
+	 * @return array The images.
 	 */
 	private function get_group_images( $group ) {
 		if ( ! Utils::sitemap_images_enabled() ) {
@@ -74,7 +95,11 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the avatar of a group.
+	 *
+	 * @param object $group The group object.
+	 *
+	 * @return string The group avatar HTML.
 	 */
 	private function get_group_avatar( $group ) {
 		return function_exists( '\bp_core_fetch_avatar' )
@@ -90,7 +115,11 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return string|void
+	 * Retrieves the cover URL of a group.
+	 *
+	 * @param object $group The group object.
+	 *
+	 * @return string The group cover URL.
 	 */
 	private function get_group_cover_url( $group ) {
 		return function_exists( '\bp_attachments_get_attachment' )
@@ -105,7 +134,11 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the type can be handled.
+	 *
+	 * @param string $type The type to check.
+	 *
+	 * @return bool True if the type can be handled, false otherwise.
 	 */
 	public function can_handle_type( $type ) {
 		return parent::can_handle_type( $type )
@@ -113,7 +146,9 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if items can be returned.
+	 *
+	 * @return bool True if items can be returned, false otherwise.
 	 */
 	private function can_return_items() {
 		return defined( '\BP_VERSION' )
@@ -124,14 +159,18 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return string
+	 * Returns the filter prefix.
+	 *
+	 * @return string The filter prefix.
 	 */
 	public function get_filter_prefix() {
 		return 'wds-sitemap-bp_groups';
 	}
 
 	/**
-	 * @return bool
+	 * Checks if BuddyPress groups are enabled.
+	 *
+	 * @return bool True if BuddyPress groups are enabled, false otherwise.
 	 */
 	private function bp_groups_enabled() {
 		$options = $this->get_options();
@@ -140,7 +179,11 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return \BP_Groups_Group[]
+	 * Retrieves the groups for the given page number.
+	 *
+	 * @param int $page_number The page number for pagination.
+	 *
+	 * @return \BP_Groups_Group[] The retrieved groups.
 	 */
 	private function get_groups( $page_number ) {
 		$per_page = $this->get_limit( $page_number );
@@ -158,7 +201,11 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return boolean
+	 * Checks if a group is excluded.
+	 *
+	 * @param object $group The group object.
+	 *
+	 * @return bool True if the group is excluded, false otherwise.
 	 */
 	private function is_group_excluded( $group ) {
 		$options = $this->get_options();
@@ -167,7 +214,9 @@ class BP_Groups extends Query {
 	}
 
 	/**
-	 * @return array
+	 * Retrieves the options.
+	 *
+	 * @return array The options.
 	 */
 	private function get_options() {
 		return Settings::get_options();

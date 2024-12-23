@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Reporting Schedule.
+ *
+ * @package Smartcrwal
+ */
+
 $frequency            = empty( $frequency ) ? false : $frequency;
 $dom_value            = empty( $dom_value ) ? false : $dom_value;
 $dow_value            = empty( $dow_value ) ? false : $dow_value;

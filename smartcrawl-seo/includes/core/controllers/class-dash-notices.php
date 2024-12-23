@@ -1,4 +1,9 @@
 <?php
+/**
+ * Handles Dashboard Notices on Free version.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Controllers;
 
@@ -12,21 +17,25 @@ require_once $file_path;
 use SmartCrawl\Singleton;
 
 /**
- * Class Dash_Notices
+ * Dash_Notices Controller for Free version.
  */
 class Dash_Notices extends Controller {
 
 	use Singleton;
 
+	/**
+	 * Initializes action hooks.
+	 *
+	 * @return void
+	 */
 	protected function init() {
-		// Register notices.
 		add_action( 'admin_init', array( $this, 'register_notices' ) );
 	}
 
 	/**
-	 * Register SmartCrawl notices.
+	 * Registers SmartCrawl notices.
 	 *
-	 * @return true
+	 * @return void
 	 */
 	public function register_notices() {
 		$installed_on = get_site_option( 'wds-free-install-date', time() );
@@ -50,7 +59,5 @@ class Dash_Notices extends Controller {
 				),
 			)
 		);
-
-		return true;
 	}
 }

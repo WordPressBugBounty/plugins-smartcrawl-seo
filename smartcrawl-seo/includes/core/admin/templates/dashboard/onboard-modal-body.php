@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onboard modal body.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 

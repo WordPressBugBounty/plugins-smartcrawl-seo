@@ -37,21 +37,21 @@ export default class SeoAnalysisCheckMetadescLength extends React.Component {
 				{typeof state === 'boolean'
 					? __(
 							'Your SEO description is a good length. Having an SEO description that is either too long or too short can harm your chances of ranking highly for this article.',
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: 0 === state
 					? __(
 							"Because you haven't specified a meta description (or excerpt), search engines will automatically generate one using your content. While this is OK, you should create your own meta description making sure it contains your focus keywords.",
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: state > 0
 					? __(
 							"Your SEO description (or excerpt) is currently too long. Search engines generally don't like long descriptions and after a certain length the value of extra keywords drops significantly.",
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: __(
 							'Your SEO description (or excerpt) is currently too short which means it has less of a chance ranking for your chosen focus keywords.',
-							'smartcrawl-seo'
+							'wds'
 					  )}
 			</p>
 		);

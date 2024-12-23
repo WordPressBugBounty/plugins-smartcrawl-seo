@@ -1,25 +1,42 @@
 <?php
+/**
+ * Comments class for handling comments schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Loops;
 
+/**
+ * Class Comments
+ *
+ * Handles comments schema fragments.
+ */
 class Comments extends Loop {
 	const ID = 'post-comments';
+
 	/**
-	 * @var
+	 * The post object.
+	 *
+	 * @var \WP_Post
 	 */
 	private $post;
 
 	/**
-	 * @param $post
+	 * Comments constructor.
+	 *
+	 * @param \WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
 		$this->post = $post;
 	}
 
 	/**
-	 * @param $property
+	 * Retrieves the property value for the comments.
 	 *
-	 * @return array
+	 * @param string $property The property to retrieve the value for.
+	 *
+	 * @return array The property value.
 	 */
 	public function get_property_value( $property ) {
 		if ( empty( $this->post ) ) {
@@ -37,7 +54,9 @@ class Comments extends Loop {
 	}
 
 	/**
-	 * @return array|int
+	 * Retrieves the comments for the post.
+	 *
+	 * @return array|int The comments for the post.
 	 */
 	private function get_comments() {
 		return get_comments(

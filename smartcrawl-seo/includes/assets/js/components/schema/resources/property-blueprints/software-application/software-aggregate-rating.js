@@ -79,7 +79,7 @@ const SoftwareAggregateRating = {
 		required: true,
 		description: __(
 			'A numerical quality rating for the item, either a number, fraction, or percentage (for example, "4", "60%", or "6 / 10").',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 	bestRating: {

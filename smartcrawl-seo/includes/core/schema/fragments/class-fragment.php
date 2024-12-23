@@ -1,15 +1,30 @@
 <?php
+/**
+ * Abstract Fragment class for handling schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
+/**
+ * Class Fragment
+ *
+ * Abstract class for handling schema fragments.
+ */
 abstract class Fragment {
+
 	/**
-	 * @var null
+	 * The schema data.
+	 *
+	 * @var null|array
 	 */
 	private $schema = null;
 
 	/**
-	 * @return array|mixed|null
+	 * Retrieves the schema data.
+	 *
+	 * @return array|mixed|null The schema data.
 	 */
 	public function get_schema() {
 		if ( is_null( $this->schema ) ) {
@@ -20,12 +35,16 @@ abstract class Fragment {
 	}
 
 	/**
-	 * @return mixed
+	 * Retrieves raw schema data.
+	 *
+	 * @return mixed The raw schema data.
 	 */
 	abstract protected function get_raw();
 
 	/**
-	 * @return array|mixed|null
+	 * Creates the schema data.
+	 *
+	 * @return array|mixed|null The created schema data.
 	 */
 	private function make_schema() {
 		/**
@@ -50,9 +69,11 @@ abstract class Fragment {
 	}
 
 	/**
-	 * @param $schema_item
+	 * Processes a schema item.
 	 *
-	 * @return array|mixed|null
+	 * @param mixed $schema_item The schema item to process.
+	 *
+	 * @return array|mixed|null The processed schema item.
 	 */
 	private function process_schema_item( $schema_item ) {
 		if ( is_a( $schema_item, self::class ) ) {
@@ -65,9 +86,11 @@ abstract class Fragment {
 	}
 
 	/**
-	 * @param $schema
+	 * Traverses a schema array.
 	 *
-	 * @return array
+	 * @param array $schema The schema array to traverse.
+	 *
+	 * @return array The traversed schema array.
 	 */
 	private function traverse_schema_array( $schema ) {
 		$new_schema   = array();

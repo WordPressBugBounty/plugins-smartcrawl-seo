@@ -1,5 +1,12 @@
 <?php
-$title                 = empty( $title ) ? '' : $title; // phpcs:ignore
+/**
+ * Template: Page Header.
+ *
+ * @package Smartcrwal
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$title                 = empty( $title ) ? '' : $title;
 $documentation_chapter = empty( $documentation_chapter ) ? '' : $documentation_chapter;
 $utm_campaign          = empty( $utm_campaign ) ? '' : $utm_campaign;
 $left_actions          = empty( $left_actions ) ? '' : $left_actions;
@@ -14,7 +21,7 @@ do_action_deprecated(
 	array(),
 	'6.4.2',
 	'smartcrawl_admin_notices',
-	__( 'Please use our new hook `smartcrawl_admin_notices` in SmartCrawl.' )
+	__( 'Please use our new hook `smartcrawl_admin_notices` in SmartCrawl.', 'smartcrawl-seo' )
 );
 
 do_action( 'smartcrawl_admin_notices' );

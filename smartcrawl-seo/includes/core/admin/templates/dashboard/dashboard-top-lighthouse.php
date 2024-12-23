@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Top bar Lighthouse summary.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -11,11 +16,11 @@ if ( ! $lighthouse_available && ! $sitemap_crawler_available ) {
 	return;
 }
 
-$lighthouse_start_time = ! empty( $lighthouse_start_time ) && $lighthouse_start_time;
+$lighthouse_start_time = ! empty( $lighthouse_start_time );
 /**
  * Report.
  *
- * @var $lighthouse_report \SmartCrawl\Lighthouse\Report|\WP_Error|false
+ * @var \SmartCrawl\Lighthouse\Report|\WP_Error|false $lighthouse_report
  */
 $lighthouse_report = empty( $lighthouse_report ) || ! $lighthouse_report->has_data() || $lighthouse_report->has_errors()
 	? false
@@ -45,7 +50,7 @@ $whitelabel_class  = \SmartCrawl\Controllers\White_Label::get()->summary_class()
 
 								<div
 									class="sui-circle-score sui-circle-score-lg sui-grade-<?php echo esc_attr( $lighthouse_report->get_score_grade() ); ?>"
-									data-score="<?php echo esc_attr( $lighthouse_report->get_score() ); ?>"></div>
+									data-score="<?php echo esc_attr( (string) $lighthouse_report->get_score() ); ?>"></div>
 							</div>
 						<?php endif; ?>
 
@@ -99,7 +104,7 @@ $whitelabel_class  = \SmartCrawl\Controllers\White_Label::get()->summary_class()
 					<?php elseif ( $lighthouse_report ) : ?>
 						<?php if ( $lighthouse_report->get_failed_audits_count() > 0 ) : ?>
 							<span class="sui-tag sui-tag-yellow">
-								<?php echo esc_html( $lighthouse_report->get_failed_audits_count() ); ?>
+								<?php echo esc_html( (string) $lighthouse_report->get_failed_audits_count() ); ?>
 							</span>
 						<?php else : ?>
 							<span

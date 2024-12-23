@@ -48,7 +48,7 @@ class Analysis_Content extends Controller {
 	 * @return bool
 	 */
 	private function is_analysis_running() {
-		return ! empty( $_GET['wds-frontend-check'] ) && ! is_admin() && is_user_logged_in(); // phpcs:ignore -- nonce verification not needed.
+		return ! empty( $_GET['wds-frontend-check'] ) && ! is_admin() && is_user_logged_in(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**

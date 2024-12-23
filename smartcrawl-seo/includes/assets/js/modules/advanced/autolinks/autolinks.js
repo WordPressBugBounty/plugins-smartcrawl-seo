@@ -48,7 +48,7 @@ export default class Autolinks extends React.Component {
 							// translators: %s: plugin title
 							__(
 								'Configure <strong>%s</strong> to automatically link certain keywords to a page on your blog or even a whole new site all together. Internal linking can help boost SEO by giving search engines ample ways to index your site.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							ConfigValues.get('plugin_title', 'admin')
 						),
@@ -60,7 +60,7 @@ export default class Autolinks extends React.Component {
 				deactivateProps={{
 					description: __(
 						'No longer need keyword linking? This will deactivate this feature but won’t remove existing links.',
-						'smartcrawl-seo'
+						'wds'
 					),
 				}}
 			>
@@ -70,7 +70,7 @@ export default class Autolinks extends React.Component {
 							// translators: %s: plugin title
 							__(
 								'<strong>%s</strong> will look for keywords that match posts/pages around your website and automatically link them. Specify what post types you want to include in this tool, and what post types you want those to automatically link to.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							ConfigValues.get('plugin_title', 'admin')
 						),
@@ -82,7 +82,7 @@ export default class Autolinks extends React.Component {
 					message={createInterpolateElement(
 						__(
 							'Certain page builders and themes can interfere with the auto linking feature causing issues on your site. Enable the "<strong>Prevent caching on auto-linked content</strong>" option in the Settings tab section to fix the issues.',
-							'smartcrawl-seo'
+							'wds'
 						),
 						{
 							strong: <strong />,

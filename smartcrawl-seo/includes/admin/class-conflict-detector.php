@@ -82,7 +82,8 @@ class Conflict_Detector extends Controller {
 		>
 			<p>
 			<?php
-			$settings_admin_url = add_query_arg( 'referer', sanitize_text_field( wp_unslash( $_GET['page'] ) ), Admin_Settings::admin_url( SC_Settings::TAB_SETTINGS ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.NonceVerification.Recommended
+			$referer_page       = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$settings_admin_url = add_query_arg( 'referer', $referer_page, Admin_Settings::admin_url( SC_Settings::TAB_SETTINGS ) );
 
 			echo wp_kses_post(
 				sprintf(

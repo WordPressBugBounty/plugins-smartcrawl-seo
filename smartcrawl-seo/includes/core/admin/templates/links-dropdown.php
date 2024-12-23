@@ -1,5 +1,10 @@
 <?php
-// phpcs:ignoreFile -- All values passed to this template are expected to be escaped already
+/**
+ * Template: Displaying a links' dropdown.
+ *
+ * @package smartcrawl
+ */
+
 $label = empty( $label ) ? '' : $label;
 $links = empty( $links ) ? array() : $links;
 ?>
@@ -14,7 +19,7 @@ $links = empty( $links ) ? array() : $links;
 	</button>
 	<ul>
 		<?php foreach ( $links as $href => $text ) : ?>
-			<li><a href="<?php echo esc_attr( $href ); ?>"><?php echo $text; ?></a></li>
+			<li><a href="<?php echo esc_attr( $href ); ?>"><?php echo esc_html( $text ); ?></a></li>
 		<?php endforeach; ?>
 	</ul>
 </div>

@@ -98,6 +98,11 @@ class Controller extends Work_Unit {
 		return 'wds-controller-io';
 	}
 
+	/**
+	 * Import Yoast data.
+	 *
+	 * @return void
+	 */
 	public function import_yoast_data() {
 		$options = $this->get_import_options_from_request();
 		$this->do_import( new Yoast(), $options );
@@ -137,6 +142,11 @@ class Controller extends Work_Unit {
 		wp_send_json_success( $result );
 	}
 
+	/**
+	 * Check if the user has permission to import.
+	 *
+	 * @return bool True if the user has permission, false otherwise.
+	 */
 	private function user_has_permission_to_import() {
 		if ( ! is_network_admin() && ! is_admin() ) {
 			return false;
@@ -151,13 +161,23 @@ class Controller extends Work_Unit {
 		return true;
 	}
 
+	/**
+	 * Import All in One SEO Pack data.
+	 *
+	 * @return void
+	 */
 	public function import_aioseop_data() {
 		$options = $this->get_import_options_from_request();
 		$this->do_import( new AIOSEOP(), $options );
 	}
 
+	/**
+	 * Get request data.
+	 *
+	 * @return array The request data.
+	 */
 	private function get_request_data() {
-		if ( isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-io-nonce' ) ) { // phpcs:ignore
+		if ( isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-io-nonce' ) ) {
 			return stripslashes_deep( $_POST );
 		} elseif ( ! empty( $_POST['io-action'] ) ) {
 				$this->add_error( 'io-nonce-failure', __( 'Invalid parameters. Try refreshing the page and attempting again.', 'smartcrawl-seo' ) );
@@ -166,6 +186,11 @@ class Controller extends Work_Unit {
 		return array();
 	}
 
+	/**
+	 * Get import options from the request.
+	 *
+	 * @return array The import options.
+	 */
 	private function get_import_options_from_request() {
 		$request_data             = $this->get_request_data();
 		$options                  = \smartcrawl_get_array_value( $request_data, 'items_to_import' );

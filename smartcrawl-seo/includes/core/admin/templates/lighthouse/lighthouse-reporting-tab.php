@@ -1,7 +1,14 @@
 <?php
+/**
+ * Template: Lighthouse Reporting Tab.
+ *
+ * @package SmartCrawl
+ */
+
 $is_member  = ! empty( $_view['is_member'] );
 $active_tab = empty( $active_tab ) ? '' : $active_tab;
 ?>
+
 <form id="wds-reporting-form">
 	<?php
 	$this->render_view(

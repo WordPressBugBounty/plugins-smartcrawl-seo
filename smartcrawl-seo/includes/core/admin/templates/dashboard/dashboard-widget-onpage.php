@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Dashboard Onpage Widget.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -44,7 +49,7 @@ if ( ! $onpage_enabled && $hide_disables ) {
 			<div class="wds-separator-top wds-draw-left-padded">
 				<small><strong><?php esc_html_e( 'Public post types', 'smartcrawl-seo' ); ?></strong></small>
 				<span class="wds-right">
-					<small><?php echo esc_html( count( $public_post_types ) ); ?></small>
+					<small><?php echo esc_html( (string) count( $public_post_types ) ); ?></small>
 				</span>
 			</div>
 		<?php endif; ?>

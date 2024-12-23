@@ -1,3 +1,12 @@
+<?php
+/**
+ * Template: Onpage Header Actions.
+ *
+ * @package Smartcrwal
+ */
+
+?>
+
 <button
 	type="button"
 	data-modal-open="wds-supported-macros-modal"

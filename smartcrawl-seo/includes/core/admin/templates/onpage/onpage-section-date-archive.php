@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Date Archive section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

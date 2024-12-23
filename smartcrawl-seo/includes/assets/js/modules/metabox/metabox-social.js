@@ -19,7 +19,7 @@ export default class MetaboxSocial extends React.Component {
 								// translators: %s: plugin title
 								__(
 									"Customize this post's title, description and featured images for social shares. You can also configure the default settings for this post type in <strong>%s</strong>'s <a>Titles & Meta</a> area.",
-									'smartcrawl-seo'
+									'wds'
 								),
 								ConfigValues.get('plugin_title', 'admin')
 							),
@@ -30,7 +30,7 @@ export default class MetaboxSocial extends React.Component {
 						label={__('OpenGraph', 'smartcrawl-seo')}
 						description={__(
 							'OpenGraph is used on many social networks such as Facebook.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						titlePlaceholder={og.title_placeholder}
 						titleValue={og.title_value}

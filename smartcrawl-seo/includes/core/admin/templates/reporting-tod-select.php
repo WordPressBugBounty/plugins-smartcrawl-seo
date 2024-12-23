@@ -1,5 +1,12 @@
 <?php
+/**
+ * Template: Reporting Time of Day Select.
+ *
+ * @package Smartcrwal
+ */
+
 $component = empty( $component ) ? '' : $component;
+
 if ( ! $component ) {
 	return;
 }
@@ -32,7 +39,7 @@ $time_label = empty( $timezone ) ? '' : sprintf( '%s (%s)', wp_date( 'h:i A' ), 
 	name="<?php echo esc_attr( $select_name ); ?>"
 >
 	<?php foreach ( range( 0, 23 ) as $tod ) : ?>
-		<option value="<?php echo esc_attr( $tod ); ?>" <?php selected( $tod, $tod_value ); ?>>
+		<option value="<?php echo esc_attr( (string) $tod ); ?>" <?php selected( $tod, $tod_value ); ?>>
 			<?php echo esc_html( date_i18n( get_option( 'time_format' ), $midnight + ( $tod * HOUR_IN_SECONDS ) ) ); ?>
 		</option>
 	<?php endforeach; ?>
@@ -43,7 +50,7 @@ $time_label = empty( $timezone ) ? '' : sprintf( '%s (%s)', wp_date( 'h:i A' ), 
 		<?php
 		printf(
 			// translators: %1$s current time with timezone, %2$s general options page url.
-			__( 'Your site\'s current time is %1$s based on your <a href="%2$s" target="_blank">WordPress Settings</a>.', 'smartcrawl-seo' ),
+			esc_html__( 'Your site\'s current time is %1$s based on your <a href="%2$s" target="_blank">WordPress Settings</a>.', 'smartcrawl-seo' ),
 			esc_html( $time_label ),
 			esc_url( admin_url( 'options-general.php' ) )
 		);

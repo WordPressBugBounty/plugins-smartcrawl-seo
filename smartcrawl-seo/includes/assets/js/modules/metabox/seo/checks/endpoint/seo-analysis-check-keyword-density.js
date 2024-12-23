@@ -36,7 +36,7 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 							/* translators: 1, 2: Density range */
 							__(
 								"Currently you haven't used any keywords in your content. The recommended density is %1$d-%2$d%%. A low keyword density means your content has less chance of ranking highly for your chosen focus keywords.",
-								'smartcrawl-seo'
+								'wds'
 							),
 							min,
 							max
@@ -46,7 +46,7 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 							/* translators: 1, 2: Density range, 3: Current density, 4: type of keyword */
 							__(
 								'Your %4$s density is %3$s%% which is within the recommended %1$d-%2$d%%, nice work! This means your content has a better chance of ranking highly for your chosen focus keywords, without appearing as spam.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							min,
 							max,
@@ -58,7 +58,7 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 							/* translators: 1, 2: Density range, 3: Current density, 4: type of keyword */
 							__(
 								'Currently your %4$s density is %3$s%% which is below the recommended %1$d-%2$d%%. A low keyword density means your content has less chance of ranking highly for your chosen focus keywords.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							min,
 							max,
@@ -69,7 +69,7 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 							/* translators: 1, 2: Density range, 3: Current density, 4: type for keyword */
 							__(
 								'Currently your %4$s density is %3$s%% which is greater than the recommended %1$d-%2$d%%. If your content is littered with too many focus keywords, search engines can penalize your content and mark it as spam.',
-								'smartcrawl-seo'
+								'wds'
 							),
 							min,
 							max,

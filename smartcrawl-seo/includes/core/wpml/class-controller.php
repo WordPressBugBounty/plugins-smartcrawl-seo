@@ -1,15 +1,27 @@
 <?php
+/**
+ * Controller class for handling WPML integration.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\WPML;
 
 use SmartCrawl\Singleton;
 use SmartCrawl\Controllers;
 
+/**
+ * Class Controller
+ *
+ * Manages WPML integration and related hooks.
+ */
 class Controller extends Controllers\Controller {
 
 	use Singleton;
 
 	/**
+	 * WPML API instance.
+	 *
 	 * @var Api
 	 */
 	private $wpml_api;
@@ -23,14 +35,25 @@ class Controller extends Controllers\Controller {
 		$this->wpml_api = new Api();
 	}
 
+	/**
+	 * Checks if WPML is active.
+	 *
+	 * @return bool True if WPML is active, false otherwise.
+	 */
 	public function should_run() {
 		return class_exists( '\SitePress' );
 	}
 
+	/**
+	 * Initializes the controller.
+	 */
 	protected function init() {
 		add_action( 'plugins_loaded', array( $this, 'hook_with_wpml' ) );
 	}
 
+	/**
+	 * Hooks the controller with WPML.
+	 */
 	public function hook_with_wpml() {
 		global $sitepress;
 		if ( empty( $sitepress ) ) {
@@ -41,7 +64,7 @@ class Controller extends Controllers\Controller {
 		add_action( 'wds_post_seo_analysis_language', array( $this, 'change_post_analysis_language' ), 10, 2 );
 
 		$strategy                 = $this->wpml_api->get_setting( 'language_negotiation_type' );
-		$separate_domain_per_lang = $strategy == 2; // phpcs:ignore
+		$separate_domain_per_lang = 2 === $strategy;
 		if ( $separate_domain_per_lang ) {
 			$this->sitemap_for_each_domain();
 		} else {
@@ -67,6 +90,14 @@ class Controller extends Controllers\Controller {
 		add_filter( 'wds_sitemap_cache_file_name', array( $this, 'append_language_code_to_cache' ) );
 	}
 
+	/**
+	 * Limits sitemap terms by language.
+	 *
+	 * @param array $include_ids Term IDs to include.
+	 * @param array $taxonomies  Taxonomies to query.
+	 *
+	 * @return array Filtered term IDs.
+	 */
 	public function limit_sitemap_terms_by_language( $include_ids, $taxonomies ) {
 		$term_query = new \WP_Term_Query(
 			array(
@@ -86,6 +117,14 @@ class Controller extends Controllers\Controller {
 		return array_merge( $include_ids, $term_ids );
 	}
 
+	/**
+	 * Limits sitemap posts by language.
+	 *
+	 * @param array $include_ids Post IDs to include.
+	 * @param array $post_types  Post types to query.
+	 *
+	 * @return array Filtered post IDs.
+	 */
 	public function limit_sitemap_posts_by_language( $include_ids, $post_types ) {
 		$query = new \WP_Query(
 			array(
@@ -108,6 +147,13 @@ class Controller extends Controllers\Controller {
 		return array_merge( $include_ids, $post_ids );
 	}
 
+	/**
+	 * Appends language code to cache file name.
+	 *
+	 * @param string $file_name Original file name.
+	 *
+	 * @return string Modified file name with language code.
+	 */
 	public function append_language_code_to_cache( $file_name ) {
 		$current_lang = apply_filters( 'wpml_current_language', null );
 
@@ -126,6 +172,15 @@ class Controller extends Controllers\Controller {
 		add_filter( 'wds_partial_sitemap_items', array( $this, 'add_homepage_versions_to_partial' ), 10, 3 );
 	}
 
+	/**
+	 * Adds homepage versions to partial sitemap.
+	 *
+	 * @param array  $items       Sitemap items.
+	 * @param string $type        Sitemap type.
+	 * @param int    $page_number Page number.
+	 *
+	 * @return array Modified sitemap items.
+	 */
 	public function add_homepage_versions_to_partial( $items, $type, $page_number ) {
 		$is_first_post_sitemap = ( 'post' === $type || 'page' === $type ) && 1 === $page_number;
 		if ( ! $is_first_post_sitemap ) {
@@ -135,6 +190,13 @@ class Controller extends Controllers\Controller {
 		return $this->add_homepage_versions( $items );
 	}
 
+	/**
+	 * Adds homepage versions to sitemap.
+	 *
+	 * @param array $items Sitemap items.
+	 *
+	 * @return array Modified sitemap items.
+	 */
 	public function add_homepage_versions( $items ) {
 		// Remove the original home url.
 		array_shift( $items );
@@ -161,6 +223,9 @@ class Controller extends Controllers\Controller {
 		return $items;
 	}
 
+	/**
+	 * Adds permalink filters.
+	 */
 	public function add_permalink_filters() {
 		$callback = array( $this, 'translate_post_url' );
 
@@ -169,6 +234,9 @@ class Controller extends Controllers\Controller {
 		add_filter( 'post_type_link', $callback, 10, 2 );
 	}
 
+	/**
+	 * Removes permalink filters.
+	 */
 	public function remove_permalink_filters() {
 		$callback = array( $this, 'translate_post_url' );
 
@@ -178,10 +246,12 @@ class Controller extends Controllers\Controller {
 	}
 
 	/**
-	 * @param string   $link       Link.
-	 * @param \WP_Post $post_or_id Post object.
+	 * Translates post URL to the current language.
 	 *
-	 * @return string
+	 * @param string   $link       Original link.
+	 * @param \WP_Post $post_or_id Post object or ID.
+	 *
+	 * @return string Translated link.
 	 */
 	public function translate_post_url( $link, $post_or_id ) {
 		$post          = get_post( $post_or_id );
@@ -198,12 +268,27 @@ class Controller extends Controllers\Controller {
 		return $language_url;
 	}
 
+	/**
+	 * Gets sitemap homepage item.
+	 *
+	 * @param string $url URL of the homepage.
+	 *
+	 * @return \SmartCrawl\Sitemaps\General\Item Sitemap item.
+	 */
 	private function get_sitemap_homepage_item( $url ) {
 		$item = new \SmartCrawl\Sitemaps\General\Item();
 
 		return $item->set_location( $url );
 	}
 
+	/**
+	 * Changes post analysis language.
+	 *
+	 * @param string $post_language Current post language.
+	 * @param int    $post_id       Post ID.
+	 *
+	 * @return string Modified post language.
+	 */
 	public function change_post_analysis_language( $post_language, $post_id ) {
 		$wpml_lang_code = $this->get_post_language_code( $post_id );
 
@@ -222,6 +307,6 @@ class Controller extends Controllers\Controller {
 	private function get_post_language_code( $post_id ) {
 		global $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare( "SELECT language_code FROM {$wpdb->prefix}icl_translations WHERE element_id = %d", $post_id ) ); // phpcs:ignore -- direct db call needed.
+		return $wpdb->get_var( $wpdb->prepare( "SELECT language_code FROM {$wpdb->prefix}icl_translations WHERE element_id = %d", $post_id ) );
 	}
 }

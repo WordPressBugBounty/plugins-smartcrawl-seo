@@ -1,8 +1,8 @@
 <?php
 /**
- * @var string $for_type
+ * Template: Onpage Social Meta Tags Sub Settings.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 $option_name    = empty( $option_name ) ? '' : $option_name;

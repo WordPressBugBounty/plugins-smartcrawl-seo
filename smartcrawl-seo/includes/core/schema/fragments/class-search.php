@@ -1,36 +1,63 @@
 <?php
+/**
+ * Search class for handling search schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Search
+ *
+ * Handles search schema fragments.
+ */
 class Search extends Fragment {
+
 	/**
-	 * @var
+	 * The search term.
+	 *
+	 * @var string
 	 */
 	private $search_term;
+
 	/**
+	 * The posts related to the search.
+	 *
 	 * @var \WP_Post[]
 	 */
 	private $posts;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
-	 * @var
+	 * The title of the search results.
+	 *
+	 * @var string
 	 */
 	private $title;
+
 	/**
-	 * @var
+	 * The description of the search results.
+	 *
+	 * @var string
 	 */
 	private $description;
 
 	/**
-	 * @param $search_term
-	 * @param $posts
-	 * @param $title
-	 * @param $description
+	 * Search constructor.
+	 *
+	 * @param string     $search_term The search term.
+	 * @param \WP_Post[] $posts The posts related to the search.
+	 * @param string     $title The title of the search results.
+	 * @param string     $description The description of the search results.
 	 */
 	public function __construct( $search_term, $posts, $title, $description ) {
 		$this->search_term = $search_term;
@@ -41,7 +68,9 @@ class Search extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed|Archive
+	 * Retrieves raw schema data.
+	 *
+	 * @return array|mixed|Archive The raw schema data.
 	 */
 	protected function get_raw() {
 		$enabled    = (bool) $this->utils->get_schema_option( 'schema_enable_search' );

@@ -14,7 +14,7 @@ export default class Deactivate extends React.Component {
 
 		return (
 			<SettingsRow
-				label={__('Deactivate', 'smartcrawl-seo')}
+				label={__('Deactivate', 'wds-textdmomain')}
 				description={description}
 			>
 				<Button

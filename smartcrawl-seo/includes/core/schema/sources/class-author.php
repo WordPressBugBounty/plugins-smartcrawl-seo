@@ -1,9 +1,19 @@
 <?php
+/**
+ * Author class for handling author schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
 use SmartCrawl\Models\User;
 
+/**
+ * Class Author
+ *
+ * Handles author schema fragments.
+ */
 class Author extends Property {
 	const ID = 'author';
 
@@ -18,17 +28,24 @@ class Author extends Property {
 	const EMAIL        = 'author_email';
 
 	/**
-	 * @var
+	 * The post object.
+	 *
+	 * @var \WP_Post
 	 */
 	private $post;
+
 	/**
-	 * @var
+	 * The field to retrieve the author data for.
+	 *
+	 * @var string
 	 */
 	private $field;
 
 	/**
-	 * @param $post
-	 * @param $field
+	 * Author constructor.
+	 *
+	 * @param \WP_Post $post The post object.
+	 * @param string   $field The field to retrieve the author data for.
 	 */
 	public function __construct( $post, $field ) {
 		parent::__construct();
@@ -38,7 +55,9 @@ class Author extends Property {
 	}
 
 	/**
-	 * @return array|string
+	 * Retrieves the value of the author data.
+	 *
+	 * @return array|string The value of the author data.
 	 */
 	public function get_value() {
 		$user     = User::get( $this->post->post_author );
@@ -83,25 +102,33 @@ class Author extends Property {
 	}
 
 	/**
-	 * @param $user User
+	 * Retrieves the full name of the user.
 	 *
-	 * @return string
+	 * @param User $user The user object.
+	 *
+	 * @return string The full name of the user.
 	 */
 	private function get_user_full_name( $user ) {
 		return $this->utils->apply_filters( 'user-full_name', $user->get_full_name(), $user );
 	}
 
 	/**
-	 * @param $user User
+	 * Retrieves the URL of the user.
 	 *
-	 * @return string
+	 * @param User $user The user object.
+	 *
+	 * @return string The URL of the user.
 	 */
 	private function get_user_url( $user ) {
 		return $this->utils->apply_filters( 'user-url', $user->get_user_url(), $user );
 	}
 
 	/**
-	 * @param $user User
+	 * Retrieves the profile URLs of the user.
+	 *
+	 * @param User $user The user object.
+	 *
+	 * @return array The profile URLs of the user.
 	 */
 	private function get_user_urls( $user ) {
 		return $this->utils->apply_filters( 'user-urls', $user->get_user_urls(), $user );

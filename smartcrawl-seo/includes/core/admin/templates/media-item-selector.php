@@ -1,7 +1,14 @@
 <?php
+/**
+ * Template: Media Item Selector.
+ *
+ * @package SmartCrawl
+ */
+
 $option_name = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 
-$id    = empty( $id ) ? '' : $id; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$id    = empty( $id ) ? '' : $id;
 $value = empty( $value ) ? '' : $value;
 $field = empty( $field ) ? 'id' : $field;
 

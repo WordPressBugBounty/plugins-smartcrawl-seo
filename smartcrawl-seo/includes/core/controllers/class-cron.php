@@ -92,7 +92,7 @@ class Cron {
 	 *
 	 * @return int|bool UNIX timestamp or false if no next event
 	 */
-	public function get_next_event( $event = false ) {
+	public function get_next_event( $event ) {
 		$event = ! empty( $event ) ? $event : self::ACTION_CRAWL;
 
 		return wp_next_scheduled( $this->get_filter( $event ) );
@@ -105,7 +105,7 @@ class Cron {
 	 *
 	 * @return bool
 	 */
-	public function unschedule( $event = false ) {
+	public function unschedule( $event = '' ) {
 		$event = ! empty( $event ) ? $event : self::ACTION_SITEMAP_UPDATE;
 		Logger::info( "Unscheduling event {$event}" );
 		$tstamp = $this->get_next_event( $event );
@@ -155,7 +155,7 @@ class Cron {
 	 *
 	 * @return bool
 	 */
-	public function has_next_event( $event = false ) {
+	public function has_next_event( $event ) {
 		return ! ! $this->get_next_event( $event );
 	}
 
@@ -201,7 +201,8 @@ class Cron {
 		$dow  = 'weekly' === $frequency ? $this->validate_dow( (int) \smartcrawl_get_array_value( $options, 'sitemap-update-dow' ) ) : 0;
 		$next = $this->get_estimated_next_event( $now, $frequency, $dow, $tod );
 
-		$msg = sprintf( "Attempt rescheduling sitemap update ({$frequency},{$day_offset},{$tod}): {$next} (%s)", gmdate( 'Y-m-d@H:i', $next ) );
+		$msg = sprintf( "Attempt rescheduling sitemap update ({$frequency},{$dow},{$tod}): {$next} (%s)", gmdate( 'Y-m-d@H:i', $next ) );
+
 		if ( ! empty( $current ) ) {
 			$msg .= sprintf( " by replacing {$current} (%s)", gmdate( 'Y-m-d@H:i', $current ) );
 		}
@@ -366,7 +367,7 @@ class Cron {
 	 *
 	 * @return bool
 	 */
-	public function schedule( $event, $time, $recurrence = false ) {
+	public function schedule( $event, $time, $recurrence ) {
 		Logger::info( "Start scheduling new {$recurrence} event {$event}" );
 
 		$this->unschedule( $event );
@@ -428,17 +429,6 @@ class Cron {
 	}
 
 	/**
-	 * Validates date of month value and returns correct one.
-	 *
-	 * @param int $dom Date of month as number.
-	 *
-	 * @return int
-	 */
-	private function validate_dom( $dom ) {
-		return in_array( $dom, range( 1, 28 ), true ) ? $dom : 1;
-	}
-
-	/**
 	 * Starts crawl
 	 *
 	 * @return bool
@@ -451,20 +441,17 @@ class Cron {
 	 * Starts sitemap regeneration.
 	 *
 	 * @since 3.5.0
-	 *
-	 * @return bool
 	 */
 	public function start_sitemap_update() {
 		Logger::debug( 'Triggered automated sitemap update action' );
 
-		// Delete cache.
+		// Deletes cache.
 		\SmartCrawl\Sitemaps\Controller::get()->invalidate_sitemap_cache();
-		// Regenerate.
+
+		// Regenerates.
 		Utils::prime_cache( true );
 
 		Logger::debug( 'Successfully updated sitemap' );
-
-		return true;
 	}
 
 	/**

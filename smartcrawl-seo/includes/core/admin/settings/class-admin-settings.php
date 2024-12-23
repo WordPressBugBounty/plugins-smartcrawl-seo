@@ -103,7 +103,7 @@ abstract class Admin_Settings extends Settings {
 		}
 
 		add_action( 'init', array( $this, 'defaults' ), 999 );
-		add_action( 'admin_body_class', array( $this, 'add_body_class' ), 20 );
+		add_filter( 'admin_body_class', array( $this, 'add_body_class' ), 20 );
 		add_action( 'admin_menu', array( $this, 'add_page' ) );
 	}
 

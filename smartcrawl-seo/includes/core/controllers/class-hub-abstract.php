@@ -1,4 +1,9 @@
 <?php
+/**
+ * Abstract class for Hub connector.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Controllers;
 
@@ -16,40 +21,106 @@ use SmartCrawl\Sitemaps\Utils;
 use SmartCrawl\Third_Party_Import\AIOSEOP;
 use SmartCrawl\Third_Party_Import\Yoast;
 
+/**
+ * Abstract class for Hub connect.
+ */
 abstract class Hub_Abstract {
 
-	public function json_receive_audit_data( $params = array(), $action = '' ) {
+	/**
+	 * Ajax handler to receive audit data.
+	 *
+	 * @param object $params Additional parameters.
+	 * @param string $action Action being performed.
+	 *
+	 * @return void
+	 */
+	public function ajax_receive_audit_data( $params, $action = '' ) {
 	}
 
-	public function sync_ignores_list( $params = array(), $action = '' ) {
+	/**
+	 * Syncs ignores list.
+	 *
+	 * @param array  $params The parameters for syncing.
+	 * @param string $action The action for syncing.
+	 *
+	 * @return bool
+	 */
+	public function sync_ignores( $params, $action = '' ) {
 		return false;
 	}
 
-	public function json_sync_ignores_list( $params = array(), $action = '' ) {
+	/**
+	 * Ajax handler to sync the ignores list.
+	 *
+	 * @param object $params Hub-provided parameters for syncing.
+	 * @param string $action The action to perform during syncing.
+	 */
+	public function ajax_sync_ignores( $params, $action = '' ) {
 	}
 
-	public function purge_ignores_list( $params = array(), $action = '' ) {
+	/**
+	 * Purges the ignores list.
+	 *
+	 * @return bool
+	 */
+	public function purge_ignores() {
 		return false;
 	}
 
-	public function json_purge_ignores_list( $params = array(), $action = '' ) {
+	/**
+	 * Ajax handler to purges ignores list.
+	 *
+	 * @return void
+	 */
+	public function ajax_purge_ignores() {
 	}
 
-	public function sync_extras_list( $params = array(), $action = '' ) {
+	/**
+	 * Syncs the extras list.
+	 *
+	 * @param array  $params The parameters for the request.
+	 * @param string $action The action to perform on the extras list. Default is an empty string.
+	 *
+	 * @return bool
+	 */
+	public function sync_extras( $params, $action = '' ) {
 		return false;
 	}
 
-	public function json_sync_extras_list( $params = array(), $action = '' ) {
+	/**
+	 * Ajax handler to sync extras list.
+	 *
+	 * @param object $params Hub-provided parameters.
+	 * @param string $action Action called.
+	 *
+	 * @return void
+	 */
+	public function ajax_sync_extras( $params, $action = '' ) {
 	}
 
-	public function purge_extras_list( $params = array(), $action = '' ) {
+	/**
+	 * Purges the extras list.
+	 *
+	 * @return bool
+	 */
+	public function purge_extras() {
 		return false;
 	}
 
-	public function json_purge_extras_list( $params = array(), $action = '' ) {
+	/**
+	 * Purges the extras list in JSON format.
+	 *
+	 * @return void
+	 */
+	public function ajax_purge_extras() {
 	}
 
-	public function json_seo_summary() {
+	/**
+	 * Ajax handler to return the SEO summary result as response.
+	 *
+	 * @return void
+	 */
+	public function ajax_seo_summary() {
 		$options = Settings::get_options();
 
 		// Twitter cards.
@@ -161,14 +232,20 @@ abstract class Hub_Abstract {
 
 		// Third-party import.
 		$import_plugins = array();
+
 		$yoast_importer = new Yoast();
+
 		if ( $yoast_importer->data_exists() ) {
 			$import_plugins[] = 'yoast';
 		}
+
 		$aioseo = new AIOSEOP();
-		if ( $aioseo->data_exists() ) {
-			$import_plugins[] = 'aioseo';
-		}
+
+		// phpcs:disable
+		// if ( $aioseo->data_exists() ) {
+		// 	$import_plugins[] = 'aioseo';
+		// }
+		// phpcs:enable
 
 		$onpage_active = $this->is_active( 'onpage' );
 		$onpage        = $onpage_active
@@ -227,7 +304,12 @@ abstract class Hub_Abstract {
 		);
 	}
 
-	public function json_run_crawl() {
+	/**
+	 * Runs the crawl and returns the result as Ajax response.
+	 *
+	 * @return void
+	 */
+	public function ajax_run_crawl() {
 		$service = Service::get( Service::SERVICE_SEO );
 		$started = $service->start();
 
@@ -244,6 +326,11 @@ abstract class Hub_Abstract {
 		}
 	}
 
+	/**
+	 * Retrieves the titles and meta information.
+	 *
+	 * @return array An associative array containing titles and meta information.
+	 */
 	private function get_titles_and_meta() {
 		$meta_title       = '';
 		$meta_description = '';
@@ -304,9 +391,11 @@ abstract class Hub_Abstract {
 	}
 
 	/**
-	 * @param string $post_type Post type.
+	 * Retrieves a random post of a specific post type.
 	 *
-	 * @return \WP_Post|null
+	 * @param string $post_type The post type to retrieve.
+	 *
+	 * @return \WP_Post|null The random post or null if no posts are found.
 	 */
 	private function get_random_post( $post_type ) {
 		$posts = get_posts(
@@ -321,17 +410,36 @@ abstract class Hub_Abstract {
 		return \smartcrawl_get_array_value( $posts, 0 );
 	}
 
+	/**
+	 * Retrieves the schema types.
+	 *
+	 * @return array
+	 */
 	private function get_schema_types() {
 		$schema_types = \SmartCrawl\Schema\Types::get()->get_schema_types();
 
 		return array_unique( array_column( $schema_types, 'type' ) );
 	}
 
+	/**
+	 * Checks if a module is active.
+	 *
+	 * @param string $module The module name.
+	 *
+	 * @return bool Returns true if the module is active, false otherwise.
+	 */
 	private function is_active( $module ) {
 		return Settings::get_setting( $module ) && Module_Settings::is_tab_allowed( 'wds_' . $module );
 	}
 
-	public function apply_config( $params ) {
+	/**
+	 * Ajax handler to apply configuration.
+	 *
+	 * @param object $params Config params.
+	 *
+	 * @return void
+	 */
+	public function ajax_apply_config( $params ) {
 		if ( empty( $params->configs ) ) {
 			wp_send_json_error(
 				array( 'message' => __( 'Invalid config', 'smartcrawl-seo' ) )
@@ -340,10 +448,16 @@ abstract class Hub_Abstract {
 
 		$configs = json_decode( wp_json_encode( $params->configs ), true );
 		Configs\Controller::get()->apply_handler( $configs );
+
 		wp_send_json_success();
 	}
 
-	public function export_config() {
+	/**
+	 * Ajax handler to export the configuration.
+	 *
+	 * @return void
+	 */
+	public function ajax_export_config() {
 		$config = Configs\Model::create_from_plugin_snapshot();
 		wp_send_json_success(
 			array(
@@ -353,7 +467,12 @@ abstract class Hub_Abstract {
 		);
 	}
 
-	public function json_refresh_lighthouse_report() {
+	/**
+	 * Refreshes the Lighthouse report and returns it as a JSON string.
+	 *
+	 * @return void
+	 */
+	public function ajax_refresh_lighthouse_report() {
 		$lighthouse = Service::get( Service::SERVICE_LIGHTHOUSE );
 		$lighthouse->refresh_report();
 	}

@@ -1,35 +1,58 @@
 <?php
+/**
+ * Abstract class for defining checks in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Lighthouse\Checks;
 
 use SmartCrawl\Lighthouse\Report;
 use SmartCrawl\Lighthouse\Tables\Table;
 
+/**
+ * Abstract Check class.
+ *
+ * Provides a base for all checks in SmartCrawl.
+ */
 abstract class Check {
 
 	/**
+	 * Title displayed when the check passes.
+	 *
 	 * @var string
 	 */
 	private $success_title = '';
 
 	/**
+	 * Title displayed when the check fails.
+	 *
 	 * @var string
 	 */
 	private $failure_title = '';
 
 	/**
+	 * Indicates if the check passed.
+	 *
 	 * @var bool
 	 */
 	private $passed = false;
 
 	/**
-	 * @var
+	 * Weight of the check.
+	 *
+	 * @var int
 	 */
 	private $weight;
 
+	/**
+	 * Constructor for the Check class.
+	 */
 	public function __construct() {}
 
 	/**
+	 * Gets the title based on the check result.
+	 *
 	 * @return string
 	 */
 	public function get_title() {
@@ -41,20 +64,26 @@ abstract class Check {
 	}
 
 	/**
-	 * @param string $title
+	 * Sets the success title.
+	 *
+	 * @param string $title The success title.
 	 */
 	public function set_success_title( $title ) {
 		$this->success_title = $title;
 	}
 
 	/**
-	 * @param string $title
+	 * Sets the failure title.
+	 *
+	 * @param string $title The failure title.
 	 */
 	public function set_failure_title( $title ) {
 		$this->failure_title = $title;
 	}
 
 	/**
+	 * Checks if the check passed.
+	 *
 	 * @return bool
 	 */
 	public function is_passed() {
@@ -62,21 +91,27 @@ abstract class Check {
 	}
 
 	/**
-	 * @param bool $passed
+	 * Sets the check result.
+	 *
+	 * @param bool $passed The check result.
 	 */
 	public function set_passed( $passed ) {
 		$this->passed = $passed;
 	}
 
 	/**
-	 * @return mixed
+	 * Gets the weight of the check.
+	 *
+	 * @return int
 	 */
 	public function get_weight() {
 		return $this->weight;
 	}
 
 	/**
-	 * @param $weight
+	 * Sets the weight of the check.
+	 *
+	 * @param int $weight The weight of the check.
 	 *
 	 * @return void
 	 */
@@ -85,7 +120,9 @@ abstract class Check {
 	}
 
 	/**
-	 * @param $id
+	 * Creates a check instance based on the ID.
+	 *
+	 * @param string $id The ID of the check.
 	 *
 	 * @return Check|null
 	 */
@@ -118,7 +155,9 @@ abstract class Check {
 	}
 
 	/**
-	 * @param $value
+	 * Wraps a value in a span tag with a specific class.
+	 *
+	 * @param string $value The value to wrap.
 	 *
 	 * @return string
 	 */
@@ -127,7 +166,9 @@ abstract class Check {
 	}
 
 	/**
-	 * @param $value
+	 * Wraps a value in a span tag with a specific class.
+	 *
+	 * @param string $value The value to wrap.
 	 *
 	 * @return string
 	 */
@@ -136,11 +177,15 @@ abstract class Check {
 	}
 
 	/**
+	 * Gets the ID of the check.
+	 *
 	 * @return mixed
 	 */
-	abstract function get_id();
+	abstract public function get_id();
 
 	/**
+	 * Prepares the check.
+	 *
 	 * @return mixed
 	 */
 	abstract public function prepare();

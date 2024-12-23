@@ -28,7 +28,7 @@ export default class MultisiteResetButton extends React.Component {
 			'wds-multisite-reset-notice',
 			__(
 				'Data and settings for all subsites have been reset successfully!',
-				'smartcrawl-seo'
+				'wds'
 			),
 			false
 		);
@@ -40,7 +40,7 @@ export default class MultisiteResetButton extends React.Component {
 			'wds-multisite-reset-notice',
 			__(
 				'We could not reset your network due to an unknown error. Please try again.',
-				'smartcrawl-seo'
+				'wds'
 			),
 			false
 		);

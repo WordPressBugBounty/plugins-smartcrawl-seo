@@ -65,13 +65,15 @@ export default class CrawlItem extends React.Component {
 										this.startShowingOccurrences()
 									}
 								/>,
-								<DropdownButton
-									key={1}
-									className="wds-redirect-crawl-item"
-									text={__('Redirect', 'smartcrawl-seo')}
-									icon="sui-icon-arrow-right"
-									onClick={() => this.props.onRedirect()}
-								/>,
+								this.props.redirects.active && (
+									<DropdownButton
+										key={1}
+										className="wds-redirect-crawl-item"
+										text={__('Redirect', 'smartcrawl-seo')}
+										icon="sui-icon-arrow-right"
+										onClick={() => this.props.onRedirect()}
+									/>
+								),
 								<DropdownButton
 									key={2}
 									className="wds-ignore-crawl-item"

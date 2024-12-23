@@ -34,11 +34,11 @@ export default class SeoAnalysisCheckTitleKeywords extends React.Component {
 				{state
 					? __(
 							"You've got your focus keyword(s) in the SEO title meaning it has the best chance of matching what users are searching for first up - nice work.",
-							'smartcrawl-seo'
+							'wds'
 					  )
 					: __(
 							"The focus keyword(s) for this article doesn't appear in the SEO title which means it has less of a chance of matching what your visitors will search for.",
-							'smartcrawl-seo'
+							'wds'
 					  )}
 			</p>
 		);

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Vertical Tab.
+ *
+ * @package Smartcrwal
+ */
+
 // Required.
 $tab_id              = empty( $tab_id ) ? '' : $tab_id;
 $tab_name            = empty( $tab_name ) ? '' : $tab_name;

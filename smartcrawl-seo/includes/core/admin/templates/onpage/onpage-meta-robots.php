@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Onpage Meta Robots.
+ *
+ * @package Smartcrwal
+ */
+
 $items = empty( $items ) ? array() : $items;
 
 if ( ! $items ) {

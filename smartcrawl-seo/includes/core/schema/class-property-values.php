@@ -1,26 +1,50 @@
 <?php
+/**
+ * Property_Values class for handling property values in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema;
 
+/**
+ * Class Property_Values
+ *
+ * Handles property values.
+ */
 class Property_Values {
 
 	/**
+	 * Property source factory.
+	 *
 	 * @var \SmartCrawl\Schema\Sources\Factory
 	 */
 	private $property_source_factory;
 
 	/**
-	 * @var \WP_Post context post
+	 * Context post.
+	 *
+	 * @var \WP_Post
 	 */
 	private $post;
 
+	/**
+	 * Property_Values constructor.
+	 *
+	 * @param \SmartCrawl\Schema\Sources\Factory $property_source_factory The property source factory.
+	 * @param \WP_Post                           $post The context post.
+	 */
 	public function __construct( $property_source_factory, $post ) {
 		$this->property_source_factory = $property_source_factory;
 		$this->post                    = $post;
 	}
 
 	/**
-	 * @return array
+	 * Retrieves property values.
+	 *
+	 * @param array $properties The properties to retrieve values for.
+	 *
+	 * @return array The property values.
 	 */
 	public function get_property_values( $properties ) {
 		$values = array();
@@ -36,7 +60,11 @@ class Property_Values {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if array keys are numeric.
+	 *
+	 * @param array $array The array to check.
+	 *
+	 * @return bool True if array keys are numeric, false otherwise.
 	 */
 	private function array_keys_numeric( $array ) {
 		if ( ! is_array( $array ) ) {
@@ -47,7 +75,11 @@ class Property_Values {
 	}
 
 	/**
-	 * @return array|mixed|string
+	 * Retrieves a single property value.
+	 *
+	 * @param array $property The property to retrieve the value for.
+	 *
+	 * @return array|mixed|string The property value.
 	 */
 	public function get_property_value( $property ) {
 		if ( $this->has_alt_versions( $property ) ) {
@@ -87,7 +119,12 @@ class Property_Values {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the property has required values for the block.
+	 *
+	 * @param array $property The property to check.
+	 * @param array $values The values to check.
+	 *
+	 * @return bool True if the property has required values for the block, false otherwise.
 	 */
 	private function has_required_for_block( $property, $values ) {
 		if ( ! $this->is_nested_property( $property ) ) {
@@ -115,28 +152,44 @@ class Property_Values {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the property has a loop.
+	 *
+	 * @param array $property The property to check.
+	 *
+	 * @return bool True if the property has a loop, false otherwise.
 	 */
 	private function has_loop( $property ) {
 		return ! empty( $this->get_loop_id( $property ) );
 	}
 
 	/**
-	 * @return mixed|null
+	 * Retrieves the loop ID.
+	 *
+	 * @param array $property The property to retrieve the loop ID for.
+	 *
+	 * @return mixed|null The loop ID.
 	 */
 	private function get_loop_id( $property ) {
 		return \smartcrawl_get_array_value( $property, 'loop' );
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the property has alternative versions.
+	 *
+	 * @param array $property The property to check.
+	 *
+	 * @return bool True if the property has alternative versions, false otherwise.
 	 */
 	private function has_alt_versions( $property ) {
 		return ! empty( $this->get_active_property_version( $property ) );
 	}
 
 	/**
-	 * @return array|mixed
+	 * Retrieves the active property version.
+	 *
+	 * @param array $property The property to retrieve the active version for.
+	 *
+	 * @return array|mixed The active property version.
 	 */
 	private function get_active_property_version( $property ) {
 		$active_version = \smartcrawl_get_array_value( $property, 'activeVersion' );
@@ -150,28 +203,44 @@ class Property_Values {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the property is nested.
+	 *
+	 * @param array $property The property to check.
+	 *
+	 * @return bool True if the property is nested, false otherwise.
 	 */
 	private function is_nested_property( $property ) {
 		return (bool) $this->get_nested_properties( $property );
 	}
 
 	/**
-	 * @return mixed|null
+	 * Retrieves the nested properties.
+	 *
+	 * @param array $property The property to retrieve the nested properties for.
+	 *
+	 * @return mixed|null The nested properties.
 	 */
 	private function get_nested_properties( $property ) {
 		return \smartcrawl_get_array_value( $property, 'properties' );
 	}
 
 	/**
-	 * @return mixed|null
+	 * Retrieves the property type.
+	 *
+	 * @param array $property The property to retrieve the type for.
+	 *
+	 * @return mixed|null The property type.
 	 */
 	private function get_property_type( $property ) {
 		return \smartcrawl_get_array_value( $property, 'type' );
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the type is simple.
+	 *
+	 * @param string $type The type to check.
+	 *
+	 * @return bool True if the type is simple, false otherwise.
 	 */
 	private function is_simple_type( $type ) {
 		return in_array(
@@ -192,7 +261,11 @@ class Property_Values {
 	}
 
 	/**
-	 * @return array|mixed|string
+	 * Retrieves a single property value.
+	 *
+	 * @param array $property The property to retrieve the value for.
+	 *
+	 * @return array|mixed|string The property value.
 	 */
 	private function get_single_property_value( $property ) {
 		$source = \smartcrawl_get_array_value( $property, 'source' );

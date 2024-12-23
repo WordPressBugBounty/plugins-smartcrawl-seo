@@ -1,28 +1,96 @@
 <?php
+/**
+ * Config Model
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Configs;
 
+use SmartCrawl\Modules\Advanced\Controller as Adv_Controller;
 use SmartCrawl\Modules\Advanced\Redirects\Database_Table;
 use SmartCrawl\Modules\Advanced\Robots\Controller;
 use SmartCrawl\Lighthouse;
 use SmartCrawl\Settings;
 
+/**
+ * Config Model class
+ */
 class Model {
-	private $id          = null;
-	private $hub_id      = null;
-	private $name        = '';
+	/**
+	 * Model ID.
+	 *
+	 * @var string
+	 */
+	private $id = '';
+	/**
+	 * The Hub ID.
+	 *
+	 * @var string
+	 */
+	private $hub_id = '';
+	/**
+	 * Model name.
+	 *
+	 * @var string
+	 */
+	private $name = '';
+	/**
+	 * Model description.
+	 *
+	 * @var string
+	 */
 	private $description = '';
-	private $configs     = array();
-	private $strings     = array();
-	private $editable    = true;
-	private $removable   = true;
-	private $official    = false;
-	private $timestamp   = 0;
+	/**
+	 * Configurations.
+	 *
+	 * @var array
+	 */
+	private $configs = array();
+	/**
+	 * Strings.
+	 *
+	 * @var array
+	 */
+	private $strings = array();
+	/**
+	 * Flag indicating whether the content is editable or not.
+	 *
+	 * @var bool
+	 */
+	private $editable = true;
+	/**
+	 * Whether the item is removable or not.
+	 *
+	 * @var bool
+	 */
+	private $removable = true;
+	/**
+	 * Flag indicating if it is official.
+	 *
+	 * @var bool
+	 */
+	private $official = false;
+	/**
+	 * Timestamp.
+	 *
+	 * @var int
+	 */
+	private $timestamp = 0;
 
+	/**
+	 * Creates an instance of the model from a plugin snapshot.
+	 *
+	 * @param string $name The name of the plugin.
+	 * @param string $description The description of the plugin.
+	 *
+	 * @return Model The created instance of the model.
+	 */
 	public static function create_from_plugin_snapshot( $name = '', $description = '' ) {
 		$configs  = Export::load()->get_all();
 		$instance = new self();
 		$strings  = $instance->prepare_strings();
+
 		return $instance
 			->set_id( uniqid() )
 			->set_name( $name )
@@ -32,13 +100,23 @@ class Model {
 			->set_timestamp( time() );
 	}
 
+	/**
+	 * Creates a model instance from hub data.
+	 *
+	 * @param array $hub_config_data The hub config data.
+	 *
+	 * @return Model|null The model instance or null if hub config data is invalid.
+	 */
 	public static function create_from_hub_data( $hub_config_data ) {
 		$hub_config_json = \smartcrawl_get_array_value( $hub_config_data, 'config' );
 		$hub_id          = \smartcrawl_get_array_value( $hub_config_data, 'id' );
+
 		if ( ! $hub_config_json || ! $hub_id ) {
 			return null;
 		}
+
 		$hub_config = json_decode( $hub_config_json, true );
+
 		if ( ! $hub_config ) {
 			return null;
 		}
@@ -48,7 +126,7 @@ class Model {
 
 		return ( new self() )
 			->set_id( uniqid() )
-			->set_hub_id( (int) $hub_id )
+			->set_hub_id( $hub_id )
 			->set_name( \smartcrawl_get_array_value( $hub_config_data, 'name' ) )
 			->set_description( \smartcrawl_get_array_value( $hub_config_data, 'description' ) )
 			->set_configs( \smartcrawl_get_array_value( $hub_config, 'configs' ) )
@@ -74,7 +152,14 @@ class Model {
 		);
 	}
 
-	public function get_label( $item ) {
+	/**
+	 * Retrieves label for module.
+	 *
+	 * @param string $module Module indicator.
+	 *
+	 * @return string Label.
+	 */
+	public function get_label( $module ) {
 		$labels = array(
 			'health'   => esc_html__( 'Health', 'smartcrawl-seo' ),
 			'onpage'   => esc_html__( 'Title & Meta', 'smartcrawl-seo' ),
@@ -85,27 +170,42 @@ class Model {
 			'settings' => esc_html__( 'Settings', 'smartcrawl-seo' ),
 		);
 
-		return (string) \smartcrawl_get_array_value( $labels, $item );
+		return (string) \smartcrawl_get_array_value( $labels, $module );
 	}
 
+	/**
+	 * Prepares string for SEO Health.
+	 *
+	 * @return string
+	 */
 	private function prepare_health_string() {
 		$reporting_status = $this->prepare_lighthouse_reporting_status();
 
 		$parts[] = esc_html__( 'SEO test - Active', 'smartcrawl-seo' );
 		$parts[] = sprintf(
 			/* translators: %s: Report status */
-			esc_html__( 'Scheduled performance reports - %s', 'wsd' ),
+			esc_html__( 'Scheduled performance reports - %s', 'smartcrawl-seo' ),
 			$reporting_status
 		);
 		return implode( "\n", $parts );
 	}
 
+	/**
+	 * Prepares string for Title & Meta.
+	 *
+	 * @return string
+	 */
 	private function prepare_onpage_string() {
 		return Settings::get_setting( 'onpage' )
 			? esc_html__( 'Active', 'smartcrawl-seo' )
 			: esc_html__( 'Inactive', 'smartcrawl-seo' );
 	}
 
+	/**
+	 * Prepares string for Schema.
+	 *
+	 * @return string
+	 */
 	private function prepare_schema_string() {
 		$social          = Settings::get_component_options( Settings::COMP_SOCIAL );
 		$schema_disabled = ! empty( $social['disable-schema'] );
@@ -114,6 +214,11 @@ class Model {
 			: esc_html__( 'Active', 'smartcrawl-seo' );
 	}
 
+	/**
+	 * Prepares string for Social.
+	 *
+	 * @return string
+	 */
 	private function prepare_social_string() {
 		$options       = Settings::get_options();
 		$social_active = (bool) \smartcrawl_get_array_value( $options, 'social' );
@@ -133,43 +238,59 @@ class Model {
 		);
 	}
 
+	/**
+	 * Prepares string for Sitemap.
+	 *
+	 * @return string
+	 */
 	private function prepare_sitemap_string() {
 		return Settings::get_setting( 'sitemap' )
 			? esc_html__( 'Active', 'smartcrawl-seo' )
 			: esc_html__( 'Inactive', 'smartcrawl-seo' );
 	}
 
+	/**
+	 * Prepares string for Advanced Tools.
+	 *
+	 * @return string
+	 */
 	private function prepare_advanced_string() {
-		$options = get_option( Settings::ADVANCED_MODULE );
+		$submodule_str = array();
 
-		$autolinks_active = (bool) \smartcrawl_get_array_value( $options['autolinks'], 'active' );
-		$redirects_table  = Database_Table::get();
-		$redirects_count  = $redirects_table->get_count();
+		foreach ( Adv_Controller::get()->submodules as $submodule_name => $handler ) {
+			if ( Settings::WOOCOMMERCE_SUBMODULE !== $submodule_name ) {
+				$is_running = $handler->should_run();
 
-		$moz_access_id  = \smartcrawl_get_array_value( $options['seomoz'], 'access_id' );
-		$moz_secret_key = \smartcrawl_get_array_value( $options['seomoz'], 'secret_key' );
-		$moz_active     = $moz_access_id && $moz_secret_key;
+				if ( Settings::SEOMOZ_SUBMODULE === $submodule_name && $is_running ) {
+					$options    = $handler->get_options();
+					$is_running = ! empty( $options['access_id'] ) && ! empty( $options['secret_key'] );
+				}
 
-		$robots_controller = Controller::get();
-		$robots_active     = $robots_controller->should_run();
+				$submodule_str[] = $handler->module_title . ' - ' . $this->get_status_string( $is_running );
+			}
+		}
 
-		return join(
-			"\n",
-			array(
-				esc_attr__( 'Automatic Links - ', 'smartcrawl-seo' ) . $this->get_status_string( $autolinks_active ),
-				esc_attr__( 'URL Redirection - ', 'smartcrawl-seo' ) . $this->get_status_string( $redirects_count ),
-				esc_attr__( 'Moz - ', 'smartcrawl-seo' ) . $this->get_status_string( $moz_active ),
-				esc_attr__( 'Robots.txt Editor - ', 'smartcrawl-seo' ) . $this->get_status_string( $robots_active ),
-			)
-		);
+		return join( "\n", $submodule_str );
 	}
 
+	/**
+	 * Retrieves the status based on the value.
+	 *
+	 * @param bool $active Indicates if the item is active.
+	 *
+	 * @return string The status string, either "Active" or "Inactive".
+	 */
 	private function get_status_string( $active ) {
 		return $active
 			? esc_html__( 'Active', 'smartcrawl-seo' )
 			: esc_html__( 'Inactive', 'smartcrawl-seo' );
 	}
 
+	/**
+	 * Prepares string for Settings.
+	 *
+	 * @return string
+	 */
 	private function prepare_settings_strings() {
 		$options                      = Settings::get_options();
 		$seo_analysis_enabled         = (bool) \smartcrawl_get_array_value( $options, 'analysis-seo' );
@@ -192,6 +313,11 @@ class Model {
 		);
 	}
 
+	/**
+	 * Prepares string for Lighthouse reporting status.
+	 *
+	 * @return string
+	 */
 	private function prepare_lighthouse_reporting_status() {
 		if ( ! Lighthouse\Options::is_cron_enabled() ) {
 			return esc_html__( 'Inactive', 'smartcrawl-seo' );
@@ -212,13 +338,17 @@ class Model {
 	}
 
 	/**
-	 * @return null
+	 * Retrieves the id of the model.
+	 *
+	 * @return string The id of the model.
 	 */
 	public function get_id() {
 		return $this->id;
 	}
 
 	/**
+	 * Sets the id of the model.
+	 *
 	 * @param string $id ID.
 	 *
 	 * @return Model
@@ -229,21 +359,27 @@ class Model {
 	}
 
 	/**
-	 * @return $this
+	 * Generates new ID of the model which is unique.
+	 *
+	 * @return Model
 	 */
 	public function refresh_id() {
 		return $this->set_id( uniqid() );
 	}
 
 	/**
-	 * @return string|null
+	 * Retrieves Hub ID.
+	 *
+	 * @return string
 	 */
 	public function get_hub_id() {
 		return $this->hub_id;
 	}
 
 	/**
-	 * @param int $hub_id Hub ID.
+	 * Sets Hub ID.
+	 *
+	 * @param string $hub_id Hub ID.
 	 *
 	 * @return Model
 	 */
@@ -253,6 +389,8 @@ class Model {
 	}
 
 	/**
+	 * Retrieves name.
+	 *
 	 * @return string
 	 */
 	public function get_name() {
@@ -260,6 +398,8 @@ class Model {
 	}
 
 	/**
+	 * Sets name.
+	 *
 	 * @param string $name Name.
 	 *
 	 * @return Model
@@ -270,6 +410,8 @@ class Model {
 	}
 
 	/**
+	 * Retrieves description.
+	 *
 	 * @return string
 	 */
 	public function get_description() {
@@ -277,6 +419,8 @@ class Model {
 	}
 
 	/**
+	 * Sets description.
+	 *
 	 * @param string $description Description.
 	 *
 	 * @return Model
@@ -287,6 +431,8 @@ class Model {
 	}
 
 	/**
+	 * Retrieves configurations.
+	 *
 	 * @return array
 	 */
 	public function get_configs() {
@@ -294,6 +440,8 @@ class Model {
 	}
 
 	/**
+	 * Sets configurations.
+	 *
 	 * @param array $configs Configs.
 	 *
 	 * @return Model
@@ -304,6 +452,8 @@ class Model {
 	}
 
 	/**
+	 * Retrieves strings.
+	 *
 	 * @return array
 	 */
 	public function get_strings() {
@@ -311,7 +461,9 @@ class Model {
 	}
 
 	/**
-	 * @param array $strings
+	 * Sets strings.
+	 *
+	 * @param array $strings Strings to be set.
 	 *
 	 * @return Model
 	 */
@@ -321,14 +473,18 @@ class Model {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the model is editable.
+	 *
+	 * @return bool Returns true if the model is editable, false otherwise.
 	 */
 	public function is_editable() {
 		return $this->editable;
 	}
 
 	/**
-	 * @param bool $editable Is editable.
+	 * Sets model as editable.
+	 *
+	 * @param bool $editable Flag indicating if the model is editable.
 	 *
 	 * @return Model
 	 */
@@ -338,6 +494,8 @@ class Model {
 	}
 
 	/**
+	 * Checks if the model is removable.
+	 *
 	 * @return bool
 	 */
 	public function is_removable() {
@@ -345,7 +503,9 @@ class Model {
 	}
 
 	/**
-	 * @param bool $removable Is removable.
+	 * Sets the removable flag.
+	 *
+	 * @param bool $removable Flag indicating if the element is removable.
 	 *
 	 * @return Model
 	 */
@@ -355,14 +515,18 @@ class Model {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the model is official.
+	 *
+	 * @return bool Returns true if official, false otherwise.
 	 */
 	public function is_official() {
 		return $this->official;
 	}
 
 	/**
-	 * @param bool $official Is official.
+	 * Sets the official flag.
+	 *
+	 * @param bool $official The official flag.
 	 *
 	 * @return Model
 	 */
@@ -372,14 +536,18 @@ class Model {
 	}
 
 	/**
-	 * @return int
+	 * Retrieves the timestamp.
+	 *
+	 * @return int The timestamp.
 	 */
 	public function get_timestamp() {
 		return $this->timestamp;
 	}
 
 	/**
-	 * @param int $timestamp Timestamp.
+	 * Sets the timestamp.
+	 *
+	 * @param int $timestamp The timestamp to set.
 	 *
 	 * @return Model
 	 */
@@ -388,14 +556,29 @@ class Model {
 		return $this;
 	}
 
+	/**
+	 * Returns the filename for the model.
+	 *
+	 * The filename is generated by concatenating 'smartcrawl-config-' and
+	 * the name of the model with spaces replaced by dashes.
+	 *
+	 * @return string The generated filename.
+	 */
 	public function get_filename() {
 		return 'smartcrawl-config-' . str_replace( ' ', '-', $this->get_name() );
 	}
 
+	/**
+	 * Inflates an instance of the Model class with data.
+	 *
+	 * @param array $data The data used to inflate the instance.
+	 *
+	 * @return Model The inflated instance.
+	 */
 	public static function inflate( $data ) {
 		return ( new self() )
 			->set_id( \smartcrawl_get_array_value( $data, 'id' ) )
-			->set_hub_id( (int) \smartcrawl_get_array_value( $data, 'hub_id' ) )
+			->set_hub_id( \smartcrawl_get_array_value( $data, 'hub_id' ) )
 			->set_name( \smartcrawl_get_array_value( $data, 'name' ) )
 			->set_description( \smartcrawl_get_array_value( $data, 'description' ) )
 			->set_configs( \smartcrawl_get_array_value( $data, 'configs' ) )
@@ -406,6 +589,11 @@ class Model {
 			->set_timestamp( (int) \smartcrawl_get_array_value( $data, 'timestamp' ) );
 	}
 
+	/**
+	 * Deflates the object into an associative array.
+	 *
+	 * @return array The deflated object array.
+	 */
 	public function deflate() {
 		return array(
 			'id'          => $this->get_id(),

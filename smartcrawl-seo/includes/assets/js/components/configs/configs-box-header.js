@@ -19,9 +19,7 @@ export default class ConfigsBoxHeader extends React.Component {
 	render() {
 		return (
 			<div className="sui-box-header">
-				<h2 className="sui-box-title">
-					{__('Configs', 'smartcrawl-seo')}
-				</h2>
+				<h2 className="sui-box-title">{__('Configs', 'smartcrawl-seo')}</h2>
 
 				<div className="sui-actions-right">
 					<label

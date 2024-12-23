@@ -62,9 +62,7 @@ export default class LighthouseCheckStructuredData extends React.Component {
 				</div>
 
 				<div className="wds-lh-section">
-					<strong>
-						{__('How to mark up your content', 'smartcrawl-seo')}
-					</strong>
+					<strong>{__('How to mark up your content', 'smartcrawl-seo')}</strong>
 					<ol>
 						<li>
 							{__(

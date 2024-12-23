@@ -306,7 +306,7 @@ class Controller extends Controllers\Controller {
 
 		$this->apply_extra();
 
-		Onboard::get()->mark_onboarding_done();
+		Onboard::get()->set_done();
 	}
 
 	/**
@@ -364,7 +364,7 @@ class Controller extends Controllers\Controller {
 	 *
 	 * This method checks if the user has permission before processing the request data.
 	 *
-	 * @return array|void If the user has permission and the nonce is verified, the sanitized POST data is returned. Otherwise, it sends a JSON error response.
+	 * @return array
 	 */
 	private function validate_request_data() {
 		if ( ! $this->has_permission() ) {

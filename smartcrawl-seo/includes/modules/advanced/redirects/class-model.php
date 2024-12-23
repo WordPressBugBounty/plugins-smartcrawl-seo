@@ -1,4 +1,9 @@
 <?php
+/**
+ * Model class for managing redirections.
+ *
+ * @package SmartCrawl\Modules\Advanced\Redirects
+ */
 
 namespace SmartCrawl\Modules\Advanced\Redirects;
 
@@ -229,6 +234,8 @@ class Model extends Models\Model {
 	}
 
 	/**
+	 * Get the type of the model.
+	 *
 	 * @return string
 	 */
 	public function get_type() {

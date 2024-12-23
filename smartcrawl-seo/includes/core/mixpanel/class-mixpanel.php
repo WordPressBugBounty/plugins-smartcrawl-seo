@@ -42,9 +42,9 @@ class Mixpanel {
 			if ( ! class_exists( 'WPMUDEV_Analytics' ) ) {
 				require_once SMARTCRAWL_PLUGIN_DIR . 'external/wpmudev-analytics/autoload.php';
 			}
-			$extra_options  = [
-				'consumer'  => 'socket',
-			];
+			$extra_options  = array(
+				'consumer' => 'socket',
+			);
 			$this->mixpanel = new WPMUDEV_Analytics( 'smartcrawl', 'SmartCrawl', 55, self::TOKEN, $extra_options );
 			// Configure mixpanel.
 			$this->mixpanel->identify( $this->identity() );
@@ -107,7 +107,7 @@ class Mixpanel {
 		$properties = array(
 			'active_theme'       => get_stylesheet(),
 			'locale'             => get_locale(),
-			'mysql_version'      => $wpdb->get_var( 'SELECT VERSION()' ), // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			'mysql_version'      => $wpdb->get_var( 'SELECT VERSION()' ),
 			'php_version'        => phpversion(),
 			'plugin'             => 'SmartCrawl',
 			'plugin_type'        => 'full' === \SMARTCRAWL_BUILD_TYPE ? 'Pro' : 'Free',

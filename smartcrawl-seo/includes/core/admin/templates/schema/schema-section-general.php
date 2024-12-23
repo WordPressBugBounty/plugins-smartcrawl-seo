@@ -1,13 +1,19 @@
 <?php
+/**
+ * Template: Schema General section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
 use SmartCrawl\Schema\Type_Constants;
 
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $option_name    = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $options        = empty( $options ) ? array() : $options;
 $social_options = empty( $social_options ) ? array() : $social_options;
-$pages          = empty( $pages ) ? array() : $pages; // phpcs:ignore
+$pages          = empty( $pages ) ? array() : $pages;
 
 $sitename             = (string) \smartcrawl_get_array_value( $social_options, 'sitename' );
 $schema_website_logo  = (string) \smartcrawl_get_array_value( $options, 'schema_website_logo' );

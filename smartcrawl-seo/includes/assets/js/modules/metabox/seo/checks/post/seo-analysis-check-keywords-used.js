@@ -36,11 +36,11 @@ export default class SeoAnalysisCheckKeywordsUsed extends React.Component {
 					{!state
 						? __(
 								'Your primary focus keyword is used on the following pages:',
-								'smartcrawl-seo'
+								'wds'
 						  )
 						: __(
 								'Your primary focused keyword isn’t used on other pages on your site. Excellent!',
-								'smartcrawl-seo'
+								'wds'
 						  )}
 				</p>
 
@@ -51,12 +51,12 @@ export default class SeoAnalysisCheckKeywordsUsed extends React.Component {
 								<th colSpan="2">
 									{__(
 										'Posts and Pages with the same primary focus keyword',
-										'smartcrawl-seo'
+										'wds'
 									)}
 									<span className="sui-description">
 										{__(
 											'Please note that the list below displays a maximum of 10 posts and pages. There might be other posts and pages using the same keyword.',
-											'smartcrawl-seo'
+											'wds'
 										)}
 									</span>
 								</th>
@@ -108,11 +108,11 @@ export default class SeoAnalysisCheckKeywordsUsed extends React.Component {
 		return !state
 			? __(
 					'Primary focus keyword is already used on another post/page',
-					'smartcrawl-seo'
+					'wds'
 			  )
 			: __(
 					'Primary focus keyword isn’t used on another post/page',
-					'smartcrawl-seo'
+					'wds'
 			  );
 	}
 
@@ -121,7 +121,7 @@ export default class SeoAnalysisCheckKeywordsUsed extends React.Component {
 			<p>
 				{__(
 					"Using the same focus keywords on multiple pages or posts can affect your page's SEO ranking. Therefore, it's recommended to only use one primary focus keyword per page/post on your site to improve its SEO ranking.",
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

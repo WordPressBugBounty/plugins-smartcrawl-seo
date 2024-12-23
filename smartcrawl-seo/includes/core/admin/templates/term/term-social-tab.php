@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Term Social Tab.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
@@ -8,8 +13,10 @@ $og_taxonomy_enabled = ! empty( $og_taxonomy_enabled );
 $twitter_setting_enabled  = ! empty( $twitter_setting_enabled );
 $twitter_taxonomy_enabled = ! empty( $twitter_taxonomy_enabled );
 
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $tax_meta = empty( $tax_meta ) ? array() : $tax_meta;
-$term     = empty( $term ) ? null : $term; // phpcs:ignore
+$term     = empty( $term ) ? null : $term;
+
 if ( ! $term ) {
 	return;
 }

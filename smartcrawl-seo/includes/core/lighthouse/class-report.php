@@ -436,6 +436,8 @@ class Report {
 	}
 
 	/**
+	 * Gets the screenshot data.
+	 *
 	 * @return string
 	 */
 	public function get_screenshot() {
@@ -443,6 +445,8 @@ class Report {
 	}
 
 	/**
+	 * Gets the screenshot width.
+	 *
 	 * @return int
 	 */
 	public function get_screenshot_width() {

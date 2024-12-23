@@ -1,7 +1,17 @@
 <?php
+/**
+ * Core_Request class for handling HTTP API requests related to posts.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
+/**
+ * Class Core_Request
+ *
+ * Handles HTTP API requests for fetching and processing post content.
+ */
 class Core_Request {
 
 	/**
@@ -94,12 +104,17 @@ class Core_Request {
 		$bits = Html::find( 'body', $content );
 
 		return apply_filters(
-			'wds-analysis-content', // phpcs:ignore
+			'wds-analysis-content',
 			(string) trim( join( "\n", $bits ) ),
 			$post_id
 		);
 	}
 
+	/**
+	 * Gets the timeout value for HTTP requests.
+	 *
+	 * @return int Timeout value in seconds.
+	 */
 	private function get_timeout() {
 		return defined( 'SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT' )
 			? SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT

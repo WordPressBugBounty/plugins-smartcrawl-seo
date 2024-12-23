@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage Meta Character Lengths.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

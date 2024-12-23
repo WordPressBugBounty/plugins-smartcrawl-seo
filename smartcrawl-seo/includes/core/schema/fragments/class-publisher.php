@@ -1,26 +1,47 @@
 <?php
+/**
+ * Publisher class for handling publisher schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Models\User;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Publisher
+ *
+ * Handles publisher schema fragments.
+ */
 class Publisher extends Fragment {
+
 	/**
-	 * @var
+	 * Full output flag.
+	 *
+	 * @var bool
 	 */
 	private $full_output;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
+	 * Owner user.
+	 *
 	 * @var User
 	 */
 	private $owner;
 
 	/**
-	 * @param $full_output
+	 * Constructor.
+	 *
+	 * @param bool $full_output The full output flag.
 	 */
 	public function __construct( $full_output ) {
 		$this->full_output = $full_output;
@@ -29,7 +50,9 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @return mixed|string
+	 * Retrieves the publisher type.
+	 *
+	 * @return mixed|string The publisher type.
 	 */
 	private function get_publisher_type() {
 		if ( $this->utils->is_schema_type_person() ) {
@@ -42,14 +65,18 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed|void
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		return $this->get_publisher_schema();
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the publisher ID.
+	 *
+	 * @return string The publisher ID.
 	 */
 	public function get_publisher_id() {
 		if ( $this->utils->is_schema_type_person() ) {
@@ -60,7 +87,9 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed|void
+	 * Retrieves the publisher schema.
+	 *
+	 * @return array The publisher schema.
 	 */
 	protected function get_publisher_schema() {
 		if ( $this->utils->is_schema_type_person() ) {
@@ -71,7 +100,9 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @return array
+	 * Retrieves the personal brand schema.
+	 *
+	 * @return array The personal brand schema.
 	 */
 	private function get_personal_brand_schema() {
 		// Summary.
@@ -98,9 +129,11 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @param $full
+	 * Retrieves the publishing organization schema.
 	 *
-	 * @return mixed|void
+	 * @param bool $full The full output flag.
+	 *
+	 * @return array The publishing organization schema.
 	 */
 	private function get_publishing_organization_schema( $full ) {
 		// Summary.
@@ -152,16 +185,20 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @param $data
+	 * Filters owner data.
 	 *
-	 * @return mixed|void
+	 * @param array $data The data to filter.
+	 *
+	 * @return array The filtered data.
 	 */
 	private function filter_owner_data( $data ) {
 		return $this->utils->apply_filters( 'owner-data', $data );
 	}
 
 	/**
-	 * @return array|mixed|void
+	 * Retrieves the organization logo.
+	 *
+	 * @return array The organization logo schema.
 	 */
 	private function get_organization_logo() {
 		$url = $this->utils->get_social_option( 'organization_logo' );
@@ -180,7 +217,9 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @return mixed|string
+	 * Retrieves the organization type option.
+	 *
+	 * @return string The organization type option.
 	 */
 	private function get_organization_type_option() {
 		$org_type = $this->utils->get_schema_option( 'organization_type' );
@@ -197,21 +236,27 @@ class Publisher extends Fragment {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the publishing organization ID.
+	 *
+	 * @return string The publishing organization ID.
 	 */
 	private function get_publishing_organization_id() {
 		return $this->utils->url_to_id( $this->get_publisher_url(), '#schema-publishing-organization' );
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the personal brand ID.
+	 *
+	 * @return string The personal brand ID.
 	 */
 	private function get_personal_brand_id() {
 		return $this->utils->url_to_id( $this->get_publisher_url(), '#schema-personal-brand' );
 	}
 
 	/**
-	 * @return false|string|\WP_Error
+	 * Retrieves the publisher URL.
+	 *
+	 * @return string The publisher URL.
 	 */
 	public function get_publisher_url() {
 		$output_page = $this->utils->get_special_page( 'schema_output_page' );

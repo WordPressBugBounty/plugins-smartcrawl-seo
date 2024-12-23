@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Progress Notice.
+ *
+ * @package Smartcrwal
+ */
+
 $message = empty( $message ) ? '' : $message;
 
 if ( ! $message ) {

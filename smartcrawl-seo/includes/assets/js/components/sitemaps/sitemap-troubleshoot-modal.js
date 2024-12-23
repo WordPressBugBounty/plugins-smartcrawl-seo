@@ -47,7 +47,7 @@ export default class SitemapTroubleshootModal extends React.Component {
 					<p className="sui-description">
 						{__(
 							'Click the button below to detect any problems with your sitemap. This will only take a few seconds.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					</p>
 				)}
@@ -88,7 +88,7 @@ export default class SitemapTroubleshootModal extends React.Component {
 					<p className="sui-description">
 						{__(
 							'Hurray! No problems with your sitemap were detected.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 					</p>
 				)}
@@ -275,7 +275,7 @@ export default class SitemapTroubleshootModal extends React.Component {
 					.catch(() => {
 						const errorMessage = __(
 							'The AJAX request failed.',
-							'smartcrawl-seo'
+							'wds'
 						);
 						this.showErrorNotice(errorMessage);
 						this.setState({

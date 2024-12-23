@@ -3,7 +3,7 @@ import RequestUtil from '../../utils/request-util';
 
 export default class CrawlRequest {
 	static redirect(source, destination) {
-		return this.post('wds_redirect_crawl_item', {
+		return this.post('smartcrawl_crawl_redirect', {
 			source,
 			destination,
 		});
@@ -14,19 +14,19 @@ export default class CrawlRequest {
 	}
 
 	static ignoreIssue(issueId) {
-		return this.changeIssueStatus(issueId, 'wds_ignore_crawl_item');
+		return this.changeIssueStatus(issueId, 'smartcrawl_crawl_ignore');
 	}
 
 	static restoreIssue(issueId) {
-		return this.changeIssueStatus(issueId, 'wds_restore_crawl_item');
+		return this.changeIssueStatus(issueId, 'smartcrawl_crawl_restore');
 	}
 
 	static restoreAll() {
-		return this.post('wds_restore_all_crawl_items');
+		return this.post('smartcrawl_crawl_restore_all');
 	}
 
 	static addToSitemap(path) {
-		return this.post('wds_sitemap_add_extra', { path });
+		return this.post('smartcrawl_sitemap_add_extra', { path });
 	}
 
 	static post(action, data) {

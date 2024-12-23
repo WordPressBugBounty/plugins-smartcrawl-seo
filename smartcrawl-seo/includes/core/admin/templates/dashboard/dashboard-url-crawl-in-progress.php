@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Dashboard Sitemap Crawler Status.
+ *
+ * @package SmartCrawl
+ */
+
 $progress = empty( $progress ) ? 0 : $progress;
 ?>
 <div class="wds-box-refresh-required"></div>

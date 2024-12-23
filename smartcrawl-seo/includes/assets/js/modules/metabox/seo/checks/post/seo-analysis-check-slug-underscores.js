@@ -37,7 +37,7 @@ export default class SeoAnalysisCheckSlugUnderscores extends React.Component {
 								// translators: %s current post url.
 								__(
 									"We have detected one or more underscores in the URL {%s}. Please consider removing them or replacing them with a hyphen (-). However, if you have already published this page, we don\\'t recommend removing the underscores (_) as it can cause short-term ranking loss. If you decide to remove the underscores in the URL of a published page, set up a 301 Redirect using the URL Redirection tool to direct traffic to the new URL. Learn more about <strong>URL Redirection</strong> on our <a>documentation</a>.",
-									'smartcrawl-seo'
+									'wds'
 								),
 								mark
 							),
@@ -56,7 +56,7 @@ export default class SeoAnalysisCheckSlugUnderscores extends React.Component {
 							// translators: %s current post url.
 							__(
 								"We didn't detect underscores in your page URL {%s}. Good job!",
-								'smartcrawl-seo'
+								'wds'
 							),
 							mark
 					  )}
@@ -77,7 +77,7 @@ export default class SeoAnalysisCheckSlugUnderscores extends React.Component {
 			<p>
 				{__(
 					'Google recommends using hyphens to separate words in the URLs instead of underscores, which helps search engines easily identify the page topic.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			</p>
 		);

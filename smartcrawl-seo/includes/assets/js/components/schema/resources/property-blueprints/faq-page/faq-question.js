@@ -44,7 +44,10 @@ const FAQQuestion = {
 		type: 'ImageObject',
 		source: 'image',
 		value: '',
-		description: __('An image associated with the question.'),
+		description: __(
+			'An image associated with the question.',
+			'smartcrawl-seo'
+		),
 		disallowDeletion: true,
 	},
 	url: {
@@ -53,7 +56,7 @@ const FAQQuestion = {
 		type: 'URL',
 		source: 'custom_text',
 		value: '',
-		description: __('Optional URL to the question.'),
+		description: __('Optional URL to the question.', 'smartcrawl-seo'),
 		disallowDeletion: true,
 	},
 };

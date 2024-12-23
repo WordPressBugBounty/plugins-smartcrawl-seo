@@ -1,50 +1,78 @@
 <?php
+/**
+ * Item class for managing redirect items.
+ *
+ * @package SmartCrawl\Modules\Advanced\Redirects
+ */
 
 namespace SmartCrawl\Modules\Advanced\Redirects;
 
+/**
+ * Class Item
+ *
+ * Represents a redirect item with various properties and methods to manage it.
+ */
 class Item {
 
 	/**
+	 * Item ID.
+	 *
 	 * @var int
 	 */
 	private $id = 0;
 
 	/**
+	 * Item title.
+	 *
 	 * @var string
 	 */
 	private $title = '';
 
 	/**
+	 * Source URL.
+	 *
 	 * @var string
 	 */
 	private $source = '';
 
 	/**
+	 * Path.
+	 *
 	 * @var string
 	 */
 	private $path = '';
 
 	/**
+	 * Destination URL.
+	 *
 	 * @var string
 	 */
 	private $destination = '';
 
 	/**
+	 * Redirect type.
+	 *
 	 * @var int
 	 */
 	private $type = 0;
 
 	/**
+	 * Options for the redirect.
+	 *
 	 * @var array
 	 */
 	private $options = array();
 
 	/**
+	 * Rules for the redirect.
+	 *
 	 * @var array
 	 */
 	private $rules = array();
 
 	/**
+	 * Get the item ID.
+	 *
 	 * @return int
 	 */
 	public function get_id() {
@@ -52,6 +80,8 @@ class Item {
 	}
 
 	/**
+	 * Set the item ID.
+	 *
 	 * @param int $id Item ID.
 	 *
 	 * @return Item
@@ -63,6 +93,8 @@ class Item {
 	}
 
 	/**
+	 * Get the item title.
+	 *
 	 * @return string
 	 */
 	public function get_title() {
@@ -70,6 +102,8 @@ class Item {
 	}
 
 	/**
+	 * Set the item title.
+	 *
 	 * @param string $title Title.
 	 *
 	 * @return Item
@@ -81,6 +115,8 @@ class Item {
 	}
 
 	/**
+	 * Get the source URL.
+	 *
 	 * @return string
 	 */
 	public function get_source() {
@@ -88,6 +124,8 @@ class Item {
 	}
 
 	/**
+	 * Set the source URL.
+	 *
 	 * @param string $source Source.
 	 *
 	 * @return Item
@@ -99,6 +137,8 @@ class Item {
 	}
 
 	/**
+	 * Get the path.
+	 *
 	 * @return string
 	 */
 	public function get_path() {
@@ -106,7 +146,11 @@ class Item {
 	}
 
 	/**
+	 * Set the path.
+	 *
 	 * @param string $path Path.
+	 *
+	 * @return Item
 	 */
 	public function set_path( $path ) {
 		$this->path = $path;
@@ -115,6 +159,8 @@ class Item {
 	}
 
 	/**
+	 * Get the destination URL.
+	 *
 	 * @return string
 	 */
 	public function get_destination() {
@@ -147,7 +193,7 @@ class Item {
 	/**
 	 * Sets redirect destination.
 	 *
-	 * @param array $destination Destination.
+	 * @param array|string $destination Destination.
 	 *
 	 * @return Item
 	 */
@@ -162,6 +208,8 @@ class Item {
 	}
 
 	/**
+	 * Get the options for the redirect.
+	 *
 	 * @return array
 	 */
 	public function get_options() {
@@ -169,6 +217,8 @@ class Item {
 	}
 
 	/**
+	 * Set the options for the redirect.
+	 *
 	 * @param array $options Options.
 	 *
 	 * @return Item
@@ -181,11 +231,18 @@ class Item {
 		return $this;
 	}
 
+	/**
+	 * Check if the redirect is a regex.
+	 *
+	 * @return bool
+	 */
 	public function is_regex() {
 		return array_search( 'regex', $this->get_options(), true ) !== false;
 	}
 
 	/**
+	 * Get the redirect type.
+	 *
 	 * @return int
 	 */
 	public function get_type() {
@@ -193,6 +250,8 @@ class Item {
 	}
 
 	/**
+	 * Set the redirect type.
+	 *
 	 * @param int $type Type.
 	 *
 	 * @return Item
@@ -229,6 +288,11 @@ class Item {
 		return $this;
 	}
 
+	/**
+	 * Deflate the item to an array.
+	 *
+	 * @return array
+	 */
 	public function deflate() {
 		return array(
 			'id'          => $this->id,
@@ -242,6 +306,13 @@ class Item {
 		);
 	}
 
+	/**
+	 * Inflate the item from an array.
+	 *
+	 * @param array $data Data to inflate from.
+	 *
+	 * @return Item
+	 */
 	public static function inflate( $data ) {
 		return ( new self() )
 			->set_id( (int) \smartcrawl_get_array_value( $data, 'id' ) )

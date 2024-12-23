@@ -281,7 +281,7 @@ const SoftwareApplication = {
 	},
 	storageRequirements: {
 		id: id(),
-		label: __('Storage Requirements'),
+		label: __('Storage Requirements', 'smartcrawl-seo'),
 		description: __(
 			'Storage requirements (free space required).',
 			'smartcrawl-seo'

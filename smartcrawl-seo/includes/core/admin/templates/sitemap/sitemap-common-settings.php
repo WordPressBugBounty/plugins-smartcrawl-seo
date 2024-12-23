@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Sitemap Common Settings.
+ *
+ * @package Smartcrwal
+ */
+
 $post_types            = empty( $post_types ) ? array() : $post_types;
 $taxonomies            = empty( $taxonomies ) ? array() : $taxonomies;
 $smartcrawl_buddypress = empty( $smartcrawl_buddypress ) ? array() : $smartcrawl_buddypress;
@@ -24,28 +30,28 @@ $ignore_post_ids       = empty( $ignore_post_ids ) ? '' : $ignore_post_ids;
 			</thead>
 
 			<tbody>
-			<?php foreach ( $post_types as $item => $post_type ) : // phpcs:ignore ?>
+			<?php foreach ( $post_types as $item => $post_item ) : ?>
 				<?php
 				$this->render_view(
 					'sitemap/sitemap-part',
 					array(
 						'item'       => $item,
-						'item_name'  => $post_type->name,
-						'item_label' => $post_type->label,
+						'item_name'  => $post_item->name,
+						'item_label' => $post_item->label,
 						'inverted'   => true,
 					)
 				);
 				?>
 			<?php endforeach; ?>
 
-			<?php foreach ( $taxonomies as $item => $taxonomy ) : // phpcs:ignore ?>
+			<?php foreach ( $taxonomies as $item => $taxonomy_item ) : ?>
 				<?php
 				$this->render_view(
 					'sitemap/sitemap-part',
 					array(
 						'item'       => $item,
-						'item_name'  => $taxonomy->name,
-						'item_label' => $taxonomy->label,
+						'item_name'  => $taxonomy_item->name,
+						'item_label' => $taxonomy_item->label,
 						'inverted'   => true,
 					)
 				);

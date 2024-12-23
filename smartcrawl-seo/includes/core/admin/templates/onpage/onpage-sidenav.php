@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Onpage Sidenav.
+ *
+ * @package Smartcrwal
+ */
+
 $active_tab                = empty( $active_tab ) ? '' : $active_tab;
 $show_static_home_settings = empty( $show_static_home_settings ) ? false : $show_static_home_settings;
 

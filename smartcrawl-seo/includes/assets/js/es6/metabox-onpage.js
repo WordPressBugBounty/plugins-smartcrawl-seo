@@ -53,17 +53,14 @@ class MetaboxOnpage extends EventTarget {
 					<span class="wds-primary-show-label">${__('Primary', 'smartcrawl-seo')}</span>
 					<button type="button" class="wds-make-primary-term hidden" aria-label="Make Primary">${__(
 						'Make Primary',
-						'smartcrawl-seo'
+						'wds'
 					)}</button>
 					</span>`;
 				const showMakePrimaryLabel = `<span class="primary_controller">
-					<span class="wds-primary-show-label hidden"> ${__(
-						'Primary',
-						'smartcrawl-seo'
-					)} </span>
+					<span class="wds-primary-show-label hidden"> ${__('Primary', 'smartcrawl-seo')} </span>
 					<button type="button" class="wds-make-primary-term" aria-label="Make Primary">${__(
 						'Make Primary',
-						'smartcrawl-seo'
+						'wds'
 					)}</button>
 					</span>`;
 				if (

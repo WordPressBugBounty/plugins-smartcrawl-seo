@@ -1,26 +1,47 @@
 <?php
+/**
+ * Publishing\_Person class for handling publishing person schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Models\User;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Publishing\_Person
+ *
+ * Handles publishing person schema fragments.
+ */
 class Publishing_Person extends Fragment {
+
 	/**
-	 * @var
+	 * The URL of the publisher.
+	 *
+	 * @var string
 	 */
 	private $publisher_url;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
+
 	/**
+	 * The owner user.
+	 *
 	 * @var User
 	 */
 	private $owner;
 
 	/**
-	 * @param $publisher_url
+	 * Publishing\_Person constructor.
+	 *
+	 * @param string $publisher_url The URL of the publisher.
 	 */
 	public function __construct( $publisher_url ) {
 		$this->publisher_url = $publisher_url;
@@ -29,14 +50,18 @@ class Publishing_Person extends Fragment {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the publishing person ID.
+	 *
+	 * @return string The publishing person ID.
 	 */
 	public function get_publishing_person_id() {
 		return $this->utils->url_to_id( $this->publisher_url, '#schema-publishing-person' );
 	}
 
 	/**
-	 * @return array
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$schema = array(

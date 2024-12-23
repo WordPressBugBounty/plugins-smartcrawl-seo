@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Social Disabled.
+ *
+ * @package Smartcrwal
+ */
+
 $this->render_view(
 	'disabled-component',
 	array(

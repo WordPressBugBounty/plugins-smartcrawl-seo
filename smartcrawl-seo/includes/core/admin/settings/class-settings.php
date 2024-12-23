@@ -155,7 +155,7 @@ class Settings extends Admin_Settings {
 	/**
 	 * Get (optionally filtered) default roles
 	 *
-	 * @param string $context_filter Optional filter to pass the roles through first.
+	 * @param string|false $context_filter Optional filter to pass the roles through first.
 	 *
 	 * @return array List of roles
 	 */
@@ -260,10 +260,6 @@ class Settings extends Admin_Settings {
 
 		add_action( 'admin_init', array( $this, 'activate_component' ) );
 		add_action( 'admin_footer', array( $this, 'add_native_dismissible_notice_javascript' ) );
-        // phpcs:ignore Squiz.PHP.CommentedOutCode.Found, Squiz.Commenting.InlineComment.InvalidEndChar
-		// add_action( 'network_admin_notices', array( $this, 'wp_org_rating_request' ) );
-        // phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
-		// add_action( 'admin_notices', array( $this, 'wp_org_rating_request' ) );
 		add_action( 'network_admin_notices', array( $this, 'import_notice' ) );
 
 		if ( ! is_multisite() || is_main_site() ) {
@@ -300,7 +296,7 @@ class Settings extends Admin_Settings {
 				self::update_specific_options( $this->option_name, $options );
 			}
 
-			do_action( "wds-component-activated-$component" ); // phpcs:ignore
+			do_action( "smartcrawl_component_activated_$component" );
 
 			wp_safe_redirect( esc_url_raw( add_query_arg( array() ) ) );
 		}
@@ -404,7 +400,7 @@ class Settings extends Admin_Settings {
 	 * @param string $label Module name.
 	 * @param string $tooltip Module tooltip.
 	 * @param string $field_name  Module field name.
-	 * @param string $inverted Determines if field name is inverted one.
+	 * @param bool   $inverted Determines if field name is inverted one.
 	 * @param mixed  $checked Is checked.
 	 * @return array
 	 */
@@ -441,21 +437,10 @@ class Settings extends Admin_Settings {
 		$this->options = self::get_specific_options( $this->option_name );
 
 		if ( empty( $this->options ) ) {
-			if ( empty( $this->options['seomoz'] ) ) {
-				$this->options['seomoz'] = 0;
-			}
-
-			if ( empty( $this->options['sitemap'] ) ) {
-				$this->options['sitemap'] = 1;
-			}
-
-			if ( empty( $this->options['onpage'] ) ) {
-				$this->options['onpage'] = 1;
-			}
-
-			if ( empty( $this->options['social'] ) ) {
-				$this->options['social'] = 1;
-			}
+			$this->options['seomoz']  = 0;
+			$this->options['sitemap'] = 1;
+			$this->options['onpage']  = 1;
+			$this->options['social']  = 1;
 		}
 
 		if ( empty( $this->options['seo_metabox_permission_level'] ) ) {
@@ -606,7 +591,7 @@ class Settings extends Admin_Settings {
 		}
 
 		$days              = 7;
-		$now               = current_time( 'timestamp' ); // phpcs:ignore
+		$now               = current_time( 'timestamp' ); // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
 		$free_install_date = get_site_option( 'wds-free-install-date' );
 		if ( ( $now - (int) $free_install_date ) < ( $days * 24 * 60 * 60 ) ) {
 			return;
@@ -662,7 +647,7 @@ class Settings extends Admin_Settings {
 	 * @return array
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wds_nonce'] ), 'wds-settings-nonce' ) ? $_POST : array(); // phpcs:ignore
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-settings-nonce' ) ? $_POST : array();
 	}
 }
 

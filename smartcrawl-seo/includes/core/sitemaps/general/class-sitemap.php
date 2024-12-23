@@ -1,4 +1,9 @@
 <?php
+/**
+ * Sitemap class for handling general sitemaps in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Sitemaps\General;
 
@@ -8,15 +13,21 @@ use SmartCrawl\Sitemaps\Cache;
 use SmartCrawl\Sitemaps\Query;
 use SmartCrawl\Sitemaps\Utils;
 
+/**
+ * Class Sitemap
+ *
+ * Handles the creation and serving of general sitemaps.
+ */
 class Sitemap extends Sitemaps\Sitemap {
+
 	/**
+	 * Adds rewrite rules for general sitemaps.
+	 *
 	 * @return void
 	 */
 	public function add_rewrites() {
 		/**
 		 * WP.
-		 *
-		 * @var $wp \WP
 		 */
 		global $wp;
 
@@ -30,13 +41,17 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the request can be handled.
+	 *
+	 * @return bool True if the request can be handled, false otherwise.
 	 */
 	public function can_handle_request() {
 		return (bool) get_query_var( 'wds_sitemap' );
 	}
 
 	/**
+	 * Handles fallback for the general sitemap.
+	 *
 	 * @return void
 	 */
 	public function do_fallback() {
@@ -44,6 +59,8 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
+	 * Serves the general sitemap.
+	 *
 	 * @return void
 	 */
 	public function serve() {
@@ -84,6 +101,10 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
+	 * Redirects to native sitemap if available.
+	 *
+	 * @param bool $native_available True if native sitemap is available, false otherwise.
+	 *
 	 * @return void
 	 */
 	private function maybe_redirect_to_native( $native_available ) {
@@ -95,10 +116,14 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
+	 * Redirects to the native sitemap.
+	 *
 	 * @return void
 	 */
 	private function redirect_to_native() {
 		/**
+		 * Global variable for accessing the WP Sitemaps instance.
+		 *
 		 * @var $wp_sitemaps \WP_Sitemaps
 		 */
 		global $wp_sitemaps;
@@ -108,7 +133,12 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return false|string
+	 * Builds a partial sitemap for the given type and page.
+	 *
+	 * @param string $type The sitemap type.
+	 * @param int    $page The sitemap page number.
+	 *
+	 * @return false|string The partial sitemap XML or false if no items.
 	 */
 	private function build_partial_sitemap( $type, $page ) {
 		$items = array();
@@ -140,7 +170,9 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return false|string
+	 * Builds the index sitemap.
+	 *
+	 * @return string The index sitemap XML.
 	 */
 	private function build_index() {
 		$index_items = array();
@@ -158,21 +190,27 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Retrieves the sitemap type query variable.
+	 *
+	 * @return string The sitemap type query variable.
 	 */
 	private function get_sitemap_type_var() {
 		return (string) get_query_var( 'wds_sitemap_type' );
 	}
 
 	/**
-	 * @return int
+	 * Retrieves the sitemap page query variable.
+	 *
+	 * @return int The sitemap page query variable.
 	 */
 	private function get_sitemap_page_var() {
 		return (int) get_query_var( 'wds_sitemap_page' );
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the request is for a gzip sitemap.
+	 *
+	 * @return bool True if the request is for a gzip sitemap, false otherwise.
 	 */
 	private function is_gzip_request() {
 		$query_var = get_query_var( 'wds_sitemap_gzip' );
@@ -180,7 +218,9 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return Query[]
+	 * Retrieves the queries for the general sitemap.
+	 *
+	 * @return Query[] The queries.
 	 */
 	private function get_queries() {
 		$query_classes = array();
@@ -211,6 +251,10 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
+	 * Post-processes the general sitemap.
+	 *
+	 * @param array $items The items to include in the sitemap.
+	 *
 	 * @return void
 	 */
 	private function post_process( $items ) {
@@ -220,7 +264,9 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return Item
+	 * Creates a sitemap item for the home page.
+	 *
+	 * @return Item The home page item.
 	 */
 	private function make_home_page_item() {
 		$item = new Item();
@@ -230,7 +276,11 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Builds the index XML for the given index items.
+	 *
+	 * @param array $index_items The index items to include in the sitemap.
+	 *
+	 * @return string The index sitemap XML.
 	 */
 	private function build_index_xml( $index_items ) {
 		return Simple_Renderer::load(
@@ -242,7 +292,11 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return string
+	 * Builds the XML for the given items.
+	 *
+	 * @param array $items The items to include in the sitemap.
+	 *
+	 * @return string The sitemap XML.
 	 */
 	private function build_xml( $items ) {
 		return Simple_Renderer::load(
@@ -254,7 +308,9 @@ class Sitemap extends Sitemaps\Sitemap {
 	}
 
 	/**
-	 * @return bool
+	 * Checks if the native sitemap is available.
+	 *
+	 * @return bool True if the native sitemap is available, false otherwise.
 	 */
 	private function native_sitemap_available() {
 		return Utils::native_sitemap_available();

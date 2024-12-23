@@ -1,13 +1,25 @@
 <?php
+/**
+ * Class for checking if the document has a valid viewport meta tag.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Lighthouse\Checks;
 
 use SmartCrawl\Simple_Renderer;
 
+/**
+ * Viewport class.
+ *
+ * Checks if the document has a valid viewport meta tag.
+ */
 class Viewport extends Check {
 	const ID = 'viewport';
 
 	/**
+	 * Prepares the check by setting success and failure titles.
+	 *
 	 * @return void
 	 */
 	public function prepare() {
@@ -16,6 +28,8 @@ class Viewport extends Check {
 	}
 
 	/**
+	 * Gets the ID of the check.
+	 *
 	 * @return string
 	 */
 	public function get_id() {

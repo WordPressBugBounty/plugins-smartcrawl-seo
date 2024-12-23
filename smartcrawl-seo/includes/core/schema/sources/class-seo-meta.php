@@ -1,19 +1,33 @@
 <?php
+/**
+ * SEO_Meta class for handling SEO metadata in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Sources;
 
+/**
+ * Class SEO_Meta
+ *
+ * Handles SEO metadata.
+ */
 class SEO_Meta extends Property {
 	const ID          = 'seo_meta';
 	const TITLE       = 'seo_title';
 	const DESCRIPTION = 'seo_description';
 
 	/**
-	 * @var
+	 * The field to retrieve the SEO metadata for.
+	 *
+	 * @var string
 	 */
 	private $field;
 
 	/**
-	 * @param $field
+	 * SEO_Meta constructor.
+	 *
+	 * @param string $field The field to retrieve the SEO metadata for.
 	 */
 	public function __construct( $field ) {
 		parent::__construct();
@@ -22,7 +36,9 @@ class SEO_Meta extends Property {
 	}
 
 	/**
-	 * @return mixed|string|void
+	 * Retrieves the value of the SEO metadata.
+	 *
+	 * @return mixed|string The value of the SEO metadata.
 	 */
 	public function get_value() {
 		$resolver = \SmartCrawl\Endpoint_Resolver::resolve();

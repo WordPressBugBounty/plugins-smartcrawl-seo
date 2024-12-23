@@ -175,7 +175,7 @@ class Controller extends Controllers\Submodule_Controller {
 					printf(
 						/* translators: %s: plugin title */
 						esc_html__( '%s URL redirects have been upgraded', 'smartcrawl-seo' ),
-						\smartcrawl_get_plugin_title()
+						esc_html( \smartcrawl_get_plugin_title() )
 					);
 					?>
 				</strong>
@@ -510,7 +510,7 @@ class Controller extends Controllers\Submodule_Controller {
 					'6.4.2',
 					"smartcrawl_after_sanitize_{$this->module_id}",
 					/* translators: %s: Module ID. */
-					sprintf( __( 'Please use our new hook `smartcrawl_after_sanitize_%s` in SmartCrawl.' ), $this->module_id )
+					sprintf( __( 'Please use our new hook `smartcrawl_after_sanitize_%s` in SmartCrawl.', 'smartcrawl-seo' ), $this->module_id )
 				);
 
 				return true;
@@ -533,7 +533,7 @@ class Controller extends Controllers\Submodule_Controller {
 			'6.4.2',
 			"smartcrawl_after_sanitize_{$this->module_id}",
 			/* translators: %s: Module ID. */
-			sprintf( __( 'Please use our new hook `smartcrawl_after_sanitize_%s` in SmartCrawl.' ), $this->module_id )
+			sprintf( __( 'Please use our new hook `smartcrawl_after_sanitize_%s` in SmartCrawl.', 'smartcrawl-seo' ), $this->module_id )
 		);
 
 		return true;
@@ -559,12 +559,12 @@ class Controller extends Controllers\Submodule_Controller {
 		}
 
 		// We don't need to escape here as we are using esc_url_raw later.
-		$url = is_ssl() ? 'https://' : 'http://';
+		$url  = is_ssl() ? 'https://' : 'http://';
 		$url .= wp_unslash( $_SERVER['HTTP_HOST'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
 			// We don't need to escape here as we are using esc_url_raw later.
-            $url .= wp_unslash( $_SERVER['REQUEST_URI'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$url .= wp_unslash( $_SERVER['REQUEST_URI'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		}
 
 		return esc_url_raw( $url );
@@ -852,7 +852,7 @@ class Controller extends Controllers\Submodule_Controller {
 			array( true ),
 			'6.4.2',
 			'smartcrawl_process_redirect',
-			__( 'Please use our new filter `smartcrawl_process_redirect` in SmartCrawl.' )
+			__( 'Please use our new filter `smartcrawl_process_redirect` in SmartCrawl.', 'smartcrawl-seo' )
 		) ) {
 			return false;
 		}
@@ -1250,7 +1250,7 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return array
 	 */
 	private function get_redirects_from_csv( $file_name, &$errors = false ) {
-		$file = fopen( $file_name, 'r' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+		$file = fopen( $file_name, 'r' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fopen
 
 		if ( ! $file ) {
 			wp_send_json_error();
@@ -1258,7 +1258,7 @@ class Controller extends Controllers\Submodule_Controller {
 
 		$redirects = array();
 
-		while ( $redirect_data = fgetcsv( $file ) ) { // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
+		while ( $redirect_data = fgetcsv( $file ) ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
 			list( $source, $destination, $type, $regex, $title, $rules ) = $redirect_data;
 
 			if ( empty( $source ) ) {
@@ -1274,7 +1274,7 @@ class Controller extends Controllers\Submodule_Controller {
 			}
 		}
 
-		fclose( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+		fclose( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
 
 		return $redirects;
 	}

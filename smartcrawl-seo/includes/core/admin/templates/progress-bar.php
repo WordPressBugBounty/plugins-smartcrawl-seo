@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Progress Bar.
+ *
+ * @package Smartcrwal
+ */
+
 $progress       = empty( $progress ) ? 0 : $progress;
 $progress_state = empty( $progress_state ) ? '' : $progress_state;
 ?>

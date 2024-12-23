@@ -1,3 +1,12 @@
+<?php
+/**
+ * Template: Onboard modal footer.
+ *
+ * @package SmartCrawl
+ */
+
+?>
+
 <div class="wds-onboard-footer-skip">
 	<a
 		class="onboard-skip sui-button sui-button-ghost"

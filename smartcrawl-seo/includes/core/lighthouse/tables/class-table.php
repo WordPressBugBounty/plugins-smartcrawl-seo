@@ -1,28 +1,48 @@
 <?php
+/**
+ * Table class for rendering Lighthouse reports.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Lighthouse\Tables;
 
+/**
+ * Table class.
+ *
+ * Handles the rendering of Lighthouse report tables.
+ */
 class Table {
 	/**
-	 * @var
+	 * Header of the table.
+	 *
+	 * @var array
 	 */
 	private $header;
 	/**
-	 * @var
+	 * Report data for the table.
+	 *
+	 * @var object
 	 */
 	private $report;
 	/**
+	 * Rows of the table.
+	 *
 	 * @var array
 	 */
 	private $rows = array();
 	/**
+	 * Screenshots associated with the table rows.
+	 *
 	 * @var array
 	 */
 	private $screenshots = array();
 
 	/**
-	 * @param $header
-	 * @param $report
+	 * Constructor for the Table class.
+	 *
+	 * @param array  $header The header of the table.
+	 * @param object $report The report data for the table.
 	 */
 	public function __construct( $header, $report ) {
 		$this->header = $header;
@@ -30,8 +50,10 @@ class Table {
 	}
 
 	/**
-	 * @param $row
-	 * @param $screenshot_node_id
+	 * Adds a row to the table.
+	 *
+	 * @param array  $row The row data.
+	 * @param string $screenshot_node_id The node ID for the screenshot.
 	 *
 	 * @return void
 	 */
@@ -41,6 +63,8 @@ class Table {
 	}
 
 	/**
+	 * Renders the table.
+	 *
 	 * @return void
 	 */
 	public function render() {
@@ -70,7 +94,7 @@ class Table {
 					<?php endforeach; ?>
 
 					<?php if ( $screenshot ) : ?>
-						<td><?php echo $screenshot; ?></td>
+						<td><?php echo wp_kses_post( $screenshot ); ?></td>
 					<?php endif; ?>
 				</tr>
 			<?php endforeach; ?>
@@ -79,9 +103,11 @@ class Table {
 	}
 
 	/**
-	 * @param $node_id
-	 * @param $thumb_width
-	 * @param $thumb_height
+	 * Gets the screenshot markup.
+	 *
+	 * @param string $node_id The node ID for the screenshot.
+	 * @param int    $thumb_width The thumbnail width.
+	 * @param int    $thumb_height The thumbnail height.
 	 *
 	 * @return false|string
 	 */
@@ -94,19 +120,21 @@ class Table {
 		ob_start();
 		?>
 		<div class="wds-lighthouse-thumbnail-container">
-			<?php echo $thumbnail; ?>
+			<?php echo wp_kses_post( $thumbnail ); ?>
 		</div>
 		<div class="wds-lighthouse-screenshot-container">
-			<?php echo $screenshot; ?>
+			<?php echo wp_kses_post( $screenshot ); ?>
 		</div>
 		<?php
 		return ob_get_clean();
 	}
 
 	/**
-	 * @param $node_id
-	 * @param $scaled_frame_width
-	 * @param $scaled_frame_height
+	 * Gets the screenshot markup.
+	 *
+	 * @param string $node_id The node ID for the screenshot.
+	 * @param int    $scaled_frame_width The scaled frame width.
+	 * @param int    $scaled_frame_height The scaled frame height.
 	 *
 	 * @return false|string
 	 */
@@ -181,9 +209,11 @@ class Table {
 	}
 
 	/**
-	 * @param $node
-	 * @param $frame_height
-	 * @param $screenshot_height
+	 * Calculates the top offset for the screenshot.
+	 *
+	 * @param array $node The node details.
+	 * @param int   $frame_height The frame height.
+	 * @param int   $screenshot_height The screenshot height.
 	 *
 	 * @return float|int|mixed
 	 */
@@ -213,13 +243,17 @@ class Table {
 	}
 
 	/**
-	 * @return mixed
+	 * Gets the table header.
+	 *
+	 * @return array
 	 */
 	public function get_header() {
 		return $this->header;
 	}
 
 	/**
+	 * Gets the table rows.
+	 *
 	 * @return array
 	 */
 	public function get_rows() {

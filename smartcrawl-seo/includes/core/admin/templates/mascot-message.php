@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Mascot Message.
+ *
+ * @package SmartCrawl
+ */
+
 namespace SmartCrawl;
 
 $key         = empty( $key ) ? '' : $key;

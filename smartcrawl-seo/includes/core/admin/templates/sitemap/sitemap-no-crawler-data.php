@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Sitemap No Crawler Data.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

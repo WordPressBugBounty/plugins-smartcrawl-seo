@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Dismissable Notice.
+ *
+ * @package SmartCrawl
+ */
+
 namespace SmartCrawl;
 
 $message = empty( $message ) ? '' : $message;

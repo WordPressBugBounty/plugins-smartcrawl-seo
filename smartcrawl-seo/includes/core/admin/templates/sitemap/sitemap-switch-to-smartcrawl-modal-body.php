@@ -1,3 +1,11 @@
+<?php
+/**
+ * Template: Sitemap switch to SmartCrawl modal body.
+ *
+ * @package SmartCrawl
+ */
+
+?>
 <button
 	type="button"
 	class="sui-button sui-button-ghost"

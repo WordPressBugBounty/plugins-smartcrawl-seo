@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Upgrade Page.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

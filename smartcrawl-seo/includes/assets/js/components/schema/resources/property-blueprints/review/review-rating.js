@@ -12,7 +12,7 @@ const ReviewRating = {
 		disallowDeletion: true,
 		description: __(
 			'A numerical quality rating for the item, either a number, fraction, or percentage (for example, "4", "60%", or "6 / 10").',
-			'smartcrawl-seo'
+			'wds'
 		),
 		required: true,
 	},
@@ -25,7 +25,7 @@ const ReviewRating = {
 		disallowDeletion: true,
 		description: __(
 			'The highest value allowed in this rating system. If omitted, 5 is assumed.',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 	worstRating: {
@@ -37,7 +37,7 @@ const ReviewRating = {
 		disallowDeletion: true,
 		description: __(
 			'The lowest value allowed in this rating system. If omitted, 1 is assumed.',
-			'smartcrawl-seo'
+			'wds'
 		),
 	},
 };

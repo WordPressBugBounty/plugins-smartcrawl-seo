@@ -1,4 +1,11 @@
 <?php
+/**
+ * Template: Schema Settings.
+ *
+ * @package Smartcrwal
+ */
+
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
 $action_url      = empty( $_view['action_url'] ) ? '' : $_view['action_url'];
 $option_name     = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $options         = empty( $options ) ? array() : $options;
@@ -6,7 +13,7 @@ $social_options  = empty( $social_options ) ? array() : $social_options;
 $active_tab      = empty( $active_tab ) ? '' : $active_tab;
 $post_types      = empty( $post_types ) ? array() : $post_types;
 $taxonomies      = empty( $taxonomies ) ? array() : $taxonomies;
-$pages           = empty( $pages ) ? array() : $pages; // phpcs:ignore
+$pages           = empty( $pages ) ? array() : $pages;
 $schema_disabled = ! empty( $social_options['disable-schema'] );
 
 $this->render_view( 'before-page-container' );

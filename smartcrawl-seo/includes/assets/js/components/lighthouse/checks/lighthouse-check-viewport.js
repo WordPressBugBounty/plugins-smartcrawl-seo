@@ -185,12 +185,7 @@ export default class LighthouseCheckViewport extends React.Component {
 						&nbsp;&nbsp;...
 					</div>
 
-					<p>
-						{__(
-							"Here's what each key-value pair does:",
-							'smartcrawl-seo'
-						)}
-					</p>
+					<p>{__("Here's what each key-value pair does:", 'smartcrawl-seo')}</p>
 					<ul>
 						<li>
 							{__(

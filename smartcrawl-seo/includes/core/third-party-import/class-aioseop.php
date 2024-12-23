@@ -1,9 +1,19 @@
 <?php
+/**
+ * This file contains the AIOSEOP class for handling the import of AIOSEOP settings.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Third_Party_Import;
 
 use SmartCrawl\Schema\Type_Constants;
 
+/**
+ * Class AIOSEOP
+ *
+ * Handles the import of AIOSEOP settings.
+ */
 class AIOSEOP extends Importer {
 
 	const IMPORT_IN_PROGRESS_FLAG = 'wds-aioseop-import-in-progress';
@@ -30,18 +40,13 @@ class AIOSEOP extends Importer {
 	 */
 	public function data_exists() {
 		return false;
-		/**
-		$options = get_option( self::AIOSEOP_OPTIONS_ID );
-		$version = \smartcrawl_get_array_value( $options, 'last_active_version' );
-
-		if ( ! $version ) {
-			return false;
-		}
-
-		return apply_filters( 'wds-import-aioseop-data-exists', strpos( $version, '3' ) === 0 ); // phpcs:ignore
-		*/
 	}
 
+	/**
+	 * Import AIOSEOP options.
+	 *
+	 * @return void
+	 */
 	public function import_options() {
 		$mappings       = $this->expand_mappings( $this->load_option_mappings() );
 		$source_options = $this->get_source_options();
@@ -83,10 +88,20 @@ class AIOSEOP extends Importer {
 		$this->save_options( $target_options );
 	}
 
+	/**
+	 * Load option mappings.
+	 *
+	 * @return array The option mappings.
+	 */
 	private function load_option_mappings() {
 		return $this->load_mapping_file( 'aioseop-mappings.php' );
 	}
 
+	/**
+	 * Get source options.
+	 *
+	 * @return array The source options.
+	 */
 	private function get_source_options() {
 		$processed_options = array();
 
@@ -97,6 +112,16 @@ class AIOSEOP extends Importer {
 		);
 	}
 
+	/**
+	 * Populate option array.
+	 *
+	 * @param mixed  $array_value The value to populate.
+	 * @param array  $array The array to populate.
+	 * @param string $array_key The key for the array.
+	 * @param int    $level The level of nesting.
+	 *
+	 * @return array The populated array.
+	 */
 	private function populate_option_array( $array_value, $array, $array_key, $level = 0 ) {
 		if ( is_array( $array_value ) && ! $this->is_numeric_array( $array_value ) && $level < 3 ) {
 			++$level;
@@ -110,10 +135,24 @@ class AIOSEOP extends Importer {
 		return $array;
 	}
 
+	/**
+	 * Check if the array is numeric.
+	 *
+	 * @param array $array The array to check.
+	 *
+	 * @return bool True if the array is numeric, false otherwise.
+	 */
 	private function is_numeric_array( $array ) {
 		return array_keys( $array ) === range( 0, count( $array ) - 1 );
 	}
 
+	/**
+	 * Check if the key meets the condition.
+	 *
+	 * @param string $key The key to check.
+	 *
+	 * @return bool True if the key meets the condition, false otherwise.
+	 */
 	private function meets_condition( $key ) {
 		$condition = null;
 		$matches   = array();
@@ -130,6 +169,14 @@ class AIOSEOP extends Importer {
 		return call_user_func_array( array( $this, $condition ), array( $key, $matches ) );
 	}
 
+	/**
+	 * Get the target key.
+	 *
+	 * @param array  $mappings The mappings array.
+	 * @param string $source_key The source key.
+	 *
+	 * @return string The target key.
+	 */
 	private function get_target_key( $mappings, $source_key ) {
 		$target_key = \smartcrawl_get_array_value( $mappings, $source_key );
 		if ( null !== $target_key ) {
@@ -145,6 +192,13 @@ class AIOSEOP extends Importer {
 		return null;
 	}
 
+	/**
+	 * Save sitemap post types.
+	 *
+	 * @param array $target_options The target options.
+	 *
+	 * @return array
+	 */
 	public function save_sitemap_posttypes( $target_options ) {
 		$source_options    = get_option( self::AIOSEOP_OPTIONS_ID );
 		$all_post_types    = $this->get_post_types();
@@ -174,6 +228,13 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Save sitemap taxonomies.
+	 *
+	 * @param array $target_options The target options.
+	 *
+	 * @return array
+	 */
 	public function save_sitemap_taxonomies( $target_options ) {
 		$source_options    = get_option( self::AIOSEOP_OPTIONS_ID );
 		$all_taxonomies    = $this->get_taxonomies();
@@ -203,6 +264,13 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Save social types.
+	 *
+	 * @param array $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	private function save_social_types( $target_options ) {
 		$default_post_types = array( 'post', 'page' );
 		$source_post_types  = \smartcrawl_get_array_value(
@@ -234,6 +302,14 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Enable social for a specific type.
+	 *
+	 * @param string $type The type to enable social for.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	private function enable_social_for( $type, $target_options ) {
 		\smartcrawl_put_array_value(
 			true,
@@ -255,6 +331,13 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Check if SEO is enabled for a taxonomy.
+	 *
+	 * @param string $taxonomy The taxonomy to check.
+	 *
+	 * @return bool True if SEO is enabled for the taxonomy, false otherwise.
+	 */
 	private function enabled_for_taxonomy( $taxonomy ) {
 		$default_types        = array( 'category', 'post_tag', 'tag' );
 		$options              = get_option( self::AIOSEOP_OPTIONS_ID );
@@ -268,6 +351,11 @@ class AIOSEOP extends Importer {
 		}
 	}
 
+	/**
+	 * Import taxonomy meta.
+	 *
+	 * @return void
+	 */
 	public function import_taxonomy_meta() {
 		$term_ids = $this->get_terms_with_aioseop_metas();
 		$wds_meta = array();
@@ -291,12 +379,24 @@ class AIOSEOP extends Importer {
 		update_option( 'wds_taxonomy_meta', $wds_meta );
 	}
 
+	/**
+	 * Get terms with AIOSEOP metas.
+	 *
+	 * @return array The term IDs with AIOSEOP metas.
+	 */
 	private function get_terms_with_aioseop_metas() {
 		global $wpdb;
 
-		return $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key LIKE '_aioseop_%' GROUP BY term_id" ); // phpcs:ignore
+		return $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key LIKE '_aioseop_%' GROUP BY term_id" );
 	}
 
+	/**
+	 * Check if SEO is enabled for a term.
+	 *
+	 * @param int $term_id The term ID to check.
+	 *
+	 * @return bool True if SEO is enabled for the term, false otherwise.
+	 */
 	private function enabled_for_term( $term_id ) {
 		$term                 = get_term( $term_id );
 		$enabled_for_term     = 'on' !== get_term_meta( $term_id, '_aioseop_disable', true );
@@ -305,6 +405,16 @@ class AIOSEOP extends Importer {
 		return $enabled_for_term && $enabled_for_taxonomy;
 	}
 
+	/**
+	 * Import term meta text.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $target_key The target key.
+	 * @param int    $term_id The term ID.
+	 * @param array  $taxonomy_meta The taxonomy meta array.
+	 *
+	 * @return array The updated taxonomy meta array.
+	 */
 	private function import_term_meta_text( $source_key, $target_key, $term_id, $taxonomy_meta ) {
 		if ( $this->meets_condition( $source_key ) ) {
 			$meta_value                   = get_term_meta( $term_id, $source_key, true );
@@ -314,6 +424,16 @@ class AIOSEOP extends Importer {
 		return $taxonomy_meta;
 	}
 
+	/**
+	 * Import term meta boolean.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $target_key The target key.
+	 * @param int    $term_id The term ID.
+	 * @param array  $taxonomy_meta The taxonomy meta array.
+	 *
+	 * @return array The updated taxonomy meta array.
+	 */
 	private function import_term_meta_boolean( $source_key, $target_key, $term_id, $taxonomy_meta ) {
 		if ( $this->meets_condition( $source_key ) ) {
 			$meta_value                   = get_term_meta( $term_id, $source_key, true );
@@ -324,6 +444,14 @@ class AIOSEOP extends Importer {
 		return $taxonomy_meta;
 	}
 
+	/**
+	 * Import term meta OpenGraph.
+	 *
+	 * @param int   $term_id The term ID.
+	 * @param array $taxonomy_meta The taxonomy meta array.
+	 *
+	 * @return array The updated taxonomy meta array.
+	 */
 	private function import_term_meta_opengraph( $term_id, $taxonomy_meta ) {
 		$source_values = get_term_meta( $term_id, '_aioseop_opengraph_settings', true );
 		if ( empty( $source_values ) ) {
@@ -338,6 +466,15 @@ class AIOSEOP extends Importer {
 		return $taxonomy_meta;
 	}
 
+	/**
+	 * Populate OpenGraph values.
+	 *
+	 * @param array  $meta_values The meta values.
+	 * @param string $opengraph_key The OpenGraph key.
+	 * @param string $twitter_key The Twitter key.
+	 *
+	 * @return array The populated OpenGraph values.
+	 */
 	private function populate_opengraph_values( $meta_values, $opengraph_key = '_wds_opengraph', $twitter_key = '_wds_twitter' ) {
 		$wds_values    = array();
 		$title         = \smartcrawl_get_array_value( $meta_values, 'aioseop_opengraph_settings_title' );
@@ -360,6 +497,11 @@ class AIOSEOP extends Importer {
 		return $wds_values;
 	}
 
+	/**
+	 * Import post meta.
+	 *
+	 * @return bool True if all posts are imported, false otherwise.
+	 */
 	public function import_post_meta() {
 		$batch_size  = apply_filters( 'wds_post_meta_import_batch_size', 300 );
 		$all_posts   = $this->get_posts_with_aioseop_metas();
@@ -388,10 +530,22 @@ class AIOSEOP extends Importer {
 		return count( $all_posts ) === count( $batch_posts );
 	}
 
+	/**
+	 * Get posts with AIOSEOP metas.
+	 *
+	 * @return array The post IDs with AIOSEOP metas.
+	 */
 	private function get_posts_with_aioseop_metas() {
 		return $this->get_posts_with_source_metas( '_aioseop_' );
 	}
 
+	/**
+	 * Check if SEO is enabled for a post.
+	 *
+	 * @param int $post_id The post ID to check.
+	 *
+	 * @return bool True if SEO is enabled for the post, false otherwise.
+	 */
 	private function enabled_for_post( $post_id ) {
 		$enabled_for_post      = 'on' !== get_post_meta( $post_id, '_aioseop_disable', true );
 		$enabled_for_post_type = $this->enabled_for_post_type( get_post_type( $post_id ) );
@@ -399,6 +553,13 @@ class AIOSEOP extends Importer {
 		return $enabled_for_post && $enabled_for_post_type;
 	}
 
+	/**
+	 * Check if SEO is enabled for a post type.
+	 *
+	 * @param string $post_type The post type to check.
+	 *
+	 * @return bool True if SEO is enabled for the post type, false otherwise.
+	 */
 	private function enabled_for_post_type( $post_type ) {
 		$default_types        = array( 'post', 'page' );
 		$options              = get_option( self::AIOSEOP_OPTIONS_ID );
@@ -412,6 +573,15 @@ class AIOSEOP extends Importer {
 		}
 	}
 
+	/**
+	 * Import post meta text.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $target_key The target key.
+	 * @param int    $post_id The post ID.
+	 *
+	 * @return void
+	 */
 	private function import_post_meta_text( $source_key, $target_key, $post_id ) {
 		if ( ! $this->meets_condition( $source_key ) ) {
 			return;
@@ -421,6 +591,13 @@ class AIOSEOP extends Importer {
 		update_post_meta( $post_id, $target_key, $meta_value );
 	}
 
+	/**
+	 * Import post meta no index.
+	 *
+	 * @param int $post_id The post ID.
+	 *
+	 * @return void
+	 */
 	private function import_post_meta_no_index( $post_id ) {
 		$source_meta_value = get_post_meta( $post_id, '_aioseop_noindex', true );
 		if ( 'on' === $source_meta_value ) {
@@ -430,6 +607,13 @@ class AIOSEOP extends Importer {
 		}
 	}
 
+	/**
+	 * Import post meta no follow.
+	 *
+	 * @param int $post_id The post ID.
+	 *
+	 * @return void
+	 */
 	private function import_post_meta_no_follow( $post_id ) {
 		$source_meta_value = get_post_meta( $post_id, '_aioseop_nofollow', true );
 		if ( 'on' === $source_meta_value ) {
@@ -439,6 +623,13 @@ class AIOSEOP extends Importer {
 		}
 	}
 
+	/**
+	 * Import post meta OpenGraph.
+	 *
+	 * @param int $post_id The post ID.
+	 *
+	 * @return void
+	 */
 	private function import_post_meta_opengraph( $post_id ) {
 		$source_values = get_post_meta( $post_id, '_aioseop_opengraph_settings', true );
 		if ( empty( $source_values ) || ! $this->opengraph_enabled_for_post_type( get_post_type( $post_id ) ) ) {
@@ -451,6 +642,13 @@ class AIOSEOP extends Importer {
 		}
 	}
 
+	/**
+	 * Check if OpenGraph is enabled for a post type.
+	 *
+	 * @param string $post_type The post type to check.
+	 *
+	 * @return bool True if OpenGraph is enabled for the post type, false otherwise.
+	 */
 	private function opengraph_enabled_for_post_type( $post_type ) {
 		$options       = get_option( self::AIOSEOP_OPTIONS_ID );
 		$og_types      = \smartcrawl_get_array_value(
@@ -470,6 +668,11 @@ class AIOSEOP extends Importer {
 		}
 	}
 
+	/**
+	 * Get custom handlers.
+	 *
+	 * @return array The custom handlers.
+	 */
 	public function get_custom_handlers() {
 		// phpcs:disable -- PHPCS complains about whitespaces here
 		return array(
@@ -484,6 +687,15 @@ class AIOSEOP extends Importer {
 		// phpcs:enable
 	}
 
+	/**
+	 * Save post type noindex values.
+	 *
+	 * @param string $source_key The source key.
+	 * @param array  $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function save_post_type_noindex( $source_key, $source_value, $target_options ) {
 		$post_types = ! empty( $source_value ) && is_array( $source_value ) ? $source_value : array();
 		foreach ( $post_types as $post_type ) {
@@ -494,6 +706,15 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Save post type nofollow values.
+	 *
+	 * @param string $source_key The source key.
+	 * @param array  $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function save_post_type_nofollow( $source_key, $source_value, $target_options ) {
 		$post_types = ! empty( $source_value ) && is_array( $source_value ) ? $source_value : array();
 		foreach ( $post_types as $post_type ) {
@@ -504,6 +725,15 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Save social profile links.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function save_social_profile_links( $source_key, $source_value, $target_options ) {
 		$mappings     = array(
 			'facebook.com'  => 'facebook_url',
@@ -534,6 +764,15 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Save tax noindex values.
+	 *
+	 * @param string $source_key The source key.
+	 * @param array  $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function save_tax_noindex_values( $source_key, $source_value, $target_options ) {
 		if ( ! is_array( $source_value ) ) {
 			return $target_options;
@@ -553,6 +792,15 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Save person or organization name.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function save_person_or_organization_name( $source_key, $source_value, $target_options ) {
 		$options       = get_option( self::AIOSEOP_OPTIONS_ID );
 		$person_or_org = \smartcrawl_get_array_value(
@@ -589,6 +837,11 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Get pre-processors.
+	 *
+	 * @return array The pre-processors.
+	 */
 	public function get_pre_processors() {
 		return array(
 			'wds_onpage_options/title-[a-z0-9_]+'          => 'replace_placeholders',
@@ -598,6 +851,14 @@ class AIOSEOP extends Importer {
 		);
 	}
 
+	/**
+	 * Wrap Google meta in markup.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The wrapped Google meta.
+	 */
 	public function wrap_google_meta_in_markup( $target_key, $source_value ) {
 		if ( strpos( trim( $source_value ), '<meta' ) === 0 ) {
 			return $source_value;
@@ -606,6 +867,14 @@ class AIOSEOP extends Importer {
 		return sprintf( '<meta name="google-site-verification" content="%s" />', $source_value );
 	}
 
+	/**
+	 * Wrap Bing meta in markup.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The wrapped Bing meta.
+	 */
 	public function wrap_bing_meta_in_markup( $target_key, $source_value ) {
 		if ( strpos( trim( $source_value ), '<meta' ) === 0 ) {
 			return $source_value;
@@ -614,6 +883,15 @@ class AIOSEOP extends Importer {
 		return sprintf( '<meta name="msvalidate.01" content="%s" />', $source_value );
 	}
 
+	/**
+	 * Save excluded pages.
+	 *
+	 * @param string $source_key The source key.
+	 * @param string $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function save_excluded_pages( $source_key, $source_value, $target_options ) {
 		$source_posts = empty( $source_value ) ? array() : explode( ',', $source_value );
 		$target_posts = array();
@@ -639,12 +917,28 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Get post ID by slug.
+	 *
+	 * @param string $slug The slug to search for.
+	 *
+	 * @return string|null The post ID.
+	 */
 	private function get_post_id_by_slug( $slug ) {
 		global $wpdb;
 
 		return $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_name = %s", $slug ) );
 	}
 
+	/**
+	 * Save extra URLs.
+	 *
+	 * @param string $source_key The source key.
+	 * @param array  $source_value The source value.
+	 * @param array  $target_options The target options.
+	 *
+	 * @return array The updated target options.
+	 */
 	public function save_extra_urls( $source_key, $source_value, $target_options ) {
 		$source_excluded_urls = empty( $source_value ) ? array() : $source_value;
 		$target_excluded_urls = array();
@@ -661,12 +955,28 @@ class AIOSEOP extends Importer {
 		return $target_options;
 	}
 
+	/**
+	 * Convert person or organization setting.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The converted setting.
+	 */
 	public function convert_person_or_org_setting( $target_key, $source_value ) {
 		return 'person' === $source_value
 			? Type_Constants::TYPE_PERSON
 			: Type_Constants::TYPE_ORGANIZATION;
 	}
 
+	/**
+	 * Replace placeholders.
+	 *
+	 * @param string $target_key The target key.
+	 * @param string $source_value The source value.
+	 *
+	 * @return string The value with placeholders replaced.
+	 */
 	public function replace_placeholders( $target_key, $source_value ) {
 		$placeholders = $this->load_mapping_file( 'aioseop-macros.php' );
 		if ( ! is_array( $placeholders ) ) {
@@ -680,20 +990,43 @@ class AIOSEOP extends Importer {
 		return $source_value;
 	}
 
+	/**
+	 * Get import in progress option ID.
+	 *
+	 * @return string The import in progress option ID.
+	 */
 	protected function get_import_in_progress_option_id() {
 		return self::IMPORT_IN_PROGRESS_FLAG;
 	}
 
+	/**
+	 * Get next network site option ID.
+	 *
+	 * @return string The next network site option ID.
+	 */
 	protected function get_next_network_site_option_id() {
 		return self::NETWORK_IMPORT_SITES_PROCESSED_COUNT;
 	}
 
+	/**
+	 * Check if canonical links are enabled.
+	 *
+	 * @return bool True if canonical links are enabled, false otherwise.
+	 */
 	private function canonical_links_enabled() {
 		$options = get_option( self::AIOSEOP_OPTIONS_ID );
 
 		return 'on' === \smartcrawl_get_array_value( $options, 'aiosp_can' ) && 'on' === \smartcrawl_get_array_value( $options, 'aiosp_customize_canonical_links' );
 	}
 
+	/**
+	 * Check if rewrite titles are enabled.
+	 *
+	 * @param string $key The key to check.
+	 * @param array  $matches The matches array.
+	 *
+	 * @return bool True if rewrite titles are enabled, false otherwise.
+	 */
 	private function rewrite_titles_enabled( $key, $matches ) {
 		$options                            = get_option( self::AIOSEOP_OPTIONS_ID );
 		$rewrite_titles                     = (bool) \smartcrawl_get_array_value( $options, 'aiosp_rewrite_titles' );
@@ -727,6 +1060,11 @@ class AIOSEOP extends Importer {
 		}
 	}
 
+	/**
+	 * Check if home OpenGraph fields are enabled.
+	 *
+	 * @return bool True if home OpenGraph fields are enabled, false otherwise.
+	 */
 	private function home_og_fields_enabled() {
 		$options                 = get_option( self::AIOSEOP_OPTIONS_ID );
 		$use_home_meta_as_social = (bool) \smartcrawl_get_array_value( $options, 'aiosp_opengraph_setmeta' );
@@ -734,6 +1072,11 @@ class AIOSEOP extends Importer {
 		return ! $use_home_meta_as_social;
 	}
 
+	/**
+	 * Get source plugins.
+	 *
+	 * @return array The source plugins.
+	 */
 	protected function get_source_plugins() {
 		return array(
 			'all-in-one-seo-pack/all_in_one_seo_pack.php',

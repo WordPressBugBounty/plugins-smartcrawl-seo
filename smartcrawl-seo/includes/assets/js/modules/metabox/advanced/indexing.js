@@ -14,7 +14,7 @@ export default class Indexing extends React.Component {
 				label={__('Indexing', 'smartcrawl-seo')}
 				description={__(
 					'Choose how search engines will index this particular page.',
-					'smartcrawl-seo'
+					'wds'
 				)}
 			>
 				<div className="sui-form-field">
@@ -29,13 +29,13 @@ export default class Indexing extends React.Component {
 							indexing.post_type_noindexed
 								? __(
 										'Index - Override Post Type Setting',
-										'smartcrawl-seo'
+										'wds'
 								  )
 								: __('Index', 'smartcrawl-seo')
 						}
 						description={__(
 							'Instruct search engines whether or not you want this post to appear in search results.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						checked={
 							indexing.post_type_noindexed
@@ -59,13 +59,13 @@ export default class Indexing extends React.Component {
 							indexing.post_type_nofollowed
 								? __(
 										'Follow - Override Post Type Setting',
-										'smartcrawl-seo'
+										'wds'
 								  )
 								: __('Follow', 'smartcrawl-seo')
 						}
 						description={__(
 							'Tells search engines whether or not to follow the links on your page and crawl them too.',
-							'smartcrawl-seo'
+							'wds'
 						)}
 						checked={
 							indexing.post_type_nofollowed

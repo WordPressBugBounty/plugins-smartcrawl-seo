@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Schema Sidenav.
+ *
+ * @package Smartcrwal
+ */
+
 $active_tab = empty( $active_tab ) ? '' : $active_tab;
 
 $this->render_view(

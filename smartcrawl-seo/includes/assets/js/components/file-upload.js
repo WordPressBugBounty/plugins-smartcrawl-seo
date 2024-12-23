@@ -59,7 +59,7 @@ export default class FileUpload extends React.Component {
 						className="sui-icon-upload-cloud"
 						aria-hidden="true"
 					/>
-					{__('Upload file', 'smartcrawl-seo')}
+					{__('Upload file', 'wds-texdomain')}
 				</label>
 
 				<div className="sui-upload-file">
@@ -67,7 +67,7 @@ export default class FileUpload extends React.Component {
 
 					<button
 						type="button"
-						aria-label={__('Remove file', 'smartcrawl-seo')}
+						aria-label={__('Remove file', 'wds-texdomain')}
 						onClick={() => this.handleRemoval()}
 					>
 						<span className="sui-icon-close" aria-hidden="true" />

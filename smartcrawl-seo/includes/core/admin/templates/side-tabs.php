@@ -1,11 +1,17 @@
 <?php
+/**
+ * Template: SideNavs.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 
-$id    = empty( $id ) ? '' : $id; // phpcs:ignore
+// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+$id    = empty( $id ) ? '' : $id;
 $name  = empty( $name ) ? '' : $name;
 $value = empty( $value ) ? '' : $value;
-$tabs  = empty( $tabs ) || ! is_array( $tabs ) ? array() : $tabs; // phpcs:ignore
+$tabs  = empty( $tabs ) || ! is_array( $tabs ) ? array() : $tabs;
 ?>
 
 <div
@@ -13,7 +19,7 @@ $tabs  = empty( $tabs ) || ! is_array( $tabs ) ? array() : $tabs; // phpcs:ignor
 	class="sui-side-tabs sui-tabs"
 >
 	<div data-tabs>
-		<?php foreach ( $tabs as $tab ) : // phpcs:ignore ?>
+		<?php foreach ( $tabs as $tab ) : ?>
 			<?php
 			$tab_value = \smartcrawl_get_array_value( $tab, 'value' );
 			$tab_label = \smartcrawl_get_array_value( $tab, 'label' );
@@ -33,7 +39,7 @@ $tabs  = empty( $tabs ) || ! is_array( $tabs ) ? array() : $tabs; // phpcs:ignor
 	</div>
 
 	<div data-panes>
-		<?php foreach ( $tabs as $tab ) : // phpcs:ignore ?>
+		<?php foreach ( $tabs as $tab ) : ?>
 			<?php
 			$tab_value         = \smartcrawl_get_array_value( $tab, 'value' );
 			$tab_template      = \smartcrawl_get_array_value( $tab, 'template' );

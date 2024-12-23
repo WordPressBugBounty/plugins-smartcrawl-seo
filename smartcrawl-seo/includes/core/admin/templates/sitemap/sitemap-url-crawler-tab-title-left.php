@@ -1,8 +1,8 @@
 <?php
 /**
- * @var Seo_Report $crawl_report
+ * Template: Sitemap Url Crawler Tab Title Left.
  *
- * @package SmartCrawl
+ * @package Smartcrwal
  */
 
 namespace SmartCrawl;
@@ -17,7 +17,7 @@ if ( $is_member ) : ?>
 		class="sui-tag sui-tag-warning"
 		style="<?php echo $active_issues ? '' : 'display:none;'; ?>"
 	>
-		<?php echo esc_html( $active_issues ); ?>
+		<?php echo esc_html( (string) $active_issues ); ?>
 	</span>
 <?php else : ?>
 	<a target="_blank" href="<?php echo esc_attr( $upgrade_url ); ?>">

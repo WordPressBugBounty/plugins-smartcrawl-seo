@@ -143,7 +143,6 @@ class Admin extends Controllers\Controller {
 	 * Applies white labeled plugin name if necessary.
 	 */
 	public function manage_plugin_title() {
-		add_filter('get_text', 'manage_plugin_title');
 		$modules = array(
 			'settings',
 			'sitemap',
@@ -186,36 +185,39 @@ class Admin extends Controllers\Controller {
 	 *
 	 * @param object $admin_bar Admin toolbar object.
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function add_toolbar_items( $admin_bar ) {
-		if ( empty( $admin_bar ) || ! function_exists( '\is_admin_bar_showing' ) ) {
-			return false;
+		if ( ! function_exists( '\is_admin_bar_showing' ) ) {
+			return;
 		}
+
 		if ( ! is_admin_bar_showing() ) {
-			return false;
+			return;
 		}
-		if ( ! apply_filters( 'wds-admin-ui-show_bar', true ) ) { // phpcs:ignore
-			return false;
+
+		if ( ! apply_filters( 'smartcrawl_admin_ui_show_bar', true ) ) {
+			return;
 		}
+
 		// Do not show if only superadmin can view settings and the current user is not super admin.
 		if (
 			is_multisite()
 			&& \smartcrawl_subsite_manager_role() === 'superadmin'
 			&& ! current_user_can( 'manage_network_options' )
 		) {
-			return false;
+			return;
 		}
 
 		// On single site don't show for non-admins.
 		if ( ! current_user_can( 'manage_options' ) ) {
-			return false;
+			return;
 		}
 
 		$optional_nodes = array();
 
 		foreach ( $this->handlers as $handler ) {
-			if ( empty( $handler ) || empty( $handler->slug ) ) {
+			if ( empty( $handler->slug ) ) {
 				continue;
 			}
 
@@ -236,8 +238,6 @@ class Admin extends Controllers\Controller {
 				$admin_bar->add_node( $optional_node );
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -319,15 +319,15 @@ class Admin extends Controllers\Controller {
 	public function smartcrawl_dismiss_message() {
 		$data    = $this->get_request_data();
 		$message = sanitize_key( \smartcrawl_get_array_value( $data, 'message' ) );
-		if ( null === $message ) {
-			wp_send_json_error();
 
-			return;
+		if ( empty( $message ) ) {
+			wp_send_json_error();
 		}
 
 		$dismissed_messages             = get_user_meta( get_current_user_id(), 'wds_dismissed_messages', true );
 		$dismissed_messages             = '' === $dismissed_messages ? array() : $dismissed_messages;
 		$dismissed_messages[ $message ] = true;
+
 		update_user_meta( get_current_user_id(), 'wds_dismissed_messages', $dismissed_messages );
 
 		$page = \smartcrawl_get_array_value( $data, 'page' );

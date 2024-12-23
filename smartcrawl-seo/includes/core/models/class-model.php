@@ -1,7 +1,19 @@
 <?php
+/**
+ * Abstract Model class for SmartCrawl.
+ *
+ * Provides base functionality for all models in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Models;
 
+/**
+ * Abstract Model class.
+ *
+ * Provides base functionality for all models in SmartCrawl.
+ */
 abstract class Model {
 
 	/**

@@ -28,7 +28,7 @@ export default class AutoLinking extends React.Component {
 					)}
 					description={__(
 						'Enter the URL to send traffic to including http:// or https://',
-						'smartcrawl-seo'
+						'wds'
 					)}
 					checked={autolinks.exclude}
 					inverted={true}

@@ -1,6 +1,15 @@
+<?php
+/**
+ * Template: Sitemap Notices.
+ *
+ * @package Smartcrwal
+ */
+
+?>
+
 <div class="sui-floating-notices">
 	<?php
-	if ( ! empty( $_GET['crawl-in-progress'] ) ) { // phpcs:ignore
+	if ( ! empty( $_GET['crawl-in-progress'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$this->render_view(
 			'floating-notice',
 			array(
@@ -11,7 +20,7 @@
 			)
 		);
 	}
-	if ( ! empty( $_GET['switched-to-native'] ) ) { // phpcs:ignore
+	if ( ! empty( $_GET['switched-to-native'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$this->render_view(
 			'floating-notice',
 			array(
@@ -28,7 +37,7 @@
 			)
 		);
 	}
-	if ( ! empty( $_GET['switched-to-sc'] ) ) { // phpcs:ignore
+	if ( ! empty( $_GET['switched-to-sc'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$this->render_view(
 			'floating-notice',
 			array(

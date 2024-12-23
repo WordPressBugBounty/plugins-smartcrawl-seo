@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Settings Data section.
+ *
+ * @package Smartcrwal
+ */
+
 $options               = empty( $_view['options'] ) ? array() : $_view['options'];
 $option_name           = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $keep_settings         = (bool) \smartcrawl_get_array_value( $options, 'keep_settings_on_uninstall' );

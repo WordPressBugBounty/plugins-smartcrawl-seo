@@ -1,37 +1,64 @@
 <?php
+/**
+ * Webpage class for handling webpage schema fragments in SmartCrawl.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Entities;
 use SmartCrawl\Schema\Utils;
 
+/**
+ * Class Webpage
+ *
+ * Handles webpage schema fragments.
+ */
 class Webpage extends Fragment {
+
 	/**
+	 * The post entity.
+	 *
 	 * @var Entities\Post
 	 */
 	private $post;
+
 	/**
-	 * @var
+	 * The type of the webpage.
+	 *
+	 * @var string
 	 */
 	private $type;
+
 	/**
-	 * @var
+	 * The author ID.
+	 *
+	 * @var int
 	 */
 	private $author_id;
+
 	/**
-	 * @var
+	 * The publisher ID.
+	 *
+	 * @var int
 	 */
 	private $publisher_id;
+
 	/**
+	 * Schema utilities.
+	 *
 	 * @var Utils
 	 */
 	private $utils;
 
 	/**
-	 * @param $post
-	 * @param $type
-	 * @param $author_id
-	 * @param $publisher_id
+	 * Webpage constructor.
+	 *
+	 * @param Entities\Post $post The post entity.
+	 * @param string        $type The type of the webpage.
+	 * @param int           $author_id The author ID.
+	 * @param int           $publisher_id The publisher ID.
 	 */
 	public function __construct( $post, $type, $author_id, $publisher_id ) {
 		$this->post         = $post;
@@ -42,7 +69,9 @@ class Webpage extends Fragment {
 	}
 
 	/**
-	 * @return array|mixed|null
+	 * Retrieves raw schema data.
+	 *
+	 * @return array The raw schema data.
 	 */
 	protected function get_raw() {
 		$post_permalink = $this->post->get_permalink();

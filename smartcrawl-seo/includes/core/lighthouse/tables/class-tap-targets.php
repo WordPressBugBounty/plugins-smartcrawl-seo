@@ -1,25 +1,43 @@
 <?php
+/**
+ * Class for managing and rendering tap target tables.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl\Lighthouse\Tables;
 
+/**
+ * Tap_Targets class.
+ *
+ * Manages and renders tap target tables.
+ */
 class Tap_Targets extends Table {
 	/**
+	 * Rows of the table.
+	 *
 	 * @var array
 	 */
 	private $rows = array();
 	/**
+	 * Screenshots of tap targets.
+	 *
 	 * @var array
 	 */
 	private $tap_target_screenshots = array();
 	/**
+	 * Screenshots of overlapping elements.
+	 *
 	 * @var array
 	 */
 	private $overlapping_screenshots = array();
 
 	/**
-	 * @param $row
-	 * @param $tap_target_node_id
-	 * @param $overlapping_node_id
+	 * Adds a row to the table.
+	 *
+	 * @param array  $row                  The row data.
+	 * @param string $tap_target_node_id   The node ID of the tap target.
+	 * @param string $overlapping_node_id  The node ID of the overlapping element.
 	 *
 	 * @return void
 	 */
@@ -30,6 +48,8 @@ class Tap_Targets extends Table {
 	}
 
 	/**
+	 * Renders the table.
+	 *
 	 * @return void
 	 */
 	public function render() {
@@ -59,9 +79,9 @@ class Tap_Targets extends Table {
 								</div>
 
 								<?php if ( 0 === $col_index ) : ?>
-									<?php echo $tap_target_screenshot; ?>
+									<?php echo wp_kses_post( $tap_target_screenshot ); ?>
 								<?php elseif ( 2 === $col_index ) : ?>
-									<?php echo $overlapping_screenshot; ?>
+									<?php echo wp_kses_post( $overlapping_screenshot ); ?>
 								<?php endif; ?>
 							</div>
 						</td>
@@ -73,7 +93,9 @@ class Tap_Targets extends Table {
 	}
 
 	/**
-	 * @return array
+	 * Gets the rows of the table.
+	 *
+	 * @return array The rows of the table.
 	 */
 	public function get_rows() {
 		return $this->rows;

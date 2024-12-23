@@ -39,10 +39,7 @@ export default class CrawlItemSitemap extends React.Component {
 									key={0}
 									className="wds-add-to-sitemap"
 									icon="sui-icon-plus"
-									text={__(
-										'Add to Sitemap',
-										'smartcrawl-seo'
-									)}
+									text={__('Add to Sitemap', 'smartcrawl-seo')}
 									onClick={() => this.props.onAddToSitemap()}
 								/>,
 								<DropdownButton

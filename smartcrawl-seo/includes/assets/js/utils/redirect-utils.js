@@ -199,7 +199,7 @@ export const populateDestination = (data) => {
 	const result = { ...data };
 
 	if (data.destination) {
-		if (data.destination.type.toLowerCase() === 'url') {
+		if (data.destination.type?.toLowerCase() === 'url') {
 			result.destination = data.destination.url;
 		} else {
 			result.destination = {
@@ -244,15 +244,23 @@ export const SourceFieldNonRegex = fieldWithValidation(TextInputField, [
 		isUrlValid,
 		__(
 			'You need to use an absolute URL like https://domain.com/new-url or start with a slash /new-url.',
-			'smartcrawl-seo'
+			'wds'
 		)
 	),
 	new Validator((url) => {
 		const isRelative = isRelativeUrlValid(url);
-		const startsWithHome = url.startsWith(homeUrl);
+		const startsWithHome = (url.replace(/\/$/, '') + '/').startsWith(
+			homeUrl
+		);
 
 		return isRelative || startsWithHome;
 	}, __('You need to enter a URL belonging to the current site.', 'smartcrawl-seo')),
+	new Validator((url) => {
+		return (
+			url.endsWith('/') ||
+			url.replace(/\/$/, '') !== homeUrl.replace(/\/$/, '')
+		);
+	}, __('If you want to use Home URL, please use a relative URL (/) instead.', 'smartcrawl-seo')),
 ]);
 
 export const SourceFieldRegex = fieldWithValidation(TextInputField, [
@@ -264,10 +272,7 @@ export const SourceFieldRegex = fieldWithValidation(TextInputField, [
 			'smartcrawl-seo'
 		)
 	),
-	new Validator(
-		isRegexStringValid,
-		__('This regex is invalid.', 'smartcrawl-seo')
-	),
+	new Validator(isRegexStringValid, __('This regex is invalid.', 'smartcrawl-seo')),
 	new Validator((value) => value.indexOf(homeUrl) !== -1),
 ]);
 

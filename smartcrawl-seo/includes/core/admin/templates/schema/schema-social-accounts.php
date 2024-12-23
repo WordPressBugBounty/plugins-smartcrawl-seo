@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Schema Social Accounts.
+ *
+ * @package Smartcrwal
+ */
+
 $option_name    = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $social_options = empty( $social_options ) ? array() : $social_options;
 ?>

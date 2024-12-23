@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template: Dashboard Sitemap Widget.
+ *
+ * @package SmartCrawl
+ */
+
 namespace SmartCrawl;
 
 use SmartCrawl\Admin\Settings\Dashboard;

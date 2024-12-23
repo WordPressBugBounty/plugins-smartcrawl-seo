@@ -8,7 +8,7 @@ Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
 Tested up to: 6.6
-Stable tag: 3.11.0
+Stable tag: 3.12.2
 
 SEO checker, content analysis & SEO optimizer. Rank higher on search engines with 301 redirects, XML sitemaps & one-click setup.
 
@@ -148,6 +148,33 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 4. Use OpenGraph and Twitter Cards to optimize social sharing.
 
 == Changelog ==
+
+= 3.12.2 ( 2024-12-23 ) =
+
+- Enhance: Code improvements
+- Fix: Fixed missing OG Image tag when "Default Feature Image" is broken.
+- Fix: Resolved "undefined" issue in Google Preview.
+- Fix: Addressed fatal error with Cloudflare location-based redirection.
+- Fix: Fixed redirect URL error on custom post types.
+- Fix: Corrected issues with automatic linking for custom links.
+- Fix: A notice related to load_plugin_textdomain appearing after upgrading to version 6.7.
+
+= 3.11.0 ( 2024-09-09 ) =
+
+- Enhance: White label improvements
+- Enhance: Site crawl cooldown timer
+- Enhance: Macros to support uppercase in custom fields
+- Enhance: Support spaces in redirect URLs
+- Fix: Configuration did not work with Advanced Tools modules
+- Fix: Permission issues with Advanced Tools in multisite environments
+- Fix: Issues with Author Schema
+- Fix: Error in automatic linking when using a slash between words
+- Fix: Missing uploadDate timezone in Video Schema
+- Fix: JavaScript error occurs when creating a redirect
+- Fix: Missing Advanced Tools after certain imports
+- Fix: Redirects not working with URLs containing special characters
+- Fix: OpenGraph tags are not added if images are deleted from the media library
+- Fix: Missing description and upload date metadata in YouTube playlists
 
 = 3.10.9 ( 2024-07-09 ) =
 

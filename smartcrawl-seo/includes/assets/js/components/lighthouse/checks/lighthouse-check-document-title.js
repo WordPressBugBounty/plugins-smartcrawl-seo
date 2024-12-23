@@ -168,9 +168,9 @@ export default class LighthouseCheckDocumentTitle extends React.Component {
 					<div className="wds-lh-highlight-container">
 						<p>
 							<strong className="wds-lh-red-word">
-								{__('Don’t. ')}
+								{__('Don’t.', 'smartcrawl-seo')}
 							</strong>
-							{__('Too vague.')}
+							{__('Too vague.', 'smartcrawl-seo')}
 						</p>
 						<div className="wds-lh-highlight wds-lh-highlight-error">
 							<LighthouseTag tag="title">
@@ -182,7 +182,7 @@ export default class LighthouseCheckDocumentTitle extends React.Component {
 							<strong className="wds-lh-green-word">
 								{__('Do. ')}
 							</strong>
-							{__('Descriptive yet concise.')}
+							{__('Descriptive yet concise.', 'smartcrawl-seo')}
 						</p>
 						<div className="wds-lh-highlight wds-lh-highlight-success">
 							<LighthouseTag tag="title">

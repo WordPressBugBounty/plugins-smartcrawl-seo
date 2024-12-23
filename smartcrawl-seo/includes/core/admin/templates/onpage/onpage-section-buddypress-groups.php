@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Onpage BuddyPress Groups section.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

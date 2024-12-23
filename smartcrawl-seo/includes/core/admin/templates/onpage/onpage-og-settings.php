@@ -1,10 +1,17 @@
 <?php
 /**
+ * Template: Onpage Opengraph Settings.
+ *
+ * @package Smartcrwal
+ */
+
+/**
+ * Opengraph Type.
+ *
  * @var string $for_type Type.
  *
  * @package SmartCrawl
  */
-
 $section_enabled_field_id = 'og-active-' . $for_type;
 $section_enabled          = ! empty( $_view['options'][ $section_enabled_field_id ] ) ? $_view['options'][ $section_enabled_field_id ] : false;
 $section_title            = __( 'Enable OpenGraph', 'smartcrawl-seo' );

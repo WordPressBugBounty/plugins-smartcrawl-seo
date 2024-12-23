@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Social Settings.
+ *
+ * @package Smartcrwal
+ */
 
 namespace SmartCrawl;
 

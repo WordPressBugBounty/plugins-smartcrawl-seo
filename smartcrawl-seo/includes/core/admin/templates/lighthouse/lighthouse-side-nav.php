@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template: Lighthouse Sidebar nav.
+ *
+ * @package SmartCrawl
+ */
 
 namespace SmartCrawl;
 
@@ -11,7 +16,7 @@ if ( ! $lighthouse_report ) {
 }
 $is_member               = ! empty( $_view['is_member'] );
 $lighthouse_cron_enabled = Options::is_cron_enabled() && $is_member;
-$is_reporting_enabled    = ! empty( $is_reporting_enabled ) && $is_reporting_enabled;
+$is_reporting_enabled    = ! empty( $is_reporting_enabled );
 
 $tab_items = array(
 	array(
