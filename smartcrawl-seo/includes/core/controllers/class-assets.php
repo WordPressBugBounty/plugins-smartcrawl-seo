@@ -723,8 +723,15 @@ class Assets extends Controller {
 			'social_active'        => Settings::get_setting( Settings::COMP_SOCIAL ) && Admin_Settings::is_tab_allowed( Settings::TAB_SOCIAL ),
 		);
 
+		$show_on_front  = get_option( 'show_on_front' );
+		$page_on_front  = (int) get_option( 'page_on_front' );
+		$page_for_posts = (int) get_option( 'page_for_posts' );
+		if ( 'page' === $show_on_front && ( $page_on_front === (int) $post_id || $page_for_posts === (int) $post_id ) ) {
+			$post_type = 'home';
+		}
+
 		$og_setting_enabled   = (bool) smartcrawl_get_array_value( $options, 'og-enable' );
-		$og_post_type_enabled = (bool) smartcrawl_get_array_value( $options, 'og-active-' . get_post_type( $post_id ) );
+		$og_post_type_enabled = (bool) smartcrawl_get_array_value( $options, 'og-active-' . $post_type );
 
 		if ( $og_setting_enabled && $og_post_type_enabled ) {
 			$cached_post = Post_Cache::get()->get_post( $post_id );

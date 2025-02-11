@@ -8,7 +8,7 @@ Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
 Tested up to: 6.6
-Stable tag: 3.12.2
+Stable tag: 3.13.0
 
 SEO checker, content analysis & SEO optimizer. Rank higher on search engines with 301 redirects, XML sitemaps & one-click setup.
 
@@ -148,6 +148,27 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 4. Use OpenGraph and Twitter Cards to optimize social sharing.
 
 == Changelog ==
+
+= 3.13.0 ( 2025-02-11 ) =
+
+- Enhance: "Keyword" is now referred to as "Keyphrase"
+- Enhance: Improve Stop Word detection in Content Analysis
+- Enhance: Resolve conflicts between URL Redirection and WordPress Default Redirection
+- Fix: Focus Keyphrase now analyzes the entire keyphrase
+- Fix: Focus Keyphrases are not separated by commas
+- Fix: Allow in-post override of global Index and Follow settings
+- Fix: Automatic Linking is 'Off' in the HUB
+- Fix: Character limit caps causing errors in URL redirection
+- Fix: SmartCrawl activation on WordPress lower than 6.4
+- Fix: Autolinking in WooCommerce Product Categories is not working
+- Fix: SmartCrawl can be installed on PHP versions lower than 7.4
+- Fix: Custom Meta Tags property gets stripped
+- Fix: A notice appears related to SmartCrawl after upgrading to WordPress 6.7
+- Fix: SEO recommendations incorrectly state that no images are added instead of checking for image alt text
+- Fix: "Follow - Override Post Type Setting" option is not working
+- Fix: Broken OpenGraph featured image
+- Fix: Automatic sitemap updates switch from Automatic to Manual after updating SmartCrawl
+- Fix: Handle specific string-type errors that occur with a particular option
 
 = 3.12.2 ( 2024-12-23 ) =
 

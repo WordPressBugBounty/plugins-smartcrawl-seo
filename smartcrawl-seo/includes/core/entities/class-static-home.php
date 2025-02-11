@@ -35,7 +35,7 @@ class Static_Home extends Post {
 	 * @param int        $page_number Page number.
 	 */
 	public function __construct( $posts = array(), $page_number = 0 ) {
-		parent::__construct( get_option( 'page_for_posts' ) );
+		parent::__construct( get_option( 'page_on_front' ) );
 
 		$this->posts       = $posts;
 		$this->page_number = $page_number;
@@ -54,6 +54,24 @@ class Static_Home extends Post {
 		);
 
 		return $schema->get_schema();
+	}
+
+	/**
+	 * Loads the value indicating whether OpenGraph is enabled for the specified location.
+	 *
+	 * @return bool The value indicating whether OpenGraph is enabled.
+	 */
+	protected function load_opengraph_enabled() {
+		return $this->is_opengraph_enabled_for_location( 'home' );
+	}
+
+	/**
+	 * Loads the Twitter enabled status for a specific location.
+	 *
+	 * @return bool The Twitter enabled status for the specified location.
+	 */
+	protected function load_twitter_enabled() {
+		return $this->is_twitter_enabled_for_location( 'home' );
 	}
 
 	/**

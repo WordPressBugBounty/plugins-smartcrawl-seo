@@ -28,8 +28,8 @@ class Para_Keywords extends Check {
 	 */
 	public function get_status_msg() {
 		return false === $this->state
-			? __( "You haven't included the focus keywords in the first paragraph of your article", 'smartcrawl-seo' )
-			: __( 'The focus keyword appears in the first paragraph of your article', 'smartcrawl-seo' );
+			? __( "You haven't included the focus keyphrases in the first paragraph of your article", 'smartcrawl-seo' )
+			: __( 'The focus keyphrase appears in the first paragraph of your article', 'smartcrawl-seo' );
 	}
 
 	/**

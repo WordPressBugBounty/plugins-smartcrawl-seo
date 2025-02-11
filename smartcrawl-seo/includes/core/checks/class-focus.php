@@ -29,8 +29,8 @@ class Focus extends Check {
 	 */
 	public function get_status_msg() {
 		return false === $this->state
-			? __( 'There are no focus keywords', 'smartcrawl-seo' )
-			: __( 'There are some focus keywords', 'smartcrawl-seo' );
+			? __( 'There are no focus keyphrases', 'smartcrawl-seo' )
+			: __( 'There are some focus keyphrases', 'smartcrawl-seo' );
 	}
 
 	/**

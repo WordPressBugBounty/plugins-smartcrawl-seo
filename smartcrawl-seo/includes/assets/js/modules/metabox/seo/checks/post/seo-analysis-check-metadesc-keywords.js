@@ -33,11 +33,11 @@ export default class SeoAnalysisCheckMetadescKeywords extends React.Component {
 			<p>
 				{state
 					? __(
-							'The focus keyword for this article appears in the SEO description which means it has a better chance of matching what your visitors will search for, brilliant!',
+							'The focus keyphrase for this article appears in the SEO description which means it has a better chance of matching what your visitors will search for, brilliant!',
 							'wds'
 					  )
 					: __(
-							"An SEO description without your focus keywords has less chance of matching what your visitors are searching for, versus a description that does. It's worth trying to get your focus keywords in there, just remember to keep it readable and natural.",
+							"An SEO description without your focus keyphrases has less chance of matching what your visitors are searching for, versus a description that does. It's worth trying to get your focus keyphrases in there, just remember to keep it readable and natural.",
 							'wds'
 					  )}
 			</p>
@@ -49,16 +49,16 @@ export default class SeoAnalysisCheckMetadescKeywords extends React.Component {
 
 		return -1 === state
 			? __(
-					"We couldn't find a description to check for keywords",
+					"We couldn't find a description to check for keyphrases",
 					'smartcrawl-seo'
 			  )
 			: false === state
 			? __(
-					"The SEO description doesn't contain your focus keywords",
+					"The SEO description doesn't contain your focus keyphrases",
 					'smartcrawl-seo'
 			  )
 			: __(
-					'The SEO description contains your focus keywords',
+					'The SEO description contains your focus keyphrases',
 					'smartcrawl-seo'
 			  );
 	}
@@ -67,7 +67,7 @@ export default class SeoAnalysisCheckMetadescKeywords extends React.Component {
 		return (
 			<p>
 				{__(
-					"It's considered good practice to try to include your focus keyword(s) in the SEO description of your pages, because this is what people looking for the article are likely searching for. The higher chance of a keyword match, the higher chance your article will be found higher up in search results. Remember this is your chance to give a potential visitor a quick peek into what's inside your article. If they like what they read they'll click on your link.",
+					"It's considered good practice to try to include your focus keyphrase(s) in the SEO description of your pages, because this is what people looking for the article are likely searching for. The higher chance of a keyphrase match, the higher chance your article will be found higher up in search results. Remember this is your chance to give a potential visitor a quick peek into what's inside your article. If they like what they read they'll click on your link.",
 					'smartcrawl-seo'
 				)}
 			</p>

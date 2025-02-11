@@ -12,6 +12,7 @@ use SmartCrawl\Controllers;
 use SmartCrawl\Integration\Maxmind;
 use SmartCrawl\Settings;
 use SmartCrawl\Singleton;
+use SmartCrawl\SmartCrawl;
 use SmartCrawl\String_Utils;
 
 /**
@@ -92,7 +93,6 @@ class Controller extends Controllers\Submodule_Controller {
 		add_action( 'wp', array( $this, 'intercept' ) );
 		add_action( 'wp', array( $this, 'redirect_post' ), 99 );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-		add_action( 'plugins_loaded', array( $this, 'maybe_create_table' ), - 10 );
 		add_action( 'wds_plugin_update', array( $this, 'upgrade_table' ), 10, 2 );
 		add_action( 'wp_ajax_smartcrawl_save_redirect', array( $this, 'save_redirect' ) );
 		add_action( 'wp_ajax_smartcrawl_delete_redirect', array( $this, 'delete_redirect' ) );
@@ -123,7 +123,6 @@ class Controller extends Controllers\Submodule_Controller {
 		remove_action( 'wp', array( $this, 'intercept' ) );
 		remove_action( 'wp', array( $this, 'redirect_post' ), 99 );
 		remove_action( 'admin_notices', array( $this, 'admin_notices' ) );
-		remove_action( 'plugins_loaded', array( $this, 'maybe_create_table' ), - 10 );
 		remove_action( 'wds_plugin_update', array( $this, 'upgrade_table' ), 10, 2 );
 		remove_action( 'wp_ajax_smartcrawl_save_redirect', array( $this, 'save_redirect' ) );
 		remove_action( 'wp_ajax_smartcrawl_delete_redirect', array( $this, 'delete_redirect' ) );
@@ -396,9 +395,7 @@ class Controller extends Controllers\Submodule_Controller {
 	 */
 	public function maybe_create_table() {
 		$db_table = Database_Table::get();
-		if ( ! $db_table->table_exists() ) {
-			$db_table->create_table();
-		}
+		$db_table->create_table();
 	}
 
 	/**

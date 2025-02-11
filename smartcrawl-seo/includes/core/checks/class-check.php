@@ -205,7 +205,7 @@ abstract class Check {
 	 * @return string
 	 */
 	protected function get_keyword_label() {
-		return $this->is_primary_keyword() ? __( 'primary keyword', 'smartcrawl-seo' ) : __( 'secondary keyword', 'smartcrawl-seo' );
+		return $this->is_primary_keyword() ? __( 'primary keyphrase', 'smartcrawl-seo' ) : __( 'secondary keyphrase', 'smartcrawl-seo' );
 	}
 
 	/**

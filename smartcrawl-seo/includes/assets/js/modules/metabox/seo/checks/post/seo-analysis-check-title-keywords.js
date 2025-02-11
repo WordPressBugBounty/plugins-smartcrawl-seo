@@ -33,11 +33,11 @@ export default class SeoAnalysisCheckTitleKeywords extends React.Component {
 			<p>
 				{state
 					? __(
-							"You've got your focus keyword(s) in the SEO title meaning it has the best chance of matching what users are searching for first up - nice work.",
+							"You've got your focus keyphrase(s) in the SEO title meaning it has the best chance of matching what users are searching for first up - nice work.",
 							'wds'
 					  )
 					: __(
-							"The focus keyword(s) for this article doesn't appear in the SEO title which means it has less of a chance of matching what your visitors will search for.",
+							"The focus keyphrase(s) for this article doesn't appear in the SEO title which means it has less of a chance of matching what your visitors will search for.",
 							'wds'
 					  )}
 			</p>
@@ -49,16 +49,16 @@ export default class SeoAnalysisCheckTitleKeywords extends React.Component {
 
 		return -1 === state
 			? __(
-					"We couldn't find a title to check for keywords",
+					"We couldn't find a title to check for keyphrases",
 					'smartcrawl-seo'
 			  )
 			: state === false
 			? __(
-					"Your focus keyword(s) aren't used in the SEO title",
+					"Your focus keyphrase(s) aren't used in the SEO title",
 					'smartcrawl-seo'
 			  )
 			: __(
-					'The SEO title contains your focus keyword(s)',
+					'The SEO title contains your focus keyphrase(s)',
 					'smartcrawl-seo'
 			  );
 	}
@@ -67,7 +67,7 @@ export default class SeoAnalysisCheckTitleKeywords extends React.Component {
 		return (
 			<p>
 				{__(
-					"It's considered good practice to try to include your focus keyword(s) in the SEO title of a page because this is what people looking for the article are likely searching for. The higher chance of a keyword match, the greater the chance that your article will be found higher up in search results. Whilst it's recommended to try and get these words in, don't sacrifice readability and the quality of the SEO title just to rank higher - people may not want to click on it if it doesn't read well.",
+					"It's considered good practice to try to include your focus keyphrase(s) in the SEO title of a page because this is what people looking for the article are likely searching for. The higher chance of a keyphrase match, the greater the chance that your article will be found higher up in search results. Whilst it's recommended to try and get these words in, don't sacrifice readability and the quality of the SEO title just to rank higher - people may not want to click on it if it doesn't read well.",
 					'smartcrawl-seo'
 				)}
 			</p>

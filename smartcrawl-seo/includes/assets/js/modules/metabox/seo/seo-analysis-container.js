@@ -43,7 +43,11 @@ export default class SeoAnalysisContainer extends React.Component {
 							sprintf(
 								// translators: %s: plugin title
 								__(
-									'This tool helps you optimize your content to give it the best chance of being found in search engines when people are looking for it. Start by choosing a few focus keywords that best describe your article, then <strong>%s</strong> will give you recommendations to make sure your content is highly optimized.',
+									'This tool helps you optimize your content to give it the ' +
+										'best chance of being found in search engines when people are ' +
+										'looking for it. Start by choosing a few focus keyphrases ' +
+										'that best describe your article, then <strong>%s</strong> will ' +
+										'give you recommendations to make sure your content is highly optimized.',
 									'wds'
 								),
 								ConfigValues.get('plugin_title', 'admin')

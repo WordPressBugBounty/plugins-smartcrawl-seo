@@ -152,9 +152,12 @@ class Utils {
 	 * @return string
 	 */
 	public function source_to_path( $source ) {
-		$path = $this->remove_scheme( $source );
-
+		$path     = $this->remove_scheme( $source );
 		$home_url = $this->remove_scheme( $this->get_unfiltered_home_url( '/' ) );
+
+		// Normalize 'www.' prefix only once.
+		$path     = ltrim( preg_replace( '/^www\./', '', $path ), '/' );
+		$home_url = ltrim( preg_replace( '/^www\./', '', $home_url ), '/' );
 
 		if ( strpos( $path, $home_url ) === 0 ) {
 			$path = str_replace( $home_url, '/', $path );

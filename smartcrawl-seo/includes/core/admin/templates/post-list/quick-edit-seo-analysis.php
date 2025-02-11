@@ -11,7 +11,7 @@
 	<div class="inline-edit-col long-label">
 		<h4><?php echo esc_html( \smartcrawl_get_plugin_title() ); ?></h4>
 		<label>
-			<span class="title"><?php esc_html_e( 'Focus keywords', 'smartcrawl-seo' ); ?></span>
+			<span class="title"><?php esc_html_e( 'Focus keyphrases', 'smartcrawl-seo' ); ?></span>
 			<span class="input-text-wrap">
 				<input class="ptitle smartcrawl_focus" type="text" value="" name="wds_focus"/>
 				<input

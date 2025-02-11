@@ -10,13 +10,14 @@ export default class Tabs extends React.Component {
 	};
 
 	render() {
-		const { tabs, value, flushed } = this.props;
+		const { tabs, value, flushed, className = '' } = this.props;
 
 		return (
 			<div
 				className={classNames(
 					'sui-tabs',
-					flushed ? 'sui-tabs-flushed' : ''
+					flushed ? 'sui-tabs-flushed' : '',
+					className
 				)}
 			>
 				<div role="tablist" className="sui-tabs-menu">

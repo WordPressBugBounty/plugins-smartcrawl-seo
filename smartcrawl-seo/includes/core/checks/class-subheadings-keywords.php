@@ -40,14 +40,14 @@ class Subheadings_Keywords extends Check {
 
 		if ( $this->is_primary_keyword() ) {
 			return false === $this->state
-				? __( 'You haven\'t used your primary keyword in any subheadings', 'smartcrawl-seo' )
+				? __( 'You haven\'t used your primary keyphrase in any subheadings', 'smartcrawl-seo' )
 				/* translators: %d: Subheading count */
-				: sprintf( __( 'Your primary keyword was found in %d subheadings', 'smartcrawl-seo' ), $this->count );
+				: sprintf( __( 'Your primary keyphrase was found in %d subheadings', 'smartcrawl-seo' ), $this->count );
 		} else {
 			return false === $this->state
-				? __( 'You haven\'t used this secondary keyword in any subheadings.', 'smartcrawl-seo' )
+				? __( 'You haven\'t used this secondary keyphrase in any subheadings.', 'smartcrawl-seo' )
 				/* translators: %d: Subheading count */
-				: sprintf( __( 'This secondary keyword was found in %d subheading(s).', 'smartcrawl-seo' ), $this->count );
+				: sprintf( __( 'This secondary keyphrase was found in %d subheading(s).', 'smartcrawl-seo' ), $this->count );
 		}
 	}
 

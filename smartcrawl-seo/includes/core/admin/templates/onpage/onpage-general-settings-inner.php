@@ -31,7 +31,7 @@ $macros             = empty( $macros ) ? array() : $macros;
 				for="<?php echo esc_attr( $title_key ); ?>"
 				class="sui-settings-label"
 			><?php esc_html_e( 'Title', 'smartcrawl-seo' ); ?></label>
-			<span class="sui-description"><?php echo esc_html( $title_label_desc ); ?></span>
+			<span class="sui-description"><?php echo wp_kses_post( $title_label_desc ); ?></span>
 		</div>
 		<div class="sui-box-settings-col-2">
 			<label class="sui-label" for="<?php echo esc_attr( sprintf( $option_name_format, $title_key ) ); ?>">

@@ -573,6 +573,10 @@ class Sitemap extends Admin_Settings {
 	public function defaults() {
 		$this->options = get_option( $this->option_name, array() );
 
+		if ( ! is_array( $this->options ) ) {
+			$this->options = array();
+		}
+
 		$dir  = wp_upload_dir();
 		$path = trailingslashit( $dir['basedir'] );
 
@@ -603,7 +607,7 @@ class Sitemap extends Admin_Settings {
 		}
 
 		if ( empty( $this->options['sitemap-disable-automatic-regeneration'] ) ) {
-			$this->options['sitemap-disable-automatic-regeneration'] = 'manual';
+			$this->options['sitemap-disable-automatic-regeneration'] = 'auto';
 		}
 		if ( ! isset( $this->options['sitemap-update-frequency'] ) ) {
 			$this->options['sitemap-update-frequency'] = Cron::get()->get_default_frequency();

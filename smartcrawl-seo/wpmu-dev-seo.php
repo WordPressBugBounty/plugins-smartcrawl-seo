@@ -3,8 +3,11 @@
  * Plugin Name: SmartCrawl
  * Plugin URI: https://wpmudev.com/project/smartcrawl-wordpress-seo/
  * Description: Every SEO option that a site requires, in one easy bundle.
- * Version: 3.12.2
+ * Version: 3.13.0
  * Network: true
+ * Requires at least: 6.4
+ * Tested up to: 6.6
+ * Requires PHP: 7.4
  * Text Domain: smartcrawl-seo
  * Author: WPMU DEV
  * Author URI: https://wpmudev.com
@@ -29,6 +32,7 @@
 namespace SmartCrawl;
 
 use SmartCrawl\Admin\Settings;
+use SmartCrawl\Modules\Advanced\Redirects\Controller;
 
 if ( ! class_exists( '\SmartCrawl\SmartCrawl' ) ) {
 	/**
@@ -55,8 +59,8 @@ if ( ! class_exists( '\SmartCrawl\SmartCrawl' ) ) {
 			// Init plugin.
 			new Init();
 
-			add_action( 'plugins_loaded', array( $this, 'set_version_options' ) );
-			add_action( 'plugins_loaded', array( $this, 'maybe_deactivate_free' ) );
+			add_action( 'init', array( $this, 'set_version_options' ) );
+			add_action( 'init', array( $this, 'maybe_deactivate_free' ) );
 		}
 
 		/**
@@ -104,6 +108,7 @@ if ( ! class_exists( '\SmartCrawl\SmartCrawl' ) ) {
 		public function set_version_options() {
 			$version = get_option( self::VERSION_OPTION_ID, false );
 			if ( ! $version || version_compare( $version, SMARTCRAWL_VERSION, '!=' ) ) {
+				Controller::get()->maybe_create_table();
 				update_option( self::LAST_VERSION_OPTION_ID, $version );
 				update_option( self::VERSION_OPTION_ID, SMARTCRAWL_VERSION );
 
@@ -188,12 +193,6 @@ if ( ! class_exists( '\SmartCrawl\SmartCrawl' ) ) {
 	register_activation_hook( __FILE__, array( '\SmartCrawl\SmartCrawl', 'activate' ) );
 	register_deactivation_hook( __FILE__, array( '\SmartCrawl\SmartCrawl', 'deactivate' ) );
 
-	if ( defined( 'SMARTCRAWL_CONDITIONAL_EXECUTION' ) && \SMARTCRAWL_CONDITIONAL_EXECUTION ) {
-		add_action(
-			'plugins_loaded',
-			array( new SmartCrawl(), 'plugin_init' )
-		);
-	} else {
-		( new SmartCrawl() )->plugin_init();
-	}
+	// Init plugin on WP init.
+	add_action( 'init', array( new SmartCrawl(), 'plugin_init' ), 1 );
 }

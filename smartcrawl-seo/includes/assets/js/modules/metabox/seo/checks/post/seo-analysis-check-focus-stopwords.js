@@ -34,7 +34,7 @@ export default class SeoAnalysisCheckFocusStopWords extends React.Component {
 			<p>
 				{!!state
 					? sprintf(
-							/* translators: %s: keyword phrases */
+							/* translators: %s: keyphrase phrases */
 							__(
 								'You kept the focus %s of your article to the point, way to go!',
 								'wds'
@@ -42,7 +42,7 @@ export default class SeoAnalysisCheckFocusStopWords extends React.Component {
 							phrase
 					  )
 					: sprintf(
-							/* translators: %s: keyword phrases */
+							/* translators: %s: keyphrase phrases */
 							__(
 								'Your focus %s contains some words that might be considered insignificant in a search query.',
 								'wds'
@@ -57,7 +57,7 @@ export default class SeoAnalysisCheckFocusStopWords extends React.Component {
 		const { state } = this.props.data.result;
 
 		return !state
-			? __('There are stop words in focus keywords', 'smartcrawl-seo')
+			? __('There are stop words in focus keyphrases', 'smartcrawl-seo')
 			: __('Focus to the point', 'smartcrawl-seo');
 	}
 

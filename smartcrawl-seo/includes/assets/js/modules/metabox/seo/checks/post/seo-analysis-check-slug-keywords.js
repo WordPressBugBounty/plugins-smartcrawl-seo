@@ -33,11 +33,11 @@ export default class SeoAnalysisCheckSlugKeywords extends React.Component {
 			<p>
 				{state
 					? __(
-							"You've got your focus keywords in the page slug which can help your page rank as you have a higher chance of matching search terms, and Google does index your page URL, great stuff!",
+							"You've got your focus keyphrases in the page slug which can help your page rank as you have a higher chance of matching search terms, and Google does index your page URL, great stuff!",
 							'wds'
 					  )
 					: __(
-							'Google does index your page URL. Using your focus keywords in the page slug can help your page rank as you have a higher chance of matching search terms. Try getting your focus keywords in there.',
+							'Google does index your page URL. Using your focus keyphrases in the page slug can help your page rank as you have a higher chance of matching search terms. Try getting your focus keyphrases in there.',
 							'wds'
 					  )}
 			</p>
@@ -49,11 +49,11 @@ export default class SeoAnalysisCheckSlugKeywords extends React.Component {
 
 		return !state
 			? __(
-					"You haven't used your focus keywords in the page URL",
+					"You haven't used your focus keyphrases in the page URL",
 					'smartcrawl-seo'
 			  )
 			: __(
-					"You've used your focus keyword in the page URL",
+					"You've used your focus keyphrase in the page URL",
 					'smartcrawl-seo'
 			  );
 	}
@@ -62,7 +62,7 @@ export default class SeoAnalysisCheckSlugKeywords extends React.Component {
 		return (
 			<p>
 				{__(
-					"The page URL you use for this post will be visible in search engine results, so it's important to also include words that the searcher is looking for (your focus keywords). It's debatable whether keywords in the slug are of any real search engine ranking benefit. One could assume that because the slug does get indexed, the algorithm may favour slugs more closely aligned with the topic being searched.",
+					"The page URL you use for this post will be visible in search engine results, so it's important to also include words that the searcher is looking for (your focus keyphrases). It's debatable whether keyphrases in the slug are of any real search engine ranking benefit. One could assume that because the slug does get indexed, the algorithm may favour slugs more closely aligned with the topic being searched.",
 					'wds'
 				)}
 			</p>

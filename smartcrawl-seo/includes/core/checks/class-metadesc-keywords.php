@@ -32,8 +32,8 @@ class Metadesc_Keywords extends Post_Check {
 	 */
 	public function get_status_msg() {
 		return false === $this->state
-			? __( "The SEO description doesn't contain your focus keywords", 'smartcrawl-seo' )
-			: __( 'The SEO description contains your focus keywords', 'smartcrawl-seo' );
+			? __( "The SEO description doesn't contain your focus keyphrases", 'smartcrawl-seo' )
+			: __( 'The SEO description contains your focus keyphrases', 'smartcrawl-seo' );
 	}
 
 	/**

@@ -228,7 +228,7 @@ class Taxonomy extends Controllers\Controller {
 
 		$smartcrawl_options = Settings::get_options();
 
-		$tax_meta  = get_option( 'wds_taxonomy_meta' );
+		$tax_meta  = get_option( 'wds_taxonomy_meta', array() );
 		$post_data = isset( $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'update-tag_' . $term_id )
 			? stripslashes_deep( $_POST )
 			: array();

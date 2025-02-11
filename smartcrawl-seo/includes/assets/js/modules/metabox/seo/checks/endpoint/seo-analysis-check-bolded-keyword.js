@@ -33,11 +33,11 @@ export default class SeoAnalysisCheckBoldedKeyword extends React.Component {
 			<p>
 				{state
 					? __(
-							'It’s best practice to bold your secondary keyword at least once throughout your content.',
+							'It’s best practice to bold your secondary keyphrase at least once throughout your content.',
 							'wds'
 					  )
 					: sprintf(
-							/* translators: %s keyword type label */
+							/* translators: %s keyphrase type label */
 							__(
 								'You bolded your %s at least once in your content. Good work!',
 								'wds'
@@ -53,13 +53,16 @@ export default class SeoAnalysisCheckBoldedKeyword extends React.Component {
 
 		return state
 			? sprintf(
-					/* translators: %s keyword label */
+					/* translators: %s keyphrase label */
 					__('The %s is bolded in your content.', 'smartcrawl-seo'),
 					type
 			  )
 			: sprintf(
-					/* translators: %s keyword label */
-					__("You haven't bolded this %s in your content.", 'smartcrawl-seo'),
+					/* translators: %s keyphrase label */
+					__(
+						"You haven't bolded this %s in your content.",
+						'smartcrawl-seo'
+					),
 					type
 			  );
 	}
@@ -70,9 +73,9 @@ export default class SeoAnalysisCheckBoldedKeyword extends React.Component {
 		return (
 			<p>
 				{sprintf(
-					/* translators: %s keyword type label */
+					/* translators: %s keyphrase type label */
 					__(
-						'Bold keywords can help visitors and Google identify what is important on the page. You should consider bolding this %s at least once in your content.',
+						'Bold keyphrases can help visitors and Google identify what is important on the page. You should consider bolding this %s at least once in your content.',
 						'wds'
 					),
 					type

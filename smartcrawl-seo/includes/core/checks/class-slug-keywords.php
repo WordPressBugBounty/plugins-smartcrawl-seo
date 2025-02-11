@@ -45,8 +45,8 @@ class Slug_Keywords extends Post_Check {
 	 */
 	public function get_status_msg() {
 		return false === $this->state
-			? __( "You haven't used your focus keywords in the page URL", 'smartcrawl-seo' )
-			: __( "You've used your focus keyword in the page URL", 'smartcrawl-seo' );
+			? __( "You haven't used your focus keyphrases in the page URL", 'smartcrawl-seo' )
+			: __( "You've used your focus keyphrase in the page URL", 'smartcrawl-seo' );
 	}
 
 	/**

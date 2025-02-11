@@ -53,7 +53,7 @@ export default class Indexing extends React.Component {
 								: 'nofollow'
 						}`}
 						name={`wds_meta-robots-${
-							indexing.post_type_nofollowed ? 'index' : 'nofollow'
+							indexing.post_type_nofollowed ? 'follow' : 'nofollow'
 						}`}
 						label={
 							indexing.post_type_nofollowed

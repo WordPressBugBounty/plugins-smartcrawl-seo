@@ -31,7 +31,7 @@ class Focus_Stopwords extends Check {
 	 */
 	public function get_status_msg() {
 		return false === $this->state
-			? __( 'There are stop words in focus keywords', 'smartcrawl-seo' )
+			? __( 'There are stop words in focus keyphrases', 'smartcrawl-seo' )
 			: __( 'Focus to the point', 'smartcrawl-seo' );
 	}
 
@@ -70,11 +70,11 @@ class Focus_Stopwords extends Check {
 		$focus = $this->get_raw_focus();
 
 		if ( count( $focus ) > 1 ) {
-			$phrase = __( 'keywords or key phrases', 'smartcrawl-seo' );
+			$phrase = __( 'keyphrases or key phrases', 'smartcrawl-seo' );
 		} else {
 			$subj   = end( $focus );
 			$phrase = false === strpos( $subj, ' ' )
-				? __( 'keywords', 'smartcrawl-seo' )
+				? __( 'Keyphrases', 'smartcrawl-seo' )
 				: __( 'key phrase', 'smartcrawl-seo' );
 		}
 

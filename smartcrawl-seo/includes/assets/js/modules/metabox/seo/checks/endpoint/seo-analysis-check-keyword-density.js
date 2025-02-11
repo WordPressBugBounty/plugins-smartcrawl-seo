@@ -35,7 +35,7 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 					? sprintf(
 							/* translators: 1, 2: Density range */
 							__(
-								"Currently you haven't used any keywords in your content. The recommended density is %1$d-%2$d%%. A low keyword density means your content has less chance of ranking highly for your chosen focus keywords.",
+								"Currently you haven't used any keyphrases in your content. The recommended density is %1$d-%2$d%%. A low keyphrase density means your content has less chance of ranking highly for your chosen focus keyphrases.",
 								'wds'
 							),
 							min,
@@ -43,9 +43,9 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 					  )
 					: state
 					? sprintf(
-							/* translators: 1, 2: Density range, 3: Current density, 4: type of keyword */
+							/* translators: 1, 2: Density range, 3: Current density, 4: type of keyphrase */
 							__(
-								'Your %4$s density is %3$s%% which is within the recommended %1$d-%2$d%%, nice work! This means your content has a better chance of ranking highly for your chosen focus keywords, without appearing as spam.',
+								'Your %4$s density is %3$s%% which is within the recommended %1$d-%2$d%%, nice work! This means your content has a better chance of ranking highly for your chosen focus keyphrases, without appearing as spam.',
 								'wds'
 							),
 							min,
@@ -55,9 +55,9 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 					  )
 					: density < min
 					? sprintf(
-							/* translators: 1, 2: Density range, 3: Current density, 4: type of keyword */
+							/* translators: 1, 2: Density range, 3: Current density, 4: type of keyphrase */
 							__(
-								'Currently your %4$s density is %3$s%% which is below the recommended %1$d-%2$d%%. A low keyword density means your content has less chance of ranking highly for your chosen focus keywords.',
+								'Currently your %4$s density is %3$s%% which is below the recommended %1$d-%2$d%%. A low keyphrase density means your content has less chance of ranking highly for your chosen focus keyphrases.',
 								'wds'
 							),
 							min,
@@ -66,9 +66,9 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 							type
 					  )
 					: sprintf(
-							/* translators: 1, 2: Density range, 3: Current density, 4: type for keyword */
+							/* translators: 1, 2: Density range, 3: Current density, 4: type for keyphrase */
 							__(
-								'Currently your %4$s density is %3$s%% which is greater than the recommended %1$d-%2$d%%. If your content is littered with too many focus keywords, search engines can penalize your content and mark it as spam.',
+								'Currently your %4$s density is %3$s%% which is greater than the recommended %1$d-%2$d%%. If your content is littered with too many focus keyphrases, search engines can penalize your content and mark it as spam.',
 								'wds'
 							),
 							min,
@@ -84,7 +84,7 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 		const { state, density, min, max, type } = this.props.data.result;
 
 		return 0 === density
-			? __("You haven't used any keywords yet", 'smartcrawl-seo')
+			? __("You haven't used any keyphrases yet", 'smartcrawl-seo')
 			: state
 			? sprintf(
 					/* translators: 1: primary or secondary, 2: low, 3: high */
@@ -125,7 +125,7 @@ export default class SeoAnalysisCheckKeywordDensity extends React.Component {
 				{sprintf(
 					/* translators: 1, 2: Density range */
 					__(
-						"Keyword density is all about making sure your content is populated with enough keywords to give it a better chance of appearing higher in search results. One way of making sure people will be able to find our content is using particular focus keywords, and using them as much as naturally possible in our content. In doing this we are trying to match up the keywords that people are likely to use when searching for this article or page, so try to get into your visitors mind and picture them typing a search into Google. While we recommend aiming for %1$d-%2$d%% density, remember content is king and you don't want your article to end up sounding like a robot. Get creative and utilize the page title, image caption, and subheadings.",
+						"Keyword density is all about making sure your content is populated with enough keyphrases to give it a better chance of appearing higher in search results. One way of making sure people will be able to find our content is using particular focus keyphrases, and using them as much as naturally possible in our content. In doing this we are trying to match up the keywords that people are likely to use when searching for this article or page, so try to get into your visitors mind and picture them typing a search into Google. While we recommend aiming for %1$d-%2$d%% density, remember content is king and you don't want your article to end up sounding like a robot. Get creative and utilize the page title, image caption, and subheadings.",
 						'smartcrawl-seo'
 					),
 					min,

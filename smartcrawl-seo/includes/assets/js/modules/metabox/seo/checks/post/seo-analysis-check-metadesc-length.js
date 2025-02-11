@@ -41,16 +41,16 @@ export default class SeoAnalysisCheckMetadescLength extends React.Component {
 					  )
 					: 0 === state
 					? __(
-							"Because you haven't specified a meta description (or excerpt), search engines will automatically generate one using your content. While this is OK, you should create your own meta description making sure it contains your focus keywords.",
+							"Because you haven't specified a meta description (or excerpt), search engines will automatically generate one using your content. While this is OK, you should create your own meta description making sure it contains your focus keyphrases.",
 							'wds'
 					  )
 					: state > 0
 					? __(
-							"Your SEO description (or excerpt) is currently too long. Search engines generally don't like long descriptions and after a certain length the value of extra keywords drops significantly.",
+							"Your SEO description (or excerpt) is currently too long. Search engines generally don't like long descriptions and after a certain length the value of extra keyphrases drops significantly.",
 							'wds'
 					  )
 					: __(
-							'Your SEO description (or excerpt) is currently too short which means it has less of a chance ranking for your chosen focus keywords.',
+							'Your SEO description (or excerpt) is currently too short which means it has less of a chance ranking for your chosen focus keyphrases.',
 							'wds'
 					  )}
 			</p>
@@ -91,7 +91,7 @@ export default class SeoAnalysisCheckMetadescLength extends React.Component {
 				{sprintf(
 					/* translators: 1,2: Recommended range of characters */
 					__(
-						"We recommend keeping your meta descriptions between %1$d and %2$d characters (including spaces). Doing so achieves a nice balance between populating your description with keywords to rank highly in search engines, and also keeping it to a readable length that won't be cut off in search engine results. Unfortunately there isn't a rule book for SEO meta descriptions, just remember to make your description great for SEO, but also (most importantly) readable and enticing for potential visitors to click on.",
+						"We recommend keeping your meta descriptions between %1$d and %2$d characters (including spaces). Doing so achieves a nice balance between populating your description with keyphrases to rank highly in search engines, and also keeping it to a readable length that won't be cut off in search engine results. Unfortunately there isn't a rule book for SEO meta descriptions, just remember to make your description great for SEO, but also (most importantly) readable and enticing for potential visitors to click on.",
 						'smartcrawl-seo'
 					),
 					minLength,

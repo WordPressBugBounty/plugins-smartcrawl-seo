@@ -95,12 +95,17 @@ export default class FocusKeywords extends React.Component {
 		return (
 			<div className="wds-focus-keyword sui-border-frame sui-form-field">
 				<label className="sui-label wds-label" htmlFor={focusInputId}>
-					{__('Focus keyword', 'smartcrawl-seo')}
+					{__('Focus keyphrase', 'smartcrawl-seo')}
 				</label>
 				<p className="sui-description wds-description">
 					{createInterpolateElement(
 						__(
-							'You can analyze the post content for up to 3 focus keywords. The SEO recommendations for each keyword will be displayed in separate tabs below. Enter each keyword you want to analyze and click the <strong>Add Keyword</strong> button, or enter multiple keywords separated by commas and click the <strong>Add Keyword</strong> button only once.',
+							'You can analyze the post content for up to 3 focus keyphrases. ' +
+								'The SEO recommendations for each keyphrase will be displayed in ' +
+								'separate tabs below. Enter each keyphrase you want to analyze and ' +
+								'click the <strong>Add keyphrase</strong> button, or enter multiple ' +
+								'keyphrases separated by commas and click the <strong>Add keyphrase</strong> ' +
+								'button only once.',
 							'wds'
 						),
 						{ strong: <strong /> }
@@ -121,7 +126,7 @@ export default class FocusKeywords extends React.Component {
 							id="wds_add_keyword"
 							disabled={keywords.length > 2}
 							loading={loading}
-							text={__('Add Keyword(s)', 'smartcrawl-seo')}
+							text={__('Add Keyphrase(s)', 'smartcrawl-seo')}
 							onClick={() => this.addKeyword()}
 						></Button>
 					}
@@ -140,7 +145,7 @@ export default class FocusKeywords extends React.Component {
 						id="wds-added-keywords-tags"
 					>
 						<label className="sui-label">
-							{__('Added keywords', 'smartcrawl-seo')}
+							{__('Added Keyphrases', 'smartcrawl-seo')}
 						</label>
 						<div className="sui-pagination-active-filters">
 							{keywords.map((keyword) => (
@@ -167,7 +172,7 @@ export default class FocusKeywords extends React.Component {
 						className="wds-notice"
 						icon="sui-icon-info"
 						message={__(
-							'You need to add focus keywords to see recommendations for this article.',
+							'You need to add focus keyphrases to see recommendations for this article.',
 							'wds'
 						)}
 					></Notice>

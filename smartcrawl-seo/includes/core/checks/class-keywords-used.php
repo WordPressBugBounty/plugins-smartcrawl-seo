@@ -33,8 +33,8 @@ class Keywords_Used extends Post_Check {
 	 */
 	public function get_status_msg() {
 		return ! $this->state
-			? __( 'Primary focus keyword is already used on another post/page', 'smartcrawl-seo' )
-			: __( 'Primary focus keyword isn’t used on another post/page', 'smartcrawl-seo' );
+			? __( 'Primary focus keyphrase is already used on another post/page', 'smartcrawl-seo' )
+			: __( 'Primary focus keyphrase isn’t used on another post/page', 'smartcrawl-seo' );
 	}
 
 	/**

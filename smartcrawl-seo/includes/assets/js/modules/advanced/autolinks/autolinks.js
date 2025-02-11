@@ -59,7 +59,8 @@ export default class Autolinks extends React.Component {
 				}}
 				deactivateProps={{
 					description: __(
-						'No longer need keyword linking? This will deactivate this feature but won’t remove existing links.',
+						'No longer need keyword linking? This will deactivate your ' +
+							'feature but retain your Autolink Settings.',
 						'wds'
 					),
 				}}

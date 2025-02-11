@@ -45,17 +45,17 @@ class Imgalts_Keywords extends Check {
 		$image_count = $this->image_count ? $this->image_count : 0;
 
 		if ( $this->state ) {
-			$message = esc_html__( 'A good balance of images contain the focus keyword(s) in their alt attribute text', 'smartcrawl-seo' );
+			$message = esc_html__( 'A good balance of images contain the focus keyphrase(s) in their alt attribute text', 'smartcrawl-seo' );
 		} elseif ( 0 === $image_count && ! $this->has_featured_image() ) {
-			$message = esc_html__( "You haven't added any images", 'smartcrawl-seo' );
+			$message = esc_html__( 'You have included a focus keyphrase in the alternative text of too many images in your content', 'smartcrawl-seo' );
 		} else {
 			$percentage = $this->get_percentage();
 			if ( $percentage > 75 ) {
-				$message = esc_html__( 'Too many of your image alt texts contain the focus keyword(s)', 'smartcrawl-seo' );
+				$message = esc_html__( 'Too many of your image alt texts contain the focus keyphrase(s)', 'smartcrawl-seo' );
 			} elseif ( 0 === $percentage ) {
-				$message = esc_html__( 'None of your image alt texts contain the focus keyword(s)', 'smartcrawl-seo' );
+				$message = esc_html__( 'None of your image alt texts contain the focus keyphrase(s)', 'smartcrawl-seo' );
 			} else {
-				$message = esc_html__( 'Too few of your image alt texts contain the focus keyword(s)', 'smartcrawl-seo' );
+				$message = esc_html__( 'Too few of your image alt texts contain the focus keyphrase(s)', 'smartcrawl-seo' );
 			}
 		}
 

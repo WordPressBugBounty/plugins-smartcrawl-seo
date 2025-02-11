@@ -30,6 +30,15 @@ $og = wp_parse_args(
 		'disabled'    => false,
 	)
 );
+if ( ! is_array( $og['images'] ) ) {
+	$og['images'] = array();
+}
+$images = array_filter(
+	$og['images'],
+	function ( $image ) {
+		return wp_get_attachment_image_src( $image );
+	}
+);
 
 $this->render_view(
 	'metabox/metabox-social-meta-tags',
@@ -42,7 +51,7 @@ $this->render_view(
 		'title_placeholder'       => $smartcrawl_post->get_opengraph_title(),
 		'current_description'     => $og['description'],
 		'description_placeholder' => $smartcrawl_post->get_opengraph_description(),
-		'images'                  => $smartcrawl_post->get_opengraph_images(),
+		'images'                  => $images,
 		'single_image'            => false,
 	)
 );

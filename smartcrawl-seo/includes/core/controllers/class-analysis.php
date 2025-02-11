@@ -267,7 +267,7 @@ class Analysis extends Controller {
 						'focus_missing' => true,
 						'status_class'  => 'wds-status-invalid',
 						'errors'        => array(
-							'focus-keyword-missing' => esc_html__( 'You need to add focus keywords to see recommendations for this article.', 'smartcrawl-seo' ),
+							'focus-keyword-missing' => esc_html__( 'You need to add focus keyphrases to see recommendations for this article.', 'smartcrawl-seo' ),
 						),
 					)
 				);

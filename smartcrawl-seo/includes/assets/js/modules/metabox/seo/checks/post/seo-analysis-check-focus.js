@@ -32,7 +32,7 @@ export default class SeoAnalysisCheckFocus extends React.Component {
 			<p>
 				{!state
 					? __(
-							'In order to give your content the best possible chance to be discovered, it is best to select some focus keywords or key phrases, to give it some context.',
+							'In order to give your content the best possible chance to be discovered, it is best to select some focus keyphrases or key phrases, to give it some context.',
 							'wds'
 					  )
 					: __(
@@ -47,15 +47,15 @@ export default class SeoAnalysisCheckFocus extends React.Component {
 		const { state } = this.props.data.result;
 
 		return !state
-			? __('There are no focus keywords', 'smartcrawl-seo')
-			: __('There are some focus keywords', 'smartcrawl-seo');
+			? __('There are no focus keyphrases', 'smartcrawl-seo')
+			: __('There are some focus keyphrases', 'smartcrawl-seo');
 	}
 
 	getMoreInfo() {
 		return (
 			<p>
 				{__(
-					'Selecting focus keywords helps describe what your content is about.',
+					'Selecting focus keyphrases helps describe what your content is about.',
 					'wds'
 				)}
 			</p>

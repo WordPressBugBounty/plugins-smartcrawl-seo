@@ -34,12 +34,12 @@ class Title_Keywords extends Post_Check {
 	 */
 	public function get_status_msg() {
 		if ( - 1 === $this->state ) {
-			return __( 'We couldn\'t find a title to check for keywords', 'smartcrawl-seo' );
+			return __( 'We couldn\'t find a title to check for keyphrases', 'smartcrawl-seo' );
 		}
 
 		return false === $this->state
-			? __( "Your focus keyword(s) aren't used in the SEO title", 'smartcrawl-seo' )
-			: __( 'The SEO title contains your focus keyword(s)', 'smartcrawl-seo' );
+			? __( "Your focus keyphrase(s) aren't used in the SEO title", 'smartcrawl-seo' )
+			: __( 'The SEO title contains your focus keyphrase(s)', 'smartcrawl-seo' );
 	}
 
 	/**

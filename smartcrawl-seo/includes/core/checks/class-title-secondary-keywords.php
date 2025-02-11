@@ -25,12 +25,12 @@ class Title_Secondary_Keywords extends Title_Keywords {
 	 */
 	public function get_status_msg() {
 		if ( - 1 === $this->state ) {
-			return __( 'We couldn\'t find a title to check for keywords', 'smartcrawl-seo' );
+			return __( 'We couldn\'t find a title to check for keyphrases', 'smartcrawl-seo' );
 		}
 
 		return false === $this->state
-			? __( 'You didn\'t use this secondary keyword in the title.', 'smartcrawl-seo' )
-			: __( 'You have used this secondary keyword in the title.', 'smartcrawl-seo' );
+			? __( 'You didn\'t use this secondary keyphrase in the title.', 'smartcrawl-seo' )
+			: __( 'You have used this secondary keyphrase in the title.', 'smartcrawl-seo' );
 	}
 
 	/**

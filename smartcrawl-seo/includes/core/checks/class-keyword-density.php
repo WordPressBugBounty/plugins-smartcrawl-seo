@@ -36,7 +36,7 @@ class Keyword_Density extends Check {
 	 */
 	public function get_status_msg() {
 		return $this->choose_status_message(
-			__( "You haven't used any keywords yet", 'smartcrawl-seo' ),
+			__( "You haven't used any keyphrases yet", 'smartcrawl-seo' ),
 			// translators: %d low, %d high.
 			__( 'Your %4$s density is between %1$d%% and %2$d%%', 'smartcrawl-seo' ),
 			// translators: %d low.
@@ -111,21 +111,19 @@ class Keyword_Density extends Check {
 		}
 		$text      = Html::plaintext( $markup );
 		$string    = String_Cache::get()->get_string( $text, $this->get_language() );
-		$words     = $string->get_words();
-		$freq      = array_count_values( $words );
-		$densities = array();
-		if ( ! empty( $words ) ) {
-			foreach ( $kws as $kw ) {
-				$dns              = isset( $freq[ $kw ] ) ? $freq[ $kw ] : 0;
-				$densities[ $kw ] = ( $dns / count( $words ) ) * 100;
-			}
-		}
-		$density       = ! empty( $densities )
-			? array_sum( array_values( $densities ) ) / count( $densities )
-			: 0;
-		$this->density = $density;
+		$stopwords = $string->get_language_stopwords();
 
-		$this->state = $density >= $this->get_min() && $density <= $this->get_max();
+		$filtered_kws  = array( strtolower( implode( ' ', $kws ) ) );
+		$filtered_text = implode( ' ', array_diff( explode( ' ', strtolower( $text ) ), $stopwords ) );
+		$total_words   = str_word_count( $filtered_text );
+
+		$densities = array();
+		foreach ( $filtered_kws as $kw ) {
+			$densities[ $kw ] = $total_words > 0 ? ( substr_count( $filtered_text, strtolower( $kw ) ) / $total_words ) * 100 : 0;
+		}
+
+		$this->density = ! empty( $densities ) ? array_sum( $densities ) / count( $densities ) : 0;
+		$this->state   = $this->density >= $this->get_min() && $this->density <= $this->get_max();
 
 		return ! ! $this->state;
 	}

@@ -27,7 +27,7 @@ $is_disalbed = empty( $_view['options']['analysis-seo'] ) && empty( $_view['opti
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'In-Post Analysis', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">
-			<?php esc_html_e( 'These modules appear inside the WordPress Post Editor and provide per-page SEO and Readability analysis to fine tune each post to focus keywords.', 'smartcrawl-seo' ); ?>
+			<?php esc_html_e( 'These modules appear inside the WordPress Post Editor and provide per-page SEO and Readability analysis to fine tune each post to focus keyphrases.', 'smartcrawl-seo' ); ?>
 		</p>
 	</div>
 

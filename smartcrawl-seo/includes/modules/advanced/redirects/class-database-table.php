@@ -47,8 +47,8 @@ class Database_Table {
 			"CREATE TABLE {$wpdb->prefix}smartcrawl_redirects (
 			id bigint UNSIGNED NOT NULL auto_increment,
 			title varchar(200) NOT NULL DEFAULT '',
-    		source varchar(200) NOT NULL DEFAULT '',
-    		path varchar(200) NOT NULL DEFAULT '',
+    		source varchar(500) NOT NULL DEFAULT '',
+    		path varchar(500) NOT NULL DEFAULT '',
     		destination varchar(200) NOT NULL DEFAULT '',
     		type smallint NOT NULL DEFAULT 0,
 			options varchar(500) NOT NULL DEFAULT '',

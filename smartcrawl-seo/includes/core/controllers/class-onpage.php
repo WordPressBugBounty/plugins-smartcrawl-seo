@@ -227,6 +227,7 @@ class OnPage extends Controller {
 					'content'    => array(),
 					'http-equiv' => array(),
 					'charset'    => array(),
+					'property'   => array(),
 					'scheme'     => array(),
 				),
 				'link' => array(
@@ -393,10 +394,9 @@ class OnPage extends Controller {
 	private function get_robots_string() {
 		$entity = $this->get_queried_entity();
 
-		if ( ! is_object( $entity ) || ! property_exists( $entity, 'get_robots' ) ) {
-			return '';
-		}
-		$robots = $entity->get_robots();
+		$robots = is_object( $entity ) && method_exists( $entity, 'get_robots' )
+			? $entity->get_robots()
+			: '';
 
 		// Cleans up, index, follow is the default and doesn't need to be in output. All other combinations should be.
 		if ( 'index,follow' === $robots ) {

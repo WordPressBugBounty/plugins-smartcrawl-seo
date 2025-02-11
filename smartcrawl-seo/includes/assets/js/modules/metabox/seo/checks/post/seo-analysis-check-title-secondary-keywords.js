@@ -30,7 +30,7 @@ export default class SeoAnalysisCheckTitleSecondaryKeywords extends React.Compon
 		return (
 			<p>
 				{__(
-					"It's recommended to use your secondary keywords in the title of your page if possible. However, it has a minor impact on improving SEO.",
+					"It's recommended to use your secondary keyphrases in the title of your page if possible. However, it has a minor impact on improving SEO.",
 					'wds'
 				)}
 			</p>
@@ -42,16 +42,16 @@ export default class SeoAnalysisCheckTitleSecondaryKeywords extends React.Compon
 
 		return state === -1
 			? __(
-					"We couldn't find a title to check for keywords",
+					"We couldn't find a title to check for keyphrases",
 					'smartcrawl-seo'
 			  )
 			: !state
 			? __(
-					"You didn't use this secondary keyword in the title.",
+					"You didn't use this secondary keyphrase in the title.",
 					'smartcrawl-seo'
 			  )
 			: __(
-					'You have used this secondary keyword in the title.',
+					'You have used this secondary keyphrase in the title.',
 					'smartcrawl-seo'
 			  );
 	}
@@ -60,7 +60,7 @@ export default class SeoAnalysisCheckTitleSecondaryKeywords extends React.Compon
 		return (
 			<p>
 				{__(
-					'Selecting focus keywords helps describe what your content is about.',
+					'Selecting focus keyphrases helps describe what your content is about.',
 					'smartcrawl-seo'
 				)}
 			</p>

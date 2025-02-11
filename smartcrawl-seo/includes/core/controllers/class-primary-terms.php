@@ -166,6 +166,10 @@ class Primary_Terms extends Controller {
 	 * @return array
 	 */
 	public function get_taxonomy_data( $taxonomy ) {
+		$terms = get_terms( array( 'taxonomy' => $taxonomy->name ) );
+		if ( is_wp_error( $terms ) || ! is_array( $terms ) ) {
+			$terms = array();
+		}
 		return array(
 			'name'     => $taxonomy->name,
 			'title'    => $taxonomy->labels->singular_name,
@@ -173,7 +177,7 @@ class Primary_Terms extends Controller {
 			'restBase' => $taxonomy->rest_base,
 			'terms'    => array_map(
 				array( $this, 'get_term_data' ),
-				get_terms( array( 'taxonomy' => $taxonomy->name ) )
+				$terms
 			),
 		);
 	}
@@ -314,42 +318,52 @@ class Primary_Terms extends Controller {
 	 * @param \WP_Post $post      The post in question.
 	 * @param string   $taxonomy  The post taxonomy.
 	 */
-	public function sanitize_post_type_link( &$post_link, $post, $taxonomy ) {
-		$find = '%' . $taxonomy . '%';
+	public function sanitize_post_type_link( $post_link, $post, $taxonomy ) {
+		$primary_term = $this->make_primary_term( $post->ID, $taxonomy );
 
-		if ( ! strpos( $post_link, $find ) ) {
-			return;
+		if ( ! $primary_term ) {
+			$terms = get_the_terms( $post->ID, $taxonomy );
+			if ( empty( $terms ) || is_wp_error( $terms ) ) {
+				return $post_link;
+			}
+			$primary_term = reset( $terms );
 		}
 
-		$primary_term = $this->make_primary_term( $taxonomy, $post->ID );
+		$term_hierarchy = $this->get_hierarchical_link( $primary_term, $taxonomy );
 
-		if ( $primary_term instanceof \WP_Term ) {
-			// Gets the terms.
-			$parents = $this->get_hierarchical_link( $primary_term );
-
-			// Replaces the placeholder rewrite tag with terms.
-			$post_link = str_replace( $find, $parents, $post_link );
+		if ( $term_hierarchy ) {
+			$post_link = str_replace( '%' . $taxonomy . '%', trim( $term_hierarchy, '/' ), $post_link );
 		}
+
+		return $post_link;
 	}
 
 	/**
 	 * Returns the hierarchical link for a given term.
 	 *
 	 * @param \WP_Term $term The term object or WordPress error object.
+	 * @param string   $taxonomy The taxonomy name.
 	 *
 	 * @return string The hierarchical link for the given term.
 	 */
-	public function get_hierarchical_link( $term ) {
-		$chain = array();
-		$name  = $term->slug;
+	public function get_hierarchical_link( $term, $taxonomy ) {
+		$hierarchical_path = get_term_parents_list(
+			$term->term_id,
+			$taxonomy,
+			array(
+				'separator' => '/',
+				'link'      => false,
+				'format'    => 'slug',
+			)
+		);
 
-		if ( $term->parent && $term->parent !== $term->term_id ) {
-			$chain[] = $this->get_hierarchical_link( get_term( $term->parent, $term->taxonomy ) );
+		if ( is_wp_error( $hierarchical_path ) ) {
+			error_log( 'Error in get_term_parents_list: ' . $hierarchical_path->get_error_message() );
+
+			return '';
 		}
 
-		$chain[] = $name;
-
-		return implode( '/', $chain );
+		return trim( $hierarchical_path, '/' );
 	}
 
 	/**

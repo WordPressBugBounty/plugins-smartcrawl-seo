@@ -72,7 +72,7 @@ export default class SeoAnalysisCheckTitleLength extends React.Component {
 					? sprintf(
 							/* translators: 1: Current length, 2,3: min/max length */
 							__(
-								'You have NOT written an SEO specific title for this article. We recommend an SEO specific title between %2$d and %3$d characters, optimized with your focus keywords.',
+								'You have NOT written an SEO specific title for this article. We recommend an SEO specific title between %2$d and %3$d characters, optimized with your focus keyphrases.',
 								'wds'
 							),
 							length,
@@ -103,7 +103,7 @@ export default class SeoAnalysisCheckTitleLength extends React.Component {
 				{sprintf(
 					/* translators: 1: Current characters length, 2,3: Recommend length range */
 					__(
-						"Your SEO title is the most important element because it is what users will see in search engine results. You'll want to make sure that you have your focus keywords in there, that it's a nice length, and that people will want to click on it. Best practices suggest keeping your titles between %2$d and %3$d characters including spaces, though in some cases 60 is the sweetspot. The length is important both for SEO ranking but also how your title will show up in search engines - long titles will be cut off visually and look bad. Unfortunately there isn't a rule book for SEO titles, just remember to make your title great for SEO but also (most importantly) readable and enticing for potential visitors to click on.",
+						"Your SEO title is the most important element because it is what users will see in search engine results. You'll want to make sure that you have your focus keyphrases in there, that it's a nice length, and that people will want to click on it. Best practices suggest keeping your titles between %2$d and %3$d characters including spaces, though in some cases 60 is the sweetspot. The length is important both for SEO ranking but also how your title will show up in search engines - long titles will be cut off visually and look bad. Unfortunately there isn't a rule book for SEO titles, just remember to make your title great for SEO but also (most importantly) readable and enticing for potential visitors to click on.",
 						'smartcrawl-seo'
 					),
 					length,

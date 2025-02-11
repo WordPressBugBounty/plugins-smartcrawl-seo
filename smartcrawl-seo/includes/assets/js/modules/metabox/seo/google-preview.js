@@ -256,7 +256,7 @@ export default class GooglePreview extends React.Component {
 											{sprintf(
 												/* translators: 1, 2: Min/max length */
 												__(
-													' - Include your focus keywords. %1$d-%2$d characters recommended.',
+													' - Include your focus keyphrases. %1$d-%2$d characters recommended.',
 													'smartcrawl-seo'
 												),
 												titleMinLength,
@@ -287,7 +287,7 @@ export default class GooglePreview extends React.Component {
 											{sprintf(
 												/* translators: 1, 2: Min/max length */
 												__(
-													' - Include your focus keywords. %1$d-%2$d characters recommended.',
+													' - Include your focus keyphrases. %1$d-%2$d characters recommended.',
 													'smartcrawl-seo'
 												),
 												descMinLength,

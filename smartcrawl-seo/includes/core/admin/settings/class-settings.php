@@ -221,6 +221,7 @@ class Settings extends Admin_Settings {
 						array(
 							'meta' => array(
 								'charset'    => array(),
+								'property'   => array(),
 								'content'    => array(),
 								'http-equiv' => array(),
 								'name'       => array(),
