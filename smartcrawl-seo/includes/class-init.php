@@ -82,6 +82,7 @@ class Init {
 		Controllers\Ajax_Search::get()->run();
 		Controllers\Primary_Terms::get()->run();
 		Mixpanel\Sitemap::get()->run();
+		Controllers\Cross_Sell_page::get()->run();
 	}
 
 	/**

@@ -7,8 +7,8 @@ Author URI: https://wpmudev.com/
 Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
-Tested up to: 6.6
-Stable tag: 3.13.0
+Tested up to: 6.8
+Stable tag: 3.13.1
 
 SEO checker, content analysis & SEO optimizer. Rank higher on search engines with 301 redirects, XML sitemaps & one-click setup.
 
@@ -148,6 +148,11 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 4. Use OpenGraph and Twitter Cards to optimize social sharing.
 
 == Changelog ==
+
+= 3.13.1 ( 2025-04-24 ) =
+
+- Enhance: Compatibility with WordPress 6.8
+- Enhance: Add a new menu item to help you discover other free plugins by WPMU DEV and more
 
 = 3.13.0 ( 2025-02-11 ) =
 

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb3c413174ec467ab18c7a73e955105b2
+class ComposerStaticInitb7934915b263a22b9e8560469a18b6d8
 {
     public static $classMap = array (
         'SmartCrawl\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/core/admin/class-admin.php',
@@ -66,6 +66,7 @@ class ComposerStaticInitb3c413174ec467ab18c7a73e955105b2
         'SmartCrawl\\Controllers\\Compatibility' => __DIR__ . '/../..' . '/includes/core/controllers/class-compatibility.php',
         'SmartCrawl\\Controllers\\Controller' => __DIR__ . '/../..' . '/includes/core/controllers/class-controller.php',
         'SmartCrawl\\Controllers\\Cron' => __DIR__ . '/../..' . '/includes/core/controllers/class-cron.php',
+        'SmartCrawl\\Controllers\\Cross_Sell_page' => __DIR__ . '/../..' . '/includes/core/controllers/class-cross-sell-page.php',
         'SmartCrawl\\Controllers\\Dash_Notices' => __DIR__ . '/../..' . '/includes/core/controllers/class-dash-notices.php',
         'SmartCrawl\\Controllers\\Data' => __DIR__ . '/../..' . '/includes/core/controllers/class-data.php',
         'SmartCrawl\\Controllers\\Hub' => __DIR__ . '/../..' . '/includes/core/controllers/class-hub.php',
@@ -303,7 +304,7 @@ class ComposerStaticInitb3c413174ec467ab18c7a73e955105b2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitb3c413174ec467ab18c7a73e955105b2::$classMap;
+            $loader->classMap = ComposerStaticInitb7934915b263a22b9e8560469a18b6d8::$classMap;
 
         }, null, ClassLoader::class);
     }

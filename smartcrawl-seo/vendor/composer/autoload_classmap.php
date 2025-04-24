@@ -65,6 +65,7 @@ return array(
     'SmartCrawl\\Controllers\\Compatibility' => $baseDir . '/includes/core/controllers/class-compatibility.php',
     'SmartCrawl\\Controllers\\Controller' => $baseDir . '/includes/core/controllers/class-controller.php',
     'SmartCrawl\\Controllers\\Cron' => $baseDir . '/includes/core/controllers/class-cron.php',
+    'SmartCrawl\\Controllers\\Cross_Sell_page' => $baseDir . '/includes/core/controllers/class-cross-sell-page.php',
     'SmartCrawl\\Controllers\\Dash_Notices' => $baseDir . '/includes/core/controllers/class-dash-notices.php',
     'SmartCrawl\\Controllers\\Data' => $baseDir . '/includes/core/controllers/class-data.php',
     'SmartCrawl\\Controllers\\Hub' => $baseDir . '/includes/core/controllers/class-hub.php',
