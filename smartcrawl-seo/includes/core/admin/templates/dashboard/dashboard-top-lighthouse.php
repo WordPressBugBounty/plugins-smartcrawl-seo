@@ -93,7 +93,7 @@ $whitelabel_class  = \SmartCrawl\Controllers\White_Label::get()->summary_class()
 
 	<div class="sui-summary-segment">
 		<ul class="sui-list">
-			<li>
+			<li id="wds-summary-audits">
 				<span class="sui-list-label"><?php esc_html_e( 'SEO Audits', 'smartcrawl-seo' ); ?></span>
 				<span class="sui-list-detail">
 					<?php if ( $lighthouse_start_time ) : ?>

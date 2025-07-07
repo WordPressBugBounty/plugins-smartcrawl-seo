@@ -19,8 +19,6 @@ $sitemaps_enabled          = Settings::get_setting( 'sitemap' );
 $sitemap_crawler_available = Utils::crawler_available();
 $email_recipients          = Sitemap::get_email_recipients();
 $override_native           = empty( $override_native ) ? false : $override_native;
-$ping_google               = ! empty( $_view['options']['ping-google'] );
-$ping_bing                 = ! empty( $_view['options']['ping-bing'] );
 ?>
 
 <?php $this->render_view( 'before-page-container' ); ?>
@@ -42,13 +40,10 @@ $ping_bing                 = ! empty( $_view['options']['ping-bing'] );
 	$this->render_view(
 		'floating-notices',
 		array(
-			'message' => $ping_google || $ping_bing
-				? esc_html__( 'Your Sitemap is updated and Search Engines are being notified with changes.', 'smartcrawl-seo' )
-				: esc_html__( 'Your sitemap has been updated.', 'smartcrawl-seo' ),
+			'message' => esc_html__( 'Your sitemap has been updated.', 'smartcrawl-seo' ),
 			'keys'    => array(
 				'wds-email-recipient-notice',
 				'wds-sitemap-manually-updated',
-				'wds-sitemap-manually-notify-search-engines',
 			),
 		)
 	);

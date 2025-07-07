@@ -27,7 +27,6 @@ class Utils {
 	const EXTRAS_STORAGE = 'wds-sitemap-extras';
 	const IGNORE_URLS_STORAGE = 'wds-sitemap-ignore_urls';
 	const IGNORE_IDS_STORAGE = 'wds-sitemap-ignore_post_ids';
-	const ENGINE_NOTIFICATION_OPTION_ID = 'wds_engine_notification';
 	const SITEMAP_META_OPTION_ID = 'wds_sitemap_dashboard';
 	const SITEMAP_VERIFICATION_TOKEN = 'SMARTCRAWL SITEMAP';
 
@@ -116,53 +115,10 @@ class Utils {
 			: array_filter( array_unique( $extras ) );
 	}
 
-	/**
-	 * Notifies search engines of the latest sitemap update
-	 *
-	 * @param bool $forced Whether to forcefully do engine notification.
-	 *
-	 * @return bool
-	 */
-	public static function notify_engines( $forced = false ) {
-		if ( \smartcrawl_is_switch_active( 'SMARTCRAWL_SITEMAP_SKIP_SE_NOTIFICATION' ) ) {
-			Logger::debug( 'Skipping SE update notification.' );
-
-			return false;
-		}
-
-		$result = array();
-		$now = time();
-		$smartcrawl_options = Settings::get_options();
-
-		if ( $forced || ! empty( $smartcrawl_options['ping-google'] ) ) {
-			do_action( 'wds_before_search_engine_update', 'google' );
-			wp_remote_get(
-				'http://www.google.com/webmasters/tools/ping?sitemap=' . esc_url( \smartcrawl_get_sitemap_url() ),
-				array( 'blocking' => false )
-			);
-			$result['google'] = array( 'time' => $now );
-			do_action( 'wds_after_search_engine_update', 'google', true, array() );
-		}
-
-		if ( $forced || ! empty( $smartcrawl_options['ping-bing'] ) ) {
-			do_action( 'wds_before_search_engine_update', 'bing' );
-			wp_remote_get(
-				'http://www.bing.com/webmaster/ping.aspx?sitemap=' . esc_url( \smartcrawl_get_sitemap_url() ),
-				array( 'blocking' => false )
-			);
-			$result['bing'] = array( 'time' => $now );
-			do_action( 'wds_after_search_engine_update', 'bing', true, array() );
-		}
-
-		update_option( self::ENGINE_NOTIFICATION_OPTION_ID, $result );
-
-		return true;
-	}
-
 	public static function update_meta_data( $item_count ) {
 		update_option( self::SITEMAP_META_OPTION_ID, array(
 			'items' => $item_count,
-			'time'  => time(),
+			'time'  => current_time( 'timestamp' ),
 		) );
 	}
 

@@ -82,4 +82,48 @@ domReady(() => {
 
 		return false;
 	});
+
+	// ✅ Intercept click on li[data-action="project-deactivate"]
+	document.body.addEventListener(
+		'click',
+		(e) => {
+			const target = e.target.closest(
+				'li[data-action="project-deactivate"]'
+			);
+			if (!target) return;
+
+			e.preventDefault();
+
+			const data = target.dataset;
+			const row = e.target.closest('tr');
+			const nameCell = row?.querySelector(
+				'.dash-sui-table-plugin__name-cell p.dash-sui-text'
+			);
+
+			if (
+				data?.action === 'project-deactivate' &&
+				nameCell &&
+				nameCell.textContent.includes('SmartCrawl')
+			) {
+				e.stopImmediatePropagation();
+
+				const wrap = document.getElementById('wds-survey-wrap');
+
+				if (wrap) {
+					const root = ReactDom.createRoot(wrap);
+					root.render(
+						<ErrorBoundary>
+							<DeactivationSurvey
+								from="dashboard-new"
+								data={data}
+							/>
+						</ErrorBoundary>
+					);
+				}
+			}
+
+			return false;
+		},
+		true // Capture phase — needed to intercept before jQuery/React
+	);
 });

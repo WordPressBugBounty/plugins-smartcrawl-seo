@@ -49,10 +49,11 @@ $time_label = empty( $timezone ) ? '' : sprintf( '%s (%s)', wp_date( 'h:i A' ), 
 	<p class="sui-description">
 		<?php
 		printf(
-			// translators: %1$s current time with timezone, %2$s general options page url.
-			esc_html__( 'Your site\'s current time is %1$s based on your <a href="%2$s" target="_blank">WordPress Settings</a>.', 'smartcrawl-seo' ),
+			// translators: 1: current time with timezone, 2, 3: opening/closing anchor tags.
+			esc_html__( 'Your site\'s current time is %1$s based on your %2$sWordPress Settings%3$s.', 'smartcrawl-seo' ),
 			esc_html( $time_label ),
-			esc_url( admin_url( 'options-general.php' ) )
+			'<a href="' . esc_url( admin_url( 'options-general.php' ) ) . '" target="_blank">',
+			'</a>'
 		);
 		?>
 	</p>

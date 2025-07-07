@@ -107,6 +107,8 @@ class Assets extends Controller {
 
 	const LIGHTHOUSE_JS = 'wds-admin-lighthouse';
 
+	const INSTANT_INDEXING_PAGE_JS = 'wds-admin-instant-indexing';
+
 	/**
 	 * Binds listening actions.
 	 */
@@ -154,6 +156,7 @@ class Assets extends Controller {
 		$this->register_network_settings_page_scripts();
 		$this->register_schema_settings_page_scripts();
 		$this->register_health_settings_page_scripts();
+		$this->register_instant_indexing_page_scripts();
 
 		// WP pages.
 		$this->register_metabox_scripts();
@@ -183,9 +186,9 @@ class Assets extends Controller {
 	/**
 	 * Register Javascript.
 	 *
-	 * @param string      $handle Name of the script. Should be unique.
-	 * @param bool|string $src    Relative URL of the script.
-	 * @param string[]    $deps   Optional. An array of registered script handles this script depends on. Default empty array.
+	 * @param string $handle Name of the script. Should be unique.
+	 * @param bool|string $src Relative URL of the script.
+	 * @param string[] $deps Optional. An array of registered script handles this script depends on. Default empty array.
 	 *
 	 * @return void
 	 */
@@ -196,9 +199,9 @@ class Assets extends Controller {
 	/**
 	 * Register a CSS stylesheet.
 	 *
-	 * @param string      $handle Name of the stylesheet. Should be unique.
-	 * @param bool|string $src    Relative URL of the stylesheet.
-	 * @param string[]    $deps   Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
+	 * @param string $handle Name of the stylesheet. Should be unique.
+	 * @param bool|string $src Relative URL of the stylesheet.
+	 * @param string[] $deps Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
 	 *
 	 * @return void
 	 */
@@ -361,8 +364,7 @@ class Assets extends Controller {
 				'nonce'       => wp_create_nonce( 'wds-nonce' ),
 				'sitemap_url' => smartcrawl_get_sitemap_url(),
 				'strings'     => array(
-					'manually_updated'          => esc_html__( 'Your sitemap has been updated.', 'smartcrawl-seo' ),
-					'manually_notified_engines' => esc_html__( 'Search Engines are being notified with changes.', 'smartcrawl-seo' ),
+					'manually_updated' => esc_html__( 'Your sitemap has been updated.', 'smartcrawl-seo' ),
 				),
 			)
 		);
@@ -726,120 +728,18 @@ class Assets extends Controller {
 		$show_on_front  = get_option( 'show_on_front' );
 		$page_on_front  = (int) get_option( 'page_on_front' );
 		$page_for_posts = (int) get_option( 'page_for_posts' );
-		if ( 'page' === $show_on_front && ( $page_on_front === (int) $post_id || $page_for_posts === (int) $post_id ) ) {
+
+		if ( $post_id && 'page' === $show_on_front &&
+			in_array( (int) $post_id, [ $page_on_front, $page_for_posts ], true )
+		) {
 			$post_type = 'home';
 		}
 
-		$og_setting_enabled   = (bool) smartcrawl_get_array_value( $options, 'og-enable' );
-		$og_post_type_enabled = (bool) smartcrawl_get_array_value( $options, 'og-active-' . $post_type );
-
-		if ( $og_setting_enabled && $og_post_type_enabled ) {
-			$cached_post = Post_Cache::get()->get_post( $post_id );
-
-			if ( $cached_post ) {
-				$og = smartcrawl_get_value( 'opengraph', $cached_post->get_post_id() );
-
-				if ( ! is_array( $og ) ) {
-					$og = array();
-				}
-
-				$og_args = array(
-					'disabled' => (bool) smartcrawl_get_array_value( $og, 'disabled' ),
-				);
-
-				if ( ! empty( $og['title'] ) ) {
-					$og_args['title_value'] = $og['title'];
-				}
-
-				$title_placeholder = $cached_post->get_opengraph_title();
-
-				if ( $title_placeholder ) {
-					$og_args['title_placeholder'] = $title_placeholder;
-				}
-
-				if ( ! empty( $og['description'] ) ) {
-					$og_args['desc_value'] = $og['description'];
-				}
-
-				$desc_placeholder = $cached_post->get_opengraph_description();
-
-				if ( $desc_placeholder ) {
-					$og_args['desc_placeholder'] = $desc_placeholder;
-				}
-
-				if ( ! empty( $og['images'] ) ) {
-					$og_args['images'] = array();
-
-					foreach ( $og['images'] as $img_id ) {
-						$img_src = wp_get_attachment_image_src( $img_id );
-
-						if ( $img_src ) {
-							$og_args['images'][] = array(
-								'id'  => $img_id,
-								'url' => $img_src[0],
-							);
-						}
-					}
-				}
-
-				$args['opengraph'] = $og_args;
-			}
-		}
-
-		$twitter_post_type_enabled = (bool) smartcrawl_get_array_value( $options, 'twitter-active-' . get_post_type( $post_id ) );
-		$twitter_setting_enabled   = (bool) smartcrawl_get_array_value( $options, 'twitter-card-enable' );
-		if ( $twitter_post_type_enabled && $twitter_setting_enabled ) {
-			$cached_post = Post_Cache::get()->get_post( $post_id );
-
-			if ( $cached_post ) {
-				$twitter = smartcrawl_get_value( 'twitter', $post_id );
-
-				if ( ! is_array( $twitter ) ) {
-					$twitter = array();
-				}
-
-				$twt_args = array(
-					'disabled' => (bool) smartcrawl_get_array_value( $twitter, 'disabled' ),
-				);
-
-				if ( ! empty( $twitter['title'] ) ) {
-					$twt_args['title_value'] = $twitter['title'];
-				}
-
-				$title_placeholder = $cached_post->get_twitter_title();
-
-				if ( $title_placeholder ) {
-					$twt_args['title_placeholder'] = $title_placeholder;
-				}
-
-				if ( ! empty( $twitter['description'] ) ) {
-					$twt_args['desc_value'] = $twitter['description'];
-				}
-
-				$desc_placeholder = $cached_post->get_twitter_description();
-
-				if ( $desc_placeholder ) {
-					$twt_args['desc_placeholder'] = $desc_placeholder;
-				}
-
-				if ( ! empty( $twitter['images'] ) ) {
-					$twt_args['images'] = array();
-
-					foreach ( $twitter['images'] as $img_id ) {
-						$img_src = wp_get_attachment_image_src( $img_id );
-
-						if ( $img_src ) {
-							$twt_args['images'][] = array(
-								'id'  => $img_id,
-								'url' => $img_src[0],
-							);
-						}
-					}
-				}
-
-				$args['twitter'] = $twt_args;
-			}
-		}
+		$social_meta = array_merge(
+			$this->get_social_meta_args( 'og', 'opengraph', $options, $post_type, $post_id ),
+			$this->get_social_meta_args( 'twitter-card', 'twitter', $options, $post_type, $post_id )
+		);
+		$args = array_merge( $args, $social_meta );
 
 		$args['advanced'] = array(
 			'indexing'  => array(
@@ -881,6 +781,90 @@ class Assets extends Controller {
 			'_wds_metabox',
 			$args
 		);
+	}
+
+	/**
+	 * Get social meta args.
+	 *
+	 * @param string $type_key  Type key.
+	 * @param string $meta_key  Meta key.
+	 * @param array  $options   Options.
+	 * @param string $post_type Post type.
+	 * @param int    $post_id   Post ID.
+	 *
+	 * @return array
+	 */
+	public function get_social_meta_args( $type_key, $meta_key, $options, $post_type, $post_id ) {
+		$setting_enabled     = (bool) smartcrawl_get_array_value( $options, "{$type_key}-enable" );
+		$post_type_enabled   = (bool) smartcrawl_get_array_value( $options, "{$type_key}-active-{$post_type}" );
+		$args                = array();
+
+		if ( ! $setting_enabled ) {
+			return $args;
+		}
+
+		$cached_post = Post_Cache::get()->get_post( $post_id );
+		$meta_args   = array(
+			'disabled' => ! $post_type_enabled,
+		);
+
+		if ( ! $cached_post ) {
+			$args[ $meta_key ] = $meta_args;
+			return $args;
+		}
+
+		$meta = smartcrawl_get_value( $meta_key, $post_id );
+		if ( ! is_array( $meta ) ) {
+			$meta = array();
+		}
+
+		$post_disabled = smartcrawl_get_array_value( $meta, 'disabled' );
+
+		if ( ! $post_disabled || $post_type_enabled ) {
+			$meta_args['disabled'] = $post_disabled;
+
+			if ( ! empty( $meta['title'] ) ) {
+				$meta_args['title_value'] = $meta['title'];
+			}
+
+			$title_method = "get_{$meta_key}_title";
+			if ( method_exists( $cached_post, $title_method ) ) {
+				$title_placeholder = $cached_post->$title_method();
+				if ( $title_placeholder ) {
+					$meta_args['title_placeholder'] = $title_placeholder;
+				}
+			}
+
+			if ( ! empty( $meta['description'] ) ) {
+				$meta_args['desc_value'] = $meta['description'];
+			}
+
+			$desc_method = "get_{$meta_key}_description";
+			if ( method_exists( $cached_post, $desc_method ) ) {
+				$desc_placeholder = $cached_post->$desc_method();
+				if ( $desc_placeholder ) {
+					$meta_args['desc_placeholder'] = $desc_placeholder;
+				}
+			}
+
+			if ( ! empty( $meta['images'] ) ) {
+				$meta_args['images'] = array();
+
+				foreach ( $meta['images'] as $img_id ) {
+					$img_src = wp_get_attachment_image_src( $img_id );
+					if ( $img_src ) {
+						$meta_args['images'][] = array(
+							'id'  => $img_id,
+							'url' => $img_src[0],
+						);
+					}
+				}
+			}
+		}
+
+		$args[ $meta_key ] = $meta_args;
+
+		return $args;
 	}
 
 	/**
@@ -1345,8 +1329,8 @@ class Assets extends Controller {
 	/**
 	 * Get script dependencies.
 	 *
-	 * @param string $file_name  File name.
-	 * @param array  $extra_deps Extra dependencies.
+	 * @param string $file_name File name.
+	 * @param array $extra_deps Extra dependencies.
 	 *
 	 * @return array
 	 */
@@ -1525,6 +1509,44 @@ class Assets extends Controller {
 				'metadesc_max'      => smartcrawl_metadesc_max_length(),
 				'random_archives'   => Onpage_Settings::get_random_archives(),
 				'random_buddypress' => Onpage_Settings::get_random_buddypress(),
+			)
+		);
+	}
+
+	/**
+	 * Register scripts for Instant Indexing page.
+	 *
+	 * @return void
+	 */
+	private function register_instant_indexing_page_scripts() {
+		if ( ! $this->is_page( Settings::TAB_INSTANT_INDEXING ) ) {
+			return;
+		}
+
+		$this->register_js(
+			self::INSTANT_INDEXING_PAGE_JS,
+			'js/wds-admin-instant-indexing.js',
+			array(
+				'jquery',
+				self::ADMIN_JS,
+			)
+		);
+
+		wp_localize_script(
+			self::INSTANT_INDEXING_PAGE_JS,
+			'_wds_instant_indexing',
+			array(
+				'nonce'      => wp_create_nonce( 'wds-instant-indexing-nonce' ),
+				'rest_nonce' => wp_create_nonce( 'wp_rest' ),
+				'rest_api'   => rest_url( 'smartcrawl/v1/instant-indexing' ),
+				'strings'    => array(
+					'empty_url'  => esc_html__( 'The URL field is empty. Please enter at least one URL and try again.', 'smartcrawl-seo' ),
+					'success'    => esc_html__( 'Submission Completed!', 'smartcrawl-seo' ),
+					'limit'      => esc_html__( 'You cannot submit more than 100 URLs at once.', 'smartcrawl-seo' ),
+					'invalid'    => esc_html__( 'One or more URLs are invalid. Please check and try again.', 'smartcrawl-seo' ),
+					'wrong'      => esc_html__( 'Something went wrong. Please try again.', 'smartcrawl-seo' ),
+					'rate_limit' => esc_html__( 'Rate limit exceeded. Please wait and try again later.', 'smartcrawl-seo' ),
+				),
 			)
 		);
 	}

@@ -13,7 +13,7 @@ $extra_urls            = empty( $extra_urls ) ? '' : $extra_urls;
 $ignore_urls           = empty( $ignore_urls ) ? '' : $ignore_urls;
 $ignore_post_ids       = empty( $ignore_post_ids ) ? '' : $ignore_post_ids;
 ?>
-<div class="sui-box-settings-row">
+<div id="wds-sitemap-include" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'Include', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">
@@ -68,7 +68,7 @@ $ignore_post_ids       = empty( $ignore_post_ids ) ? '' : $ignore_post_ids;
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-sitemap-inclusions" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label
 			for="extra-sitemap-urls"
@@ -91,7 +91,7 @@ $ignore_post_ids       = empty( $ignore_post_ids ) ? '' : $ignore_post_ids;
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-sitemap-exclusions" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label
 			for="<?php echo esc_attr( $option_name ); ?>[sitemap_ignore_urls]"

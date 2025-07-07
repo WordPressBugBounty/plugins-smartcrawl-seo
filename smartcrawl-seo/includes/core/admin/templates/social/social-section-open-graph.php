@@ -12,6 +12,7 @@
 	$this->render_view(
 		'toggle-group',
 		array(
+			'id'          => 'wds-social-open-graph',
 			'label'       => __( 'OpenGraph Support', 'smartcrawl-seo' ),
 			'description' => __( 'This will add a few extra meta tags to the head section of your pages.', 'smartcrawl-seo' ),
 			'items'       => array(

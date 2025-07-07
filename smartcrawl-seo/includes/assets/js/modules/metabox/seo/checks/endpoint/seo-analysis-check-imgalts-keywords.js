@@ -93,7 +93,7 @@ export default class SeoAnalysisCheckImgaltsKeywords extends React.Component {
 			);
 		} else if (imgCnt && !hasFeatured) {
 			message = __(
-				'You have included a focus keyphrase in the alternative text of too many images in your content',
+				'You have not included the focus keyphrase in the alternative text of any images in your content',
 				'smartcrawl-seo'
 			);
 		} else if (percent > 75) {

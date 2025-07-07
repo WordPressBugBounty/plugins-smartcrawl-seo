@@ -37,6 +37,7 @@ $this->render_view(
 $this->render_view(
 	'onpage/onpage-meta-robots',
 	array(
-		'items' => $meta_robots_author,
+		'for_type' => 'author',
+		'items'    => $meta_robots_author,
 	)
 );

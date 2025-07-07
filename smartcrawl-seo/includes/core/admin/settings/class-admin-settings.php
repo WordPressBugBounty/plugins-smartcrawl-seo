@@ -167,7 +167,7 @@ abstract class Admin_Settings extends Settings {
 		}
 
 		$settings_opts = Settings::get_specific_options( Settings::SETTINGS_MODULE . '_options' );
-		$hide_disables = \smartcrawl_get_array_value( $settings_opts, 'hide_disables', true );
+		$hide_disables = \smartcrawl_get_array_value( $settings_opts, 'hide_disables', false );
 
 		if ( 'schema' === $this->name ) {
 			$social_opts = Settings::get_component_options( Settings::COMP_SOCIAL );

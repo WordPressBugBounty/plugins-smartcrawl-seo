@@ -35,7 +35,7 @@
 			},
 			function (response) {
 				if (response.success) {
-					Wds.close_dialog();
+					closeModal(e);
 				}
 			}
 		);
@@ -61,6 +61,9 @@
 			function (response) {
 				if (response.success) {
 					Wds.close_dialog();
+					if (response.data.redirect_url) {
+						window.open(response.data.redirect_url, '_blank');
+					}
 				}
 			}
 		);

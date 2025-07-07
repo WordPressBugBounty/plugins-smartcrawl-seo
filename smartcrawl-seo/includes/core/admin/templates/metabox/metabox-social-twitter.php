@@ -36,15 +36,16 @@ $twitter = wp_parse_args(
 $this->render_view(
 	'metabox/metabox-social-meta-tags',
 	array(
-		'main_title'              => __( 'Twitter', 'smartcrawl-seo' ),
-		'main_description'        => __( 'These details will be used in Twitter cards.', 'smartcrawl-seo' ),
-		'field_name'              => 'wds-twitter',
-		'disabled'                => (bool) \smartcrawl_get_array_value( $twitter, 'disabled' ),
-		'current_title'           => $twitter['title'],
-		'title_placeholder'       => $smartcrawl_post->get_twitter_title(),
-		'current_description'     => $twitter['description'],
-		'description_placeholder' => $smartcrawl_post->get_twitter_description(),
-		'images'                  => $twitter['images'],
-		'single_image'            => true,
+		'main_title'               => __( 'Twitter', 'smartcrawl-seo' ),
+		'main_description'         => __( 'These details will be used in Twitter cards.', 'smartcrawl-seo' ),
+		'field_name'               => 'wds-twitter',
+		'disabled'                 => (bool) \smartcrawl_get_array_value( $twitter, 'disabled' ),
+		'twitter_enabled_globally' => ! empty( $twitter_enabled_globally ),
+		'current_title'            => $twitter['title'],
+		'title_placeholder'        => $smartcrawl_post->get_twitter_title(),
+		'current_description'      => $twitter['description'],
+		'description_placeholder'  => $smartcrawl_post->get_twitter_description(),
+		'images'                   => $twitter['images'],
+		'single_image'             => true,
 	)
 );

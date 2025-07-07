@@ -35,15 +35,16 @@ class Conflict_Detector extends Events {
 	 */
 	protected function init() {
 		$this->module_titles = array(
-			Settings::TAB_DASHBOARD     => 'Dashboard',
-			Settings::TAB_HEALTH        => 'SEO Health',
-			Settings::TAB_ONPAGE        => 'Title & Meta',
-			Settings::TAB_SOCIAL        => 'Social',
-			Settings::TAB_SCHEMA        => 'Schema',
-			Settings::TAB_SITEMAP       => 'Sitemaps',
-			Settings::ADVANCED_MODULE   => 'Advanced Tools',
-			Upgrade::MENU_SLUG          => 'Upgrade to SmartCrawl Pro',
-			Network_Settings::MENU_SLUG => 'Network Settings',
+			Settings::TAB_DASHBOARD        => 'Dashboard',
+			Settings::TAB_HEALTH           => 'SEO Health',
+			Settings::TAB_ONPAGE           => 'Title & Meta',
+			Settings::TAB_SOCIAL           => 'Social',
+			Settings::TAB_SCHEMA           => 'Schema',
+			Settings::TAB_INSTANT_INDEXING => 'Instant Indexing',
+			Settings::TAB_SITEMAP          => 'Sitemaps',
+			Settings::ADVANCED_MODULE      => 'Advanced Tools',
+			Upgrade::MENU_SLUG             => 'Upgrade to SmartCrawl Pro',
+			Network_Settings::MENU_SLUG    => 'Network Settings',
 		);
 
 		add_action( 'smartcrawl_dismissed_message', array( $this, 'intercept_dismissed_message' ), 10, 2 );

@@ -487,11 +487,6 @@ class Onpage extends Admin_Settings {
 			__( 'Yes', 'smartcrawl-seo' ),
 		);
 
-		$arguments['engines'] = array(
-			'ping-google' => __( 'Google', 'smartcrawl-seo' ),
-			'ping-bing'   => __( 'Bing', 'smartcrawl-seo' ),
-		);
-
 		$arguments['separators'] = \smartcrawl_get_separators();
 
 		$static_homepage           = 'page' === get_option( 'show_on_front' );

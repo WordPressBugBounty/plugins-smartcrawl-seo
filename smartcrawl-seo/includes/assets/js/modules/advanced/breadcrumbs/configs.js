@@ -42,6 +42,7 @@ class Configs extends React.Component {
 
 		return (
 			<SettingsRow
+				id="wds-breadcrumb-configs"
 				label={__('Configurations', 'smartcrawl-seo')}
 				description={__(
 					'Enable and configure the additional breadcrumbs settings for your site.',

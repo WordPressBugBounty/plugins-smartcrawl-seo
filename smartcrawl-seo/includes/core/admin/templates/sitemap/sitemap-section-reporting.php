@@ -52,7 +52,7 @@ $email_recipients     = empty( $email_recipients ) ? array() : $email_recipients
 		?>
 	<?php endif; ?>
 </div>
-<div class="sui-box-settings-row <?php echo $is_member ? '' : 'sui-disabled'; ?>">
+<div id="wds-sitemap-schedule-crawls" class="sui-box-settings-row <?php echo $is_member ? '' : 'sui-disabled'; ?>">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 

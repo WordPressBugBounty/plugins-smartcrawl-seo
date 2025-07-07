@@ -49,6 +49,7 @@ class Robots extends React.Component {
 		if (alreadyExist) {
 			return (
 				<Box
+					id="tab_robots_editor"
 					title={__('Robots.txt Editor', 'smartcrawl-seo')}
 					className="wds-robots-txt"
 				>
@@ -76,6 +77,7 @@ class Robots extends React.Component {
 		if (!rootdirExist) {
 			return (
 				<Box
+					id="tab_robots_editor"
 					title={__('Robots.txt Editor', 'smartcrawl-seo')}
 					className="wds-robots-txt"
 				>
@@ -107,6 +109,7 @@ class Robots extends React.Component {
 
 		return (
 			<SubmoduleBox
+				id="tab_robots_editor"
 				name="robots"
 				title={__('Robots.txt Editor', 'smartcrawl-seo')}
 				className="wds-robots-txt"
@@ -154,6 +157,7 @@ class Robots extends React.Component {
 				/>
 
 				<SettingsRow
+					id="wds-robots-output"
 					label={__('Output', 'smartcrawl-seo')}
 					description={__(
 						'Here’s a preview of your current robots.txt output. Customize your robots.txt file below.',
@@ -169,6 +173,7 @@ class Robots extends React.Component {
 				</SettingsRow>
 
 				<SettingsRow
+					id="wds-robots-sitemap"
 					label={__('Include Sitemap', 'smartcrawl-seo')}
 					description={__(
 						"It's really good practice to instruct search engines where to find your sitemap. If enabled, we will automatically add the required code to your robots file.",
@@ -231,6 +236,7 @@ class Robots extends React.Component {
 					</Toggle>
 				</SettingsRow>
 				<SettingsRow
+					id="wds-robots-customize"
 					label={__('Customize', 'smartcrawl-seo')}
 					description={createInterpolateElement(
 						__(

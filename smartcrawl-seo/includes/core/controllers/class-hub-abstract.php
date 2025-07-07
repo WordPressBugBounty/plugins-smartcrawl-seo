@@ -203,26 +203,11 @@ abstract class Hub_Abstract {
 			)
 			: array();
 		$sitemap_stats             = Utils::get_meta_data();
-		$sitemap_se_stats          = get_option( Utils::ENGINE_NOTIFICATION_OPTION_ID );
 		$sitemap                   = $this->is_active( 'sitemap' )
 			? array(
-				'url'                      => \smartcrawl_get_sitemap_url(),
-				'last_update'              => \smartcrawl_get_array_value( $sitemap_stats, 'time' ),
-				'last_google_notification' => \smartcrawl_get_array_value(
-					$sitemap_se_stats,
-					array(
-						'google',
-						'time',
-					)
-				),
-				'last_bing_notification'   => \smartcrawl_get_array_value(
-					$sitemap_se_stats,
-					array(
-						'bing',
-						'time',
-					)
-				),
-				'crawler'                  => array(
+				'url'         => \smartcrawl_get_sitemap_url(),
+				'last_update' => \smartcrawl_get_array_value( $sitemap_stats, 'time' ),
+				'crawler'     => array(
 					'in_progress'        => $seo_report->is_in_progress(),
 					'last_run_timestamp' => $seo_service->get_last_run_timestamp(),
 					'reporting'          => (object) $crawler_reporting,
@@ -249,6 +234,15 @@ abstract class Hub_Abstract {
 
 		$onpage_active = $this->is_active( 'onpage' );
 		$onpage        = $onpage_active
+			? array(
+				'meta'              => $this->get_titles_and_meta(),
+				'static_homepage'   => get_option( 'show_on_front' ) === 'page',
+				'public_post_types' => count( get_post_types( array( 'public' => true ) ) ),
+			)
+			: array();
+
+		$instant_indexing_active = $this->is_active( 'instant_indexing' );
+		$instant_indexing        = $instant_indexing_active
 			? array(
 				'meta'              => $this->get_titles_and_meta(),
 				'static_homepage'   => get_option( 'show_on_front' ) === 'page',
@@ -292,14 +286,15 @@ abstract class Hub_Abstract {
 
 		wp_send_json_success(
 			array(
-				'onpage'     => (object) $onpage,
-				'schema'     => (object) $schema,
-				'social'     => (object) $social,
-				'advanced'   => (object) $advanced,
-				'lighthouse' => (object) $lighthouse,
-				'sitemap'    => (object) $sitemap,
-				'analysis'   => (object) $analysis,
-				'import'     => array( 'plugins' => $import_plugins ),
+				'onpage'           => (object) $onpage,
+				'instant_indexing' => (object) $instant_indexing,
+				'schema'           => (object) $schema,
+				'social'           => (object) $social,
+				'advanced'         => (object) $advanced,
+				'lighthouse'       => (object) $lighthouse,
+				'sitemap'          => (object) $sitemap,
+				'analysis'         => (object) $analysis,
+				'import'           => array( 'plugins' => $import_plugins ),
 			)
 		);
 	}

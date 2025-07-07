@@ -12,7 +12,7 @@ use SmartCrawl\Lighthouse\Options;
 $option_name      = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $dashboard_device = Options::dashboard_widget_device();
 ?>
-<div class="sui-box-settings-row">
+<div id="wds-seo-settings" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Dashboard Widget', 'smartcrawl-seo' ); ?>

@@ -109,12 +109,9 @@ class Keyword_Density extends Check {
 
 			return true; // Can't determine kw density.
 		}
-		$text      = Html::plaintext( $markup );
-		$string    = String_Cache::get()->get_string( $text, $this->get_language() );
-		$stopwords = $string->get_language_stopwords();
-
+		$text          = Html::plaintext( $markup );
 		$filtered_kws  = array( strtolower( implode( ' ', $kws ) ) );
-		$filtered_text = implode( ' ', array_diff( explode( ' ', strtolower( $text ) ), $stopwords ) );
+		$filtered_text = strtolower( $text );
 		$total_words   = str_word_count( $filtered_text );
 
 		$densities = array();

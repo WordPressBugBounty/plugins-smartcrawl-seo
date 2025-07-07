@@ -26,28 +26,34 @@ $toggle_label            = empty( $toggle_label ) ? esc_html__( 'Enable for this
 	</div>
 	<div class="sui-box-settings-col-2">
 		<?php
-		$this->render_view(
-			'toggle-item',
-			array(
-				'inverted'                   => true,
-				'field_name'                 => $field_name . '[disabled]',
-				'field_id'                   => $field_name . '-disabled',
-				'checked'                    => $disabled,
-				'item_label'                 => $toggle_label,
-				'sub_settings_template'      => 'metabox/metabox-social-meta-tags-sub-settings',
-				'sub_settings_template_args' => array(
-					'field_name'              => $field_name,
-					'current_title'           => $current_title,
-					'title_placeholder'       => $title_placeholder,
-					'current_description'     => $current_description,
-					'description_placeholder' => $description_placeholder,
-					'images'                  => $images,
-					'images_available'        => $images_available,
-					'single_image'            => $single_image,
-					'images_description'      => $images_description,
-				),
-			)
-		);
+		if ( isset( $og_enabled_globally ) && ! $og_enabled_globally ) {
+			$this->render_view( 'onpage/onpage-og-disabled' );
+		} else if ( isset( $twitter_enabled_globally ) && ! $twitter_enabled_globally ) {
+			$this->render_view( 'onpage/onpage-twitter-disabled' );
+		} else {
+			$this->render_view(
+				'toggle-item',
+				array(
+					'inverted'                   => true,
+					'field_name'                 => $field_name . '[disabled]',
+					'field_id'                   => $field_name . '-disabled',
+					'checked'                    => $disabled,
+					'item_label'                 => $toggle_label,
+					'sub_settings_template'      => 'metabox/metabox-social-meta-tags-sub-settings',
+					'sub_settings_template_args' => array(
+						'field_name'              => $field_name,
+						'current_title'           => $current_title,
+						'title_placeholder'       => $title_placeholder,
+						'current_description'     => $current_description,
+						'description_placeholder' => $description_placeholder,
+						'images'                  => $images,
+						'images_available'        => $images_available,
+						'single_image'            => $single_image,
+						'images_description'      => $images_description,
+					),
+				)
+			);
+		}
 		?>
 	</div>
 </div>

@@ -24,6 +24,7 @@ class Controller extends Controllers\Submodule_Controller {
 	protected function __construct() {
 		$this->module_title = __( 'Breadcrumbs', 'smartcrawl-seo' );
 		$this->event_name   = 'Breadcrumbs';
+		$this->class_name   = 'tab_breadcrumb';
 	}
 
 	/**

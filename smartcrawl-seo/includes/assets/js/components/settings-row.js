@@ -16,6 +16,7 @@ export default class SettingsRow extends React.Component {
 
 		return (
 			<div
+				id={this.props.id}
 				className={classnames(
 					slim ? 'sui-box-settings-slim-row' : 'sui-box-settings-row',
 					flushed ? 'sui-flushed' : ''

@@ -22,7 +22,7 @@ $schema_output_page   = (int) \smartcrawl_get_array_value( $options, 'schema_out
 $sitelinks_search_box = (bool) \smartcrawl_get_array_value( $options, 'sitelinks_search_box' );
 ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-website" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Website Details', 'smartcrawl-seo' ); ?>
@@ -72,7 +72,7 @@ $sitelinks_search_box = (bool) \smartcrawl_get_array_value( $options, 'sitelinks
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-person-organization" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Person or Organization', 'smartcrawl-seo' ); ?>
@@ -130,7 +130,7 @@ $this->render_view(
 );
 ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-sitelinks-searchbox" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Sitelinks Searchbox', 'smartcrawl-seo' ); ?>
@@ -155,7 +155,7 @@ $this->render_view(
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-output-page" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Output Page', 'smartcrawl-seo' ); ?>

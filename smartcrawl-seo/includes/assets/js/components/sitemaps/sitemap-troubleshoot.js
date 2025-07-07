@@ -26,6 +26,7 @@ export default class SitemapTroubleshoot extends React.Component {
 		return (
 			<React.Fragment>
 				<SettingsRow
+					id="wds-sitemap-troubleshoot"
 					label={__('Troubleshoot Sitemap', 'smartcrawl-seo')}
 					description={__(
 						'If your sitemap is not as expected, you can use this tool to identify the problem.',

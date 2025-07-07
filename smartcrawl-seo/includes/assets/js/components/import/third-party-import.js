@@ -30,7 +30,7 @@ export default class ThirdPartyImport extends React.Component {
 
 		return (
 			<React.Fragment>
-				<div className="sui-box-settings-row">
+				<div id="wds-settings-import" className="sui-box-settings-row">
 					<div className="sui-box-settings-col-1">
 						<label className="sui-settings-label">
 							{__('Import', 'wds-texdomain')}

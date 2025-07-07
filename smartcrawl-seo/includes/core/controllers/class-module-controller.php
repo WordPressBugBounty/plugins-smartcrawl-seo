@@ -46,13 +46,6 @@ abstract class Module_Controller extends Controller {
 	public $page_title;
 
 	/**
-	 * The position in the menu order this item should appear.
-	 *
-	 * @var float|int
-	 */
-	public $position = null;
-
-	/**
 	 * Action message
 	 *
 	 * @var string
@@ -159,7 +152,7 @@ abstract class Module_Controller extends Controller {
 	 */
 	protected function init() {
 		if ( \smartcrawl_get_array_value( $this->settings_opts, 'hide_disables', true ) ) {
-			add_action( 'admin_menu', array( $this, 'admin_menu' ), 98 );
+			add_action( 'admin_menu', array( $this, 'admin_menu' ), 99 );
 			add_filter( 'smartcrawl_admin_bar_menu', array( $this, 'admin_bar_menu' ), 99 );
 		}
 	}
@@ -236,7 +229,6 @@ abstract class Module_Controller extends Controller {
 			is_multisite() && \smartcrawl_subsite_manager_role() === 'superadmin' ? 'manage_network_options' : 'manage_options',
 			$this->module_name,
 			array( $this, 'output_page' ),
-			$this->position
 		);
 	}
 

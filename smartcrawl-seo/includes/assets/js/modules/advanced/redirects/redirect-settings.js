@@ -17,49 +17,6 @@ import SubmoduleBox from '../../../components/layout/submodule-box';
 const isMember = ConfigValues.get('is_member', 'admin') === '1';
 
 class RedirectSettings extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			isNewFeature:
-				ConfigValues.get('new_feature_status', 'admin') !== '3',
-		};
-
-		this.newFeature = React.createRef();
-	}
-
-	componentDidMount() {
-		if (!this.state.isNewFeature) {
-			return;
-		}
-
-		$(window).on('scroll', () => {
-			if (this.state.isNewFeature && this.isElementInViewport()) {
-				this.setState({ isNewFeature: false }, () => {
-					RequestUtil.post(
-						'smartcrawl_new_feature_status',
-						ConfigValues.get('nonce', 'admin'),
-						{ step: 3 }
-					);
-				});
-			}
-		});
-	}
-
-	isElementInViewport() {
-		if (!this.newFeature.current) {
-			return;
-		}
-
-		const $target = $(this.newFeature.current);
-		const elementTop = $target.offset().top;
-		const elementBottom = elementTop + $target.height();
-		const viewportTop = $(window).scrollTop();
-		const viewportBottom = viewportTop + $(window).height();
-
-		return elementBottom > viewportTop && elementTop < viewportBottom;
-	}
-
 	render() {
 		const {
 			active,
@@ -97,6 +54,7 @@ class RedirectSettings extends React.Component {
 				}}
 			>
 				<SettingsRow
+					id="wds-redirects-attachments"
 					label={__('Redirect attachments', 'smartcrawl-seo')}
 					description={__(
 						'Redirect attachments to their respective file, preventing them from appearing in the SERPs.',
@@ -129,6 +87,7 @@ class RedirectSettings extends React.Component {
 				</SettingsRow>
 
 				<SettingsRow
+					id="wds-redirects-type"
 					label={__('Default Redirection Type', 'smartcrawl-seo')}
 					description={__(
 						'Select the redirection type that you would like to be used as default.',
@@ -144,6 +103,7 @@ class RedirectSettings extends React.Component {
 				</SettingsRow>
 
 				<SettingsRow
+					id="wds-redirects-rule"
 					label={
 						<>
 							{__('Location-based Rules', 'smartcrawl-seo')}
@@ -158,18 +118,6 @@ class RedirectSettings extends React.Component {
 									{__('Pro', 'smartcrawl-seo')}
 								</span>
 							)}
-							{!!isMember &&
-								ConfigValues.get(
-									'new_feature_status',
-									'admin'
-								) !== '3' && (
-									<span
-										className="sui-tag sui-tag-green sui-tag-sm"
-										ref={this.newFeature}
-									>
-										{__('New', 'smartcrawl-seo')}
-									</span>
-								)}
 						</>
 					}
 					description={__(

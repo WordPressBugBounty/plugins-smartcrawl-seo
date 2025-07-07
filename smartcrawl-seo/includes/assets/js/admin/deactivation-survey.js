@@ -41,7 +41,7 @@ export default class DeactivationSurvey extends React.Component {
 			open: true,
 			selected: false,
 			messages: {},
-			valid: true,
+			valid: false,
 			submitting: false,
 			skipping: false,
 		};
@@ -110,6 +110,20 @@ export default class DeactivationSurvey extends React.Component {
 					}
 
 					wpmudevDashboardAdminPluginsPage.deactivate(data);
+				});
+			}, 1000);
+
+			debounced();
+		} else if (from === 'dashboard-new') {
+			const { pid } = data;
+			const debounced = debounce(() => {
+				this.setState({ open: false }, () => {
+					if (
+						window.wpmudevActions &&
+						typeof window.wpmudevActions.deactivate === 'function'
+					) {
+						window.wpmudevActions.deactivate(pid);
+					}
 				});
 			}, 1000);
 

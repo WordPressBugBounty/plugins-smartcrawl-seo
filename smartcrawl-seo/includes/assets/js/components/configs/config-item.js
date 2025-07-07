@@ -196,6 +196,7 @@ export default class ConfigItem extends React.Component {
 			health: __('SEO Health', 'smartcrawl-seo'),
 			onpage: __('Title & Meta', 'smartcrawl-seo'),
 			schema: __('Schema', 'smartcrawl-seo'),
+			instant_indexing: __('Instant Indexing', 'smartcrawl-seo'),
 			social: __('Social', 'smartcrawl-seo'),
 			sitemap: __('Sitemap', 'smartcrawl-seo'),
 			advanced: __('Advanced Tools', 'smartcrawl-seo'),

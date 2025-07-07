@@ -189,7 +189,7 @@
 
 		$(document)
 			.on('click', '.wds-analysis', handle_analysis_click)
-			.on('click', 'td.column-title', '.editinline', populate_quick_edit_fields)
+			.on('click', '.editinline', populate_quick_edit_fields)
 			.on('click', '.wds-meta-details a', toggle_seo_details)
 		;
 

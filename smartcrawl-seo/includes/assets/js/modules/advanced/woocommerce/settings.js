@@ -34,6 +34,7 @@ class Settings extends React.Component {
 				</SettingsRow>
 
 				<SettingsRow
+					id="wds-woocommerce-schema"
 					label={__('Improve Woo Schema', 'smartcrawl-seo')}
 					description={__(
 						"Improve your site's WooCommerce Schema.",
@@ -114,6 +115,7 @@ class Settings extends React.Component {
 				</SettingsRow>
 
 				<SettingsRow
+					id="wds-woocommerce-meta"
 					label={__('Improve Woo Meta', 'smartcrawl-seo')}
 					description={__(
 						"Improve your site's default WooCommerce Meta.",
@@ -176,6 +178,7 @@ class Settings extends React.Component {
 				</SettingsRow>
 
 				<SettingsRow
+					id="wds-woocommerce-search-engines"
 					label={__('Restrict Search Engines', 'smartcrawl-seo')}
 					description={__(
 						'Use these options to restrict Indexing or crawling of specific pages on the site.',

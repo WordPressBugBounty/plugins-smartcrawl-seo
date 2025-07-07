@@ -35,33 +35,4 @@ $sitemap_stats         = empty( $sitemap_stats ) ? array() : $sitemap_stats;
 			<a href='#update_sitemap' id='wds_update_now'><?php echo esc_html__( 'Update sitemap now', 'smartcrawl-seo' ); ?></a>
 		</p>
 	</div>
-
-	<div class="wds-sitemaps-widget-right">
-		<?php if ( $engines ) { ?>
-			<ul>
-				<?php
-				foreach ( $engines as $key => $engine ) {
-					$service_name = ucfirst( $key );
-					$engine_date  = ! empty( $engine['time'] ) ? date_i18n( get_option( 'date_format' ), $engine['time'] ) : false;
-					$engine_time  = ! empty( $engine['time'] ) ? date_i18n( get_option( 'time_format' ), $engine['time'] ) : false;
-					/* translators: 1: Date, 2: Engine item */
-					$engine_timestamp = ( $engine_date && $engine_time ) ? sprintf( __( 'Last notified on %1$s, at %2$s.', 'smartcrawl-seo' ), $engine_date, $engine_time ) : __( 'Not notified', 'smartcrawl-seo' );
-					?>
-					<li>
-						<b><?php echo esc_html( $service_name ); ?>:</b> <?php echo esc_html( $engine_timestamp ); ?>
-					</li>
-				<?php } ?>
-
-			</ul>
-
-		<?php } else { ?>
-			<div><?php esc_html_e( "Search engines haven't been recently updated.", 'smartcrawl-seo' ); ?></div>
-		<?php } ?>
-
-		<p>
-			<a href='#update_search_engines' id='wds_update_engines'>
-				<?php echo esc_html__( 'Force search engines notification', 'smartcrawl-seo' ); ?>
-			</a>
-		</p>
-	</div>
 </div>

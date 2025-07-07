@@ -22,6 +22,7 @@ class Formats extends React.Component {
 
 		return (
 			<SettingsRow
+				id="wds-breadcrumb-formats"
 				label={__('Breadcrumbs Label Format', 'smartcrawl-seo')}
 				description={__(
 					'Customize your breadcrumbs label formats across your site. ',

@@ -51,10 +51,14 @@ export default class SideBar extends React.Component {
 						return (
 							<li
 								key={id}
-								className={classnames('sui-vertical-tab', {
-									'sui-disabled': disabled,
-									current: id === selected,
-								})}
+								className={classnames(
+									'sui-vertical-tab',
+									{
+										'sui-disabled': disabled,
+										current: id === selected,
+									},
+									item.className ?? ''
+								)}
 							>
 								<a
 									href="#"
@@ -62,9 +66,6 @@ export default class SideBar extends React.Component {
 									onClick={(e) => this.handleChange(id, e)}
 								>
 									{item.title}
-									{!!item.new_feature && (
-										<span className="wds-new-feature-status"></span>
-									)}
 								</a>
 							</li>
 						);

@@ -38,6 +38,7 @@ $this->render_view(
 $this->render_view(
 	'onpage/onpage-meta-robots',
 	array(
-		'items' => $archive_post_type_robots,
+		'for_type' => $archive_post_type,
+		'items'    => $archive_post_type_robots,
 	)
 );

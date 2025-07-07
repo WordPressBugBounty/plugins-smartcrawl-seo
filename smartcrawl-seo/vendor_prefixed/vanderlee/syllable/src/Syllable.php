@@ -141,7 +141,7 @@ class Syllable
     /**
      * @param Cache $cache
      */
-    public function setCache(Cache $cache = null)
+	public function setCache(?Cache $cache = null)
     {
         $this->cache = $cache;
     }
@@ -497,7 +497,7 @@ class Syllable
      * @param DOMNodeList|null $includeNodes
      * @param bool             $split
      */
-    private function hyphenateHtmlDom(DOMNode $node, DOMNodeList $excludeNodes = null, DOMNodeList $includeNodes = null, $split = \true)
+    private function hyphenateHtmlDom(DOMNode $node, ?DOMNodeList $excludeNodes = null, ?DOMNodeList $includeNodes = null, $split = \true)
     {
         if ($node->hasChildNodes()) {
             foreach ($node->childNodes as $child) {

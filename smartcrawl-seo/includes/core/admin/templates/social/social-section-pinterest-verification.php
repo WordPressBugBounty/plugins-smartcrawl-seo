@@ -28,7 +28,7 @@ if ( isset( $options['pinterest-verification-status'] ) ) {
 }
 ?>
 
-<div class="sui-box-settings-row wds-separator-top">
+<div id="wds-social-pinterest-meta" class="sui-box-settings-row wds-separator-top">
 	<div class="sui-box-settings-col-1">
 		<label
 			for="pinterest-verify"

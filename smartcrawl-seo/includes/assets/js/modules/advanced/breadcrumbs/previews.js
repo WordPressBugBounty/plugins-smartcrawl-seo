@@ -23,6 +23,7 @@ class Previews extends React.Component {
 
 		return (
 			<SettingsRow
+				id="wds-breadcrumb-preview"
 				key={1}
 				label={__('Preview', 'smartcrawl-seo')}
 				description={createInterpolateElement(

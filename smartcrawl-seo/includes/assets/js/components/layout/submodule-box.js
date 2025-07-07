@@ -15,6 +15,7 @@ class SubmoduleBox extends React.Component {
 	static defaultProps = {
 		name: '',
 		title: '',
+		id: '',
 		activateProps: {},
 		deactivateProps: {},
 		disableFooter: false,
@@ -101,6 +102,7 @@ class SubmoduleBox extends React.Component {
 		const { activating } = this.state;
 
 		const boxProps = PropUtil.getValidProps(this.props, [
+			'id',
 			'title',
 			'className',
 			'headerLeft',
@@ -147,6 +149,7 @@ class SubmoduleBox extends React.Component {
 
 						{Object.keys(deactivateProps).length > 0 && (
 							<SettingsRow
+								id={`wds-${name}-deactivate`}
 								label={__('Deactivate', 'smartcrawl-seo')}
 								{...deactivateProps}
 							>

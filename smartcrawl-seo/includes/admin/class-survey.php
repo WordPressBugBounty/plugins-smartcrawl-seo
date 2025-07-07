@@ -45,11 +45,13 @@ class Survey extends Controller {
 
 			$deps = array( 'jquery' );
 
-			if ( self::is_wpmudev_plugins_page() ) {
+			$is_wpmudev_dash_old = self::is_wpmudev_plugin_version_old();
+
+			if ( self::is_wpmudev_plugins_page() && $is_wpmudev_dash_old ) {
 				$deps[] = 'wpmudev-dashboard-admin-js';
 			}
 
-			if ( self::is_wp_plugins_page() ) {
+			if ( self::is_wp_plugins_page() || ( self::is_wpmudev_plugins_page() && ! $is_wpmudev_dash_old ) ) {
 				\smartcrawl_enqueue_style( Assets::APP_CSS, 'app' );
 
 				\smartcrawl_enqueue_script(
@@ -124,6 +126,31 @@ class Survey extends Controller {
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		return 'wpmudev-plugins' === $page;
+	}
+
+	/**
+	 * Checks WPMU DEV Plugins version.
+	 *
+	 * @return bool
+	 */
+	private function is_wpmudev_plugin_version_old() {
+		if ( class_exists( '\WPMUDEV_Dashboard' ) && property_exists( '\WPMUDEV_Dashboard', 'version' ) ) {
+			$version = trim( \WPMUDEV_Dashboard::$version );
+
+			if ( $version === '' ) {
+				return true;
+			}
+
+			// If version starts with '4.12', consider it NOT old (including beta/alpha/rc)
+			if ( strpos( $version, '4.12' ) === 0 ) {
+				return false;
+			}
+
+			// Otherwise compare numerically
+			return version_compare( $version, '4.12', '<' );
+		}
+
+		return false;
 	}
 
 	/**

@@ -16,6 +16,7 @@ class AutolinkTypes extends React.Component {
 
 		return (
 			<SettingsRow
+				id="wds-autolink-post-types"
 				label={__('Post Types', 'smartcrawl-seo')}
 				description={__(
 					'Use the options below to select post types to insert links in, and post types/taxonomies to link to.',

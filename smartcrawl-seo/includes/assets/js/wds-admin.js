@@ -601,7 +601,7 @@
 		window.Wds.floating_message();
 		window.Wds.inverted_toggle();
 
-		manageNewFeatureStatus();
+		window.Wds.manageNewFeatureStatus(0);
 	}
 
 	$(init);
@@ -632,7 +632,7 @@
 		});
 	};
 
-	function manageNewFeatureStatus() {
+	window.Wds.manageNewFeatureStatus = function (step) {
 		$(document).ready(function () {
 			if (
 				$('.toplevel_page_wds_wizard .wp-menu-name').has(
@@ -645,10 +645,10 @@
 					data: {
 						action: 'smartcrawl_new_feature_status',
 						_wds_nonce: window._wds_admin.nonce,
-						step: 0,
+						step,
 					},
 				});
 			}
 		});
-	}
+	};
 })(jQuery);

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb7934915b263a22b9e8560469a18b6d8
+class ComposerStaticInit75348b6105e715b6e3842cddd1769142
 {
     public static $classMap = array (
         'SmartCrawl\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/core/admin/class-admin.php',
@@ -17,6 +17,8 @@ class ComposerStaticInitb7934915b263a22b9e8560469a18b6d8
         'SmartCrawl\\Admin\\Settings\\Admin_Settings' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-admin-settings.php',
         'SmartCrawl\\Admin\\Settings\\Dashboard' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-dashboard.php',
         'SmartCrawl\\Admin\\Settings\\Health' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-health.php',
+        'SmartCrawl\\Admin\\Settings\\Instant_Indexing' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-instant-indexing.php',
+        'SmartCrawl\\Admin\\Settings\\Instant_Indexing_Free' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-instant-indexing-free.php',
         'SmartCrawl\\Admin\\Settings\\Onpage' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-onpage.php',
         'SmartCrawl\\Admin\\Settings\\Schema' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-schema.php',
         'SmartCrawl\\Admin\\Settings\\Settings' => __DIR__ . '/../..' . '/includes/core/admin/settings/class-settings.php',
@@ -103,6 +105,11 @@ class ComposerStaticInitb7934915b263a22b9e8560469a18b6d8
         'SmartCrawl\\Front' => __DIR__ . '/../..' . '/includes/class-front.php',
         'SmartCrawl\\Html' => __DIR__ . '/../..' . '/includes/core/class-html.php',
         'SmartCrawl\\Init' => __DIR__ . '/../..' . '/includes/class-init.php',
+        'SmartCrawl\\Instant_Indexing\\Controller' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-controller.php',
+        'SmartCrawl\\Instant_Indexing\\Controller_Free' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-controller-free.php',
+        'SmartCrawl\\Instant_Indexing\\IndexNow_API' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-indexnow-api.php',
+        'SmartCrawl\\Instant_Indexing\\IndexNow_Actions' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-indexnow-actions.php',
+        'SmartCrawl\\Instant_Indexing\\IndexNow_REST' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-indexnow-rest.php',
         'SmartCrawl\\Integration\\Maxmind\\Controller' => __DIR__ . '/../..' . '/includes/integration/maxmind/class-controller.php',
         'SmartCrawl\\Integration\\Maxmind\\Cron' => __DIR__ . '/../..' . '/includes/integration/maxmind/class-cron.php',
         'SmartCrawl\\Integration\\Maxmind\\GeoDB' => __DIR__ . '/../..' . '/includes/integration/maxmind/class-geodb.php',
@@ -304,7 +311,7 @@ class ComposerStaticInitb7934915b263a22b9e8560469a18b6d8
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitb7934915b263a22b9e8560469a18b6d8::$classMap;
+            $loader->classMap = ComposerStaticInit75348b6105e715b6e3842cddd1769142::$classMap;
 
         }, null, ClassLoader::class);
     }

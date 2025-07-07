@@ -37,6 +37,7 @@ $this->render_view(
 $this->render_view(
 	'onpage/onpage-meta-robots',
 	array(
-		'items' => $meta_robots_search,
+		'for_type' => 'search',
+		'items'    => $meta_robots_search,
 	)
 );

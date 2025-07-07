@@ -11,6 +11,7 @@ export default class Breadcrumbs extends React.Component {
 	render() {
 		return (
 			<SubmoduleBox
+				id="tab_breadcrumb"
 				name="breadcrumbs"
 				title={__('Breadcrumbs', 'smartcrawl-seo')}
 				activateProps={{

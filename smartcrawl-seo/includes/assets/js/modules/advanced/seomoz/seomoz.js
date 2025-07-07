@@ -93,14 +93,20 @@ class Seomoz extends React.Component {
 				<table className="sui-table">
 					<thead>
 						<tr>
-							<th className="label">{__('Metric', 'smartcrawl-seo')}</th>
-							<th className="result">{__('Value', 'smartcrawl-seo')}</th>
+							<th className="label">
+								{__('Metric', 'smartcrawl-seo')}
+							</th>
+							<th className="result">
+								{__('Value', 'smartcrawl-seo')}
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
-								<strong>{__('Domain mozRank', 'smartcrawl-seo')}</strong>
+								<strong>
+									{__('Domain mozRank', 'smartcrawl-seo')}
+								</strong>
 								<br />
 								{createInterpolateElement(
 									__(
@@ -237,7 +243,9 @@ class Seomoz extends React.Component {
 						</tr>
 						<tr>
 							<td>
-								<strong>{__('Homepage mozRank', 'smartcrawl-seo')}</strong>
+								<strong>
+									{__('Homepage mozRank', 'smartcrawl-seo')}
+								</strong>
 								<br />
 								{createInterpolateElement(
 									__(
@@ -326,6 +334,7 @@ class Seomoz extends React.Component {
 
 		return (
 			<SubmoduleBox
+				id="tab_moz"
 				name="seomoz"
 				title={
 					active

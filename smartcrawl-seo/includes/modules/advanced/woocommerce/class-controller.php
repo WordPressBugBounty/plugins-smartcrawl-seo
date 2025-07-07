@@ -42,6 +42,7 @@ class Controller extends Controllers\Submodule_Controller {
 	protected function __construct() {
 		$this->module_title = __( 'WooCommerce SEO', 'smartcrawl-seo' );
 		$this->event_name   = 'WooCommerce SEO';
+		$this->class_name   = 'tab_woo';
 	}
 
 	/**

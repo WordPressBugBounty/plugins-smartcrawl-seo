@@ -101,6 +101,7 @@ class RedirectTable extends React.Component {
 
 		return (
 			<Box
+				id="tab_url_redirection"
 				title={__('URL Redirection', 'smartcrawl-seo')}
 				className="wds-redirects"
 				headerRight={
@@ -153,7 +154,6 @@ class RedirectTable extends React.Component {
 										),
 									}
 								)}
-								<span className="wds-new-feature-status" />
 							</>
 						}
 					/>
@@ -230,7 +230,10 @@ class RedirectTable extends React.Component {
 								</>
 							)}
 							<Search
-								placeholder={__('Search Redirects', 'smartcrawl-seo')}
+								placeholder={__(
+									'Search Redirects',
+									'smartcrawl-seo'
+								)}
 								onChange={(kw) => this.handleSearch(kw)}
 							/>
 						</div>
@@ -242,19 +245,25 @@ class RedirectTable extends React.Component {
 
 									<div className="wds-redirect-item-source">
 										<small>
-											<strong>{__('From', 'smartcrawl-seo')}</strong>
+											<strong>
+												{__('From', 'smartcrawl-seo')}
+											</strong>
 										</small>
 									</div>
 
 									<div className="wds-redirect-item-destination">
 										<small>
-											<strong>{__('To', 'smartcrawl-seo')}</strong>
+											<strong>
+												{__('To', 'smartcrawl-seo')}
+											</strong>
 										</small>
 									</div>
 
 									<div className="wds-redirect-item-options">
 										<small>
-											<strong>{__('Type', 'smartcrawl-seo')}</strong>
+											<strong>
+												{__('Type', 'smartcrawl-seo')}
+											</strong>
 										</small>
 									</div>
 
@@ -553,7 +562,10 @@ class RedirectTable extends React.Component {
 				);
 			}).length > 0
 		) {
-			return __('That URL already exists, please try again.', 'smartcrawl-seo');
+			return __(
+				'That URL already exists, please try again.',
+				'smartcrawl-seo'
+			);
 		}
 
 		if (isNonRedirectType(data.type)) {
@@ -741,7 +753,8 @@ class RedirectTable extends React.Component {
 			})
 			.catch((message) => {
 				this.showErrorNotice(
-					message || __('Failed to update redirects.', 'smartcrawl-seo')
+					message ||
+						__('Failed to update redirects.', 'smartcrawl-seo')
 				);
 			})
 			.finally(() => {

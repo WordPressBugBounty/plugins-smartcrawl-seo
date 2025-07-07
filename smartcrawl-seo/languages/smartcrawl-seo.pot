@@ -2,20 +2,20 @@
 # This file is distributed under the same license as the SmartCrawl Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SmartCrawl Pro 3.13.1\n"
+"Project-Id-Version: SmartCrawl Pro 3.14.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/build\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-24T10:48:52+00:00\n"
+"POT-Creation-Date: 2025-06-30T10:53:50+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 
 #. Plugin Name of the plugin
 #: wpmu-dev-seo.php
-#: includes/core/admin/settings/class-dashboard.php:218
+#: includes/core/admin/settings/class-dashboard.php:223
 #: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:26
 msgid "SmartCrawl Pro"
 msgstr ""
@@ -44,11 +44,13 @@ msgstr ""
 
 #. translators: 1: Old class name, 2: Version number, 3: New class name.
 #: deprecated-aliases.php:299
+#, php-format
 msgid "Class %1$s is deprecated since version %2$s! Use %3$s instead."
 msgstr ""
 
 #. translators: 1, 2: strong tag, 3, 4: anchor tag, 5: plugin title
 #: includes/admin/class-conflict-detector.php:91
+#, php-format
 msgid "%1$sWe've detected one or more SEO plugins on your site.%2$s To avoid SEO issues, please disable the conflicting plugin(s) or select specific %1$s%5$s%2$s modules to use alongside other plugins on the %3$sSettings page%4$s."
 msgstr ""
 
@@ -58,27 +60,29 @@ msgstr ""
 
 #. translators: 1,2: Anchor tag to plugins page.
 #: includes/admin/class-conflict-detector.php:260
+#, php-format
 msgid "There is an issue in deactivating this plugin. Please try deactivating it from the %1$sPlugins page%2$s or contact the plugin author for assistance."
 msgstr ""
 
 #. translators: %s: Plugin name, 2,3: Anchor tag to plugins page.
 #: includes/admin/class-conflict-detector.php:291
+#, php-format
 msgid "%1$s is required by other plugin(s). Please try deactivating it from the %2$sPlugins page%3$s or contact the plugin author for assistance."
 msgstr ""
 
-#: includes/core/admin/class-admin.php:235
-#: includes/core/admin/settings/class-dashboard.php:228
+#: includes/core/admin/class-admin.php:240
+#: includes/core/admin/settings/class-dashboard.php:233
 #: includes/core/admin/templates/dashboard/dashboard.php:21
 #: includes/core/controllers/class-plugin-links-free.php:65
 #: includes/core/controllers/class-plugin-links.php:69
 msgid "Dashboard"
 msgstr ""
 
-#: includes/core/admin/class-admin.php:308
+#: includes/core/admin/class-admin.php:313
 msgid "This site discourages search engines from indexing the pages, which will affect your SEO efforts."
 msgstr ""
 
-#: includes/core/admin/class-admin.php:309
+#: includes/core/admin/class-admin.php:314
 msgid "You can fix this here"
 msgstr ""
 
@@ -116,11 +120,13 @@ msgstr ""
 
 #. translators: %1$d minimum length, %2$d maximum length.
 #: includes/core/admin/class-taxonomy.php:118
+#, php-format
 msgid "Meta description length should be between %1$d - %2$d characters"
 msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/pages/class-network-settings.php:169
+#, php-format
 msgid "%s Network Settings"
 msgstr ""
 
@@ -133,7 +139,7 @@ msgstr ""
 #: includes/core/admin/settings/class-onpage.php:399
 #: includes/core/admin/settings/class-settings.php:359
 #: includes/core/admin/templates/onpage/onpage-settings.php:24
-#: includes/core/configs/class-model.php:165
+#: includes/core/configs/class-model.php:166
 msgid "Title & Meta"
 msgstr ""
 
@@ -142,42 +148,56 @@ msgstr ""
 #: includes/core/admin/settings/class-settings.php:364
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:38
 #: includes/core/admin/templates/schema/schema-settings.php:26
-#: includes/core/configs/class-model.php:166
+#: includes/core/configs/class-model.php:167
 msgid "Schema"
 msgstr ""
 
 #: includes/core/admin/pages/class-network-settings.php:190
+#: includes/core/admin/settings/class-instant-indexing-free.php:43
+#: includes/core/admin/settings/class-instant-indexing.php:46
+#: includes/core/admin/settings/class-settings.php:371
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:29
+#: includes/core/admin/templates/instant-indexing-free.php:14
+#: includes/core/admin/templates/instant-indexing/instant-indexing-content.php:25
+#: includes/core/class-settings.php:309
+#: includes/core/configs/class-model.php:168
+msgid "Instant Indexing"
+msgstr ""
+
+#: includes/core/admin/pages/class-network-settings.php:191
 #: includes/core/admin/settings/class-social.php:203
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:39
 #: includes/core/admin/templates/onpage/onpage-og-twitter.php:29
 #: includes/core/admin/templates/social/social-settings.php:19
 #: includes/core/admin/templates/term/term-nav.php:16
-#: includes/core/class-settings.php:299
-#: includes/core/configs/class-model.php:167
+#: includes/core/class-settings.php:307
+#: includes/core/configs/class-model.php:169
 #: includes/assets/js/modules/metabox/metabox.js:230
 msgid "Social"
 msgstr ""
 
-#: includes/core/admin/pages/class-network-settings.php:191
-#: includes/core/admin/settings/class-settings.php:376
-#: includes/core/admin/settings/class-sitemap.php:405
+#: includes/core/admin/pages/class-network-settings.php:192
+#: includes/core/admin/settings/class-settings.php:385
+#: includes/core/admin/settings/class-sitemap.php:394
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:72
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:62
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:33
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:31
 msgid "Sitemaps"
 msgstr ""
 
-#: includes/core/admin/pages/class-network-settings.php:192
+#: includes/core/admin/pages/class-network-settings.php:193
 #: includes/core/admin/templates/dashboard/dashboard-widget-advanced-tools.php:39
-#: includes/core/configs/class-model.php:169
+#: includes/core/configs/class-model.php:171
 #: includes/modules/advanced/class-controller.php:27
-#: includes/assets/js/modules/advanced/advanced.js:30
+#: includes/assets/js/modules/advanced/advanced.js:18
 msgid "Advanced Tools"
 msgstr ""
 
-#: includes/core/admin/pages/class-network-settings.php:193
+#: includes/core/admin/pages/class-network-settings.php:194
 #: includes/core/admin/settings/class-settings.php:282
 #: includes/core/admin/templates/health/health-section-settings.php:16
+#: includes/core/admin/templates/instant-indexing/instant-indexing-content.php:90
+#: includes/core/admin/templates/instant-indexing/instant-indexing-sidenav.php:25
 #: includes/core/admin/templates/lighthouse/lighthouse-side-nav.php:42
 #: includes/core/admin/templates/onpage/onpage-settings.php:323
 #: includes/core/admin/templates/onpage/onpage-sidenav.php:39
@@ -185,22 +205,22 @@ msgstr ""
 #: includes/core/admin/templates/schema/schema-sidenav.php:29
 #: includes/core/admin/templates/settings/settings-section-data.php:25
 #: includes/core/admin/templates/settings/settings.php:21
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:124
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:119
 #: includes/core/admin/templates/sitemap/sitemap-side-nav.php:50
 #: includes/core/admin/templates/social/social-settings.php:109
 #: includes/core/admin/templates/social/social-sidenav.php:29
-#: includes/core/configs/class-model.php:170
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:109
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:76
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:332
+#: includes/core/configs/class-model.php:172
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:110
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:33
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:341
 msgid "Settings"
 msgstr ""
 
-#: includes/core/admin/pages/class-network-settings.php:219
+#: includes/core/admin/pages/class-network-settings.php:220
 msgid "You are currently in Per Site mode which means each site on your network has different settings."
 msgstr ""
 
-#: includes/core/admin/pages/class-network-settings.php:224
+#: includes/core/admin/pages/class-network-settings.php:225
 msgid "Configure Main Site"
 msgstr ""
 
@@ -211,26 +231,27 @@ msgstr ""
 
 #: includes/core/admin/settings/class-admin-settings.php:264
 #: includes/core/admin/templates/floating-notices.php:23
-#: includes/core/controllers/class-module-controller.php:331
+#: includes/core/controllers/class-module-controller.php:323
 msgid "Settings updated"
 msgstr ""
 
 #: includes/core/admin/settings/class-admin-settings.php:268
-#: includes/core/controllers/class-module-controller.php:335
+#: includes/core/controllers/class-module-controller.php:327
 msgid " &amp; W3 Total Cache Page Cache flushed"
 msgstr ""
 
 #: includes/core/admin/settings/class-admin-settings.php:271
-#: includes/core/controllers/class-module-controller.php:338
+#: includes/core/controllers/class-module-controller.php:330
 msgid " &amp; WP Super Cache flushed"
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/core/admin/settings/class-dashboard.php:62
+#: includes/core/admin/settings/class-dashboard.php:64
+#, php-format
 msgid "%s Wizard: Dashboard"
 msgstr ""
 
-#: includes/core/admin/settings/class-dashboard.php:219
+#: includes/core/admin/settings/class-dashboard.php:224
 #: includes/core/admin/templates/emails/lighthouse-email.php:320
 #: includes/core/core.php:1049
 msgid "SmartCrawl"
@@ -238,12 +259,20 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/settings/class-health.php:49
+#, php-format
 msgid "%s Wizard: SEO Health"
 msgstr ""
 
 #: includes/core/admin/settings/class-health.php:83
 #: includes/core/admin/templates/lighthouse/lighthouse-settings.php:22
 msgid "SEO Health"
+msgstr ""
+
+#. translators: %s: plugin title
+#: includes/core/admin/settings/class-instant-indexing-free.php:58
+#: includes/core/admin/settings/class-instant-indexing.php:61
+#, php-format
+msgid "%s Wizard: Instant Indexing"
 msgstr ""
 
 #: includes/core/admin/settings/class-onpage.php:216
@@ -286,6 +315,7 @@ msgstr ""
 
 #. translators: %s target.
 #: includes/core/admin/settings/class-onpage.php:296
+#, php-format
 msgid "You might want to exclude this type from the %s as well."
 msgstr ""
 
@@ -303,6 +333,7 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/settings/class-onpage.php:379
+#, php-format
 msgid "%s Wizard: Title & Meta"
 msgstr ""
 
@@ -312,6 +343,7 @@ msgstr ""
 
 #. translators: %s post type.
 #: includes/core/admin/settings/class-onpage.php:468
+#, php-format
 msgid "%s archive"
 msgstr ""
 
@@ -324,219 +356,211 @@ msgid "No"
 msgstr ""
 
 #: includes/core/admin/settings/class-onpage.php:487
-#: includes/core/admin/settings/class-sitemap.php:280
-#: includes/core/admin/settings/class-sitemap.php:524
+#: includes/core/admin/settings/class-sitemap.php:269
+#: includes/core/admin/settings/class-sitemap.php:513
 msgid "Yes"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:491
-msgid "Google"
-msgstr ""
-
-#: includes/core/admin/settings/class-onpage.php:492
-msgid "Bing"
-msgstr ""
-
-#: includes/core/admin/settings/class-onpage.php:511
+#: includes/core/admin/settings/class-onpage.php:506
 msgid "BuddyPress groups"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:517
+#: includes/core/admin/settings/class-onpage.php:512
 msgid "BuddyPress profile"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:533
+#: includes/core/admin/settings/class-onpage.php:528
 msgid "Your homepage is set to a static page, Homepage. You can edit your homepage meta from here, as well as in the WordPress editor for that page."
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:542
+#: includes/core/admin/settings/class-onpage.php:537
 msgid "Go To Homepage"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:564
+#: includes/core/admin/settings/class-onpage.php:559
 msgid "Post/page ID"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:565
+#: includes/core/admin/settings/class-onpage.php:560
 msgid "Title of the post/page"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:566
+#: includes/core/admin/settings/class-onpage.php:561
 msgid "Post/page excerpt (or auto-generated if it does not exist)"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:567
+#: includes/core/admin/settings/class-onpage.php:562
 msgid "Post/page excerpt (without auto-generation)"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:568
+#: includes/core/admin/settings/class-onpage.php:563
 msgid "Post/page modified time"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:569
+#: includes/core/admin/settings/class-onpage.php:564
 msgid "Date of the post/page"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:570
+#: includes/core/admin/settings/class-onpage.php:565
 msgid "Post/page author's 'nicename'"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:571
+#: includes/core/admin/settings/class-onpage.php:566
 msgid "Post/page author's userid"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:572
+#: includes/core/admin/settings/class-onpage.php:567
 msgid "Post/page author's description"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:576
+#: includes/core/admin/settings/class-onpage.php:571
 msgid "Attachment caption"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:580
+#: includes/core/admin/settings/class-onpage.php:575
 msgid "Post categories (comma separated)"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:581
+#: includes/core/admin/settings/class-onpage.php:576
 msgid "Current tag/tags"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:596
+#: includes/core/admin/settings/class-onpage.php:591
 msgid "Term ID"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:597
+#: includes/core/admin/settings/class-onpage.php:592
 msgid "Term name"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:598
+#: includes/core/admin/settings/class-onpage.php:593
 msgid "Term description"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:602
+#: includes/core/admin/settings/class-onpage.php:597
 msgid "Category name"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:603
+#: includes/core/admin/settings/class-onpage.php:598
 msgid "Category description"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:607
+#: includes/core/admin/settings/class-onpage.php:602
 msgid "Tag name"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:608
+#: includes/core/admin/settings/class-onpage.php:603
 msgid "Tag description"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:621
+#: includes/core/admin/settings/class-onpage.php:616
 #: includes/core/admin/templates/onpage/onpage-section-settings.php:12
-#: includes/modules/advanced/breadcrumbs/class-controller.php:339
+#: includes/modules/advanced/breadcrumbs/class-controller.php:340
 msgid "Separator"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:622
-#: includes/modules/advanced/breadcrumbs/class-controller.php:340
+#: includes/core/admin/settings/class-onpage.php:617
+#: includes/modules/advanced/breadcrumbs/class-controller.php:341
 msgid "Site's name"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:623
-#: includes/modules/advanced/breadcrumbs/class-controller.php:341
+#: includes/core/admin/settings/class-onpage.php:618
+#: includes/modules/advanced/breadcrumbs/class-controller.php:342
 msgid "Site's tagline / description"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:624
-#: includes/modules/advanced/breadcrumbs/class-controller.php:358
+#: includes/core/admin/settings/class-onpage.php:619
+#: includes/modules/advanced/breadcrumbs/class-controller.php:359
 msgid "Current page number (i.e. page 2 of 4)"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:625
-#: includes/modules/advanced/breadcrumbs/class-controller.php:359
+#: includes/core/admin/settings/class-onpage.php:620
+#: includes/modules/advanced/breadcrumbs/class-controller.php:360
 msgid "Current page total"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:626
-#: includes/modules/advanced/breadcrumbs/class-controller.php:360
+#: includes/core/admin/settings/class-onpage.php:621
+#: includes/modules/advanced/breadcrumbs/class-controller.php:361
 msgid "Current page number"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:627
-#: includes/core/admin/settings/class-onpage.php:629
-#: includes/modules/advanced/breadcrumbs/class-controller.php:361
-#: includes/modules/advanced/breadcrumbs/class-controller.php:363
+#: includes/core/admin/settings/class-onpage.php:622
+#: includes/core/admin/settings/class-onpage.php:624
+#: includes/modules/advanced/breadcrumbs/class-controller.php:362
+#: includes/modules/advanced/breadcrumbs/class-controller.php:364
 msgid "Current page number, spelled out as numeral in English"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:628
-#: includes/modules/advanced/breadcrumbs/class-controller.php:362
+#: includes/core/admin/settings/class-onpage.php:623
+#: includes/modules/advanced/breadcrumbs/class-controller.php:363
 msgid "Current page total, spelled out as numeral in English"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:630
-#: includes/modules/advanced/breadcrumbs/class-controller.php:342
+#: includes/core/admin/settings/class-onpage.php:625
+#: includes/modules/advanced/breadcrumbs/class-controller.php:343
 msgid "Current time"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:631
-#: includes/modules/advanced/breadcrumbs/class-controller.php:343
+#: includes/core/admin/settings/class-onpage.php:626
+#: includes/modules/advanced/breadcrumbs/class-controller.php:344
 msgid "Current date"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:632
-#: includes/modules/advanced/breadcrumbs/class-controller.php:344
+#: includes/core/admin/settings/class-onpage.php:627
+#: includes/modules/advanced/breadcrumbs/class-controller.php:345
 msgid "Current month"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:633
-#: includes/modules/advanced/breadcrumbs/class-controller.php:345
+#: includes/core/admin/settings/class-onpage.php:628
+#: includes/modules/advanced/breadcrumbs/class-controller.php:346
 msgid "Current year"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:644
+#: includes/core/admin/settings/class-onpage.php:639
 msgid "BuddyPress username"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:645
+#: includes/core/admin/settings/class-onpage.php:640
 msgid "BuddyPress user's full name"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:656
+#: includes/core/admin/settings/class-onpage.php:651
 msgid "BuddyPress group name"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:657
+#: includes/core/admin/settings/class-onpage.php:652
 msgid "BuddyPress group description"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:668
+#: includes/core/admin/settings/class-onpage.php:663
 msgid "Post type label plural"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:669
+#: includes/core/admin/settings/class-onpage.php:664
 msgid "Post type label singular"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:680
+#: includes/core/admin/settings/class-onpage.php:675
 msgid "Current search phrase"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:691
+#: includes/core/admin/settings/class-onpage.php:686
 msgid "Author's 'nicename'"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:692
+#: includes/core/admin/settings/class-onpage.php:687
 msgid "Author's userid"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:693
+#: includes/core/admin/settings/class-onpage.php:688
 msgid "Author's description"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:704
+#: includes/core/admin/settings/class-onpage.php:699
 msgid "Date of the archive"
 msgstr ""
 
-#: includes/core/admin/settings/class-onpage.php:1027
+#: includes/core/admin/settings/class-onpage.php:1022
 msgid "Example search query"
 msgstr ""
 
@@ -546,6 +570,7 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/settings/class-schema.php:107
+#, php-format
 msgid "%s Wizard: Schema"
 msgstr ""
 
@@ -563,7 +588,7 @@ msgstr ""
 #: includes/core/admin/templates/onpage/onpage-settings.php:98
 #: includes/core/admin/templates/onpage/onpage-sidenav.php:23
 #: includes/core/admin/templates/schema/schema-section-general.php:175
-#: includes/core/controllers/class-hub-abstract.php:355
+#: includes/core/controllers/class-hub-abstract.php:350
 msgid "Homepage"
 msgstr ""
 
@@ -601,7 +626,7 @@ msgstr ""
 
 #: includes/core/admin/settings/class-schema.php:438
 #: includes/core/admin/templates/metabox/metabox-advanced-indexing.php:84
-#: includes/modules/advanced/breadcrumbs/class-controller.php:242
+#: includes/modules/advanced/breadcrumbs/class-controller.php:243
 #: includes/assets/js/modules/metabox/advanced/indexing.js:82
 msgid "Archive"
 msgstr ""
@@ -615,6 +640,7 @@ msgstr ""
 #: includes/core/admin/settings/class-settings.php:168
 #: includes/core/admin/settings/class-settings.php:170
 #: includes/core/admin/settings/class-settings.php:172
+#, php-format
 msgid "%s (and up)"
 msgstr ""
 
@@ -641,16 +667,17 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/settings/class-settings.php:258
+#, php-format
 msgid "%s Wizard: Settings"
 msgstr ""
 
 #: includes/core/admin/settings/class-settings.php:324
-#: includes/core/admin/settings/class-sitemap.php:527
+#: includes/core/admin/settings/class-sitemap.php:516
 msgid "All pages"
 msgstr ""
 
 #: includes/core/admin/settings/class-settings.php:325
-#: includes/core/admin/settings/class-sitemap.php:528
+#: includes/core/admin/settings/class-sitemap.php:517
 msgid "Home page"
 msgstr ""
 
@@ -662,74 +689,80 @@ msgstr ""
 msgid "Let search engines know whether you're an organization or a person, and add all your social profiles so search engines know which social profiles to attribute your web content to."
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:371
+#: includes/core/admin/settings/class-settings.php:372
+#: includes/core/admin/templates/instant-indexing-free.php:26
+#: includes/core/admin/templates/instant-indexing/instant-indexing-disabled.php:17
+msgid "Notify search engines like Bing and Yandex via the IndexNow API whenever pages are added and updated. You can also submit URLs manually."
+msgstr ""
+
+#: includes/core/admin/settings/class-settings.php:380
 msgid "Social Network"
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:372
+#: includes/core/admin/settings/class-settings.php:381
 #: includes/core/admin/templates/social/social-settings.php:53
 msgid "Add meta data to your pages to make them look great when shared on platforms such as Facebook and other popular social networks."
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:377
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:159
+#: includes/core/admin/settings/class-settings.php:386
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:154
 msgid "Automatically generate a sitemap and regularly send updates to Google."
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:487
+#: includes/core/admin/settings/class-settings.php:500
 msgid "Please use our new filter `smartcrawl_default_settings` in SmartCrawl."
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:513
+#: includes/core/admin/settings/class-settings.php:526
 msgid "Yoast SEO"
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:519
+#: includes/core/admin/settings/class-settings.php:532
 msgid "All In One SEO"
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:541
+#: includes/core/admin/settings/class-settings.php:554
 msgid "auto-import"
 msgstr ""
 
 #. translators: 1: Plugin name, 2: Anchor tag to Import/Export page, 3,4: strong tag, 5: plugin title
-#: includes/core/admin/settings/class-settings.php:545
+#: includes/core/admin/settings/class-settings.php:558
+#, php-format
 msgid "We've detected you have %1$s settings. Do you want to %2$s your configuration into %3$s%5$s%4$s?"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
-#: includes/core/admin/settings/class-settings.php:617
+#: includes/core/admin/settings/class-settings.php:630
+#, php-format
 msgid "Excellent! You've been using %1$s%3$s%2$s for over a week. Hope you are enjoying it so far. We have spent countless hours developing this free plugin for you, and we would really appreciate it if you could drop us a rating on wp.org to help us spread the word and boost our motivation."
 msgstr ""
 
-#: includes/core/admin/settings/class-settings.php:628
+#: includes/core/admin/settings/class-settings.php:641
 #: includes/core/controllers/class-plugin-links-free.php:87
 msgid "Rate SmartCrawl"
 msgstr ""
 
-#: includes/core/admin/settings/class-sitemap.php:161
+#: includes/core/admin/settings/class-sitemap.php:158
 msgid "Please enter a valid number in the \"Items Per Sitemap\" setting"
 msgstr ""
 
 #. translators: %s max items per sitemap.
-#: includes/core/admin/settings/class-sitemap.php:172
+#: includes/core/admin/settings/class-sitemap.php:169
+#, php-format
 msgid "The maximum number allowed for \"Items Per Sitemap\" setting is %d"
 msgstr ""
 
-#: includes/core/admin/settings/class-sitemap.php:181
-msgid "Please add at least one recipient to enable the scheduled report."
-msgstr ""
-
 #. translators: %s: plugin title
-#: includes/core/admin/settings/class-sitemap.php:385
+#: includes/core/admin/settings/class-sitemap.php:374
+#, php-format
 msgid "%s Wizard: Sitemap"
 msgstr ""
 
-#: includes/core/admin/settings/class-sitemap.php:477
+#: includes/core/admin/settings/class-sitemap.php:466
 msgid "You don't have permission to run crawl."
 msgstr ""
 
-#: includes/core/admin/settings/class-sitemap.php:793
+#: includes/core/admin/settings/class-sitemap.php:782
 msgid "Some email recipients could not be saved."
 msgstr ""
 
@@ -739,12 +772,14 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/settings/class-social.php:185
+#, php-format
 msgid "%s Wizard: Social"
 msgstr ""
 
 #. translators: %s: Number of active sitemap issues
 #: includes/core/admin/templates/dashboard/dashboard-box-title-url-crawl-stats.php:17
 #: includes/core/admin/templates/dashboard/dashboard-url-crawl-stats.php:17
+#, php-format
 msgid "You have %s sitemap issue"
 msgid_plural "You have %s sitemap issues"
 msgstr[0] ""
@@ -807,8 +842,8 @@ msgstr ""
 #: includes/core/admin/templates/network-settings.php:160
 #: includes/core/admin/templates/settings/settings-analysis.php:106
 #: includes/core/admin/templates/settings/settings-analysis.php:124
-#: includes/modules/advanced/woocommerce/class-controller.php:414
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:87
+#: includes/modules/advanced/woocommerce/class-controller.php:415
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:88
 msgid "None"
 msgstr ""
 
@@ -887,7 +922,7 @@ msgid "View report"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-mini-lighthouse-report.php:64
-#: includes/modules/advanced/seomoz/class-controller.php:336
+#: includes/modules/advanced/seomoz/class-controller.php:337
 msgid "View Report"
 msgstr ""
 
@@ -907,25 +942,29 @@ msgstr ""
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:26
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:45
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:54
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:52
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:34
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:197
 #: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:32
 #: includes/core/admin/templates/lighthouse/lighthouse-reporting-title-tag.php:15
 #: includes/core/admin/templates/lighthouse/lighthouse-side-nav.php:34
 #: includes/core/admin/templates/sitemap/sitemap-reporting-title-pro-tag.php:21
 #: includes/core/admin/templates/sitemap/sitemap-url-crawler-tab-title-left.php:28
+#: includes/core/admin/templates/toggle-item.php:71
 #: includes/modules/advanced/autolinks/class-controller-free.php:67
-#: includes/modules/advanced/autolinks/class-controller.php:306
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:141
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:72
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:158
-#: includes/assets/js/modules/settings/general/plugin-modules.js:69
+#: includes/modules/advanced/autolinks/class-controller.php:307
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:142
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:62
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:118
+#: includes/assets/js/modules/settings/general/plugin-modules.js:65
 msgid "Pro"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:34
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:70
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:59
 #: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:53
-#: includes/core/admin/templates/disabled-component-inner.php:59
+#: includes/core/admin/templates/disabled-component-inner.php:24
 #: includes/core/admin/templates/report-vertical-tab.php:55
 msgid "Upgrade to Pro"
 msgstr ""
@@ -948,11 +987,12 @@ msgstr ""
 #: includes/core/admin/templates/dashboard/dashboard-reports-full.php:63
 #: includes/core/admin/templates/dashboard/dashboard-reports-full.php:92
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:70
-#: includes/core/configs/class-model.php:201
-#: includes/core/configs/class-model.php:213
-#: includes/core/configs/class-model.php:249
-#: includes/core/configs/class-model.php:286
-#: includes/core/configs/class-model.php:323
+#: includes/core/configs/class-model.php:203
+#: includes/core/configs/class-model.php:214
+#: includes/core/configs/class-model.php:226
+#: includes/core/configs/class-model.php:262
+#: includes/core/configs/class-model.php:299
+#: includes/core/configs/class-model.php:336
 msgid "Inactive"
 msgstr ""
 
@@ -975,6 +1015,7 @@ msgstr ""
 
 #. translators: %s: Link linked to PDF reports in Hub
 #: includes/core/admin/templates/dashboard/dashboard-reports-full.php:120
+#, php-format
 msgid "You can also set up scheduled PDF reports for your clients via %s."
 msgstr ""
 
@@ -1034,7 +1075,7 @@ msgid "No audits"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-top-sitemap-list-item.php:30
-#: includes/core/configs/class-model.php:168
+#: includes/core/configs/class-model.php:170
 msgid "Sitemap"
 msgstr ""
 
@@ -1059,6 +1100,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/dashboard/dashboard-url-crawl-in-progress.php:16
+#, php-format
 msgid "%1$s%3$s%2$s is performing a URL Crawl. Please wait..."
 msgstr ""
 
@@ -1068,11 +1110,13 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/dashboard/dashboard-url-crawl-in-progress.php:39
+#, php-format
 msgid "You can always come back later. %1$s%3$s%2$s will send you an email to %4$s with the results of the crawl."
 msgstr ""
 
 #. translators: %s: Number of active sitemap issues
 #: includes/core/admin/templates/dashboard/dashboard-url-crawl-stats.php:20
+#, php-format
 msgid "%d issue"
 msgid_plural "%d issues"
 msgstr[0] ""
@@ -1080,6 +1124,7 @@ msgstr[1] ""
 
 #. translators: %s: Number of missing urls
 #: includes/core/admin/templates/dashboard/dashboard-url-crawl-stats.php:23
+#, php-format
 msgid "%d missing URL"
 msgid_plural "%d missing URLs"
 msgstr[0] ""
@@ -1090,11 +1135,12 @@ msgid "No issues"
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:28
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:31
+#, php-format
 msgid "%s works with other SEO Plugins."
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:36
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:39
 #: includes/core/admin/templates/dashboard/onboard-modal-header-button.php:12
 #: includes/core/admin/templates/modal.php:46
 #: includes/core/admin/templates/modal.php:59
@@ -1102,21 +1148,29 @@ msgid "Close this dialog window"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
-#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:42
-msgid "%1$s%3$s%2$s works with other SEO Plugins."
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:45
+#, php-format
+msgid "%1$sNew! Instant Indexing%2$s"
 msgstr ""
 
-#. translators: %s: current user display name
-#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:57
-msgid "Hey there! %s, if are you tired of managing multiple SEO plugins, then say hello to SmartCrawl's new superpower: seamless compatibility with your favorite SEO plugins!"
+#. translators: 1,2,3,4,5,6: strong tag
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:61
+#, php-format
+msgid "Hi there! We're excited to introduce Instant Indexing in SmartCrawl. Now, you can instantly notify search engines like %1$sBing%2$s and %3$sYandex%4$s using %5$sIndexNow%6$s whenever pages on your site are added, updated, or removed."
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:67
-msgid "You can now leverage SmartCrawl's powerful features alongside other SEO plugins without worrying about any conflicts. Simply navigate to the settings page and deactivate the modules that conflict with your current SEO plugin."
+#. translators: 1,2: anchor tag
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:78
+#, php-format
+msgid "Take control of your SEO with real-time visibility and faster search engine updates. %1$sLearn more%2$s"
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:79
-msgid "Got it!"
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:95
+msgid "Activate Instant Indexing"
+msgstr ""
+
+#: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:97
+msgid "Upgrade to pro to activate"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-advanced-tools.php:44
@@ -1128,6 +1182,7 @@ msgid "Configure advanced tools"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-advanced-tools.php:63
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:71
 #: includes/core/admin/templates/dashboard/dashboard-widget-onpage.php:66
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:86
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:225
@@ -1139,21 +1194,23 @@ msgstr ""
 #: includes/core/admin/templates/dashboard/dashboard-widget-advanced-tools.php:71
 #: includes/core/admin/templates/dashboard/dashboard-widget-content-analysis.php:69
 #: includes/core/admin/templates/dashboard/dashboard-widget-content-analysis.php:93
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:65
 #: includes/core/admin/templates/dashboard/dashboard-widget-onpage.php:75
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:107
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:135
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:59
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:82
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:137
+#: includes/core/admin/templates/instant-indexing/instant-indexing-disabled.php:18
 #: includes/core/admin/templates/onpage/onpage-disabled.php:16
 #: includes/core/admin/templates/schema/schema-disabled.php:16
 #: includes/core/admin/templates/social/social-disabled.php:16
 #: includes/modules/advanced/autolinks/class-controller-free.php:90
-#: includes/modules/advanced/autolinks/class-controller.php:335
-#: includes/modules/advanced/breadcrumbs/class-controller.php:488
-#: includes/modules/advanced/redirects/class-controller.php:479
-#: includes/modules/advanced/robots/class-controller.php:345
-#: includes/modules/advanced/seomoz/class-controller.php:362
+#: includes/modules/advanced/autolinks/class-controller.php:336
+#: includes/modules/advanced/breadcrumbs/class-controller.php:489
+#: includes/modules/advanced/redirects/class-controller.php:480
+#: includes/modules/advanced/robots/class-controller.php:346
+#: includes/modules/advanced/seomoz/class-controller.php:363
 msgid "Activate"
 msgstr ""
 
@@ -1207,9 +1264,51 @@ msgstr ""
 msgid "Edit Posts"
 msgstr ""
 
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:33
+#: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:196
+#: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:31
+#: includes/core/admin/templates/sitemap/sitemap-reporting-title-pro-tag.php:19
+#: includes/core/admin/templates/sitemap/sitemap-url-crawler-tab-title-left.php:26
+#: includes/core/admin/templates/toggle-item.php:70
+#: includes/core/admin/templates/upgrade-page.php:19
+#: includes/core/admin/templates/upgrade-page.php:30
+#: includes/modules/advanced/autolinks/class-controller-free.php:65
+#: includes/modules/advanced/autolinks/class-controller.php:305
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:137
+msgid "Upgrade to SmartCrawl Pro"
+msgstr ""
+
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:37
+#: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:55
+#: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:71
+#: includes/core/admin/templates/dashboard/dashboard-widget-social.php:64
+#: includes/core/configs/class-model.php:202
+#: includes/core/configs/class-model.php:213
+#: includes/core/configs/class-model.php:227
+#: includes/core/configs/class-model.php:261
+#: includes/core/configs/class-model.php:298
+#: includes/modules/advanced/autolinks/class-controller.php:314
+#: includes/modules/advanced/breadcrumbs/class-controller.php:475
+#: includes/modules/advanced/robots/class-controller.php:332
+msgid "Active"
+msgstr ""
+
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:45
+msgid "Instantly notify search engines like Bing and Yandex whenever your site’s content changes using our IndexNow API integration."
+msgstr ""
+
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:47
+msgid "Automatically notify Bing and Yandex whenever you add, update, or remove pages, helping your content appear in search results faster."
+msgstr ""
+
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:49
+msgid "Your site is now set to instantly notify Bing and Yandex via the IndexNow API. Fine-tune when and how URLs are submitted by adjusting your configuration."
+msgstr ""
+
 #. translators: 1: Remaining cool down minutes, 2: plugin title
 #: includes/core/admin/templates/dashboard/dashboard-widget-lighthouse.php:36
 #: includes/core/admin/templates/lighthouse/lighthouse-header-actions.php:19
+#, php-format
 msgid "%2$s is just catching her breath, you can run another test in %1$s minutes."
 msgstr ""
 
@@ -1217,7 +1316,7 @@ msgstr ""
 #: includes/core/admin/templates/emails/lighthouse-email.php:99
 #: includes/core/admin/templates/emails/lighthouse-email.php:230
 #: includes/core/admin/templates/health/health-test-mode-lighthouse.php:35
-#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:34
+#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:35
 #: includes/core/admin/templates/lighthouse/lighthouse-recipients.php:87
 msgid "Desktop"
 msgstr ""
@@ -1226,13 +1325,14 @@ msgstr ""
 #: includes/core/admin/templates/emails/lighthouse-email.php:109
 #: includes/core/admin/templates/emails/lighthouse-email.php:242
 #: includes/core/admin/templates/health/health-test-mode-lighthouse.php:39
-#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:41
+#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:43
 #: includes/core/admin/templates/lighthouse/lighthouse-recipients.php:91
 msgid "Mobile"
 msgstr ""
 
 #. translators: %d: issue count
 #: includes/core/admin/templates/dashboard/dashboard-widget-lighthouse.php:65
+#, php-format
 msgid "You have %d outstanding SEO audit"
 msgid_plural "You have %d outstanding SEO audits"
 msgstr[0] ""
@@ -1298,20 +1398,8 @@ msgstr ""
 
 #. translators: 1: plugin title
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:51
+#, php-format
 msgid "%s automatically computes a schema structure for your pages based on your schema settings. By default, Article type is printed for all post types. You can replace this automatically-generated schema type by configuring types in the schema type builder."
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:55
-#: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:71
-#: includes/core/admin/templates/dashboard/dashboard-widget-social.php:64
-#: includes/core/configs/class-model.php:200
-#: includes/core/configs/class-model.php:214
-#: includes/core/configs/class-model.php:248
-#: includes/core/configs/class-model.php:285
-#: includes/modules/advanced/autolinks/class-controller.php:313
-#: includes/modules/advanced/breadcrumbs/class-controller.php:474
-#: includes/modules/advanced/robots/class-controller.php:331
-msgid "Active"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:82
@@ -1336,22 +1424,26 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:32
+#, php-format
 msgid "You're using the default WordPress sitemap. You can switch to %s's advanced sitemaps at any time."
 msgstr ""
 
 #. translators: %s: Link to sitemap.xml
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:37
 #: includes/core/admin/templates/sitemap/sitemap-smartcrawl.php:25
+#, php-format
 msgid "Your sitemap is available at %s"
 msgstr ""
 
 #. translators: %s: Link to WP-Core sitemap url
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:44
+#, php-format
 msgid "Your WordPress core sitemap is available at %s"
 msgstr ""
 
 #. translators: %s: Link to news sitemap url
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:51
+#, php-format
 msgid "Your news sitemap is available at %s"
 msgstr ""
 
@@ -1360,17 +1452,18 @@ msgid "Automatically generate detailed sitemaps to tell search engines what cont
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:90
-#: includes/core/class-settings.php:300
+#: includes/core/class-settings.php:308
 msgid "XML Sitemap"
 msgstr ""
 
 #. translators: 1: plugin title
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:98
+#, php-format
 msgid "%s Sitemap"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:99
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:155
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:150
 #: includes/core/admin/templates/sitemap/sitemap-side-nav.php:24
 msgid "WP Core Sitemap"
 msgstr ""
@@ -1396,23 +1489,12 @@ msgstr ""
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:178
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:205
+#, php-format
 msgid "Automatically schedule %1$s%3$s%2$s to run check for URLs that are missing from your Sitemap."
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:187
 msgid "Sitemaps must be activated"
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:196
-#: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:31
-#: includes/core/admin/templates/sitemap/sitemap-reporting-title-pro-tag.php:19
-#: includes/core/admin/templates/sitemap/sitemap-url-crawler-tab-title-left.php:26
-#: includes/core/admin/templates/upgrade-page.php:19
-#: includes/core/admin/templates/upgrade-page.php:30
-#: includes/modules/advanced/autolinks/class-controller-free.php:65
-#: includes/modules/advanced/autolinks/class-controller.php:304
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:136
-msgid "Upgrade to SmartCrawl Pro"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:221
@@ -1480,7 +1562,7 @@ msgid "Connect to pinterest"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:107
-#: includes/modules/advanced/seomoz/class-controller.php:348
+#: includes/modules/advanced/seomoz/class-controller.php:349
 #: includes/assets/js/modules/advanced/seomoz/connect.js:149
 msgid "Connect"
 msgstr ""
@@ -1553,6 +1635,7 @@ msgstr ""
 #. translators: %s link to documentation.
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:46
 #: includes/core/admin/templates/settings/settings-analysis.php:43
+#, php-format
 msgid "This feature may not work as expected as our SEO analysis engine doesn't support your current site language. For better results, change the language in WordPress settings to one of the <a href=\"%s\" target=\"_blank\">supported languages</a>."
 msgstr ""
 
@@ -1578,7 +1661,8 @@ msgstr ""
 
 #. translators: %s link to robots.txt file.
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:98
-#: includes/modules/advanced/robots/class-controller.php:316
+#: includes/modules/advanced/robots/class-controller.php:317
+#, php-format
 msgid "We've detected an existing %s file that we are unable to edit. You will need to remove it before you can enable this feature."
 msgstr ""
 
@@ -1596,17 +1680,20 @@ msgstr ""
 
 #. translators: 1, 2: opening/closing span tags
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:141
+#, php-format
 msgid "Share Anonymous Usage Data %1$sRecommended%2$s"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title, 4,5: anchor tag
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:148
+#, php-format
 msgid "Help us improve %1$s%3$s%2$s, and prevent errors by sharing anonymous and non-sensitive usage data. You can change this option in the settings. See %4$smore info%5$s about the data we collect."
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:157
-#: includes/core/admin/templates/settings/settings-section-general.php:250
+#: includes/core/admin/templates/settings/settings-section-general.php:252
+#, php-format
 msgid "Help us improve %1$s%3$s%2$s, by sharing anonymous, and non-sensitive usage data."
 msgstr ""
 
@@ -1636,10 +1723,11 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/dashboard/onboarding.php:15
+#, php-format
 msgid "Welcome to %1$s%3$s%2$s, the hottest SEO plugin for WordPress! Let's quickly set up the basics for you, then you can fine tune each setting as you go - our recommendations are on by default."
 msgstr ""
 
-#: includes/core/admin/templates/disabled-component-inner.php:34
+#: includes/core/admin/templates/disabled-component-inner.php:37
 msgid "Disabled"
 msgstr ""
 
@@ -1653,7 +1741,7 @@ msgstr ""
 
 #: includes/core/admin/templates/dismissable-notice.php:36
 #: includes/core/lighthouse/class-controller.php:103
-#: includes/modules/advanced/redirects/class-controller.php:191
+#: includes/modules/advanced/redirects/class-controller.php:192
 msgid "Dismiss"
 msgstr ""
 
@@ -1663,21 +1751,25 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/templates/emails/email-header.php:20
+#, php-format
 msgid "%s Report"
 msgstr ""
 
 #. translators: %s - tested on
 #: includes/core/admin/templates/emails/lighthouse-email.php:62
+#, php-format
 msgid "SEO test summary for <br/>%s"
 msgstr ""
 
 #. translators: %s: Username.
 #: includes/core/admin/templates/emails/lighthouse-email.php:68
+#, php-format
 msgid "Hi %s,"
 msgstr ""
 
 #. translators: %s - tested on
 #: includes/core/admin/templates/emails/lighthouse-email.php:73
+#, php-format
 msgid "Here’s your latest SEO test summary generated on %s."
 msgstr ""
 
@@ -1726,7 +1818,8 @@ msgstr ""
 
 #. translators: %s: Heart icon
 #: includes/core/admin/templates/footer.php:12
-#: includes/core/controllers/class-assets.php:265
+#: includes/core/controllers/class-assets.php:268
+#, php-format
 msgid "Made with %s by WPMU DEV"
 msgstr ""
 
@@ -1801,20 +1894,198 @@ msgstr ""
 
 #: includes/core/admin/templates/health/health-test-mode-lighthouse.php:53
 #: includes/core/admin/templates/lighthouse/lighthouse-reporting.php:108
-#: includes/core/admin/templates/onpage/onpage-list-homepage.php:54
-#: includes/core/admin/templates/onpage/onpage-static-homepage.php:86
+#: includes/core/admin/templates/onpage/onpage-list-homepage.php:55
+#: includes/core/admin/templates/onpage/onpage-static-homepage.php:92
 #: includes/core/admin/templates/report-vertical-tab.php:23
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:203
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:198
 #: includes/core/admin/templates/vertical-tab-upsell.php:17
-#: includes/core/admin/templates/vertical-tab.php:17
+#: includes/core/admin/templates/vertical-tab.php:18
 msgid "Save Settings"
 msgstr ""
 
-#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:31
+#: includes/core/admin/templates/instant-indexing-free.php:31
+#: includes/core/admin/templates/instant-indexing/instant-indexing-disabled.php:24
+msgid "Upgrade to Unlock Instant Indexing"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-content.php:60
+msgid "Manual URL Submission"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-content.php:75
+#: includes/core/admin/templates/instant-indexing/instant-indexing-sidenav.php:21
+msgid "Submission History"
+msgstr ""
+
+#. translators: 1,2: anchor tag
+#: includes/core/admin/templates/instant-indexing/instant-indexing-google-api.php:16
+#, php-format
+msgid "Google Instant Indexing support is coming soon! Once available, you'll be able to notify Google about your latest posts and updates instantly—no more waiting for the next crawl. Keep an eye on our %1$sRoadmap%2$s for updates."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:15
+msgid "IndexNow API Settings"
+msgstr ""
+
+#. translators: 1, 2: opening/closing anchor tags with learn more link
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:21
+#, php-format
+msgid "The IndexNow API key is automatically generated to verify site ownership. If you suspect the key has been compromised, you can generate a new one. %1$sLearn more%2$s"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:31
+#: includes/core/admin/templates/schema/schema-youtube-api-key-field.php:30
+msgid "API Key"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:34
+msgid "1ce79794c0b74cd39b7632af37"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:42
+msgid "Generate new Key"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:48
+msgid "API Key Location"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:49
+msgid "Click Verify Key to check if your API key is accessible to search engines. This will open the key file in your browser and display the API key."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:52
+msgid "https://domain.com/1ce79794c0b74cd39b7632af37.txt"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:60
+msgid "Verify Key"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:68
+msgid "Automatically Index Post Types"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:71
+msgid "Select the post types you want to automatically submit to IndexNow for indexing."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-indexnow-api.php:77
+msgid "Post types"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-settings.php:10
+msgid "IndexNow API"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-settings.php:11
+msgid "Google API"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-settings.php:15
+msgid "Use the options below to configure the API keys and settings for Instant Indexing."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-settings.php:32
+msgid "coming soon"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-settings.php:63
+#: includes/core/admin/templates/instant-indexing/instant-indexing-settings.php:72
+#: includes/core/admin/templates/onpage/onpage-section-settings.php:87
+#: includes/core/admin/templates/onpage/onpage-section-settings.php:100
+#: includes/core/admin/templates/schema/schema-section-settings.php:43
+#: includes/core/admin/templates/schema/schema-section-settings.php:59
+#: includes/core/admin/templates/sitemap/sitemap-deactivate-button.php:14
+#: includes/core/admin/templates/sitemap/sitemap-deactivate-button.php:30
+#: includes/core/admin/templates/social/social-section-settings.php:18
+#: includes/core/admin/templates/social/social-section-settings.php:34
+msgid "Deactivate"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-settings.php:65
+msgid "No longer need Instant indexing? This will deactivate this feature."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-sidenav.php:17
+msgid "Submit URL"
+msgstr ""
+
+#. translators: 1,2: Head tag
+#: includes/core/admin/templates/instant-indexing/instant-indexing-submission-history.php:28
+#, php-format
+msgid "%1$sNo URLs submitted yet%2$sYour most recent submissions will appear here."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-submission-history.php:33
+#: includes/core/admin/templates/instant-indexing/instant-indexing-submit-url.php:11
+#: includes/core/admin/templates/instant-indexing/instant-indexing-submit-url.php:28
+msgid "Submit URLs"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-submit-url.php:14
+msgid "Enter the URLs you want to manually submit for indexing. Add one URL per line."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-submit-url.php:20
+msgid "Enter URLs (One per line, up to 100 URLs)"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/instant-indexing-submit-url.php:31
+msgid "Submitting..."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:25
+msgid "Below are the logs of your 100 most recent submissions."
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:31
+#: includes/core/admin/templates/instant-indexing/submission-history.php:72
+msgid "Display"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:44
+#: includes/core/admin/templates/instant-indexing/submission-history.php:82
+msgid "results per page"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:48
+msgid "Clear Submissions"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:56
+#: includes/modules/advanced/breadcrumbs/class-controller.php:292
+msgid "Date"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:57
+msgid "URL"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:58
+#: includes/assets/js/modules/advanced/autolinks/exclusion-modal.js:65
+#: includes/assets/js/modules/advanced/autolinks/list/list.js:36
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:265
+msgid "Type"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:59
+msgid "Response"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:60
+msgid "Status"
+msgstr ""
+
+#: includes/core/admin/templates/instant-indexing/submission-history.php:88
+msgid "results"
+msgstr ""
+
+#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:32
 msgid "Apply desktop simulation"
 msgstr ""
 
-#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:38
+#: includes/core/admin/templates/lighthouse/lighthouse-extra-actions.php:40
 msgid "Apply mobile simulation"
 msgstr ""
 
@@ -1850,7 +2121,7 @@ msgstr ""
 
 #: includes/core/admin/templates/lighthouse/lighthouse-reporting-tab.php:18
 #: includes/core/admin/templates/lighthouse/lighthouse-side-nav.php:33
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:200
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:195
 #: includes/core/admin/templates/sitemap/sitemap-side-nav.php:43
 msgid "Reporting"
 msgstr ""
@@ -1861,6 +2132,7 @@ msgstr ""
 
 #. translators: 1: List of frequency intervals, 2: Recipients
 #: includes/core/admin/templates/lighthouse/lighthouse-reporting.php:35
+#, php-format
 msgid "Automatic Lighthouse reports are enabled and sending %1$s to %2$d recipient."
 msgid_plural "Automatic Lighthouse reports are enabled and sending %1$s to %2$d recipients."
 msgstr[0] ""
@@ -1913,7 +2185,7 @@ msgid "Remove file"
 msgstr ""
 
 #: includes/core/admin/templates/metabox/metabox-advanced-indexing.php:19
-#: includes/core/admin/templates/onpage/onpage-meta-robots.php:17
+#: includes/core/admin/templates/onpage/onpage-meta-robots.php:19
 #: includes/core/admin/templates/term/term-advanced-tab.php:21
 #: includes/assets/js/modules/metabox/advanced/indexing.js:14
 msgid "Indexing"
@@ -1972,7 +2244,7 @@ msgstr ""
 #: includes/core/admin/templates/onpage/onpage-macros-modal.php:47
 #: includes/core/admin/templates/onpage/onpage-social-meta-tags-sub-settings.php:29
 #: includes/core/admin/templates/post-list/meta-details.php:51
-#: includes/modules/advanced/breadcrumbs/class-controller.php:289
+#: includes/modules/advanced/breadcrumbs/class-controller.php:290
 #: includes/assets/js/modules/metabox/social/social-item.js:48
 msgid "Title"
 msgstr ""
@@ -2091,6 +2363,7 @@ msgstr ""
 
 #. translators: %s: Link to Configs page
 #: includes/core/admin/templates/network-settings.php:143
+#, php-format
 msgid "Select a config that you would like to apply to new sub-sites. Visit the %s page to manage all your configs."
 msgstr ""
 
@@ -2119,11 +2392,13 @@ msgstr ""
 #: includes/core/admin/templates/onpage/onpage-general-settings-inner.php:86
 #: includes/core/admin/templates/term/term-meta-edit-form.php:72
 #: includes/core/admin/templates/term/term-meta-edit-form.php:106
+#, php-format
 msgid "- Minimum of %1$d characters, max %2$d."
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/onpage/onpage-general-settings.php:16
+#, php-format
 msgid "Choose the variables from which %1$s%3$s%2$s will automatically generate your SEO title from."
 msgstr ""
 
@@ -2131,27 +2406,27 @@ msgstr ""
 msgid "A title needs a description. Choose the variables to automatically generate a description from."
 msgstr ""
 
-#: includes/core/admin/templates/onpage/onpage-header-actions.php:16
+#: includes/core/admin/templates/onpage/onpage-header-actions.php:17
 msgid "Browse Macros"
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-list-homepage.php:21
-#: includes/core/admin/templates/onpage/onpage-static-homepage.php:41
+#: includes/core/admin/templates/onpage/onpage-static-homepage.php:45
 msgid "Define the main title of your website that Google will index."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-list-homepage.php:22
-#: includes/core/admin/templates/onpage/onpage-static-homepage.php:42
+#: includes/core/admin/templates/onpage/onpage-static-homepage.php:46
 msgid "This is generally your brand name, sometimes with a tagline."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-list-homepage.php:24
-#: includes/core/admin/templates/onpage/onpage-static-homepage.php:46
+#: includes/core/admin/templates/onpage/onpage-static-homepage.php:50
 msgid "Set the default description that will accompany your SEO title in search engine results."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-list-homepage.php:25
-#: includes/core/admin/templates/onpage/onpage-static-homepage.php:47
+#: includes/core/admin/templates/onpage/onpage-static-homepage.php:51
 msgid "Remember to keep it simple, to the point, and include a bit about what your website can offer potential visitors."
 msgstr ""
 
@@ -2170,6 +2445,7 @@ msgstr ""
 
 #. translators: 1, 2: Min/max length
 #: includes/core/admin/templates/onpage/onpage-meta-character-lengths.php:36
+#, php-format
 msgid "Recommended length is between %1$d and %2$d characters."
 msgstr ""
 
@@ -2189,6 +2465,7 @@ msgstr ""
 #. translators: %d: Character length
 #: includes/core/admin/templates/onpage/onpage-meta-character-lengths.php:79
 #: includes/core/admin/templates/onpage/onpage-meta-character-lengths.php:95
+#, php-format
 msgid "%d characters"
 msgstr ""
 
@@ -2213,7 +2490,7 @@ msgstr ""
 msgid "Maximum should be greater than Minimum."
 msgstr ""
 
-#: includes/core/admin/templates/onpage/onpage-meta-robots.php:18
+#: includes/core/admin/templates/onpage/onpage-meta-robots.php:20
 msgid "Choose whether you want your website to appear in search results."
 msgstr ""
 
@@ -2223,6 +2500,7 @@ msgstr ""
 
 #. translators: 1: Message, 2: Anchor tag to Open Graph page
 #: includes/core/admin/templates/onpage/onpage-og-disabled.php:17
+#, php-format
 msgid "%1$s You can enable it %2$s."
 msgstr ""
 
@@ -2232,7 +2510,7 @@ msgid "here"
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-og-settings.php:17
-#: includes/core/admin/templates/social/social-section-open-graph.php:19
+#: includes/core/admin/templates/social/social-section-open-graph.php:20
 msgid "Enable OpenGraph"
 msgstr ""
 
@@ -2267,11 +2545,13 @@ msgstr ""
 
 #. translators: %s: Singular post type name
 #: includes/core/admin/templates/onpage/onpage-section-post-type.php:18
+#, php-format
 msgid "OpenGraph support enhances how your content appears when shared on social networks such as Facebook. You can set default values here but also customize this per %s via the post editor."
 msgstr ""
 
 #. translators: %s: Singular post type name
 #: includes/core/admin/templates/onpage/onpage-section-post-type.php:21
+#, php-format
 msgid "Twitter Cards support enhances how your content appears when shared on Twitter. You can set default values here but also customize this per %s via the post editor."
 msgstr ""
 
@@ -2281,6 +2561,7 @@ msgstr ""
 
 #. translators: %s: Separator placeholder
 #: includes/core/admin/templates/onpage/onpage-section-settings.php:17
+#, php-format
 msgid "The separator refers to the break between variables which you can use by referencing the %s tag. You can choose a preset one or bake your own."
 msgstr ""
 
@@ -2309,28 +2590,19 @@ msgstr ""
 msgid "Meta Description"
 msgstr ""
 
-#: includes/core/admin/templates/onpage/onpage-section-settings.php:87
-#: includes/core/admin/templates/onpage/onpage-section-settings.php:100
-#: includes/core/admin/templates/schema/schema-section-settings.php:43
-#: includes/core/admin/templates/schema/schema-section-settings.php:59
-#: includes/core/admin/templates/sitemap/sitemap-deactivate-button.php:14
-#: includes/core/admin/templates/sitemap/sitemap-deactivate-button.php:30
-#: includes/core/admin/templates/social/social-section-settings.php:18
-#: includes/core/admin/templates/social/social-section-settings.php:34
-msgid "Deactivate"
-msgstr ""
-
 #: includes/core/admin/templates/onpage/onpage-section-settings.php:89
 msgid "Use this option to deactivate the Title and Meta module from your site."
 msgstr ""
 
 #. translators: %s: Singular post type name
 #: includes/core/admin/templates/onpage/onpage-section-taxonomy.php:17
+#, php-format
 msgid "OpenGraph support enhances how your content appears when shared on social networks such as Facebook. You can set default values here but also customize this for each %s."
 msgstr ""
 
 #. translators: %s: Singular post type name
 #: includes/core/admin/templates/onpage/onpage-section-taxonomy.php:20
+#, php-format
 msgid "Twitter Cards support enhances how your content appears when shared on Twitter. You can set default values here but also customize this for each %s."
 msgstr ""
 
@@ -2349,18 +2621,20 @@ msgstr ""
 
 #. translators: %s: Singular post type name
 #: includes/core/admin/templates/onpage/onpage-settings.php:129
+#, php-format
 msgid "Customize your %s title, description and meta options."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-settings.php:144
 #: includes/core/admin/templates/onpage/onpage-sidenav.php:27
-#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:19
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:97
+#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:20
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:98
 msgid "Post Types"
 msgstr ""
 
 #. translators: %s: Taxonomy label
 #: includes/core/admin/templates/onpage/onpage-settings.php:169
+#, php-format
 msgid "Customize the title, description and meta options for %s."
 msgstr ""
 
@@ -2416,6 +2690,7 @@ msgstr ""
 
 #. translators: %s: Archive post type label
 #: includes/core/admin/templates/onpage/onpage-settings.php:245
+#, php-format
 msgid "Customize title, description and meta for the archive page of custom post type %s."
 msgstr ""
 
@@ -2477,6 +2752,7 @@ msgstr ""
 
 #. translators: 1: Message, 2: Anchor tag to Twitter card section
 #: includes/core/admin/templates/onpage/onpage-twitter-disabled.php:17
+#, php-format
 msgid "%1$s You can enable them %2$s."
 msgstr ""
 
@@ -2526,6 +2802,8 @@ msgstr ""
 #. translators: 1: current time with timezone, 2, 3: opening/closing anchor tags.
 #: includes/core/admin/templates/reporting-dom-select.php:53
 #: includes/core/admin/templates/reporting-dow-select.php:66
+#: includes/core/admin/templates/reporting-tod-select.php:53
+#, php-format
 msgid "Your site's current time is %1$s based on your %2$sWordPress Settings%3$s."
 msgstr ""
 
@@ -2563,11 +2841,6 @@ msgstr ""
 
 #: includes/core/admin/templates/reporting-tod-select.php:32
 msgid "Time of Day"
-msgstr ""
-
-#. translators: %1$s current time with timezone, %2$s general options page url.
-#: includes/core/admin/templates/reporting-tod-select.php:53
-msgid "Your site's current time is %1$s based on your <a href=\"%2$s\" target=\"_blank\">WordPress Settings</a>."
 msgstr ""
 
 #: includes/core/admin/templates/schema/schema-nav-menus-dropdown-form-field.php:21
@@ -2643,6 +2916,7 @@ msgstr ""
 
 #. translators: %s: Link to Schema types section
 #: includes/core/admin/templates/schema/schema-organization-types-dropdown.php:65
+#, php-format
 msgid "Note: If you want to add Local Business markup, you can do it by adding a “Local Business” type in the %s."
 msgstr ""
 
@@ -2978,6 +3252,7 @@ msgstr ""
 
 #. translators: %s: Link to documentation
 #: includes/core/admin/templates/schema/schema-youtube-api-key-field.php:17
+#, php-format
 msgid "To learn more about how to connect to Youtube, see our %s."
 msgstr ""
 
@@ -2987,10 +3262,6 @@ msgstr ""
 
 #: includes/core/admin/templates/schema/schema-youtube-api-key-field.php:25
 msgid "Access Code"
-msgstr ""
-
-#: includes/core/admin/templates/schema/schema-youtube-api-key-field.php:30
-msgid "API Key"
 msgstr ""
 
 #: includes/core/admin/templates/schema/schema-youtube-api-key-field.php:35
@@ -3009,8 +3280,8 @@ msgstr ""
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:132
 #: includes/core/admin/templates/urlmetrics-metabox.php:14
 #: includes/core/admin/templates/urlmetrics-metabox.php:88
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:96
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:312
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:97
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:320
 msgid "Metric"
 msgstr ""
 
@@ -3018,34 +3289,35 @@ msgstr ""
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:133
 #: includes/core/admin/templates/urlmetrics-metabox.php:15
 #: includes/core/admin/templates/urlmetrics-metabox.php:89
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:97
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:315
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:100
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:323
 msgid "Value"
 msgstr ""
 
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:21
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:103
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:108
 msgid "Domain mozRank"
 msgstr ""
 
 #. translators: %s: Link to help
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:25
+#, php-format
 msgid "Measure of the mozRank %s of the domain in the Linkscape index"
 msgstr ""
 
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:31
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:104
 #: includes/core/admin/templates/urlmetrics-metabox.php:54
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:122
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:259
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:128
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:267
 msgid "10-point score:"
 msgstr ""
 
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:37
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:110
 #: includes/core/admin/templates/urlmetrics-metabox.php:62
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:132
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:269
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:138
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:277
 msgid "Raw score:"
 msgstr ""
 
@@ -3054,32 +3326,35 @@ msgid "Domain Authority"
 msgstr ""
 
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:58
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:174
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:180
 msgid "External Links to Homepage"
 msgstr ""
 
 #. translators: %s: Link to help
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:62
+#, php-format
 msgid "The number of external (from other subdomains), juice passing links %s to the target URL in the Linkscape index"
 msgstr ""
 
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:76
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:209
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:215
 msgid "Links to Homepage"
 msgstr ""
 
 #. translators: %s: Link to help
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:80
+#, php-format
 msgid "The number of internal and external, juice and non-juice passing links %s to the target URL in the Linkscape index"
 msgstr ""
 
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:94
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:240
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:247
 msgid "Homepage mozRank"
 msgstr ""
 
 #. translators: %s: Link to help
 #: includes/core/admin/templates/seomoz-dashboard-widget.php:98
+#, php-format
 msgid "Measure of the mozRank %s of the homepage URL in the Linkscape index"
 msgstr ""
 
@@ -3101,6 +3376,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/settings/settings-analysis.php:56
+#, php-format
 msgid "Choose how you want %1$s%3$s%2$s to analyze your content."
 msgstr ""
 
@@ -3134,6 +3410,7 @@ msgstr ""
 
 #. translators: 1: "None" within <strong> tag, 2: Class selector
 #: includes/core/admin/templates/settings/settings-analysis.php:123
+#, php-format
 msgid "Custom setup? Choose the %1$s method and add the class %2$s to container elements you want to include in the SEO and Readability Analysis."
 msgstr ""
 
@@ -3167,6 +3444,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/settings/settings-section-configs.php:31
+#, php-format
 msgid "Use configs to save preset configurations of %1$s%3$s%2$s's settings, then upload and apply them to your other sites in just a few clicks! You can easily apply configs to multiple sites at once via the Hub."
 msgstr ""
 
@@ -3251,107 +3529,111 @@ msgstr ""
 msgid "Readability Analysis uses the Flesch-Kincaid test to determine how easy your content is to read."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:70
+#: includes/core/admin/templates/settings/settings-section-general.php:71
 msgid "Admin Bar"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
-#: includes/core/admin/templates/settings/settings-section-general.php:73
+#: includes/core/admin/templates/settings/settings-section-general.php:74
+#, php-format
 msgid "Add a shortcut to %1$s%3$s%2$s settings in the top WordPress Admin bar."
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/core/admin/templates/settings/settings-section-general.php:82
+#: includes/core/admin/templates/settings/settings-section-general.php:83
+#, php-format
 msgid "Enable %s shortcut"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:93
+#: includes/core/admin/templates/settings/settings-section-general.php:95
 msgid "Meta Tags"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
-#: includes/core/admin/templates/settings/settings-section-general.php:96
+#: includes/core/admin/templates/settings/settings-section-general.php:98
+#, php-format
 msgid "Choose what %1$s%3$s%2$s modules you want available to use."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:104
+#: includes/core/admin/templates/settings/settings-section-general.php:106
 msgid "Hide generator meta tag"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:105
+#: includes/core/admin/templates/settings/settings-section-general.php:107
 msgid "It can be considered a security risk to have your WordPress version visible to the public, so we recommend you hide it."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:108
+#: includes/core/admin/templates/settings/settings-section-general.php:110
 msgid "Hide redundant canonical link tags"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:109
+#: includes/core/admin/templates/settings/settings-section-general.php:111
 msgid "WordPress automatically generates a canonical tag for your website, but in many cases this isn’t needed so you can turn it off to avoid any potential SEO ‘duplicate content’ backlash from search engines."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:112
+#: includes/core/admin/templates/settings/settings-section-general.php:114
 msgid "Enforce meta tag character limits"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:113
+#: includes/core/admin/templates/settings/settings-section-general.php:115
 msgid "Each meta tag type has recommended maximum characters lengths to follow. Turning this off will remove the enforcement preventing you from adding too many characters."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:122
+#: includes/core/admin/templates/settings/settings-section-general.php:124
 msgid "Search engines"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:123
+#: includes/core/admin/templates/settings/settings-section-general.php:125
 msgid "This tool will add the meta tags required by search engines to verify your site with their SEO management tools to your websites <head> tag."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:133
+#: includes/core/admin/templates/settings/settings-section-general.php:135
 msgid "Google Verification"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:135
+#: includes/core/admin/templates/settings/settings-section-general.php:137
 msgid "Paste the full meta tag from Google."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:154
+#: includes/core/admin/templates/settings/settings-section-general.php:156
 msgid "Bing Verification"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:156
+#: includes/core/admin/templates/settings/settings-section-general.php:158
 msgid "Paste the full meta tag from Bing."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:172
+#: includes/core/admin/templates/settings/settings-section-general.php:174
 msgid "Add verification code to"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:197
+#: includes/core/admin/templates/settings/settings-section-general.php:199
 msgid "Custom meta tags"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:198
+#: includes/core/admin/templates/settings/settings-section-general.php:200
 msgid "Have more meta tags you want to add? Add as many as you like."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:221
+#: includes/core/admin/templates/settings/settings-section-general.php:223
 msgid "Add Another"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:232
+#: includes/core/admin/templates/settings/settings-section-general.php:234
 msgid "Usage Tracking"
 msgstr ""
 
 #. translators: 1, 2: opening/closing anchor tag, 3,4: strong tag, 5: plugin title
-#: includes/core/admin/templates/settings/settings-section-general.php:240
+#: includes/core/admin/templates/settings/settings-section-general.php:242
+#, php-format
 msgid "Help us improve %3$s%5$s%4$s by sharing anonymous, and non-sensitive usage data. See %1$smore info%2$s about the data we collect."
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:271
+#: includes/core/admin/templates/settings/settings-section-general.php:273
 msgid "Allow Usage Tracking"
 msgstr ""
 
-#: includes/core/admin/templates/settings/settings-section-general.php:272
+#: includes/core/admin/templates/settings/settings-section-general.php:274
 msgid "Note: Usage tracking is completely anonymous and non-sensitive, and we only track features you are/aren’t using to make more informed feature decisions."
 msgstr ""
 
@@ -3396,7 +3678,7 @@ msgstr ""
 #: includes/core/admin/templates/settings/settings-sidenav.php:35
 #: includes/core/admin/templates/settings/settings.php:167
 #: includes/assets/js/modules/advanced/redirects/import-modal.js:68
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:109
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:110
 msgid "Import"
 msgstr ""
 
@@ -3448,7 +3730,7 @@ msgid "Enter one URL per line"
 msgstr ""
 
 #: includes/core/admin/templates/sitemap/sitemap-common-settings.php:99
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:105
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:106
 #: includes/assets/js/modules/advanced/autolinks/excluded-posts.js:41
 msgid "Exclusions"
 msgstr ""
@@ -3518,6 +3800,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title, 4: br tag
 #: includes/core/admin/templates/sitemap/sitemap-disabled.php:13
+#, php-format
 msgid "Automatically generate a full sitemap, regularly send updates to search engines and set up.%4$s%1$s%3$s%2$s to automatically check URLs are discoverable by search engines."
 msgstr ""
 
@@ -3527,12 +3810,14 @@ msgstr ""
 
 #. translators: %s: remaining time in hours and minutes
 #: includes/core/admin/templates/sitemap/sitemap-extra-actions.php:51
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:96
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:91
+#, php-format
 msgid "SEO Crawler is cooling down. Please wait for %s before initiating another scan."
 msgstr ""
 
 #. translators: %s: Last crawl date
 #: includes/core/admin/templates/sitemap/sitemap-extra-actions.php:60
+#, php-format
 msgid "Last crawl: %s"
 msgstr ""
 
@@ -3548,26 +3833,21 @@ msgstr ""
 msgid "Update Sitemap"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-manually-notify-search-engines.php:10
-msgid "Search engines aren't being notified automatically. Click the button below to submit your sitemap to search engines."
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-manually-notify-search-engines.php:21
-msgid "Notify Search Engines"
-msgstr ""
-
 #. translators: 1: Link to WordPress native sitemap.xml, 2,3: strong tag, 4: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-native.php:27
+#, php-format
 msgid "Your sitemap is available at %1$s. Note that you're using the default WordPress sitemap but can switch to %2$s%4$s%3$s's advanced sitemaps at any time."
 msgstr ""
 
 #. translators: 1: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-native.php:43
+#, php-format
 msgid "Switch to %1$s Sitemap"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-native.php:52
+#, php-format
 msgid "Switch to the powerful and styled %1$s%3$s%2$s sitemap to ensure that search engines index all your posts and pages."
 msgstr ""
 
@@ -3597,6 +3877,7 @@ msgstr ""
 
 #. translators: %s: Maximum number of links in each sitemap
 #: includes/core/admin/templates/sitemap/sitemap-native.php:101
+#, php-format
 msgid "Choose how many links each sitemap has, up to %d."
 msgstr ""
 
@@ -3606,11 +3887,13 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-native.php:130
+#, php-format
 msgid "Note: By clicking this button you are disabling %1$s%3$s%2$s's sitemap module. The Wordpress core sitemap will still be available afterwards."
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-no-crawler-data.php:17
+#, php-format
 msgid "Have %1$s%3$s%2$s check for broken URLs, 404s, multiple redirections and other harmful issues that can reduce your ability to rank in search engines."
 msgstr ""
 
@@ -3624,16 +3907,19 @@ msgstr ""
 
 #. translators: %s: Link to wp-sitemap.xml
 #: includes/core/admin/templates/sitemap/sitemap-notices.php:31
+#, php-format
 msgid "You have successfully switched to the Wordpress core sitemap. You can find it at %s"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title, 4: link to sitemap
 #: includes/core/admin/templates/sitemap/sitemap-notices.php:48
+#, php-format
 msgid "Well done! You have successfully switched to the %1$s%3$s%2$s sitemap. You can find it at %4$s"
 msgstr ""
 
 #. translators: %s: Item label
 #: includes/core/admin/templates/sitemap/sitemap-part.php:15
+#, php-format
 msgid "Include/exclude %s from your sitemap"
 msgstr ""
 
@@ -3649,79 +3935,69 @@ msgstr ""
 msgid "Select how often the sitemap should be updated."
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:24
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:23
 msgid "Include images"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:25
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:24
 msgid "If your posts contain imagery you would like others to be able to search, this setting will help Google Images index them correctly."
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:28
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:27
 msgid "Include image items with the sitemap"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:29
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:28
 msgid "Note: When uploading attachments to posts, be sure to add titles and captions that clearly describe your images."
 msgstr ""
 
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:39
+msgid "Style sitemap"
+msgstr ""
+
 #: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:40
-msgid "Auto-notify search engines"
+msgid "Adds some nice styling to your sitemap."
 msgstr ""
 
-#. translators: 1,2: strong tag, 3: plugin title
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:47
-msgid "By default, %1$s%3$s%2$s will auto-notify Google and Bing whenever your sitemap changes. Alternatively, you can manually notify search engines."
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:44
+msgid "Include stylesheet with sitemap"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:66
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:118
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:45
+msgid "Note: This doesn’t affect your SEO and is purely visual."
+msgstr ""
+
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:56
+msgid "Automatic sitemap updates"
+msgstr ""
+
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:60
+msgid "By default, we will automatically update your sitemap but if you wish to update it manually, you can switch to manual mode, or if you wish to update it at regular intervals switch to scheduled mode."
+msgstr ""
+
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:74
 msgid "Automatic"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:70
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:122
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:78
 msgid "Manual"
 msgstr ""
 
 #: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:83
-msgid "Style sitemap"
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:84
-msgid "Adds some nice styling to your sitemap."
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:88
-msgid "Include stylesheet with sitemap"
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:89
-msgid "Note: This doesn’t affect your SEO and is purely visual."
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:100
-msgid "Automatic sitemap updates"
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:104
-msgid "By default, we will automatically update your sitemap but if you wish to update it manually, you can switch to manual mode, or if you wish to update it at regular intervals switch to scheduled mode."
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:127
 msgid "Scheduled"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:142
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:98
 msgid "If you no longer wish to use the Sitemap generator, you can deactivate it."
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:143
+#: includes/core/admin/templates/sitemap/sitemap-section-advanced.php:99
 msgid "Note: Sitemaps are crucial for helping search engines index all of your content effectively. We highly recommend you have a valid sitemap."
 msgstr ""
 
 #. translators: %s: Link to News sitemap documentation
 #: includes/core/admin/templates/sitemap/sitemap-section-news.php:27
+#, php-format
 msgid "Are you publishing newsworthy content? Use the Google News Sitemap to list news articles and posts published in the last 48 hours so that they show up in Google News. %s"
 msgstr ""
 
@@ -3731,6 +4007,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-section-reporting.php:30
+#, php-format
 msgid "Set up %1$s%3$s%2$s to automatically crawl your URLs daily, weekly or monthly and send an email report to your inbox."
 msgstr ""
 
@@ -3750,31 +4027,28 @@ msgstr ""
 msgid "Unlock automated crawls of your URLs to always stay on top of any issues with SmartCrawl Pro. Get Sitemap Reports as part of a WPMU DEV membership along with other pro plugins and services, 24/7 support and much more"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:46
-msgid "Your Sitemap is updated and Search Engines are being notified with changes."
-msgstr ""
-
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:47
-#: includes/core/controllers/class-assets.php:364
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:43
+#: includes/core/controllers/class-assets.php:367
 msgid "Your sitemap has been updated."
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:154
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:149
 #: includes/core/admin/templates/sitemap/sitemap-side-nav.php:23
 msgid "General Sitemap"
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:159
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:154
 msgid "Set up your sitemaps to tell search engines what content you want them to crawl and index."
 msgstr ""
 
-#: includes/core/admin/templates/sitemap/sitemap-settings.php:182
+#: includes/core/admin/templates/sitemap/sitemap-settings.php:177
 #: includes/core/admin/templates/sitemap/sitemap-side-nav.php:33
 msgid "Crawler"
 msgstr ""
 
 #. translators: %s: Directory where sitemap.xml should be stored
 #: includes/core/admin/templates/sitemap/sitemap-smartcrawl.php:37
+#, php-format
 msgid "Unable to write to sitemap file in: %s"
 msgstr ""
 
@@ -3788,6 +4062,7 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-smartcrawl.php:69
+#, php-format
 msgid "Note: %s sitemap will be disabled."
 msgstr ""
 
@@ -3801,6 +4076,7 @@ msgstr ""
 
 #. translators: %s: Maximum number of sitemap items per each sitemap
 #: includes/core/admin/templates/sitemap/sitemap-split-setting.php:39
+#, php-format
 msgid "Choose how many URLs each sitemap has, up to %s. A higher number will use more server resources to generate."
 msgstr ""
 
@@ -3816,9 +4092,9 @@ msgstr ""
 
 #: includes/core/admin/templates/sitemap/sitemap-switch-to-native-modal.php:12
 #: includes/core/admin/templates/sitemap/sitemap-switch-to-smartcrawl-modal.php:12
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:343
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:381
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:395
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:352
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:390
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:404
 msgid "Are you sure?"
 msgid_plural "Bulk Delete Redirect?"
 msgstr[0] ""
@@ -3826,11 +4102,13 @@ msgstr[1] ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-switch-to-native-modal.php:15
+#, php-format
 msgid "The powerful %1$s%3$s%2$s sitemap ensures search engines index all of your posts and pages. Are you sure you wish to switch to the WordPress core sitemap?"
 msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/admin/templates/sitemap/sitemap-switch-to-smartcrawl-modal.php:15
+#, php-format
 msgid "Please confirm that you wish to switch to %1$s%3$s%2$s's powerful sitemap. You can switch back to the WordPress core sitemap at anytime."
 msgstr ""
 
@@ -3838,15 +4116,15 @@ msgstr ""
 msgid "Change how your content looks on popular social media platforms."
 msgstr ""
 
-#: includes/core/admin/templates/social/social-section-open-graph.php:15
+#: includes/core/admin/templates/social/social-section-open-graph.php:16
 msgid "OpenGraph Support"
 msgstr ""
 
-#: includes/core/admin/templates/social/social-section-open-graph.php:16
+#: includes/core/admin/templates/social/social-section-open-graph.php:17
 msgid "This will add a few extra meta tags to the head section of your pages."
 msgstr ""
 
-#: includes/core/admin/templates/social/social-section-open-graph.php:20
+#: includes/core/admin/templates/social/social-section-open-graph.php:21
 msgid "By default OpenGraph will use your default titles, descriptions and feature images. You can override the default on a per post basis inside the post editor, as well as under Titles & Meta for specific post types."
 msgstr ""
 
@@ -3898,15 +4176,15 @@ msgstr ""
 msgid "Add meta data to your pages to make them look great when shared on Twitter."
 msgstr ""
 
-#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:37
+#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:23
 msgid "Image"
 msgstr ""
 
-#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:48
+#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:34
 msgid "No Image"
 msgstr ""
 
-#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:83
+#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:69
 msgid "A preview of how your Homepage will appear as a Twitter Card."
 msgstr ""
 
@@ -3969,6 +4247,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title, 4: link to Title & Meta page
 #: includes/core/admin/templates/term/term-social-tab.php:29
+#, php-format
 msgid "Customize this term's title, description and featured images for social shares. You can also configure the default settings for this taxonomy in %1$s%3$s%2$s's %4$s area."
 msgstr ""
 
@@ -3986,7 +4265,8 @@ msgid "This image will be used as the featured image when the term archive is sh
 msgstr ""
 
 #. translators: %s: Item label
-#: includes/core/admin/templates/toggle-item.php:86
+#: includes/core/admin/templates/toggle-item.php:96
+#, php-format
 msgid "Sub-settings of '%s'"
 msgstr ""
 
@@ -4100,6 +4380,7 @@ msgstr ""
 
 #. translators: %s: Section title
 #: includes/core/admin/templates/vertical-tab-section-accordion.php:21
+#, php-format
 msgid "Enable/Disable %s"
 msgstr ""
 
@@ -4109,11 +4390,13 @@ msgstr ""
 
 #. translators: %s: Tab name
 #: includes/core/admin/templates/vertical-tabs-side-nav.php:35
+#, php-format
 msgid "%s tab"
 msgstr ""
 
 #. translators: %s: Number of items
 #: includes/core/admin/templates/wp-dashboard/sitemaps-widget.php:21
+#, php-format
 msgid "Your sitemap contains %s."
 msgstr ""
 
@@ -4125,28 +4408,11 @@ msgstr ""
 msgid "Update sitemap now"
 msgstr ""
 
-#. translators: 1: Date, 2: Engine item
-#: includes/core/admin/templates/wp-dashboard/sitemaps-widget.php:48
-msgid "Last notified on %1$s, at %2$s."
-msgstr ""
-
-#. translators: 1: Date, 2: Engine item
-#: includes/core/admin/templates/wp-dashboard/sitemaps-widget.php:48
-msgid "Not notified"
-msgstr ""
-
-#: includes/core/admin/templates/wp-dashboard/sitemaps-widget.php:58
-msgid "Search engines haven't been recently updated."
-msgstr ""
-
-#: includes/core/admin/templates/wp-dashboard/sitemaps-widget.php:63
-msgid "Force search engines notification"
-msgstr ""
-
 #. translators: %s keyword label.
 #. translators: %s keyphrase label
 #: includes/core/checks/class-bolded-keyword.php:37
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-bolded-keyword.js:62
+#, php-format,js-format
 msgid "You haven't bolded this %s in your content."
 msgstr ""
 
@@ -4154,6 +4420,7 @@ msgstr ""
 #. translators: %s keyphrase label
 #: includes/core/checks/class-bolded-keyword.php:39
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-bolded-keyword.js:57
+#, php-format,js-format
 msgid "The %s is bolded in your content."
 msgstr ""
 
@@ -4174,6 +4441,7 @@ msgstr ""
 #. translators: %s Word count
 #: includes/core/checks/class-content-length.php:47
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-content-length.js:71
+#, php-format,js-format
 msgid "The text contains %1$d words which is less than the recommended minimum of %2$d words"
 msgstr ""
 
@@ -4181,6 +4449,7 @@ msgstr ""
 #. translators: %s Word count
 #: includes/core/checks/class-content-length.php:49
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-content-length.js:80
+#, php-format,js-format
 msgid "The text contains %1$d words which is more than the recommended minimum of %2$d words"
 msgstr ""
 
@@ -4195,7 +4464,7 @@ msgid "Focus to the point"
 msgstr ""
 
 #: includes/core/checks/class-focus-stopwords.php:73
-msgid "keyphrases or key phrases"
+msgid "keyphrases"
 msgstr ""
 
 #: includes/core/checks/class-focus-stopwords.php:77
@@ -4223,7 +4492,7 @@ msgstr ""
 
 #: includes/core/checks/class-imgalts-keywords.php:50
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-imgalts-keywords.js:95
-msgid "You have included a focus keyphrase in the alternative text of too many images in your content"
+msgid "You have not included the focus keyphrase in the alternative text of any images in your content"
 msgstr ""
 
 #: includes/core/checks/class-imgalts-keywords.php:54
@@ -4248,16 +4517,19 @@ msgstr ""
 
 #. translators: %d low, %d high.
 #: includes/core/checks/class-keyword-density.php:41
+#, php-format
 msgid "Your %4$s density is between %1$d%% and %2$d%%"
 msgstr ""
 
 #. translators: %d low.
 #: includes/core/checks/class-keyword-density.php:43
+#, php-format
 msgid "Your %4$s density is less than %1$d%%"
 msgstr ""
 
 #. translators: %d high.
 #: includes/core/checks/class-keyword-density.php:45
+#, php-format
 msgid "Your %4$s density is greater than %2$d%%"
 msgstr ""
 
@@ -4275,6 +4547,7 @@ msgstr ""
 #. translators: 1, 2: Number of internal/external links.
 #: includes/core/checks/class-links-count.php:49
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-links-count.js:67
+#, php-format,js-format
 msgid "You have %1$d internal and %2$d external links in your content"
 msgstr ""
 
@@ -4285,6 +4558,7 @@ msgstr ""
 
 #. translators: 2: Number of external links
 #: includes/core/checks/class-links-count.php:52
+#, php-format
 msgid "You have 0 internal and %2$d external links in your content"
 msgstr ""
 
@@ -4322,6 +4596,7 @@ msgstr ""
 #. translators: %d into max length
 #: includes/core/checks/class-metadesc-length.php:49
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-metadesc-length.js:72
+#, php-format,js-format
 msgid "Your meta description is greater than %d characters"
 msgstr ""
 
@@ -4329,6 +4604,7 @@ msgstr ""
 #. translators: %d into min length
 #: includes/core/checks/class-metadesc-length.php:51
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-metadesc-length.js:80
+#, php-format,js-format
 msgid "Your meta description is less than %d characters"
 msgstr ""
 
@@ -4382,6 +4658,7 @@ msgstr ""
 
 #. translators: %d: Subheading count
 #: includes/core/checks/class-subheadings-keywords.php:45
+#, php-format
 msgid "Your primary keyphrase was found in %d subheadings"
 msgstr ""
 
@@ -4391,6 +4668,7 @@ msgstr ""
 
 #. translators: %d: Subheading count
 #: includes/core/checks/class-subheadings-keywords.php:50
+#, php-format
 msgid "This secondary keyphrase was found in %d subheading(s)."
 msgstr ""
 
@@ -4465,7 +4743,7 @@ msgstr ""
 msgid "Error (critical issue)"
 msgstr ""
 
-#: includes/core/class-settings.php:298
+#: includes/core/class-settings.php:306
 msgid "Title & Meta Optimization"
 msgstr ""
 
@@ -4522,53 +4800,55 @@ msgstr ""
 msgid "Import process failed, aborting"
 msgstr ""
 
-#: includes/core/configs/class-model.php:164
+#: includes/core/configs/class-model.php:165
 msgid "Health"
 msgstr ""
 
-#: includes/core/configs/class-model.php:184
+#: includes/core/configs/class-model.php:186
 msgid "SEO test - Active"
 msgstr ""
 
 #. translators: %s: Report status
-#: includes/core/configs/class-model.php:187
+#: includes/core/configs/class-model.php:189
+#, php-format
 msgid "Scheduled performance reports - %s"
 msgstr ""
 
-#: includes/core/configs/class-model.php:235
+#: includes/core/configs/class-model.php:248
 msgid "OpenGraph Support - "
 msgstr ""
 
-#: includes/core/configs/class-model.php:236
+#: includes/core/configs/class-model.php:249
 msgid "Twitter Cards - "
 msgstr ""
 
-#: includes/core/configs/class-model.php:306
+#: includes/core/configs/class-model.php:319
 msgid "In-Post Page Analysis - "
 msgstr ""
 
-#: includes/core/configs/class-model.php:307
+#: includes/core/configs/class-model.php:320
 msgid "In-Post Readability Analysis - "
 msgstr ""
 
-#: includes/core/configs/class-model.php:308
+#: includes/core/configs/class-model.php:321
 msgid "Preserve settings on uninstall - "
 msgstr ""
 
-#: includes/core/configs/class-model.php:309
+#: includes/core/configs/class-model.php:322
 msgid "Keep data on uninstall - "
 msgstr ""
 
-#: includes/core/configs/class-model.php:310
+#: includes/core/configs/class-model.php:323
 msgid "Usage tracking - "
 msgstr ""
 
-#: includes/core/configs/class-model.php:311
+#: includes/core/configs/class-model.php:324
 msgid "High Contrast Mode - "
 msgstr ""
 
 #. translators: 1: Frequency, 2: Receipients
-#: includes/core/configs/class-model.php:334
+#: includes/core/configs/class-model.php:347
+#, php-format
 msgid "Active and sending %1$s to %2$d recipients"
 msgstr ""
 
@@ -4598,72 +4878,92 @@ msgstr ""
 msgid "Readability:"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:272
+#: includes/core/controllers/class-assets.php:275
 msgid "Initializing ..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:273
+#: includes/core/controllers/class-assets.php:276
 msgid "Running SEO checks ..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:274
+#: includes/core/controllers/class-assets.php:277
 msgid "Running final checks and finishing up ..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:275
+#: includes/core/controllers/class-assets.php:278
 msgid "characters"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:365
-msgid "Search Engines are being notified with changes."
-msgstr ""
-
-#: includes/core/controllers/class-assets.php:440
+#: includes/core/controllers/class-assets.php:442
 msgid "All done, please hold on..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:650
+#: includes/core/controllers/class-assets.php:652
 msgid "{TOTAL_LEFT} characters left"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:651
+#: includes/core/controllers/class-assets.php:653
 msgid "Over {MAX_COUNT} characters ({CURRENT_COUNT})"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:652
+#: includes/core/controllers/class-assets.php:654
 msgid "Over {MAX_COUNT} characters ({CURRENT_COUNT}) - make sure your SEO title is shorter"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:957
+#: includes/core/controllers/class-assets.php:941
 msgid "Loading, please hold on..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1134
+#: includes/core/controllers/class-assets.php:1118
 msgid "Key valid!"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1135
+#: includes/core/controllers/class-assets.php:1119
 msgid "Key invalid"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1320
+#: includes/core/controllers/class-assets.php:1304
 msgid "Analyzing data and preparing report..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1321
+#: includes/core/controllers/class-assets.php:1305
 msgid "Running SEO test..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1322
+#: includes/core/controllers/class-assets.php:1306
 msgid "Refreshing data. Please wait..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1323
+#: includes/core/controllers/class-assets.php:1307
 msgid "The audit has been copied successfully."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1324
+#: includes/core/controllers/class-assets.php:1308
 msgid "Audit could not be copied to clipboard."
+msgstr ""
+
+#: includes/core/controllers/class-assets.php:1543
+msgid "The URL field is empty. Please enter at least one URL and try again."
+msgstr ""
+
+#: includes/core/controllers/class-assets.php:1544
+msgid "Submission Completed!"
+msgstr ""
+
+#: includes/core/controllers/class-assets.php:1545
+msgid "You cannot submit more than 100 URLs at once."
+msgstr ""
+
+#: includes/core/controllers/class-assets.php:1546
+msgid "One or more URLs are invalid. Please check and try again."
+msgstr ""
+
+#: includes/core/controllers/class-assets.php:1547
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: includes/core/controllers/class-assets.php:1548
+msgid "Rate limit exceeded. Please wait and try again later."
 msgstr ""
 
 #: includes/core/controllers/class-cron-free.php:336
@@ -4689,24 +4989,28 @@ msgstr ""
 #. translators: %s: plugin title
 #: includes/core/controllers/class-cron-free.php:472
 #: includes/core/controllers/class-cron.php:563
+#, php-format
 msgid "%s Hourly"
 msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/controllers/class-cron-free.php:480
 #: includes/core/controllers/class-cron.php:571
+#, php-format
 msgid "%s Daily"
 msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/controllers/class-cron-free.php:488
 #: includes/core/controllers/class-cron.php:579
+#, php-format
 msgid "%s Weekly"
 msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/controllers/class-cron-free.php:496
 #: includes/core/controllers/class-cron.php:587
+#, php-format
 msgid "%s Monthly"
 msgstr ""
 
@@ -4716,15 +5020,17 @@ msgstr ""
 
 #. translators: 1: Open strong tag, 2: Site name, 3: Close strong tag.
 #: includes/core/controllers/class-data.php:107
+#, php-format
 msgid "Resetting %1$s%2$s%3$s"
 msgstr ""
 
-#: includes/core/controllers/class-hub-abstract.php:445
+#: includes/core/controllers/class-hub-abstract.php:440
 msgid "Invalid config"
 msgstr ""
 
 #. translators: 1: plugin title, 2: menu title.
-#: includes/core/controllers/class-module-controller.php:107
+#: includes/core/controllers/class-module-controller.php:100
+#, php-format
 msgid "%1$s Wizard: %2$s"
 msgstr ""
 
@@ -4779,12 +5085,12 @@ msgstr ""
 msgid "click here"
 msgstr ""
 
-#: includes/core/core.php:1600
-#: includes/modules/advanced/woocommerce/class-controller.php:159
+#: includes/core/core.php:1601
+#: includes/modules/advanced/woocommerce/class-controller.php:160
 msgid "Not now"
 msgstr ""
 
-#: includes/core/core.php:1808
+#: includes/core/core.php:1809
 msgid "your DEV account email"
 msgstr ""
 
@@ -4838,13 +5144,94 @@ msgstr ""
 
 #. translators: 1: Current page number, 2: Total page number
 #: includes/core/entities/class-entity.php:928
-#: includes/modules/advanced/breadcrumbs/class-controller.php:179
+#: includes/modules/advanced/breadcrumbs/class-controller.php:180
+#, php-format
 msgid "Page %1$s of %2$s"
 msgstr ""
 
 #: includes/core/entities/class-post.php:182
 #: includes/core/entities/class-post.php:198
 msgid "This content is password protected."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-actions.php:181
+#: includes/core/instant-indexing/class-indexnow-actions.php:221
+msgid "SmartCrawl Instant Indexing: Submit Now"
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:155
+msgid "Submission successful!"
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:176
+msgid "Success. The URL has been submitted."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:177
+msgid "Accepted. The URL submission is being processed."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:178
+msgid "Bad request. Check your input."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:179
+msgid "Unauthorized. Invalid API key."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:180
+msgid "Resource not found. Verify URL."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:181
+msgid "Unprocessable entity. Invalid URL format."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:182
+msgid "Rate limit exceeded."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:183
+msgid "Server error. Try again later."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:184
+msgid "Service unavailable. Server busy."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-api.php:194
+msgid "Unexpected error occurred."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-rest.php:70
+msgid "No valid URLs submitted."
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-rest.php:76
+msgid "Invalid URLs found: "
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-rest.php:81
+msgid "Error submitting URLs: "
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-rest.php:90
+#, php-format
+msgid "%1$sSubmission Completed:%2$s %3$d URLs have been processed successfully%4$s %5$s"
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-rest.php:95
+#: includes/core/instant-indexing/class-indexnow-rest.php:106
+msgid "View Submission History"
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-rest.php:101
+#, php-format
+msgid "%1$sSubmission Failed:%2$s %3$d URLs have not been processed%4$s %5$s"
+msgstr ""
+
+#: includes/core/instant-indexing/class-indexnow-rest.php:122
+msgid "Array of URLs to be submitted."
 msgstr ""
 
 #: includes/core/lighthouse/checks/class-canonical.php:24
@@ -4969,6 +5356,7 @@ msgstr ""
 
 #. translators: %s: Current user's first name
 #: includes/core/lighthouse/class-controller.php:93
+#, php-format
 msgid "Heads up, %s! SmartCrawl’s SEO Checkup functionality has been removed in favor of SEO Audits powered by Google Lighthouse. We’ve automatically migrated your SEO Checkup settings to Lighthouse SEO Audit."
 msgstr ""
 
@@ -5006,6 +5394,7 @@ msgstr ""
 
 #. translators: 1: Date, 2: Time
 #: includes/core/lighthouse/class-report.php:334
+#, php-format
 msgid "%1$s at %2$s"
 msgstr ""
 
@@ -5120,8 +5509,8 @@ msgstr ""
 msgid "Anonymous"
 msgstr ""
 
-#: includes/core/schema/class-printer.php:133
-#: includes/core/schema/class-printer.php:136
+#: includes/core/schema/class-printer.php:135
+#: includes/core/schema/class-printer.php:138
 msgid "Test Schema"
 msgstr ""
 
@@ -5135,11 +5524,13 @@ msgstr ""
 
 #. translators: 1: Site url, 2: Score
 #: includes/core/services/class-lighthouse.php:321
+#, php-format
 msgid "SEO Report for %1$s - Score %2$s"
 msgstr ""
 
 #. translators: 1: Site url, 2: Score
 #: includes/core/services/class-lighthouse.php:330
+#, php-format
 msgid "SEO Report for %1$s - Desktop score %2$s / Mobile score %3$s"
 msgstr ""
 
@@ -5155,6 +5546,7 @@ msgstr ""
 
 #. translators: 1: remaining hours, 2: remaining minutes
 #: includes/core/services/class-seo.php:238
+#, php-format
 msgid "%1$s hour"
 msgid_plural "%1$s hours"
 msgstr[0] ""
@@ -5162,6 +5554,7 @@ msgstr[1] ""
 
 #. translators: %s: remaining minutes
 #: includes/core/services/class-seo.php:253
+#, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
 msgstr[0] ""
@@ -5177,37 +5570,32 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/core/sitemaps/class-dashboard-widget.php:60
+#, php-format
 msgid "Sitemaps - %s"
 msgstr ""
 
 #. translators: last updated date & last updated time.
-#: includes/core/sitemaps/class-dashboard-widget.php:80
+#: includes/core/sitemaps/class-dashboard-widget.php:79
+#, php-format
 msgid "It was last updated on %1$s, at %2$s."
 msgstr ""
 
 #. translators: last updated date & last updated time.
-#: includes/core/sitemaps/class-dashboard-widget.php:80
+#: includes/core/sitemaps/class-dashboard-widget.php:79
 msgid "Your sitemap hasn't been updated recently."
 msgstr ""
 
-#: includes/core/sitemaps/class-dashboard-widget.php:98
+#: includes/core/sitemaps/class-dashboard-widget.php:94
 msgid "Updating..."
 msgstr ""
 
-#: includes/core/sitemaps/class-dashboard-widget.php:99
+#: includes/core/sitemaps/class-dashboard-widget.php:95
 msgid "Done updating the sitemap, please hold on..."
-msgstr ""
-
-#: includes/core/sitemaps/class-dashboard-widget.php:100
-msgid "Notifying..."
-msgstr ""
-
-#: includes/core/sitemaps/class-dashboard-widget.php:101
-msgid "Done notifying search engines, please hold on..."
 msgstr ""
 
 #. translators: 1: User display name, 2,3: strong tag, 4: plugin title
 #: includes/core/sitemaps/class-troubleshooting.php:156
+#, php-format
 msgid "Hey, %1$s! A problem on your site is preventing sitemaps from functioning properly. Identify and resolve any issues with %2$s%4$s%3$s’s Sitemap Troubleshooting feature."
 msgstr ""
 
@@ -5222,6 +5610,7 @@ msgstr ""
 
 #. translators: %s: Error message
 #: includes/core/sitemaps/class-troubleshooting.php:338
+#, php-format
 msgid "Our troubleshooter was not able to access your sitemap for testing. We received the following error: %s"
 msgstr ""
 
@@ -5235,6 +5624,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/sitemaps/class-troubleshooting.php:351
+#, php-format
 msgid "You have another sitemap plugin conflicting with %1$s%3$s%2$s's sitemap###SITEMAP_URL###. Please deactivate the conflicting plugin and try again."
 msgstr ""
 
@@ -5248,6 +5638,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/sitemaps/class-troubleshooting.php:366
+#, php-format
 msgid "You have a physical file named###SITEMAP_URL### on your server that is conflicting with %1$s%3$s%2$s. Please delete the file and try again."
 msgstr ""
 
@@ -5261,6 +5652,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/sitemaps/class-troubleshooting.php:383
+#, php-format
 msgid "Pretty permalinks are not working for your sitemap###SITEMAP_URL###. You may have to manually include some rewrite rules to your server's configuration files. Visit %1$s%3$s%2$s's documentation for details on how to fix this issue."
 msgstr ""
 
@@ -5278,6 +5670,7 @@ msgstr ""
 
 #. translators: 1,2: strong tag, 3: plugin title
 #: includes/core/sitemaps/class-troubleshooting.php:398
+#, php-format
 msgid "You are using <code>plain</code> permalinks on this site. Change your permalink structure to anything else for the %1$s%3$s%2$s sitemap to work."
 msgstr ""
 
@@ -5348,8 +5741,8 @@ msgid "Automatic Links"
 msgstr ""
 
 #: includes/modules/advanced/autolinks/class-controller-free.php:57
-#: includes/modules/advanced/autolinks/class-controller.php:295
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:43
+#: includes/modules/advanced/autolinks/class-controller.php:296
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:44
 #: includes/assets/js/modules/metabox/advanced/auto-linking.js:17
 msgid "Automatic Linking"
 msgstr ""
@@ -5357,19 +5750,20 @@ msgstr ""
 #. translators: 1,2: strong tag, 3: plugin title
 #. translators: 1,2: strong tag, 2: plugin title
 #: includes/modules/advanced/autolinks/class-controller-free.php:76
-#: includes/modules/advanced/autolinks/class-controller.php:321
+#: includes/modules/advanced/autolinks/class-controller.php:322
+#, php-format
 msgid "Configure %1$s%3$s%2$s to automatically link certain key words to a page on your blog or even a whole new site all together."
 msgstr ""
 
-#: includes/modules/advanced/autolinks/class-controller.php:185
+#: includes/modules/advanced/autolinks/class-controller.php:186
 msgid "Limit values must be numeric"
 msgstr ""
 
-#: includes/modules/advanced/autolinks/class-controller.php:1643
+#: includes/modules/advanced/autolinks/class-controller.php:1648
 msgid "Comments"
 msgstr ""
 
-#: includes/modules/advanced/autolinks/class-controller.php:1649
+#: includes/modules/advanced/autolinks/class-controller.php:1654
 msgid "Product Categories"
 msgstr ""
 
@@ -5377,6 +5771,7 @@ msgstr ""
 #: includes/modules/advanced/breadcrumbs/builders/class-archives.php:133
 #: includes/modules/advanced/breadcrumbs/builders/class-posts.php:215
 #: includes/modules/advanced/breadcrumbs/builders/class-taxonomies.php:91
+#, php-format
 msgid "Archive for %s"
 msgstr ""
 
@@ -5387,6 +5782,7 @@ msgstr ""
 
 #. translators: %d current page number.
 #: includes/modules/advanced/breadcrumbs/builders/class-builder.php:370
+#, php-format
 msgid "Page %d"
 msgstr ""
 
@@ -5396,308 +5792,314 @@ msgstr ""
 
 #. translators: %s search query.
 #: includes/modules/advanced/breadcrumbs/builders/class-search.php:33
+#, php-format
 msgid "Search for '%s'"
 msgstr ""
 
 #: includes/modules/advanced/breadcrumbs/class-controller.php:25
-#: includes/modules/advanced/breadcrumbs/class-controller.php:468
-#: includes/assets/js/modules/advanced/breadcrumbs/breadcrumbs.js:15
+#: includes/modules/advanced/breadcrumbs/class-controller.php:469
+#: includes/assets/js/modules/advanced/breadcrumbs/breadcrumbs.js:16
 msgid "Breadcrumbs"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:222
+#: includes/modules/advanced/breadcrumbs/class-controller.php:223
 #: includes/assets/js/modules/advanced/autolinks/exclusion-modal.js:88
 msgid "Post"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:224
-#: includes/modules/advanced/breadcrumbs/class-controller.php:234
+#: includes/modules/advanced/breadcrumbs/class-controller.php:225
+#: includes/modules/advanced/breadcrumbs/class-controller.php:235
 msgid "%%title%%"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:232
+#: includes/modules/advanced/breadcrumbs/class-controller.php:233
 msgid "Page"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:243
+#: includes/modules/advanced/breadcrumbs/class-controller.php:244
 msgid "Archive Page"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:245
+#: includes/modules/advanced/breadcrumbs/class-controller.php:246
 msgid "Archives for %%original-title%%"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:254
+#: includes/modules/advanced/breadcrumbs/class-controller.php:255
 msgid "Search"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:255
+#: includes/modules/advanced/breadcrumbs/class-controller.php:256
 msgid "Search Results Page"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:257
+#: includes/modules/advanced/breadcrumbs/class-controller.php:258
 msgid "Search for \"%%searchphrase%%\""
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:266
+#: includes/modules/advanced/breadcrumbs/class-controller.php:267
 msgid "404"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:267
+#: includes/modules/advanced/breadcrumbs/class-controller.php:268
 msgid "404 Error Page"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:269
+#: includes/modules/advanced/breadcrumbs/class-controller.php:270
 msgid "404 Error: page not found"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:288
+#: includes/modules/advanced/breadcrumbs/class-controller.php:289
 msgid "ID"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:290
+#: includes/modules/advanced/breadcrumbs/class-controller.php:291
 msgid "Modified Time"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:291
-msgid "Date"
-msgstr ""
-
-#: includes/modules/advanced/breadcrumbs/class-controller.php:292
+#: includes/modules/advanced/breadcrumbs/class-controller.php:293
 msgid "Author Nicename"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:293
+#: includes/modules/advanced/breadcrumbs/class-controller.php:294
 msgid "Author Userid"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:298
+#: includes/modules/advanced/breadcrumbs/class-controller.php:299
 msgid "Categories (comma separated)"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:299
+#: includes/modules/advanced/breadcrumbs/class-controller.php:300
 msgid "Tags"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:315
+#: includes/modules/advanced/breadcrumbs/class-controller.php:316
 msgid "Archive Title ( no prefix )"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:316
+#: includes/modules/advanced/breadcrumbs/class-controller.php:317
 msgid "Archive Title"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:323
+#: includes/modules/advanced/breadcrumbs/class-controller.php:324
 msgid "Search Keyword"
 msgstr ""
 
-#: includes/modules/advanced/breadcrumbs/class-controller.php:480
+#: includes/modules/advanced/breadcrumbs/class-controller.php:481
 msgid "Enhance your site's user experience and crawlability by adding breadcrumbs to your posts, pages, archives, and products."
 msgstr ""
 
 #: includes/modules/advanced/redirects/class-controller.php:61
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:77
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:104
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:34
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:105
 msgid "URL Redirection"
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/modules/advanced/redirects/class-controller.php:176
+#: includes/modules/advanced/redirects/class-controller.php:177
+#, php-format
 msgid "%s URL redirects have been upgraded"
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:183
+#: includes/modules/advanced/redirects/class-controller.php:184
 msgid "We've changed how URL redirects are stored, and your existing redirects have been upgraded accordingly. Please check your existing redirects to ensure they work as expected."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:189
+#: includes/modules/advanced/redirects/class-controller.php:190
 msgid "Go to Redirects"
 msgstr ""
 
 #. translators: 1, 2: strong tag, 3: post type label, 4: post stats transition action, 5, 6: Link to redirection page, 7: Redirection source url.
-#: includes/modules/advanced/redirects/class-controller.php:367
+#: includes/modules/advanced/redirects/class-controller.php:368
+#, php-format
 msgid "%1$sSEO Notice:%2$s A published %3$s(%8$s%7$s%9$s) has been moved to %4$s. %5$sAdd redirection%6$s to improve SEO."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:451
+#: includes/modules/advanced/redirects/class-controller.php:452
 msgid "URL Redirects"
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:457
-#: includes/modules/advanced/redirects/class-controller.php:471
-#: includes/modules/advanced/seomoz/class-controller.php:355
+#: includes/modules/advanced/redirects/class-controller.php:458
+#: includes/modules/advanced/redirects/class-controller.php:472
+#: includes/modules/advanced/seomoz/class-controller.php:356
 msgid "Automatically redirect traffic from one URL to another."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:463
+#: includes/modules/advanced/redirects/class-controller.php:464
 #: includes/assets/js/modules/advanced/redirects/redirect-modal.js:27
 #: includes/assets/js/modules/advanced/redirects/redirect-table.js:166
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:299
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:308
 msgid "Add Redirect"
 msgstr ""
 
 #. translators: %s: Module ID.
-#: includes/modules/advanced/redirects/class-controller.php:510
-#: includes/modules/advanced/redirects/class-controller.php:533
+#: includes/modules/advanced/redirects/class-controller.php:511
+#: includes/modules/advanced/redirects/class-controller.php:534
+#, php-format
 msgid "Please use our new hook `smartcrawl_after_sanitize_%s` in SmartCrawl."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:852
+#: includes/modules/advanced/redirects/class-controller.php:853
 msgid "Please use our new filter `smartcrawl_process_redirect` in SmartCrawl."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:903
+#: includes/modules/advanced/redirects/class-controller.php:904
 msgid "There is no data to proceed with your request."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:915
+#: includes/modules/advanced/redirects/class-controller.php:916
 msgid "The redirect from URL is empty."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:922
+#: includes/modules/advanced/redirects/class-controller.php:923
 msgid "The redirect from/to URL is empty."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1012
-#: includes/modules/advanced/redirects/class-controller.php:1029
+#: includes/modules/advanced/redirects/class-controller.php:1013
+#: includes/modules/advanced/redirects/class-controller.php:1030
 msgid "Url"
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1059
+#: includes/modules/advanced/redirects/class-controller.php:1060
 msgid "Request data is not valid."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1070
+#: includes/modules/advanced/redirects/class-controller.php:1071
 msgid "Something was wrong."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1083
+#: includes/modules/advanced/redirects/class-controller.php:1084
 msgid "Failed to retrieve data."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1091
+#: includes/modules/advanced/redirects/class-controller.php:1092
 msgid "Not found redirects."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1100
+#: includes/modules/advanced/redirects/class-controller.php:1101
 msgid "Failed to get redirects by given IDs."
 msgstr ""
 
 #. translators: %s: Redirect id
-#: includes/modules/advanced/redirects/class-controller.php:1118
+#: includes/modules/advanced/redirects/class-controller.php:1119
+#, php-format
 msgid "Failed to get redirect by given ID: %s."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1149
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:744
+#: includes/modules/advanced/redirects/class-controller.php:1150
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:757
 msgid "Failed to update redirects."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1178
+#: includes/modules/advanced/redirects/class-controller.php:1179
 msgid "Please select a file under 1MB."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1197
+#: includes/modules/advanced/redirects/class-controller.php:1198
 msgid "Only JSON or CSV files are supported."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1205
+#: includes/modules/advanced/redirects/class-controller.php:1206
 msgid "Some entries have invalid values. Please try again!"
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1213
+#: includes/modules/advanced/redirects/class-controller.php:1214
 msgid "No valid redirects were found, please check your file."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1222
+#: includes/modules/advanced/redirects/class-controller.php:1223
 msgid "An error occurred while inserting CSV data into the database."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1355
+#: includes/modules/advanced/redirects/class-controller.php:1356
 msgid "Please save some redirects first."
 msgstr ""
 
 #: includes/modules/advanced/robots/class-controller.php:26
-#: includes/assets/js/modules/advanced/robots/robots.js:52
-#: includes/assets/js/modules/advanced/robots/robots.js:79
-#: includes/assets/js/modules/advanced/robots/robots.js:111
+#: includes/assets/js/modules/advanced/robots/robots.js:53
+#: includes/assets/js/modules/advanced/robots/robots.js:81
+#: includes/assets/js/modules/advanced/robots/robots.js:114
 msgid "Robots.txt Editor"
 msgstr ""
 
-#: includes/modules/advanced/robots/class-controller.php:192
+#: includes/modules/advanced/robots/class-controller.php:193
 msgid "Please use our new filter `smartcrawl_robots_txt_content` in SmartCrawl."
 msgstr ""
 
 #. translators: %s: Url to robots.txt file.
-#: includes/modules/advanced/robots/class-controller.php:285
+#: includes/modules/advanced/robots/class-controller.php:286
+#, php-format
 msgid "We've detected an existing <a target=\"_blank\" href=\"%s\">robots.txt</a> file that we are unable to edit. You will need to remove it before you can enable this feature."
 msgstr ""
 
-#: includes/modules/advanced/robots/class-controller.php:337
+#: includes/modules/advanced/robots/class-controller.php:338
 msgid "Add a robots.txt file to tell search engines what they can and can’t index, and where things are."
 msgstr ""
 
 #: includes/modules/advanced/seomoz/class-controller.php:37
 #: includes/assets/js/modules/advanced/seomoz/connect.js:73
 #: includes/assets/js/modules/advanced/seomoz/seomoz.js:78
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:333
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:342
 msgid "Moz"
 msgstr ""
 
 #. Translators: %s is the name of the plugin.
-#: includes/modules/advanced/seomoz/class-controller.php:132
+#: includes/modules/advanced/seomoz/class-controller.php:133
+#, php-format
 msgid "Moz URL Metrics - %s"
 msgstr ""
 
-#: includes/modules/advanced/seomoz/class-controller.php:191
+#: includes/modules/advanced/seomoz/class-controller.php:192
 msgid "We were unable to retrieve data from the Moz API."
 msgstr ""
 
-#: includes/modules/advanced/seomoz/class-controller.php:246
+#: includes/modules/advanced/seomoz/class-controller.php:247
 msgid "If you've recently created an account, allow 24 hours for your first data to arrive. If you are an existing user, please reset your Moz API credentials to fix this issue."
 msgstr ""
 
-#: includes/modules/advanced/seomoz/class-controller.php:325
+#: includes/modules/advanced/seomoz/class-controller.php:326
 msgid "Moz Integration"
 msgstr ""
 
-#: includes/modules/advanced/seomoz/class-controller.php:341
+#: includes/modules/advanced/seomoz/class-controller.php:342
 msgid "Moz provides reports that tell you how your site stacks up against the competition with all of the important SEO measurement tools."
 msgstr ""
 
-#: includes/modules/advanced/seomoz/class-controller.php:345
+#: includes/modules/advanced/seomoz/class-controller.php:346
 msgid "Connect your Moz account"
 msgstr ""
 
 #: includes/modules/advanced/woocommerce/class-controller.php:43
-#: includes/assets/js/modules/advanced/woocommerce/woocommerce.js:11
+#: includes/assets/js/modules/advanced/woocommerce/woocommerce.js:12
 msgid "WooCommerce SEO"
 msgstr ""
 
-#: includes/modules/advanced/woocommerce/class-controller.php:137
+#: includes/modules/advanced/woocommerce/class-controller.php:138
 msgid "Improve your WooCommerce SEO"
 msgstr ""
 
 #. translators: %s: User's first name
-#: includes/modules/advanced/woocommerce/class-controller.php:143
+#: includes/modules/advanced/woocommerce/class-controller.php:144
+#, php-format
 msgid "Hey, %s! It looks like you’re using WooCommerce. Did you know that you can improve your site’s SEO ranking with our WooCommerce SEO settings?"
 msgstr ""
 
-#: includes/modules/advanced/woocommerce/class-controller.php:152
+#: includes/modules/advanced/woocommerce/class-controller.php:153
 msgid "Activate WooCommerce SEO"
 msgstr ""
 
-#: includes/modules/advanced/woocommerce/class-controller.php:401
+#: includes/modules/advanced/woocommerce/class-controller.php:402
 msgid "Shop Manager (and up)"
 msgstr ""
 
 #. translators: 1: Meta key label, 2: plugin title
 #: includes/modules/advanced/woocommerce/class-global-id.php:74
+#, php-format
 msgid "%1$s value to use in the %2$s Product schema."
 msgstr ""
 
 #. translators: 1: Variation name, 2: plugin title
 #: includes/modules/advanced/woocommerce/class-global-id.php:125
+#, php-format
 msgid "%1$s value to use in $2$s Product schema."
 msgstr ""
 
@@ -5713,69 +6115,71 @@ msgstr ""
 msgid "GTIN"
 msgstr ""
 
-#: includes/assets/js/admin/deactivation-survey.js:155
+#: includes/assets/js/admin/deactivation-survey.js:169
 msgid "Deactivate SmartCrawl?"
 msgstr ""
 
-#: includes/assets/js/admin/deactivation-survey.js:156
+#: includes/assets/js/admin/deactivation-survey.js:170
 msgid "Before you go. Please take a moment to share your valuable insights on why you deactivated our plugin. Your feedback fuels our improvements."
 msgstr ""
 
-#: includes/assets/js/admin/deactivation-survey.js:164
+#: includes/assets/js/admin/deactivation-survey.js:178
 msgid "Submit & Deactivate"
 msgstr ""
 
-#: includes/assets/js/admin/deactivation-survey.js:171
+#: includes/assets/js/admin/deactivation-survey.js:185
 msgid "Skip & Deactivate"
 msgstr ""
 
-#: includes/assets/js/admin/deactivation-survey.js:183
+#: includes/assets/js/admin/deactivation-survey.js:197
 msgid "<strong>Did you know you can use SmartCrawl with other SEO Plugins?</strong> You can <a>activate specific modules</a> that work seamlessly together with other SEO plugins."
 msgstr ""
 
-#: includes/assets/js/admin/deactivation-survey.js:220
+#: includes/assets/js/admin/deactivation-survey.js:234
 msgid "Please kindly tell us which plugin you are switching to."
 msgstr ""
 
-#: includes/assets/js/admin/deactivation-survey.js:232
+#: includes/assets/js/admin/deactivation-survey.js:246
 msgid "Please tell us why. (optional)"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:20
+#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:21
 msgid "Use the options below to select post types to insert links in, and post types/taxonomies to link to."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:28
+#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:29
 msgid "Insert Links"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:29
+#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:30
 msgid "Select the post types to insert links in."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:40
+#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:41
 msgid "Link To"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:41
+#: includes/assets/js/modules/advanced/autolinks/autolink-types.js:42
 msgid "Select the post types & taxonomies that can be linked to."
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:49
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:50
+#, js-format
 msgid "Configure <strong>%s</strong> to automatically link certain keywords to a page on your blog or even a whole new site all together. Internal linking can help boost SEO by giving search engines ample ways to index your site."
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:72
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:73
+#, js-format
 msgid "<strong>%s</strong> will look for keywords that match posts/pages around your website and automatically link them. Specify what post types you want to include in this tool, and what post types you want those to automatically link to."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:84
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:85
 msgid "Certain page builders and themes can interfere with the auto linking feature causing issues on your site. Enable the \"<strong>Prevent caching on auto-linked content</strong>\" option in the Settings tab section to fix the issues."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/autolinks/autolinks.js:101
+#: includes/assets/js/modules/advanced/autolinks/autolinks.js:102
 #: includes/assets/js/modules/advanced/autolinks/custom-keyword-pairs.js:38
 msgid "Custom Links"
 msgstr ""
@@ -5879,12 +6283,6 @@ msgstr ""
 
 #: includes/assets/js/modules/advanced/autolinks/exclusion-modal.js:56
 msgid "Add"
-msgstr ""
-
-#: includes/assets/js/modules/advanced/autolinks/exclusion-modal.js:65
-#: includes/assets/js/modules/advanced/autolinks/list/list.js:36
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:257
-msgid "Type"
 msgstr ""
 
 #: includes/assets/js/modules/advanced/autolinks/exclusion-modal.js:73
@@ -6052,11 +6450,11 @@ msgstr ""
 msgid "Configure extra settings for absolute control over autolinking."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/breadcrumbs.js:17
+#: includes/assets/js/modules/advanced/breadcrumbs/breadcrumbs.js:18
 msgid "Breadcrumbs provide an organized trail of links showing a visitor's journey on a website, improving the user experience and aiding search engines in understanding the site's structure for enhanced SEO."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/breadcrumbs.js:23
+#: includes/assets/js/modules/advanced/breadcrumbs/breadcrumbs.js:24
 msgid "No longer need breadcrumbs? This will deactivate this feature."
 msgstr ""
 
@@ -6076,32 +6474,27 @@ msgstr ""
 msgid "PHP Code"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:49
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:84
-msgid "Copy"
-msgstr ""
-
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:58
+#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:45
 msgid "Copy the shortcode and paste it to the desired location in the post editor to display the breadcrumbs on your page or post. <a>Learn more</a>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:93
+#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:69
 msgid "Copy the PHP code and paste it in the desired location within template editor to display the breadcrumbs on your page or post. <a>Learn more</a>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:129
+#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:105
 msgid "Shortcode copied successfully."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:136
+#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:112
 msgid "Shortcode could not be copied to clipboard."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:150
+#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:128
 msgid "The PHP Code copied successfully."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:160
+#: includes/assets/js/modules/advanced/breadcrumbs/code-type.js:138
 msgid "The PHP Code could not be copied to clipboard."
 msgstr ""
 
@@ -6137,70 +6530,71 @@ msgstr ""
 msgid "Enable this option to hide the default WooCommerce product breadcrumbs from your site."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:45
+#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:46
 msgid "Configurations"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:46
+#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:47
 msgid "Enable and configure the additional breadcrumbs settings for your site."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:67
+#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:68
 msgid "Prefix"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:71
-#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:86
+#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:72
+#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:87
 msgid "Eg. Location"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:92
-#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:115
+#: includes/assets/js/modules/advanced/breadcrumbs/configs.js:93
+#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:116
 msgid "Home"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/formats.js:25
+#: includes/assets/js/modules/advanced/breadcrumbs/formats.js:26
 msgid "Breadcrumbs Label Format"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/formats.js:26
+#: includes/assets/js/modules/advanced/breadcrumbs/formats.js:27
 msgid "Customize your breadcrumbs label formats across your site. "
 msgstr ""
 
 #. translators: %s: Breadcrumb type name
-#: includes/assets/js/modules/advanced/breadcrumbs/formats.js:39
+#: includes/assets/js/modules/advanced/breadcrumbs/formats.js:40
+#, js-format
 msgid "%s Label Format"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:27
+#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:28
 msgid "Preview"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:29
+#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:30
 msgid "See how breadcrumbs will appear on your web page. Click “<strong>Show more</strong>” to reveal the preview of breadcrumbs on all page types."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:52
+#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:53
 msgid "Hide more"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:60
+#: includes/assets/js/modules/advanced/breadcrumbs/previews.js:61
 msgid "Show more"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:14
+#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:15
 msgid "Breadcrumbs Separator"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:15
+#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:16
 msgid "Select a breadcrumbs separator from the list or add a custom separator. You can also use HTML characters."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:57
+#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:58
 msgid "Enter your own custom separator"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:61
+#: includes/assets/js/modules/advanced/breadcrumbs/separators.js:62
 msgid "Enter separator"
 msgstr ""
 
@@ -6210,6 +6604,7 @@ msgstr ""
 
 #. translators: %s: number of bulk items count
 #: includes/assets/js/modules/advanced/redirects/bulk-update-modal.js:26
+#, js-format
 msgid "Enable the bulk update actions you wish to perform. This will override the existing values for the <strong>%s</strong> selected item(s)."
 msgstr ""
 
@@ -6247,7 +6642,7 @@ msgid "Invalid license key. Please check that you have entered the correct key a
 msgstr ""
 
 #: includes/assets/js/modules/advanced/redirects/maxmind-config-activation.js:86
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:85
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:75
 msgid "<a>Unlock with SmartCrawl Pro</a> to unlock the Location-Based Redirects feature."
 msgstr ""
 
@@ -6278,6 +6673,7 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/assets/js/modules/advanced/redirects/maxmind-config-deactivation.js:65
+#, js-format
 msgid "Your site is connected to above Maxmind license key. <strong>%s</strong> automatically downloads latest GeoLite2 data weekly. You can use the disconnect button above to change the license key."
 msgstr ""
 
@@ -6324,6 +6720,7 @@ msgstr ""
 
 #. translators: %s: Home url.
 #: includes/assets/js/modules/advanced/redirects/redirect-edit-main.js:52
+#, js-format
 msgid "E.g. %s/(.*)-cats"
 msgstr ""
 
@@ -6367,21 +6764,25 @@ msgstr ""
 
 #. translators: %s: comma separated country names.
 #: includes/assets/js/modules/advanced/redirects/redirect-item.js:167
+#, js-format
 msgid "From %s, etc."
 msgstr ""
 
 #. translators: %s: comma separated country names.
 #: includes/assets/js/modules/advanced/redirects/redirect-item.js:173
+#, js-format
 msgid "From %s."
 msgstr ""
 
 #. translators: %s: comma separated country names.
 #: includes/assets/js/modules/advanced/redirects/redirect-item.js:192
+#, js-format
 msgid "Not from %s, etc."
 msgstr ""
 
 #. translators: %s: comma separated country names.
 #: includes/assets/js/modules/advanced/redirects/redirect-item.js:198
+#, js-format
 msgid "Not from %s."
 msgstr ""
 
@@ -6391,6 +6792,7 @@ msgstr ""
 
 #. translators: %s: Home url.
 #: includes/assets/js/modules/advanced/redirects/redirect-modal.js:32
+#, js-format
 msgid "Allowed formats include relative URLs like <strong>/cats</strong> or absolute URLs such as <strong>%s/cats</strong>."
 msgstr ""
 
@@ -6400,7 +6802,7 @@ msgstr ""
 
 #: includes/assets/js/modules/advanced/redirects/redirect-rules-geo-item.js:55
 #: includes/assets/js/modules/advanced/redirects/redirect-rules-geo-item.js:104
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:245
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:249
 msgid "From"
 msgstr ""
 
@@ -6417,92 +6819,89 @@ msgstr ""
 msgid " No Country"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:63
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:149
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:53
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:109
 msgid "Location-based Rules"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:67
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:153
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:57
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:113
 msgid "Unlock with SmartCrawl Pro to gain access to location-based redirections rules."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:121
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:111
 msgid "Successfully connected to Maxmind’s GeoLite2 database."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:132
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:122
 msgid "Disable default Redirect To"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:138
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:128
 msgid "Check this option to use only location-based redirects."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:183
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:173
 msgid "You've added one or more conflicting location rules."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:205
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:195
 msgid "Add Rule"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:212
+#: includes/assets/js/modules/advanced/redirects/redirect-rules-geo.js:202
 msgid "Click the add rules button to add location-based rules."
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:83
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:40
+#, js-format
 msgid "Configure <strong>%s</strong> to automatically redirect traffic from one URL to another. Use this tool if you have changed a page’s URL and wish to keep traffic flowing to the new page."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:93
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:50
 msgid "No longer need URL Redirection? This will deactivate this feature and disable all redirects. Your redirects will not be deleted."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:100
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:107
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:58
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:65
 msgid "Redirect attachments"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:101
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:59
 msgid "Redirect attachments to their respective file, preventing them from appearing in the SERPs."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:112
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:70
 msgid "Redirect image attachments only"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:123
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:81
 msgid "Select this option if you only want to redirect attachments that are an image."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:132
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:91
 msgid "Default Redirection Type"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:133
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:92
 msgid "Select the redirection type that you would like to be used as default."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:170
-msgid "New"
-msgstr ""
-
-#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:175
+#: includes/assets/js/modules/advanced/redirects/redirect-settings.js:123
 msgid "Add location-based redirect rules to ensure users see the most relevant content based on their locations."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:117
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:118
 msgid "Export"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:128
-#: includes/assets/js/modules/settings/general/plugin-modules.js:21
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:129
+#: includes/assets/js/modules/settings/general/plugin-modules.js:17
 msgid "Automatically redirect traffic from one URL to another. Use this tool if you have changed a page’s URL and wish to keep traffic flowing to the new page."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:140
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:141
 msgid "<strong>New</strong>: You can now add Geolocation-based rules to redirects. This will ensure users are redirected to the most relevant content based on their locations. <a>Add a new redirect</a> to set location rules."
 msgstr ""
 
@@ -6518,145 +6917,151 @@ msgstr ""
 msgid "Search Redirects"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:251
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:257
 msgid "To"
 msgstr ""
 
 #. translators: %s: Keyword.
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:284
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:293
+#, js-format
 msgid "No results found for the keyword <strong>%s</strong>."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:306
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:315
 msgid "You can add as many redirects as you like. Add your first above!"
 msgstr ""
 
 #. translators: %s: number of items being deleted.
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:353
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:362
+#, js-format
 msgid "Are you sure you want to delete the %s selected redirects? This action is irreversible."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:359
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:368
 msgid "Are you sure you want to delete this redirect? This action is irreversible."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:382
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:391
 msgid "Are you sure you want to delete all redirects? This action is irreversible."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:396
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:405
 msgid "Are you sure you want to delete this rule? This action is irreversible."
 msgstr ""
 
 #. translators: %d: Inserted count.
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:462
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:471
+#, js-format
 msgid "%d redirect inserted successfully!"
 msgid_plural "%d redirects inserted successfully!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:556
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:565
 msgid "That URL already exists, please try again."
 msgstr ""
 
 #. translators: 1: redirect destination, 2: redirect source
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:576
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:588
+#, js-format
 msgid "Redirect chain from <strong>%1$s</strong> to <strong>%2$s</strong> already exists."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:681
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:693
 msgid "The redirect has been updated."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:739
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:751
 msgid "The redirects have been updated."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:791
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:804
 msgid "The redirect has been removed."
 msgid_plural "The redirects have been removed."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:830
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:843
 msgid "All redirects have been removed."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/redirects/redirect-table.js:919
+#: includes/assets/js/modules/advanced/redirects/redirect-table.js:932
 msgid "An error occurred. Please reload the page and try again!"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:56
-#: includes/assets/js/modules/advanced/robots/robots.js:83
-#: includes/assets/js/modules/advanced/robots/robots.js:114
-#: includes/assets/js/modules/advanced/robots/robots.js:127
+#: includes/assets/js/modules/advanced/robots/robots.js:57
+#: includes/assets/js/modules/advanced/robots/robots.js:85
+#: includes/assets/js/modules/advanced/robots/robots.js:117
+#: includes/assets/js/modules/advanced/robots/robots.js:130
 msgid "Search engines use web crawlers (bots) to explore and index the internet. A robots.txt file is a critical text file that tells those bots what they can and can’t index, and where things are."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:62
+#: includes/assets/js/modules/advanced/robots/robots.js:63
 msgid "We've detected an existing <a>robots.txt</a> file that we are unable to edit. You will need to remove it before you can enable this feature."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:87
+#: includes/assets/js/modules/advanced/robots/robots.js:89
 msgid "We've detected your site is installed on a sub-directory. Robots.txt files only work when added to the root directory of a domain, so you'll need to change how your WordPress installation is set up to use this feature."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:120
+#: includes/assets/js/modules/advanced/robots/robots.js:123
 msgid "No longer need a Robots.txt file? This will deactivate this feature and remove the file."
 msgstr ""
 
 #. translators: %s: Link to sitemap url.
-#: includes/assets/js/modules/advanced/robots/robots.js:138
+#: includes/assets/js/modules/advanced/robots/robots.js:141
+#, js-format
 msgid "Your robots.txt is active and visible to bots. You can view it at <a>%s</a>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:157
+#: includes/assets/js/modules/advanced/robots/robots.js:161
 msgid "Output"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:158
+#: includes/assets/js/modules/advanced/robots/robots.js:162
 msgid "Here’s a preview of your current robots.txt output. Customize your robots.txt file below."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:164
+#: includes/assets/js/modules/advanced/robots/robots.js:168
 msgid "Robots.txt preview"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:172
+#: includes/assets/js/modules/advanced/robots/robots.js:177
 msgid "Include Sitemap"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:173
+#: includes/assets/js/modules/advanced/robots/robots.js:178
 msgid "It's really good practice to instruct search engines where to find your sitemap. If enabled, we will automatically add the required code to your robots file."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:179
+#: includes/assets/js/modules/advanced/robots/robots.js:184
 msgid "Link to my Sitemap"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:189
-#: includes/assets/js/modules/advanced/robots/robots.js:216
+#: includes/assets/js/modules/advanced/robots/robots.js:194
+#: includes/assets/js/modules/advanced/robots/robots.js:221
 msgid "Sitemap URL"
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/assets/js/modules/advanced/robots/robots.js:200
+#: includes/assets/js/modules/advanced/robots/robots.js:205
+#, js-format
 msgid "We've detected you're using <strong>%s</strong>'s built in sitemap and will output this for you automatically."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:218
+#: includes/assets/js/modules/advanced/robots/robots.js:223
 msgid "Copy and paste the URL to your sitemap. E.g <strong>/sitemap.xml</strong> or <strong>https://example.com/sitemap.xml</strong>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:234
+#: includes/assets/js/modules/advanced/robots/robots.js:240
 msgid "Customize"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:236
+#: includes/assets/js/modules/advanced/robots/robots.js:242
 msgid "Customize the robots.txt output here. We have <a>full documentation</a> on a range of examples and options for your robots.txt file."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/robots/robots.js:252
+#: includes/assets/js/modules/advanced/robots/robots.js:258
 msgid "Edit your robots.txt file"
 msgstr ""
 
@@ -6669,7 +7074,7 @@ msgid "Disabled component"
 msgstr ""
 
 #: includes/assets/js/modules/advanced/seomoz/connect.js:85
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:336
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:345
 msgid "Moz provides reports that tell you how your site stacks up against the competition with all of the important SEO measurement tools - ranking, links, and much more."
 msgstr ""
 
@@ -6717,31 +7122,31 @@ msgstr ""
 msgid "Reset API Credentials"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:106
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:112
 msgid "Measure of the mozRank <a>(?)</a> of the domain in the Linkscape index"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:145
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:151
 msgid "<strong>Domain Authority</strong> <a>(?)</a>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:181
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:187
 msgid "The number of external (from other subdomains), juice passing links <a>(?)</a> to the target URL in the Linkscape index"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:213
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:219
 msgid "The number of internal and external, juice and non-juice passing links <a>(?)</a> to the target URL in the Linkscape index"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:243
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:251
 msgid "Measure of the mozRank <a>(?)</a> of the homepage URL in the Linkscape index"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:282
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:290
 msgid "<strong>Homepage Authority</strong> <a>(?)</a>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/seomoz/seomoz.js:342
+#: includes/assets/js/modules/advanced/seomoz/seomoz.js:351
 msgid "No longer need MOZ? Deactivate MOZ here. This will also reset your MOZ credentials."
 msgstr ""
 
@@ -6749,95 +7154,95 @@ msgstr ""
 msgid "Use the WooCommerce SEO configurations below to add recommended Woo metadata and Product Schema to your WooCommerce site, helping you stand out in search results pages."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:37
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:38
 msgid "Improve Woo Schema"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:38
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:39
 msgid "Improve your site's WooCommerce Schema."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:46
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:47
 msgid "For these settings to be applied, the <a>Schema module</a> must first be enabled."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:64
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:65
 msgid "Brand"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:65
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:66
 msgid "Select the product taxonomy to use as Brand in Schema & OpenGraph markup."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:76
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:77
 msgid "Global Identifier"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:78
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:79
 msgid "Global Identifier key to use in the Product Schema. You can add a Global Identifier value for each product in the <strong>Inventory</strong> section of the <strong>Product Metabox</strong>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:102
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:103
 msgid "Enable Shop Schema"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:103
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:104
 msgid "Add schema data on the shop page."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:117
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:119
 msgid "Improve Woo Meta"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:118
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:120
 msgid "Improve your site's default WooCommerce Meta."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:126
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:128
 msgid "For these settings to be applied, OpenGraph Support must first be <a>enabled</a>."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:145
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:147
 msgid "Enable Product Open Graph"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:149
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:151
 msgid "If enabled, WooCommerce product data will be added to Open Graph."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:162
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:164
 msgid "Remove Generator Tag"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:164
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:166
 msgid "If enabled, the WooCommerce generator tag <strong><meta name=\"generator\" content=\"WooCommerce x.x.x\" /></strong> will be removed."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:179
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:182
 msgid "Restrict Search Engines"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:180
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:183
 msgid "Use these options to restrict Indexing or crawling of specific pages on the site."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:186
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:189
 msgid "Noindex Hidden Products"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:187
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:190
 msgid "Set Product Pages to noindex when WooCommerce Catalog visibility is set to hidden."
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:201
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:204
 msgid "Disallow Crawling of Cart, Checkout & My Account Pages"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/settings.js:206
+#: includes/assets/js/modules/advanced/woocommerce/settings.js:209
 msgid "If enabled, the following will be added to your Robots.txt file:<br/><strong>Disallow: /*add-to-cart=*<br/>Disallow: /cart/<br/>Disallow: /checkout/<br/>Disallow: /my-account/</strong>"
 msgstr ""
 
-#: includes/assets/js/modules/advanced/woocommerce/woocommerce.js:13
+#: includes/assets/js/modules/advanced/woocommerce/woocommerce.js:14
 msgid "Activate WooCommerce SEO to add the required metadata and Product Schema to your WooCommerce site, helping you stand out in search results."
 msgstr ""
 
@@ -6876,6 +7281,7 @@ msgstr ""
 
 #. translators: %s: plugin title
 #: includes/assets/js/modules/metabox/metabox-social.js:20
+#, js-format
 msgid "Customize this post's title, description and featured images for social shares. You can also configure the default settings for this post type in <strong>%s</strong>'s <a>Titles & Meta</a> area."
 msgstr ""
 
@@ -6885,6 +7291,7 @@ msgstr ""
 
 #. translators: %s: Level description
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:39
+#, js-format
 msgid "Your content is <strong>%s</strong>."
 msgstr ""
 
@@ -6966,11 +7373,13 @@ msgstr ""
 
 #. translators: %s keyphrase type label
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-bolded-keyword.js:41
+#, js-format
 msgid "You bolded your %s at least once in your content. Good work!"
 msgstr ""
 
 #. translators: %s keyphrase type label
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-bolded-keyword.js:77
+#, js-format
 msgid "Bold keyphrases can help visitors and Google identify what is important on the page. You should consider bolding this %s at least once in your content."
 msgstr ""
 
@@ -6980,16 +7389,19 @@ msgstr ""
 
 #. translators: %d Word count.
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-content-length.js:42
+#, js-format
 msgid "Your content is longer than the recommend minimum of %d words, excellent!"
 msgstr ""
 
 #. translators: %d Word count.
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-content-length.js:50
+#, js-format
 msgid "The best practice minimum content length for the web is %1$d words so we recommend you aim for at least this amount - the more the merrier."
 msgstr ""
 
 #. translators: %d Word count
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-content-length.js:96
+#, js-format
 msgid "Content is ultimately the bread and butter of your SEO. Without words, your pages and posts will have a hard time ranking for the keyphrases you want them to. As a base for any article best practice suggests a minimum of %d words, with 1000 being a good benchmark and 1600 being the optimal. Numerous studies have uncovered that longer content tends to perform better than shorter content, with pages having 1000 words or more performing best. Whilst optimizing your content for search engines is what we're going for here, a proven bi-product is that high quality long form articles also tend to get shared more on social platforms. With the increasing power of social media as a tool for traffic it's a nice flow on effect of writing those juicy high quality articles your readers are waiting for."
 msgstr ""
 
@@ -7003,6 +7415,7 @@ msgstr ""
 
 #. translators: %d images with focus count, %d image count.
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-imgalts-keywords.js:52
+#, js-format
 msgid "%1$d/%2$d images on this page have alt text with your keyphrase(s) which is too much. Whilst it’s great that you have image alternative text with your focus keyphrase(s), you can also get penalized for having too many keyphrases on a page. Try to include your keyphrase(s) in image alt texts only when it makes sense."
 msgstr ""
 
@@ -7012,6 +7425,7 @@ msgstr ""
 
 #. translators: %d images with focus count, %d image count.
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-imgalts-keywords.js:67
+#, js-format
 msgid "%1$d/%2$d images on this page have alt text with your chosen keyphrase(s). Alternative attribute text for images helps search engines correctly index images and aid visually impaired readers. It’s recommended practice to have your topic keyphrases in a good number of your images to further associate the article with the topic you’re writing about. Add your keyphrase(s) to a few more of your images, but be careful not to overdo it."
 msgstr ""
 
@@ -7021,46 +7435,55 @@ msgstr ""
 
 #. translators: 1, 2: Density range
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:37
+#, js-format
 msgid "Currently you haven't used any keyphrases in your content. The recommended density is %1$d-%2$d%%. A low keyphrase density means your content has less chance of ranking highly for your chosen focus keyphrases."
 msgstr ""
 
 #. translators: 1, 2: Density range, 3: Current density, 4: type of keyphrase
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:47
+#, js-format
 msgid "Your %4$s density is %3$s%% which is within the recommended %1$d-%2$d%%, nice work! This means your content has a better chance of ranking highly for your chosen focus keyphrases, without appearing as spam."
 msgstr ""
 
 #. translators: 1, 2: Density range, 3: Current density, 4: type of keyphrase
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:59
+#, js-format
 msgid "Currently your %4$s density is %3$s%% which is below the recommended %1$d-%2$d%%. A low keyphrase density means your content has less chance of ranking highly for your chosen focus keyphrases."
 msgstr ""
 
 #. translators: 1, 2: Density range, 3: Current density, 4: type for keyphrase
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:70
+#, js-format
 msgid "Currently your %4$s density is %3$s%% which is greater than the recommended %1$d-%2$d%%. If your content is littered with too many focus keyphrases, search engines can penalize your content and mark it as spam."
 msgstr ""
 
 #. translators: 1: primary or secondary, 2: low, 3: high
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:91
+#, js-format
 msgid "Your %1$s density is between %2$d%% and %3$d%%"
 msgstr ""
 
 #. translators: 1: primary or secondary, 2: low
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:102
+#, js-format
 msgid "Your %1$s density is less than %2$d%%"
 msgstr ""
 
 #. translators: 1: primary or secondary, 2: high
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:111
+#, js-format
 msgid "Your %1$s density is greater than %2$d%%"
 msgstr ""
 
 #. translators: 1, 2: Density range
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:127
+#, js-format
 msgid "Keyword density is all about making sure your content is populated with enough keyphrases to give it a better chance of appearing higher in search results. One way of making sure people will be able to find our content is using particular focus keyphrases, and using them as much as naturally possible in our content. In doing this we are trying to match up the keywords that people are likely to use when searching for this article or page, so try to get into your visitors mind and picture them typing a search into Google. While we recommend aiming for %1$d-%2$d%% density, remember content is king and you don't want your article to end up sounding like a robot. Get creative and utilize the page title, image caption, and subheadings."
 msgstr ""
 
 #. translators: 3: Number of internal links.
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-links-count.js:38
+#, js-format
 msgid "Internal links help search engines crawl your website, effectively pointing them to more pages to index on your website. You've already added %1$d links, nice work!"
 msgstr ""
 
@@ -7071,6 +7494,7 @@ msgstr ""
 
 #. translators: %d: Number of external links.
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-links-count.js:82
+#, js-format
 msgid "You have 0 internal and %d external links in your content"
 msgstr ""
 
@@ -7117,6 +7541,7 @@ msgstr ""
 
 #. translators: %d: Subheading count
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-subheadings-keywords.js:42
+#, js-format
 msgid "You've used this keyphrase in %d subheading(s), which will help the user and search engines quickly figure out the content on your page. Good work!"
 msgstr ""
 
@@ -7138,21 +7563,25 @@ msgstr ""
 
 #. translators: 1: primary or secondary, 2: Subheading count
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-subheadings-keywords.js:73
+#, js-format
 msgid "Your %1$s keyphrase was found in %2$d subheadings"
 msgstr ""
 
 #. translators: %s: primary or secondary
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-subheadings-keywords.js:82
+#, js-format
 msgid "You haven't used your %s keyphrase in any subheadings"
 msgstr ""
 
 #. translators: %s: keyphrase phrases
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-focus-stopwords.js:38
+#, js-format
 msgid "You kept the focus %s of your article to the point, way to go!"
 msgstr ""
 
 #. translators: %s: keyphrase phrases
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-focus-stopwords.js:46
+#, js-format
 msgid "Your focus %s contains some words that might be considered insignificant in a search query."
 msgstr ""
 
@@ -7161,7 +7590,7 @@ msgid "Stop words are words which can be considered insignificant in a search qu
 msgstr ""
 
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-focus.js:34
-msgid "In order to give your content the best possible chance to be discovered, it is best to select some focus keyphrases or key phrases, to give it some context."
+msgid "In order to give your content the best possible chance to be discovered, it is best to select some focus keyphrases to give it some context."
 msgstr ""
 
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-focus.js:38
@@ -7239,6 +7668,7 @@ msgstr ""
 
 #. translators: 1,2: Recommended range of characters
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-metadesc-length.js:93
+#, js-format
 msgid "We recommend keeping your meta descriptions between %1$d and %2$d characters (including spaces). Doing so achieves a nice balance between populating your description with keyphrases to rank highly in search engines, and also keeping it to a readable length that won't be cut off in search engine results. Unfortunately there isn't a rule book for SEO meta descriptions, just remember to make your description great for SEO, but also (most importantly) readable and enticing for potential visitors to click on."
 msgstr ""
 
@@ -7256,11 +7686,13 @@ msgstr ""
 
 #. translators: %s current post url.
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-slug-underscores.js:38
+#, js-format
 msgid "We have detected one or more underscores in the URL {%s}. Please consider removing them or replacing them with a hyphen (-). However, if you have already published this page, we don\\'t recommend removing the underscores (_) as it can cause short-term ranking loss. If you decide to remove the underscores in the URL of a published page, set up a 301 Redirect using the URL Redirection tool to direct traffic to the new URL. Learn more about <strong>URL Redirection</strong> on our <a>documentation</a>."
 msgstr ""
 
 #. translators: %s current post url.
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-slug-underscores.js:57
+#, js-format
 msgid "We didn't detect underscores in your page URL {%s}. Good job!"
 msgstr ""
 
@@ -7286,26 +7718,31 @@ msgstr ""
 
 #. translators: 1: Current length, 2,3: min/max length
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-title-length.js:41
+#, js-format
 msgid "Your SEO title is %1$d characters which is between the recommended best practice of %2$d-%3$d characters."
 msgstr ""
 
 #. translators: 1: Current length, 2,3: min/max length
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-title-length.js:52
+#, js-format
 msgid "Your SEO title is %1$d characters which is greater than the recommended %3$d characters. Best practice is between %2$d and %3$d characters, with 60 being the sweet spot."
 msgstr ""
 
 #. translators: 1: Current length, 2,3: min/max length
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-title-length.js:63
+#, js-format
 msgid "Your SEO title is %1$d characters which is less than the recommended %2$d characters. Best practice is between %2$d and %3$d characters, with 60 being the sweet spot."
 msgstr ""
 
 #. translators: 1: Current length, 2,3: min/max length
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-title-length.js:74
+#, js-format
 msgid "You have NOT written an SEO specific title for this article. We recommend an SEO specific title between %2$d and %3$d characters, optimized with your focus keyphrases."
 msgstr ""
 
 #. translators: 1: Current characters length, 2,3: Recommend length range
 #: includes/assets/js/modules/metabox/seo/checks/post/seo-analysis-check-title-length.js:105
+#, js-format
 msgid "Your SEO title is the most important element because it is what users will see in search engine results. You'll want to make sure that you have your focus keyphrases in there, that it's a nice length, and that people will want to click on it. Best practices suggest keeping your titles between %2$d and %3$d characters including spaces, though in some cases 60 is the sweetspot. The length is important both for SEO ranking but also how your title will show up in search engines - long titles will be cut off visually and look bad. Unfortunately there isn't a rule book for SEO titles, just remember to make your title great for SEO but also (most importantly) readable and enticing for potential visitors to click on."
 msgstr ""
 
@@ -7332,6 +7769,7 @@ msgstr ""
 #. translators: 1, 2: Min/max length
 #: includes/assets/js/modules/metabox/seo/google-preview.js:258
 #: includes/assets/js/modules/metabox/seo/google-preview.js:289
+#, js-format
 msgid " - Include your focus keyphrases. %1$d-%2$d characters recommended."
 msgstr ""
 
@@ -7345,6 +7783,7 @@ msgstr ""
 
 #. translators: %d: error count.
 #: includes/assets/js/modules/metabox/seo/seo-analysis-tab-content.js:122
+#, js-format
 msgid "You have %d SEO recommendation. We recommend you satisfy as many improvements as possible to ensure your content gets found."
 msgid_plural "You have %d SEO recommendations. We recommend you satisfy as many improvements as possible to ensure your content gets found."
 msgstr[0] ""
@@ -7359,27 +7798,28 @@ msgid "Primary"
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/assets/js/modules/settings/general/plugin-modules.js:13
-msgid "<strong>%s</strong> will look for keywords that match posts/pages around your website and automatically link them."
+#: includes/assets/js/modules/settings/general/plugin-modules.js:11
+#, js-format
+msgid "%s will look for keywords that match posts/pages around your website and automatically link them."
 msgstr ""
 
-#: includes/assets/js/modules/settings/general/plugin-modules.js:25
+#: includes/assets/js/modules/settings/general/plugin-modules.js:21
 msgid "Add recommended Woo Meta and Product schema to your WooCommerce site."
 msgstr ""
 
-#: includes/assets/js/modules/settings/general/plugin-modules.js:29
+#: includes/assets/js/modules/settings/general/plugin-modules.js:25
 msgid "Moz provides reports that tell you how your site stacks up against the competition with all of the important SEO measurement tools etc."
 msgstr ""
 
-#: includes/assets/js/modules/settings/general/plugin-modules.js:33
+#: includes/assets/js/modules/settings/general/plugin-modules.js:29
 msgid "A robots.txt file tells bots what to index on your site and where they are."
 msgstr ""
 
-#: includes/assets/js/modules/settings/general/plugin-modules.js:37
+#: includes/assets/js/modules/settings/general/plugin-modules.js:33
 msgid "Add breadcrumb trails to your web pages to indicate the page's position in the site hierarchy and help users understand and explore your site effectively."
 msgstr ""
 
-#: includes/assets/js/modules/settings/general/plugin-modules.js:111
+#: includes/assets/js/modules/settings/general/plugin-modules.js:107
 msgid "Hide disabled modules from the Dashboard and sub-menu"
 msgstr ""
 

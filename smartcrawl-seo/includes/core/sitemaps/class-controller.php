@@ -44,21 +44,7 @@ class Controller extends Controllers\Controller {
 				'json_update_sitemap',
 			)
 		);
-		add_action(
-			'wp_ajax_wds_update_engines',
-			array(
-				$this,
-				'json_update_engines',
-			)
-		);
 
-		add_action(
-			'wp_ajax_wds-manually-update-engines',
-			array(
-				$this,
-				'json_manually_update_engines',
-			)
-		);
 		add_action(
 			'wp_ajax_wds-manually-update-sitemap',
 			array(
@@ -186,15 +172,6 @@ class Controller extends Controllers\Controller {
 		}
 
 		Utils::prime_cache( false );
-	}
-
-	/**
-	 * Manually updates the search engines.
-	 *
-	 * @return void
-	 */
-	public function json_manually_update_engines() {
-		Utils::notify_engines( true );
 	}
 
 	/**
@@ -343,16 +320,6 @@ class Controller extends Controllers\Controller {
 	public function json_update_sitemap() {
 		$this->invalidate_sitemap_cache();
 		Utils::prime_cache( true );
-		die( 1 );
-	}
-
-	/**
-	 * Updates the search engines via AJAX.
-	 *
-	 * @return void
-	 */
-	public function json_update_engines() {
-		Utils::notify_engines( 1 );
 		die( 1 );
 	}
 

@@ -54,7 +54,7 @@ if ( $lighthouse_cron_enabled ) {
 }
 ?>
 
-<div class="sui-box-settings-row <?php echo $is_member ? '' : 'sui-disabled'; ?>">
+<div id="wds-seo-reporting" class="sui-box-settings-row <?php echo $is_member ? '' : 'sui-disabled'; ?>">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Configure', 'smartcrawl-seo' ); ?>

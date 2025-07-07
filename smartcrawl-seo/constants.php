@@ -9,8 +9,8 @@
 /**
  * Internal constants, not to be overridden
  */
-const SMARTCRAWL_VERSION     = '3.13.1';
-const SMARTCRAWL_BUILD       = '1745491742665';
+const SMARTCRAWL_VERSION     = '3.14.0';
+const SMARTCRAWL_BUILD       = '1751280841512';
 const SMARTCRAWL_BUILD_TYPE  = 'free';
 const SMARTCRAWL_SUI_VERSION = '2.12.23';
 const SMARTCRAWL_PACKAGE_ID  = 167;
@@ -37,9 +37,6 @@ if ( ! defined( 'SMARTCRAWL_SITEMAP_SKIP_IMAGES' ) ) {
 }
 if ( ! defined( 'SMARTCRAWL_SITEMAP_SKIP_TAXONOMIES' ) ) {
 	define( 'SMARTCRAWL_SITEMAP_SKIP_TAXONOMIES', false );
-}
-if ( ! defined( 'SMARTCRAWL_SITEMAP_SKIP_SE_NOTIFICATION' ) ) {
-	define( 'SMARTCRAWL_SITEMAP_SKIP_SE_NOTIFICATION', false );
 }
 if ( ! defined( 'SMARTCRAWL_EXPERIMENTAL_FEATURES_ON' ) ) {
 	define( 'SMARTCRAWL_EXPERIMENTAL_FEATURES_ON', false );

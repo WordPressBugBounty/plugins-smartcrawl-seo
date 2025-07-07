@@ -12,6 +12,7 @@ $is_active           = empty( $is_active ) ? false : $is_active;
 $tab_sections        = ! empty( $tab_sections ) && is_array( $tab_sections ) ? $tab_sections : array();
 $title_actions_left  = empty( $title_actions_left ) ? false : $title_actions_left;
 $title_actions_right = empty( $title_actions_right ) ? false : $title_actions_right;
+$is_header           = ! isset( $is_header ) || $is_header;
 
 // Optional.
 $button_text = isset( $button_text ) ? $button_text : esc_html__( 'Save Settings', 'smartcrawl-seo' );
@@ -24,23 +25,25 @@ $first_section = true;
 	class="wds-vertical-tab-section sui-box <?php echo esc_attr( $tab_id ); ?> <?php echo $is_active ? '' : 'hidden'; ?>"
 	id="<?php echo esc_attr( $tab_id ); ?>"
 >
-	<div class="sui-box-header">
-		<h2 class="sui-box-title">
-			<?php echo esc_html( $tab_name ); ?>
-		</h2>
+	<?php if ( $is_header ) : ?>
+        <div class="sui-box-header">
+            <h2 class="sui-box-title">
+                <?php echo esc_html( $tab_name ); ?>
+            </h2>
 
-		<?php if ( $title_actions_left ) : ?>
-			<div class="sui-actions-left">
-				<?php $this->render_view( $title_actions_left ); ?>
-			</div>
-		<?php endif; ?>
+            <?php if ( $title_actions_left ) : ?>
+                <div class="sui-actions-left">
+                    <?php $this->render_view( $title_actions_left ); ?>
+                </div>
+            <?php endif; ?>
 
-		<?php if ( $title_actions_right ) : ?>
-			<div class="sui-actions-right">
-				<?php $this->render_view( $title_actions_right ); ?>
-			</div>
-		<?php endif; ?>
-	</div>
+            <?php if ( $title_actions_right ) : ?>
+                <div class="sui-actions-right">
+                    <?php $this->render_view( $title_actions_right ); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+	<?php endif; ?>
 
 	<div class="<?php echo $is_singular ? 'sui-box-body' : 'sui-accordion sui-accordion-flushed'; ?>">
 		<?php foreach ( $tab_sections as $section ) : ?>

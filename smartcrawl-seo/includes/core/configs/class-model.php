@@ -142,13 +142,14 @@ class Model {
 	 */
 	private function prepare_strings() {
 		return array(
-			'health'   => $this->prepare_health_string(),
-			'onpage'   => $this->prepare_onpage_string(),
-			'schema'   => $this->prepare_schema_string(),
-			'social'   => $this->prepare_social_string(),
-			'sitemap'  => $this->prepare_sitemap_string(),
-			'advanced' => $this->prepare_advanced_string(),
-			'settings' => $this->prepare_settings_strings(),
+			'health'           => $this->prepare_health_string(),
+			'onpage'           => $this->prepare_onpage_string(),
+			'instant_indexing' => $this->prepare_instant_indexing_string(),
+			'schema'           => $this->prepare_schema_string(),
+			'social'           => $this->prepare_social_string(),
+			'sitemap'          => $this->prepare_sitemap_string(),
+			'advanced'         => $this->prepare_advanced_string(),
+			'settings'         => $this->prepare_settings_strings(),
 		);
 	}
 
@@ -161,13 +162,14 @@ class Model {
 	 */
 	public function get_label( $module ) {
 		$labels = array(
-			'health'   => esc_html__( 'Health', 'smartcrawl-seo' ),
-			'onpage'   => esc_html__( 'Title & Meta', 'smartcrawl-seo' ),
-			'schema'   => esc_html__( 'Schema', 'smartcrawl-seo' ),
-			'social'   => esc_html__( 'Social', 'smartcrawl-seo' ),
-			'sitemap'  => esc_html__( 'Sitemap', 'smartcrawl-seo' ),
-			'advanced' => esc_html__( 'Advanced Tools', 'smartcrawl-seo' ),
-			'settings' => esc_html__( 'Settings', 'smartcrawl-seo' ),
+			'health'           => esc_html__( 'Health', 'smartcrawl-seo' ),
+			'onpage'           => esc_html__( 'Title & Meta', 'smartcrawl-seo' ),
+			'schema'           => esc_html__( 'Schema', 'smartcrawl-seo' ),
+			'instant_indexing' => esc_html__( 'Instant Indexing', 'smartcrawl-seo' ),
+			'social'           => esc_html__( 'Social', 'smartcrawl-seo' ),
+			'sitemap'          => esc_html__( 'Sitemap', 'smartcrawl-seo' ),
+			'advanced'         => esc_html__( 'Advanced Tools', 'smartcrawl-seo' ),
+			'settings'         => esc_html__( 'Settings', 'smartcrawl-seo' ),
 		);
 
 		return (string) \smartcrawl_get_array_value( $labels, $module );
@@ -197,6 +199,17 @@ class Model {
 	 */
 	private function prepare_onpage_string() {
 		return Settings::get_setting( 'onpage' )
+			? esc_html__( 'Active', 'smartcrawl-seo' )
+			: esc_html__( 'Inactive', 'smartcrawl-seo' );
+	}
+
+	/**
+	 * Prepares string for Instant Indexing
+	 *
+	 * @return string
+	 */
+	private function prepare_instant_indexing_string() {
+		return Settings::get_setting( 'instant_indexing' )
 			? esc_html__( 'Active', 'smartcrawl-seo' )
 			: esc_html__( 'Inactive', 'smartcrawl-seo' );
 	}

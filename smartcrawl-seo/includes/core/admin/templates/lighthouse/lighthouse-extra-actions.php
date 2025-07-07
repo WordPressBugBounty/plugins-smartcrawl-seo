@@ -27,6 +27,7 @@ if ( ! $lighthouse_report || ! $lighthouse_report->has_data() || $lighthouse_rep
 ?>
 <div class="wds-lh-device">
 	<a
+		id="wds-seo-desktop"
 		class="<?php echo 'desktop' === $device ? 'active' : 'sui-tooltip'; ?>"
 		data-tooltip="<?php esc_html_e( 'Apply desktop simulation', 'smartcrawl-seo' ); ?>"
 		href="<?php echo esc_attr( $desktop_url ); ?>"
@@ -34,6 +35,7 @@ if ( ! $lighthouse_report || ! $lighthouse_report->has_data() || $lighthouse_rep
 		<span class="sui-icon-monitor" aria-hidden="true"></span> <?php esc_html_e( 'Desktop', 'smartcrawl-seo' ); ?>
 	</a>
 	<a
+        id="wds-seo-mobile"
 		class="<?php echo 'mobile' === $device ? 'active' : 'sui-tooltip'; ?>"
 		data-tooltip="<?php esc_html_e( 'Apply mobile simulation', 'smartcrawl-seo' ); ?>"
 		href="<?php echo esc_attr( $mobile_url ); ?>"

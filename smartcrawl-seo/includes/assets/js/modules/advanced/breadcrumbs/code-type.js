@@ -1,12 +1,11 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-import Button from '../../../components/button';
 import SideTabs from '../../../components/side-tabs';
 import SettingsRow from '../../../components/settings-row';
 import NoticeUtil from '../../../utils/notice-util';
 import { createInterpolateElement } from '@wordpress/element';
 import FloatingNoticePlaceholder from '../../../components/floating-notice-placeholder';
-import TextInputField from '../../../components/form-fields/text-input-field';
+import CodeSnippet from '../../../components/code-snippet';
 
 export default class CodeType extends React.Component {
 	constructor(props) {
@@ -22,6 +21,7 @@ export default class CodeType extends React.Component {
 
 		return (
 			<SettingsRow
+				id="wds-breadcrumb-code"
 				label={__('Add Breadcrumbs to your Webpage', 'smartcrawl-seo')}
 				description={__(
 					'You can add breadcrumbs to any page on your website using the ‘shortcode’ on the post editor, or the ‘PHP code’ on the template page.',
@@ -39,74 +39,50 @@ export default class CodeType extends React.Component {
 					onChange={(checked) => this.handleChange(checked)}
 				>
 					{codeType === '0' && (
-						<>
-							<TextInputField
-								readOnly
-								value="[smartcrawl_breadcrumbs]"
-								suffix={
-									<Button
-										icon="sui-icon-copy"
-										text={__('Copy', 'smartcrawl-seo')}
-										onClick={() =>
-											this.handleCopy(codeType)
-										}
-									></Button>
-								}
-							></TextInputField>
-							<p className="sui-description">
-								{createInterpolateElement(
-									__(
-										'Copy the shortcode and paste it to the desired location in the post editor to display the breadcrumbs on your page or post. <a>Learn more</a>',
-										'smartcrawl-seo'
+						<CodeSnippet
+							snippet="[smartcrawl_breadcrumbs]"
+							description={createInterpolateElement(
+								__(
+									'Copy the shortcode and paste it to the desired location in the post editor to display the breadcrumbs on your page or post. <a>Learn more</a>',
+									'smartcrawl-seo'
+								),
+								{
+									a: (
+										<a
+											href="https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/#add-breadcrumbs"
+											target="_blank"
+											rel="noreferrer"
+											className="learn-more"
+										/>
 									),
-									{
-										a: (
-											<a
-												href="https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/#add-breadcrumbs"
-												target="_blank"
-												rel="noreferrer"
-												className="learn-more"
-											/>
-										),
-									}
-								)}
-							</p>
-						</>
+								}
+							)}
+							onCopy={() => this.handleCopy(codeType)}
+						/>
 					)}
 					{codeType === '1' && (
-						<>
-							<TextInputField
-								readOnly
-								value="<?php smartcrawl_breadcrumbs(); ?>"
-								suffix={
-									<Button
-										icon="sui-icon-copy"
-										text={__('Copy', 'smartcrawl-seo')}
-										onClick={() =>
-											this.handleCopy(codeType)
-										}
-									></Button>
-								}
-							></TextInputField>
-							<p className="sui-description">
-								{createInterpolateElement(
-									__(
-										'Copy the PHP code and paste it in the desired location within template editor to display the breadcrumbs on your page or post. <a>Learn more</a>',
-										'smartcrawl-seo'
+						<CodeSnippet
+							snippet={
+								"<?php\n if ( function_exists( 'smartcrawl_breadcrumbs' ) ) {\n    smartcrawl_breadcrumbs();\n } \n?>"
+							}
+							description={createInterpolateElement(
+								__(
+									'Copy the PHP code and paste it in the desired location within template editor to display the breadcrumbs on your page or post. <a>Learn more</a>',
+									'smartcrawl-seo'
+								),
+								{
+									a: (
+										<a
+											href="https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/#add-breadcrumbs"
+											target="_blank"
+											rel="noreferrer"
+											className="learn-more"
+										/>
 									),
-									{
-										a: (
-											<a
-												href="https://wpmudev.com/docs/wpmu-dev-plugins/smartcrawl/#add-breadcrumbs"
-												target="_blank"
-												rel="noreferrer"
-												className="learn-more"
-											/>
-										),
-									}
-								)}
-							</p>
-						</>
+								}
+							)}
+							onCopy={() => this.handleCopy(codeType)}
+						/>
 					)}
 				</SideTabs>
 			</SettingsRow>
@@ -143,7 +119,9 @@ export default class CodeType extends React.Component {
 		}
 		if (codeType === '1') {
 			navigator.clipboard
-				.writeText('<?php smartcrawl_breadcrumbs(); ?>')
+				.writeText(
+					"<?php if ( function_exists( 'smartcrawl_breadcrumbs' ) ) {\n    smartcrawl_breadcrumbs();\n} ?>"
+				)
 				.then(() => {
 					NoticeUtil.showSuccessNotice(
 						'smartcrawl-breadcrumb-copied',

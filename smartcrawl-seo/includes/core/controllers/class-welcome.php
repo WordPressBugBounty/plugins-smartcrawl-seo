@@ -7,6 +7,7 @@
 
 namespace SmartCrawl\Controllers;
 
+use SmartCrawl\Services\Service;
 use SmartCrawl\SmartCrawl;
 use SmartCrawl\Settings;
 use SmartCrawl\Singleton;
@@ -87,13 +88,26 @@ class Welcome extends Controller {
 			wp_send_json_error();
 		}
 
+		$admin_url = 'https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_instant-indexing_upgrade-modal_upgrade-button';
+
+		// Check if the user is a member of WPMU DEV.
+		$service = Service::get( Service::SERVICE_SITE );
+		if ( $service->is_member() ) {
+			$options                                    = Settings::get_specific_options( 'wds_settings_options' );
+			$options[ Settings::COMP_INSTANT_INDEXING ] = 1;
+			Settings::update_specific_options( 'wds_settings_options', $options );
+			$admin_url = admin_url( 'admin.php?page=wds_instant_indexing' );
+		}
+
 		// Set flag for dismissal.
 		Settings::update_specific_options(
 			self::WELCOME_MODAL_DISMISSED_OPTION,
 			SMARTCRAWL_VERSION
 		);
 
-		wp_send_json_success();
+		wp_send_json_success( array(
+			'redirect_url' => esc_url( $admin_url ),
+		) );
 	}
 
 	/**

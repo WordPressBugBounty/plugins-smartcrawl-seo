@@ -184,13 +184,14 @@ class Network_Settings extends Page {
 	 * @return void
 	 */
 	public function options_page() {
-		$arguments['slugs']                = array(
-			Settings::TAB_ONPAGE      => __( 'Title & Meta', 'smartcrawl-seo' ),
-			Settings::TAB_SCHEMA      => __( 'Schema', 'smartcrawl-seo' ),
-			Settings::TAB_SOCIAL      => __( 'Social', 'smartcrawl-seo' ),
-			Settings::TAB_SITEMAP     => __( 'Sitemaps', 'smartcrawl-seo' ),
-			Settings::ADVANCED_MODULE => __( 'Advanced Tools', 'smartcrawl-seo' ),
-			Settings::TAB_SETTINGS    => __( 'Settings', 'smartcrawl-seo' ),
+		$arguments['slugs'] = array(
+			Settings::TAB_ONPAGE           => __( 'Title & Meta', 'smartcrawl-seo' ),
+			Settings::TAB_SCHEMA           => __( 'Schema', 'smartcrawl-seo' ),
+			Settings::TAB_INSTANT_INDEXING => __( 'Instant Indexing', 'smartcrawl-seo' ),
+			Settings::TAB_SOCIAL           => __( 'Social', 'smartcrawl-seo' ),
+			Settings::TAB_SITEMAP          => __( 'Sitemaps', 'smartcrawl-seo' ),
+			Settings::ADVANCED_MODULE      => __( 'Advanced Tools', 'smartcrawl-seo' ),
+			Settings::TAB_SETTINGS         => __( 'Settings', 'smartcrawl-seo' ),
 		);
 		$arguments['blog_tabs']            = \SmartCrawl\Admin\Settings\Settings::get_blog_tabs();
 		$arguments['subsite_manager_role'] = get_site_option( 'wds_subsite_manager_role' );

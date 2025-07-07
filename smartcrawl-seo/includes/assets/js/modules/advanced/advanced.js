@@ -11,18 +11,6 @@ import Robots from './robots/robots';
 import ModuleProvider from '../../components/layout/module-provider';
 
 export default class Advanced extends React.Component {
-	componentDidMount() {
-		if (parseInt(ConfigValues.get('new_feature_status', 'admin')) > 0) {
-			return;
-		}
-
-		RequestUtil.post(
-			'smartcrawl_new_feature_status',
-			ConfigValues.get('nonce', 'admin'),
-			{ step: 1 }
-		);
-	}
-
 	render() {
 		return (
 			<ModuleProvider

@@ -43,7 +43,7 @@ if ( $sitemap_cache->is_writable() ) {
 }
 if ( $native_sitemap_available ) {
 	?>
-	<div class="sui-box-settings-row">
+	<div id="wds-sitemap-switch-core" class="sui-box-settings-row">
 		<div class="sui-box-settings-col-1">
 			<label class="sui-settings-label">
 				<?php esc_html_e( 'Switch to WP core Sitemap', 'smartcrawl-seo' ); ?>

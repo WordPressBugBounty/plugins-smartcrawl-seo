@@ -18,6 +18,7 @@ $attributes                 = empty( $attributes ) ? array() : $attributes;
 $sub_settings_template      = empty( $sub_settings_template ) ? '' : $sub_settings_template;
 $sub_settings_template_args = empty( $sub_settings_template_args ) ? array() : $sub_settings_template_args;
 $sub_settings_border        = isset( $sub_settings_border ) ? $sub_settings_border : true;
+$is_pro                     = empty( $is_pro ) ? false : $is_pro;
 
 $attr_string = '';
 foreach ( $attributes as $attribute => $attribute_value ) {
@@ -47,6 +48,9 @@ $checkbox_checked = ( $inverted && ! $checked ) || ( ! $inverted && $checked );
 				aria-controls="sub-settings-<?php echo esc_attr( $field_id ); ?>"
 			<?php endif; ?>
 			<?php echo wp_kses_post( $attr_string ); ?>
+			<?php if ( $is_pro ) : ?>
+				disabled="disabled"
+			<?php endif; ?>
 		/>
 
 		<span class="sui-toggle-slider" aria-hidden="true"></span>
@@ -61,6 +65,12 @@ $checkbox_checked = ( $inverted && ! $checked ) || ( ! $inverted && $checked );
 				echo wp_kses_post( $html_label );
 			}
 			?>
+			<?php if ( $is_pro ) : ?>
+				<span class="sui-tag sui-tag-pro sui-tooltip"
+					  data-tooltip="<?php esc_html_e( 'Upgrade to SmartCrawl Pro', 'smartcrawl-seo' ); ?>">
+					<?php esc_html_e( 'Pro', 'smartcrawl-seo' ); ?>
+				</span>
+			<?php endif; ?>
 		</span>
 
 		<div id="description-<?php echo esc_attr( $field_id ); ?>" class="sui-description">

@@ -65,7 +65,7 @@ class New_Feature extends Controller {
 	public function admin_settings_submenu_title( $menu_name, $slug ) {
 		$viewed = (int) Settings::get_specific_options( 'wds-features-viewed', 0 );
 
-		if ( Settings::ADVANCED_MODULE === $slug && $viewed < 1 ) {
+		if ( Settings::TAB_INSTANT_INDEXING === $slug && $viewed < 1 ) {
 			$menu_name .= '<span class="wds-new-feature-status"></span>';
 		}
 

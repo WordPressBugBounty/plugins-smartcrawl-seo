@@ -43,7 +43,16 @@ export default class Button extends React.Component {
 			dashed,
 			onClick,
 			value,
+			...rest
 		} = this.props;
+
+		// Extract data attributes
+		const dataAttrs = Object.keys(rest)
+			.filter((key) => key.startsWith('data-'))
+			.reduce((obj, key) => {
+				obj[key] = rest[key];
+				return obj;
+			}, {});
 
 		let HtmlTag, props;
 
@@ -90,6 +99,7 @@ export default class Button extends React.Component {
 		return (
 			<>
 				<HtmlTag
+					{...dataAttrs}
 					{...props}
 					className={classnames(
 						className,

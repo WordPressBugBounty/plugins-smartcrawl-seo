@@ -36,6 +36,7 @@ class Controller extends Controllers\Submodule_Controller {
 
 		$this->module_title = __( 'Moz', 'smartcrawl-seo' );
 		$this->event_name   = 'Moz';
+		$this->class_name   = 'tab_moz';
 	}
 
 	/**

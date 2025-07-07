@@ -50,6 +50,7 @@ $this->render_view(
 $this->render_view(
 	'onpage/onpage-meta-robots',
 	array(
-		'items' => $post_type_robots,
+		'for_type' => $post_type,
+		'items'    => $post_type_robots,
 	)
 );

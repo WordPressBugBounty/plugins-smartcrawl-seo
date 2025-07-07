@@ -50,6 +50,8 @@ class Admin extends Controllers\Controller {
 					'smartcrawl-pro_page_wds_onpage',
 					'smartcrawl-pro_page_wds_schema-network',
 					'smartcrawl-pro_page_wds_schema',
+					'smartcrawl-pro_page_wds_instant_indexing-network',
+					'smartcrawl-pro_page_wds_instant_indexing',
 					'smartcrawl-pro_page_wds_social-network',
 					'smartcrawl-pro_page_wds_social',
 					'smartcrawl-pro_page_wds_sitemap-network',
@@ -87,10 +89,11 @@ class Admin extends Controllers\Controller {
 		$hide_disables = \smartcrawl_get_array_value( $settings_opts, 'hide_disables', true );
 
 		$modules = array(
-			'onpage'  => Admin_Settings\Onpage::get(),
-			'schema'  => Admin_Settings\Schema::get(),
-			'social'  => Admin_Settings\Social::get(),
-			'sitemap' => Admin_Settings\Sitemap::get(),
+			'onpage'           => Admin_Settings\Onpage::get(),
+			'schema'           => Admin_Settings\Schema::get(),
+			'instant_indexing' => Admin_Settings\Instant_Indexing::get(),
+			'social'           => Admin_Settings\Social::get(),
+			'sitemap'          => Admin_Settings\Sitemap::get(),
 		);
 
 		foreach ( $modules as $module_name => $module_handler ) {
@@ -123,6 +126,7 @@ class Admin extends Controllers\Controller {
 			'onpage',
 			'social',
 			'schema',
+			'instant_indexing'
 		);
 
 		foreach ( $modules as $module ) {
@@ -149,6 +153,7 @@ class Admin extends Controllers\Controller {
 			'onpage',
 			'social',
 			'schema',
+			'instant_indexing',
 		);
 
 		foreach ( $modules as $module ) {

@@ -12,7 +12,7 @@ $social_options = empty( $social_options ) ? array() : $social_options;
 $schema_enable_test_button = (bool) \smartcrawl_get_array_value( $options, 'schema_enable_test_button' );
 ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-social-deactivate" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Deactivate', 'smartcrawl-seo' ); ?>

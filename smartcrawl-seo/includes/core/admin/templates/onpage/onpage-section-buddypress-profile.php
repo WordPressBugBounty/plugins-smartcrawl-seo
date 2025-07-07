@@ -37,6 +37,7 @@ $this->render_view(
 $this->render_view(
 	'onpage/onpage-meta-robots',
 	array(
-		'items' => $meta_robots_bp_profile,
+		'for_type' => 'bp_profile',
+		'items'    => $meta_robots_bp_profile,
 	)
 );

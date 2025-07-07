@@ -39,7 +39,7 @@ $post_types = empty( $post_types ) ? array() : $post_types;
 $taxonomies = empty( $taxonomies ) ? array() : $taxonomies;
 ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-special-page" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Special Pages', 'smartcrawl-seo' ); ?>
@@ -85,7 +85,7 @@ $taxonomies = empty( $taxonomies ) ? array() : $taxonomies;
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-structured-data" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Structured Data', 'smartcrawl-seo' ); ?>
@@ -120,7 +120,7 @@ $taxonomies = empty( $taxonomies ) ? array() : $taxonomies;
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-default-image" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Default Image', 'smartcrawl-seo' ); ?>
@@ -148,7 +148,7 @@ $taxonomies = empty( $taxonomies ) ? array() : $taxonomies;
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-author" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Author', 'smartcrawl-seo' ); ?>
@@ -184,7 +184,7 @@ $taxonomies = empty( $taxonomies ) ? array() : $taxonomies;
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-archives" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Archives', 'smartcrawl-seo' ); ?>
@@ -369,7 +369,7 @@ $taxonomies = empty( $taxonomies ) ? array() : $taxonomies;
 	</div>
 </div>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-media-objects" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Media objects', 'smartcrawl-seo' ); ?>

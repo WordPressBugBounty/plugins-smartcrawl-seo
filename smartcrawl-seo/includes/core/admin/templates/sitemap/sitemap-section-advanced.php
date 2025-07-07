@@ -11,8 +11,6 @@ $automatically_switched = empty( $automatically_switched ) ? false : $automatica
 $total_post_count       = empty( $total_post_count ) ? 0 : $total_post_count;
 $option_name            = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $regeneration_method    = \SmartCrawl\Sitemaps\Utils::get_regeneration_method();
-$ping_google            = ! empty( $_view['options']['ping-google'] );
-$ping_bing              = ! empty( $_view['options']['ping-bing'] );
 ?>
 
 <?php $this->render_view( 'sitemap/sitemap-split-setting' ); ?>
@@ -21,6 +19,7 @@ $ping_bing              = ! empty( $_view['options']['ping-bing'] );
 $this->render_view(
 	'toggle-group',
 	array(
+		'id'          => 'wds-sitemap-include-images',
 		'label'       => esc_html__( 'Include images', 'smartcrawl-seo' ),
 		'description' => esc_html__( 'If your posts contain imagery you would like others to be able to search, this setting will help Google Images index them correctly.', 'smartcrawl-seo' ),
 		'items'       => array(
@@ -33,53 +32,10 @@ $this->render_view(
 	)
 );
 
-?>
-<div class="sui-box-settings-row">
-	<div class="sui-box-settings-col-1">
-		<label class="sui-settings-label">
-			<?php esc_html_e( 'Auto-notify search engines', 'smartcrawl-seo' ); ?>
-		</label>
-
-		<span class="sui-description">
-			<?php
-			printf(
-				/* translators: 1,2: strong tag, 3: plugin title */
-				esc_html__( 'By default, %1$s%3$s%2$s will auto-notify Google and Bing whenever your sitemap changes. Alternatively, you can manually notify search engines.', 'smartcrawl-seo' ),
-				'<strong>',
-				'</strong>',
-				esc_html( \smartcrawl_get_plugin_title() )
-			);
-			?>
-		</span>
-	</div>
-	<div class="sui-box-settings-col-2">
-		<?php
-		$this->render_view(
-			'side-tabs',
-			array(
-				'id'    => 'wds-auto-notify-engines-tabs',
-				'name'  => "{$option_name}[auto-notify-search-engines]",
-				'value' => $ping_google && $ping_bing ? '1' : '',
-				'tabs'  => array(
-					array(
-						'value' => '1',
-						'label' => esc_html__( 'Automatic', 'smartcrawl-seo' ),
-					),
-					array(
-						'value'    => '',
-						'label'    => esc_html__( 'Manual', 'smartcrawl-seo' ),
-						'template' => 'sitemap/sitemap-manually-notify-search-engines',
-					),
-				),
-			)
-		);
-		?>
-	</div>
-</div>
-<?php
 $this->render_view(
 	'toggle-group',
 	array(
+		'id'          => 'wds-sitemap-styles',
 		'label'       => esc_html__( 'Style sitemap', 'smartcrawl-seo' ),
 		'description' => esc_html__( 'Adds some nice styling to your sitemap.', 'smartcrawl-seo' ),
 		'separator'   => true,
@@ -94,7 +50,7 @@ $this->render_view(
 );
 ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-sitemap-automatic-update" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Automatic sitemap updates', 'smartcrawl-seo' ); ?>

@@ -9,18 +9,21 @@ namespace SmartCrawl;
 
 use SmartCrawl\Services\Service;
 
-$content         = empty( $content ) ? '' : $content;
-$image           = empty( $image ) ? 'empty-box.svg' : $image;
-$component       = empty( $component ) ? '' : $component;
-$is_member       = Service::get( Service::SERVICE_SITE )->is_member();
-$upgrade_tag     = empty( $upgrade_tag ) ? '' : $upgrade_tag;
-$premium_feature = ! empty( $premium_feature );
-$notice          = empty( $notice ) ? '' : $notice;
-$button_url      = empty( $button_url ) ? '' : $button_url;
-$button_icon     = empty( $button_icon ) ? '' : $button_icon;
-$button_disabled = empty( $button_disabled ) ? false : $button_disabled;
-$button_name     = empty( $button_name ) ? '' : $button_name;
-$button_text     = empty( $button_text ) ? '' : $button_text;
+$content             = empty( $content ) ? '' : $content;
+$image               = empty( $image ) ? 'empty-box.svg' : $image;
+$component           = empty( $component ) ? '' : $component;
+$is_member           = Service::get( Service::SERVICE_SITE )->is_member();
+$upgrade_tag         = empty( $upgrade_tag ) ? '' : $upgrade_tag;
+$premium_feature     = ! empty( $premium_feature );
+$notice              = empty( $notice ) ? '' : $notice;
+$button_url          = empty( $button_url ) ? '' : $button_url;
+$button_icon         = empty( $button_icon ) ? '' : $button_icon;
+$button_disabled     = empty( $button_disabled ) ? false : $button_disabled;
+$button_name         = empty( $button_name ) ? '' : $button_name;
+$button_text         = empty( $button_text ) ? '' : $button_text;
+$upgrade_button_text = empty( $upgrade_button_text ) ? esc_html__( 'Upgrade to Pro', 'smartcrawl-seo' ) : $upgrade_button_text;
+$button_class        = empty( $button_class ) ? '' : $button_class;
+$button_color        = empty( $button_color ) ? 'blue' : $button_color;
 
 $image_url   = sprintf( '%s/assets/images/%s', SMARTCRAWL_PLUGIN_URL, $image );
 $image_url   = \SmartCrawl\Controllers\White_Label::get()->get_wpmudev_hero_image( $image_url );
@@ -56,12 +59,12 @@ $upgrade_url = 'https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source
 			target="_blank"
 			href="<?php echo esc_attr( $upgrade_url ); ?>"
 		>
-			<?php esc_html_e( 'Upgrade to Pro', 'smartcrawl-seo' ); ?>
+			<?php echo esc_html( $upgrade_button_text ); ?>
 		</a>
 	<?php else : ?>
 		<?php if ( $button_url ) : ?>
 			<a
-				class="sui-button sui-button-blue <?php echo $button_disabled ? 'disabled' : ''; ?>"
+				class="sui-button sui-button-<?php echo esc_attr( $button_color ); ?> <?php echo esc_attr( $button_class ) . ( $button_disabled ? 'disabled' : '' ); ?>"
 				href="<?php echo esc_attr( $button_url ); ?>"
 			>
 				<?php if ( $button_icon ) : ?>
@@ -71,14 +74,14 @@ $upgrade_url = 'https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source
 			</a>
 		<?php elseif ( $button_name ) : ?>
 			<button
-				class="sui-button sui-button-blue <?php echo $button_disabled ? 'disabled' : ''; ?>"
+				class="sui-button sui-button-<?php echo esc_attr( $button_color ); ?> <?php echo esc_attr( $button_class ) . ( $button_disabled ? 'disabled' : '' ); ?>"
 				type="submit"
 				name="<?php echo esc_attr( $button_name ); ?>"
 				value="1"
 			><?php echo esc_attr( $button_text ); ?></button>
 		<?php else : ?>
 			<input
-				class="sui-button sui-button-blue <?php echo $button_disabled ? 'disabled' : ''; ?>"
+				class="sui-button sui-button-<?php echo esc_attr( $button_color ); ?> <?php echo esc_attr( $button_class ) . ( $button_disabled ? 'disabled' : '' ); ?>"
 				type="submit"
 				name="submit"
 				value="<?php echo esc_attr( $button_text ); ?>"

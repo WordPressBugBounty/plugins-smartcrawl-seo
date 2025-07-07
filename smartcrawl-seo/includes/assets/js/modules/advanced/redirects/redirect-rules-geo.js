@@ -35,16 +35,6 @@ class RedirectRulesGeo extends React.Component {
 
 	handleToggleRules() {
 		this.props.toggleRules();
-
-		if (this.state.isNewFeature) {
-			this.setState({ isNewFeature: false }, () => {
-				RequestUtil.post(
-					'smartcrawl_new_feature_status',
-					ConfigValues.get('nonce', 'admin'),
-					{ step: 4 }
-				);
-			});
-		}
 	}
 
 	askDeleting(ind = -1) {

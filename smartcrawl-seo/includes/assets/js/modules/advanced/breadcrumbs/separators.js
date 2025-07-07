@@ -11,6 +11,7 @@ class Separators extends React.Component {
 
 		return (
 			<SettingsRow
+				id="wds-breadcrumb-separator"
 				label={__('Breadcrumbs Separator', 'smartcrawl-seo')}
 				description={__(
 					'Select a breadcrumbs separator from the list or add a custom separator. You can also use HTML characters.',

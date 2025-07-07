@@ -10,7 +10,7 @@ $seo_metabox_301_permission_level    = empty( $seo_metabox_301_permission_level 
 $urlmetrics_metabox_permission_level = empty( $urlmetrics_metabox_permission_level ) ? array() : $urlmetrics_metabox_permission_level;
 $option_name                         = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 ?>
-<div class="sui-box-settings-row">
+<div id="wds-settings-access" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'Access', 'smartcrawl-seo' ); ?></label>
 	</div>

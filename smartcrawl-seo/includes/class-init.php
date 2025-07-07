@@ -83,6 +83,7 @@ class Init {
 		Controllers\Primary_Terms::get()->run();
 		Mixpanel\Sitemap::get()->run();
 		Controllers\Cross_Sell_page::get()->run();
+		Instant_Indexing\Controller::get()->run();
 	}
 
 	/**

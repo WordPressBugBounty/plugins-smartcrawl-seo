@@ -335,7 +335,7 @@ class Settings extends Admin_Settings {
 			Assets::SETTINGS_PAGE_JS,
 			'_wds_settings',
 			array(
-				'hide_disables' => isset( $options['hide_disables'] ) ? $options['hide_disables'] : true,
+				'hide_disables' => isset( $options['hide_disables'] ) ? $options['hide_disables'] : false,
 			)
 		);
 
@@ -355,24 +355,33 @@ class Settings extends Admin_Settings {
 
 		// All available modules excluding Advanced Tools. Advanced Tools will be added by JS.
 		$all_plugin_modules = array(
-			'onpage'  => $this->plugin_module_args(
+			'onpage'           => $this->plugin_module_args(
 				__( 'Title & Meta', 'smartcrawl-seo' ),
 				__( 'Customize your homepage title, description, and meta options.', 'smartcrawl-seo' ),
 				'onpage'
 			),
-			'schema'  => $this->plugin_module_args(
+			'schema'           => $this->plugin_module_args(
 				__( 'Schema', 'smartcrawl-seo' ),
 				__( 'Let search engines know whether you\'re an organization or a person, and add all your social profiles so search engines know which social profiles to attribute your web content to.', 'smartcrawl-seo' ),
 				'disable-schema',
 				true,
 				$disable_schema
 			),
-			'social'  => $this->plugin_module_args(
+			'instant_indexing' => $this->plugin_module_args(
+				__( 'Instant Indexing', 'smartcrawl-seo' ),
+				__( 'Notify search engines like Bing and Yandex via the IndexNow API whenever pages are added and updated. You can also submit URLs manually.', 'smartcrawl-seo' ),
+				'instant_indexing',
+				false,
+				null,
+				! $this->get_service()->is_member()
+
+			),
+			'social'           => $this->plugin_module_args(
 				__( 'Social Network', 'smartcrawl-seo' ),
 				__( 'Add meta data to your pages to make them look great when shared on platforms such as Facebook and other popular social networks.', 'smartcrawl-seo' ),
 				'social'
 			),
-			'sitemap' => $this->plugin_module_args(
+			'sitemap'          => $this->plugin_module_args(
 				__( 'Sitemaps', 'smartcrawl-seo' ),
 				__( 'Automatically generate a sitemap and regularly send updates to Google.', 'smartcrawl-seo' ),
 				'sitemap'
@@ -400,12 +409,14 @@ class Settings extends Admin_Settings {
 	 *
 	 * @param string $label Module name.
 	 * @param string $tooltip Module tooltip.
-	 * @param string $field_name  Module field name.
-	 * @param bool   $inverted Determines if field name is inverted one.
-	 * @param mixed  $checked Is checked.
+	 * @param string $field_name Module field name.
+	 * @param bool $inverted Determines if field name is inverted one.
+	 * @param mixed $checked Is checked.
+	 * @param bool $is_pro Is Pro or free.
+	 *
 	 * @return array
 	 */
-	private function plugin_module_args( $label, $tooltip, $field_name, $inverted = false, $checked = null ) {
+	private function plugin_module_args( $label, $tooltip, $field_name, $inverted = false, $checked = null, $is_pro = false ) {
 		if ( is_null( $checked ) ) {
 			$checked = \smartcrawl_get_array_value( self::get_options(), $field_name );
 		}
@@ -415,6 +426,7 @@ class Settings extends Admin_Settings {
 			'html_label' => '<span class="sui-tooltip sui-tooltip-constrained" data-tooltip="' . esc_attr( $tooltip ) . '" style="--tooltip-width: 240px;">' . esc_html( $label ) . '</span>',
 			'inverted'   => $inverted,
 			'checked'    => $checked,
+			'is_pro'     => $is_pro,
 		);
 	}
 
@@ -438,10 +450,11 @@ class Settings extends Admin_Settings {
 		$this->options = self::get_specific_options( $this->option_name );
 
 		if ( empty( $this->options ) ) {
-			$this->options['seomoz']  = 0;
-			$this->options['sitemap'] = 1;
-			$this->options['onpage']  = 1;
-			$this->options['social']  = 1;
+			$this->options['seomoz']           = 0;
+			$this->options['sitemap']          = 1;
+			$this->options['onpage']           = 1;
+			$this->options['social']           = 1;
+			$this->options['instant_indexing'] = 0;
 		}
 
 		if ( empty( $this->options['seo_metabox_permission_level'] ) ) {
@@ -476,7 +489,7 @@ class Settings extends Admin_Settings {
 		}
 
 		if ( ! isset( $this->options['hide_disables'] ) ) {
-			$this->options['hide_disables'] = true;
+			$this->options['hide_disables'] = false;
 		}
 
 		$this->options = apply_filters_deprecated(
@@ -524,8 +537,8 @@ class Settings extends Admin_Settings {
 	 * Handles to show import notice.
 	 *
 	 * @param Importer $importer Third party plugin as an importer.
-	 * @param string   $plugin_key Importer plugin key.
-	 * @param string   $plugin_name Plugin name.
+	 * @param string $plugin_key Importer plugin key.
+	 * @param string $plugin_name Plugin name.
 	 *
 	 * @return void
 	 */
@@ -534,14 +547,14 @@ class Settings extends Admin_Settings {
 			return;
 		}
 
-		$auto_import_url = sprintf(
-			/* translators: %s: Url to Auto Import settings page. */
+		$auto_import_url      = sprintf(
+		/* translators: %s: Url to Auto Import settings page. */
 			'<a href="%s">%s</a>',
 			Admin_Settings::admin_url( SC_Settings::TAB_SETTINGS ) . '&tab=tab_import_export',
 			esc_html__( 'auto-import', 'smartcrawl-seo' )
 		);
-		$message = sprintf(
-			/* translators: 1: Plugin name, 2: Anchor tag to Import/Export page, 3,4: strong tag, 5: plugin title */
+		$message              = sprintf(
+		/* translators: 1: Plugin name, 2: Anchor tag to Import/Export page, 3,4: strong tag, 5: plugin title */
 			esc_html__( 'We\'ve detected you have %1$s settings. Do you want to %2$s your configuration into %3$s%5$s%4$s?', 'smartcrawl-seo' ),
 			$plugin_name,
 			$auto_import_url,
@@ -559,8 +572,8 @@ class Settings extends Admin_Settings {
 
 		?>
 		<div
-			class="notice-warning notice is-dismissible wds-native-dismissible-notice"
-			data-message-key="<?php echo esc_attr( $message_key ); ?>"
+				class="notice-warning notice is-dismissible wds-native-dismissible-notice"
+				data-message-key="<?php echo esc_attr( $message_key ); ?>"
 		>
 			<p><?php echo wp_kses_post( $message ); ?></p>
 		</div>
@@ -607,13 +620,13 @@ class Settings extends Admin_Settings {
 
 		?>
 		<div
-			class="notice-info notice is-dismissible wds-native-dismissible-notice"
-			data-message-key="<?php echo esc_attr( $key ); ?>"
+				class="notice-info notice is-dismissible wds-native-dismissible-notice"
+				data-message-key="<?php echo esc_attr( $key ); ?>"
 		>
 			<p>
 				<?php
 				printf(
-					/* translators: 1,2: strong tag, 3: plugin title */
+				/* translators: 1,2: strong tag, 3: plugin title */
 					esc_html__( 'Excellent! You\'ve been using %1$s%3$s%2$s for over a week. Hope you are enjoying it so far. We have spent countless hours developing this free plugin for you, and we would really appreciate it if you could drop us a rating on wp.org to help us spread the word and boost our motivation.', 'smartcrawl-seo' ),
 					'<strong>',
 					'</strong>',
@@ -622,8 +635,8 @@ class Settings extends Admin_Settings {
 				?>
 			</p>
 			<a
-				target="_blank" href="https://wordpress.org/plugins/smartcrawl-seo#reviews"
-				class="button button-primary"
+					target="_blank" href="https://wordpress.org/plugins/smartcrawl-seo#reviews"
+					class="button button-primary"
 			>
 				<?php esc_html_e( 'Rate SmartCrawl', 'smartcrawl-seo' ); ?>
 			</a>

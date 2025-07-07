@@ -204,27 +204,6 @@ import SitemapTroubleshoot from './components/sitemaps/sitemap-troubleshoot';
 		});
 	};
 
-	const manuallyNotifySearchEngines = () => {
-		const $button = $(this);
-		$button.addClass('sui-button-onload');
-		return $.post(
-			ajaxurl,
-			{
-				action: 'wds-manually-update-engines',
-				_wds_nonce: Wds.get('sitemaps', 'nonce'),
-			},
-			() => {
-				Wds.show_floating_message(
-					'wds-sitemap-manually-notify-search-engines',
-					Wds.l10n('sitemaps', 'manually_notified_engines'),
-					'success'
-				);
-				$button.removeClass('sui-button-onload');
-			},
-			'json'
-		);
-	};
-
 	const manuallyUpdateSitemap = () => {
 		const $button = $(this);
 		$button.addClass('sui-button-onload');
@@ -289,12 +268,7 @@ import SitemapTroubleshoot from './components/sitemaps/sitemap-troubleshoot';
 				'#wds-deactivate-sitemap-module',
 				deactivateSitemapModule
 			)
-			.on('click', '#wds-manually-update-sitemap', manuallyUpdateSitemap)
-			.on(
-				'click',
-				'#wds-manually-notify-search-engines',
-				manuallyNotifySearchEngines
-			);
+			.on('click', '#wds-manually-update-sitemap', manuallyUpdateSitemap);
 
 		$(updateSitemapSubsectionVisibility);
 	};

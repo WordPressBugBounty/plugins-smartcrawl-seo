@@ -87,6 +87,7 @@ export default class NewsSitemapTab extends React.Component {
 					)}
 
 					<SettingsRow
+						id="wds-sitemap-news-status"
 						label={__('Enable News Sitemap', 'smartcrawl-seo')}
 						description={__(
 							'Use this option to enable or disable the Google News Sitemap feature.',
@@ -132,6 +133,7 @@ export default class NewsSitemapTab extends React.Component {
 
 					{enabled && (
 						<SettingsRow
+							id="wds-sitemap-news-publication"
 							label={__('News Publication', 'smartcrawl-seo')}
 							description={__(
 								'Enter your Google News publication name.',
@@ -162,6 +164,7 @@ export default class NewsSitemapTab extends React.Component {
 
 					{enabled && (
 						<SettingsRow
+							id="wds-sitemap-inclusions"
 							label={__('Inclusions', 'smartcrawl-seo')}
 							description={__(
 								'Select Post Types to include in your news sitemap.',

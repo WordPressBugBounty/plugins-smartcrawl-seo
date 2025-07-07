@@ -117,7 +117,11 @@ class Youtube_Data_Fetcher {
 	 * @return array|false
 	 */
 	private static function remote_get( $url ) {
-		$response = wp_remote_get( $url );
+		$response = wp_remote_get( $url, array(
+			'headers' => array(
+				'Referer' => site_url(),
+			),
+		) );
 
 		if ( is_wp_error( $response ) ) {
 			Logger::error( $response->get_error_message() );

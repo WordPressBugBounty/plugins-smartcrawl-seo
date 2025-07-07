@@ -47,6 +47,7 @@ $this->render_view(
 		'main_description'        => __( 'OpenGraph is used on many social networks such as Facebook.', 'smartcrawl-seo' ),
 		'field_name'              => 'wds-opengraph',
 		'disabled'                => (bool) \smartcrawl_get_array_value( $og, 'disabled' ),
+		'og_enabled_globally'     => ! empty( $og_enabled_globally ),
 		'current_title'           => $og['title'],
 		'title_placeholder'       => $smartcrawl_post->get_opengraph_title(),
 		'current_description'     => $og['description'],

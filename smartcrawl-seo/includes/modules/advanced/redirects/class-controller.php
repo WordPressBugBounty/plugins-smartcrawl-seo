@@ -61,6 +61,7 @@ class Controller extends Controllers\Submodule_Controller {
 		$this->module_title = __( 'URL Redirection', 'smartcrawl-seo' );
 		$this->event_name   = 'URL Redirection';
 		$this->utils        = Utils::get();
+		$this->class_name   = 'tab_url_redirection';
 	}
 
 	/**
@@ -561,7 +562,7 @@ class Controller extends Controllers\Submodule_Controller {
 
 		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
 			// We don't need to escape here as we are using esc_url_raw later.
-			$url .= wp_unslash( $_SERVER['REQUEST_URI'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$url .= rawurldecode( wp_unslash( $_SERVER['REQUEST_URI'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		}
 
 		return esc_url_raw( $url );

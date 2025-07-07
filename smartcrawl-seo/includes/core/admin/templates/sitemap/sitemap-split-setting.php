@@ -12,7 +12,7 @@ use SmartCrawl\Sitemaps\Utils;
 $option_name       = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $items_per_sitemap = Utils::get_items_per_sitemap();
 ?>
-<div class="sui-box-settings-row">
+<div id="wds-sitemap-structure" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'Sitemap Structure', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">

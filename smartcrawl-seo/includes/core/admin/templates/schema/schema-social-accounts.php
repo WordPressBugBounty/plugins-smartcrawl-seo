@@ -9,7 +9,7 @@ $option_name    = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $social_options = empty( $social_options ) ? array() : $social_options;
 ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-schema-social-accounts" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Social Accounts', 'smartcrawl-seo' ); ?>

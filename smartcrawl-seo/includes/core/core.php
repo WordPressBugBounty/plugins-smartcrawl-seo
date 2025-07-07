@@ -1400,12 +1400,13 @@ function smartcrawl_activate_all_blog_tabs() {
 	update_site_option(
 		'wds_blog_tabs',
 		array(
-			SmartCrawl\Settings::TAB_ONPAGE      => true,
-			SmartCrawl\Settings::TAB_SCHEMA      => true,
-			SmartCrawl\Settings::TAB_SOCIAL      => true,
-			SmartCrawl\Settings::TAB_SITEMAP     => true,
-			SmartCrawl\Settings::ADVANCED_MODULE => true,
-			SmartCrawl\Settings::TAB_SETTINGS    => true,
+			SmartCrawl\Settings::TAB_ONPAGE           => true,
+			SmartCrawl\Settings::TAB_SCHEMA           => true,
+			SmartCrawl\Settings::TAB_INSTANT_INDEXING => true,
+			SmartCrawl\Settings::TAB_SOCIAL           => true,
+			SmartCrawl\Settings::TAB_SITEMAP          => true,
+			SmartCrawl\Settings::ADVANCED_MODULE      => true,
+			SmartCrawl\Settings::TAB_SETTINGS         => true,
 		)
 	);
 }

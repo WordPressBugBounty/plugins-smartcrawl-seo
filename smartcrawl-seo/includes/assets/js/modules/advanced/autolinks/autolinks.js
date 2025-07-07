@@ -39,6 +39,7 @@ export default class Autolinks extends React.Component {
 	render() {
 		return (
 			<SubmoduleBox
+				id="tab_automatic_linking"
 				name="autolinks"
 				title={__('Automatic Linking', 'smartcrawl-seo')}
 				headerLeft={this.renderTag()}
@@ -90,7 +91,7 @@ export default class Autolinks extends React.Component {
 						}
 					)}
 				></Notice>
-				<SettingsRow direction="column">
+				<SettingsRow id="wds-autolinks-tabs" direction="column">
 					<Tabs
 						tabs={{
 							post_types: {

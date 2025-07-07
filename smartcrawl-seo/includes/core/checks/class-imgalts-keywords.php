@@ -47,7 +47,7 @@ class Imgalts_Keywords extends Check {
 		if ( $this->state ) {
 			$message = esc_html__( 'A good balance of images contain the focus keyphrase(s) in their alt attribute text', 'smartcrawl-seo' );
 		} elseif ( 0 === $image_count && ! $this->has_featured_image() ) {
-			$message = esc_html__( 'You have included a focus keyphrase in the alternative text of too many images in your content', 'smartcrawl-seo' );
+			$message = esc_html__( 'You have not included the focus keyphrase in the alternative text of any images in your content', 'smartcrawl-seo' );
 		} else {
 			$percentage = $this->get_percentage();
 			if ( $percentage > 75 ) {

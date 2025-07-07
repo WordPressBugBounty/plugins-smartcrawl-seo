@@ -191,7 +191,7 @@ class Social extends Admin_Settings {
 		parent::init();
 
 		remove_action( 'admin_menu', array( $this, 'add_page' ) );
-		add_action( 'admin_menu', array( $this, 'add_page' ), 96 );
+		add_action( 'admin_menu', array( $this, 'add_page' ), 97 );
 	}
 
 	/**

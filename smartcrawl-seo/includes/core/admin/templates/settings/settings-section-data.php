@@ -13,7 +13,7 @@ $usage_tracking        = (bool) \smartcrawl_get_array_value( $options, 'usage_tr
 $show_subsite_controls = is_multisite();
 ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-settings-uninstallation" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'Uninstallation', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">
@@ -110,7 +110,7 @@ $show_subsite_controls = is_multisite();
 	</div>
 <?php endif; ?>
 
-<div class="sui-box-settings-row">
+<div id="wds-settings-factory-reset" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'Factory Reset', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">

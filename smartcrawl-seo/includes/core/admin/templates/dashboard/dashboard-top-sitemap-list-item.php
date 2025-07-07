@@ -26,7 +26,7 @@ if ( ! $sitemap_crawler_available ) {
 	return;
 }
 ?>
-<li>
+<li id="wds-sitemap-summary">
 	<span class="sui-list-label"><?php esc_html_e( 'Sitemap', 'smartcrawl-seo' ); ?></span>
 	<span class="sui-list-detail">
 		<?php if ( ! $is_member ) : ?>

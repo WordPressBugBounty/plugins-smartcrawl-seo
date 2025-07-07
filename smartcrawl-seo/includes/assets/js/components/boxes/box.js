@@ -3,6 +3,7 @@ import classnames from 'classnames';
 
 export default class Box extends React.Component {
 	static defaultProps = {
+		id: '',
 		title: '',
 		headerLeft: '',
 		headerRight: '',
@@ -12,6 +13,7 @@ export default class Box extends React.Component {
 
 	render() {
 		const {
+			id,
 			title,
 			headerLeft,
 			headerRight,
@@ -22,7 +24,10 @@ export default class Box extends React.Component {
 		} = this.props;
 
 		return (
-			<div className={classnames('sui-box', className)}>
+			<div
+				{...(id ? { id } : {})}
+				className={classnames('sui-box', className)}
+			>
 				<div className="sui-box-header">
 					<h2 className="sui-box-title">{title}</h2>
 					{!!headerLeft && (

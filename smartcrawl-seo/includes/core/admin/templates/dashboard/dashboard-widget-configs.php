@@ -10,4 +10,4 @@ namespace SmartCrawl;
 // Rendered through react.
 wp_enqueue_script( \SmartCrawl\Controllers\Assets::CONFIGS_JS );
 ?>
-<div id="wds-config-widget" class="wds-configs-container"></div>
+<section id="wds-config-widget" class="wds-configs-container"></section>

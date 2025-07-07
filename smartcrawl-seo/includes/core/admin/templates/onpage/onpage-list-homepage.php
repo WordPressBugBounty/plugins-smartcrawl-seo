@@ -39,7 +39,8 @@ $this->render_view(
 $this->render_view(
 	'onpage/onpage-meta-robots',
 	array(
-		'items' => $meta_robots_main_blog_archive,
+		'for_type' => 'home',
+		'items'    => $meta_robots_main_blog_archive,
 	)
 );
 ?>

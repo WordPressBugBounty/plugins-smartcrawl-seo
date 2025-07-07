@@ -59,6 +59,7 @@ $configs_available = is_main_site();
 			$this->render_view( 'dashboard/dashboard-widget-onpage' );
 			$this->render_view( 'dashboard/dashboard-widget-sitemap' );
 			$this->render_view( 'dashboard/dashboard-widget-advanced-tools' );
+			$this->render_view( 'dashboard/dashboard-widget-instant-indexing' );
 			$this->render_view( 'dashboard/dashboard-widget-reports' );
 			?>
 		</div>

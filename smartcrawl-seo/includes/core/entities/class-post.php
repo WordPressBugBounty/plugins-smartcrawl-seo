@@ -700,6 +700,13 @@ class Post extends Entity {
 	 * @return array The result of the "load_social_images" method.
 	 */
 	protected function load_opengraph_images() {
+		$wp_post = $this->get_wp_post();
+
+		// Handle password protected content.
+		if ( $wp_post && post_password_required( $this->get_post_id() ) ) {
+			return array();
+		}
+
 		return $this->load_social_images(
 			array( $this, 'get_opengraph_post_meta' ),
 			array( $this, 'load_opengraph_images_from_options' ),
@@ -904,6 +911,13 @@ class Post extends Entity {
 	 * @return array
 	 */
 	protected function load_twitter_images() {
+		$wp_post = $this->get_wp_post();
+
+		// Handle password protected content.
+		if ( $wp_post && post_password_required( $this->get_post_id() ) ) {
+			return array();
+		}
+
 		return $this->load_social_images(
 			array( $this, 'get_twitter_post_meta' ),
 			array( $this, 'load_twitter_images_from_options' ),

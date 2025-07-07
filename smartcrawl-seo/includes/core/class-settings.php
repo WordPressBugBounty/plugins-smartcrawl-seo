@@ -24,6 +24,8 @@ abstract class Settings extends Renderable {
 
 	const COMP_SCHEMA = 'schema';
 
+	const COMP_INSTANT_INDEXING = 'instant_indexing';
+
 	const COMP_SITEMAP = 'sitemap';
 
 	const COMP_LIGHTHOUSE = 'lighthouse';
@@ -45,6 +47,8 @@ abstract class Settings extends Renderable {
 	const TAB_SOCIAL = 'wds_social';
 
 	const TAB_SCHEMA = 'wds_schema';
+
+	const TAB_INSTANT_INDEXING = 'wds_instant_indexing';
 
 	const TAB_SITEMAP = 'wds_sitemap';
 
@@ -97,6 +101,7 @@ abstract class Settings extends Renderable {
 			self::TAB_SOCIAL,
 			self::TAB_HEALTH,
 			self::TAB_LIGHTHOUSE,
+			self::TAB_INSTANT_INDEXING,
 		);
 	}
 
@@ -110,16 +115,18 @@ abstract class Settings extends Renderable {
 	 * @return array Options array
 	 */
 	public static function get_options() {
-		$settings = self::get_local_settings();
-		$onpage   = get_option( self::TAB_ONPAGE . '_options', array() );
-		$sitemap  = get_option( self::TAB_SITEMAP . '_options', array() );
-		$social   = get_option( self::TAB_SOCIAL . '_options', array() );
+		$settings         = self::get_local_settings();
+		$onpage           = get_option( self::TAB_ONPAGE . '_options', array() );
+		$sitemap          = get_option( self::TAB_SITEMAP . '_options', array() );
+		$social           = get_option( self::TAB_SOCIAL . '_options', array() );
+		$instant_indexing = get_option( self::TAB_INSTANT_INDEXING . '_options', array() );
 
 		return array_merge(
 			(array) $settings,
 			(array) $onpage,
 			(array) $sitemap,
-			(array) $social
+			(array) $social,
+			(array) $instant_indexing,
 		);
 	}
 
@@ -177,6 +184,7 @@ abstract class Settings extends Renderable {
 		return array(
 			self::COMP_ONPAGE,
 			self::COMP_SCHEMA,
+			self::COMP_INSTANT_INDEXING,
 			self::COMP_SOCIAL,
 			self::COMP_SITEMAP,
 			self::COMP_HEALTH,
@@ -295,9 +303,10 @@ abstract class Settings extends Renderable {
 	 */
 	public static function get_known_components() {
 		return array(
-			self::COMP_ONPAGE  => __( 'Title & Meta Optimization', 'smartcrawl-seo' ),
-			self::COMP_SOCIAL  => __( 'Social', 'smartcrawl-seo' ),
-			self::COMP_SITEMAP => __( 'XML Sitemap', 'smartcrawl-seo' ),
+			self::COMP_ONPAGE           => __( 'Title & Meta Optimization', 'smartcrawl-seo' ),
+			self::COMP_SOCIAL           => __( 'Social', 'smartcrawl-seo' ),
+			self::COMP_SITEMAP          => __( 'XML Sitemap', 'smartcrawl-seo' ),
+			self::COMP_INSTANT_INDEXING => __( 'Instant Indexing', 'smartcrawl-seo' ),
 		);
 	}
 

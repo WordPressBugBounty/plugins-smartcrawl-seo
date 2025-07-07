@@ -43,40 +43,9 @@ class Module extends React.Component {
 
 		history.replaceState({}, '', updatedUrl);
 
-		this.handleNewFeatureStatus();
-
 		const { updateSelected } = this.props;
 
 		updateSelected(selected);
-	}
-
-	handleNewFeatureStatus() {
-		const { selected } = this.props;
-		const { items, statusUpdated } = this.state;
-
-		if (
-			statusUpdated ||
-			!items.find((module) => module.id === selected)?.new_feature
-		) {
-			return;
-		}
-
-		this.setState(
-			{
-				statusUpdated: true,
-			},
-			() => {
-				RequestUtil.post(
-					'smartcrawl_new_feature_status',
-					ConfigValues.get('nonce', 'admin'),
-					{ step: 2 }
-				);
-			}
-		);
-	}
-
-	componentDidMount() {
-		this.handleNewFeatureStatus();
 	}
 
 	render() {

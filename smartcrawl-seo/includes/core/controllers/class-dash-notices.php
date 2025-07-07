@@ -53,6 +53,7 @@ class Dash_Notices extends Controller {
 					'smartcrawl_page_wds_health',
 					'smartcrawl_page_wds_onpage',
 					'smartcrawl_page_wds_social',
+					'smartcrawl_page_wds_instant_indexing',
 					'smartcrawl_page_wds_sitemap',
 					'smartcrawl_page_wds_autolinks',
 					'smartcrawl_page_wds_settings',

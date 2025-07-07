@@ -453,6 +453,11 @@ class OnPage extends Controller {
 			$wp_robots[ $directive ] = true;
 		}
 
+		// Exclude max-image-preview if noindex is present.
+		if ( isset( $wp_robots['noindex'] ) ) {
+			unset( $wp_robots['max-image-preview'] );
+		}
+
 		return $wp_robots;
 	}
 

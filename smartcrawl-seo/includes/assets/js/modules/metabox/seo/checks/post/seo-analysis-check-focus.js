@@ -32,7 +32,7 @@ export default class SeoAnalysisCheckFocus extends React.Component {
 			<p>
 				{!state
 					? __(
-							'In order to give your content the best possible chance to be discovered, it is best to select some focus keyphrases or key phrases, to give it some context.',
+							'In order to give your content the best possible chance to be discovered, it is best to select some focus keyphrases to give it some context.',
 							'wds'
 					  )
 					: __(

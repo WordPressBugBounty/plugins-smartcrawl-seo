@@ -23,7 +23,7 @@ $lang_supported = Controller::get()->is_language_supported();
 $is_disalbed = empty( $_view['options']['analysis-seo'] ) && empty( $_view['options']['analysis-readability'] );
 ?>
 
-<div class="sui-box-settings-row wds-in-post-analysis"<?php echo $is_disalbed ? ' style="display: none;"' : ''; ?>>
+<div id="wds-in-post-analysis" class="sui-box-settings-row wds-in-post-analysis"<?php echo $is_disalbed ? ' style="display: none;"' : ''; ?>>
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'In-Post Analysis', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">

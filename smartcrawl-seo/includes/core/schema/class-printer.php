@@ -127,6 +127,8 @@ class Printer extends Work_Unit {
 		}
 
 		$url = esc_url_raw( 'http' . ( isset( $_SERVER['HTTPS'] ) ? 's' : '' ) . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}" ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidatedNotSanitized
+		// Append a cache-busting parameter to prevent caching issues.
+		$url = add_query_arg( 'nocache', time(), $url );
 		$admin_bar->add_menu(
 			array(
 				'id'    => 'smartcrawl-test-item',

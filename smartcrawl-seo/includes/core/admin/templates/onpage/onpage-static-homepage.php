@@ -25,6 +25,10 @@ $macros                 = array_merge(
 	Onpage::get_singular_macros( 'page' ),
 	Onpage::get_general_macros()
 );
+
+$social_options           = Settings::get_component_options( Settings::COMP_SOCIAL );
+$og_enabled_globally      = \smartcrawl_get_array_value( $social_options, 'og-enable' );
+$twitter_enabled_globally = \smartcrawl_get_array_value( $social_options, 'twitter-card-enable' );
 ?>
 
 <?php echo wp_kses_post( $front_page_notice ); ?>
@@ -52,14 +56,16 @@ $this->render_view(
 $this->render_view(
 	'metabox/metabox-social-opengraph',
 	array(
-		'post' => $front_page,
+		'post'                => $front_page,
+		'og_enabled_globally' => $og_enabled_globally,
 	)
 );
 
 $this->render_view(
 	'metabox/metabox-social-twitter',
 	array(
-		'post' => $front_page,
+		'post'                     => $front_page,
+		'twitter_enabled_globally' => $twitter_enabled_globally,
 	)
 );
 

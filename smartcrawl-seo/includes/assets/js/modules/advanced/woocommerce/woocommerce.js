@@ -7,6 +7,7 @@ export default class Woocommerce extends React.Component {
 	render() {
 		return (
 			<SubmoduleBox
+				id="tab_woo"
 				name="woocommerce"
 				title={__('WooCommerce SEO', 'smartcrawl-seo')}
 				activateProps={{

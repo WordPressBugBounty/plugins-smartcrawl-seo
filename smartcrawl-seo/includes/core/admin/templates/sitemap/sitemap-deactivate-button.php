@@ -8,7 +8,7 @@
 $label_description  = empty( $label_description ) ? '' : $label_description;
 $button_description = empty( $button_description ) ? '' : $button_description;
 ?>
-<div class="sui-box-settings-row">
+<div id="wds-sitemap-deactivate" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Deactivate', 'smartcrawl-seo' ); ?>

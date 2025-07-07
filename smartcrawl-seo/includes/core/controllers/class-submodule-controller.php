@@ -58,6 +58,13 @@ abstract class Submodule_Controller extends Controller {
 	public $premium = false;
 
 	/**
+	 * Class name
+	 *
+	 * @var string
+	 */
+	public string $class_name = '';
+
+	/**
 	 * Includes methods that runs always.
 	 *
 	 * @return void

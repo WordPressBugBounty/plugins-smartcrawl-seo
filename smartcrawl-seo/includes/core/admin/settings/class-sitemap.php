@@ -68,9 +68,6 @@ class Sitemap extends Admin_Settings {
 			}
 		}
 
-		$result['ping-google'] = ! empty( $input['auto-notify-search-engines'] );
-		$result['ping-bing']   = ! empty( $input['auto-notify-search-engines'] );
-
 		// Array Booleans.
 		foreach ( array_keys( $this->get_post_types_options() ) as $post_type ) {
 			$result[ $post_type ] = ! empty( $input[ $post_type ] );
@@ -173,14 +170,6 @@ class Sitemap extends Admin_Settings {
 			);
 		}
 		$result['items-per-sitemap'] = $per_sitemap;
-
-		if ( empty( $input['sitemap-email-recipients'] ) ) {
-			add_settings_error(
-				$this->option_name,
-				'empty_recipient',
-				esc_html__( 'Please add at least one recipient to enable the scheduled report.', 'smartcrawl-seo' )
-			);
-		}
 
 		if ( isset( $input['troubleshoot-count'] ) ) {
 			$result['troubleshoot-count'] = (int) $input['troubleshoot-count'];
@@ -393,7 +382,7 @@ class Sitemap extends Admin_Settings {
 		parent::init();
 
 		remove_action( 'admin_menu', array( $this, 'add_page' ) );
-		add_action( 'admin_menu', array( $this, 'add_page' ), 97 );
+		add_action( 'admin_menu', array( $this, 'add_page' ), 98 );
 	}
 
 	/**

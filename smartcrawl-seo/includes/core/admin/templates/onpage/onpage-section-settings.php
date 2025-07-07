@@ -7,7 +7,7 @@
 
 $separators = empty( $separators ) ? array() : $separators;
 ?>
-<div class="sui-box-settings-row">
+<div id="wds-onpage-separator" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label for="separator" class="sui-settings-label"><?php esc_html_e( 'Separator', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">
@@ -46,7 +46,7 @@ $separators = empty( $separators ) ? array() : $separators;
 	</div>
 </div>
 
-<div class="sui-box-settings-row wds-onpage-character-lengths">
+<div id="wds-onpage-character-lengths" class="sui-box-settings-row wds-onpage-character-lengths">
 	<div class="sui-box-settings-col-1">
 		<label for="separator" class="sui-settings-label"><?php esc_html_e( 'Character Lengths', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">
@@ -82,7 +82,7 @@ $separators = empty( $separators ) ? array() : $separators;
 	</div>
 </div>
 
-<div class="sui-box-settings-row wds-onpage-character-lengths">
+<div id="wds-onpage-deactivate" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label for="separator" class="sui-settings-label"><?php esc_html_e( 'Deactivate', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">

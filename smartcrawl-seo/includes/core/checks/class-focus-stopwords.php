@@ -70,7 +70,7 @@ class Focus_Stopwords extends Check {
 		$focus = $this->get_raw_focus();
 
 		if ( count( $focus ) > 1 ) {
-			$phrase = __( 'keyphrases or key phrases', 'smartcrawl-seo' );
+			$phrase = __( 'keyphrases', 'smartcrawl-seo' );
 		} else {
 			$subj   = end( $focus );
 			$phrase = false === strpos( $subj, ' ' )

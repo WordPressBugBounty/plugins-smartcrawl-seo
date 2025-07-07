@@ -8,6 +8,7 @@
 ?>
 
 <button
+	id="wds-supported-macros"
 	type="button"
 	data-modal-open="wds-supported-macros-modal"
 	data-modal-open-focus="wds-supported-macros-modal-close-button"

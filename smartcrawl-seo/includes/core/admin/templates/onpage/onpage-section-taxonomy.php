@@ -49,6 +49,7 @@ $this->render_view(
 $this->render_view(
 	'onpage/onpage-meta-robots',
 	array(
-		'items' => $meta_robots,
+		'for_type' => $taxonomy->name,
+		'items'    => $meta_robots,
 	)
 );

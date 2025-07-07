@@ -25,7 +25,7 @@ $macros             = empty( $macros ) ? array() : $macros;
 ?>
 
 <?php if ( $title_key ) : ?>
-	<div class="sui-box-settings-row wds-title-row">
+	<div id="wds-onpage-<?php echo esc_attr( $title_key ); ?>" class="sui-box-settings-row wds-title-row">
 		<div class="sui-box-settings-col-1">
 			<label
 				for="<?php echo esc_attr( $title_key ); ?>"
@@ -67,7 +67,7 @@ $macros             = empty( $macros ) ? array() : $macros;
 <?php endif; ?>
 
 <?php if ( $description_key ) : ?>
-	<div class="sui-box-settings-row wds-description-row">
+	<div id="wds-onpage-<?php echo esc_attr( $description_key ); ?>" class="sui-box-settings-row wds-description-row">
 		<div class="sui-box-settings-col-1">
 			<label
 				for="<?php echo esc_attr( $description_key ); ?>"

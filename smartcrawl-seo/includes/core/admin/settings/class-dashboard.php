@@ -39,6 +39,8 @@ class Dashboard extends Admin_Settings {
 
 	const BOX_SCHEMA = 'wds-schema-box';
 
+	const BOX_INSTANT_INDEXING = 'wds-instant-indexing-box';
+
 	/**
 	 * Validate input.
 	 *
@@ -156,6 +158,9 @@ class Dashboard extends Admin_Settings {
 
 			case self::BOX_SCHEMA:
 				return $this->load_view( 'dashboard/dashboard-widget-schema' );
+
+			case self::BOX_INSTANT_INDEXING:
+				return $this->load_view( 'dashboard/dashboard-widget-instant-indexing' );
 		}
 
 		return null;
@@ -267,6 +272,6 @@ class Dashboard extends Admin_Settings {
 	 * TODO: replace with check_ajax_referer
 	 */
 	private function get_request_data() {
-		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-admin-nonce' ) ? stripslashes_deep( $_POST ) : array();
+		return isset( $_POST['_wds_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-nonce' ) ? stripslashes_deep( $_POST ) : array();
 	}
 }

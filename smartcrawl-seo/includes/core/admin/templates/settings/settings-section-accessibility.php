@@ -9,7 +9,7 @@ $option_name          = empty( $_view['option_name'] ) ? '' : $_view['option_nam
 $high_contrast_option = "{$option_name}[high-contrast]";
 $enabled              = ! empty( $_view['options']['high-contrast'] );
 ?>
-<div class="sui-box-settings-row">
+<div id="wds-settings-contrast-mode" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 

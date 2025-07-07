@@ -78,7 +78,7 @@ $whitelabel_class = \SmartCrawl\Controllers\White_Label::get()->summary_class();
 
 	<div class="sui-summary-segment">
 		<ul class="sui-list">
-			<li>
+			<li id="wds-seo-content-audits">
 				<span class="sui-list-label"><?php esc_html_e( 'Content audits', 'smartcrawl-seo' ); ?></span>
 				<span class="sui-list-detail">
 					<?php if ( $content_warnings ) : ?>
@@ -91,7 +91,7 @@ $whitelabel_class = \SmartCrawl\Controllers\White_Label::get()->summary_class();
 				</span>
 			</li>
 
-			<li>
+            <li id="wds-seo-indexing-audits">
 				<span class="sui-list-label"><?php esc_html_e( 'Indexing audits', 'smartcrawl-seo' ); ?></span>
 				<span class="sui-list-detail">
 					<?php if ( $visibility_warnings ) : ?>
@@ -102,7 +102,7 @@ $whitelabel_class = \SmartCrawl\Controllers\White_Label::get()->summary_class();
 				</span>
 			</li>
 
-			<li>
+            <li id="wds-seo-responsive-audits">
 				<span class="sui-list-label">
 					<?php esc_html_e( 'Responsive audits', 'smartcrawl-seo' ); ?>
 				</span>

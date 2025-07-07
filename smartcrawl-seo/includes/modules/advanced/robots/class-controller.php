@@ -25,6 +25,7 @@ class Controller extends Controllers\Submodule_Controller {
 	protected function __construct() {
 		$this->module_title = __( 'Robots.txt Editor', 'smartcrawl-seo' );
 		$this->event_name   = 'Robots.txt Editor';
+		$this->class_name   = 'tab_robots_editor';
 	}
 
 	/**

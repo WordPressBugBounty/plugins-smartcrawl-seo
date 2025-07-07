@@ -5,13 +5,14 @@
  * @package Smartcrwal
  */
 
+$id               = empty( $id ) ? '' : $id;
 $label            = empty( $label ) ? '' : $label;
 $description      = empty( $description ) ? '' : $description;
 $items            = empty( $items ) ? array() : $items;
 $view_option_name = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 ?>
 
-<div class="sui-box-settings-row <?php echo isset( $separator ) && $separator ? '' : 'wds-no-separator'; ?>">
+<div id="<?php echo esc_attr( $id ); ?>" class="sui-box-settings-row <?php echo isset( $separator ) && $separator ? '' : 'wds-no-separator'; ?>">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php echo esc_html( $label ); ?></label>
 		<p class="sui-description">

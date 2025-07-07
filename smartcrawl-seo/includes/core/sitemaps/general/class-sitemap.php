@@ -259,7 +259,6 @@ class Sitemap extends Sitemaps\Sitemap {
 	 */
 	private function post_process( $items ) {
 		do_action( 'wds_sitemap_created' );
-		Utils::notify_engines();
 		Utils::update_meta_data( count( $items ) );
 	}
 

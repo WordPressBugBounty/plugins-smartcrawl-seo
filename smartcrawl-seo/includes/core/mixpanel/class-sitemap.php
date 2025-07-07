@@ -57,7 +57,6 @@ class Sitemap extends Events {
 		foreach (
 			array(
 				'items-per-sitemap',
-				'ping-google',
 			)
 			as $field
 		) {
@@ -70,13 +69,10 @@ class Sitemap extends Events {
 		}
 
 		if ( $track ) {
-			$ping_google = $this->get_value( 'ping-google', $new_value );
-
 			$this->tracker()->track(
 				'SMA - Sitemap Settings',
 				array(
 					'sitemap_structure_links' => $this->get_value( 'items-per-sitemap', $new_value, 0 ),
-					'notify_search_engines'   => $ping_google ? 'Automatic' : 'Manual',
 				)
 			);
 		}

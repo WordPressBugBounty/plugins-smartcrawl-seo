@@ -23,7 +23,7 @@ $twitter_enabled_locally  = ! empty( $onpage_options[ $twitter_enabled_field_id 
 $twitter_description      = empty( $twitter_description ) ? '' : $twitter_description;
 $macros                   = empty( $macros ) ? array() : $macros;
 ?>
-<div class="sui-box-settings-row wds-social-row">
+<div id="wds-onpage-social-<?php echo esc_attr( $for_type ); ?>" class="sui-box-settings-row wds-social-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label">
 			<?php esc_html_e( 'Social', 'smartcrawl-seo' ); ?>

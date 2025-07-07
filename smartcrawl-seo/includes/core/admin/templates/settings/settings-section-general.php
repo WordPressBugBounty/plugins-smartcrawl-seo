@@ -15,7 +15,7 @@ $plugin_modules = empty( $plugin_modules ) ? array() : $plugin_modules;
 
 <div id="wds-conflicting-plugins"></div>
 
-<div class="sui-box-settings-row">
+<div id="wds-settings-plugin-modules" class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'Plugin Modules', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description">
@@ -67,6 +67,7 @@ $this->render_view( 'settings/settings-analysis' );
 $this->render_view(
 	'toggle-group',
 	array(
+		'id' => 'wds-settings-admin-bar',
 		'label'       => esc_html__( 'Admin Bar', 'smartcrawl-seo' ),
 		'description' => sprintf(
 			/* translators: 1,2: strong tag, 3: plugin title */
@@ -90,6 +91,7 @@ $this->render_view(
 $this->render_view(
 	'toggle-group',
 	array(
+		'id' => 'wds-settings-meta-tags',
 		'label'       => __( 'Meta Tags', 'smartcrawl-seo' ),
 		'description' => sprintf(
 			/* translators: 1,2: strong tag, 3: plugin title */
@@ -117,7 +119,7 @@ $this->render_view(
 );
 ?>
 
-<div class="sui-box-settings-row wds-verification-tags">
+<div id="wds-settings-search-engines" class="sui-box-settings-row wds-verification-tags">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'Search engines', 'smartcrawl-seo' ); ?></label>
 		<p class="sui-description"><?php esc_html_e( 'This tool will add the meta tags required by search engines to verify your site with their SEO management tools to your websites <head> tag.', 'smartcrawl-seo' ); ?></p>
@@ -227,7 +229,7 @@ $this->render_view(
 
 <?php if ( \smartcrawl_is_tracking_allowed() ) : ?>
 
-	<div class="sui-box-settings-row">
+	<div id="wds-settings-usage-tracking" class="sui-box-settings-row">
 		<div class="sui-box-settings-col-1">
 			<label class="sui-settings-label"><?php esc_html_e( 'Usage Tracking', 'smartcrawl-seo' ); ?></label>
 			<p class="sui-description">

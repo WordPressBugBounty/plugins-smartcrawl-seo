@@ -25,7 +25,6 @@ class Controller extends Controllers\Module_Controller {
 	protected function __construct() {
 		$this->module_name  = Settings::ADVANCED_MODULE;
 		$this->module_title = __( 'Advanced Tools', 'smartcrawl-seo' );
-		$this->position     = 6;
 
 		$this->submodules = array(
 			Settings::AUTOLINKS_SUBMODULE   => Autolinks\Controller::get(),
@@ -96,8 +95,9 @@ class Controller extends Controllers\Module_Controller {
 		foreach ( $this->submodules as $submodule_name => $handler ) {
 			if ( $handler->is_active() ) {
 				$submodule = array(
-					'id'    => $submodule_name,
-					'title' => $handler->module_title,
+					'id'        => $submodule_name,
+					'title'     => $handler->module_title,
+					'className' => $handler->class_name ?: '',
 				);
 
 				if ( Settings::REDIRECTS_SUBMODULE === $submodule_name && (int) Settings::get_specific_options( 'wds-features-viewed', 0 ) < 2 ) {

@@ -3,20 +3,16 @@ import ConfigValues from '../../../es6/config-values';
 import Toggle from '../../../components/toggle';
 import Checkbox from '../../../components/checkbox';
 import { __, sprintf } from '@wordpress/i18n';
-import { createInterpolateElement } from '@wordpress/element';
 import Notice from '../../../components/notices/notice';
 
 const tooltips = {
-	autolinks: createInterpolateElement(
-		sprintf(
-			// translators: %s: plugin title
-			__(
-				'<strong>%s</strong> will look for keywords that match posts/pages around your website and automatically link them.',
-				'wds'
-			),
-			ConfigValues.get('plugin_title', 'admin')
+	autolinks: sprintf(
+		// translators: %s: plugin title
+		__(
+			'%s will look for keywords that match posts/pages around your website and automatically link them.',
+			'wds'
 		),
-		{ strong: <strong /> }
+		ConfigValues.get('plugin_title', 'admin')
 	),
 	redirects: __(
 		'Automatically redirect traffic from one URL to another. Use this tool if you have changed a page’s URL and wish to keep traffic flowing to the new page.',
