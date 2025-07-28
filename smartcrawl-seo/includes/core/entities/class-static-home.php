@@ -35,7 +35,7 @@ class Static_Home extends Post {
 	 * @param int        $page_number Page number.
 	 */
 	public function __construct( $posts = array(), $page_number = 0 ) {
-		parent::__construct( get_option( 'page_on_front' ) );
+		parent::__construct( get_option( 'page_for_posts' ) );
 
 		$this->posts       = $posts;
 		$this->page_number = $page_number;

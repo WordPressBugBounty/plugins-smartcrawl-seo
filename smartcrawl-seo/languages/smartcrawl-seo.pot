@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the SmartCrawl Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SmartCrawl Pro 3.14.0\n"
+"Project-Id-Version: SmartCrawl Pro 3.14.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/build\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-30T10:53:50+00:00\n"
+"POT-Creation-Date: 2025-07-22T14:30:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
@@ -4510,25 +4510,25 @@ msgstr ""
 msgid "Too few of your image alt texts contain the focus keyphrase(s)"
 msgstr ""
 
-#: includes/core/checks/class-keyword-density.php:39
+#: includes/core/checks/class-keyword-density.php:48
 #: includes/assets/js/modules/metabox/seo/checks/endpoint/seo-analysis-check-keyword-density.js:87
 msgid "You haven't used any keyphrases yet"
 msgstr ""
 
 #. translators: %d low, %d high.
-#: includes/core/checks/class-keyword-density.php:41
+#: includes/core/checks/class-keyword-density.php:50
 #, php-format
 msgid "Your %4$s density is between %1$d%% and %2$d%%"
 msgstr ""
 
 #. translators: %d low.
-#: includes/core/checks/class-keyword-density.php:43
+#: includes/core/checks/class-keyword-density.php:52
 #, php-format
 msgid "Your %4$s density is less than %1$d%%"
 msgstr ""
 
 #. translators: %d high.
-#: includes/core/checks/class-keyword-density.php:45
+#: includes/core/checks/class-keyword-density.php:54
 #, php-format
 msgid "Your %4$s density is greater than %2$d%%"
 msgstr ""

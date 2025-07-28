@@ -24,6 +24,13 @@ class Welcome extends Controller {
 	const WELCOME_MODAL_DISMISSED_OPTION = 'wds-welcome-modal-dismissed';
 
 	/**
+	 * Version of the welcome modal feature.
+	 *
+	 * @since 3.14.0
+	 */
+	const WELCOME_MODAL_FEATURE_VERSION = '3.14.0';
+
+	/**
 	 * Initialize the modal.
 	 *
 	 * @return void
@@ -65,7 +72,7 @@ class Welcome extends Controller {
 	 */
 	public function show_modal() {
 		$dismissed_version = Settings::get_specific_options( self::WELCOME_MODAL_DISMISSED_OPTION, '1.0.0' );
-		$not_dismissed     = version_compare( $dismissed_version, SMARTCRAWL_VERSION, '<' );
+		$not_dismissed     = version_compare( $dismissed_version, self::WELCOME_MODAL_FEATURE_VERSION, '<' );
 		$onboarding_done   = Settings::get_specific_options( Onboard::ONBOARDING_DONE_OPTION );
 		$is_fresh_install  = ! SmartCrawl::get_last_version();
 

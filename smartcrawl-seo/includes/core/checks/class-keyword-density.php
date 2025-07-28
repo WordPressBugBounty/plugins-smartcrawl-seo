@@ -9,6 +9,7 @@ namespace SmartCrawl\Checks;
 
 use SmartCrawl\Cache\String_Cache;
 use SmartCrawl\Html;
+use SmartCrawl\String_Utils;
 
 /**
  * Class Smartcrawl_Check_Keyword_Density
@@ -28,6 +29,14 @@ class Keyword_Density extends Check {
 	 * @var null|int
 	 */
 	private $density = null;
+
+	/**
+	 * Holds stopwords for the current language.
+	 *
+	 * @var array
+	 */
+	private $stopwords = array();
+
 
 	/**
 	 * Retrieves the message for the check.
@@ -109,9 +118,14 @@ class Keyword_Density extends Check {
 
 			return true; // Can't determine kw density.
 		}
-		$text          = Html::plaintext( $markup );
-		$filtered_kws  = array( strtolower( implode( ' ', $kws ) ) );
-		$filtered_text = strtolower( $text );
+		$text         = Html::plaintext( $markup );
+		$filtered_kws = array( strtolower( implode( ' ', $kws ) ) );
+
+		if ( empty( $this->stopwords ) ) {
+			$string          = String_Cache::get()->get_string( $text, $this->get_language() );
+			$this->stopwords = $string->get_language_stopwords();
+		}
+		$filtered_text = String_Utils::normalize_content( $text, $this->stopwords );
 		$total_words   = str_word_count( $filtered_text );
 
 		$densities = array();

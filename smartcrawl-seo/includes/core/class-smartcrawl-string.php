@@ -312,12 +312,12 @@ class SmartCrawl_String {
 			return $keywords;
 		}
 
-		$words = String_Utils::words( $string );
+		$stopwords = $this->get_language_stopwords();
+
+		$words = String_Utils::words( $string, $stopwords );
 		if ( empty( $words ) ) {
 			return $keywords;
 		}
-
-		$stopwords = $this->get_language_stopwords();
 
 		foreach ( $words as $word ) {
 			if ( in_array( $word, $stopwords, true ) ) {

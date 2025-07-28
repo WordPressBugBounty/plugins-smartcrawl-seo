@@ -227,7 +227,7 @@ class Endpoint_Resolver {
 	 * @return boolean
 	 */
 	private function is_static_posts_page() {
-		$page_for_posts = (int) get_option( 'page_on_front' );
+		$page_for_posts = (int) get_option( 'page_for_posts' );
 		$query          = $this->get_query_context();
 		if ( ! $query instanceof \WP_Query ) {
 			return false;

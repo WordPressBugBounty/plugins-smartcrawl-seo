@@ -134,21 +134,18 @@ class String_Utils {
 	 * Extracts words from text
 	 *
 	 * @param string $text Text to process.
+	 * @param array $stopwords Optional list of stopwords to filter out.
 	 *
 	 * @return array Recognized normalized words
 	 */
-	public static function words( $text = '' ) {
-		$words = array();
-
+	public static function words( $text = '', array $stopwords = [] ) {
 		if ( empty( $text ) ) {
-			return $words;
+			return [];
 		}
 		$text = join( ' ', self::paragraphs( $text ) );
+		$text = self::normalize_content( $text, $stopwords );
 
-		$text  = preg_replace( '/[^ [:alnum:]]/iu', '', self::lowercase( $text ) );
-		$words = array_filter( explode( ' ', $text ) );
-
-		return $words;
+		return array_filter( explode( ' ', $text ) );
 	}
 
 	/**
@@ -246,5 +243,47 @@ class String_Utils {
 		}
 
 		return ( self::substr( $haystack, - $length ) === $needle );
+	}
+
+
+	/**
+	 * Clean and normalize content.
+	 *
+	 * @param string $markup    HTML or raw text input.
+	 * @param array  $stopwords List of stopwords to filter out
+	 *
+	 * @return string Normalized plain text.
+	 */
+	public static function normalize_content( string $markup, array $stopwords = array() ): string {
+		$text = function_exists( 'mb_strtolower' )
+			? mb_strtolower( $markup, 'UTF-8' )
+			: strtolower( $markup );
+
+		// Remove unwanted punctuation.
+		$text = preg_replace( '/[&’\'"`!?@#\*\^~=<>\[\]\{\}]/u', '', $text );
+
+		$text = preg_replace_callback(
+			'/(\S+)/u',
+			function ( $matches ) use ( $stopwords ) {
+				$word = $matches[1];
+
+				if ( preg_match( '/[\-_\.,\/\\\\:;\+]/', $word ) ) {
+					$parts = preg_split( '/[\-_\.,\/\\\\:;\+]+/', $word );
+
+					if ( array_intersect( $parts, $stopwords ) ) {
+						return $word;
+					}
+
+					return implode( ' ', $parts );
+				}
+
+				return $word;
+			},
+			$text
+		);
+
+		$text = preg_replace( '/\s+/u', ' ', $text );
+
+		return trim( $text );
 	}
 }

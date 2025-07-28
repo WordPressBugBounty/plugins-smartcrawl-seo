@@ -453,7 +453,7 @@ class Settings extends Admin_Settings {
 			$this->options['seomoz']           = 0;
 			$this->options['sitemap']          = 1;
 			$this->options['onpage']           = 1;
-			$this->options['social']           = 1;
+			$this->options['social']           = 0;
 			$this->options['instant_indexing'] = 0;
 		}
 

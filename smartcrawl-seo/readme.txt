@@ -8,7 +8,7 @@ Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 3.14.0
+Stable tag: 3.14.1
 
 SEO checker, content analysis & SEO optimizer. Rank higher on search engines with 301 redirects, XML sitemaps & one-click setup.
 
@@ -148,6 +148,13 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 6. Schema Type Builder
 
 == Changelog ==
+
+= 3.14.1 ( 2025-07-28 ) =
+
+- Fix: Website and Organization schema details are not added correctly in certain cases.
+- Fix: Meta Title and Description do not apply to the blog page when a static front page is set.
+- Fix: Schema Types Builder does not function as expected.
+- Fix: Keyphrase detection in post content fails, affecting SEO analysis.
 
 = 3.14.0 ( 2025-07-07 ) =
 
