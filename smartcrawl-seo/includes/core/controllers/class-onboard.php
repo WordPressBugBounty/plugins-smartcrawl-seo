@@ -94,6 +94,10 @@ class Onboard extends Controller {
 			$opts['og-enable']           = $enable;
 			$opts['twitter-card-enable'] = $enable;
 			Settings::update_component_options( Settings::COMP_SOCIAL, $opts );
+
+			$opts_settings           = Settings::get_specific_options( 'wds_settings_options' );
+			$opts_settings['social'] = $enable;
+			Settings::update_specific_options( 'wds_settings_options', $opts_settings );
 			wp_send_json_success();
 		} elseif ( 'sitemaps-enable' === $target ) {
 			$opts            = Settings::get_specific_options( 'wds_settings_options' );

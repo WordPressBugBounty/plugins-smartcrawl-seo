@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the SmartCrawl Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SmartCrawl Pro 3.14.1\n"
+"Project-Id-Version: SmartCrawl Pro 3.14.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/build\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-22T14:30:03+00:00\n"
+"POT-Creation-Date: 2025-08-07T12:55:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
@@ -5159,47 +5159,47 @@ msgstr ""
 msgid "SmartCrawl Instant Indexing: Submit Now"
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:155
+#: includes/core/instant-indexing/class-indexnow-api.php:165
 msgid "Submission successful!"
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:176
+#: includes/core/instant-indexing/class-indexnow-api.php:186
 msgid "Success. The URL has been submitted."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:177
+#: includes/core/instant-indexing/class-indexnow-api.php:187
 msgid "Accepted. The URL submission is being processed."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:178
+#: includes/core/instant-indexing/class-indexnow-api.php:188
 msgid "Bad request. Check your input."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:179
+#: includes/core/instant-indexing/class-indexnow-api.php:189
 msgid "Unauthorized. Invalid API key."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:180
+#: includes/core/instant-indexing/class-indexnow-api.php:190
 msgid "Resource not found. Verify URL."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:181
+#: includes/core/instant-indexing/class-indexnow-api.php:191
 msgid "Unprocessable entity. Invalid URL format."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:182
+#: includes/core/instant-indexing/class-indexnow-api.php:192
 msgid "Rate limit exceeded."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:183
+#: includes/core/instant-indexing/class-indexnow-api.php:193
 msgid "Server error. Try again later."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:184
+#: includes/core/instant-indexing/class-indexnow-api.php:194
 msgid "Service unavailable. Server busy."
 msgstr ""
 
-#: includes/core/instant-indexing/class-indexnow-api.php:194
+#: includes/core/instant-indexing/class-indexnow-api.php:204
 msgid "Unexpected error occurred."
 msgstr ""
 

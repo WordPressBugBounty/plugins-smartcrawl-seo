@@ -8,7 +8,7 @@ Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 3.14.1
+Stable tag: 3.14.2
 
 SEO checker, content analysis & SEO optimizer. Rank higher on search engines with 301 redirects, XML sitemaps & one-click setup.
 
@@ -148,6 +148,11 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 6. Schema Type Builder
 
 == Changelog ==
+
+= 3.14.2 ( 2025-08-08 ) =
+
+- Fix: Security improvements
+- Fix: Ensure Social sharing features are correctly enabled when selected during onboarding
 
 = 3.14.1 ( 2025-07-28 ) =
 
