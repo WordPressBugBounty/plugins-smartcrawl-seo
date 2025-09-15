@@ -67,6 +67,5 @@ $configs_available = is_main_site();
 
 	<?php do_action( 'wds-dshboard-after_settings' ); ?>
 
-	<?php $this->render_view( 'dashboard/dashboard-cross-sell-footer' ); ?>
 	<?php $this->render_view( 'footer' ); ?>
 </div>

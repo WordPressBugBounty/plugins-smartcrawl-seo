@@ -1,6 +1,6 @@
 <?php
 /**
- * Template: Metabox Social Twitter.
+ * Template: Metabox Social X.
  *
  * @package Smartcrwal
  */
@@ -36,8 +36,8 @@ $twitter = wp_parse_args(
 $this->render_view(
 	'metabox/metabox-social-meta-tags',
 	array(
-		'main_title'               => __( 'Twitter', 'smartcrawl-seo' ),
-		'main_description'         => __( 'These details will be used in Twitter cards.', 'smartcrawl-seo' ),
+		'main_title'               => __( 'X', 'smartcrawl-seo' ),
+		'main_description'         => __( 'These details will be used in X cards.', 'smartcrawl-seo' ),
 		'field_name'               => 'wds-twitter',
 		'disabled'                 => (bool) \smartcrawl_get_array_value( $twitter, 'disabled' ),
 		'twitter_enabled_globally' => ! empty( $twitter_enabled_globally ),

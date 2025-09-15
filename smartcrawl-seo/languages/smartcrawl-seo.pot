@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the SmartCrawl Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SmartCrawl Pro 3.14.2\n"
+"Project-Id-Version: SmartCrawl Pro 3.14.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/build\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-07T12:55:01+00:00\n"
+"POT-Creation-Date: 2025-09-09T10:38:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
@@ -226,7 +226,8 @@ msgstr ""
 
 #: includes/core/admin/pages/class-upgrade-free.php:41
 #: includes/core/admin/pages/class-upgrade-free.php:42
-msgid "Upgrade for 80% Off!"
+#: includes/core/controllers/class-plugin-links-free.php:47
+msgid "Limited-Time Offer"
 msgstr ""
 
 #: includes/core/admin/settings/class-admin-settings.php:264
@@ -867,52 +868,6 @@ msgstr ""
 msgid "Expand overall SEO analysis"
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:19
-msgid "Check out our other free wordpress.org plugins!"
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:27
-msgid "Hummingbird Page Speed Optimization"
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:28
-msgid "Performance Tests, File Optimization & Compression, Page, Browser  & Gravatar Caching, GZIP Compression, CloudFlare Integration & more."
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:32
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:47
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:62
-msgid "View features"
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:42
-msgid "Defender Security, Monitoring, and Hack Protection"
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:43
-msgid "Security Tweaks & Recommendations, File & Malware Scanning, Login & 404 Lockout Protection, Two-Factor Authentication & more."
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:57
-msgid "Smush Image Compression and Optimization"
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:58
-msgid "Resize, optimize and compress all of your images with the incredibly powerful and award-winning, 100% free WordPress image optimizer."
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:70
-msgid "Your All-in-One WordPress Platform"
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:71
-msgid "Pretty much everything you need for developing and managing WordPress based websites, and then some."
-msgstr ""
-
-#: includes/core/admin/templates/dashboard/dashboard-cross-sell-footer.php:78
-msgid "Learn more"
-msgstr ""
-
 #: includes/core/admin/templates/dashboard/dashboard-mini-lighthouse-report.php:28
 msgid "You have no failed SEO audits. Awesome work!"
 msgstr ""
@@ -1510,7 +1465,7 @@ msgid "Summary Card"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:44
-msgid "Control and optimize how your website appears when shared on social platforms like Facebook and Twitter."
+msgid "Control and optimize how your website appears when shared on social platforms like Facebook and X."
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:48
@@ -1534,12 +1489,12 @@ msgstr ""
 #: includes/core/admin/templates/social/social-section-twitter-cards.php:13
 #: includes/core/admin/templates/social/social-settings.php:69
 #: includes/core/admin/templates/social/social-sidenav.php:21
-msgid "Twitter Cards"
+msgid "X Cards"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:73
 #: includes/core/admin/templates/social/social-section-twitter-cards.php:14
-msgid "With Twitter Cards, you can attach rich photos, videos and media experiences to Tweets, helping to drive traffic to your website."
+msgid "With X Cards, you can attach rich photos, videos and media experiences to Tweets, helping to drive traffic to your website."
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:79
@@ -1667,15 +1622,15 @@ msgid "We've detected an existing %s file that we are unable to edit. You will n
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:116
-msgid "OpenGraph & Twitter Cards"
+msgid "OpenGraph & X Cards"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:117
-msgid "Enhance how your posts and pages look when shared on Twitter and Facebook by adding extra meta tags to your page output."
+msgid "Enhance how your posts and pages look when shared on X and Facebook by adding extra meta tags to your page output."
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/onboard-modal-body.php:120
-msgid "Activating OpenGraph & Twitter Cards"
+msgid "Activating OpenGraph & X Cards"
 msgstr ""
 
 #. translators: 1, 2: opening/closing span tags
@@ -1877,7 +1832,7 @@ msgstr ""
 #: includes/core/admin/templates/metabox/metabox-social-twitter.php:39
 #: includes/core/admin/templates/term/term-social-tab.php:99
 #: includes/assets/js/modules/metabox/metabox-social.js:44
-msgid "Twitter"
+msgid "X"
 msgstr ""
 
 #: includes/core/admin/templates/footer.php:128
@@ -2304,7 +2259,7 @@ msgstr ""
 #: includes/core/admin/templates/metabox/metabox-social-twitter.php:40
 #: includes/core/admin/templates/term/term-social-tab.php:100
 #: includes/assets/js/modules/metabox/metabox-social.js:45
-msgid "These details will be used in Twitter cards."
+msgid "These details will be used in X cards."
 msgstr ""
 
 #: includes/core/admin/templates/metabox/underscore-link-rel-attribute.php:12
@@ -2536,7 +2491,7 @@ msgstr ""
 #: includes/core/admin/templates/onpage/onpage-section-buddypress-groups.php:34
 #: includes/core/admin/templates/onpage/onpage-section-buddypress-profile.php:32
 #: includes/core/admin/templates/onpage/onpage-twitter-settings.php:12
-msgid "Twitter Cards support enhances how your content appears when shared on Twitter."
+msgid "X Cards support enhances how your content appears when shared on X."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-section-buddypress-profile.php:30
@@ -2552,7 +2507,7 @@ msgstr ""
 #. translators: %s: Singular post type name
 #: includes/core/admin/templates/onpage/onpage-section-post-type.php:21
 #, php-format
-msgid "Twitter Cards support enhances how your content appears when shared on Twitter. You can set default values here but also customize this per %s via the post editor."
+msgid "X Cards support enhances how your content appears when shared on X. You can set default values here but also customize this per %s via the post editor."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-section-post-type.php:43
@@ -2603,7 +2558,7 @@ msgstr ""
 #. translators: %s: Singular post type name
 #: includes/core/admin/templates/onpage/onpage-section-taxonomy.php:20
 #, php-format
-msgid "Twitter Cards support enhances how your content appears when shared on Twitter. You can set default values here but also customize this for each %s."
+msgid "X Cards support enhances how your content appears when shared on X. You can set default values here but also customize this for each %s."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-section-taxonomy.php:42
@@ -2731,7 +2686,7 @@ msgid "Default Featured Images"
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-social-meta-tags-sub-settings.php:100
-msgid "Choose featured image that will be used when sharing on Twitter."
+msgid "Choose featured image that will be used when sharing on X."
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-social-meta-tags-sub-settings.php:102
@@ -2747,10 +2702,10 @@ msgid "If no feature or custom cover image is added, use the first image in the 
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-twitter-disabled.php:12
-msgid "Twitter Cards are globally disabled."
+msgid "X Cards are globally disabled."
 msgstr ""
 
-#. translators: 1: Message, 2: Anchor tag to Twitter card section
+#. translators: 1: Message, 2: Anchor tag to X card section
 #: includes/core/admin/templates/onpage/onpage-twitter-disabled.php:17
 #, php-format
 msgid "%1$s You can enable them %2$s."
@@ -2758,7 +2713,7 @@ msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-twitter-settings.php:10
 #: includes/core/admin/templates/social/social-section-twitter-cards.php:23
-msgid "Enable Twitter Cards"
+msgid "Enable X Cards"
 msgstr ""
 
 #: includes/core/admin/templates/onpage/underscore-macros-list.php:10
@@ -3223,7 +3178,7 @@ msgid "Add all your social accounts so search engines know which profiles to att
 msgstr ""
 
 #: includes/core/admin/templates/schema/schema-social-accounts.php:28
-msgid "Twitter Username"
+msgid "X Username"
 msgstr ""
 
 #: includes/core/admin/templates/schema/schema-social-accounts.php:42
@@ -4173,7 +4128,7 @@ msgid "Use this option to deactivate the social module from your site."
 msgstr ""
 
 #: includes/core/admin/templates/social/social-settings.php:73
-msgid "Add meta data to your pages to make them look great when shared on Twitter."
+msgid "Add meta data to your pages to make them look great when shared on X."
 msgstr ""
 
 #: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:23
@@ -4185,7 +4140,7 @@ msgid "No Image"
 msgstr ""
 
 #: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:69
-msgid "A preview of how your Homepage will appear as a Twitter Card."
+msgid "A preview of how your Homepage will appear as a X Card."
 msgstr ""
 
 #: includes/core/admin/templates/term/term-advanced-tab.php:17
@@ -4819,7 +4774,7 @@ msgid "OpenGraph Support - "
 msgstr ""
 
 #: includes/core/configs/class-model.php:249
-msgid "Twitter Cards - "
+msgid "X Cards - "
 msgstr ""
 
 #: includes/core/configs/class-model.php:319
@@ -4910,59 +4865,59 @@ msgstr ""
 msgid "Over {MAX_COUNT} characters ({CURRENT_COUNT}) - make sure your SEO title is shorter"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:941
+#: includes/core/controllers/class-assets.php:945
 msgid "Loading, please hold on..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1118
+#: includes/core/controllers/class-assets.php:1122
 msgid "Key valid!"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1119
+#: includes/core/controllers/class-assets.php:1123
 msgid "Key invalid"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1304
+#: includes/core/controllers/class-assets.php:1308
 msgid "Analyzing data and preparing report..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1305
+#: includes/core/controllers/class-assets.php:1309
 msgid "Running SEO test..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1306
+#: includes/core/controllers/class-assets.php:1310
 msgid "Refreshing data. Please wait..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1307
+#: includes/core/controllers/class-assets.php:1311
 msgid "The audit has been copied successfully."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1308
+#: includes/core/controllers/class-assets.php:1312
 msgid "Audit could not be copied to clipboard."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1543
+#: includes/core/controllers/class-assets.php:1547
 msgid "The URL field is empty. Please enter at least one URL and try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1544
+#: includes/core/controllers/class-assets.php:1548
 msgid "Submission Completed!"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1545
+#: includes/core/controllers/class-assets.php:1549
 msgid "You cannot submit more than 100 URLs at once."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1546
+#: includes/core/controllers/class-assets.php:1550
 msgid "One or more URLs are invalid. Please check and try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1547
+#: includes/core/controllers/class-assets.php:1551
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1548
+#: includes/core/controllers/class-assets.php:1552
 msgid "Rate limit exceeded. Please wait and try again later."
 msgstr ""
 
@@ -5055,10 +5010,6 @@ msgstr ""
 
 #: includes/core/controllers/class-new-feature.php:132
 msgid "New feature badge was successfully updated."
-msgstr ""
-
-#: includes/core/controllers/class-plugin-links-free.php:47
-msgid "Upgrade For 80% Off!"
 msgstr ""
 
 #: includes/core/controllers/class-plugin-links.php:50

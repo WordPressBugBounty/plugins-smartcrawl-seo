@@ -120,7 +120,7 @@ $filtered_footer_text = \SmartCrawl\Controllers\White_Label::get()->get_wpmudev_
 		</li>
 		<li><a href="https://twitter.com/wpmudev" target="_blank">
 				<span class="sui-icon-social-twitter" aria-hidden="true"></span>
-				<span class="sui-screen-reader-text"><?php esc_html_e( 'Twitter', 'smartcrawl-seo' ); ?></span>
+				<span class="sui-screen-reader-text"><?php esc_html_e( 'X', 'smartcrawl-seo' ); ?></span>
 			</a>
 		</li>
 		<li><a href="https://www.instagram.com/wpmu_dev/" target="_blank">

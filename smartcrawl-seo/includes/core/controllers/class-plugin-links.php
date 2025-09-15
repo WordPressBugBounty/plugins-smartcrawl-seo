@@ -42,9 +42,9 @@ class Plugin_Links extends Controller {
 		array_unshift(
 			$links,
 			sprintf(
-				'<a href="%s" style="color: #8D00B1;">%s</a>',
+				'<a href="%s" style="color: #8D00B1;" target="_blank">%s</a>',
 				'https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_pluginlist_upgrade',
-				esc_html( __( 'Upgrade For 80% Off!', 'smartcrawl-seo' ) )
+				esc_html( __( 'Limited-Time Offer', 'smartcrawl-seo' ) )
 			)
 		);
 

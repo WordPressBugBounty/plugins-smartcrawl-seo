@@ -1,6 +1,6 @@
 <?php
 /**
- * Template: Onpage Opengraph Twitter.
+ * Template: Onpage Opengraph X.
  *
  * @package Smartcrwal
  */

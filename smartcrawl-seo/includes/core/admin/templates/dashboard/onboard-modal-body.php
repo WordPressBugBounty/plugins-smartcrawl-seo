@@ -113,11 +113,11 @@ $usage_tracking = Settings::get_value( 'usage_tracking', Settings::get_options()
 			'toggle-item',
 			array(
 				'field_name'       => 'opengraph-twitter-enable',
-				'item_label'       => esc_html__( 'OpenGraph & Twitter Cards', 'smartcrawl-seo' ),
-				'item_description' => esc_html__( 'Enhance how your posts and pages look when shared on Twitter and Facebook by adding extra meta tags to your page output.', 'smartcrawl-seo' ),
+				'item_label'       => esc_html__( 'OpenGraph & X Cards', 'smartcrawl-seo' ),
+				'item_description' => esc_html__( 'Enhance how your posts and pages look when shared on X and Facebook by adding extra meta tags to your page output.', 'smartcrawl-seo' ),
 				'checked'          => true,
 				'attributes'       => array(
-					'data-processing' => esc_attr__( 'Activating OpenGraph & Twitter Cards', 'smartcrawl-seo' ),
+					'data-processing' => esc_attr__( 'Activating OpenGraph & X Cards', 'smartcrawl-seo' ),
 				),
 			)
 		);

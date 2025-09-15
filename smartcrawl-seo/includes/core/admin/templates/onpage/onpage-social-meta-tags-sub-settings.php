@@ -97,7 +97,7 @@ $macros                 = empty( $macros ) ? array() : $macros;
 	</div>
 	<p class="sui-description">
 		<?php if ( $single_image ) : ?>
-			<?php esc_html_e( 'Choose featured image that will be used when sharing on Twitter.', 'smartcrawl-seo' ); ?>
+			<?php esc_html_e( 'Choose featured image that will be used when sharing on X.', 'smartcrawl-seo' ); ?>
 		<?php else : ?>
 			<?php esc_html_e( 'Choose featured images that will be used when sharing on Facebook or other platforms that support OpenGraph.', 'smartcrawl-seo' ); ?>
 		<?php endif; ?>

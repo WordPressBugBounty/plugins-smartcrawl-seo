@@ -98,6 +98,9 @@ class Modules extends Events {
 			case 'wds-deactivate-onpage-module':
 				$from = 'Title & Meta';
 				break;
+			case 'wds_change_instant_indexing_status':
+				$from = 'Instant Indexing';
+				break;
 			default:
 				$from = '';
 		}
@@ -205,12 +208,13 @@ class Modules extends Events {
 	 */
 	private function get_modules() {
 		return array(
-			Settings::COMP_SEO         => 'SEO Analysis',
-			Settings::COMP_READABILITY => 'Readability Analysis',
-			Settings::COMP_SCHEMA      => 'Schema',
-			Settings::COMP_ONPAGE      => 'Title & Meta',
-			Settings::COMP_SITEMAP     => 'Sitemaps',
-			Settings::COMP_SOCIAL      => 'Social',
+			Settings::COMP_SEO              => 'SEO Analysis',
+			Settings::COMP_READABILITY      => 'Readability Analysis',
+			Settings::COMP_SCHEMA           => 'Schema',
+			Settings::COMP_ONPAGE           => 'Title & Meta',
+			Settings::COMP_SITEMAP          => 'Sitemaps',
+			Settings::COMP_SOCIAL           => 'Social',
+			Settings::COMP_INSTANT_INDEXING => 'Instant Indexing',
 		);
 	}
 

@@ -31,7 +31,7 @@ $this->render_view(
 		'for_type'            => 'bp_groups',
 		'social_label_desc'   => esc_html__( 'Enable or disable support for social platforms when a BuddyPress group is shared on them.', 'smartcrawl-seo' ),
 		'og_description'      => esc_html__( 'OpenGraph support enhances how your content appears when shared on social networks such as Facebook.', 'smartcrawl-seo' ),
-		'twitter_description' => esc_html__( 'Twitter Cards support enhances how your content appears when shared on Twitter.', 'smartcrawl-seo' ),
+		'twitter_description' => esc_html__( 'X Cards support enhances how your content appears when shared on X.', 'smartcrawl-seo' ),
 		'macros'              => $macros,
 	)
 );

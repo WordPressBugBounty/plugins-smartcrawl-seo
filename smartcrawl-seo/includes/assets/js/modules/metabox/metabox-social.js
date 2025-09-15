@@ -41,9 +41,9 @@ export default class MetaboxSocial extends React.Component {
 						isSingle={false}
 					></SocialItem>
 					<SocialItem
-						label={__('Twitter', 'smartcrawl-seo')}
+						label={__('X', 'smartcrawl-seo')}
 						description={__(
-							'These details will be used in Twitter cards.',
+							'These details will be used in X cards.',
 							'smartcrawl-seo'
 						)}
 						type="twitter"

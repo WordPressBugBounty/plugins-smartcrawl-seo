@@ -18,7 +18,7 @@ $this->render_view(
 			),
 			array(
 				'id'   => 'tab_twitter_cards',
-				'name' => esc_html__( 'Twitter Cards', 'smartcrawl-seo' ),
+				'name' => esc_html__( 'X Cards', 'smartcrawl-seo' ),
 			),
 			array(
 				'id'   => 'tab_pinterest_verification',

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita00bfcc9d1a1752bd5af927f825553e8
+class ComposerStaticInit4bebad2aadedee6b2bc3bee35749fecc
 {
     public static $classMap = array (
         'SmartCrawl\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/core/admin/class-admin.php',
@@ -311,7 +311,7 @@ class ComposerStaticInita00bfcc9d1a1752bd5af927f825553e8
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInita00bfcc9d1a1752bd5af927f825553e8::$classMap;
+            $loader->classMap = ComposerStaticInit4bebad2aadedee6b2bc3bee35749fecc::$classMap;
 
         }, null, ClassLoader::class);
     }

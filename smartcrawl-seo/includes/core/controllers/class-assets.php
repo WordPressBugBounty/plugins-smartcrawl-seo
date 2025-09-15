@@ -795,8 +795,12 @@ class Assets extends Controller {
 	 * @return array
 	 */
 	public function get_social_meta_args( $type_key, $meta_key, $options, $post_type, $post_id ) {
+		$active_key = $type_key . '-active-' . $post_type;
+		if ( 'twitter' === $meta_key ) {
+			$active_key = $meta_key . '-active-' . $post_type;
+		}
 		$setting_enabled     = (bool) smartcrawl_get_array_value( $options, "{$type_key}-enable" );
-		$post_type_enabled   = (bool) smartcrawl_get_array_value( $options, "{$type_key}-active-{$post_type}" );
+		$post_type_enabled   = (bool) smartcrawl_get_array_value( $options, $active_key );
 		$args                = array();
 
 		if ( ! $setting_enabled ) {

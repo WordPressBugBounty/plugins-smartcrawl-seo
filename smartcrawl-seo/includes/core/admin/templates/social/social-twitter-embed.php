@@ -1,6 +1,6 @@
 <?php
 /**
- * Template: Social Twitter Embed.
+ * Template: Social X Embed.
  *
  * @package Smartcrwal
  */

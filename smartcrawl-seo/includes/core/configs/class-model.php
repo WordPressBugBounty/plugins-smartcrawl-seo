@@ -246,7 +246,7 @@ class Model {
 			"\n",
 			array(
 				esc_attr__( 'OpenGraph Support - ', 'smartcrawl-seo' ) . $this->get_status_string( $og_active ),
-				esc_attr__( 'Twitter Cards - ', 'smartcrawl-seo' ) . $this->get_status_string( $twitter_active ),
+				esc_attr__( 'X Cards - ', 'smartcrawl-seo' ) . $this->get_status_string( $twitter_active ),
 			)
 		);
 	}

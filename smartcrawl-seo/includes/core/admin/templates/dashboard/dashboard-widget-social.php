@@ -41,7 +41,7 @@ if ( ! $social_enabled && $hide_disables ) {
 	</div>
 
 	<div class="sui-box-body">
-		<p><?php esc_html_e( 'Control and optimize how your website appears when shared on social platforms like Facebook and Twitter.', 'smartcrawl-seo' ); ?></p>
+		<p><?php esc_html_e( 'Control and optimize how your website appears when shared on social platforms like Facebook and X.', 'smartcrawl-seo' ); ?></p>
 
 		<?php if ( $social_enabled ) : ?>
 			<div class="wds-separator-top wds-draw-left-padded">
@@ -67,10 +67,10 @@ if ( ! $social_enabled && $hide_disables ) {
 			</div>
 
 			<div class="wds-separator-top wds-draw-left-padded">
-				<small><strong><?php esc_html_e( 'Twitter Cards', 'smartcrawl-seo' ); ?></strong></small>
+				<small><strong><?php esc_html_e( 'X Cards', 'smartcrawl-seo' ); ?></strong></small>
 				<?php if ( ! $twitter_card_enabled ) : ?>
 					<p>
-						<small><?php esc_attr_e( 'With Twitter Cards, you can attach rich photos, videos and media experiences to Tweets, helping to drive traffic to your website.', 'smartcrawl-seo' ); ?></small>
+						<small><?php esc_attr_e( 'With X Cards, you can attach rich photos, videos and media experiences to Tweets, helping to drive traffic to your website.', 'smartcrawl-seo' ); ?></small>
 					</p>
 					<button
 						type="button"

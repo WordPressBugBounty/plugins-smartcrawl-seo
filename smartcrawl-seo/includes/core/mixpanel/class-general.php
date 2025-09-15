@@ -72,7 +72,7 @@ class General extends Events {
 		$modules  = array(
 			'analysis-seo'        => 'SEO and Readability Analysis',
 			'sitemap'             => 'Sitemaps',
-			'twitter-card-enable' => 'OpenGraph & Twitter Cards',
+			'twitter-card-enable' => 'OpenGraph & X Cards',
 			'usage_tracking'      => 'Usage Tracking Opt-In',
 		);
 

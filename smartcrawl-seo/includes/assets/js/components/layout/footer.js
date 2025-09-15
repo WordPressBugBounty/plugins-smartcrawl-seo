@@ -196,7 +196,7 @@ export default class Footer extends React.Component {
 								aria-hidden="true"
 							></span>
 							<span className="sui-screen-reader-text">
-								{__('Twitter', 'smartcrawl-seo')}
+								{__('X', 'smartcrawl-seo')}
 							</span>
 						</a>
 					</li>

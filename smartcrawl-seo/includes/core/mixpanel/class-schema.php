@@ -160,7 +160,7 @@ class Schema extends Events {
 		$social_accounts = array();
 
 		$socials = array(
-			'twitter_username' => 'Twitter',
+			'twitter_username' => 'X',
 			'fb-app-id'        => 'Facebook App ID',
 			'facebook_url'     => 'Facebook',
 			'instagram_url'    => 'Instagram',

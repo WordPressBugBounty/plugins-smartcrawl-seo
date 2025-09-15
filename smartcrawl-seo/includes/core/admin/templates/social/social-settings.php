@@ -66,11 +66,11 @@ $social_enabled = Settings::get_setting( 'social' );
 					'vertical-tab',
 					array(
 						'tab_id'       => 'tab_twitter_cards',
-						'tab_name'     => esc_html__( 'Twitter Cards', 'smartcrawl-seo' ),
+						'tab_name'     => esc_html__( 'X Cards', 'smartcrawl-seo' ),
 						'is_active'    => 'tab_twitter_cards' === $active_tab,
 						'tab_sections' => array(
 							array(
-								'section_description' => esc_html__( 'Add meta data to your pages to make them look great when shared on Twitter.', 'smartcrawl-seo' ),
+								'section_description' => esc_html__( 'Add meta data to your pages to make them look great when shared on X.', 'smartcrawl-seo' ),
 								'section_template'    => 'social/social-section-twitter-cards',
 								'section_args'        => array(
 									'options' => $options,

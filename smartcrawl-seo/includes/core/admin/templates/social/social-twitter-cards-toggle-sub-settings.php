@@ -1,6 +1,6 @@
 <?php
 /**
- * Template: Social Twitter Cards Toggle Sub-settings.
+ * Template: Social X Cards Toggle Sub-settings.
  *
  * @package Smartcrwal
  */
@@ -66,6 +66,6 @@ $option_name       = empty( $_view['option_name'] ) ? '' : $_view['option_name']
 			</div>
 		</div>
 	</div>
-	<p class="sui-description"><?php esc_html_e( 'A preview of how your Homepage will appear as a Twitter Card.', 'smartcrawl-seo' ); ?></p>
+	<p class="sui-description"><?php esc_html_e( 'A preview of how your Homepage will appear as a X Card.', 'smartcrawl-seo' ); ?></p>
 </div>
 

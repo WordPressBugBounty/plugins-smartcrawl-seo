@@ -17,7 +17,7 @@ $singular_name = empty( $taxonomy->labels->singular_name ) ? 'post' : strtolower
 $og_description = esc_html__( 'OpenGraph support enhances how your content appears when shared on social networks such as Facebook. You can set default values here but also customize this for each %s.', 'smartcrawl-seo' );
 $og_description = sprintf( $og_description, $singular_name );
 /* translators: %s: Singular post type name */
-$twitter_description = esc_html__( 'Twitter Cards support enhances how your content appears when shared on Twitter. You can set default values here but also customize this for each %s.', 'smartcrawl-seo' );
+$twitter_description = esc_html__( 'X Cards support enhances how your content appears when shared on X. You can set default values here but also customize this for each %s.', 'smartcrawl-seo' );
 $twitter_description = sprintf( $twitter_description, $singular_name );
 $macros              = array_merge(
 	Onpage::get_term_macros( $taxonomy->name ),

@@ -25,7 +25,7 @@ $social_options = empty( $social_options ) ? array() : $social_options;
 				<label
 					for="twitter_username"
 					class="sui-label"
-				><?php esc_html_e( 'Twitter Username', 'smartcrawl-seo' ); ?></label>
+				><?php esc_html_e( 'X Username', 'smartcrawl-seo' ); ?></label>
 
 				<div class="sui-control-with-icon">
 					<span class="sui-icon-social-twitter" aria-hidden="true"></span>

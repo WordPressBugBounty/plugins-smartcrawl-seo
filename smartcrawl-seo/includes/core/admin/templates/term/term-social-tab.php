@@ -96,8 +96,8 @@ $is_active = empty( $is_active ) ? false : $is_active;
 				'metabox/metabox-social-meta-tags',
 				array(
 					'toggle_label'            => esc_html__( 'Enable for this term', 'smartcrawl-seo' ),
-					'main_title'              => esc_html__( 'Twitter', 'smartcrawl-seo' ),
-					'main_description'        => esc_html__( 'These details will be used in Twitter cards.', 'smartcrawl-seo' ),
+					'main_title'              => esc_html__( 'X', 'smartcrawl-seo' ),
+					'main_description'        => esc_html__( 'These details will be used in X cards.', 'smartcrawl-seo' ),
 					'field_name'              => 'wds-twitter',
 					'disabled'                => $twitter_meta_disabled,
 					'current_title'           => $twitter['title'],

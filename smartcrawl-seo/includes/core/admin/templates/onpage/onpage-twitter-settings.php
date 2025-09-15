@@ -1,15 +1,15 @@
 <?php
 /**
- * Template: Onpage Twitter Settings.
+ * Template: Onpage X Settings.
  *
  * @package Smartcrwal
  */
 
 $section_enabled_field_id = 'twitter-active-' . $for_type;
 $section_enabled          = ! empty( $_view['options'][ $section_enabled_field_id ] ) ? $_view['options'][ $section_enabled_field_id ] : false;
-$section_title            = __( 'Enable Twitter Cards', 'smartcrawl-seo' );
+$section_title            = __( 'Enable X Cards', 'smartcrawl-seo' );
 $section_description      = empty( $section_description )
-	? esc_html__( 'Twitter Cards support enhances how your content appears when shared on Twitter.', 'smartcrawl-seo' )
+	? esc_html__( 'X Cards support enhances how your content appears when shared on X.', 'smartcrawl-seo' )
 	: $section_description;
 $option_name              = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $title_field_id           = 'twitter-title-' . $for_type;
