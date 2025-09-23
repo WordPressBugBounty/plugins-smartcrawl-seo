@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the SmartCrawl Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SmartCrawl Pro 3.14.3\n"
+"Project-Id-Version: SmartCrawl Pro 3.14.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/build\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-09T10:38:18+00:00\n"
+"POT-Creation-Date: 2025-09-23T08:21:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
@@ -5893,75 +5893,83 @@ msgstr ""
 msgid "Please use our new filter `smartcrawl_process_redirect` in SmartCrawl."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:904
+#: includes/modules/advanced/redirects/class-controller.php:902
+#: includes/modules/advanced/redirects/class-controller.php:1062
+#: includes/modules/advanced/redirects/class-controller.php:1090
+#: includes/modules/advanced/redirects/class-controller.php:1182
+#: includes/modules/advanced/redirects/class-controller.php:1369
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: includes/modules/advanced/redirects/class-controller.php:907
 msgid "There is no data to proceed with your request."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:916
+#: includes/modules/advanced/redirects/class-controller.php:919
 msgid "The redirect from URL is empty."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:923
+#: includes/modules/advanced/redirects/class-controller.php:926
 msgid "The redirect from/to URL is empty."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1013
-#: includes/modules/advanced/redirects/class-controller.php:1030
+#: includes/modules/advanced/redirects/class-controller.php:1016
+#: includes/modules/advanced/redirects/class-controller.php:1033
 msgid "Url"
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1060
+#: includes/modules/advanced/redirects/class-controller.php:1068
 msgid "Request data is not valid."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1071
+#: includes/modules/advanced/redirects/class-controller.php:1079
 msgid "Something was wrong."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1084
+#: includes/modules/advanced/redirects/class-controller.php:1097
 msgid "Failed to retrieve data."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1092
+#: includes/modules/advanced/redirects/class-controller.php:1105
 msgid "Not found redirects."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1101
+#: includes/modules/advanced/redirects/class-controller.php:1114
 msgid "Failed to get redirects by given IDs."
 msgstr ""
 
 #. translators: %s: Redirect id
-#: includes/modules/advanced/redirects/class-controller.php:1119
+#: includes/modules/advanced/redirects/class-controller.php:1132
 #, php-format
 msgid "Failed to get redirect by given ID: %s."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1150
+#: includes/modules/advanced/redirects/class-controller.php:1163
 #: includes/assets/js/modules/advanced/redirects/redirect-table.js:757
 msgid "Failed to update redirects."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1179
+#: includes/modules/advanced/redirects/class-controller.php:1197
 msgid "Please select a file under 1MB."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1198
+#: includes/modules/advanced/redirects/class-controller.php:1216
 msgid "Only JSON or CSV files are supported."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1206
+#: includes/modules/advanced/redirects/class-controller.php:1224
 msgid "Some entries have invalid values. Please try again!"
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1214
+#: includes/modules/advanced/redirects/class-controller.php:1232
 msgid "No valid redirects were found, please check your file."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1223
+#: includes/modules/advanced/redirects/class-controller.php:1241
 msgid "An error occurred while inserting CSV data into the database."
 msgstr ""
 
-#: includes/modules/advanced/redirects/class-controller.php:1356
+#: includes/modules/advanced/redirects/class-controller.php:1382
 msgid "Please save some redirects first."
 msgstr ""
 

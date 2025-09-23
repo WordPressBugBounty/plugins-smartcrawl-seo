@@ -121,6 +121,9 @@ abstract class Submodule_Controller extends Controller {
 	 * @return void
 	 */
 	public function update_submodule() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error();
+		}
 		if ( ! isset( $_POST['_wds_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-admin-nonce' ) ) {
 			wp_send_json_error();
 		}

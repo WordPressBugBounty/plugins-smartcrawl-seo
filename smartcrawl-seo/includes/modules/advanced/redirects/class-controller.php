@@ -898,6 +898,9 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function save_redirect() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) );
+		}
 		$data = $this->get_request_data();
 
 		if ( empty( $data ) ) {
@@ -1054,6 +1057,11 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function delete_redirect() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'message' => esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) )
+			);
+		}
 		$data = $this->get_request_data();
 
 		if ( empty( $data ) ) {
@@ -1077,6 +1085,11 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function bulk_update_redirects() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'message' => esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) )
+			);
+		}
 		$data = $this->get_request_data();
 
 		if ( empty( $data ) ) {
@@ -1164,6 +1177,11 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function import_redirects() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'message' => esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) )
+			);
+		}
 		$data = $this->get_request_data();
 
 		if ( empty( $data ) ) {
@@ -1346,6 +1364,14 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function export_redirects() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array( 'message' => esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) )
+			);
+		}
+		if ( ! isset( $_POST['_wds_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-admin-nonce' ) ) {
+			wp_send_json_error();
+		}
 		ob_start();
 
 		$redirects = $this->redirects_table->get_redirects();
