@@ -825,7 +825,7 @@ class Onpage extends Admin_Settings {
 			$this->options['enable-date-archive'] = false;
 		}
 
-		update_option( $this->option_name, $this->options );
+		update_option( $this->option_name, $this->options, 'off' );
 	}
 
 	/**

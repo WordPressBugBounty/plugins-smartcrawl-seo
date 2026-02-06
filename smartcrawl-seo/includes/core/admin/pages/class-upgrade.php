@@ -38,8 +38,8 @@ class Upgrade extends Page {
 	public function add_page() {
 		add_submenu_page(
 			'wds_wizard',
-			esc_html__( 'Limited-Time Offer', 'smartcrawl-seo' ),
-			esc_html__( 'Limited-Time Offer', 'smartcrawl-seo' ),
+			esc_html__( 'Get SmartCrawl Pro', 'smartcrawl-seo' ),
+			esc_html__( 'Get SmartCrawl Pro', 'smartcrawl-seo' ),
 			'manage_options',
 			'https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_submenu_upsell',
 		);

@@ -35,10 +35,30 @@ class Schema extends Admin_Settings {
 	 */
 	public function validate( $input ) {
 		$input = $this->validate_and_save_social_options( $input );
+		// Array settings need special handling
+		$array_settings = array(
+			'schema_disabled_post_type_archives' => $this->get_post_types(),
+			'schema_disabled_taxonomy_archives'  => $this->get_taxonomies(),
+		);
 
 		$validated = array();
 		foreach ( $input as $setting_key => $setting_value ) {
-			$validated[ $setting_key ] = $this->validate_setting( $setting_key, $setting_value );
+			if ( ! isset( $array_settings[ $setting_key ] ) ) {
+				$validated[ $setting_key ] = $this->validate_setting( $setting_key, $setting_value );
+			}
+		}
+
+		// Validate array settings
+		foreach ( $array_settings as $array_setting => $available_items ) {
+			$input_data = $input[ $array_setting ] ?? array();
+			$disabled_items = array();
+			foreach ( $available_items as $item_key => $item_label ) {
+				$key = sanitize_key( $item_key );
+				if ( ! empty( $input_data[ $key ] ) ) {
+					$disabled_items[ $key ] = true;
+				}
+			}
+			$validated[ $array_setting ] = $disabled_items;
 		}
 
 		foreach ( $this->get_toggle_settings() as $toggle_setting ) {
@@ -617,12 +637,10 @@ class Schema extends Admin_Settings {
 			'schema_enable_author_url',
 			'schema_enable_author_gravatar',
 			'schema_enable_post_type_archives',
-			'schema_disabled_post_type_archives',
 			'schema_enable_author_archives',
 			'schema_enable_search',
 			'schema_enable_date_archives',
 			'schema_enable_taxonomy_archives',
-			'schema_disabled_taxonomy_archives',
 			'schema_enable_audio',
 			'schema_enable_video',
 			'schema_enable_yt_api',

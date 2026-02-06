@@ -134,6 +134,9 @@ class Analysis_Content extends Controller {
 			return;
 		}
 
+		// Increase memory limit and execution time for large content pages.
+		$this->increase_resource_limits();
+
 		// We never want to see the admin bar in analysis.
 		add_filter( 'show_admin_bar', '__return_false' );
 
@@ -229,5 +232,54 @@ class Analysis_Content extends Controller {
 		$bits = Html::find( $css_selector, $content );
 
 		return (string) trim( join( "\n", $bits ) );
+	}
+
+	/**
+	 * Increases PHP memory limit and execution time for large content pages.
+	 *
+	 * @return void
+	 */
+	private function increase_resource_limits() {
+		// Increase memory limit to 256M if not already higher.
+		$current_memory_limit = ini_get( 'memory_limit' );
+		if ( $current_memory_limit ) {
+			$current_memory_bytes = $this->convert_to_bytes( $current_memory_limit );
+			$target_memory_bytes = 256 * 1024 * 1024; // 256M.
+			if ( $current_memory_bytes < $target_memory_bytes ) {
+				@ini_set( 'memory_limit', '256M' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			}
+		}
+
+		// Increase max execution time to 60 seconds if not already higher.
+		$current_max_execution_time = ini_get( 'max_execution_time' );
+		if ( $current_max_execution_time && $current_max_execution_time > 0 && $current_max_execution_time < 60 ) {
+			@set_time_limit( 60 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		}
+	}
+
+	/**
+	 * Converts memory limit string to bytes.
+	 *
+	 * @param string $value Memory limit string (e.g., '128M', '256M').
+	 *
+	 * @return int Memory limit in bytes.
+	 */
+	private function convert_to_bytes( $value ) {
+		$value = trim( $value );
+		$last = strtolower( $value[ strlen( $value ) - 1 ] );
+		$value = (int) $value;
+
+		switch ( $last ) {
+			case 'g':
+				$value *= 1024;
+				// No break - fall through.
+			case 'm':
+				$value *= 1024;
+				// No break - fall through.
+			case 'k':
+				$value *= 1024;
+		}
+
+		return $value;
 	}
 }

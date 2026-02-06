@@ -9,8 +9,8 @@
 /**
  * Internal constants, not to be overridden
  */
-const SMARTCRAWL_VERSION     = '3.14.4';
-const SMARTCRAWL_BUILD       = '1758615725169';
+const SMARTCRAWL_VERSION     = '3.15.0';
+const SMARTCRAWL_BUILD       = '1768798336241';
 const SMARTCRAWL_BUILD_TYPE  = 'free';
 const SMARTCRAWL_SUI_VERSION = '2.12.23';
 const SMARTCRAWL_PACKAGE_ID  = 167;
@@ -51,7 +51,7 @@ if ( ! defined( 'SMARTCRAWL_OMIT_PORT_MATCHES' ) ) {
 	define( 'SMARTCRAWL_OMIT_PORT_MATCHES', true );
 }
 if ( ! defined( 'SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT' ) ) {
-	define( 'SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT', 5 );
+	define( 'SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT', 30 );
 }
 if ( ! defined( 'SMARTCRAWL_SERVICE_REQUEST_TIMEOUT' ) ) {
 	define( 'SMARTCRAWL_SERVICE_REQUEST_TIMEOUT', 5 );

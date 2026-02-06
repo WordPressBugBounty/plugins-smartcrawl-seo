@@ -8,7 +8,7 @@ Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 3.14.4
+Stable tag: 3.15.0
 
 SEO checker, content analysis & SEO optimizer. Rank higher on search engines with 301 redirects, XML sitemaps & one-click setup.
 
@@ -148,6 +148,32 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 6. Schema Type Builder
 
 == Changelog ==
+
+= 3.15.0 ( 2026-01-26 ) =
+
+- Enhancement: Limit Person Schema to specific pages when Organization Schema is enabled.
+- Enhancement: Optimize database performance by setting wds_onpage_options autoload to NO.
+- Enhancement: Improve compatibility between the Title & Meta module and the Discourse plugin.
+- Fix: SEO checks failing on large content pages.
+- Fix: Editor getting stuck when typing for more than two minutes while SmartCrawl is enabled.
+- Fix: Social accounts being erased from Schema General Settings.
+- Fix: Categories and tags not saving under Taxonomy Archives.
+- Fix: HTML characters appearing in the SEO Health report.
+- Fix: Blog or Posts Archive pages not working with Global Titles & Meta Descriptions.
+- Fix: Article Schema being added to all pages
+- Fix: Author URL appearing even after disabling it in SmartCrawl settings.
+- Fix: SmartCrawl not detecting focus keywords when numbers are used.
+- Fix: Auto-linking is causing issues with the WooCommerce cart.
+- Fix: Sitemap update schedule select option is being disabled.
+
+= 3.14.6 ( 2025-12-17 ) =
+
+- Enhance: Miscellaneous improvements
+
+= 3.14.5 ( 2025-11-20 ) =
+
+- Enhance: Miscellaneousness improvements
+- Fix: Duplicate homepage URLs appear in the sitemap when using WPML plugin
 
 = 3.14.4 ( 2025-09-23 ) =
 

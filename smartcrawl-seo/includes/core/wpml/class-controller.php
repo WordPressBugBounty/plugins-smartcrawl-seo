@@ -48,7 +48,7 @@ class Controller extends Controllers\Controller {
 	 * Initializes the controller.
 	 */
 	protected function init() {
-		add_action( 'plugins_loaded', array( $this, 'hook_with_wpml' ) );
+		$this->hook_with_wpml();
 	}
 
 	/**
@@ -88,6 +88,7 @@ class Controller extends Controllers\Controller {
 		add_filter( 'wds_terms_sitemap_include_term_ids', array( $this, 'limit_sitemap_terms_by_language' ), 10, 2 );
 		add_filter( 'wds_news_sitemap_include_post_ids', array( $this, 'limit_sitemap_posts_by_language' ), 10, 2 );
 		add_filter( 'wds_sitemap_cache_file_name', array( $this, 'append_language_code_to_cache' ) );
+		add_filter( 'wds_sitemap_ignored_page_ids', array( $this, 'exclude_homepage_translations' ) );
 	}
 
 	/**
@@ -170,6 +171,7 @@ class Controller extends Controllers\Controller {
 		add_filter( 'wds_sitemap_created', array( $this, 'remove_permalink_filters' ) );
 		add_filter( 'wds_full_sitemap_items', array( $this, 'add_homepage_versions' ) );
 		add_filter( 'wds_partial_sitemap_items', array( $this, 'add_homepage_versions_to_partial' ), 10, 3 );
+		add_filter( 'wds_sitemap_ignored_page_ids', array( $this, 'exclude_homepage_translations' ) );
 	}
 
 	/**
@@ -300,13 +302,111 @@ class Controller extends Controllers\Controller {
 	/**
 	 * We would rather use wpml_get_language_information, but it has internal caching that doesn't get purged the first time a post is saved.
 	 *
+	 * Results are cached in a static variable to avoid repeated database queries during the same request.
+	 *
 	 * @param int $post_id Post ID.
 	 *
 	 * @return string|null
 	 */
 	private function get_post_language_code( $post_id ) {
+		static $cache = array();
+
+		$post_id = (int) $post_id;
+		if ( ! $post_id ) {
+			return null;
+		}
+
+		if ( isset( $cache[ $post_id ] ) ) {
+			return $cache[ $post_id ];
+		}
+
 		global $wpdb;
 
-		return $wpdb->get_var( $wpdb->prepare( "SELECT language_code FROM {$wpdb->prefix}icl_translations WHERE element_id = %d", $post_id ) );
+		$cache[ $post_id ] = $wpdb->get_var( $wpdb->prepare( "SELECT language_code FROM {$wpdb->prefix}icl_translations WHERE element_id = %d", $post_id ) );
+
+		return $cache[ $post_id ];
+	}
+
+	/**
+	 * Gets all translation IDs for the homepage page.
+	 *
+	 * When a static page is set as homepage, this method retrieves all translation IDs
+	 * (including the original homepage ID) by querying WPML's translations table directly.
+	 *
+	 * We use direct database queries instead of WPML filters to avoid caching issues
+	 *
+	 * @return array Array of homepage translation IDs, or empty array if not applicable.
+	 */
+	private function get_homepage_translation_ids() {
+		static $cached_ids = null;
+
+		if ( null !== $cached_ids ) {
+			return $cached_ids;
+		}
+
+		// Only fetch if a static page is set as homepage.
+		if ( 'page' !== get_option( 'show_on_front' ) ) {
+			$cached_ids = array();
+			return $cached_ids;
+		}
+
+		$homepage_id = (int) get_option( 'page_on_front' );
+		if ( ! $homepage_id ) {
+			$cached_ids = array();
+			return $cached_ids;
+		}
+
+		// Get all translations of the homepage page by querying WPML translations table directly.
+		$translation_ids = array( $homepage_id );
+		global $wpdb;
+		$trid = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT trid FROM {$wpdb->prefix}icl_translations WHERE element_id = %d AND element_type = 'post_page'",
+				$homepage_id
+			)
+		);
+
+		if ( $trid ) {
+			$all_translations = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT element_id FROM {$wpdb->prefix}icl_translations WHERE trid = %d AND element_type = 'post_page'",
+					$trid
+				)
+			);
+
+			if ( ! empty( $all_translations ) ) {
+				$translation_ids = array_map( 'intval', $all_translations );
+			}
+		}
+
+		$cached_ids = $translation_ids;
+
+		return $cached_ids;
+	}
+
+	/**
+	 * Excludes homepage page and all its translations from the page sitemap.
+	 *
+	 * When a static page is set as homepage and WPML is active, the homepage page
+	 * and its translations are included in the page query results. This causes duplicates
+	 * because WPML's add_homepage_versions already adds homepage URLs for each language.
+	 *
+	 * @param array $ignored_ids Array of page IDs to ignore.
+	 *
+	 * @return array Modified array with homepage page and its translations excluded.
+	 */
+	public function exclude_homepage_translations( $ignored_ids ) {
+		$translation_ids = $this->get_homepage_translation_ids();
+
+		if ( empty( $translation_ids ) ) {
+			return $ignored_ids;
+		}
+
+		// Merge with existing ignored IDs.
+		$ignored_ids = empty( $ignored_ids ) || ! is_array( $ignored_ids )
+			? array()
+			: $ignored_ids;
+
+		return array_unique( array_merge( $ignored_ids, $translation_ids ) );
 	}
 }

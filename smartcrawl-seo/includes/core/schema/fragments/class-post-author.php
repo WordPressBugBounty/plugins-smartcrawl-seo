@@ -9,6 +9,7 @@ namespace SmartCrawl\Schema\Fragments;
 
 use SmartCrawl\Models\User;
 use SmartCrawl\Schema\Utils;
+use SmartCrawl\Settings;
 
 /**
  * Class Post_Author
@@ -47,7 +48,8 @@ class Post_Author extends Fragment {
 	 * @return string The post author ID.
 	 */
 	public function get_post_author_id() {
-		return $this->get_author_id( $this->user );
+		$schema_enable_author_url = (bool) $this->utils->get_schema_option( 'schema_enable_author_url' );
+		return $this->get_author_id( $this->user, $schema_enable_author_url );
 	}
 
 	/**
@@ -58,14 +60,20 @@ class Post_Author extends Fragment {
 	protected function get_raw() {
 		$name = $this->utils->get_user_full_name( $this->user );
 
+		$schema_enable_author_url = (bool) $this->utils->get_schema_option( 'schema_enable_author_url' );
+
+		// Use author posts URL for base only if schema_enable_author_url is enabled
+		$base_url = $schema_enable_author_url ? $this->get_user_url( $this->user ) : get_site_url();
+
 		$schema = array(
 			'@type' => 'Person',
-			'@id'   => $this->get_post_author_id(),
+			'@id'   => $this->get_author_id( $this->user, $schema_enable_author_url ),
 			'name'  => $name,
 		);
 
 		$url = $this->get_user_url( $this->user );
-		if ( (bool) $this->utils->get_schema_option( 'schema_enable_author_url' ) ) {
+
+		if ( $schema_enable_author_url ) {
 			$schema['url'] = $url;
 		}
 
@@ -76,7 +84,7 @@ class Post_Author extends Fragment {
 
 		if ( $this->utils->is_author_gravatar_enabled() ) {
 			$schema['image'] = $this->utils->get_image_schema(
-				$this->utils->url_to_id( $url, '#schema-author-gravatar' ),
+				$this->utils->url_to_id( $base_url, '#schema-author-gravatar' ),
 				$this->user->get_avatar_url( 100 ),
 				100,
 				100,
@@ -118,12 +126,19 @@ class Post_Author extends Fragment {
 	 * Retrieves the author ID.
 	 *
 	 * @param User $user The user object.
+	 * @param bool $schema_enable_author_url Whether author URL is enabled in schema settings.
 	 *
-	 * @return string The author ID.
+	 * @return string The author ID (a valid URI).
 	 */
-	private function get_author_id( $user ) {
-		$url = get_author_posts_url( $user->get_id() );
+	private function get_author_id( $user, bool $schema_enable_author_url = true ) {
+		if ( $schema_enable_author_url ) {
+			$url = get_author_posts_url( $user->get_id() );
+			return $this->utils->url_to_id( $url, '#schema-author' );
+		}
 
-		return $this->utils->url_to_id( $url, '#schema-author' );
+		// When schema_enable_author_url is disabled, use the site URL
+		$site_url = get_site_url();
+		$user_id  = $user->get_id();
+		return $this->utils->url_to_id( $site_url, '#schema-author-' . $user_id );
 	}
 }

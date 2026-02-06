@@ -11,7 +11,7 @@ $options = empty( $options ) ? $_view['options'] : $options;
 <div id="wds-social-twitter-card" class="sui-box-settings-row wds-separator-top">
 	<div class="sui-box-settings-col-1">
 		<label class="sui-settings-label"><?php esc_html_e( 'X Cards', 'smartcrawl-seo' ); ?></label>
-		<p class="sui-description"><?php esc_html_e( 'With X Cards, you can attach rich photos, videos and media experiences to Tweets, helping to drive traffic to your website.', 'smartcrawl-seo' ); ?></p>
+		<p class="sui-description"><?php esc_html_e( 'With X Cards, you can attach rich photos, videos and media experiences to Posts, helping to drive traffic to your website.', 'smartcrawl-seo' ); ?></p>
 	</div>
 
 	<?php $twitter_card_enabled = $options['twitter-card-enable']; ?>

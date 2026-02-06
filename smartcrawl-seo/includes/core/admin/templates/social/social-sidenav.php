@@ -17,7 +17,7 @@ $this->render_view(
 				'name' => esc_html__( 'OpenGraph', 'smartcrawl-seo' ),
 			),
 			array(
-				'id'   => 'tab_twitter_cards',
+				'id'   => 'tab_x_cards',
 				'name' => esc_html__( 'X Cards', 'smartcrawl-seo' ),
 			),
 			array(

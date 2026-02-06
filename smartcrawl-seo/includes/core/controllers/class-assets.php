@@ -265,7 +265,8 @@ class Assets extends Controller {
 		$empty_box_img = White_Label::get()->get_wpmudev_hero_image( $empty_box_img );
 
 		/* translators: %s: Heart icon */
-		$footer_text = White_Label::get()->get_wpmudev_footer_text( sprintf( esc_html__( 'Made with %s by WPMU DEV', 'smartcrawl-seo' ), '<span class="sui-icon-heart" aria-hidden="true" aria-label="love"></span>' ) );
+		$default_footer_text = sprintf( esc_html__( 'Made with %s by WPMU DEV', 'smartcrawl-seo' ), '<span class="sui-icon-heart" aria-hidden="true" aria-label="love"></span>' );
+		$footer_text         = White_Label::get()->get_wpmudev_footer_text( $default_footer_text );
 
 		wp_localize_script(
 			self::ADMIN_JS,
@@ -298,6 +299,8 @@ class Assets extends Controller {
 				'new_feature_status' => Settings::get_specific_options( 'wds-features-viewed', 0 ),
 				'empty_box_logo'     => $empty_box_img,
 				'footer_text'        => $footer_text,
+				'hide_doc_link'      => White_Label::get()->is_hide_wpmudev_doc_link(),
+				'default_footer_text' => $default_footer_text,
 			)
 		);
 

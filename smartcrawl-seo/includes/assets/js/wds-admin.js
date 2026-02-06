@@ -600,8 +600,6 @@
 	function init() {
 		window.Wds.floating_message();
 		window.Wds.inverted_toggle();
-
-		window.Wds.manageNewFeatureStatus(0);
 	}
 
 	$(init);

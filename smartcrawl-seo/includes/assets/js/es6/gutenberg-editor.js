@@ -9,12 +9,22 @@ class GutenbergEditor extends EventTarget {
 	constructor() {
 		super();
 
+		this.unsubscribe = null;
+
 		this.init();
 	}
 
 	init() {
 		this.hook_change_listener();
 		this.register_api_fetch_middleware();
+	}
+
+	destroy() {
+		// Clean up wp.data subscription
+		if (this.unsubscribe && typeof this.unsubscribe === 'function') {
+			this.unsubscribe();
+			this.unsubscribe = null;
+		}
 	}
 
 	/**
@@ -85,7 +95,7 @@ class GutenbergEditor extends EventTarget {
 			2000
 		);
 
-		wp.data.subscribe(() => {
+		this.unsubscribe = wp.data.subscribe(() => {
 			if (
 				this.is_post_loaded() &&
 				this.get_editor().isEditedPostDirty() &&

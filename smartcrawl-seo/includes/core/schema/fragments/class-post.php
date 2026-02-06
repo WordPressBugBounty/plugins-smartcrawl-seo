@@ -82,12 +82,13 @@ class Post extends Fragment {
 		$headline    = $this->post->get_meta_title();
 		$description = $this->post->get_meta_description();
 
-		$author_schema = $this->author_id
-			? array( '@id' => $this->author_id ) // An author has already been added, just link to it.
-			: new Post_Author( $this->post->get_post_author() );
+		// Include author schema based on schema type
+		$include_author = true;
+		if ( $this->utils->is_schema_type_organization() && ! $this->author_id ) {
+			$include_author = false;
+		}
 
 		$schema = array(
-			'author'        => $author_schema,
 			'publisher'     => array( '@id' => $this->publisher_id ),
 			'dateModified'  => get_the_modified_date( 'Y-m-d\TH:i:s', $wp_post ),
 			'datePublished' => get_the_date( 'Y-m-d\TH:i:s', $wp_post ),
@@ -95,6 +96,13 @@ class Post extends Fragment {
 			'description'   => $description,
 			'name'          => $this->utils->apply_filters( 'post-data-name', get_the_title( $wp_post ), $wp_post ),
 		);
+
+		if ( $include_author ) {
+			$author_schema    = $this->author_id
+				? array( '@id' => $this->author_id )
+				: new Post_Author( $this->post->get_post_author() );
+			$schema['author'] = $author_schema;
+		}
 
 		$enable_comments = (bool) $this->utils->get_schema_option( 'schema_enable_comments' );
 		if ( $this->include_comments && $enable_comments ) {

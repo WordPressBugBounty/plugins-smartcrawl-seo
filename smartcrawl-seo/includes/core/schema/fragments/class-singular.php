@@ -92,7 +92,14 @@ class Singular extends Fragment {
 			}
 		}
 
-		if ( ! $author_id ) {
+		$include_author = false;
+		if ( $this->utils->is_schema_type_person() ) {
+			$include_author = true;
+		} elseif ( $this->utils->is_schema_type_organization() && $this->include_article_schema ) {
+			$include_author = true;
+		}
+
+		if ( $include_author && ! $author_id ) {
 			$post_author = new Post_Author( $this->post->get_post_author() );
 			$schema[]    = $post_author;
 			$author_id   = $post_author->get_post_author_id();
@@ -118,7 +125,7 @@ class Singular extends Fragment {
 				$author_id,
 				$publisher->get_publisher_id()
 			);
-		} elseif ( $this->include_article_schema ) {
+		} elseif ( $this->should_add_default_article_schema() ) {
 			$schema[] = new Minimal_Webpage( $url, $publisher->get_publisher_id() );
 			$schema[] = new Article(
 				$this->post,
@@ -218,5 +225,48 @@ class Singular extends Fragment {
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Checks if default Article schema should be added when no custom schemas exist.
+	 *
+	 * @return bool True if Article schema should be added, false otherwise.
+	 */
+	private function should_add_default_article_schema() {
+		if ( ! $this->include_article_schema ) {
+			return false;
+		}
+
+		$post_type = $this->post->get_post_type();
+
+		// Add Article schema for blog posts with no schema set.
+		if ( 'post' === $post_type ) {
+			return true;
+		}
+
+		// Add Article schema for News/Article CPTs (post types in news sitemap) with no schema set.
+		if ( $this->is_news_article_cpt( $post_type ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if a post type is a News/Article CPT.
+	 *
+	 * @param string $post_type The post type to check.
+	 * @return bool True if the post type is a News/Article CPT, false otherwise.
+	 */
+	private function is_news_article_cpt( $post_type ) {
+		if ( ! \SmartCrawl\Sitemaps\Utils::get_sitemap_option( 'enable-news-sitemap' ) ) {
+			return false;
+		}
+
+		$news_query      = new \SmartCrawl\Sitemaps\News\Query();
+		$supported_types = $news_query->get_supported_types();
+
+		return in_array( $post_type, $supported_types, true );
 	}
 }

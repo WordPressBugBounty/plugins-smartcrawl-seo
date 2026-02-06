@@ -10,6 +10,10 @@ namespace SmartCrawl;
 use SmartCrawl\Admin\Settings\Admin_Settings;
 use SmartCrawl\Services\Service;
 
+if ( ! Admin_Settings::is_tab_allowed( Settings::TAB_INSTANT_INDEXING ) ) {
+	return;
+}
+
 $service       = Service::get( Service::SERVICE_SITE );
 $page_url      = Admin_Settings::admin_url( Settings::TAB_INSTANT_INDEXING );
 $option_value  = Settings::get_specific_options( 'wds_settings_options' );

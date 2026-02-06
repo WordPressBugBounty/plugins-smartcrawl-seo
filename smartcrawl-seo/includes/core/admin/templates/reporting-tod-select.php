@@ -14,7 +14,7 @@ $tod_value = empty( $tod_value ) ? false : $tod_value;
 
 $is_member   = ! empty( $_view['is_member'] );
 $option_name = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
-$disabled    = $is_member ? '' : 'disabled';
+$disabled    = ( $is_member || 'sitemap-update' === $component ) ? '' : 'disabled';
 
 $midnight = strtotime( 'today' );
 

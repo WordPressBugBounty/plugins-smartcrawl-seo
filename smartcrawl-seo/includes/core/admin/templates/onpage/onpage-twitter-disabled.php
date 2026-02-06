@@ -18,7 +18,7 @@ if ( Admin_Settings::is_tab_allowed( Settings::TAB_SOCIAL ) ) {
 		$message,
 		sprintf(
 			'<a href="%s">%s</a>',
-			esc_url_raw( add_query_arg( 'tab', 'tab_twitter_cards', $social_page ) ),
+			esc_url_raw( add_query_arg( 'tab', 'tab_x_cards', $social_page ) ),
 			esc_html__( 'here', 'smartcrawl-seo' )
 		)
 	);

@@ -34,8 +34,13 @@ class Init {
 	private function init() {
 		$this->common();
 
-		add_action( 'wpml_loaded', array( $this, 'wpml' ) );
-
+		// Register WPML hook, but if wpml_loaded already fired, initialize immediately.
+		// wpml_loaded fires on plugins_loaded, which happens before init hook.
+		if ( did_action( 'wpml_loaded' ) ) {
+			$this->wpml();
+		} else {
+			add_action( 'wpml_loaded', array( $this, 'wpml' ) );
+		}
 		if ( is_admin() ) {
 			$this->admin();
 		} else {

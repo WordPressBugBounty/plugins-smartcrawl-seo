@@ -291,6 +291,17 @@ class Utils {
 	}
 
 	/**
+	 * Checks if the schema type is organization.
+	 *
+	 * @return bool True if the schema type is organization, false otherwise.
+	 */
+	public function is_schema_type_organization() {
+		$schema_type = $this->get_social_option( 'schema_type' );
+
+		return empty( $schema_type ) || $schema_type === 'Organization';
+	}
+
+	/**
 	 * Retrieves a special page by key.
 	 *
 	 * @param string $key The key of the special page.

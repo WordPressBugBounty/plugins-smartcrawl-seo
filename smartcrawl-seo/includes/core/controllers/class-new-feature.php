@@ -30,46 +30,8 @@ class New_Feature extends Controller {
 	 * Binds processing actions.
 	 */
 	protected function init() {
-		add_filter( 'smartcrawl_admin_settings_menu_title', array( $this, 'admin_settings_menu_title' ) );
-		add_filter( 'smartcrawl_admin_settings_submenu_title', array( $this, 'admin_settings_submenu_title' ), 10, 2 );
-
 		add_action( 'wp_ajax_smartcrawl_new_feature_status', array( $this, 'update_new_feature_status' ) );
 		add_action( 'wp_ajax_smartcrawl_update_new_feature', array( $this, 'update_new_feature_badge' ) );
-	}
-
-	/**
-	 * Retrieves menu name of admin settings with new features.
-	 *
-	 * @param string $menu_name Navigation item name.
-	 *
-	 * @return string
-	 */
-	public function admin_settings_menu_title( $menu_name ) {
-		$viewed = (int) Settings::get_specific_options( 'wds-features-viewed', -1 );
-
-		if ( -1 === $viewed ) {
-			$menu_name .= '<span class="wds-new-feature-status"></span>';
-		}
-
-		return $menu_name;
-	}
-
-	/**
-	 * Retrieves menu item name of admin settings with new features.
-	 *
-	 * @param string $menu_name Menu item name.
-	 * @param string $slug Menu item slug.
-	 *
-	 * @return string
-	 */
-	public function admin_settings_submenu_title( $menu_name, $slug ) {
-		$viewed = (int) Settings::get_specific_options( 'wds-features-viewed', 0 );
-
-		if ( Settings::TAB_INSTANT_INDEXING === $slug && $viewed < 1 ) {
-			$menu_name .= '<span class="wds-new-feature-status"></span>';
-		}
-
-		return $menu_name;
 	}
 
 	/**

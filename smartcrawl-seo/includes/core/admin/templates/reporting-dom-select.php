@@ -14,7 +14,7 @@ if ( ! $component ) {
 $option_name = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $dom_value   = empty( $dom_value ) ? false : $dom_value;
 $is_member   = ! empty( $_view['is_member'] );
-$disabled    = $is_member ? '' : 'disabled';
+$disabled    = ( $is_member || 'sitemap-update' === $component ) ? '' : 'disabled';
 $dom_range   = range( 1, 28 );
 
 $select_id   = "wds-{$component}-dom";

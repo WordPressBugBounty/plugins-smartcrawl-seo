@@ -110,11 +110,74 @@ class OnPage extends Controller {
 	}
 
 	/**
+	 * Check if we should skip processing for this request.
+	 *
+	 * Skips processing for AJAX, REST API, admin, feed, or cron requests
+	 * to prevent interference with plugins like Discourse that use these endpoints.
+	 *
+	 * @return bool True if we should skip processing, false otherwise.
+	 */
+	private function should_skip_processing() {
+		// Allow other plugins to signal that processing should be skipped.
+		// This is useful for plugins like Discourse that need to make requests
+		// without SEO processing interfering.
+		$skip = apply_filters( 'smartcrawl_onpage_skip_processing', false );
+		if ( $skip ) {
+			return true;
+		}
+
+		// Skip for admin requests.
+		if ( is_admin() ) {
+			return true;
+		}
+
+		// Skip for AJAX requests.
+		if ( wp_doing_ajax() ) {
+			return true;
+		}
+
+		// Skip for REST API requests.
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			return true;
+		}
+
+		// Skip for feed requests.
+		if ( is_feed() ) {
+			return true;
+		}
+
+		// Skip for cron requests.
+		if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
+			return true;
+		}
+
+		// Skip for XML-RPC requests.
+		if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
+			return true;
+		}
+
+		// Skip if URL contains wp-json (REST API endpoint).
+		// This catches cases where REST_REQUEST might not be set yet.
+		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+			$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+			if ( false !== strpos( $request_uri, 'wp-json' ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Starts buffering the header.
 	 *
 	 * The buffer output will be used to replace the title.
 	 */
 	public function smartcrawl_start_title_buffer() {
+		if ( $this->should_skip_processing() ) {
+			return;
+		}
+
 		ob_start( array( $this, 'smartcrawl_process_title_buffer' ) );
 	}
 
@@ -166,6 +229,10 @@ class OnPage extends Controller {
 	 * @return string
 	 */
 	public function smartcrawl_title( $title ) {
+		if ( $this->should_skip_processing() ) {
+			return $title;
+		}
+
 		$entity = $this->get_queried_entity();
 
 		if ( $entity && method_exists( $entity, 'get_meta_title' ) ) {
@@ -179,6 +246,10 @@ class OnPage extends Controller {
 	 * Processes the stuff that goes into the HTML head
 	 */
 	public function smartcrawl_head() {
+		if ( $this->should_skip_processing() ) {
+			return;
+		}
+
 		if ( $this->force_rewrite_title() ) {
 			$this->smartcrawl_stop_title_buffer(); // STOP processing the buffer.
 		}
@@ -202,6 +273,10 @@ class OnPage extends Controller {
 	 * @return void
 	 */
 	public function smartcrawl_head_extras() {
+		if ( $this->should_skip_processing() ) {
+			return;
+		}
+
 		$this->head_start();
 		$this->print_meta_tags();
 		$this->head_end();
@@ -435,6 +510,10 @@ class OnPage extends Controller {
 	 * @return mixed
 	 */
 	public function add_smartcrawl_robots_to_wp_robots( $wp_robots ) {
+		if ( $this->should_skip_processing() ) {
+			return $wp_robots;
+		}
+
 		if (
 			! $this->is_blog_public() // If user has an override at the blog level.
 			|| $this->robots_processing_disabled() // or robots processing is disabled.
@@ -467,7 +546,7 @@ class OnPage extends Controller {
 	 * @return bool
 	 */
 	private function smartcrawl_metadesc() {
-		if ( is_admin() ) {
+		if ( $this->should_skip_processing() ) {
 			return false;
 		}
 

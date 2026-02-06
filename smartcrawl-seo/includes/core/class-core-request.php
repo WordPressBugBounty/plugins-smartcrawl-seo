@@ -88,18 +88,48 @@ class Core_Request {
 			$params['cookies'] = $cookies;
 		}
 		$params['timeout'] = $this->get_timeout();
+		// Remove response size limit for large content pages.
+		$params['limit_response_size'] = 0; // 0 means no limit.
 
 		$response = wp_remote_get( $url, $params );
 
 		if ( is_wp_error( $response ) ) {
+			$error_code = $response->get_error_code();
+			$error_message = $response->get_error_message();
+			
+			// Check for timeout errors specifically.
+			if ( 'http_request_failed' === $error_code && 
+			     ( strpos( $error_message, 'timeout' ) !== false || 
+			       strpos( $error_message, 'timed out' ) !== false ) ) {
+				return new \WP_Error( 
+					__CLASS__, 
+					sprintf( 
+						'Request timed out after %d seconds. The page content may be too large. Consider reducing the amount of content or increasing SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT.', 
+						$this->get_timeout() 
+					) 
+				);
+			}
+			
 			return $response;
 		}
 
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return new \WP_Error( __CLASS__, 'Non-200 response' );
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( 200 !== $response_code ) {
+			return new \WP_Error( 
+				__CLASS__, 
+				sprintf( 'Non-200 response: %d', $response_code ) 
+			);
 		}
 
 		$content = wp_remote_retrieve_body( $response );
+		
+		// Check if content is empty, which might indicate an issue.
+		if ( empty( $content ) ) {
+			return new \WP_Error( 
+				__CLASS__, 
+				'Empty response body received. The page may have failed to render properly.' 
+			);
+		}
 
 		$bits = Html::find( 'body', $content );
 
@@ -118,6 +148,6 @@ class Core_Request {
 	private function get_timeout() {
 		return defined( 'SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT' )
 			? SMARTCRAWL_ANALYSIS_REQUEST_TIMEOUT
-			: 5;
+			: 30;
 	}
 }

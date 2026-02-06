@@ -9,21 +9,59 @@ class ClassicEditor extends EventTarget {
 	constructor() {
 		super();
 
+		this.debouncedChangeCallback = null;
+		this.autosaveHandler = null;
+		this.loadHandler = null;
+		this.tinymceChangeCallback = null;
+
 		this.init();
 	}
 
 	init() {
+		this.debouncedChangeCallback = this.get_debounced_change_callback();
+		this.autosaveHandler = () => this.dispatch_autosave_event();
+		this.loadHandler = () => this.hook_tinymce_change_listener();
+
 		$(document)
 			.on(
 				'input',
 				'input#title,textarea#content,textarea#excerpt',
-				this.get_debounced_change_callback()
+				this.debouncedChangeCallback
 			)
-			.on('after-autosave.smartcrawl', () =>
-				this.dispatch_autosave_event()
-			);
+			.on('after-autosave.smartcrawl', this.autosaveHandler);
 
-		$(window).on('load', () => this.hook_tinymce_change_listener());
+		$(window).on('load', this.loadHandler);
+	}
+
+	destroy() {
+		// Clean up jQuery event handlers
+		if (this.debouncedChangeCallback) {
+			$(document).off(
+				'input',
+				'input#title,textarea#content,textarea#excerpt',
+				this.debouncedChangeCallback
+			);
+			this.debouncedChangeCallback = null;
+		}
+
+		if (this.autosaveHandler) {
+			$(document).off('after-autosave.smartcrawl', this.autosaveHandler);
+			this.autosaveHandler = null;
+		}
+
+		if (this.loadHandler) {
+			$(window).off('load', this.loadHandler);
+			this.loadHandler = null;
+		}
+
+		// Clean up TinyMCE listener if it exists
+		if (this.tinymceChangeCallback) {
+			let editor = typeof tinymce !== 'undefined' && tinymce.get('content');
+			if (editor) {
+				editor.off('change', this.tinymceChangeCallback);
+			}
+			this.tinymceChangeCallback = null;
+		}
 	}
 
 	/**
@@ -56,7 +94,8 @@ class ClassicEditor extends EventTarget {
 	hook_tinymce_change_listener() {
 		let editor = typeof tinymce !== 'undefined' && tinymce.get('content');
 		if (editor) {
-			editor.on('change', this.get_debounced_change_callback());
+			this.tinymceChangeCallback = this.get_debounced_change_callback();
+			editor.on('change', this.tinymceChangeCallback);
 		}
 	}
 

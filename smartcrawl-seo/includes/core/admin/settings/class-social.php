@@ -27,10 +27,13 @@ class Social extends Admin_Settings {
 	 * @return array Validated input
 	 */
 	public function validate( $input ) {
-		$result = array();
+		// Get existing settings to preserve values not in the current form submission
+		$result = Settings::get_specific_options( $this->option_name );
+		// Merge with defaults to ensure all expected keys exist
+		$result = wp_parse_args( $result, $this->get_default_options() );
 
-		if ( ! empty( $input['wds_social-setup'] ) ) {
-			$result['wds_social-setup'] = true;
+		if ( isset( $input['wds_social-setup'] ) ) {
+			$result['wds_social-setup'] = ! empty( $input['wds_social-setup'] );
 		}
 
 		$result['disable-schema'] = $this->disable_schema( $input );
@@ -43,65 +46,82 @@ class Social extends Admin_Settings {
 			'youtube_url',
 		);
 		foreach ( $urls as $type ) {
-			if ( empty( $input[ $type ] ) ) {
-				continue;
+			// Only update if the field is present in the input
+			if ( isset( $input[ $type ] ) ) {
+				if ( empty( $input[ $type ] ) ) {
+					// If empty string is submitted, clear the value
+					$result[ $type ] = '';
+					continue;
+				}
+				$social_url = trim( $input[ $type ] );
+				if ( ! preg_match( '/^https?:\/\//', $social_url ) ) {
+					add_settings_error(
+						$this->option_name,
+						'social_url_invalid',
+						esc_html__( 'Some social URLs could not be saved. Please try again.', 'smartcrawl-seo' )
+					);
+					continue;
+				}
+				$result[ $type ] = $social_url;
 			}
-			$social_url = trim( $input[ $type ] );
-			if ( ! preg_match( '/^https?:\/\//', $social_url ) ) {
-				add_settings_error(
-					$this->option_name,
-					'social_url_invalid',
-					esc_html__( 'Some social URLs could not be saved. Please try again.', 'smartcrawl-seo' )
-				);
-				continue;
-			}
-			$result[ $type ] = $social_url;
+			// If not in input, preserve existing value (already in $result)
 		}
 
-		if ( ! empty( $input['sitename'] ) ) {
+		if ( isset( $input['sitename'] ) ) {
 			$result['sitename'] = sanitize_text_field( $input['sitename'] );
 		}
-		if ( ! empty( $input['override_name'] ) ) {
+		if ( isset( $input['override_name'] ) ) {
 			$result['override_name'] = sanitize_text_field( $input['override_name'] );
 		}
-		if ( ! empty( $input['organization_name'] ) ) {
+		if ( isset( $input['organization_name'] ) ) {
 			$result['organization_name'] = sanitize_text_field( $input['organization_name'] );
 		}
-		if ( ! empty( $input['organization_logo'] ) ) {
+		if ( isset( $input['organization_logo'] ) ) {
 			$result['organization_logo'] = sanitize_text_field( $input['organization_logo'] );
 		}
-		if ( ! empty( $input['schema_type'] ) ) {
+		if ( isset( $input['schema_type'] ) ) {
 			$result['schema_type'] = sanitize_text_field( $input['schema_type'] );
 		}
-		if ( ! empty( $input['twitter_username'] ) ) {
+		if ( isset( $input['twitter_username'] ) ) {
 			$result['twitter_username'] = sanitize_text_field( $input['twitter_username'] );
 		}
-		if ( ! empty( $input['twitter-card-type'] ) ) {
+		if ( isset( $input['twitter-card-type'] ) ) {
 			$result['twitter-card-type'] = sanitize_text_field( $input['twitter-card-type'] );
 		}
-		if ( ! empty( $input['fb-app-id'] ) ) {
+		if ( isset( $input['fb-app-id'] ) ) {
 			$result['fb-app-id'] = sanitize_text_field( $input['fb-app-id'] );
 		}
 
-		$result['og-enable']           = ! empty( $input['og-enable'] );
-		$result['twitter-card-enable'] = ! empty( $input['twitter-card-enable'] );
+		if ( isset( $input['og-enable'] ) ) {
+			$result['og-enable'] = ! empty( $input['og-enable'] );
+		}
+		if ( isset( $input['twitter-card-enable'] ) ) {
+			$result['twitter-card-enable'] = ! empty( $input['twitter-card-enable'] );
+		}
 
-		$this->toggle_og_globally(
-			$result['og-enable']
-		);
+		if ( isset( $input['og-enable'] ) ) {
+			$this->toggle_og_globally(
+				$result['og-enable']
+			);
+		}
 
-		$this->toggle_twitter_cards_globally(
-			$result['twitter-card-enable']
-		);
+		if ( isset( $input['twitter-card-enable'] ) ) {
+			$this->toggle_twitter_cards_globally(
+				$result['twitter-card-enable']
+			);
+		}
 
-		if ( ! empty( $input['pinterest-verify'] ) ) {
-			$pin                                     = \SmartCrawl\Social\Pinterest_Printer::get();
-			$raw                                     = trim( $input['pinterest-verify'] );
-			$tag                                     = $pin->get_verified_tag( $raw );
-			$result['pinterest-verify']              = str_replace( ' ', '', $raw ) === str_replace( ' ', '', $tag ) ? $tag : false;
-			$result['pinterest-verification-status'] = str_replace( ' ', '', $raw ) === str_replace( ' ', '', $tag ) ? '' : 'fail';
-		} else {
-			$result['pinterest-verification-status'] = false;
+		if ( isset( $input['pinterest-verify'] ) ) {
+			if ( ! empty( $input['pinterest-verify'] ) ) {
+				$pin                                     = \SmartCrawl\Social\Pinterest_Printer::get();
+				$raw                                     = trim( $input['pinterest-verify'] );
+				$tag                                     = $pin->get_verified_tag( $raw );
+				$result['pinterest-verify']              = str_replace( ' ', '', $raw ) === str_replace( ' ', '', $tag ) ? $tag : false;
+				$result['pinterest-verification-status'] = str_replace( ' ', '', $raw ) === str_replace( ' ', '', $tag ) ? '' : 'fail';
+			} else {
+				$result['pinterest-verify']              = '';
+				$result['pinterest-verification-status'] = false;
+			}
 		}
 
 		return $result;

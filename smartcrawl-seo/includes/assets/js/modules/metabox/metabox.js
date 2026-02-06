@@ -41,13 +41,24 @@ export default class Metabox extends React.Component {
 	componentDidMount() {
 		window.addEventListener('load', this.refresh);
 
-		this.editor.addEventListener('autosave', () => {
+		this.autosaveHandler = () => {
 			this.refreshAnalysis(true);
-		});
+		};
+		this.editor.addEventListener('autosave', this.autosaveHandler);
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('load', this.refresh);
+
+		// Clean up editor event listener
+		if (this.autosaveHandler && this.editor) {
+			this.editor.removeEventListener('autosave', this.autosaveHandler);
+		}
+
+		// Clean up editor instance
+		if (this.editor && typeof this.editor.destroy === 'function') {
+			this.editor.destroy();
+		}
 	}
 
 	refresh() {

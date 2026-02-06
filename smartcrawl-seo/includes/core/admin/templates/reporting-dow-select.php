@@ -14,7 +14,7 @@ if ( ! $component ) {
 $option_name = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $dow_value   = empty( $dow_value ) ? false : $dow_value;
 $is_member   = ! empty( $_view['is_member'] );
-$disabled    = $is_member ? '' : 'disabled';
+$disabled    = ( $is_member || 'sitemap-update' === $component ) ? '' : 'disabled';
 $monday      = strtotime( 'this Monday' );
 $days        = array(
 	esc_html__( 'Sunday', 'smartcrawl-seo' ),

@@ -72,6 +72,13 @@ export default class SeoAnalysisTabContent extends React.Component {
 		};
 	}
 
+	componentWillUnmount() {
+		// Clean up editor instance
+		if (this.editor && typeof this.editor.destroy === 'function') {
+			this.editor.destroy();
+		}
+	}
+
 	handleIgnore(id) {
 		RequestUtil.post(
 			'wds_analysis_ignore_check',

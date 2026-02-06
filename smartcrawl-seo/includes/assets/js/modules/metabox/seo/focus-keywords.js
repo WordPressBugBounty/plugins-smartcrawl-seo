@@ -34,6 +34,13 @@ export default class FocusKeywords extends React.Component {
 		};
 	}
 
+	componentWillUnmount() {
+		// Clean up editor instance
+		if (this.editor && typeof this.editor.destroy === 'function') {
+			this.editor.destroy();
+		}
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	componentDidUpdate(prevProps, prevState) {
 		const { loading } = this.props;

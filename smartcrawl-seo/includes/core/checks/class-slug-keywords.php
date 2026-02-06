@@ -32,7 +32,7 @@ class Slug_Keywords extends Post_Check {
 		$kwds = array();
 		foreach ( $keywords as $k ) {
 			$keyword_string = new SmartCrawl_String( $k, $this->get_language() );
-			$kwds           = array_merge( $kwds, $keyword_string->get_keywords() );
+			$kwds           = $kwds + $keyword_string->get_keywords();
 		}
 
 		return array_map( 'sanitize_title', array_unique( array_keys( $kwds ) ) );

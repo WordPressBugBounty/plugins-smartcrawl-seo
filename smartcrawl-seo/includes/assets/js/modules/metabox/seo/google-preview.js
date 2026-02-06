@@ -44,6 +44,8 @@ export default class GooglePreview extends React.Component {
 			this.editor = new ClassicEditor();
 		}
 
+		this.unsubscribe = null;
+
 		this.state = {
 			openForm: false,
 			loading: false,
@@ -62,11 +64,24 @@ export default class GooglePreview extends React.Component {
 
 	componentDidMount() {
 		if (window._wpLoadBlockEditor) {
-			wp.data.subscribe(() => {
+			this.unsubscribe = wp.data.subscribe(() => {
 				this.refresh();
 			});
 		} else {
 			this.refresh();
+		}
+	}
+
+	componentWillUnmount() {
+		// Clean up wp.data subscription
+		if (this.unsubscribe && typeof this.unsubscribe === 'function') {
+			this.unsubscribe();
+			this.unsubscribe = null;
+		}
+
+		// Clean up editor instance
+		if (this.editor && typeof this.editor.destroy === 'function') {
+			this.editor.destroy();
 		}
 	}
 
@@ -86,20 +101,11 @@ export default class GooglePreview extends React.Component {
 
 	refresh() {
 		const post = this.editor.get_data();
-		// Check if Gutenberg editor is active.
-		if (window._wpLoadBlockEditor) {
-			wp.data.subscribe(() => {
-				this.setState({
-					editorTitle: post.get_title(),
-					editorDesc: post.get_content(),
-				});
-			});
-		} else {
-			this.setState({
-				editorTitle: post.get_title(),
-				editorDesc: post.get_content(),
-			});
-		}
+		// Update state directly without creating nested subscriptions
+		this.setState({
+			editorTitle: post.get_title(),
+			editorDesc: post.get_content(),
+		});
 	}
 
 	refreshPlaceholder() {

@@ -44,6 +44,11 @@ $option_name       = empty( $_view['option_name'] ) ? '' : $_view['option_name']
 		<div data-panes>
 			<div class="<?php echo $card_type_image ? 'active' : ''; ?>">
 				<?php
+				// Note: We use twitter.com URLs instead of x.com URLs because X's embed API
+				// still requires twitter.com URLs to function properly. Despite the platform
+				// rebranding to X, the embed infrastructure hasn't fully migrated to support
+				// x.com URLs yet. This is a known limitation on X's side.
+				// See: https://github.com/umbraco/Umbraco-CMS/issues/16645
 				$this->render_view(
 					'social/social-twitter-embed',
 					array(
@@ -56,6 +61,11 @@ $option_name       = empty( $_view['option_name'] ) ? '' : $_view['option_name']
 
 			<div class="<?php echo $card_type_summary ? 'active' : ''; ?>">
 				<?php
+				// Note: We use twitter.com URLs instead of x.com URLs because X's embed API
+				// still requires twitter.com URLs to function properly. Despite the platform
+				// rebranding to X, the embed infrastructure hasn't fully migrated to support
+				// x.com URLs yet. This is a known limitation on X's side.
+				// See: https://github.com/umbraco/Umbraco-CMS/issues/16645
 				$this->render_view(
 					'social/social-twitter-embed',
 					array(

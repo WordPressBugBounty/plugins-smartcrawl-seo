@@ -27,6 +27,13 @@ export default class ReadabilityAnalysisContent extends React.Component {
 		}
 	}
 
+	componentWillUnmount() {
+		// Clean up editor instance
+		if (this.editor && typeof this.editor.destroy === 'function') {
+			this.editor.destroy();
+		}
+	}
+
 	levelsMap() {
 		const veryEasy = __('Very easy to read', 'smartcrawl-seo'),
 			easy = __('Easy to read', 'smartcrawl-seo'),

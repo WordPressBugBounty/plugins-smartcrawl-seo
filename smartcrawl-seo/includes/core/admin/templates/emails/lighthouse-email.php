@@ -59,7 +59,7 @@ $icon_error      = sprintf( '%s/assets/images/icon-error.png', $plugin_url );
 						<p style="color: #333333;font-family: 'Roboto', Arial, sans-serif;font-size: 25px;font-weight: 700;line-height: 34px;margin: 0 0 5px;padding: 0;text-align: left;">
 							<?php
 							printf( /* translators: %s - tested on */
-								esc_html__( 'SEO test summary for <br/>%s', 'smartcrawl-seo' ),
+								esc_html__( 'SEO test summary for', 'smartcrawl-seo' ) . '<br/>%s',
 								'<a class="brand" href="' . esc_attr( $lighthouse_url ) . '" target="_blank" style="color: #0059FF;font-family: \'Roboto\', Arial, sans-serif;font-weight: inherit;line-height: 30px;margin: 0;padding: 0;text-align: left;text-decoration: none">' . esc_html( site_url() ) . '</a>'
 							);
 							?>

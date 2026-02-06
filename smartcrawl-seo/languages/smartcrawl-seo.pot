@@ -1,15 +1,15 @@
-# Copyright (C) 2025 WPMU DEV
+# Copyright (C) 2026 WPMU DEV
 # This file is distributed under the same license as the SmartCrawl Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SmartCrawl Pro 3.14.4\n"
+"Project-Id-Version: SmartCrawl Pro 3.15.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/build\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-23T08:21:53+00:00\n"
+"POT-Creation-Date: 2026-01-19T04:52:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
@@ -144,7 +144,7 @@ msgid "Title & Meta"
 msgstr ""
 
 #: includes/core/admin/pages/class-network-settings.php:189
-#: includes/core/admin/settings/class-schema.php:77
+#: includes/core/admin/settings/class-schema.php:97
 #: includes/core/admin/settings/class-settings.php:364
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:38
 #: includes/core/admin/templates/schema/schema-settings.php:26
@@ -156,7 +156,7 @@ msgstr ""
 #: includes/core/admin/settings/class-instant-indexing-free.php:43
 #: includes/core/admin/settings/class-instant-indexing.php:46
 #: includes/core/admin/settings/class-settings.php:371
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:29
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:33
 #: includes/core/admin/templates/instant-indexing-free.php:14
 #: includes/core/admin/templates/instant-indexing/instant-indexing-content.php:25
 #: includes/core/class-settings.php:309
@@ -165,14 +165,14 @@ msgid "Instant Indexing"
 msgstr ""
 
 #: includes/core/admin/pages/class-network-settings.php:191
-#: includes/core/admin/settings/class-social.php:203
+#: includes/core/admin/settings/class-social.php:223
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:39
 #: includes/core/admin/templates/onpage/onpage-og-twitter.php:29
 #: includes/core/admin/templates/social/social-settings.php:19
 #: includes/core/admin/templates/term/term-nav.php:16
 #: includes/core/class-settings.php:307
 #: includes/core/configs/class-model.php:169
-#: includes/assets/js/modules/metabox/metabox.js:230
+#: includes/assets/js/modules/metabox/metabox.js:241
 msgid "Social"
 msgstr ""
 
@@ -226,8 +226,9 @@ msgstr ""
 
 #: includes/core/admin/pages/class-upgrade-free.php:41
 #: includes/core/admin/pages/class-upgrade-free.php:42
+#: includes/core/admin/templates/upgrade-page.php:136
 #: includes/core/controllers/class-plugin-links-free.php:47
-msgid "Limited-Time Offer"
+msgid "Get SmartCrawl Pro"
 msgstr ""
 
 #: includes/core/admin/settings/class-admin-settings.php:264
@@ -565,25 +566,25 @@ msgstr ""
 msgid "Example search query"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:55
+#: includes/core/admin/settings/class-schema.php:75
 msgid "Please use our new hook `smartcrawl_after_sanitize_schema` in SmartCrawl."
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/core/admin/settings/class-schema.php:107
+#: includes/core/admin/settings/class-schema.php:127
 #, php-format
 msgid "%s Wizard: Schema"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:185
+#: includes/core/admin/settings/class-schema.php:205
 msgid "Post type"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:186
+#: includes/core/admin/settings/class-schema.php:206
 msgid "Show Globally"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:187
+#: includes/core/admin/settings/class-schema.php:207
 #: includes/core/admin/templates/dashboard/dashboard-widget-onpage.php:43
 #: includes/core/admin/templates/onpage/onpage-settings.php:64
 #: includes/core/admin/templates/onpage/onpage-settings.php:98
@@ -593,39 +594,39 @@ msgstr ""
 msgid "Homepage"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:188
+#: includes/core/admin/settings/class-schema.php:208
 msgid "Author role"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:189
+#: includes/core/admin/settings/class-schema.php:209
 msgid "Post format"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:190
+#: includes/core/admin/settings/class-schema.php:210
 msgid "Page template"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:191
+#: includes/core/admin/settings/class-schema.php:211
 msgid "Product type"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:225
+#: includes/core/admin/settings/class-schema.php:245
 msgid "Variable Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:226
+#: includes/core/admin/settings/class-schema.php:246
 msgid "Simple Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:227
+#: includes/core/admin/settings/class-schema.php:247
 msgid "Grouped Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:228
+#: includes/core/admin/settings/class-schema.php:248
 msgid "External Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:438
+#: includes/core/admin/settings/class-schema.php:458
 #: includes/core/admin/templates/metabox/metabox-advanced-indexing.php:84
 #: includes/modules/advanced/breadcrumbs/class-controller.php:243
 #: includes/assets/js/modules/metabox/advanced/indexing.js:82
@@ -767,12 +768,12 @@ msgstr ""
 msgid "Some email recipients could not be saved."
 msgstr ""
 
-#: includes/core/admin/settings/class-social.php:54
+#: includes/core/admin/settings/class-social.php:61
 msgid "Some social URLs could not be saved. Please try again."
 msgstr ""
 
 #. translators: %s: plugin title
-#: includes/core/admin/settings/class-social.php:185
+#: includes/core/admin/settings/class-social.php:205
 #, php-format
 msgid "%s Wizard: Social"
 msgstr ""
@@ -795,7 +796,7 @@ msgstr ""
 #: includes/core/admin/templates/dashboard/dashboard-content-analysis-readability-overview.php:82
 #: includes/core/models/class-analysis.php:298
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:119
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:38
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:45
 msgid "Easy"
 msgstr ""
 
@@ -804,7 +805,7 @@ msgstr ""
 #: includes/core/admin/templates/dashboard/dashboard-content-analysis-readability-overview.php:80
 #: includes/core/models/class-analysis.php:300
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:111
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:40
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:47
 msgid "Difficult"
 msgstr ""
 
@@ -898,7 +899,7 @@ msgstr ""
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:45
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:54
 #: includes/core/admin/templates/dashboard/dashboard-welcome-modal.php:52
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:34
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:38
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:197
 #: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:32
 #: includes/core/admin/templates/lighthouse/lighthouse-reporting-title-tag.php:15
@@ -917,7 +918,7 @@ msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:34
 #: includes/core/admin/templates/dashboard/dashboard-reports-free.php:70
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:59
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:63
 #: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:53
 #: includes/core/admin/templates/disabled-component-inner.php:24
 #: includes/core/admin/templates/report-vertical-tab.php:55
@@ -984,7 +985,7 @@ msgstr ""
 #: includes/core/admin/templates/lighthouse/lighthouse-summary.php:60
 #: includes/core/admin/templates/term/term-nav.php:13
 #: includes/core/controllers/class-analysis.php:212
-#: includes/assets/js/modules/metabox/metabox.js:181
+#: includes/assets/js/modules/metabox/metabox.js:192
 msgid "SEO"
 msgstr ""
 
@@ -1137,7 +1138,7 @@ msgid "Configure advanced tools"
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-advanced-tools.php:63
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:71
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:75
 #: includes/core/admin/templates/dashboard/dashboard-widget-onpage.php:66
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:86
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:225
@@ -1149,7 +1150,7 @@ msgstr ""
 #: includes/core/admin/templates/dashboard/dashboard-widget-advanced-tools.php:71
 #: includes/core/admin/templates/dashboard/dashboard-widget-content-analysis.php:69
 #: includes/core/admin/templates/dashboard/dashboard-widget-content-analysis.php:93
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:65
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:69
 #: includes/core/admin/templates/dashboard/dashboard-widget-onpage.php:75
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:107
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:135
@@ -1219,7 +1220,7 @@ msgstr ""
 msgid "Edit Posts"
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:33
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:37
 #: includes/core/admin/templates/dashboard/dashboard-widget-sitemap.php:196
 #: includes/core/admin/templates/dashboard/dashboard-widget-upgrade.php:31
 #: includes/core/admin/templates/sitemap/sitemap-reporting-title-pro-tag.php:19
@@ -1233,7 +1234,7 @@ msgstr ""
 msgid "Upgrade to SmartCrawl Pro"
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:37
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:41
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:55
 #: includes/core/admin/templates/dashboard/dashboard-widget-schema.php:71
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:64
@@ -1248,15 +1249,15 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:45
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:49
 msgid "Instantly notify search engines like Bing and Yandex whenever your site’s content changes using our IndexNow API integration."
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:47
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:51
 msgid "Automatically notify Bing and Yandex whenever you add, update, or remove pages, helping your content appear in search results faster."
 msgstr ""
 
-#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:49
+#: includes/core/admin/templates/dashboard/dashboard-widget-instant-indexing.php:53
 msgid "Your site is now set to instantly notify Bing and Yandex via the IndexNow API. Fine-tune when and how URLs are submitted by adjusting your configuration."
 msgstr ""
 
@@ -1494,7 +1495,7 @@ msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:73
 #: includes/core/admin/templates/social/social-section-twitter-cards.php:14
-msgid "With X Cards, you can attach rich photos, videos and media experiences to Tweets, helping to drive traffic to your website."
+msgid "With X Cards, you can attach rich photos, videos and media experiences to Posts, helping to drive traffic to your website."
 msgstr ""
 
 #: includes/core/admin/templates/dashboard/dashboard-widget-social.php:79
@@ -1712,8 +1713,7 @@ msgstr ""
 
 #. translators: %s - tested on
 #: includes/core/admin/templates/emails/lighthouse-email.php:62
-#, php-format
-msgid "SEO test summary for <br/>%s"
+msgid "SEO test summary for"
 msgstr ""
 
 #. translators: %s: Username.
@@ -2190,7 +2190,7 @@ msgstr ""
 
 #: includes/core/admin/templates/metabox/metabox-dummy-preview.php:11
 #: includes/core/admin/templates/term/term-google-preview.php:29
-#: includes/assets/js/modules/metabox/seo/google-preview.js:201
+#: includes/assets/js/modules/metabox/seo/google-preview.js:207
 msgid "Google Preview"
 msgstr ""
 
@@ -2211,8 +2211,8 @@ msgstr ""
 #: includes/core/admin/templates/post-list/meta-details.php:63
 #: includes/core/admin/templates/schema/schema-organization-settings.php:50
 #: includes/core/admin/templates/term/term-meta-edit-form.php:100
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:128
-#: includes/assets/js/modules/metabox/seo/google-preview.js:285
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:135
+#: includes/assets/js/modules/metabox/seo/google-preview.js:291
 #: includes/assets/js/modules/metabox/social/social-item.js:55
 msgid "Description"
 msgstr ""
@@ -2338,7 +2338,7 @@ msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-general-settings-inner.php:38
 #: includes/core/admin/templates/term/term-meta-edit-form.php:66
-#: includes/assets/js/modules/metabox/seo/google-preview.js:254
+#: includes/assets/js/modules/metabox/seo/google-preview.js:260
 msgid "SEO Title"
 msgstr ""
 
@@ -2480,7 +2480,7 @@ msgid "Enable or disable support for social platforms when this content is share
 msgstr ""
 
 #: includes/core/admin/templates/onpage/onpage-preview.php:35
-#: includes/assets/js/modules/metabox/seo/google-preview.js:232
+#: includes/assets/js/modules/metabox/seo/google-preview.js:238
 msgid "A preview of how your title and meta will appear in Google Search."
 msgstr ""
 
@@ -3161,7 +3161,7 @@ msgstr ""
 #: includes/core/admin/templates/schema/schema-sidenav.php:21
 #: includes/core/admin/templates/term/term-nav.php:19
 #: includes/assets/js/modules/advanced/redirects/redirect-edit-tabs.js:42
-#: includes/assets/js/modules/metabox/metabox.js:236
+#: includes/assets/js/modules/metabox/metabox.js:247
 msgid "Advanced"
 msgstr ""
 
@@ -3983,7 +3983,7 @@ msgid "Unlock automated crawls of your URLs to always stay on top of any issues 
 msgstr ""
 
 #: includes/core/admin/templates/sitemap/sitemap-settings.php:43
-#: includes/core/controllers/class-assets.php:367
+#: includes/core/controllers/class-assets.php:370
 msgid "Your sitemap has been updated."
 msgstr ""
 
@@ -4139,7 +4139,7 @@ msgstr ""
 msgid "No Image"
 msgstr ""
 
-#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:69
+#: includes/core/admin/templates/social/social-twitter-cards-toggle-sub-settings.php:79
 msgid "A preview of how your Homepage will appear as a X Card."
 msgstr ""
 
@@ -4184,7 +4184,7 @@ msgid "Enter the full canonical URL including http:// or https://"
 msgstr ""
 
 #: includes/core/admin/templates/term/term-meta-edit-form.php:51
-#: includes/assets/js/modules/metabox/seo/google-preview.js:243
+#: includes/assets/js/modules/metabox/seo/google-preview.js:249
 msgid "Edit Meta"
 msgstr ""
 
@@ -4311,10 +4311,6 @@ msgstr ""
 
 #: includes/core/admin/templates/upgrade-page.php:128
 msgid "Get SmartCrawl Pro, and get a better WordPress"
-msgstr ""
-
-#: includes/core/admin/templates/upgrade-page.php:136
-msgid "Get SmartCrawl Pro"
 msgstr ""
 
 #: includes/core/admin/templates/urlmetrics-metabox.php:22
@@ -4808,12 +4804,12 @@ msgid "Active and sending %1$s to %2$d recipients"
 msgstr ""
 
 #: includes/core/controllers/class-analysis.php:215
-#: includes/assets/js/modules/metabox/metabox.js:209
+#: includes/assets/js/modules/metabox/metabox.js:220
 msgid "Readability"
 msgstr ""
 
 #: includes/core/controllers/class-analysis.php:270
-#: includes/assets/js/modules/metabox/seo/focus-keywords.js:174
+#: includes/assets/js/modules/metabox/seo/focus-keywords.js:181
 msgid "You need to add focus keyphrases to see recommendations for this article."
 msgstr ""
 
@@ -4833,91 +4829,91 @@ msgstr ""
 msgid "Readability:"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:275
+#: includes/core/controllers/class-assets.php:276
 msgid "Initializing ..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:276
+#: includes/core/controllers/class-assets.php:277
 msgid "Running SEO checks ..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:277
+#: includes/core/controllers/class-assets.php:278
 msgid "Running final checks and finishing up ..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:278
+#: includes/core/controllers/class-assets.php:279
 msgid "characters"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:442
+#: includes/core/controllers/class-assets.php:445
 msgid "All done, please hold on..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:652
+#: includes/core/controllers/class-assets.php:655
 msgid "{TOTAL_LEFT} characters left"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:653
+#: includes/core/controllers/class-assets.php:656
 msgid "Over {MAX_COUNT} characters ({CURRENT_COUNT})"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:654
+#: includes/core/controllers/class-assets.php:657
 msgid "Over {MAX_COUNT} characters ({CURRENT_COUNT}) - make sure your SEO title is shorter"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:945
+#: includes/core/controllers/class-assets.php:948
 msgid "Loading, please hold on..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1122
+#: includes/core/controllers/class-assets.php:1125
 msgid "Key valid!"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1123
+#: includes/core/controllers/class-assets.php:1126
 msgid "Key invalid"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1308
+#: includes/core/controllers/class-assets.php:1311
 msgid "Analyzing data and preparing report..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1309
+#: includes/core/controllers/class-assets.php:1312
 msgid "Running SEO test..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1310
+#: includes/core/controllers/class-assets.php:1313
 msgid "Refreshing data. Please wait..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1311
+#: includes/core/controllers/class-assets.php:1314
 msgid "The audit has been copied successfully."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1312
+#: includes/core/controllers/class-assets.php:1315
 msgid "Audit could not be copied to clipboard."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1547
+#: includes/core/controllers/class-assets.php:1550
 msgid "The URL field is empty. Please enter at least one URL and try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1548
+#: includes/core/controllers/class-assets.php:1551
 msgid "Submission Completed!"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1549
+#: includes/core/controllers/class-assets.php:1552
 msgid "You cannot submit more than 100 URLs at once."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1550
+#: includes/core/controllers/class-assets.php:1553
 msgid "One or more URLs are invalid. Please check and try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1551
+#: includes/core/controllers/class-assets.php:1554
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1552
+#: includes/core/controllers/class-assets.php:1555
 msgid "Rate limit exceeded. Please wait and try again later."
 msgstr ""
 
@@ -4989,26 +4985,26 @@ msgstr ""
 msgid "%1$s Wizard: %2$s"
 msgstr ""
 
-#: includes/core/controllers/class-new-feature.php:86
-#: includes/core/controllers/class-new-feature.php:90
-#: includes/core/controllers/class-new-feature.php:123
-#: includes/core/controllers/class-new-feature.php:127
+#: includes/core/controllers/class-new-feature.php:48
+#: includes/core/controllers/class-new-feature.php:52
+#: includes/core/controllers/class-new-feature.php:85
+#: includes/core/controllers/class-new-feature.php:89
 msgid "No Permission to set."
 msgstr ""
 
-#: includes/core/controllers/class-new-feature.php:96
+#: includes/core/controllers/class-new-feature.php:58
 msgid "Feature is not found."
 msgstr ""
 
-#: includes/core/controllers/class-new-feature.php:105
+#: includes/core/controllers/class-new-feature.php:67
 msgid "New feature status was successfully updated."
 msgstr ""
 
-#: includes/core/controllers/class-new-feature.php:115
+#: includes/core/controllers/class-new-feature.php:77
 msgid "Nonce verification failed."
 msgstr ""
 
-#: includes/core/controllers/class-new-feature.php:132
+#: includes/core/controllers/class-new-feature.php:94
 msgid "New feature badge was successfully updated."
 msgstr ""
 
@@ -5409,50 +5405,50 @@ msgstr ""
 
 #: includes/core/models/class-analysis.php:290
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:17
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:31
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:38
 msgid "Very easy to read"
 msgstr ""
 
 #: includes/core/models/class-analysis.php:291
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:18
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:32
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:39
 msgid "Easy to read"
 msgstr ""
 
 #: includes/core/models/class-analysis.php:292
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:19
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:33
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:40
 msgid "Fairly easy to read"
 msgstr ""
 
 #: includes/core/models/class-analysis.php:293
 #: includes/core/models/class-analysis.php:299
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:20
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:34
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:39
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:41
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:46
 msgid "Standard"
 msgstr ""
 
 #: includes/core/models/class-analysis.php:294
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:21
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:35
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:42
 msgid "Fairly difficult to read"
 msgstr ""
 
 #: includes/core/models/class-analysis.php:295
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:22
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:36
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:43
 msgid "Difficult to read"
 msgstr ""
 
 #: includes/core/models/class-analysis.php:296
 #: includes/assets/js/modules/metabox/readability/readability-analysis-container.js:23
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:37
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:44
 msgid "Very difficult to read"
 msgstr ""
 
 #: includes/core/models/class-analysis.php:301
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:41
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:48
 msgid "Fairly difficult"
 msgstr ""
 
@@ -5710,11 +5706,11 @@ msgstr ""
 msgid "Limit values must be numeric"
 msgstr ""
 
-#: includes/modules/advanced/autolinks/class-controller.php:1648
+#: includes/modules/advanced/autolinks/class-controller.php:1649
 msgid "Comments"
 msgstr ""
 
-#: includes/modules/advanced/autolinks/class-controller.php:1654
+#: includes/modules/advanced/autolinks/class-controller.php:1655
 msgid "Product Categories"
 msgstr ""
 
@@ -7288,41 +7284,41 @@ msgstr ""
 msgid "More advanced readability tests coming soon."
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:127
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:134
 msgid "Score"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:177
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:184
 msgid "Flesch-Kincaid Test"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:189
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:196
 #: includes/assets/js/modules/metabox/seo/seo-analysis-check-item.js:69
 msgid "Restore"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:214
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:221
 msgid "Overview"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:216
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:223
 msgid "The Flesch-Kincaid readability tests are readability tests designed to indicate how difficult a passage is to understand. Here are the benchmarks."
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:223
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:230
 msgid "How to fix"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:225
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:232
 msgid "Try to use shorter sentences, with less difficult words to improve readability."
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:236
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:243
 #: includes/assets/js/modules/metabox/seo/seo-analysis-check-item.js:97
 msgid "Ignore"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:241
+#: includes/assets/js/modules/metabox/readability/readability-analysis-content.js:248
 msgid "This will ignore warnings for this particular post."
 msgstr ""
 
@@ -7709,25 +7705,25 @@ msgstr ""
 msgid "It's recommended to use your secondary keyphrases in the title of your page if possible. However, it has a minor impact on improving SEO."
 msgstr ""
 
-#: includes/assets/js/modules/metabox/seo/focus-keywords.js:98
+#: includes/assets/js/modules/metabox/seo/focus-keywords.js:105
 msgid "Focus keyphrase"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/seo/focus-keywords.js:117
+#: includes/assets/js/modules/metabox/seo/focus-keywords.js:124
 msgid "E.g. broken iphone screen"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/seo/focus-keywords.js:129
+#: includes/assets/js/modules/metabox/seo/focus-keywords.js:136
 msgid "Add Keyphrase(s)"
 msgstr ""
 
-#: includes/assets/js/modules/metabox/seo/focus-keywords.js:148
+#: includes/assets/js/modules/metabox/seo/focus-keywords.js:155
 msgid "Added Keyphrases"
 msgstr ""
 
 #. translators: 1, 2: Min/max length
-#: includes/assets/js/modules/metabox/seo/google-preview.js:258
-#: includes/assets/js/modules/metabox/seo/google-preview.js:289
+#: includes/assets/js/modules/metabox/seo/google-preview.js:264
+#: includes/assets/js/modules/metabox/seo/google-preview.js:295
 #, js-format
 msgid " - Include your focus keyphrases. %1$d-%2$d characters recommended."
 msgstr ""
@@ -7741,14 +7737,14 @@ msgid "More Info"
 msgstr ""
 
 #. translators: %d: error count.
-#: includes/assets/js/modules/metabox/seo/seo-analysis-tab-content.js:122
+#: includes/assets/js/modules/metabox/seo/seo-analysis-tab-content.js:129
 #, js-format
 msgid "You have %d SEO recommendation. We recommend you satisfy as many improvements as possible to ensure your content gets found."
 msgid_plural "You have %d SEO recommendations. We recommend you satisfy as many improvements as possible to ensure your content gets found."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/assets/js/modules/metabox/seo/seo-analysis-tab-content.js:130
+#: includes/assets/js/modules/metabox/seo/seo-analysis-tab-content.js:137
 msgid "All SEO recommendations are met. Your content is as optimized as possible - nice work!"
 msgstr ""
 

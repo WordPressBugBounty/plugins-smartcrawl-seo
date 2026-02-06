@@ -38,6 +38,7 @@ class Controller extends Controllers\Controller {
 		add_action( 'init', array( $this, 'redirect_admin_pages' ) );
 		add_action( 'wds_plugin_update', array( $this, 'upgrade_pre_343_post_types' ), 10, 2 );
 		add_action( 'wds_plugin_update', array( $this, 'upgrade_advanced_options' ), 10, 2 );
+		add_action( 'wds_plugin_update', array( $this, 'set_onpage_options_autoload_off' ), 10, 2 );
 	}
 
 	/**
@@ -294,6 +295,74 @@ class Controller extends Controllers\Controller {
 		delete_option( 'wds_woocommerce_options' );
 		delete_option( 'wds_breadcrumb_options' );
 		delete_option( 'wds_robots_options' );
+	}
+
+	/**
+	 * Sets wds_onpage_options autoload to 'off' to prevent bloating the autoload cache.
+	 *
+	 * @param string $new_version New version.
+	 * @param string $old_version Old version.
+	 *
+	 * @return void
+	 */
+	public function set_onpage_options_autoload_off( $new_version, $old_version ) {
+		$option_name = 'wds_onpage_options';
+
+		if ( is_multisite() ) {
+			// In multisite, run migration on all sites.
+			$sites = get_sites( array( 'fields' => 'ids', 'number' => PHP_INT_MAX ) );
+
+			foreach ( $sites as $site_id ) {
+				switch_to_blog( $site_id );
+				$this->do_set_onpage_options_autoload_off( $option_name );
+				restore_current_blog();
+			}
+		} else {
+			// Single site.
+			$this->do_set_onpage_options_autoload_off( $option_name );
+		}
+	}
+
+	/**
+	 * Actually performs the autoload update for wds_onpage_options.
+	 *
+	 * @param string $option_name Option name to update.
+	 *
+	 * @return void
+	 */
+	private function do_set_onpage_options_autoload_off( $option_name ) {
+		global $wpdb;
+
+		// Check if the option exists and get the current autoload value.
+		$autoload = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT autoload FROM {$wpdb->options} WHERE option_name = %s",
+				$option_name
+			)
+		);
+
+		// If the option doesn't exist, skip.
+		if ( ! $autoload ) {
+			return;
+		}
+
+		// If autoload is already 'off' (current standard), skip.
+		if ( 'off' === $autoload ) {
+			return;
+		}
+
+		// Update autoload to 'off' (WordPress 6.6+ standard).
+		$wpdb->update(
+			$wpdb->options,
+			array( 'autoload' => 'off' ),
+			array( 'option_name' => $option_name ),
+			array( '%s' ),
+			array( '%s' )
+		);
+
+		// Clear the options cache to ensure the change takes effect immediately.
+		wp_cache_delete( 'alloptions', 'options' );
+		wp_cache_delete( $option_name, 'options' );
 	}
 
 	/**

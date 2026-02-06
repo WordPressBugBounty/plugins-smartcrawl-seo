@@ -65,9 +65,9 @@ $social_enabled = Settings::get_setting( 'social' );
 				$this->render_view(
 					'vertical-tab',
 					array(
-						'tab_id'       => 'tab_twitter_cards',
+						'tab_id'       => 'tab_x_cards',
 						'tab_name'     => esc_html__( 'X Cards', 'smartcrawl-seo' ),
-						'is_active'    => 'tab_twitter_cards' === $active_tab,
+						'is_active'    => 'tab_x_cards' === $active_tab,
 						'tab_sections' => array(
 							array(
 								'section_description' => esc_html__( 'Add meta data to your pages to make them look great when shared on X.', 'smartcrawl-seo' ),
