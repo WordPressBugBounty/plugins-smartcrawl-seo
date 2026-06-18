@@ -52,70 +52,6 @@ class Collection {
 	}
 
 	/**
-	 * Syncs data with hub.
-	 *
-	 * Works under the assumption that the HUB has the most up-to-date version of the data.
-	 *
-	 * @return bool
-	 */
-	public function sync_with_hub() {
-		$local_changes_pushed  = $this->push_local_changes();
-		$remote_changes_pulled = $this->pull_remote_changes();
-		$this->save();
-
-		return $local_changes_pushed && $remote_changes_pulled;
-	}
-
-	/**
-	 * If there are any configs that were never published to the hub, this method publishes them.
-	 * This is basically for free users that upgrade to pro and need their local configs published.
-	 *
-	 * @return bool
-	 */
-	private function push_local_changes() {
-		$success = true;
-
-		foreach ( $this->get_configs() as $local_config ) {
-			if ( $local_config->get_hub_id() ) {
-				// The local config already exists on hub, nothing to do.
-				continue;
-			}
-
-			$saved_to_hub = $this->service->publish_config( $local_config );
-
-			if ( ! empty( $saved_to_hub['id'] ) ) {
-				$local_config->set_hub_id( $saved_to_hub['id'] );
-			} else {
-				Logger::error( 'There was an error while publishing a local config to remote' );
-			}
-
-			$success = $success && $saved_to_hub;
-		}
-
-		return $success;
-	}
-
-	/**
-	 * Retrieves remote config changes from the hub.
-	 *
-	 * @return bool
-	 */
-	private function pull_remote_changes() {
-		$hub_configs = $this->get_hub_configs();
-
-		if ( false === $hub_configs ) {
-			Logger::error( 'There was an error fetching configs from the HUB' );
-
-			return false;
-		}
-
-		$applied = $this->apply_remote_changes_to_local( $hub_configs );
-		$removed = $this->remove_remotely_deleted_from_local( $hub_configs );
-
-		return $applied && $removed;
-	}
-
-	/**
 	 * Adds config.
 	 *
 	 * @param Model $config Config model.
@@ -395,61 +331,6 @@ class Collection {
 
 		return $hub_configs;
 	}
-
-	/**
-	 * User could update name and description of configs or add brand-new configs on the hub side.
-	 * This method applies those changes to local.
-	 *
-	 * @param Model[] $hub_configs Hub configs.
-	 *
-	 * @return bool
-	 */
-	private function apply_remote_changes_to_local( $hub_configs ) {
-		foreach ( $hub_configs as $hub_config ) {
-			$local_config = $this->get_by_hub_id( $hub_config->get_hub_id() );
-
-			if ( $local_config ) {
-				$local_config
-					->set_name( $hub_config->get_name() )
-					->set_description( $hub_config->get_description() )
-					->set_official( $hub_config->is_official() )
-					->set_timestamp( $hub_config->get_timestamp() );
-			} else {
-				$this->add( $hub_config );
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * The user could delete configs on the hub. This method removes such configs from local.
-	 *
-	 * @param Model[] $hub_configs Hub configs.
-	 *
-	 * @return bool
-	 */
-	private function remove_remotely_deleted_from_local( $hub_configs ) {
-		foreach ( $this->get_configs() as $local_config ) {
-			if ( ! $local_config->get_hub_id() ) {
-				// At this point in the sync process there shouldn't be any local configs without hub IDs, something is not right.
-				Logger::notice( 'Unexpected config without HUB ID found' );
-
-				return false;
-			}
-			$hub_config = smartcrawl_get_array_value(
-				$hub_configs,
-				$this->id_to_key( $local_config->get_hub_id() )
-			);
-			if ( ! $hub_config ) {
-				// Hub version was removed, remove local version as well.
-				$this->remove( $local_config );
-			}
-		}
-
-		return true;
-	}
-
 	/**
 	 * Update config option wds_blog_tabs settings.
 	 *

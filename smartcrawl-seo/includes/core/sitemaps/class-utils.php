@@ -144,7 +144,7 @@ class Utils {
 	}
 
 	public static function stylesheet_enabled() {
-		return (boolean) self::get_sitemap_option( 'sitemap-stylesheet' );
+		return (bool) self::get_sitemap_option( 'sitemap-stylesheet' );
 	}
 
 	public static function native_sitemap_available() {
@@ -154,7 +154,7 @@ class Utils {
 	}
 
 	public static function override_native() {
-		return (boolean) self::get_sitemap_option( 'override-native' );
+		return (bool) self::get_sitemap_option( 'override-native' );
 	}
 
 	public static function get_items_per_sitemap() {

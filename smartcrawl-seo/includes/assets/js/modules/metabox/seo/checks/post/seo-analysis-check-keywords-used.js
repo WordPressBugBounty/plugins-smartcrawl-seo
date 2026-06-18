@@ -45,27 +45,26 @@ export default class SeoAnalysisCheckKeywordsUsed extends React.Component {
 				</p>
 
 				{Array.isArray(usedIn) && !!usedIn.length && (
-					<table className="sui-table wds-keywords-used-table">
-						<thead>
-							<tr>
-								<th colSpan="2">
+					<div className="wds-keywords-used-list-wrap">
+						<div className="wds-keywords-used-list">
+							<div className="wds-keywords-used-list-header">
+								{__(
+									'Posts and Pages with the same primary focus keyphrase',
+									'wds'
+								)}
+								<span className="sui-description">
 									{__(
-										'Posts and Pages with the same primary focus keyphrase',
+										'Please note that the list below displays a maximum of 10 posts and pages. There might be other posts and pages using the same keyphrase.',
 										'wds'
 									)}
-									<span className="sui-description">
-										{__(
-											'Please note that the list below displays a maximum of 10 posts and pages. There might be other posts and pages using the same keyphrase.',
-											'wds'
-										)}
-									</span>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
+								</span>
+							</div>
 							{usedIn.map((post, index) => (
-								<tr key={index}>
-									<td>
+								<div
+									key={index}
+									className="wds-keywords-used-list-row"
+								>
+									<div className="wds-keywords-used-list-cell">
 										<div className="wds-keywords-used-post-title">
 											<strong>{post.title}</strong>
 											<span className="sui-tag">
@@ -82,8 +81,8 @@ export default class SeoAnalysisCheckKeywordsUsed extends React.Component {
 											></span>{' '}
 											{post.permalink}
 										</a>
-									</td>
-									<td>
+									</div>
+									<div className="wds-keywords-used-list-cell wds-keywords-used-list-cell--action">
 										<Button
 											color="ghost"
 											href={post.edit_link}
@@ -92,11 +91,11 @@ export default class SeoAnalysisCheckKeywordsUsed extends React.Component {
 											icon="sui-icon-pencil"
 											text={__('Edit', 'smartcrawl-seo')}
 										></Button>
-									</td>
-								</tr>
+									</div>
+								</div>
 							))}
-						</tbody>
-					</table>
+						</div>
+					</div>
 				)}
 			</React.Fragment>
 		);

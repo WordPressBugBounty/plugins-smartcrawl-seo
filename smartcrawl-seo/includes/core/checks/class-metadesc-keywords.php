@@ -55,7 +55,7 @@ class Metadesc_Keywords extends Post_Check {
 				: '';
 		}
 
-		$this->state = $this->has_focus( $subject );
+		$this->state = $this->has_focus_loose( $subject );
 
 		return ! ! $this->state;
 	}

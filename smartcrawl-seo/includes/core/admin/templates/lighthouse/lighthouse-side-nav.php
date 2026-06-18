@@ -14,8 +14,6 @@ $lighthouse_report = empty( $lighthouse_report ) ? false : $lighthouse_report;
 if ( ! $lighthouse_report ) {
 	return;
 }
-$is_member               = ! empty( $_view['is_member'] );
-$lighthouse_cron_enabled = Options::is_cron_enabled() && $is_member;
 $is_reporting_enabled    = ! empty( $is_reporting_enabled );
 
 $tab_items = array(
@@ -31,10 +29,9 @@ if ( $is_reporting_enabled ) {
 	$tab_items[] = array(
 		'id'        => 'tab_reporting',
 		'name'      => esc_html__( 'Reporting', 'smartcrawl-seo' ),
-		'tag_value' => $is_member ? '' : esc_html__( 'Pro', 'smartcrawl-seo' ),
-		'tag_class' => $is_member ? '' : 'sui-tag-pro',
-		'tick'      => $lighthouse_cron_enabled,
-	);
+		'tag_value' => esc_html__( 'Pro', 'smartcrawl-seo' ),
+		'tag_class' => 'sui-tag-pro',
+		);
 }
 
 $tab_items[] = array(

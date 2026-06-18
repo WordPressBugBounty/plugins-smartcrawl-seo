@@ -5,20 +5,15 @@ import Notice from './notices/notice';
 import Button from './button';
 import ConfigValues from '../es6/config-values';
 
-const nonce = ConfigValues.get('settings_nonce', 'admin');
-const isMember = ConfigValues.get('is_member', 'admin') === '1';
-
 export default class DisabledComponent extends React.Component {
 	static defaultProps = {
 		imagePath: ConfigValues.get('empty_box_logo', 'admin') || false,
 		message: '',
 		notice: '',
-		component: '',
-		button: false,
 		inner: false,
 		premium: false,
 		upgradeTag: '',
-		nonceFields: true,
+		button: null,
 	};
 
 	render() {
@@ -26,17 +21,11 @@ export default class DisabledComponent extends React.Component {
 			imagePath,
 			message,
 			notice,
-			component,
-			button,
 			inner,
 			premium,
 			upgradeTag,
-			nonceFields,
+			button,
 		} = this.props;
-
-		const referer = this.props.referer
-			? this.props.referer
-			: ConfigValues.get('referer', 'admin');
 
 		return (
 			<div
@@ -57,7 +46,7 @@ export default class DisabledComponent extends React.Component {
 
 					{!!notice && <Notice message={notice}></Notice>}
 
-					{premium && !isMember && (
+					{premium && (
 						<Button
 							color="purple"
 							target="_blank"
@@ -68,34 +57,7 @@ export default class DisabledComponent extends React.Component {
 							text={__('Upgrade to Pro', 'smartcrawl-seo')}
 						></Button>
 					)}
-
-					{(!premium || isMember) && (
-						<>
-							{component && (
-								<input
-									type="hidden"
-									name="wds-activate-component"
-									value={component}
-								/>
-							)}
-							{nonceFields && nonce && (
-								<input
-									type="hidden"
-									id="_wds_nonce"
-									name="_wds_nonce"
-									value={nonce}
-								/>
-							)}
-							{nonceFields && referer && (
-								<input
-									type="hidden"
-									name="_wp_http_referer"
-									value={referer}
-								/>
-							)}
-							{button}
-						</>
-					)}
+					{!premium && button}
 				</div>
 			</div>
 		);

@@ -23,10 +23,6 @@ class Cross_Sell_page extends Controller {
 	 * @return void
 	 */
 	protected function init() {
-		if ( Service::get( Service::SERVICE_SITE )->is_member() ) {
-			return;
-		}
-
 		$cross_sell_path = SMARTCRAWL_PLUGIN_DIR . 'external/plugins-cross-sell-page/plugin-cross-sell.php';
 		if ( ! file_exists( $cross_sell_path ) ) {
 			return;

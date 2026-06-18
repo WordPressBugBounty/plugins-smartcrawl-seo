@@ -5,7 +5,6 @@
  * @package SmartCrawl
  */
 
-$is_member  = ! empty( $_view['is_member'] );
 $active_tab = empty( $active_tab ) ? '' : $active_tab;
 ?>
 

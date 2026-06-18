@@ -57,7 +57,7 @@ class Metabox extends Controllers\Controller {
 		add_action( 'wpsc_edit_product', array( $this, 'rebuild_sitemap' ) );
 		add_action( 'wpsc_rate_product', array( $this, 'rebuild_sitemap' ) );
 
-		add_action( 'admin_menu', array( $this, 'smartcrawl_create_meta_box' ) );
+		add_action( 'add_meta_boxes', array( $this, 'smartcrawl_create_meta_box' ), 10, 2 );
 
 		add_action( 'save_post', array( $this, 'save_postdata' ) );
 		add_filter( 'attachment_fields_to_save', array( $this, 'smartcrawl_save_attachment_postdata' ) );
@@ -291,7 +291,7 @@ class Metabox extends Controllers\Controller {
 	/**
 	 * Adds the metabox to the queue
 	 */
-	public function smartcrawl_create_meta_box() {
+	public function smartcrawl_create_meta_box( $post_type, $post ) {
 		$show = \user_can_see_seo_metabox();
 		if ( function_exists( '\add_meta_box' ) ) {
 			// Show branding for singular installs.
@@ -304,6 +304,9 @@ class Metabox extends Controllers\Controller {
 			);
 			foreach ( $post_types as $posttype ) {
 				if ( $this->is_private_post_type( $posttype ) ) {
+					continue;
+				}
+				if ( $this->is_block_editor_post_type( $posttype ) ) {
 					continue;
 				}
 				if ( $show ) {
@@ -380,6 +383,10 @@ class Metabox extends Controllers\Controller {
 			return;
 		}
 
+		if ( ! \user_can_see_seo_metabox() ) {
+			return;
+		}
+
 		$ptype = ! empty( $post_type_rq )
 			? $post_type_rq
 			: ( ! empty( $post->post_type ) ? $post->post_type : false );
@@ -404,8 +411,7 @@ class Metabox extends Controllers\Controller {
 		}
 
 		if ( isset( $request_data['wds_focus'] ) ) {
-			$focus = stripslashes_deep( $request_data['wds_focus'] );
-
+			$focus = $request_data['wds_focus'];
 			if ( trim( $focus ) === '' ) {
 				delete_post_meta( $post_id, '_wds_focus-keywords' );
 			} else {
@@ -451,10 +457,6 @@ class Metabox extends Controllers\Controller {
 		}
 
 		$this->save_robots_meta( $post, $request_data );
-
-		if ( ! isset( $request_data['wds_autolinks-exclude'] ) ) {
-			delete_post_meta( $post_id, '_wds_autolinks-exclude' );
-		}
 
 		update_post_meta(
 			$post->ID,
@@ -542,12 +544,14 @@ class Metabox extends Controllers\Controller {
 	 * @param string $column Column ID.
 	 */
 	public function smartcrawl_quick_edit_dispatch( $column ) {
-		if ( 'smartcrawl-robots' === $column ) {
-			Simple_Renderer::render(
-				'post-list/quick-edit-onpage',
-				array( 'show_title' => Settings::get_setting( 'disable-analysis-on-list' ) )
-			);
+		if ( 'smartcrawl-robots' !== $column || ! \user_can_see_seo_metabox() ) {
+			return;
 		}
+
+		Simple_Renderer::render(
+			'post-list/quick-edit-onpage',
+			array( 'show_title' => Settings::get_setting( 'disable-analysis-on-list' ) )
+		);
 	}
 
 	/**
@@ -555,7 +559,11 @@ class Metabox extends Controllers\Controller {
 	 */
 	public function json_wds_postmeta() {
 		$data = $this->get_request_data();
-		$id   = (int) $data['id'];
+		$id   = ! empty( $data['id'] ) ? (int) $data['id'] : 0;
+
+		if ( ! \user_can_see_seo_metabox() || ! $id || ! current_user_can( 'edit_post', $id ) ) {
+			die( wp_json_encode( false ) );
+		}
 
 		die(
 			wp_json_encode(
@@ -723,5 +731,28 @@ class Metabox extends Controllers\Controller {
 		}
 
 		return $this->is_private_post_type( $current_screen->post_type );
+	}
+
+	/**
+	 * Whether a post type uses the block editor as its default editor.
+	 *
+	 * The function use_block_editor_for_post_type() already accounts for the Classic Editor
+	 * plugin: when Classic Editor is active and set to "Classic Editor" it
+	 * returns false, so the classic metabox is preserved.  When Classic Editor
+	 * is configured to "Allow users to switch" it also returns false, keeping
+	 * the metabox visible for users who choose the classic editor.
+	 *
+	 * @param string $post_type Registered post-type name.
+	 *
+	 * @return bool
+	 */
+	private function is_block_editor_post_type( $post_type ) {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( $screen && method_exists( $screen, 'is_block_editor' ) ) {
+			return $screen->is_block_editor();
+		}
+
+		return function_exists( 'use_block_editor_for_post_type' )
+			&& use_block_editor_for_post_type( $post_type );
 	}
 }

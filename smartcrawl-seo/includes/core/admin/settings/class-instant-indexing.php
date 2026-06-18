@@ -7,7 +7,6 @@
 
 namespace SmartCrawl\Admin\Settings;
 
-use SmartCrawl\Controllers\Assets;
 use SmartCrawl\Settings;
 use SmartCrawl\Singleton;
 
@@ -72,7 +71,6 @@ class Instant_Indexing extends Admin_Settings {
 	public function options_page() {
 		parent::options_page();
 
-		wp_enqueue_script( Assets::INSTANT_INDEXING_PAGE_JS );
 		wp_enqueue_media();
 
 		$this->render_page( 'instant-indexing' );

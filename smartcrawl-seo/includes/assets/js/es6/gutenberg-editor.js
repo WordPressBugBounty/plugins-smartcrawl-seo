@@ -1,7 +1,6 @@
 import Post from './post';
 import wp from 'wp';
 import _ from '_';
-import $ from 'jQuery';
 import ConfigValues from './config-values';
 import { EventTarget } from 'event-target-shim';
 
@@ -36,7 +35,8 @@ class GutenbergEditor extends EventTarget {
 
 		let postId = editor.getEditedPostAttribute('id');
 		if (!postId) {
-			postId = $('#post_ID').val() || 0;
+			const hidden = document.getElementById('post_ID');
+			postId = hidden && hidden.value ? parseInt(hidden.value, 10) || 0 : 0;
 		}
 
 		post = post

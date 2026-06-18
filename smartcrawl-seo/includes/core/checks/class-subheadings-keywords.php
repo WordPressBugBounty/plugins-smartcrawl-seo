@@ -67,7 +67,7 @@ class Subheadings_Keywords extends Check {
 			/**
 			 * Convert subject into plain text to strip tags
 			 */
-			if ( $this->has_focus( Html::plaintext( $subject ) ) ) {
+			if ( $this->has_focus_loose( Html::plaintext( $subject ) ) ) {
 				++$count;
 			}
 		}

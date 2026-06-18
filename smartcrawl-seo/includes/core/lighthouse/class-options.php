@@ -42,7 +42,7 @@ class Options {
 	 * @return bool
 	 */
 	public static function is_cron_enabled() {
-		return (bool) \smartcrawl_get_array_value( self::get_options(), self::CRON_ENABLE );
+		return false;
 	}
 
 	/**
@@ -51,11 +51,7 @@ class Options {
 	 * @return array
 	 */
 	public static function email_recipients() {
-		$recipients = \smartcrawl_get_array_value( self::get_options(), self::RECIPIENTS );
-
-		return empty( $recipients )
-			? array()
-			: $recipients;
+		return array();
 	}
 
 	/**
@@ -64,7 +60,7 @@ class Options {
 	 * @return string
 	 */
 	public static function reporting_frequency() {
-		return \smartcrawl_get_array_value( self::get_options(), self::REPORTING_FREQUENCY );
+		return 'weekly';
 	}
 
 	/**
@@ -73,7 +69,7 @@ class Options {
 	 * @return string
 	 */
 	public static function reporting_dom() {
-		return \smartcrawl_get_array_value( self::get_options(), self::REPORTING_DOM );
+		return '1';
 	}
 
 	/**
@@ -82,7 +78,7 @@ class Options {
 	 * @return string
 	 */
 	public static function reporting_dow() {
-		return \smartcrawl_get_array_value( self::get_options(), self::REPORTING_DOW );
+		return '0';
 	}
 
 	/**
@@ -91,7 +87,7 @@ class Options {
 	 * @return string
 	 */
 	public static function reporting_tod() {
-		return \smartcrawl_get_array_value( self::get_options(), self::REPORTING_TOD );
+		return '0';
 	}
 
 	/**
@@ -100,7 +96,7 @@ class Options {
 	 * @return string
 	 */
 	public static function reporting_device() {
-		return \smartcrawl_get_array_value( self::get_options(), self::REPORTING_DEVICE );
+		return 'both';
 	}
 
 	/**
@@ -109,7 +105,7 @@ class Options {
 	 * @return bool
 	 */
 	public static function reporting_condition_enabled() {
-		return (bool) \smartcrawl_get_array_value( self::get_options(), self::REPORTING_CONDITION_ENABLED );
+		return false;
 	}
 
 	/**
@@ -118,28 +114,18 @@ class Options {
 	 * @return int
 	 */
 	public static function reporting_condition() {
-		return (int) \smartcrawl_get_array_value( self::get_options(), self::REPORTING_CONDITION );
+		return 90;
 	}
 
 	/**
 	 * Save default options.
 	 */
 	public static function save_defaults() {
-		$options  = Settings::get_specific_options( self::OPTION_ID );
-		$options  = is_array( $options ) ? $options : array();
-		$defaults = array_merge(
-			self::get_defaults(),
-			array(
-				self::RECIPIENTS    => array( self::get_email_recipient() ),
-				self::REPORTING_DOM => wp_rand( 1, 28 ),
-				self::REPORTING_DOW => wp_rand( 0, 6 ),
-				self::REPORTING_TOD => wp_rand( 0, 23 ),
-			)
-		);
-		foreach ( $defaults as $opt => $default ) {
-			if ( ! isset( $options[ $opt ] ) ) {
-				$options[ $opt ] = $default;
-			}
+		$options = Settings::get_specific_options( self::OPTION_ID );
+		$options = is_array( $options ) ? $options : array();
+		$defaults = self::get_defaults();
+		if ( ! isset( $options[ self::DASHBOARD_WIDGET_DEVICE ] ) ) {
+			$options[ self::DASHBOARD_WIDGET_DEVICE ] = $defaults[ self::DASHBOARD_WIDGET_DEVICE ];
 		}
 		Settings::update_specific_options( self::OPTION_ID, $options );
 	}
@@ -150,49 +136,11 @@ class Options {
 	 * @param array $input Form data to save.
 	 */
 	public static function save_form_data( $input ) {
-		$result                     = array();
-		$email_recipients           = \smartcrawl_get_array_value( $input, self::RECIPIENTS );
-		$sanitized_recipients       = \smartcrawl_sanitize_recipients( $email_recipients );
-		$result[ self::RECIPIENTS ] = $sanitized_recipients;
-
-		if ( empty( $sanitized_recipients ) ) {
-			$result[ self::RECIPIENTS ] = array( self::get_email_recipient() );
-		}
-
-		if ( empty( $input[ self::CRON_ENABLE ] ) || empty( $sanitized_recipients ) ) {
-			$result[ self::CRON_ENABLE ] = false;
-		} else {
-			$result[ self::CRON_ENABLE ] = true;
-		}
-
-		$frequency                           = ! empty( $input[ self::REPORTING_FREQUENCY ] )
-			? Cron::get()->get_valid_frequency( $input[ self::REPORTING_FREQUENCY ] )
-			: Cron::get()->get_default_frequency();
-		$result[ self::REPORTING_FREQUENCY ] = $frequency;
-
-		$result[ self::REPORTING_DOW ] = self::validate_dow(
-			(int) \smartcrawl_get_array_value( $input, self::REPORTING_DOW )
-		);
-
-		$result[ self::REPORTING_DOM ] = self::validate_dom(
-			(int) \smartcrawl_get_array_value( $input, self::REPORTING_DOM )
-		);
-
-		$tod                           = isset( $input[ self::REPORTING_TOD ] ) && is_numeric( $input[ self::REPORTING_TOD ] )
-			? (int) $input[ self::REPORTING_TOD ]
-			: 0;
-		$result[ self::REPORTING_TOD ] = in_array( $tod, range( 0, 23 ), true ) ? $tod : 0;
-		$result[ self::REPORTING_CONDITION_ENABLED ] = ! empty( $input[ self::REPORTING_CONDITION_ENABLED ] );
-		$result[ self::REPORTING_CONDITION ]         = (int) \smartcrawl_get_array_value( $input, self::REPORTING_CONDITION );
-		$result[ self::REPORTING_DEVICE ]            = sanitize_text_field(
-			(string) \smartcrawl_get_array_value( $input, self::REPORTING_DEVICE )
-		);
-
-		$result[ self::DASHBOARD_WIDGET_DEVICE ] = empty( $input[ self::DASHBOARD_WIDGET_DEVICE ] )
+		$options = self::get_options();
+		$options[ self::DASHBOARD_WIDGET_DEVICE ] = empty( $input[ self::DASHBOARD_WIDGET_DEVICE ] )
 			? 'desktop'
 			: sanitize_text_field( $input[ self::DASHBOARD_WIDGET_DEVICE ] );
-
-		Settings::update_specific_options( self::OPTION_ID, $result );
+		Settings::update_specific_options( self::OPTION_ID, $options );
 	}
 
 	/**

@@ -1,9 +1,9 @@
 import React from 'react';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import LighthouseReportGroup from './lighthouse-report-group';
+import LighthouseReportFooter from './lighthouse-report-footer';
 import Notice from '../notices/notice';
 import { createInterpolateElement } from '@wordpress/element';
-import Button from '../button';
 import classnames from 'classnames';
 import UrlUtil from '../../utils/url-util';
 import ConfigValues from '../../es6/config-values';
@@ -18,8 +18,6 @@ import LighthouseCheckIsCrawlable from './checks/lighthouse-check-is-crawlable';
 import LighthouseCheckRobotsTxt from './checks/lighthouse-check-robots-txt';
 import LighthouseCheckCrawlableAnchors from './checks/lighthouse-check-crawlable-anchors';
 import LighthouseCheckStructuredData from './checks/lighthouse-check-structured-data';
-
-const isMember = ConfigValues.get('is_member', 'admin') === '1';
 
 export default class LighthouseReport extends React.Component {
 	static defaultProps = {
@@ -108,36 +106,7 @@ export default class LighthouseReport extends React.Component {
 							</LighthouseReportGroup>
 						);
 					})}
-
-					{!isMember && (
-						<div className="wds-vertical-tab-section sui-box">
-							<div id="wds-lighthouse-report-upsell-notice">
-								<Notice
-									type="purple"
-									message={createInterpolateElement(
-										__(
-											'Upgrade to Pro to schedule automated tests and send white label email reports directly to your clients. Never miss a beat with your search engine optimization.<br/> <a/>',
-											'smartcrawl-seo'
-										),
-										{
-											br: <br />,
-											a: (
-												<Button
-													target="_blank"
-													color="purple"
-													text={__(
-														'Unlock now with Pro',
-														'smartcrawl-seo'
-													)}
-													href="https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_lighthouse_report_upsell_notice"
-												/>
-											),
-										}
-									)}
-								/>
-							</div>
-						</div>
-					)}
+					<LighthouseReportFooter />
 				</div>
 			</React.Fragment>
 		);

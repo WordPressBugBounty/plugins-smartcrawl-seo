@@ -24,6 +24,7 @@ export default (state = {}, action) => {
 				},
 				action.payload
 			);
+			payload.rules = Array.isArray(payload.rules) ? payload.rules : [];
 
 			state = {
 				...state,

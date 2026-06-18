@@ -36,6 +36,7 @@ use function smartcrawl_metadesc_min_length;
 use function smartcrawl_title_max_length;
 use function smartcrawl_title_min_length;
 use function smartcrawl_woocommerce_active;
+use function user_can_see_seo_metabox;
 use function user_can_see_seo_metabox_301_redirect;
 
 /**
@@ -81,6 +82,10 @@ class Assets extends Controller {
 
 	const METABOX_COMPONENTS_JS = 'wds-metabox-components';
 
+	const SIDEBAR_JS = 'wds-sidebar';
+
+	const SIDEBAR_CSS = 'wds-sidebar-styles';
+
 	const METABOX_LINK_FORMAT_BUTTON = 'wds-link-format-button';
 
 	const METABOX_LINK_REL_ATTRIBUTE_FIELD = 'wds-link-rel-attribute-field';
@@ -113,7 +118,8 @@ class Assets extends Controller {
 	 * Binds listening actions.
 	 */
 	public function init() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_assets' ), - 10 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_assets' ), -10 );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'register_block_editor_assets' ) );
 	}
 
 	/**
@@ -170,6 +176,31 @@ class Assets extends Controller {
 	}
 
 	/**
+	 * Register block editor assets.
+	 *
+	 * @return void
+	 */
+	public function register_block_editor_assets() {
+		if ( ! $this->is_block_editor_active() ) {
+			return;
+		}
+
+		$can_seo_metabox = function_exists( '\user_can_see_seo_metabox' ) && \user_can_see_seo_metabox();
+		$can_moz_sidebar = false;
+
+		if ( function_exists( '\user_can_see_urlmetrics_metabox' ) && \user_can_see_urlmetrics_metabox() ) {
+			$moz_controller   = \SmartCrawl\Modules\Advanced\Seomoz\Controller::get();
+			$can_moz_sidebar  = $moz_controller
+				&& method_exists( $moz_controller, 'is_connected' )
+				&& $moz_controller->is_connected();
+		}
+
+		if ( $can_seo_metabox || $can_moz_sidebar ) {
+			$this->register_sidebar_scripts();
+		}
+	}
+
+	/**
 	 * Get version to be used for JS and Css files.
 	 *
 	 * @return string
@@ -186,9 +217,9 @@ class Assets extends Controller {
 	/**
 	 * Register Javascript.
 	 *
-	 * @param string $handle Name of the script. Should be unique.
+	 * @param string      $handle Name of the script. Should be unique.
 	 * @param bool|string $src Relative URL of the script.
-	 * @param string[] $deps Optional. An array of registered script handles this script depends on. Default empty array.
+	 * @param string[]    $deps Optional. An array of registered script handles this script depends on. Default empty array.
 	 *
 	 * @return void
 	 */
@@ -199,9 +230,9 @@ class Assets extends Controller {
 	/**
 	 * Register a CSS stylesheet.
 	 *
-	 * @param string $handle Name of the stylesheet. Should be unique.
+	 * @param string      $handle Name of the stylesheet. Should be unique.
 	 * @param bool|string $src Relative URL of the stylesheet.
-	 * @param string[] $deps Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
+	 * @param string[]    $deps Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
 	 *
 	 * @return void
 	 */
@@ -266,40 +297,36 @@ class Assets extends Controller {
 
 		/* translators: %s: Heart icon */
 		$default_footer_text = sprintf( esc_html__( 'Made with %s by WPMU DEV', 'smartcrawl-seo' ), '<span class="sui-icon-heart" aria-hidden="true" aria-label="love"></span>' );
-		$footer_text         = White_Label::get()->get_wpmudev_footer_text( $default_footer_text );
-
 		wp_localize_script(
 			self::ADMIN_JS,
 			'_wds_admin',
 			array(
-				'strings'            => array(
+				'strings'             => array(
 					'initializing' => esc_html__( 'Initializing ...', 'smartcrawl-seo' ),
 					'running'      => esc_html__( 'Running SEO checks ...', 'smartcrawl-seo' ),
 					'finalizing'   => esc_html__( 'Running final checks and finishing up ...', 'smartcrawl-seo' ),
 					'characters'   => esc_html__( 'characters', 'smartcrawl-seo' ),
 				),
-				'home_url'           => trailingslashit( home_url() ),
-				'plugin_url'         => untrailingslashit( SMARTCRAWL_PLUGIN_URL ),
-				'plugin_title'       => \smartcrawl_get_plugin_title(),
-				'nonce'              => wp_create_nonce( 'wds-admin-nonce' ),
-				'referer'            => remove_query_arg( '_wp_http_referer' ),
-				'version'            => str_replace( '.', '-', SMARTCRAWL_SUI_VERSION ),
-				'dismissed_messages' => $dismissed_messages,
-				'is_member'          => Service::get( Service::SERVICE_SITE )->is_member(),
-				'settings_nonce'     => wp_create_nonce( 'wds-settings-nonce' ),
-				'ajax_url'           => admin_url( 'admin-ajax.php' ),
-				'rest_url'           => get_rest_url(),
-				'plugins_url'        => admin_url( 'plugins.php' ),
-				'post_types'         => array_map(
+				'home_url'            => trailingslashit( home_url() ),
+				'plugin_url'          => untrailingslashit( SMARTCRAWL_PLUGIN_URL ),
+				'plugin_title'        => \smartcrawl_get_plugin_title(),
+				'nonce'               => wp_create_nonce( 'wds-admin-nonce' ),
+				'referer'             => remove_query_arg( '_wp_http_referer' ),
+				'version'             => str_replace( '.', '-', SMARTCRAWL_SUI_VERSION ),
+				'dismissed_messages'  => $dismissed_messages,
+				'settings_nonce'      => wp_create_nonce( 'wds-settings-nonce' ),
+				'ajax_url'            => admin_url( 'admin-ajax.php' ),
+				'rest_url'            => get_rest_url(),
+				'plugins_url'         => admin_url( 'plugins.php' ),
+				'post_types'          => array_map(
 					function ( $post_type ) {
 						return get_post_type_object( $post_type )->labels->singular_name;
 					},
 					smartcrawl_frontend_post_types()
 				),
-				'new_feature_status' => Settings::get_specific_options( 'wds-features-viewed', 0 ),
-				'empty_box_logo'     => $empty_box_img,
-				'footer_text'        => $footer_text,
-				'hide_doc_link'      => White_Label::get()->is_hide_wpmudev_doc_link(),
+				'new_feature_status'  => Settings::get_specific_options( 'wds-features-viewed', 0 ),
+				'empty_box_logo'      => $empty_box_img,
+				'hide_doc_link'       => White_Label::get()->is_hide_wpmudev_doc_link(),
 				'default_footer_text' => $default_footer_text,
 			)
 		);
@@ -609,6 +636,7 @@ class Assets extends Controller {
 		$this->register_macro_replacement_script();
 
 		if ( $this->is_block_editor_active() ) {
+
 			$link_format_button_deps = $this->dynamic_dependencies(
 				self::METABOX_LINK_FORMAT_BUTTON,
 				array(
@@ -733,7 +761,7 @@ class Assets extends Controller {
 		$page_for_posts = (int) get_option( 'page_for_posts' );
 
 		if ( $post_id && 'page' === $show_on_front &&
-			in_array( (int) $post_id, [ $page_on_front, $page_for_posts ], true )
+			in_array( (int) $post_id, array( $page_on_front, $page_for_posts ), true )
 		) {
 			$post_type = 'home';
 		}
@@ -742,7 +770,7 @@ class Assets extends Controller {
 			$this->get_social_meta_args( 'og', 'opengraph', $options, $post_type, $post_id ),
 			$this->get_social_meta_args( 'twitter-card', 'twitter', $options, $post_type, $post_id )
 		);
-		$args = array_merge( $args, $social_meta );
+		$args        = array_merge( $args, $social_meta );
 
 		$args['advanced'] = array(
 			'indexing'  => array(
@@ -787,6 +815,132 @@ class Assets extends Controller {
 	}
 
 	/**
+	 * Registers and enqueues the Gutenberg sidebar script.
+	 *
+	 * Called from register_metabox_scripts() only when the block editor is
+	 * active, so this bundle never loads on classic-editor screens.
+	 *
+	 * WordPress script handles declared as dependencies ensure that
+	 * wp.plugins, wp.editPost, wp.components, etc. are available on the
+	 * global wp object before the bundle executes.
+	 *
+	 * @return void
+	 */
+	private function register_sidebar_scripts() {
+		$this->register_css( self::SIDEBAR_CSS, 'css/wds-sidebar-styles.min.css' );
+		wp_enqueue_style( self::SIDEBAR_CSS );
+		wp_enqueue_style( 'dashicons' );
+
+		$sidebar_deps = $this->dynamic_dependencies(
+			self::SIDEBAR_JS,
+			array(
+				'wp-plugins',    // wp.plugins.registerPlugin.
+				'wp-edit-post',  // wp.editPost.PluginSidebar + PluginSidebarMoreMenuItem.
+				'wp-element',    // React wrapper / JSX.
+				'wp-components', // wp.components.PanelBody etc.
+				'wp-i18n',       // wp.i18n.__().
+				'wp-data',       // wp.data — useSeoMeta, GutenbergEditor store subscription.
+				'wp-api-fetch',  // wp.apiFetch — GutenbergEditor autosave middleware.
+				self::SUI_JS,    // Shared UI components.
+			)
+		);
+
+		$this->register_js( self::SIDEBAR_JS, 'js/build/wds-sidebar.min.js', $sidebar_deps );
+
+		wp_enqueue_script( self::SIDEBAR_JS );
+
+		$options   = Settings::get_options();
+		$post_id   = $this->get_post_id_query_var();
+		$post_type = $this->get_post_type();
+		$title     = (string) smartcrawl_get_array_value( $options, 'title-' . $post_type );
+		$metadesc  = (string) smartcrawl_get_array_value( $options, 'metadesc-' . $post_type );
+
+		$advanced_should_run  = \SmartCrawl\Modules\Advanced\Controller::get()->should_run();
+		$redirects_should_run = $advanced_should_run && \SmartCrawl\Modules\Advanced\Redirects\Controller::get()->should_run();
+		$autolinks_should_run = $advanced_should_run && \SmartCrawl\Modules\Advanced\Autolinks\Controller::get()->should_run();
+
+		$social_options           = Settings::get_component_options( Settings::COMP_SOCIAL );
+		$og_enabled_globally      = (bool) smartcrawl_get_array_value( $social_options, 'og-enable' );
+		$twitter_enabled_globally = (bool) smartcrawl_get_array_value( $social_options, 'twitter-card-enable' );
+		$social_tab_allowed       = Admin_Settings::is_tab_allowed( Settings::TAB_SOCIAL );
+		$social_settings_url      = $social_tab_allowed ? Admin_Settings::admin_url( Settings::TAB_SOCIAL ) : '';
+
+		$cached_post                 = $post_id ? Post_Cache::get()->get_post( $post_id ) : null;
+		$opengraph_title_placeholder = $cached_post ? (string) $cached_post->get_opengraph_title() : '';
+		$opengraph_desc_placeholder  = $cached_post ? (string) $cached_post->get_opengraph_description() : '';
+		$twitter_title_placeholder   = $cached_post ? (string) $cached_post->get_twitter_title() : '';
+		$twitter_desc_placeholder    = $cached_post ? (string) $cached_post->get_twitter_description() : '';
+		$moz_controller              = \SmartCrawl\Modules\Advanced\Seomoz\Controller::get();
+		$moz_connected               = $moz_controller && method_exists( $moz_controller, 'is_connected' ) && $moz_controller->is_connected();
+		$moz_can_view                = $moz_controller && method_exists( $moz_controller, 'can_view_urlmetrics' ) && $moz_controller->can_view_urlmetrics();
+
+		wp_localize_script(
+			self::SIDEBAR_JS,
+			'_wds_sidebar',
+			array(
+				'nonce'                => wp_create_nonce( 'wds-metabox-nonce' ),
+				'sui_version'          => str_replace( '.', '-', SMARTCRAWL_SUI_VERSION ),
+				'plugin_title'         => \smartcrawl_get_plugin_title(),
+				'seo_metabox_can_view' => function_exists( '\user_can_see_seo_metabox' ) && \user_can_see_seo_metabox(),
+				'gutenberg_active'     => $this->is_block_editor_active(),
+				'post_type'            => $post_type,
+				'taxonomies'           => $this->get_taxonomies(),
+				'onpage_active'        => Settings::get_setting( 'onpage' ) && Admin_Settings::is_tab_allowed( Settings::TAB_ONPAGE ),
+				'seo_active'           => Settings::get_setting( 'analysis-seo' ),
+				'readability_active'   => Settings::get_setting( 'analysis-readability' ),
+				'social_active'        => Settings::get_setting( Settings::COMP_SOCIAL ) && Admin_Settings::is_tab_allowed( Settings::TAB_SOCIAL ),
+				'tab_onpage_url'       => Admin_Settings::admin_url( Settings::TAB_ONPAGE ),
+				'primary_terms_active' => Primary_Terms::get()->should_run(),
+				// Same as _wds_metabox (register_metabox_scripts): sidebar reads ConfigValues.get(..., 'metabox') at bundle load.
+				'macros'               => array_merge(
+					Onpage_Settings::get_singular_macros( $post_type ),
+					Onpage_Settings::get_general_macros()
+				),
+				'title_min_length'     => smartcrawl_title_min_length(),
+				'title_max_length'     => smartcrawl_title_max_length(),
+				'metadesc_min_length'  => smartcrawl_metadesc_min_length(),
+				'metadesc_max_length'  => smartcrawl_metadesc_max_length(),
+				'meta_title'           => $title,
+				'meta_desc'            => $metadesc,
+				'post_url'             => $post_id ? get_permalink( $post_id ) : '',
+				'seo_title'            => smartcrawl_get_value( 'title', $post_id ),
+				'seo_desc'             => smartcrawl_get_value( 'metadesc', $post_id ),
+				'advanced'             => array(
+					'indexing'  => array(
+						'post_type_noindexed'  => (bool) smartcrawl_get_array_value( $options, sprintf( 'meta_robots-noindex-%s', $post_type ) ),
+						'post_type_nofollowed' => (bool) smartcrawl_get_array_value( $options, sprintf( 'meta_robots-nofollow-%s', $post_type ) ),
+					),
+					'redirect'  => array(
+						'has_permission' => function_exists( '\user_can_see_seo_metabox_301_redirect' ) && \user_can_see_seo_metabox_301_redirect(),
+						'available'      => $redirects_should_run,
+					),
+					'autolinks' => array(
+						'available' => $autolinks_should_run,
+					),
+				),
+				'social'               => array(
+					'settings_url' => $social_settings_url,
+					'tab_allowed'  => $social_tab_allowed,
+					'opengraph'    => array(
+						'enabled_globally'  => $og_enabled_globally,
+						'title_placeholder' => $opengraph_title_placeholder,
+						'desc_placeholder'  => $opengraph_desc_placeholder,
+					),
+					'twitter'      => array(
+						'enabled_globally'  => $twitter_enabled_globally,
+						'title_placeholder' => $twitter_title_placeholder,
+						'desc_placeholder'  => $twitter_desc_placeholder,
+					),
+				),
+				'moz'                  => array(
+					'connected' => $moz_connected,
+					'can_view'  => $moz_can_view,
+				),
+			)
+		);
+	}
+
+	/**
 	 * Get social meta args.
 	 *
 	 * @param string $type_key  Type key.
@@ -802,9 +956,9 @@ class Assets extends Controller {
 		if ( 'twitter' === $meta_key ) {
 			$active_key = $meta_key . '-active-' . $post_type;
 		}
-		$setting_enabled     = (bool) smartcrawl_get_array_value( $options, "{$type_key}-enable" );
-		$post_type_enabled   = (bool) smartcrawl_get_array_value( $options, $active_key );
-		$args                = array();
+		$setting_enabled   = (bool) smartcrawl_get_array_value( $options, "{$type_key}-enable" );
+		$post_type_enabled = (bool) smartcrawl_get_array_value( $options, $active_key );
+		$args              = array();
 
 		if ( ! $setting_enabled ) {
 			return $args;
@@ -1337,7 +1491,7 @@ class Assets extends Controller {
 	 * Get script dependencies.
 	 *
 	 * @param string $file_name File name.
-	 * @param array $extra_deps Extra dependencies.
+	 * @param array  $extra_deps Extra dependencies.
 	 *
 	 * @return array
 	 */
@@ -1448,12 +1602,10 @@ class Assets extends Controller {
 
 		$this->set_script_translations( self::CONFIGS_JS );
 
-		$service = new Configs\Service();
 		wp_localize_script(
 			self::CONFIGS_JS,
 			'_wds_config',
 			array(
-				'is_member'    => $service->is_member(),
 				'nonce'        => wp_create_nonce( 'wds-configs-nonce' ),
 				'configs'      => Configs\Collection::get()->get_deflated_configs(),
 				'timezone'     => $this->get_timezone(),
@@ -1530,31 +1682,5 @@ class Assets extends Controller {
 			return;
 		}
 
-		$this->register_js(
-			self::INSTANT_INDEXING_PAGE_JS,
-			'js/wds-admin-instant-indexing.js',
-			array(
-				'jquery',
-				self::ADMIN_JS,
-			)
-		);
-
-		wp_localize_script(
-			self::INSTANT_INDEXING_PAGE_JS,
-			'_wds_instant_indexing',
-			array(
-				'nonce'      => wp_create_nonce( 'wds-instant-indexing-nonce' ),
-				'rest_nonce' => wp_create_nonce( 'wp_rest' ),
-				'rest_api'   => rest_url( 'smartcrawl/v1/instant-indexing' ),
-				'strings'    => array(
-					'empty_url'  => esc_html__( 'The URL field is empty. Please enter at least one URL and try again.', 'smartcrawl-seo' ),
-					'success'    => esc_html__( 'Submission Completed!', 'smartcrawl-seo' ),
-					'limit'      => esc_html__( 'You cannot submit more than 100 URLs at once.', 'smartcrawl-seo' ),
-					'invalid'    => esc_html__( 'One or more URLs are invalid. Please check and try again.', 'smartcrawl-seo' ),
-					'wrong'      => esc_html__( 'Something went wrong. Please try again.', 'smartcrawl-seo' ),
-					'rate_limit' => esc_html__( 'Rate limit exceeded. Please wait and try again later.', 'smartcrawl-seo' ),
-				),
-			)
-		);
-	}
+		}
 }

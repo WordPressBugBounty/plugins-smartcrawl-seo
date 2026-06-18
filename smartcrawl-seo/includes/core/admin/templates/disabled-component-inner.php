@@ -7,12 +7,10 @@
 
 namespace SmartCrawl;
 
-use SmartCrawl\Services\Service;
-
 $content             = empty( $content ) ? '' : $content;
 $image               = empty( $image ) ? 'empty-box.svg' : $image;
 $component           = empty( $component ) ? '' : $component;
-$is_member           = Service::get( Service::SERVICE_SITE )->is_member();
+$is_enabled          = false;
 $upgrade_tag         = empty( $upgrade_tag ) ? '' : $upgrade_tag;
 $premium_feature     = ! empty( $premium_feature );
 $notice              = empty( $notice ) ? '' : $notice;
@@ -53,7 +51,7 @@ $upgrade_url = 'https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source
 		<?php wp_nonce_field( 'wds-settings-nonce', '_wds_nonce' ); ?>
 	<?php endif; ?>
 
-	<?php if ( $premium_feature && ! $is_member ) : ?>
+	<?php if ( $premium_feature && ! $is_enabled ) : ?>
 		<a
 			class="sui-button sui-button-purple"
 			target="_blank"

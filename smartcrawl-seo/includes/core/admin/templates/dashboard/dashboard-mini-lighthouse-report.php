@@ -15,9 +15,6 @@ if ( ! $lighthouse_report ) {
 	return;
 }
 $page_url          = \SmartCrawl\Admin\Settings\Admin_Settings::admin_url( Settings::TAB_HEALTH );
-$service           = Service::get( Service::SERVICE_SITE );
-$is_member         = $service->is_member();
-$reporting_enabled = Options::is_cron_enabled() && $is_member;
 ?>
 
 <?php if ( ! $lighthouse_report->get_failed_audits_count() ) : ?>
@@ -63,11 +60,4 @@ $reporting_enabled = Options::is_cron_enabled() && $is_member;
 
 		<span class="sui-icon-eye" aria-hidden="true"></span> <?php esc_html_e( 'View Report', 'smartcrawl-seo' ); ?>
 	</a>
-	<small>
-		<?php
-		echo empty( $reporting_enabled )
-			? esc_html__( 'Automatic audits are disabled', 'smartcrawl-seo' )
-			: esc_html__( 'Automatic audits are enabled', 'smartcrawl-seo' );
-		?>
-	</small>
-</div>
+	</div>

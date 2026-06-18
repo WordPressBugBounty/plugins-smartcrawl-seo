@@ -434,6 +434,9 @@ class OnPage extends Controller {
 					? $date_callback( $requested_year, $requested_month )
 					: get_term_link( $term, $term->taxonomy )
 				);
+				if ( is_wp_error( $prev ) ) {
+					return false;
+				}
 				$prev = ( '' === get_option( 'permalink_structure' ) )
 					? ( ( $paged > 2 ) ? add_query_arg( 'page', $paged - 1, $prev ) : $prev )
 					: ( ( $paged > 2 ) ? trailingslashit( $prev ) . 'page/' . ( $paged - 1 ) : $prev );
@@ -449,6 +452,9 @@ class OnPage extends Controller {
 					? $date_callback( $requested_year, $requested_month )
 					: get_term_link( $term, $term->taxonomy )
 				);
+				if ( is_wp_error( $next ) ) {
+					return false;
+				}
 				$next_page = $is_paged + 1;
 				$next      = ( '' === get_option( 'permalink_structure' ) )
 					? add_query_arg( 'page', $next_page, $next )

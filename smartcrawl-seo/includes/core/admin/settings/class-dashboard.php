@@ -158,7 +158,6 @@ class Dashboard extends Admin_Settings {
 
 			case self::BOX_SCHEMA:
 				return $this->load_view( 'dashboard/dashboard-widget-schema' );
-
 			case self::BOX_INSTANT_INDEXING:
 				return $this->load_view( 'dashboard/dashboard-widget-instant-indexing' );
 		}

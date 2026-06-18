@@ -1,7 +1,6 @@
 import ErrorBoundary from './components/error-boundry';
 import ReactDom from 'react-dom/client';
 import React from 'react';
-import CrawlReport from './components/crawler/crawl-report';
 import UrlUtil from './utils/url-util';
 import NewsSitemapTab from './components/sitemaps/news-sitemap-tab';
 import ConfigValues from './es6/config-values';
@@ -46,91 +45,6 @@ import SitemapTroubleshoot from './components/sitemaps/sitemap-troubleshoot';
 			</React.Fragment>
 		);
 	}
-
-	const updatePageAfterReportReload = (activeIssues, activeSitemapIssues) => {
-		if (activeIssues === undefined) {
-			// In progress or no data
-			return;
-		}
-
-		const $titleIssuesIndicator = $(
-				'#tab_url_crawler .sui-box-header .sui-tag'
-			),
-			$crawlerTab = $('li.tab_url_crawler'),
-			$labelIssuesIndicator = $crawlerTab.find('.sui-tag'),
-			$labelTick = $crawlerTab.find('.sui-icon-check-tick'),
-			$labelSpinner = $crawlerTab.find('.sui-icon-loader'),
-			$newCrawlButton = $('.wds-new-crawl-button'),
-			$summaryNumber = $('.sui-summary-large'),
-			$summaryIcon = $('.sui-summary-large + [class*="sui-icon-"]'),
-			$sitemapIssueCount = $('.wds-invisible-urls-count'),
-			$titleIgnoreAllButton = $(
-				'.sui-box-header .wds-ignore-all'
-			).closest('div');
-
-		if (activeIssues > 0) {
-			$titleIssuesIndicator.show().html(activeIssues);
-			$labelIssuesIndicator.show().html(activeIssues);
-			$titleIgnoreAllButton.show();
-			$labelTick.hide();
-			$summaryIcon
-				.removeClass('sui-icon-check-tick sui-success')
-				.addClass('sui-icon-info sui-warning');
-		} else {
-			$titleIssuesIndicator.hide();
-			$labelIssuesIndicator.hide();
-			$titleIgnoreAllButton.hide();
-			$labelTick.show();
-			$summaryIcon
-				.removeClass('sui-icon-info sui-warning')
-				.addClass('sui-icon-check-tick sui-success');
-		}
-
-		// Show active issue count in top section
-		$summaryNumber.html(activeIssues);
-		$sitemapIssueCount.html(activeSitemapIssues);
-
-		// Hide the spinner and show the new crawl button regardless of the result
-		$labelSpinner.hide();
-		$newCrawlButton.show();
-	};
-
-	const getCrawlProgress = () =>
-		$.post(
-			ajaxurl,
-			{
-				action: 'smartcrawl_crawl_get_progress',
-				_wds_nonce: Wds.get('crawler', 'nonce'),
-			},
-			() => false,
-			'json'
-		);
-
-	const updateProgress = () => {
-		const $container = $('.tab_url_crawler');
-		if (!$container.find('.wds-url-crawler-progress').length) {
-			return;
-		}
-
-		/**
-		 * Get crawl progress.
-		 *
-		 * @param {{data:{in_progress:boolean, progress: number}}} response - Response
-		 */
-		getCrawlProgress().done((response) => {
-			const inProgress = response?.data?.in_progress;
-			const progress = response?.data?.progress;
-			const $progressBar = $('#tab_url_crawler .wds-progress');
-
-			if (inProgress) {
-				Wds.update_progress_bar($progressBar, progress);
-				setTimeout(updateProgress, 5000);
-			} else {
-				Wds.update_progress_bar($progressBar, 100);
-				window.location.reload();
-			}
-		});
-	};
 
 	const updateSitemapSubsectionVisibility = () => {
 		$('.wds-sitemap-toggleable').each(() => {
@@ -246,11 +160,6 @@ import SitemapTroubleshoot from './components/sitemaps/sitemap-troubleshoot';
 		window.Wds.conditional_fields();
 		window.Wds.dismissible_message();
 		window.Wds.vertical_tabs();
-		window.Wds.reporting_schedule();
-
-		updateProgress();
-		UrlUtil.removeQueryParam('crawl-in-progress');
-
 		$(document)
 			.on(
 				'change',
@@ -274,17 +183,4 @@ import SitemapTroubleshoot from './components/sitemaps/sitemap-troubleshoot';
 	};
 
 	$(init);
-
-	const reportContainer = document.getElementById('wds-url-crawler-report');
-	if (reportContainer) {
-		const root = ReactDom.createRoot(reportContainer);
-
-		root.render(
-			<ErrorBoundary>
-				<CrawlReport
-					onActiveIssueCountChange={updatePageAfterReportReload}
-				/>
-			</ErrorBoundary>
-		);
-	}
-})(jQuery);
+	})(jQuery);

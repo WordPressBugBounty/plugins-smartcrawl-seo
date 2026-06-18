@@ -305,12 +305,7 @@ abstract class Admin_Settings extends Settings {
 		$sui_class = \smartcrawl_sui_class();
 		if ( $this->is_current_screen() && strpos( $classes, $sui_class ) === false ) {
 			$classes .= " {$sui_class} ";
-
-			$service = Service::get( Service::SERVICE_SITE );
-			if ( $service->is_member() ) {
-				$classes .= ' wds-is-member';
 			}
-		}
 
 		return $classes;
 	}
@@ -363,8 +358,7 @@ abstract class Admin_Settings extends Settings {
 				'action_url'  => $this->action_url,
 				'msg'         => $this->msg,
 				'errors'      => $errors,
-				'is_member'   => $service->is_member(),
-			),
+				),
 		);
 	}
 

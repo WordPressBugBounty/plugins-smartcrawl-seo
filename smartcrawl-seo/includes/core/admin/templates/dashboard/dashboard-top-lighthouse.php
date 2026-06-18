@@ -8,6 +8,7 @@
 namespace SmartCrawl;
 
 use SmartCrawl\Admin\Settings\Dashboard;
+use SmartCrawl\Lighthouse\Report;
 
 $lighthouse_available      = is_main_site();
 $sitemap_crawler_available = \SmartCrawl\Sitemaps\Utils::crawler_available();
@@ -22,10 +23,19 @@ $lighthouse_start_time = ! empty( $lighthouse_start_time );
  *
  * @var \SmartCrawl\Lighthouse\Report|\WP_Error|false $lighthouse_report
  */
-$lighthouse_report = empty( $lighthouse_report ) || ! $lighthouse_report->has_data() || $lighthouse_report->has_errors()
-	? false
-	: $lighthouse_report;
-$whitelabel_class  = \SmartCrawl\Controllers\White_Label::get()->summary_class();
+$lighthouse_report   = empty( $lighthouse_report ) || ! $lighthouse_report->has_data() || $lighthouse_report->has_errors()
+		? false
+		: $lighthouse_report;
+$whitelabel_class    = \SmartCrawl\Controllers\White_Label::get()->summary_class();
+$content_warnings    = $lighthouse_report
+		? $lighthouse_report->get_group( Report::GROUP_CONTENT )->get_failing_count()
+		: 0;
+$indexing_warnings   = $lighthouse_report
+		? $lighthouse_report->get_group( Report::GROUP_VISIBILITY )->get_failing_count()
+		: 0;
+$responsive_warnings = $lighthouse_report
+		? $lighthouse_report->get_group( Report::GROUP_RESPONSIVE )->get_failing_count()
+		: 0;
 ?>
 
 <div
@@ -93,23 +103,16 @@ $whitelabel_class  = \SmartCrawl\Controllers\White_Label::get()->summary_class()
 
 	<div class="sui-summary-segment">
 		<ul class="sui-list">
-			<li id="wds-summary-audits">
-				<span class="sui-list-label"><?php esc_html_e( 'SEO Audits', 'smartcrawl-seo' ); ?></span>
+			<li id="wds-seo-content-audits">
+				<span class="sui-list-label"><?php esc_html_e( 'Content audits', 'smartcrawl-seo' ); ?></span>
 				<span class="sui-list-detail">
 					<?php if ( $lighthouse_start_time ) : ?>
-						<p>
-							<span
-								class="sui-icon-loader sui-loading"
-								aria-hidden="true"></span> <small><?php echo esc_html__( 'SEO Test in progress ...', 'smartcrawl-seo' ); ?></small></p>
+						<span class="sui-icon-loader sui-loading" aria-hidden="true"></span>
 					<?php elseif ( $lighthouse_report ) : ?>
-						<?php if ( $lighthouse_report->get_failed_audits_count() > 0 ) : ?>
-							<span class="sui-tag sui-tag-yellow">
-								<?php echo esc_html( (string) $lighthouse_report->get_failed_audits_count() ); ?>
-							</span>
+						<?php if ( $content_warnings ) : ?>
+							<span class="sui-tag sui-tag-yellow"><?php echo esc_html( (string) $content_warnings ); ?></span>
 						<?php else : ?>
-							<span
-								class="sui-icon-check-tick sui-success sui-md"
-								aria-hidden="true"></span> <small><?php esc_html_e( 'No audits', 'smartcrawl-seo' ); ?></small>
+							<span class="sui-icon-check-tick sui-success sui-md" aria-hidden="true"></span>
 						<?php endif; ?>
 					<?php else : ?>
 						-
@@ -117,7 +120,39 @@ $whitelabel_class  = \SmartCrawl\Controllers\White_Label::get()->summary_class()
 				</span>
 			</li>
 
-			<?php $this->render_view( 'dashboard/dashboard-top-sitemap-list-item' ); ?>
+			<li id="wds-seo-indexing-audits">
+				<span class="sui-list-label"><?php esc_html_e( 'Indexing audits', 'smartcrawl-seo' ); ?></span>
+				<span class="sui-list-detail">
+					<?php if ( $lighthouse_start_time ) : ?>
+						<span class="sui-icon-loader sui-loading" aria-hidden="true"></span>
+					<?php elseif ( $lighthouse_report ) : ?>
+						<?php if ( $indexing_warnings ) : ?>
+							<span class="sui-tag sui-tag-yellow"><?php echo esc_html( (string) $indexing_warnings ); ?></span>
+						<?php else : ?>
+							<span class="sui-icon-check-tick sui-success sui-md" aria-hidden="true"></span>
+						<?php endif; ?>
+					<?php else : ?>
+						-
+					<?php endif; ?>
+				</span>
+			</li>
+
+			<li id="wds-seo-responsive-audits">
+				<span class="sui-list-label"><?php esc_html_e( 'Responsive audits', 'smartcrawl-seo' ); ?></span>
+				<span class="sui-list-detail">
+					<?php if ( $lighthouse_start_time ) : ?>
+						<span class="sui-icon-loader sui-loading" aria-hidden="true"></span>
+					<?php elseif ( $lighthouse_report ) : ?>
+						<?php if ( $responsive_warnings ) : ?>
+							<span class="sui-tag sui-tag-yellow"><?php echo esc_html( (string) $responsive_warnings ); ?></span>
+						<?php else : ?>
+							<span class="sui-icon-check-tick sui-success sui-md" aria-hidden="true"></span>
+						<?php endif; ?>
+					<?php else : ?>
+						-
+					<?php endif; ?>
+				</span>
+			</li>
 		</ul>
 	</div>
 </div>

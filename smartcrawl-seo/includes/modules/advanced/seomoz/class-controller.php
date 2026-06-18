@@ -67,6 +67,119 @@ class Controller extends Controllers\Submodule_Controller {
 
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'wp_ajax_smartcrawl_update_moz_conn', array( $this, 'update_moz_connection' ) );
+		add_action( 'wp_ajax_wds_get_moz_urlmetrics', array( $this, 'ajax_get_moz_urlmetrics' ) );
+	}
+
+	/**
+	 * Whether the current admin screen is the block editor.
+	 *
+	 * @return bool
+	 */
+	private function is_block_editor_screen() {
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && method_exists( $screen, 'is_block_editor' ) ) {
+				return (bool) $screen->is_block_editor();
+			}
+		}
+
+		// Fallback for older environments / Gutenberg plugin.
+		return function_exists( '\is_gutenberg_page' ) && \is_gutenberg_page();
+	}
+
+	/**
+	 * Whether Moz is connected (credentials present).
+	 *
+	 * @return bool
+	 */
+	public function is_connected() {
+		return ! empty( $this->options['access_id'] ) && ! empty( $this->options['secret_key'] );
+	}
+
+	/**
+	 * Whether the current user can view Moz URL metrics.
+	 *
+	 * @return bool
+	 */
+	public function can_view_urlmetrics() {
+		return function_exists( '\user_can_see_urlmetrics_metabox' ) && \user_can_see_urlmetrics_metabox();
+	}
+
+	/**
+	 * Ajax handler to fetch Moz URL metrics for a post in the block editor sidebar.
+	 *
+	 * @return void
+	 */
+	public function ajax_get_moz_urlmetrics() {
+		if ( ! isset( $_POST['_wds_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wds_nonce'] ) ), 'wds-metabox-nonce' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Invalid nonce.', 'smartcrawl-seo' ),
+				)
+			);
+		}
+
+		if ( ! $this->can_view_urlmetrics() ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'You do not have permission to view Moz metrics.', 'smartcrawl-seo' ),
+				)
+			);
+		}
+
+		$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+		if ( ! $post_id ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Missing post ID.', 'smartcrawl-seo' ),
+				)
+			);
+		}
+
+		$post = get_post( $post_id );
+		if ( ! $post ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'Invalid post.', 'smartcrawl-seo' ),
+				)
+			);
+		}
+
+		if ( in_array( $post->post_status, array( 'auto-draft', 'draft', 'pending' ), true ) ) {
+			wp_send_json_success(
+				array(
+					'blocked'     => true,
+					'post_status' => $post->post_status,
+				)
+			);
+		}
+
+		$data = $this->get_metrics_args( get_permalink( $post_id ) );
+		if ( $data ) {
+			wp_send_json_success(
+				array(
+					'blocked'     => false,
+					'post_status' => $post->post_status,
+					'attribution' => $data['attribution'],
+					'urlmetrics'  => $data['urlmetrics'],
+				)
+			);
+		}
+
+		$api        = new API( $this->options['access_id'], $this->options['secret_key'] );
+		$urlmetrics = $api->urlmetrics( get_permalink( $post_id ) );
+		$error      = $this->get_specific_error( $urlmetrics );
+		$message    = sprintf(
+			'%s %s',
+			esc_html__( 'We were unable to retrieve data from the Moz API.', 'smartcrawl-seo' ),
+			$error
+		);
+
+		wp_send_json_error(
+			array(
+				'message' => $message,
+			)
+		);
 	}
 
 	/**
@@ -118,11 +231,15 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function add_meta_boxes() {
-		if ( empty( $this->options['access_id'] ) || empty( $this->options['secret_key'] ) ) {
+		if ( $this->is_block_editor_screen() ) {
 			return;
 		}
 
-		$show = \user_can_see_urlmetrics_metabox();
+		if ( ! $this->is_connected() ) {
+			return;
+		}
+
+		$show = $this->can_view_urlmetrics();
 
 		foreach ( get_post_types() as $post_type ) {
 			if ( $show ) {
@@ -155,10 +272,20 @@ class Controller extends Controllers\Submodule_Controller {
 			<div class="<?php \smartcrawl_wrap_class( 'wds-metabox' ); ?>">
 				<div class="wds-metabox-section">
 					<?php
-					$this->render_metrics(
-						get_permalink( $post->ID ),
-						'urlmetrics-metabox'
-					);
+					if ( in_array( $post->post_status, array( 'auto-draft', 'draft', 'pending' ), true ) ) {
+						Module_Settings::get()->output_view(
+							'notice',
+							array(
+								'class'   => 'sui-notice-info',
+								'message' => esc_html__( 'Moz metrics will be available once the post is published.', 'smartcrawl-seo' ),
+							)
+						);
+					} else {
+						$this->render_metrics(
+							get_permalink( $post->ID ),
+							'urlmetrics-metabox'
+						);
+					}
 					?>
 				</div>
 			</div>
@@ -244,7 +371,7 @@ class Controller extends Controllers\Submodule_Controller {
 	private function get_specific_error( $response ) {
 		switch ( API::get_error_type( $response ) ) {
 			case 400:
-				return esc_html__( "If you've recently created an account, allow 24 hours for your first data to arrive. If you are an existing user, please reset your Moz API credentials to fix this issue.", 'smartcrawl-seo' );
+				return __( "If you've recently created an account, allow 24 hours for your first data to arrive. If you are an existing user, please reset your Moz API credentials to fix this issue.", 'smartcrawl-seo' );
 
 			default:
 				return isset( $response->error_message ) ? $response->error_message : '';

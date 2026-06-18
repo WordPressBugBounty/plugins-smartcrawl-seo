@@ -181,14 +181,8 @@ class Model {
 	 * @return string
 	 */
 	private function prepare_health_string() {
-		$reporting_status = $this->prepare_lighthouse_reporting_status();
-
 		$parts[] = esc_html__( 'SEO test - Active', 'smartcrawl-seo' );
-		$parts[] = sprintf(
-			/* translators: %s: Report status */
-			esc_html__( 'Scheduled performance reports - %s', 'smartcrawl-seo' ),
-			$reporting_status
-		);
+
 		return implode( "\n", $parts );
 	}
 
@@ -323,30 +317,6 @@ class Model {
 				esc_attr__( 'Usage tracking - ', 'smartcrawl-seo' ) . $this->get_status_string( $usage_tracking ),
 				esc_attr__( 'High Contrast Mode - ', 'smartcrawl-seo' ) . $this->get_status_string( $high_contrast ),
 			)
-		);
-	}
-
-	/**
-	 * Prepares string for Lighthouse reporting status.
-	 *
-	 * @return string
-	 */
-	private function prepare_lighthouse_reporting_status() {
-		if ( ! Lighthouse\Options::is_cron_enabled() ) {
-			return esc_html__( 'Inactive', 'smartcrawl-seo' );
-		}
-
-		$recipients = Lighthouse\Options::email_recipients();
-		$frequency  = \smartcrawl_get_array_value(
-			\SmartCrawl\Controllers\Cron::get()->get_frequencies(),
-			Lighthouse\Options::reporting_frequency()
-		);
-
-		return sprintf(
-			/* translators: 1: Frequency, 2: Receipients */
-			esc_html__( 'Active and sending %1$s to %2$d recipients', 'smartcrawl-seo' ),
-			$frequency,
-			count( $recipients )
 		);
 	}
 

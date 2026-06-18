@@ -286,4 +286,53 @@ class String_Utils {
 
 		return trim( $text );
 	}
+
+	/**
+	 * Normalizes punctuation only (lowercase, strip/split on punctuation).
+	 *
+	 * @param string $markup HTML or raw text input.
+	 *
+	 * @return string Normalized plain text with all words preserved.
+	 */
+	public static function normalize_punctuation_only( string $markup ): string {
+		return self::normalize_content( $markup );
+	}
+
+	/**
+	 * Normalizes content and removes stop words.
+	 *
+	 * @param string $content   Text to process.
+	 * @param array  $stopwords List of stopwords to remove.
+	 *
+	 * @return string Normalized text with stop words removed.
+	 */
+	public static function normalize_content_without_stopwords( string $content, array $stopwords = array() ): string {
+		$normalized = self::normalize_content( $content );
+		$words      = array_filter( explode( ' ', $normalized ) );
+		$filtered   = array_filter( $words, function ( $word ) use ( $stopwords ) {
+			return '' !== $word && ! in_array( $word, $stopwords, true );
+		} );
+
+		return implode( ' ', $filtered );
+	}
+
+	/**
+	 * Whether the content contains the keyphrase with a loose match (ignoring stop words and punctuation).
+	 *
+	 * @param string $content   Text to search in.
+	 * @param string $keyphrase Keyphrase to find.
+	 * @param array  $stopwords List of stopwords.
+	 *
+	 * @return bool True if keyphrase is present (loose match).
+	 */
+	public static function has_keyphrase_loose( string $content, string $keyphrase, array $stopwords = array() ): bool {
+		$content_normalized   = self::normalize_content_without_stopwords( $content, $stopwords );
+		$keyphrase_normalized = self::normalize_content_without_stopwords( $keyphrase, $stopwords );
+
+		if ( '' === $keyphrase_normalized ) {
+			return true;
+		}
+
+		return false !== self::pos( $content_normalized, $keyphrase_normalized );
+	}
 }

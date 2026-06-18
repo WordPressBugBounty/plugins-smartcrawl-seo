@@ -28,19 +28,31 @@ export default class Modal extends React.Component {
 	}
 
 	componentDidMount() {
-		SUI.openModal(
-			this.props.id,
-			this.props.focusAfterClose,
-			this.props.focusAfterOpen
-				? this.props.focusAfterOpen
-				: this.getTitleId(),
-			false,
-			false
-		);
+		this._suiOpen = false;
+		this._openTimer = setTimeout(() => {
+			this._suiOpen = true;
+			SUI.openModal(
+				this.props.id,
+				this.props.focusAfterClose,
+				this.props.focusAfterOpen
+					? this.props.focusAfterOpen
+					: this.getTitleId(),
+				false,
+				false
+			);
+		}, 0);
 	}
 
 	componentWillUnmount() {
-		SUI.closeModal();
+		clearTimeout(this._openTimer);
+		if (this._suiOpen) {
+			this._suiOpen = false;
+			try {
+				SUI.closeModal();
+			} catch (e) {
+				// No open dialog — nothing to close.
+			}
+		}
 	}
 
 	handleKeyDown(event) {

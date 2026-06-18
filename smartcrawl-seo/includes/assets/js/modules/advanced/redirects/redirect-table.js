@@ -131,34 +131,6 @@ class RedirectTable extends React.Component {
 						'wds'
 					)}
 				</p>
-
-				{!!isNewFeature && (
-					<Notice
-						type="info"
-						message={
-							<>
-								{createInterpolateElement(
-									__(
-										'<strong>New</strong>: You can now add Geolocation-based rules to redirects. This will ensure users are redirected to the most relevant content based on their locations. <a>Add a new redirect</a> to set location rules.',
-										'wds'
-									),
-									{
-										strong: <strong />,
-										a: (
-											<a
-												href="#"
-												onClick={() =>
-													this.startSaving()
-												}
-											/>
-										),
-									}
-								)}
-							</>
-						}
-					/>
-				)}
-
 				<div className="sui-box-builder">
 					<div className="sui-box-builder-header">
 						<div className="sui-box-builder-actions">

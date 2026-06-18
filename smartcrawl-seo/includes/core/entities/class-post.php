@@ -10,6 +10,7 @@ namespace SmartCrawl\Entities;
 use SmartCrawl\Html;
 use SmartCrawl\Models\User;
 use SmartCrawl\Schema\Fragments\Singular;
+use SmartCrawl\Settings;
 
 /**
  * Post Entity class.
@@ -546,10 +547,407 @@ class Post extends Entity {
 		$canonical = \smartcrawl_get_value( 'canonical', $wp_post->ID );
 
 		if ( empty( $canonical ) ) {
+			$canonical = $this->get_automatic_wpml_duplicate_canonical_url();
+		}
+
+		if ( empty( $canonical ) ) {
 			$canonical = $this->get_default_canonical();
 		}
 
 		return $canonical;
+	}
+
+	/**
+	 * Loads automatic canonical URL for WPML non-translatable post duplicates.
+	 *
+	 * @return string
+	 */
+	private function get_automatic_wpml_duplicate_canonical_url() {
+		if ( ! Settings::get_setting( 'general-auto-canonical-wpml' ) ) {
+			return '';
+		}
+
+		if ( ! class_exists( '\SitePress' ) ) {
+			return '';
+		}
+
+		$wp_post = $this->get_wp_post();
+		if ( ! $wp_post ) {
+			return '';
+		}
+
+		$default_language_code = apply_filters( 'wpml_default_language', null );
+		if ( empty( $default_language_code ) ) {
+			return '';
+		}
+
+		static $cache = array();
+		$cache_key = $wp_post->ID . '_' . $default_language_code;
+		if ( isset( $cache[ $cache_key ] ) ) {
+			return $cache[ $cache_key ];
+		}
+
+		if ( ! $this->is_wpml_secondary_language_post( $wp_post->ID, $default_language_code ) ) {
+			return $cache[ $cache_key ] = '';
+		}
+
+		if ( ! $this->is_wpml_non_translatable_post_type( $wp_post->post_type ) ) {
+			return $cache[ $cache_key ] = '';
+		}
+
+		$duplicate_of_post_id = (int) get_post_meta( $wp_post->ID, '_icl_lang_duplicate_of', true );
+		$duplicate_of_post_id = $duplicate_of_post_id
+			?: (int) apply_filters( 'wpml_original_element_id', null, $wp_post->ID, 'post_' . $wp_post->post_type )
+				?: (int) apply_filters(
+					'wpml_object_id',
+					$wp_post->ID,
+					$wp_post->post_type,
+					true,
+					$default_language_code
+				);
+
+		$resolved_default_post_id = $this->get_wpml_default_language_post_id(
+			$wp_post->ID,
+			$wp_post->post_type,
+			$default_language_code
+		);
+
+		if ( ! $duplicate_of_post_id && ! $resolved_default_post_id ) {
+			return $cache[ $cache_key ] = '';
+		}
+
+		$target_post_id = $resolved_default_post_id
+			?: ( ( ! $duplicate_of_post_id || $duplicate_of_post_id === $wp_post->ID )
+				? $wp_post->ID
+				: $duplicate_of_post_id );
+
+		if ( ! $target_post_id ) {
+			return $cache[ $cache_key ] = '';
+		}
+
+		if ( 'publish' !== get_post_status( $target_post_id ) ) {
+			return $cache[ $cache_key ] = '';
+		}
+
+		$cache[ $cache_key ] = $this->get_wpml_default_language_permalink( $target_post_id, $default_language_code );
+
+		return $cache[ $cache_key ];
+	}
+
+	/**
+	 * Converts a post permalink to the default WPML language URL.
+	 *
+	 * @param int    $post_id                Post ID.
+	 * @param string $default_language_code  WPML default language code.
+	 *
+	 * @return string
+	 */
+	private function get_wpml_default_language_permalink( $post_id, $default_language_code ) {
+		$current_language_code = apply_filters( 'wpml_current_language', null );
+		$default_hidden        = $this->is_wpml_default_language_hidden_in_url();
+		$permalink             = $this->get_permalink_in_language( $post_id, $default_language_code );
+		if ( $permalink ) {
+			$permalink = $this->convert_wpml_permalink_to_default_language(
+				$permalink,
+				$default_language_code,
+				$current_language_code
+			);
+		}
+
+		if ( ! $permalink ) {
+			if ( $default_hidden && ! empty( $current_language_code ) && $current_language_code !== $default_language_code ) {
+				$stripped = $this->get_default_language_url_by_stripping_prefix( $default_language_code );
+				if ( ! empty( $stripped ) ) {
+					return $stripped;
+				}
+			}
+
+			return '';
+		}
+
+		if ( $default_hidden && ! empty( $current_language_code ) && $current_language_code !== $default_language_code && str_contains( $permalink, '/' . $current_language_code . '/' ) ) {
+			$stripped = $this->get_default_language_url_by_stripping_prefix( $default_language_code );
+			if ( ! empty( $stripped ) ) {
+				return $stripped;
+			}
+		}
+
+		return $permalink;
+	}
+
+	/**
+	 * Gets a post permalink in a specific WPML language.
+	 *
+	 * @param int    $post_id   Post ID.
+	 * @param string $lang_code Language code.
+	 *
+	 * @return string
+	 */
+	private function get_permalink_in_language( $post_id, $lang_code ) {
+		$current_language_code = apply_filters( 'wpml_current_language', null );
+		if ( empty( $lang_code ) || $current_language_code === $lang_code ) {
+			$permalink = get_permalink( $post_id );
+
+			return $permalink ?: '';
+		}
+
+		do_action( 'wpml_switch_language', $lang_code );
+		$permalink = get_permalink( $post_id );
+		do_action( 'wpml_switch_language', $current_language_code );
+
+		return $permalink ?: '';
+	}
+
+	/**
+	 * Converts a permalink to the default WPML language URL.
+	 *
+	 * @param string $permalink Current permalink.
+	 * @param string $default_language_code Default language code.
+	 * @param string $current_language_code Current language code.
+	 *
+	 * @return string
+	 */
+	private function convert_wpml_permalink_to_default_language( $permalink, $default_language_code, $current_language_code ) {
+		$permalink = apply_filters( 'wpml_permalink', $permalink, $default_language_code, true );
+		if ( class_exists( '\SitePress' ) && ! empty( $GLOBALS['sitepress'] ) && method_exists( $GLOBALS['sitepress'], 'convert_url' ) ) {
+			$converted = $GLOBALS['sitepress']->convert_url( $permalink, $default_language_code );
+			if ( ! empty( $converted ) ) {
+				$permalink = $converted;
+			}
+		}
+
+		$default_home = $this->get_wpml_language_home_url( $default_language_code );
+		$current_home = $this->get_wpml_language_home_url( $current_language_code );
+		if ( $default_home && $current_home && str_starts_with( $permalink, $current_home ) ) {
+			$permalink = $default_home . ltrim( substr( $permalink, strlen( $current_home ) ), '/' );
+		}
+
+		return $permalink;
+	}
+
+	/**
+	 * Gets the home URL for a WPML language.
+	 *
+	 * @param string $language_code Language code.
+	 *
+	 * @return string
+	 */
+	private function get_wpml_language_home_url( $language_code ) {
+		if ( empty( $language_code ) ) {
+			return '';
+		}
+		$languages = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0 ) );
+		$url       = is_array( $languages )
+			? \smartcrawl_get_array_value( \smartcrawl_get_array_value( $languages, $language_code, array() ), 'url', '' )
+			: '';
+
+		return $url ?: (string) apply_filters( 'wpml_permalink', home_url( '/' ), $language_code, true );
+	}
+
+	/**
+	 * Checks if WPML is configured to hide the default language in URLs.
+	 *
+	 * Only applies when using directory-based URLs (not separate domains).
+	 *
+	 * @return bool
+	 */
+	private function is_wpml_default_language_hidden_in_url() {
+		$forced = apply_filters( 'smartcrawl_wpml_force_strip_language_prefix', null );
+		if ( true === $forced ) {
+			return true;
+		}
+		if ( ! class_exists( '\SitePress' ) || empty( $GLOBALS['sitepress'] ) ) {
+			return false;
+		}
+		$strategy = (int) $GLOBALS['sitepress']->get_setting( 'language_negotiation_type', 1 );
+		if ( 2 === $strategy ) {
+			return false;
+		}
+		$urls = $GLOBALS['sitepress']->get_setting( 'urls', array() );
+
+		return empty( $urls['directory_for_default_language'] );
+	}
+
+	/**
+	 * Builds default-language URL by stripping the current-language prefix from the path.
+	 *
+	 * @param string $default_language_code WPML default language code.
+	 *
+	 * @return string
+	 */
+	private function get_default_language_url_by_stripping_prefix( $default_language_code ) {
+		$wp_post = $this->get_wp_post();
+		if ( ! $wp_post ) {
+			return '';
+		}
+
+		$current_language_code = apply_filters( 'wpml_current_language', null );
+		if ( empty( $current_language_code ) || $current_language_code === $default_language_code ) {
+			return '';
+		}
+
+		$path = $this->get_wpml_current_request_path( $wp_post );
+		if ( empty( $path ) || '/' === $path ) {
+			return '';
+		}
+
+		$path_without_lang = $this->strip_wpml_language_prefix_from_path( $path, $current_language_code );
+		if ( null === $path_without_lang ) {
+			return '';
+		}
+
+		$origin = $this->get_wpml_site_origin_url( $wp_post );
+		if ( ! $origin ) {
+			return '';
+		}
+
+		return $origin . '/' . ltrim( $path_without_lang, '/' );
+	}
+
+	/**
+	 * Gets the current request path from permalink or REQUEST_URI.
+	 *
+	 * @param \WP_Post $wp_post Current post.
+	 *
+	 * @return string
+	 */
+	private function get_wpml_current_request_path( $wp_post ) {
+		$permalink = $wp_post ? get_permalink( $wp_post->ID ) : '';
+		$path      = $permalink ? wp_parse_url( $permalink, PHP_URL_PATH ) : '';
+		if ( empty( $path ) || '/' === $path ) {
+			$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+			$path        = $request_uri ? wp_parse_url( 'http://example.com' . $request_uri, PHP_URL_PATH ) : '';
+		}
+
+		return is_string( $path ) ? $path : '';
+	}
+
+	/**
+	 * Strips the language prefix from a path.
+	 *
+	 * @param string $path URL path.
+	 * @param string $lang_code Language code.
+	 *
+	 * @return string|null Path without prefix, or null if prefix not found.
+	 */
+	private function strip_wpml_language_prefix_from_path( $path, $lang_code ) {
+		$prefix = '/' . $lang_code . '/';
+		if ( str_starts_with( $path, $prefix ) ) {
+			return substr( $path, strlen( $prefix ) );
+		}
+		$prefix_alt = '/' . $lang_code;
+		if ( str_starts_with( $path, $prefix_alt ) ) {
+			return ltrim( substr( $path, strlen( $prefix_alt ) ), '/' );
+		}
+
+		return null;
+	}
+
+	/**
+	 * Gets the site origin URL (scheme + host + port).
+	 *
+	 * @param \WP_Post $wp_post Current post.
+	 *
+	 * @return string
+	 */
+	private function get_wpml_site_origin_url( $wp_post ) {
+		$url    = ( $wp_post ? get_permalink( $wp_post->ID ) : '' ) ?: get_option( 'home' );
+		$parsed = wp_parse_url( $url );
+		if ( empty( $parsed['host'] ?? '' ) ) {
+			$parsed = wp_parse_url( get_option( 'home' ) );
+		}
+		$host = $parsed['host'] ?? '';
+		if ( empty( $host ) ) {
+			return '';
+		}
+		$scheme = isset( $parsed['scheme'] ) ? $parsed['scheme'] . '://' : 'https://';
+		$port   = ! empty( $parsed['port'] ) ? ':' . $parsed['port'] : '';
+
+		return $scheme . $host . $port;
+	}
+
+	/**
+	 * Resolves the post ID in WPML default language from the translations table.
+	 *
+	 * @param int    $post_id               Current post ID.
+	 * @param string $post_type             Current post type.
+	 * @param string $default_language_code Default WPML language code.
+	 *
+	 * @return int
+	 */
+	private function get_wpml_default_language_post_id( $post_id, $post_type, $default_language_code ) {
+		if ( ! $post_id || empty( $post_type ) || empty( $default_language_code ) ) {
+			return 0;
+		}
+
+		global $wpdb;
+
+		$element_type = 'post_' . $post_type;
+		$trid         = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT trid FROM {$wpdb->prefix}icl_translations WHERE element_id = %d AND element_type = %s LIMIT 1",
+				$post_id,
+				$element_type
+			)
+		);
+		if ( empty( $trid ) ) {
+			return 0;
+		}
+
+		$default_post_id = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT element_id FROM {$wpdb->prefix}icl_translations WHERE trid = %d AND element_type = %s AND language_code = %s ORDER BY source_language_code IS NULL DESC LIMIT 1",
+				$trid,
+				$element_type,
+				$default_language_code
+			)
+		);
+
+		return (int) $default_post_id;
+	}
+
+	/**
+	 * Checks if a post type is configured as non-translatable in WPML.
+	 *
+	 * @param string $post_type Post type.
+	 *
+	 * @return bool
+	 */
+	private function is_wpml_non_translatable_post_type( $post_type ) {
+		$is_translated = apply_filters( 'wpml_is_translated_post_type', null, $post_type );
+		if ( is_null( $is_translated ) ) {
+			return false;
+		}
+
+		return ! (bool) $is_translated;
+	}
+
+	/**
+	 * Checks if a post belongs to a secondary WPML language.
+	 *
+	 * @param int $post_id Post ID.
+	 * @param string $default_language_code WPML default language code.
+	 *
+	 * @return bool
+	 */
+	private function is_wpml_secondary_language_post( $post_id, $default_language_code ) {
+		if ( empty( $default_language_code ) ) {
+			return false;
+		}
+
+		$current_language_code = apply_filters( 'wpml_current_language', null );
+		if ( ! empty( $current_language_code ) ) {
+			return $current_language_code !== $default_language_code;
+		}
+
+		$language_details = apply_filters( 'wpml_post_language_details', null, $post_id );
+		$language_code    = \smartcrawl_get_array_value( $language_details, 'language_code' );
+
+		if ( empty( $language_code ) ) {
+			return false;
+		}
+
+		return $language_code !== $default_language_code;
 	}
 
 	/**
@@ -1102,7 +1500,7 @@ class Post extends Entity {
 	 * @return array
 	 */
 	public function get_focus_keywords() {
-		if ( is_null( $this->focus_keywords ) ) {
+		if ( is_null( $this->focus_keywords ) || ! is_array( $this->focus_keywords ) ) {
 			$this->focus_keywords = $this->load_focus_keywords();
 		}
 
@@ -1136,10 +1534,13 @@ class Post extends Entity {
 		// Makes it a string.
 		$keywords = implode( ',', $keywords );
 
+		// Slash keywords. WP expects all data to be slashed and will unslash it (fixes '\' character issues).
+		$keywords = wp_slash( $keywords );
+
 		// Saves to post meta.
 		\smartcrawl_set_value( 'focus-keywords', $keywords, $this->get_post_id() );
 
-		$this->focus_keywords = $keywords;
+		$this->focus_keywords = null;
 	}
 
 	/**
@@ -1208,7 +1609,7 @@ class Post extends Entity {
 	public function set_focus_keywords_from_string( $keywords = '' ) {
 		// No need to continue if empty.
 		if ( empty( $keywords ) ) {
-			$this->set_focus_keywords( array() );
+			$this->set_focus_keywords();
 			return;
 		}
 

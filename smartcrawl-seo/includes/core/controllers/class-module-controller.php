@@ -124,8 +124,8 @@ abstract class Module_Controller extends Controller {
 		}
 
 		if ( ! \smartcrawl_get_array_value( $this->settings_opts, 'hide_disables', true ) ) {
-			add_action( 'admin_menu', array( $this, 'admin_menu' ), 98 );
-			add_filter( 'smartcrawl_admin_bar_menu', array( $this, 'admin_bar_menu' ), 98 );
+			add_action( 'admin_menu', array( $this, 'admin_menu' ), 99 );
+			add_filter( 'smartcrawl_admin_bar_menu', array( $this, 'admin_bar_menu' ), 99 );
 		}
 
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
@@ -362,12 +362,6 @@ abstract class Module_Controller extends Controller {
 
 		if ( ! in_array( $sui_class, $classes, true ) ) {
 			$classes[] = $sui_class;
-		}
-
-		$service = Service::get( Service::SERVICE_SITE );
-
-		if ( $service->is_member() ) {
-			$classes[] = 'wds-is-member';
 		}
 
 		return implode( ' ', $classes );

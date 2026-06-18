@@ -190,7 +190,7 @@ export default class Metabox extends React.Component {
 				label: (
 					<React.Fragment>
 						{__('SEO', 'smartcrawl-seo')}
-						{this.renderIssueCount('seo-textdomain')}
+						{this.renderIssueCount('seo')}
 					</React.Fragment>
 				),
 				component: (
@@ -206,7 +206,7 @@ export default class Metabox extends React.Component {
 						analysis={seo}
 						loading={loading}
 						onRefresh={() => this.handleAutosave()}
-					></MetaboxSeo>
+					/>
 				),
 			},
 		};
@@ -226,7 +226,7 @@ export default class Metabox extends React.Component {
 						analysis={readability}
 						loading={loading}
 						onRefresh={() => this.handleAutosave()}
-					></MetaboxReadability>
+					/>
 				),
 			};
 		}
@@ -239,13 +239,13 @@ export default class Metabox extends React.Component {
 		if (isSocialActive) {
 			tabs.social = {
 				label: __('Social', 'smartcrawl-seo'),
-				component: <MetaboxSocial></MetaboxSocial>,
+				component: <MetaboxSocial />,
 			};
 		}
 
 		tabs.advanced = {
 			label: __('Advanced', 'smartcrawl-seo'),
-			component: <MetaboxAdvanced></MetaboxAdvanced>,
+			component: <MetaboxAdvanced />,
 		};
 
 		return tabs;
@@ -263,7 +263,7 @@ export default class Metabox extends React.Component {
 					tabs={this.generateTabs()}
 					value={this.state.selectedTab}
 					onChange={(tab) => this.handleTabChange(tab)}
-				></Tabs>
+				/>
 			</React.Fragment>
 		);
 	}

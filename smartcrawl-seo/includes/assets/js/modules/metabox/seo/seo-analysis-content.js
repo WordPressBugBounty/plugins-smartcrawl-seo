@@ -7,6 +7,7 @@ import FormattingUtil from '../../../utils/formatting-util';
 export default class SeoAnalysisContent extends React.Component {
 	static defaultProps = {
 		analysis: {},
+		useReactAccordion: false,
 	};
 
 	constructor(props) {
@@ -29,7 +30,7 @@ export default class SeoAnalysisContent extends React.Component {
 	}
 
 	render() {
-		const { analysis } = this.props;
+		const { analysis, useReactAccordion } = this.props;
 
 		const tabs = {};
 
@@ -40,13 +41,14 @@ export default class SeoAnalysisContent extends React.Component {
 						isPrimary={true}
 						hasError={analysis.primary_error_count > 0}
 						text={analysis.primary_keyword}
-					></SeoAnalysisTabLabel>
+					/>
 				),
 				component: (
 					<SeoAnalysisTabContent
 						errCnt={analysis.primary_error_count}
 						checks={analysis.primary_checks}
-					></SeoAnalysisTabContent>
+						useReactAccordion={useReactAccordion}
+					/>
 				),
 			};
 		}
@@ -66,17 +68,22 @@ export default class SeoAnalysisContent extends React.Component {
 									Object.keys(check.errors || {}).length > 0
 								}
 								text={keyword}
-							></SeoAnalysisTabLabel>
+							/>
 						),
 						component: (
 							<SeoAnalysisTabContent
 								errCnt={Object.keys(check.errors || {}).length}
 								checks={check.checks || {}}
-							></SeoAnalysisTabContent>
+								useReactAccordion={useReactAccordion}
+							/>
 						),
 					};
 				}
 			});
+		}
+
+		if (!Object.keys(tabs).length) {
+			return null;
 		}
 
 		return (
@@ -85,7 +92,7 @@ export default class SeoAnalysisContent extends React.Component {
 				tabs={tabs}
 				value={this.state.selectedTab}
 				onChange={(tab) => this.handleTabChange(tab)}
-			></Tabs>
+			/>
 		);
 	}
 }

@@ -255,55 +255,6 @@ class Lighthouse extends Service {
 	}
 
 	/**
-	 * Check requirements and send emails if condition is meet.
-	 */
-	public function maybe_send_emails() {
-		if ( ! $this->is_member() || ! Options::is_cron_enabled() ) {
-			return;
-		}
-
-		$desktop_report = $this->get_last_report();
-		if ( ! $desktop_report->has_data() || $desktop_report->has_errors() ) {
-			Logger::debug( 'Not sending Lighthouse emails because a valid report is not available.' );
-
-			return;
-		}
-
-		if ( ! $desktop_report->is_fresh() ) {
-			Logger::debug( 'Not sending Lighthouse emails because the latest report is not fresh.' );
-
-			return;
-		}
-
-		$reporting_condition = Options::reporting_condition();
-		$mobile_report       = $this->get_last_report( 'mobile' );
-		if (
-			Options::reporting_condition_enabled()
-			&& $reporting_condition
-		) {
-			$reporting_device            = Options::reporting_device();
-			$score_higher_than_condition = true;
-
-			if ( 'both' === $reporting_device || 'desktop' === $reporting_device ) {
-				$score_higher_than_condition = $desktop_report->get_score() >= $reporting_condition;
-			}
-
-			if ( 'both' === $reporting_device || 'mobile' === $reporting_device ) {
-				$score_higher_than_condition = $score_higher_than_condition && $mobile_report->get_score() >= $reporting_condition;
-			}
-
-			if ( $score_higher_than_condition ) {
-				Logger::debug( 'Not sending Lighthouse emails because the required score condition is not met.' );
-
-				return;
-			}
-		}
-
-		Logger::debug( 'Sending Lighthouse emails.' );
-		$this->send_emails();
-	}
-
-	/**
 	 * Handler to send email.
 	 */
 	private function send_emails() {

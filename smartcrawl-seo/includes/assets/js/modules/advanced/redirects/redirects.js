@@ -12,8 +12,7 @@ class Redirects extends React.Component {
 			this.props.hasOwnProperty('redirect')
 				? {
 						...this.props.redirect,
-						maxmind_license: this.props.maxmind_license,
-				  }
+						}
 				: Object.assign({}, this.props, {
 						id: '',
 						source: '',

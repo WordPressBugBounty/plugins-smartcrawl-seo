@@ -648,12 +648,7 @@ abstract class Entity {
 			return array();
 		}
 
-		return array_filter(
-			$images,
-			function ( $image ) {
-				return wp_get_attachment_image_src( $image );
-			}
-		);
+		return $this->image_ids_to_urls( $images );
 	}
 
 	/**
@@ -703,12 +698,7 @@ abstract class Entity {
 			return array();
 		}
 
-		return array_filter(
-			$images,
-			function ( $image ) {
-				return wp_get_attachment_image_src( $image );
-			}
-		);
+		return $this->image_ids_to_urls( $images );
 	}
 
 	/**
@@ -1190,7 +1180,12 @@ abstract class Entity {
 			$images = array();
 		}
 
-		if ( is_numeric( $image_id ) ) {
+		if ( is_array( $image_id ) ) {
+			$attachment_url = \smartcrawl_get_array_value( $image_id, 0 );
+			if ( $attachment_url ) {
+				$images[ $attachment_url ] = $image_id;
+			}
+		} elseif ( is_numeric( $image_id ) ) {
 			$attachment     = wp_get_attachment_image_src( $image_id, 'full' );
 			$attachment_url = \smartcrawl_get_array_value( $attachment, 0 );
 			if ( $attachment_url ) {

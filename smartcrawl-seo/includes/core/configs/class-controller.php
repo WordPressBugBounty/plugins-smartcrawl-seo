@@ -41,35 +41,11 @@ class Controller extends Controllers\Controller {
 	 * Initializes the actions for AJAX requests.
 	 */
 	protected function init() {
-		add_action( 'wp_ajax_smartcrawl_sync_configs', array( $this, 'sync_configs' ) );
 		add_action( 'wp_ajax_smartcrawl_create_config', array( $this, 'create_config' ) );
 		add_action( 'wp_ajax_smartcrawl_update_config', array( $this, 'update_config' ) );
 		add_action( 'wp_ajax_smartcrawl_delete_config', array( $this, 'delete_config' ) );
 		add_action( 'wp_ajax_smartcrawl_apply_config', array( $this, 'apply_config' ) );
 		add_action( 'wp_ajax_smartcrawl_upload_config', array( $this, 'upload_config' ) );
-	}
-
-	/**
-	 * Synchronizes hub configs.
-	 */
-	public function sync_configs() {
-		$this->validate_request_data();
-
-		$collection = Collection::get();
-
-		if ( $this->service->is_member() ) {
-			$synced = $collection->sync_with_hub();
-
-			if ( ! $synced ) {
-				wp_send_json_error( array( 'message' => __( 'Failed to sync with Hub.', 'smartcrawl-seo' ) ) );
-			}
-		}
-
-		wp_send_json_success(
-			array(
-				'configs' => $collection->get_deflated_configs(),
-			)
-		);
 	}
 
 	/**
@@ -91,16 +67,6 @@ class Controller extends Controllers\Controller {
 		$description = sanitize_text_field( smartcrawl_get_array_value( $data, 'description' ) );
 
 		$config = Model::create_from_plugin_snapshot( $name, $description );
-
-		if ( $this->service->is_member() ) {
-			$response = $this->service->publish_config( $config );
-
-			if ( empty( $response['id'] ) ) {
-				wp_send_json_error( array( 'message' => __( 'Failed to retrieve Response ID.', 'smartcrawl-seo' ) ) );
-			} else {
-				$config->set_hub_id( $response['id'] );
-			}
-		}
 
 		$collection = Collection::get();
 		$collection->add( $config );
@@ -148,21 +114,6 @@ class Controller extends Controllers\Controller {
 		$config->set_name( sanitize_text_field( $name ) );
 		$config->set_description( sanitize_text_field( $description ) );
 
-		if ( $this->service->is_member() ) {
-			if ( $config->get_hub_id() ) {
-				$response = $this->service->update_config( $config );
-			} else {
-				$response = $this->service->publish_config( $config );
-				if ( ! empty( $response['id'] ) ) {
-					$config->set_hub_id( $response['id'] );
-				}
-			}
-
-			if ( ! $response ) {
-				wp_send_json_error( array( 'message' => __( 'Response is not valid.', 'smartcrawl-seo' ) ) );
-			}
-		}
-
 		$collection->save();
 
 		wp_send_json_success(
@@ -188,14 +139,6 @@ class Controller extends Controllers\Controller {
 
 		if ( ! $config ) {
 			wp_send_json_error( array( 'message' => __( 'Failed to retrieve config.', 'smartcrawl-seo' ) ) );
-		}
-
-		if ( $this->service->is_member() ) {
-			$response = $this->service->delete_config( $config );
-
-			if ( ! $response ) {
-				wp_send_json_error( array( 'message' => __( 'Response is not valid.', 'smartcrawl-seo' ) ) );
-			}
 		}
 
 		$collection->remove( $config );
@@ -262,16 +205,6 @@ class Controller extends Controllers\Controller {
 		$config->refresh_id();
 		$config->set_timestamp( time() );
 		$collection = Collection::get();
-
-		if ( $this->service->is_member() ) {
-			$response = $this->service->publish_config( $config );
-
-			if ( empty( $response['id'] ) ) {
-				wp_send_json_error( array( 'message' => __( 'Failed to retrieve Response ID.', 'smartcrawl-seo' ) ) );
-			} else {
-				$config->set_hub_id( $response['id'] );
-			}
-		}
 
 		$collection->add( $config );
 		$collection->save();

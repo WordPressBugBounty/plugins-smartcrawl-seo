@@ -12,6 +12,7 @@ export default class FormField extends React.Component {
 		formControl: false,
 		prefix: '',
 		suffix: '',
+		controlGroupClassName: '',
 	};
 
 	render() {
@@ -55,21 +56,32 @@ export default class FormField extends React.Component {
 	}
 
 	renderFormControl() {
-		const { prefix, suffix, loading, disabled } = this.props;
+		const {
+			prefix,
+			suffix,
+			loading,
+			disabled,
+			controlGroupClassName,
+			...propsForControl
+		} = this.props;
 
 		const FormControl = this.props.formControl;
 
 		if (suffix || prefix) {
 			return (
 				<div
-					className={classnames('sui-form-control-group', {
-						'sui-disabled': loading || disabled,
-					})}
+					className={classnames(
+						'sui-form-control-group',
+						controlGroupClassName,
+						{
+							'sui-disabled': loading || disabled,
+						}
+					)}
 				>
 					{!!prefix && (
 						<div className="sui-field-prefix">{prefix}</div>
 					)}
-					<FormControl {...this.props} />
+					<FormControl {...propsForControl} />
 					{!!suffix && (
 						<div className="sui-field-suffix">{suffix}</div>
 					)}
@@ -77,6 +89,6 @@ export default class FormField extends React.Component {
 			);
 		}
 
-		return <FormControl {...this.props} />;
+		return <FormControl {...propsForControl} />;
 	}
 }

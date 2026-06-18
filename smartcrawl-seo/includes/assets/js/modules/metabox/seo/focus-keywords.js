@@ -1,5 +1,5 @@
 import React from 'react';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import Button from '../../../components/button';
 import TextInput from '../../../components/input-fields/text-input';
 import { createInterpolateElement } from '@wordpress/element';
@@ -41,8 +41,7 @@ export default class FocusKeywords extends React.Component {
 		}
 	}
 
-	// eslint-disable-next-line no-unused-vars
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(prevProps) {
 		const { loading } = this.props;
 
 		if (prevProps.loading !== loading) {
@@ -121,6 +120,8 @@ export default class FocusKeywords extends React.Component {
 				<TextInputField
 					id={focusInputId}
 					name="wds_focus_input"
+					className="wds-keyphrase-input"
+					controlGroupClassName="wds-keyphrase-row"
 					placeholder={__(
 						'E.g. broken iphone screen',
 						'smartcrawl-seo'
@@ -131,9 +132,10 @@ export default class FocusKeywords extends React.Component {
 					suffix={
 						<Button
 							id="wds_add_keyword"
+							className="wds-keyphrase-button sui-button"
 							disabled={keywords.length > 2}
 							loading={loading}
-							text={__('Add Keyphrase(s)', 'smartcrawl-seo')}
+							text={__('Add', 'smartcrawl-seo')}
 							onClick={() => this.addKeyword()}
 						></Button>
 					}
@@ -161,12 +163,18 @@ export default class FocusKeywords extends React.Component {
 									key={keyword}
 								>
 									{keyword}
-									<span
+									<button
+										type="button"
 										className="sui-active-filter-remove wds-remove-keyword"
+										aria-label={sprintf(
+											/* translators: %s: focus keyphrase */
+											__('Remove %s', 'smartcrawl-seo'),
+											keyword
+										)}
 										onClick={() =>
 											this.removeKeyword(keyword)
 										}
-									></span>
+									/>
 								</span>
 							))}
 						</div>

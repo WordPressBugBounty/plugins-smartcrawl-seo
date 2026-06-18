@@ -6,11 +6,19 @@ export default class MetaboxReadability extends React.Component {
 	static defaultProps = {
 		analysis: {},
 		loading: false,
+		isRefreshing: false,
 		onRefresh: () => false,
+		useReactAccordion: false,
 	};
 
 	render() {
-		const { analysis, loading, onRefresh } = this.props;
+		const {
+			analysis,
+			loading,
+			isRefreshing,
+			onRefresh,
+			useReactAccordion,
+		} = this.props;
 
 		return (
 			<div className="wds_readability">
@@ -27,8 +35,10 @@ export default class MetaboxReadability extends React.Component {
 					<ReadabilityAnalysisContainer
 						analysis={analysis}
 						loading={loading}
+						isRefreshing={isRefreshing}
 						onRefresh={onRefresh}
-					></ReadabilityAnalysisContainer>
+						useReactAccordion={useReactAccordion}
+					/>
 				</div>
 			</div>
 		);

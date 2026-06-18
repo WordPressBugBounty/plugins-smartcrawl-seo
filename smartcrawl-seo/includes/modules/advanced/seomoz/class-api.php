@@ -158,7 +158,25 @@ class API {
 		$request_url = "http://lsapi.seomoz.com/linkscape/{$api_call}/{$argument}?Cols={$cols}&AccessID={$this->access_id}&Expires={$timestamp}&Signature=" . $this->generate_signature( $timestamp );
 		$response    = wp_remote_get( $request_url );
 
-		return ! is_wp_error( $response ) ? json_decode( wp_remote_retrieve_body( $response ) ) : false;
+		if ( is_wp_error( $response ) ) {
+			$error                = new \stdClass();
+			$error->status        = 500;
+			$error->error_message = $response->get_error_message();
+
+			return $error;
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $response ) );
+
+		if ( null === $body ) {
+			$error                = new \stdClass();
+			$error->status        = (int) wp_remote_retrieve_response_code( $response );
+			$error->error_message = wp_remote_retrieve_body( $response );
+
+			return $error;
+		}
+
+		return $body;
 	}
 
 	/**

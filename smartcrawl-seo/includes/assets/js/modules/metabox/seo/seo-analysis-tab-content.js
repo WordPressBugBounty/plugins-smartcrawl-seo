@@ -25,6 +25,7 @@ import SeoAnalysisCheckParaKeywords from './checks/endpoint/seo-analysis-check-p
 import SeoAnalysisCheckSubheadingsKeywords from './checks/endpoint/seo-analysis-check-subheadings-keywords';
 import SeoAnalysisCheckBoldedKeyword from './checks/endpoint/seo-analysis-check-bolded-keyword';
 import SeoAnalysisCheckTitleSecondaryKeywords from './checks/post/seo-analysis-check-title-secondary-keywords';
+import SeoAnalysisAccordionContext from './seo-analysis-accordion-context';
 
 const SeoAnalysisCheckComponents = {
 	// Checks that deal with raw post data.
@@ -55,6 +56,7 @@ export default class SeoAnalysisTabContent extends React.Component {
 	static defaultProps = {
 		errCnt: 0,
 		checks: {},
+		useReactAccordion: false,
 	};
 
 	constructor(props) {
@@ -114,7 +116,7 @@ export default class SeoAnalysisTabContent extends React.Component {
 	}
 
 	render() {
-		const { errCnt } = this.props;
+		const { errCnt, useReactAccordion } = this.props;
 		const { checks } = this.state;
 
 		return (
@@ -139,25 +141,39 @@ export default class SeoAnalysisTabContent extends React.Component {
 										'wds-texdomain'
 								  )
 						}
-					></Notice>
+					/>
 
-					<div className="wds-accordion sui-accordion">
-						{Object.keys(checks).map((key, index) => {
-							const ComponentName =
-								SeoAnalysisCheckComponents[key];
+					<SeoAnalysisAccordionContext.Provider
+						value={{ useReactAccordion: !!useReactAccordion }}
+					>
+						<div
+							className={
+								useReactAccordion
+									? 'wds-seo-assessments-stack'
+									: 'wds-accordion sui-accordion'
+							}
+						>
+							{Object.keys(checks).map((key, index) => {
+								const ComponentName =
+									SeoAnalysisCheckComponents[key];
 
-							return ComponentName ? (
-								<ComponentName
-									key={index}
-									data={checks[key]}
-									onIgnore={() => this.handleIgnore(key)}
-									onUnignore={() => this.handleUnignore(key)}
-								/>
-							) : (
-								''
-							);
-						})}
-					</div>
+								return ComponentName ? (
+									<ComponentName
+										key={index}
+										data={checks[key]}
+										onIgnore={() =>
+											this.handleIgnore(key)
+										}
+										onUnignore={() =>
+											this.handleUnignore(key)
+										}
+									/>
+								) : (
+									''
+								);
+							})}
+						</div>
+					</SeoAnalysisAccordionContext.Provider>
 				</div>
 			</div>
 		);

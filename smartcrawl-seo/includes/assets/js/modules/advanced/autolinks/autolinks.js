@@ -1,18 +1,15 @@
 import React from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import { createInterpolateElement } from '@wordpress/element';
+import { connect } from 'react-redux';
 import UrlUtil from '../../../utils/url-util';
 import Notice from '../../../components/notices/notice';
-import AutolinkTypes from './autolink-types';
-import CustomKeywordPairs from './custom-keyword-pairs';
-import ExcludedPosts from './excluded-posts';
-import Settings from './settings';
 import ConfigValues from '../../../es6/config-values';
 import Tabs from '../../../components/tabs';
 import SettingsRow from '../../../components/settings-row';
 import SubmoduleBox from '../../../components/layout/submodule-box';
 
-export default class Autolinks extends React.Component {
+class Autolinks extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -79,53 +76,10 @@ export default class Autolinks extends React.Component {
 						{ strong: <strong /> }
 					)}
 				</p>
-				<Notice
-					type=""
-					message={createInterpolateElement(
-						__(
-							'Certain page builders and themes can interfere with the auto linking feature causing issues on your site. Enable the "<strong>Prevent caching on auto-linked content</strong>" option in the Settings tab section to fix the issues.',
-							'wds'
-						),
-						{
-							strong: <strong />,
-						}
-					)}
-				></Notice>
-				<SettingsRow id="wds-autolinks-tabs" direction="column">
-					<Tabs
-						tabs={{
-							post_types: {
-								label: __('Post Types', 'smartcrawl-seo'),
-								component: <AutolinkTypes />,
-							},
-							custom_links: {
-								label: __('Custom Links', 'smartcrawl-seo'),
-								component: <CustomKeywordPairs />,
-							},
-							exclusions: {
-								label: __('Exclusions', 'smartcrawl-seo'),
-								component: <ExcludedPosts />,
-							},
-							settings: {
-								label: __('Settings', 'smartcrawl-seo'),
-								component: <Settings />,
-							},
-						}}
-						value={this.state.subTab}
-						onChange={(tab) => this.handleTabChange(tab)}
-					></Tabs>
-				</SettingsRow>
-			</SubmoduleBox>
+				</SubmoduleBox>
 		);
 	}
-
 	renderTag() {
-		const isMember = ConfigValues.get('is_member', 'admin') === '1';
-
-		if (isMember) {
-			return '';
-		}
-
 		return (
 			<a
 				target="_blank"
@@ -145,3 +99,7 @@ export default class Autolinks extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = (state) => ({ ...state.autolinks });
+
+export default connect(mapStateToProps)(Autolinks);

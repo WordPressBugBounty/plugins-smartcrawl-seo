@@ -18,18 +18,18 @@ export default class SeoAnalysisTabLabel extends React.Component {
 						aria-hidden="true"
 						className="sui-warning sui-icon-info"
 						style={{ pointerEvents: 'none' }}
-					></span>
+					/>
 				)}
 				{!hasError && (
 					<span
 						aria-hidden="true"
 						className="sui-success sui-icon-check-tick"
-					></span>
+					/>
 				)}{' '}
 				{text}{' '}
 				{!!isPrimary && (
 					<span
-						className="sui-tag sui-tag-green"
+						className="sui-tag sui-tag-green wds-seo-primary-keyword-badge"
 						style={{ pointerEvents: 'none' }}
 					>
 						{__('Primary', 'smartcrawl-seo')}

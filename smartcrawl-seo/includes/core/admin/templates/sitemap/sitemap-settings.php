@@ -11,9 +11,7 @@ use SmartCrawl\Admin\Settings\Sitemap;
 use SmartCrawl\Services\Service;
 use SmartCrawl\Sitemaps\Utils;
 
-$is_member                 = ! empty( $_view['is_member'] );
 $active_tab                = empty( $active_tab ) ? '' : $active_tab;
-$crawl_report              = empty( $_view['crawl_report'] ) ? null : $_view['crawl_report'];
 $smartcrawl_buddypress     = empty( $smartcrawl_buddypress ) ? array() : $smartcrawl_buddypress;
 $sitemaps_enabled          = Settings::get_setting( 'sitemap' );
 $sitemap_crawler_available = Utils::crawler_available();
@@ -31,8 +29,7 @@ $override_native           = empty( $override_native ) ? false : $override_nativ
 			'title'                 => esc_html__( 'Sitemaps', 'smartcrawl-seo' ),
 			'documentation_chapter' => 'sitemaps',
 			'utm_campaign'          => 'smartcrawl_sitemap_docs',
-			'extra_actions'         => $sitemap_crawler_available ? 'sitemap/sitemap-extra-actions' : '',
-		)
+			)
 	);
 	?>
 
@@ -52,8 +49,6 @@ $override_native           = empty( $override_native ) ? false : $override_nativ
 
 	<?php
 	if ( $sitemaps_enabled ) {
-		$service            = Service::get( Service::SERVICE_SEO );
-		$cooldown_remaining = $service->get_cooldown_remaining();
 		?>
 
 		<form action='<?php echo esc_attr( $_view['action_url'] ); ?>' method='post' class="wds-form">
@@ -64,41 +59,6 @@ $override_native           = empty( $override_native ) ? false : $override_nativ
 				name='<?php echo esc_attr( $_view['option_name'] ); ?>[<?php echo esc_attr( $_view['slug'] ); ?>-setup]'
 				value="1"
 			>
-			<?php if ( $sitemap_crawler_available ) : ?>
-				<div id="wds-crawl-summary-container">
-					<?php
-					$this->render_view(
-						'sitemap/sitemap-crawl-stats',
-						array(
-							'crawl_report'    => $crawl_report,
-							'override_native' => $override_native,
-						)
-					);
-					?>
-				</div>
-			<?php endif; ?>
-
-			<?php if ( $cooldown_remaining && ! $service->in_progress() ) : ?>
-
-				<div class="sui-notice sui-notice-grey">
-					<div class="sui-notice-content">
-						<div class="sui-notice-message">
-							<span class="sui-notice-icon sui-md sui-icon-clock" aria-hidden="true"></span>
-							<p>
-								<?php
-								printf(
-								/* translators: %s: remaining time in hours and minutes */
-									esc_html__( 'SEO Crawler is cooling down. Please wait for %s before initiating another scan.', 'smartcrawl-seo' ),
-									esc_html( $cooldown_remaining )
-								);
-								?>
-							</p>
-						</div>
-					</div>
-				</div>
-
-			<?php endif; ?>
-
 			<div class="wds-vertical-tabs-container sui-row-with-sidenav" id="sitemap-settings-tabs">
 
 				<?php
@@ -195,7 +155,7 @@ $override_native           = empty( $override_native ) ? false : $override_nativ
 							'tab_name'           => esc_html__( 'Reporting', 'smartcrawl-seo' ),
 							'is_active'          => 'tab_url_crawler_reporting' === $active_tab,
 							'title_actions_left' => 'sitemap/sitemap-reporting-title-pro-tag',
-							'button_text'        => $is_member ? esc_html__( 'Save Settings', 'smartcrawl-seo' ) : '',
+							'button_text'        => '',
 							'tab_sections'       => array(
 								array(
 									'section_template' => 'sitemap/sitemap-section-reporting',

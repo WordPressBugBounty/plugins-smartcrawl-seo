@@ -110,6 +110,10 @@ $this->render_view(
 				'label'       => __( 'Hide redundant canonical link tags', 'smartcrawl-seo' ),
 				'description' => __( 'WordPress automatically generates a canonical tag for your website, but in many cases this isn’t needed so you can turn it off to avoid any potential SEO ‘duplicate content’ backlash from search engines.', 'smartcrawl-seo' ),
 			),
+			'general-auto-canonical-wpml' => array(
+				'label'       => __( 'Automatically add canonical URLs for non-translatable WPML posts', 'smartcrawl-seo' ),
+				'description' => __( 'When WPML creates secondary-language duplicates for non-translatable post types, SmartCrawl will automatically set the canonical URL to the original post. This helps prevent duplicate content and consolidates SEO signals.', 'smartcrawl-seo' ),
+			),
 			'metabox-lax_enforcement'              => array(
 				'label'       => __( 'Enforce meta tag character limits', 'smartcrawl-seo' ),
 				'description' => __( 'Each meta tag type has recommended maximum characters lengths to follow. Turning this off will remove the enforcement preventing you from adding too many characters.', 'smartcrawl-seo' ),

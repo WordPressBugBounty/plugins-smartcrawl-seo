@@ -321,7 +321,7 @@ class Controller extends Controllers\Submodule_Controller {
 						),
 					)
 				);
-
+				echo '</div>'; // Parent div should be closed before returning.
 				return;
 			}
 			?>

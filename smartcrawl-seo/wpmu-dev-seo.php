@@ -3,10 +3,10 @@
  * Plugin Name: SmartCrawl
  * Plugin URI: https://wpmudev.com/project/smartcrawl-wordpress-seo/
  * Description: Every SEO option that a site requires, in one easy bundle.
- * Version: 3.15.0
+ * Version: 3.16.2
  * Network: true
  * Requires at least: 6.4
- * Tested up to: 6.8
+ * Tested up to: 7.0
  * Requires PHP: 7.4
  * Text Domain: smartcrawl-seo
  * Author: WPMU DEV
@@ -70,9 +70,7 @@ if ( ! class_exists( '\SmartCrawl\SmartCrawl' ) ) {
 		 */
 		public static function activate() {
 			require_once plugin_dir_path( __FILE__ ) . 'constants.php';
-
-			// Init plugin.
-			new Init();
+			require_once SMARTCRAWL_PLUGIN_DIR . 'core/core.php';
 
 			Settings\Dashboard::get()->defaults();
 			Settings\Health::get()->defaults();
@@ -91,9 +89,7 @@ if ( ! class_exists( '\SmartCrawl\SmartCrawl' ) ) {
 		 * @return void
 		 */
 		private static function save_installation_timestamp() {
-			$service     = self::get_service();
-			$option_name = $service->is_member() ? 'wds-pro-install-date' : 'wds-free-install-date';
-
+			$option_name  = 'wds-free-install-date';
 			$install_date = get_site_option( $option_name );
 			if ( empty( $install_date ) ) {
 				update_site_option( $option_name, current_time( 'timestamp' ) ); // phpcs:ignore
@@ -114,15 +110,6 @@ if ( ! class_exists( '\SmartCrawl\SmartCrawl' ) ) {
 
 				do_action( 'wds_plugin_update', SMARTCRAWL_VERSION, $version );
 			}
-		}
-
-		/**
-		 * Get service instance.
-		 *
-		 * @return Services\Site
-		 */
-		private static function get_service() {
-			return Services\Service::get( Services\Service::SERVICE_SITE );
 		}
 
 		/**

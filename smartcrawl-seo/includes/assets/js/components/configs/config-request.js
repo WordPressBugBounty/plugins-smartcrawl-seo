@@ -2,10 +2,6 @@ import ConfigValues from '../../es6/config-values';
 import RequestUtil from '../../utils/request-util';
 
 export default class ConfigRequest {
-	static sync() {
-		return this.post('smartcrawl_sync_configs');
-	}
-
 	static applyConfig(configId) {
 		return this.post('smartcrawl_apply_config', { config_id: configId });
 	}

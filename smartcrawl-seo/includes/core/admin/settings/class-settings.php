@@ -109,6 +109,11 @@ class Settings extends Admin_Settings {
 		} else {
 			$result['general-suppress-redundant_canonical'] = false;
 		}
+		if ( ! empty( $input['general-auto-canonical-wpml'] ) ) {
+			$result['general-auto-canonical-wpml'] = true;
+		} else {
+			$result['general-auto-canonical-wpml'] = false;
+		}
 
 		// High Contrast Mode option in Accessibility under Settings module.
 		if ( ! empty( $input['high-contrast'] ) ) {
@@ -336,7 +341,7 @@ class Settings extends Admin_Settings {
 			'_wds_settings',
 			array(
 				'hide_disables' => isset( $options['hide_disables'] ) ? $options['hide_disables'] : false,
-			)
+				)
 		);
 
 		$this->render_page( 'settings/settings', $arguments );
@@ -373,8 +378,7 @@ class Settings extends Admin_Settings {
 				'instant_indexing',
 				false,
 				null,
-				! $this->get_service()->is_member()
-
+				true
 			),
 			'social'           => $this->plugin_module_args(
 				__( 'Social Network', 'smartcrawl-seo' ),
@@ -491,6 +495,9 @@ class Settings extends Admin_Settings {
 		if ( ! isset( $this->options['hide_disables'] ) ) {
 			$this->options['hide_disables'] = false;
 		}
+		if ( ! isset( $this->options['general-auto-canonical-wpml'] ) ) {
+			$this->options['general-auto-canonical-wpml'] = false;
+		}
 
 		$this->options = apply_filters_deprecated(
 			'wds_defaults',
@@ -587,63 +594,6 @@ class Settings extends Admin_Settings {
 	 */
 	public function add_native_dismissible_notice_javascript() {
 		$this->render_view( 'native-dismissible-notice-javascript' );
-	}
-
-	/**
-	 * Not being used as of now.
-	 *
-	 * @return void
-	 */
-	public function wp_org_rating_request() {
-		$service = $this->get_service();
-		if ( $service->is_member() || ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		if ( is_multisite() && ! is_network_admin() ) {
-			return;
-		}
-
-		$days              = 7;
-		$now               = current_time( 'timestamp' ); // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested
-		$free_install_date = get_site_option( 'wds-free-install-date' );
-		if ( ( $now - (int) $free_install_date ) < ( $days * 24 * 60 * 60 ) ) {
-			return;
-		}
-
-		$key                  = 'wp-org-rating-request';
-		$dismissed_messages   = get_user_meta( get_current_user_id(), 'wds_dismissed_messages', true );
-		$is_message_dismissed = \smartcrawl_get_array_value( $dismissed_messages, $key ) === true;
-		if ( $is_message_dismissed ) {
-			return;
-		}
-
-		?>
-		<div
-				class="notice-info notice is-dismissible wds-native-dismissible-notice"
-				data-message-key="<?php echo esc_attr( $key ); ?>"
-		>
-			<p>
-				<?php
-				printf(
-				/* translators: 1,2: strong tag, 3: plugin title */
-					esc_html__( 'Excellent! You\'ve been using %1$s%3$s%2$s for over a week. Hope you are enjoying it so far. We have spent countless hours developing this free plugin for you, and we would really appreciate it if you could drop us a rating on wp.org to help us spread the word and boost our motivation.', 'smartcrawl-seo' ),
-					'<strong>',
-					'</strong>',
-					esc_html( \smartcrawl_get_plugin_title() )
-				);
-				?>
-			</p>
-			<a
-					target="_blank" href="https://wordpress.org/plugins/smartcrawl-seo#reviews"
-					class="button button-primary"
-			>
-				<?php esc_html_e( 'Rate SmartCrawl', 'smartcrawl-seo' ); ?>
-			</a>
-			<a href="#" class="wds-native-dismiss">No Thanks</a>
-			<p></p>
-		</div>
-		<?php
 	}
 
 	/**

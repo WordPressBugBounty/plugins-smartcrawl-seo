@@ -8,7 +8,6 @@
 namespace SmartCrawl;
 
 use SmartCrawl\Admin\Settings\Dashboard;
-use SmartCrawl\Services\Service;
 use SmartCrawl\Sitemaps\Utils;
 use SmartCrawl\Admin\Settings\Admin_Settings;
 
@@ -22,8 +21,6 @@ $page_url        = Admin_Settings::admin_url( Settings::TAB_SITEMAP );
 $options         = $_view['options'];
 $sitemap_enabled = Settings::get_setting( 'sitemap' );
 $option_name     = Settings::SETTINGS_MODULE . '_options';
-$service         = Service::get( Service::SERVICE_SITE );
-$is_member       = $service->is_member();
 $override_native = Utils::override_native();
 $tooltip_text    = $override_native
 	? esc_html__( 'You can switch to the WordPress core sitemap through the configure button.', 'smartcrawl-seo' )
@@ -71,18 +68,7 @@ if ( ! $sitemap_enabled && $hide_disables ) {
 		<h2 class="sui-box-title">
 			<span class="sui-icon-web-globe-world" aria-hidden="true"></span> <?php esc_html_e( 'Sitemaps', 'smartcrawl-seo' ); ?>
 		</h2>
-		<?php
-		if ( $sitemap_enabled && $is_member && $sitemap_crawler_available ) {
-			$this->render_view(
-				'url-crawl-master',
-				array(
-					'progress_template' => 'dashboard/dashboard-box-title-url-crawl-in-progress',
-					'ready_template'    => 'dashboard/dashboard-box-title-url-crawl-stats',
-				)
-			);
-		}
-		?>
-	</div>
+        </div>
 	<div class="sui-box-body">
 		<p><?php esc_html_e( 'Automatically generate detailed sitemaps to tell search engines what content you want them to crawl and index.', 'smartcrawl-seo' ); ?></p>
 
@@ -154,65 +140,15 @@ if ( ! $sitemap_enabled && $hide_disables ) {
 			</div>
 		<?php endif; ?>
 
-		<?php if ( $sitemap_crawler_available ) : ?>
-			<div class="wds-separator-top cf <?php echo $is_member ? 'wds-draw-left-padded' : 'wds-box-blocked-area wds-draw-down wds-draw-left'; ?>">
-				<small><strong><?php esc_html_e( 'URL Crawler', 'smartcrawl-seo' ); ?></strong></small>
-				<?php if ( $is_member ) : ?>
-					<?php if ( $sitemap_enabled ) : ?>
-						<?php
-						$this->render_view(
-							'url-crawl-master',
-							array(
-								'ready_template'    => 'dashboard/dashboard-url-crawl-stats',
-								'progress_template' => 'dashboard/dashboard-url-crawl-in-progress',
-								'no_data_template'  => 'dashboard/dashboard-url-crawl-no-data-small',
-							)
-						);
-						?>
-					<?php else : ?>
-						<p>
-							<small>
-								<?php
-								printf(
-									/* translators: 1,2: strong tag, 3: plugin title */
-									esc_html__( 'Automatically schedule %1$s%3$s%2$s to run check for URLs that are missing from your Sitemap.', 'smartcrawl-seo' ),
-									'<strong>',
-									'</strong>',
-									esc_html( \smartcrawl_get_plugin_title() )
-								);
-								?>
-							</small>
-						</p>
-						<div><span class="sui-tag sui-tag-inactive">
-							<?php esc_html_e( 'Sitemaps must be activated', 'smartcrawl-seo' ); ?>
-						</span></div>
-					<?php endif; ?>
-				<?php else : ?>
-					<a
-						href="https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_dash_crawl_pro_tag"
-						target="_blank">
-						<span
-							class="sui-tag sui-tag-pro sui-tooltip"
-							data-tooltip="<?php esc_attr_e( 'Upgrade to SmartCrawl Pro', 'smartcrawl-seo' ); ?>">
-							<?php esc_html_e( 'Pro', 'smartcrawl-seo' ); ?>
-						</span>
-					</a>
-					<p>
-						<small>
-							<?php
-							printf(
-								/* translators: 1,2: strong tag, 3: plugin title */
-								esc_html__( 'Automatically schedule %1$s%3$s%2$s to run check for URLs that are missing from your Sitemap.', 'smartcrawl-seo' ),
-								'<strong>',
-								'</strong>',
-								esc_html( \smartcrawl_get_plugin_title() )
-							);
-							?>
-						</small>
-					</p>
-				<?php endif; ?>
-			</div>
-		<?php endif; ?>
+		<?php
+		$this->render_view(
+			'dashboard/dashboard-widget-sitemap-crawler',
+			array(
+				'sitemap_enabled'           => $sitemap_enabled,
+				'sitemap_crawler_available' => $sitemap_crawler_available,
+			)
+		);
+		?>
 	</div>
 
 	<div class="sui-box-footer">

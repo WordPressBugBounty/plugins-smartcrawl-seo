@@ -81,14 +81,15 @@ class Init {
 		Schema\Printer::run();
 		Lighthouse\Controller::get()->run();
 		Configs\Controller::get()->run();
-		Crawler\Controller::get()->run();
 		Multisite\Network_Configs::get()->run();
 		Multisite\Sitewide_Deprecation::get()->run();
 		Controllers\Ajax_Search::get()->run();
 		Controllers\Primary_Terms::get()->run();
+		Controllers\Post_Meta::get()->run();
 		Mixpanel\Sitemap::get()->run();
 		Controllers\Cross_Sell_page::get()->run();
 		Instant_Indexing\Controller::get()->run();
+		Integration\Generateblocks\Meta_Tags::run();
 	}
 
 	/**

@@ -9,19 +9,17 @@ export default class MetaboxAdvanced extends React.Component {
 	render() {
 		return (
 			<div className="wds_advanced">
-				<div className="wds-metabox-section sui-box-body">
-					<p>
-						{__(
-							'Configure the advanced settings for this post.',
-							'wds'
-						)}
-					</p>
+				<p>
+					{__(
+						'Configure the advanced settings for this post.',
+						'wds'
+					)}
+				</p>
 
-					<Indexing></Indexing>
-					<Canonical></Canonical>
-					<Redirect></Redirect>
-					<AutoLinking></AutoLinking>
-				</div>
+				<Indexing></Indexing>
+				<Canonical></Canonical>
+				<Redirect></Redirect>
+				<AutoLinking></AutoLinking>
 			</div>
 		);
 	}

@@ -327,11 +327,7 @@ class Troubleshooting extends Controllers\Controller {
 	 * @return array
 	 */
 	private function get_issue_details( $status ) {
-		$service     = Service::get( Service::SERVICE_SITE );
-		$support_url = $service->is_member()
-			? 'https://wpmudev.com/hub2/support'
-			: 'https://wordpress.org/support/plugin/smartcrawl-seo/';
-
+		$support_url = 'https://wordpress.org/support/plugin/smartcrawl-seo/';
 		$wp_error_message = $this->wp_error ? $this->wp_error->get_error_message() : '';
 		$request_error    = $wp_error_message
 			/* translators: %s: Error message */

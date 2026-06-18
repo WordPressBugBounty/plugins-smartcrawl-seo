@@ -13,8 +13,6 @@ if ( ! $component ) {
 
 $option_name = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
 $dom_value   = empty( $dom_value ) ? false : $dom_value;
-$is_member   = ! empty( $_view['is_member'] );
-$disabled    = ( $is_member || 'sitemap-update' === $component ) ? '' : 'disabled';
 $dom_range   = range( 1, 28 );
 
 $select_id   = "wds-{$component}-dom";
@@ -32,7 +30,7 @@ $time_label = empty( $timezone ) ? '' : sprintf( '%s (%s)', wp_date( 'h:i A' ), 
 </label>
 
 <select
-	class="sui-select" <?php echo esc_attr( $disabled ); ?>
+	class="sui-select"
 	id="<?php echo esc_attr( $select_id ); ?>"
 	data-minimum-results-for-search="-1"
 	name="<?php echo esc_attr( $select_name ); ?>"

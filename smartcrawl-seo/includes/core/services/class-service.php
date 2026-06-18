@@ -221,25 +221,6 @@ abstract class Service {
 			$can_install
 		);
 	}
-
-	/**
-	 * Checks whether the account has current paid plan with us
-	 *
-	 * @return bool
-	 */
-	public function is_member() {
-		if (
-			$this->has_dashboard() &&
-			$this->membership_includes_smartcrawl() &&
-			defined( 'SMARTCRAWL_BUILD_TYPE' ) &&
-			'full' === SMARTCRAWL_BUILD_TYPE
-		) {
-			return true;
-		}
-
-		return false;
-	}
-
 	/**
 	 * Check if current membership has access to SC.
 	 *

@@ -12,7 +12,6 @@ import {
 import Notice from '../../../components/notices/notice';
 import ConfigValues from '../../../es6/config-values';
 import { connect } from 'react-redux';
-import RedirectRulesGeo from './redirect-rules-geo';
 import UrlInputField from '../../../components/form-fields/url-input-field';
 import Toggle from '../../../components/toggle';
 
@@ -176,11 +175,7 @@ class RedirectEditMain extends React.Component {
 
 				{this.renderType()}
 
-				{((bulkUpdating && (!bulkType || !isNonRedirectType(type))) ||
-					(!bulkUpdating && !isNonRedirectType(type))) && (
-					<RedirectRulesGeo />
-				)}
-			</>
+				</>
 		);
 	}
 }

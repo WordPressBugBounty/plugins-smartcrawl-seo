@@ -10,7 +10,6 @@ namespace SmartCrawl;
 use SmartCrawl\Admin\Settings\Admin_Settings;
 use SmartCrawl\Admin\Settings\Dashboard;
 use SmartCrawl\Modules\Advanced\Robots\Controller;
-use SmartCrawl\Services\Service;
 
 if ( ! Admin_Settings::is_tab_allowed( Settings::ADVANCED_MODULE ) ) {
 	return;
@@ -25,9 +24,6 @@ if ( ! $is_active && \smartcrawl_get_array_value( $settings_opts, 'hide_disables
 }
 
 $page_url = Admin_Settings::admin_url( Settings::ADVANCED_MODULE );
-
-$service   = Service::get( Service::SERVICE_SITE );
-$is_member = $service->is_member();
 ?>
 
 <section
@@ -73,22 +69,5 @@ $is_member = $service->is_member();
 			</button>
 		<?php endif; ?>
 	</div>
-	<?php if ( ! $is_member ) : ?>
-		<div class="sui-box-body">
-			<?php
-			$this->render_view(
-				'mascot-message',
-				array(
-					'key'         => 'seo-checkup-upsell',
-					'dismissible' => false,
-					'message'     => sprintf(
-						'%s <a target="_blank" class="sui-button sui-button-purple" href="https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_dash_reports_upsell_notice">%s</a>',
-						esc_html__( 'Upgrade to Pro and automatically link your articles both internally and externally with automatic linking - a favourite among SEO pros.', 'smartcrawl-seo' ),
-						esc_html__( 'Unlock now with Pro', 'smartcrawl-seo' )
-					),
-				)
-			);
-			?>
-		</div>
-	<?php endif; ?>
+	<?php $this->render_view( 'dashboard/dashboard-widget-advanced-tools-upsell' ); ?>
 </section>

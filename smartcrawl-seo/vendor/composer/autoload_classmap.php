@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'SmartCrawl\\Admin\\Admin' => $baseDir . '/includes/core/admin/class-admin.php',
     'SmartCrawl\\Admin\\Conflict_Detector' => $baseDir . '/includes/admin/class-conflict-detector.php',
     'SmartCrawl\\Admin\\Metabox' => $baseDir . '/includes/core/admin/class-metabox.php',
@@ -77,6 +78,7 @@ return array(
     'SmartCrawl\\Controllers\\OnPage' => $baseDir . '/includes/core/controllers/class-onpage.php',
     'SmartCrawl\\Controllers\\Onboard' => $baseDir . '/includes/core/controllers/class-onboard.php',
     'SmartCrawl\\Controllers\\Plugin_Links' => $baseDir . '/includes/core/controllers/class-plugin-links.php',
+    'SmartCrawl\\Controllers\\Post_Meta' => $baseDir . '/includes/core/controllers/class-post-meta.php',
     'SmartCrawl\\Controllers\\Primary_Terms' => $baseDir . '/includes/core/controllers/class-primary-terms.php',
     'SmartCrawl\\Controllers\\Recommended_Plugins' => $baseDir . '/includes/core/controllers/class-recommended-plugins.php',
     'SmartCrawl\\Controllers\\Report_Permalinks' => $baseDir . '/includes/core/controllers/class-report-permalinks.php',
@@ -109,6 +111,7 @@ return array(
     'SmartCrawl\\Instant_Indexing\\IndexNow_API' => $baseDir . '/includes/core/instant-indexing/class-indexnow-api.php',
     'SmartCrawl\\Instant_Indexing\\IndexNow_Actions' => $baseDir . '/includes/core/instant-indexing/class-indexnow-actions.php',
     'SmartCrawl\\Instant_Indexing\\IndexNow_REST' => $baseDir . '/includes/core/instant-indexing/class-indexnow-rest.php',
+    'SmartCrawl\\Integration\\Generateblocks\\Meta_Tags' => $baseDir . '/includes/integration/generateblocks/class-meta-tags.php',
     'SmartCrawl\\Integration\\Maxmind\\Controller' => $baseDir . '/includes/integration/maxmind/class-controller.php',
     'SmartCrawl\\Integration\\Maxmind\\Cron' => $baseDir . '/includes/integration/maxmind/class-cron.php',
     'SmartCrawl\\Integration\\Maxmind\\GeoDB' => $baseDir . '/includes/integration/maxmind/class-geodb.php',
@@ -165,6 +168,7 @@ return array(
     'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Builders\\Woocommerce' => $baseDir . '/includes/modules/advanced/breadcrumbs/builders/class-woocommerce.php',
     'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Controller' => $baseDir . '/includes/modules/advanced/breadcrumbs/class-controller.php',
     'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Helper' => $baseDir . '/includes/modules/advanced/breadcrumbs/class-helper.php',
+    'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Term_Resolver' => $baseDir . '/includes/modules/advanced/breadcrumbs/class-term-resolver.php',
     'SmartCrawl\\Modules\\Advanced\\Controller' => $baseDir . '/includes/modules/advanced/class-controller.php',
     'SmartCrawl\\Modules\\Advanced\\Redirects\\Controller' => $baseDir . '/includes/modules/advanced/redirects/class-controller.php',
     'SmartCrawl\\Modules\\Advanced\\Redirects\\Database_Table' => $baseDir . '/includes/modules/advanced/redirects/class-database-table.php',
@@ -286,7 +290,6 @@ return array(
     'SmartCrawl\\WPML\\Controller' => $baseDir . '/includes/core/wpml/class-controller.php',
     'SmartCrawl\\Work_Unit' => $baseDir . '/includes/core/class-work-unit.php',
     'SmartCrawl\\Youtube_Data_Fetcher' => $baseDir . '/includes/core/class-youtube-data-fetcher.php',
-    'Smartcrawl_Vendor\\Detection\\MobileDetect' => $baseDir . '/vendor_prefixed/mobiledetect/mobiledetectlib/src/MobileDetect.php',
     'Smartcrawl_Vendor\\MaxMind\\Db\\Reader' => $baseDir . '/vendor_prefixed/maxmind-db/reader/src/MaxMind/Db/Reader.php',
     'Smartcrawl_Vendor\\MaxMind\\Db\\Reader\\Decoder' => $baseDir . '/vendor_prefixed/maxmind-db/reader/src/MaxMind/Db/Reader/Decoder.php',
     'Smartcrawl_Vendor\\MaxMind\\Db\\Reader\\InvalidDatabaseException' => $baseDir . '/vendor_prefixed/maxmind-db/reader/src/MaxMind/Db/Reader/InvalidDatabaseException.php',

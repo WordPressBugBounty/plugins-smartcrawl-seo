@@ -429,7 +429,6 @@ class Controller extends Controllers\Submodule_Controller {
 			'active'             => ! empty( $this->options['active'] ),
 			'non_redirect_types' => $this->utils->get_non_redirect_types(),
 			'redirects'          => $this->get_redirects(),
-			'maxmind_license'    => Maxmind\GeoDB::get()->get_license(),
 			'options'            => array(
 				'attachments'  => ! empty( $this->options['attachments'] ),
 				'images_only'  => ! empty( $this->options['images_only'] ),
@@ -609,19 +608,6 @@ class Controller extends Controllers\Submodule_Controller {
 			return;
 		}
 
-		if ( Maxmind\GeoDB::get()->get_license() ) {
-			$geo_rules = $redirect->get_rules();
-
-			if ( ! empty( $geo_rules ) ) {
-				$country         = Maxmind\GeoDB::get()->get_country_by_ip();
-				$geo_destination = $this->find_geo_destination( $geo_rules, $country );
-
-				if ( $geo_destination ) {
-					$destination = $geo_destination;
-				}
-			}
-		}
-
 		// We're here, so redirect.
 		if ( $destination && Utils::get()->get_full_url( $this->get_current_path() ) !== Utils::get()->get_full_url( $destination ) ) {
 			// We can't use wp_safe_redirect because we also need to have external redirect.
@@ -709,33 +695,6 @@ class Controller extends Controllers\Submodule_Controller {
 	 *
 	 * @return string|false
 	 */
-	private function find_geo_destination( $rules, $country ) {
-		foreach ( $rules as $rule ) {
-			if ( ! is_array( $rule ) ) {
-				$rule = (array) $rule;
-			}
-
-			if (
-				( empty( $rule['indicate'] ) && in_array( $country, $rule['countries'], true ) ) ||
-				( ! empty( $rule['indicate'] ) && ! in_array( $country, $rule['countries'], true ) )
-			) {
-				$destination = $rule['url'];
-
-				if ( ! empty( $destination['id'] ) ) {
-					$destination = get_permalink( $destination['id'] );
-
-					if ( ! $destination ) {
-						return false;
-					}
-				}
-
-				return $destination;
-			}
-		}
-
-		return false;
-	}
-
 	/**
 	 * Retrieves query vars from url.
 	 *
@@ -898,56 +857,65 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function save_redirect() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) );
+		try {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) );
+			}
+			$data = $this->get_request_data();
+
+			if ( empty( $data ) ) {
+				wp_send_json_error( __( 'There is no data to proceed with your request.', 'smartcrawl-seo' ) );
+			}
+
+			$id          = intval( \smartcrawl_get_array_value( $data, 'id' ) );
+			$source      = \smartcrawl_get_array_value( $data, 'source' );
+			$destination = \smartcrawl_get_array_value( $data, 'destination', '' );
+			$type        = \smartcrawl_get_array_value( $data, 'type', '' );
+			$title       = \smartcrawl_get_array_value( $data, 'title', '' );
+			$options     = \smartcrawl_get_array_value( $data, 'options', array() );
+			$rules       = $this->normalize_rules( \smartcrawl_get_array_value( $data, 'rules', array() ) );
+
+			if ( empty( $source ) ) {
+				wp_send_json_error( __( 'The redirect from URL is empty.', 'smartcrawl-seo' ) );
+			}
+
+			if ( $this->utils->is_non_redirect_type( $type ) ) {
+				$destination = '';
+				$rules       = array();
+			} elseif ( empty( $destination ) && empty( $rules ) ) {
+				wp_send_json_error( __( 'The redirect from/to URL is empty.', 'smartcrawl-seo' ) );
+			}
+
+			$redirect_item = $this->utils->create_redirect_item( $source, $destination, $type, $title, $options, $rules );
+
+			if ( $redirect_item->is_regex() && $this->is_source_regex_invalid( $source ) ) {
+				wp_send_json_error( array( 'message' => 'Invalid regex source.' ) );
+			}
+
+			if ( $id ) {
+				$redirect_item->set_id( $id );
+			}
+
+			$table = Database_Table::get();
+			$saved = $table->save_redirect( $redirect_item );
+
+			if ( $saved ) {
+				$redirect_item->set_id( $saved );
+
+				$data = $redirect_item->deflate();
+
+				wp_send_json_success( $this->populate_destination( $data ) );
+			}
+
+			wp_send_json_error();
+		} catch ( \Throwable $e ) {
+			$message = __( 'Failed to save redirect. Please reload the page and try again.', 'smartcrawl-seo' );
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$message = sprintf( 'Redirect save failed: %1$s (%2$s:%3$d)', $e->getMessage(), $e->getFile(), $e->getLine() );
+			}
+
+			wp_send_json_error( array( 'message' => $message ) );
 		}
-		$data = $this->get_request_data();
-
-		if ( empty( $data ) ) {
-			wp_send_json_error( __( 'There is no data to proceed with your request.', 'smartcrawl-seo' ) );
-		}
-
-		$id          = intval( \smartcrawl_get_array_value( $data, 'id' ) );
-		$source      = \smartcrawl_get_array_value( $data, 'source' );
-		$destination = \smartcrawl_get_array_value( $data, 'destination', '' );
-		$type        = \smartcrawl_get_array_value( $data, 'type', '' );
-		$title       = \smartcrawl_get_array_value( $data, 'title', '' );
-		$options     = \smartcrawl_get_array_value( $data, 'options', array() );
-		$rules       = \smartcrawl_get_array_value( $data, 'rules', array() );
-
-		if ( empty( $source ) ) {
-			wp_send_json_error( __( 'The redirect from URL is empty.', 'smartcrawl-seo' ) );
-		}
-
-		if ( $this->utils->is_non_redirect_type( $type ) ) {
-			$destination = '';
-			$rules       = array();
-		} elseif ( empty( $destination ) && empty( $rules ) ) {
-			wp_send_json_error( __( 'The redirect from/to URL is empty.', 'smartcrawl-seo' ) );
-		}
-
-		$redirect_item = $this->utils->create_redirect_item( $source, $destination, $type, $title, $options, $rules );
-
-		if ( $redirect_item->is_regex() && $this->is_source_regex_invalid( $source ) ) {
-			wp_send_json_error( array( 'message' => 'Invalid regex source.' ) );
-		}
-
-		if ( $id ) {
-			$redirect_item->set_id( $id );
-		}
-
-		$table = Database_Table::get();
-		$saved = $table->save_redirect( $redirect_item );
-
-		if ( $saved ) {
-			$redirect_item->set_id( $saved );
-
-			$data = $redirect_item->deflate();
-
-			wp_send_json_success( $this->populate_destination( $data ) );
-		}
-
-		wp_send_json_error();
 	}
 
 	/**
@@ -985,11 +953,14 @@ class Controller extends Controllers\Submodule_Controller {
 			$redirect['destination'] = $this->format_destination( $redirect['destination'] );
 		}
 
-		if ( empty( $redirect['rules'] ) ) {
+		if ( empty( $redirect['rules'] ) || ! is_array( $redirect['rules'] ) ) {
 			$redirect['rules'] = array();
 		}
 
 		foreach ( $redirect['rules'] as $index => $rule ) {
+			if ( ! is_array( $rule ) || empty( $rule['url'] ) ) {
+				continue;
+			}
 			$rule['url'] = $this->format_destination( $rule['url'] );
 
 			$redirect['rules'][ $index ] = $rule;
@@ -1085,86 +1056,127 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return void
 	 */
 	public function bulk_update_redirects() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error(
-				array( 'message' => esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) )
-			);
-		}
-		$data = $this->get_request_data();
-
-		if ( empty( $data ) ) {
-			wp_send_json_error(
-				array( 'message' => __( 'Failed to retrieve data.', 'smartcrawl-seo' ) )
-			);
-		}
-
-		$ids = \smartcrawl_get_array_value( $data, 'ids' );
-
-		if ( empty( $ids ) ) {
-			wp_send_json_error(
-				array( 'message' => __( 'Not found redirects.', 'smartcrawl-seo' ) )
-			);
-		}
-
-		$table     = Database_Table::get();
-		$redirects = $table->get_redirects( $ids );
-
-		if ( ! $redirects ) {
-			wp_send_json_error(
-				array( 'message' => __( 'Failed to get redirects by given IDs.', 'smartcrawl-seo' ) )
-			);
-		}
-
-		$destination = \smartcrawl_get_array_value( $data, 'destination', '' );
-		$type        = \smartcrawl_get_array_value( $data, 'type', '' );
-		$rules       = \smartcrawl_get_array_value( $data, 'rules', array() );
-
-		$response = array();
-
-		foreach ( $ids as $id ) {
-			$redirect = \smartcrawl_get_array_value( $redirects, $id );
-
-			if ( ! $redirect ) {
+		try {
+			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error(
-					array(
-						'message' => sprintf(
-							/* translators: %s: Redirect id */
-							__( 'Failed to get redirect by given ID: %s.', 'smartcrawl-seo' ),
-							$id
-						),
-					)
+					array( 'message' => esc_html__( 'You do not have permission to perform this action.', 'smartcrawl-seo' ) )
+				);
+			}
+			$data = $this->get_request_data();
+
+			if ( empty( $data ) ) {
+				wp_send_json_error(
+					array( 'message' => __( 'Failed to retrieve data.', 'smartcrawl-seo' ) )
 				);
 			}
 
-			if ( ! empty( $type ) ) {
-				$redirect->set_type( $type );
+			$ids = \smartcrawl_get_array_value( $data, 'ids' );
+
+			if ( empty( $ids ) ) {
+				wp_send_json_error(
+					array( 'message' => __( 'Not found redirects.', 'smartcrawl-seo' ) )
+				);
 			}
 
-			if ( $this->utils->is_non_redirect_type( $type ) ) {
-				$redirect->set_destination( '' );
-				$redirect->set_rules( $rules );
-			} else {
-				if ( ! empty( $destination ) ) {
-					$redirect->set_destination( $destination );
+			$table     = Database_Table::get();
+			$redirects = $table->get_redirects( $ids );
+
+			if ( ! $redirects ) {
+				wp_send_json_error(
+					array( 'message' => __( 'Failed to get redirects by given IDs.', 'smartcrawl-seo' ) )
+				);
+			}
+
+			$destination = \smartcrawl_get_array_value( $data, 'destination', '' );
+			$type        = \smartcrawl_get_array_value( $data, 'type', '' );
+			$rules       = $this->normalize_rules( \smartcrawl_get_array_value( $data, 'rules', array() ) );
+
+			$response = array();
+
+			foreach ( $ids as $id ) {
+				$redirect = \smartcrawl_get_array_value( $redirects, $id );
+
+				if ( ! $redirect ) {
+					wp_send_json_error(
+						array(
+							'message' => sprintf(
+								/* translators: %s: Redirect id */
+								__( 'Failed to get redirect by given ID: %s.', 'smartcrawl-seo' ),
+								$id
+							),
+						)
+					);
 				}
 
-				if ( ! empty( $rules ) ) {
+				if ( ! empty( $type ) ) {
+					$redirect->set_type( $type );
+				}
+
+				if ( $this->utils->is_non_redirect_type( $type ) ) {
+					$redirect->set_destination( '' );
 					$redirect->set_rules( $rules );
+				} else {
+					if ( ! empty( $destination ) ) {
+						$redirect->set_destination( $destination );
+					}
+
+					if ( ! empty( $rules ) ) {
+						$redirect->set_rules( $rules );
+					}
 				}
+
+				$response[ $id ] = $this->populate_destination( $redirect->deflate() );
 			}
 
-			$response[ $id ] = $this->populate_destination( $redirect->deflate() );
+			$is_updated = $table->update_redirects( $redirects );
+
+			if ( false === $is_updated ) {
+				wp_send_json_error(
+					array( 'message' => __( 'Failed to update redirects.', 'smartcrawl-seo' ) )
+				);
+			}
+
+			wp_send_json_success( $response );
+		} catch ( \Throwable $e ) {
+			$message = __( 'Failed to update redirects. Please reload the page and try again.', 'smartcrawl-seo' );
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$message = sprintf( 'Bulk redirect update failed: %1$s (%2$s:%3$d)', $e->getMessage(), $e->getFile(), $e->getLine() );
+			}
+
+			wp_send_json_error( array( 'message' => $message ) );
+		}
+	}
+
+	/**
+	 * Normalize location-based rules payload to a predictable array shape.
+	 *
+	 * @param mixed $rules Raw rules value from request.
+	 *
+	 * @return array
+	 */
+	private function normalize_rules( $rules ) {
+		if ( empty( $rules ) ) {
+			return array();
 		}
 
-		$is_updated = $table->update_redirects( $redirects );
-
-		if ( false === $is_updated ) {
-			wp_send_json_error(
-				array( 'message' => __( 'Failed to update redirects.', 'smartcrawl-seo' ) )
-			);
+		// Accept JSON-string payloads as a fallback.
+		if ( is_string( $rules ) ) {
+			$decoded = json_decode( $rules, true );
+			$rules   = is_array( $decoded ) ? $decoded : array();
 		}
 
-		wp_send_json_success( $response );
+		if ( ! is_array( $rules ) ) {
+			return array();
+		}
+
+		$normalized = array();
+		foreach ( $rules as $rule ) {
+			if ( is_array( $rule ) ) {
+				$normalized[] = $rule;
+			}
+		}
+
+		return $normalized;
 	}
 
 	/**

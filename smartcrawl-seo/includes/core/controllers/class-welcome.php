@@ -97,15 +97,6 @@ class Welcome extends Controller {
 
 		$admin_url = 'https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_instant-indexing_upgrade-modal_upgrade-button';
 
-		// Check if the user is a member of WPMU DEV.
-		$service = Service::get( Service::SERVICE_SITE );
-		if ( $service->is_member() ) {
-			$options                                    = Settings::get_specific_options( 'wds_settings_options' );
-			$options[ Settings::COMP_INSTANT_INDEXING ] = 1;
-			Settings::update_specific_options( 'wds_settings_options', $options );
-			$admin_url = admin_url( 'admin.php?page=wds_instant_indexing' );
-		}
-
 		// Set flag for dismissal.
 		Settings::update_specific_options(
 			self::WELCOME_MODAL_DISMISSED_OPTION,

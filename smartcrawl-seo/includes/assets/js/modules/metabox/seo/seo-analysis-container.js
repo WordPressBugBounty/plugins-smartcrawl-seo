@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { __, sprintf } from '@wordpress/i18n';
 import { createInterpolateElement } from '@wordpress/element';
 import Button from '../../../components/button';
@@ -14,29 +15,78 @@ export default class SeoAnalysisContainer extends React.Component {
 		onUpdateKeywords: () => false,
 		analysis: {},
 		loading: false,
+		isRefreshing: false,
 		onRefresh: () => false,
+		useReactAccordion: false,
 	};
 
 	render() {
-		const { keywords, analysis, loading, onUpdateKeywords, onRefresh } =
-			this.props;
+		const {
+			keywords,
+			analysis,
+			loading,
+			isRefreshing,
+			onUpdateKeywords,
+			onRefresh,
+			useReactAccordion,
+		} = this.props;
+
+		const refreshDisabled = loading || isRefreshing;
 
 		return (
 			<div className="wds-seo-analysis-container">
 				<div className="wds-seo-analysis-label">
-					<strong>{__('SEO Analysis', 'smartcrawl-seo')}</strong>
+					<label className="sui-label">
+						{__('SEO Analysis', 'smartcrawl-seo')}
+					</label>
 
-					<Button
-						className="wds-refresh-analysis wds-analysis-seo"
-						color="ghost"
-						icon="sui-icon-update"
-						text={__('Refresh', 'smartcrawl-seo')}
-						loading={loading}
-						onClick={onRefresh}
-					></Button>
+					{useReactAccordion ? (
+						<button
+							type="button"
+							className={classnames(
+								'wds-refresh-button',
+								'wds-refresh-analysis',
+								'wds-analysis-seo',
+								'sui-button',
+								'sui-button-ghost',
+								{
+									'is-loading': isRefreshing || loading,
+								}
+							)}
+							disabled={refreshDisabled}
+							onClick={onRefresh}
+							aria-busy={isRefreshing}
+						>
+							{isRefreshing ? (
+								<span
+									className="wds-spinner"
+									aria-hidden="true"
+								/>
+							) : (
+								<span
+									className="wds-refresh-icon"
+									aria-hidden="true"
+								>
+									<span className="sui-icon-update" />
+								</span>
+							)}
+							{isRefreshing
+								? __('Refreshing…', 'smartcrawl-seo')
+								: __('Refresh', 'smartcrawl-seo')}
+						</button>
+					) : (
+						<Button
+							className="wds-refresh-analysis wds-analysis-seo"
+							color="ghost"
+							icon="sui-icon-update"
+							text={__('Refresh', 'smartcrawl-seo')}
+							loading={loading}
+							onClick={onRefresh}
+						/>
+					)}
 				</div>
 
-				<div className="sui-box-body">
+				<div className="wds-seo-analysis-content">
 					<MascotMessage
 						msgKey="metabox-seo-analysis"
 						message={createInterpolateElement(
@@ -54,32 +104,32 @@ export default class SeoAnalysisContainer extends React.Component {
 							),
 							{ strong: <strong /> }
 						)}
-					></MascotMessage>
-				</div>
-
-				<FocusKeywords
-					keywords={keywords}
-					onUpdateKeywords={onUpdateKeywords}
-					loading={loading}
-				></FocusKeywords>
-
-				{!!loading && (
-					<Notice
-						type={false}
-						className="wds-analysis-working"
+					/>
+					<FocusKeywords
+						keywords={keywords}
+						onUpdateKeywords={onUpdateKeywords}
 						loading={loading}
-						message={__(
-							'Analyzing content. Please wait a few moments.',
-							'wds'
-						)}
-					></Notice>
-				)}
+					/>
 
-				{!loading && (
-					<SeoAnalysisContent
-						analysis={analysis}
-					></SeoAnalysisContent>
-				)}
+					{!!loading && (
+						<Notice
+							type={false}
+							className="wds-analysis-working"
+							loading={loading}
+							message={__(
+								'Analyzing content. Please wait a few moments.',
+								'wds'
+							)}
+						/>
+					)}
+
+					{!loading && (
+						<SeoAnalysisContent
+							analysis={analysis}
+							useReactAccordion={useReactAccordion}
+						/>
+					)}
+				</div>
 			</div>
 		);
 	}

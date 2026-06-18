@@ -9,6 +9,7 @@
 namespace SmartCrawl\Modules\Advanced\Breadcrumbs\Builders;
 
 use SmartCrawl\Modules\Advanced\Breadcrumbs\Helper;
+use SmartCrawl\Modules\Advanced\Breadcrumbs\Term_Resolver;
 use SmartCrawl\Endpoint_Resolver;
 use SmartCrawl\Singleton;
 
@@ -418,6 +419,24 @@ abstract class Builder {
 		}
 
 		return $entity->apply_macros( $string, 'breadcrumb' );
+	}
+
+	/**
+	 * Resolve the breadcrumb term for the current post.
+	 *
+	 * @param string $taxonomy Taxonomy name.
+	 *
+	 * @return false|\WP_Term
+	 * @since 3.16.0
+	 */
+	protected function resolve_breadcrumb_term( $taxonomy ) {
+		global $post;
+
+		if ( ! $post instanceof \WP_Post ) {
+			return false;
+		}
+
+		return Term_Resolver::get_term( $post->ID, $taxonomy );
 	}
 
 	/**

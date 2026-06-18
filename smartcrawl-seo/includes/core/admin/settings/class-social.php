@@ -91,25 +91,12 @@ class Social extends Admin_Settings {
 		if ( isset( $input['fb-app-id'] ) ) {
 			$result['fb-app-id'] = sanitize_text_field( $input['fb-app-id'] );
 		}
+		
+		$result['og-enable']           = ! empty( $input['og-enable'] );
+		$result['twitter-card-enable'] = ! empty( $input['twitter-card-enable'] );
 
-		if ( isset( $input['og-enable'] ) ) {
-			$result['og-enable'] = ! empty( $input['og-enable'] );
-		}
-		if ( isset( $input['twitter-card-enable'] ) ) {
-			$result['twitter-card-enable'] = ! empty( $input['twitter-card-enable'] );
-		}
-
-		if ( isset( $input['og-enable'] ) ) {
-			$this->toggle_og_globally(
-				$result['og-enable']
-			);
-		}
-
-		if ( isset( $input['twitter-card-enable'] ) ) {
-			$this->toggle_twitter_cards_globally(
-				$result['twitter-card-enable']
-			);
-		}
+		$this->toggle_og_globally( $result['og-enable'] );
+		$this->toggle_twitter_cards_globally( $result['twitter-card-enable'] );
 
 		if ( isset( $input['pinterest-verify'] ) ) {
 			if ( ! empty( $input['pinterest-verify'] ) ) {
@@ -263,12 +250,12 @@ class Social extends Admin_Settings {
 			'pinterest_url'       => '',
 			'youtube_url'         => '',
 			// Twitter.
-			'twitter-card-enable' => true,
+			'twitter-card-enable' => false,
 			'twitter-card-type'   => '',
 			// Pinterest.
 			'pinterest-verify'    => '',
 			// OpenGraph.
-			'og-enable'           => true,
+			'og-enable'           => false,
 			// Facebook-specific.
 			'fb-app-id'           => '',
 		);

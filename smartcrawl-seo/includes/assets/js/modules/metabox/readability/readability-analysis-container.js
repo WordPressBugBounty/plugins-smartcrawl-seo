@@ -10,7 +10,9 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 	static defaultProps = {
 		analysis: {},
 		loading: false,
+		isRefreshing: false,
 		onRefresh: () => false,
+		useReactAccordion: false,
 	};
 
 	levelDescription(level) {
@@ -48,7 +50,16 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 	}
 
 	render() {
-		const { analysis, loading, onRefresh } = this.props;
+		const {
+			analysis,
+			loading,
+			isRefreshing,
+			onRefresh,
+			useReactAccordion,
+		} = this.props;
+
+		const refreshDisabled =
+			loading || isRefreshing || !!analysis.refresh_disabled;
 
 		const totalScore = 100;
 		const levelDescription = this.levelDescription(analysis.level);
@@ -71,6 +82,10 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 								<span className="sui-summary-large">
 									{analysis.score}
 								</span>
+								<span className="sui-summary-percent">
+									{'/'}
+									{totalScore}
+								</span>
 								<span
 									className={classnames(
 										`sui-${analysis.state}`,
@@ -79,10 +94,6 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 											: 'sui-icon-info'
 									)}
 								></span>
-								<span className="sui-summary-percent">
-									{'/'}
-									{totalScore}
-								</span>
 								<span className="sui-summary-sub">
 									{__('Readability score', 'smartcrawl-seo')}
 								</span>
@@ -94,15 +105,55 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 								<small>{levelDescription}</small>
 							)}
 
-							<Button
-								className="wds-refresh-analysis wds-analysis-readability"
-								color="ghost"
-								icon="sui-icon-update"
-								text={__('Refresh', 'smartcrawl-seo')}
-								loading={loading}
-								disabled={!!analysis.refresh_disabled}
-								onClick={onRefresh}
-							></Button>
+							{useReactAccordion ? (
+								<button
+									type="button"
+									className={classnames(
+										'wds-refresh-button',
+										'wds-refresh-analysis',
+										'wds-analysis-readability',
+										'sui-button',
+										'sui-button-ghost',
+										{
+											'is-loading':
+												isRefreshing || loading,
+										}
+									)}
+									disabled={refreshDisabled}
+									onClick={onRefresh}
+									aria-busy={isRefreshing}
+								>
+									{isRefreshing ? (
+										<span
+											className="wds-spinner"
+											aria-hidden="true"
+										/>
+									) : (
+										<span
+											className="wds-refresh-icon"
+											aria-hidden="true"
+										>
+											<span className="sui-icon-update" />
+										</span>
+									)}
+									{isRefreshing
+										? __('Refreshing…', 'smartcrawl-seo')
+										: __('Refresh', 'smartcrawl-seo')}
+									{/* <span className="wds-refresh-text">
+										
+									</span> */}
+								</button>
+							) : (
+								<Button
+									className="wds-refresh-analysis wds-analysis-readability"
+									color="ghost"
+									icon="sui-icon-update"
+									text={__('Refresh', 'smartcrawl-seo')}
+									loading={loading}
+									disabled={!!analysis.refresh_disabled}
+									onClick={onRefresh}
+								></Button>
+							)}
 						</div>
 					</div>
 
@@ -130,14 +181,15 @@ export default class ReadabilityAnalysisContainer extends React.Component {
 								'Analyzing content. Please wait a few moments.',
 								'smartcrawl-seo'
 							)}
-						></Notice>
+						/>
 					)}
 
 					<ReadabilityAnalysisContent
 						state={analysis.state}
 						ignored={analysis.ignored}
 						level={analysis.level}
-					></ReadabilityAnalysisContent>
+						useReactAccordion={useReactAccordion}
+					/>
 
 					<p className="wds-interstitial-text">
 						<small>

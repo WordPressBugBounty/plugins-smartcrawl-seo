@@ -32,7 +32,7 @@ export default class Notice extends React.Component {
 							/>
 						)}
 
-						{icon && (
+						{icon && !loading && (
 							<span
 								className={classnames(
 									'sui-notice-icon sui-md',

@@ -6,7 +6,7 @@ const { useMemo, useState } = wp.element;
 const { __ } = wp.i18n;
 const { withSpokenMessages, Popover } = wp.components;
 const { prependHTTP } = wp.url;
-const { create, insert, isCollapsed, applyFormat } = wp.richText;
+const { create, insert, isCollapsed, applyFormat, useAnchor } = wp.richText;
 const { __experimentalLinkControl } = wp.blockEditor;
 const LinkControl = __experimentalLinkControl;
 
@@ -39,35 +39,20 @@ function InlineLinkUI({
 	onChange,
 	speak,
 	stopAddingLink,
+	contentRef,
 }) {
 	const mountingKey = useMemo(uniqueId, [addingLink]);
 
 	const [nextLinkValue, setNextLinkValue] = useState();
 
-	const anchor = useMemo(() => {
-		const selection = window.getSelection();
-
-		if (!selection.rangeCount) {
-			return;
-		}
-
-		const range = selection.getRangeAt(0);
-
-		if (addingLink && !isActive) {
-			return range;
-		}
-
-		let element = range.startContainer;
-
-		// If the caret is right before the element, select the next element.
-		element = element.nextElementSibling || element;
-
-		while (element.nodeType !== window.Node.ELEMENT_NODE) {
-			element = element.parentNode;
-		}
-
-		return element.closest('a');
-	}, [addingLink, value.start, value.end]);
+	const popoverAnchor = useAnchor({
+		editableContentElement: contentRef && contentRef.current,
+		settings: {
+			tagName: 'a',
+			className: null,
+			isActive,
+		},
+	});
 
 	const linkValue = {
 		url: activeAttributes.url,
@@ -156,7 +141,7 @@ function InlineLinkUI({
 	return (
 		<Popover
 			key={mountingKey}
-			anchor={anchor}
+			anchor={popoverAnchor}
 			focusOnMount={addingLink ? 'firstElement' : false}
 			onClose={stopAddingLink}
 			placement="bottom-start"

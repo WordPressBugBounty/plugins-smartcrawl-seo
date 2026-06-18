@@ -9,7 +9,6 @@
 namespace SmartCrawl\Modules\Advanced\Breadcrumbs\Builders;
 
 use SmartCrawl\Modules\Advanced\Breadcrumbs\Helper;
-use SmartCrawl\Controllers\Primary_Terms;
 
 /**
  * Pages breadcrumb class.
@@ -49,8 +48,8 @@ class Posts extends Builder {
 			// Set category crumbs.
 			$this->set_category_crumbs();
 		} else {
-			// Setup archive crumb.
-			$this->maybe_set_post_archive_crumb( false );
+			// Set taxonomy crumbs for custom post types.
+			$this->set_custom_taxonomy_crumbs();
 			// Set post parents crumbs.
 			$this->maybe_set_post_ancestors_crumbs();
 		}
@@ -139,16 +138,12 @@ class Posts extends Builder {
 	/**
 	 * Set crumbs for category items.
 	 *
-	 * If there is a primary category set, we will always use it or else
-	 * we will use the first item from the assigned category.
-	 * If a the primary category has a parent, we will include that too.
-	 *
 	 * @since 3.5.0
 	 *
 	 * @return void
 	 */
 	protected function set_category_crumbs() {
-		$category = $this->get_primary_category();
+		$category = $this->resolve_breadcrumb_term( 'category' );
 
 		if ( $category instanceof \WP_Term ) {
 			// Set ancestor crumbs.
@@ -165,38 +160,82 @@ class Posts extends Builder {
 	}
 
 	/**
-	 * Get primary category of the post.
+	 * Set crumbs for custom taxonomy items.
 	 *
-	 * If there is no primary category, use the first assigned category
-	 * as primary.
+	 * @since 3.16.0
 	 *
-	 * @since 3.5.0
+	 * @return void
+	 */
+	protected function set_custom_taxonomy_crumbs() {
+		global $post;
+
+		$post_type = get_post_type( $post->ID );
+		if ( ! $post_type ) {
+			return;
+		}
+
+		// Get all hierarchical taxonomies for this post type.
+		$taxonomies = get_object_taxonomies( $post_type, 'objects' );
+		if ( empty( $taxonomies ) ) {
+			return;
+		}
+
+		// Filter to only hierarchical taxonomies.
+		$hierarchical_taxonomies = array_filter(
+			$taxonomies,
+			function ( $taxonomy ) {
+				return $taxonomy->hierarchical;
+			}
+		);
+
+		if ( empty( $hierarchical_taxonomies ) ) {
+			return;
+		}
+
+		$taxonomy      = reset( $hierarchical_taxonomies );
+		$taxonomy_name = $taxonomy->name;
+
+		// Get primary term if available.
+		$term = $this->get_primary_term( $taxonomy_name );
+
+		if ( $term instanceof \WP_Term ) {
+			$this->set_ancestor_crumbs( $term->term_id, $taxonomy_name );
+
+			$term_link = get_term_link( $term->term_id, $taxonomy_name );
+			$item      = array(
+				'title' => $term->name,
+			);
+			if ( $term_link && ! is_wp_error( $term_link ) ) {
+				$item['link'] = $term_link;
+			}
+
+			$this->add_item(
+				$item
+			);
+		}
+	}
+
+	/**
+	 * Get the primary term for a given taxonomy.
+	 *
+	 * @since 3.16.0
+	 *
+	 * @param string $taxonomy_name Taxonomy name.
 	 *
 	 * @return false|\WP_Term
 	 */
-	protected function get_primary_category() {
+	protected function get_primary_term( $taxonomy_name ) {
 		global $post;
 
-		// Is primary category feature active.
-		$primary_terms_active = Primary_Terms::get()->should_run();
-
-		// Get primary category.
-		if ( $primary_terms_active ) {
-			$category = get_post_meta( $post->ID, 'wds_primary_category', true );
-			if ( ! empty( $category ) ) {
-				$category = get_term( $category, 'category' );
-			}
+		if ( ! $post instanceof \WP_Post ) {
+			return false;
 		}
 
-		// Primary category is not available, get first category.
-		if ( ! $primary_terms_active || empty( $category ) ) {
-			$categories = get_the_category( $post->ID );
-
-			// First item is the primary category.
-			$category = empty( $categories ) ? false : $categories[0];
+		if ( ! taxonomy_exists( $taxonomy_name ) || ! is_object_in_taxonomy( $post->post_type, $taxonomy_name ) ) {
+			return false;
 		}
 
-		return $category;
+		return $this->resolve_breadcrumb_term( $taxonomy_name );
 	}
 
 	/**

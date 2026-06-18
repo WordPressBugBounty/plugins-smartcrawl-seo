@@ -21,7 +21,6 @@ domReady(() => {
 	$(init);
 
 	function init() {
-		window.Wds.reporting_schedule();
 		window.Wds.vertical_tabs();
 		window.Wds.hook_toggleables();
 

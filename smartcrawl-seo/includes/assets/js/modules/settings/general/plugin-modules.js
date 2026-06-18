@@ -36,8 +36,7 @@ const tooltips = {
 	),
 };
 const title = ConfigValues.get('title', 'advanced'),
-	submodules = ConfigValues.get('submodules', 'advanced') || [],
-	isMember = ConfigValues.get('is_member', 'admin');
+	submodules = ConfigValues.get('submodules', 'advanced') || [];
 
 export default class PluginModules extends React.Component {
 	render() {
@@ -49,52 +48,75 @@ export default class PluginModules extends React.Component {
 							<span className="wds-module-title">{title}</span>
 						</div>
 						<div className="wds-module-body">
-							{Object.keys(submodules).map((key, index) => (
-								<div className="sui-form-field" key={index}>
-									<Toggle
-										name={`wds_settings_options[advanced][${key}]`}
-										label={
-											<>
-												{submodules[key]?.title}{' '}
-												{submodules[key]?.premium &&
-													!isMember && (
+							{Object.keys(submodules).map((key, index) => {
+								const submodule = submodules[key];
+								const isPremiumLocked = !!submodule?.premium;
+
+								return (
+									<div className="sui-form-field" key={index}>
+										<Toggle
+											name={`wds_settings_options[advanced][${key}]`}
+											label={
+												<>
+													<span
+														className={
+															tooltips[key]
+																? 'sui-tooltip sui-tooltip-constrained'
+																: undefined
+														}
+														data-tooltip={
+															tooltips[key] ||
+															undefined
+														}
+														style={
+															tooltips[key]
+																? {
+																		'--tooltip-width':
+																			'240px',
+																  }
+																: undefined
+														}
+													>
+														{submodule?.title}
+													</span>
+													{isPremiumLocked && (
 														<span
 															className="sui-tag sui-tag-pro sui-tooltip"
-															data-tooltip="Upgrade to SmartCrawl Pro"
+															data-tooltip={__(
+																'Upgrade to SmartCrawl Pro',
+																'smartcrawl-seo'
+															)}
 														>
-															{__('Pro', 'smartcrawl-seo')}
+															{__(
+																'Pro',
+																'smartcrawl-seo'
+															)}
 														</span>
 													)}
-											</>
-										}
-										tooltip={tooltips[key]}
-										checked={
-											!submodules[key]?.warning &&
-											submodules[key]?.active &&
-											(!submodules[key]?.premium ||
-												isMember)
-										}
-										disabled={
-											submodules[key]?.warning ||
-											(submodules[key]?.premium &&
-												!isMember)
-										}
-									/>
-									{submodules[key].warning && (
-										<Notice
-											type="warning"
-											message={
-												<span
-													dangerouslySetInnerHTML={{
-														__html: submodules[key]
-															.warning,
-													}}
-												></span>
+												</>
 											}
+											checked={
+												!submodule?.warning &&
+												!isPremiumLocked &&
+												submodule?.active
+											}
+											disabled={isPremiumLocked}
 										/>
-									)}
-								</div>
-							))}
+										{submodule.warning && (
+											<Notice
+												type="warning"
+												message={
+													<span
+														dangerouslySetInnerHTML={{
+															__html: submodule.warning,
+														}}
+													></span>
+												}
+											/>
+										)}
+									</div>
+								);
+							})}
 						</div>
 					</div>
 				)}

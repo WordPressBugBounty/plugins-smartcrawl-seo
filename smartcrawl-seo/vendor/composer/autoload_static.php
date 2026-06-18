@@ -4,9 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit35da7489a14b9aac977b1266e8075a08
+class ComposerStaticInite4423c17802da4157ae15308282e2501
 {
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'SmartCrawl\\Admin\\Admin' => __DIR__ . '/../..' . '/includes/core/admin/class-admin.php',
         'SmartCrawl\\Admin\\Conflict_Detector' => __DIR__ . '/../..' . '/includes/admin/class-conflict-detector.php',
         'SmartCrawl\\Admin\\Metabox' => __DIR__ . '/../..' . '/includes/core/admin/class-metabox.php',
@@ -78,6 +79,7 @@ class ComposerStaticInit35da7489a14b9aac977b1266e8075a08
         'SmartCrawl\\Controllers\\OnPage' => __DIR__ . '/../..' . '/includes/core/controllers/class-onpage.php',
         'SmartCrawl\\Controllers\\Onboard' => __DIR__ . '/../..' . '/includes/core/controllers/class-onboard.php',
         'SmartCrawl\\Controllers\\Plugin_Links' => __DIR__ . '/../..' . '/includes/core/controllers/class-plugin-links.php',
+        'SmartCrawl\\Controllers\\Post_Meta' => __DIR__ . '/../..' . '/includes/core/controllers/class-post-meta.php',
         'SmartCrawl\\Controllers\\Primary_Terms' => __DIR__ . '/../..' . '/includes/core/controllers/class-primary-terms.php',
         'SmartCrawl\\Controllers\\Recommended_Plugins' => __DIR__ . '/../..' . '/includes/core/controllers/class-recommended-plugins.php',
         'SmartCrawl\\Controllers\\Report_Permalinks' => __DIR__ . '/../..' . '/includes/core/controllers/class-report-permalinks.php',
@@ -110,6 +112,7 @@ class ComposerStaticInit35da7489a14b9aac977b1266e8075a08
         'SmartCrawl\\Instant_Indexing\\IndexNow_API' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-indexnow-api.php',
         'SmartCrawl\\Instant_Indexing\\IndexNow_Actions' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-indexnow-actions.php',
         'SmartCrawl\\Instant_Indexing\\IndexNow_REST' => __DIR__ . '/../..' . '/includes/core/instant-indexing/class-indexnow-rest.php',
+        'SmartCrawl\\Integration\\Generateblocks\\Meta_Tags' => __DIR__ . '/../..' . '/includes/integration/generateblocks/class-meta-tags.php',
         'SmartCrawl\\Integration\\Maxmind\\Controller' => __DIR__ . '/../..' . '/includes/integration/maxmind/class-controller.php',
         'SmartCrawl\\Integration\\Maxmind\\Cron' => __DIR__ . '/../..' . '/includes/integration/maxmind/class-cron.php',
         'SmartCrawl\\Integration\\Maxmind\\GeoDB' => __DIR__ . '/../..' . '/includes/integration/maxmind/class-geodb.php',
@@ -166,6 +169,7 @@ class ComposerStaticInit35da7489a14b9aac977b1266e8075a08
         'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Builders\\Woocommerce' => __DIR__ . '/../..' . '/includes/modules/advanced/breadcrumbs/builders/class-woocommerce.php',
         'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Controller' => __DIR__ . '/../..' . '/includes/modules/advanced/breadcrumbs/class-controller.php',
         'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Helper' => __DIR__ . '/../..' . '/includes/modules/advanced/breadcrumbs/class-helper.php',
+        'SmartCrawl\\Modules\\Advanced\\Breadcrumbs\\Term_Resolver' => __DIR__ . '/../..' . '/includes/modules/advanced/breadcrumbs/class-term-resolver.php',
         'SmartCrawl\\Modules\\Advanced\\Controller' => __DIR__ . '/../..' . '/includes/modules/advanced/class-controller.php',
         'SmartCrawl\\Modules\\Advanced\\Redirects\\Controller' => __DIR__ . '/../..' . '/includes/modules/advanced/redirects/class-controller.php',
         'SmartCrawl\\Modules\\Advanced\\Redirects\\Database_Table' => __DIR__ . '/../..' . '/includes/modules/advanced/redirects/class-database-table.php',
@@ -287,7 +291,6 @@ class ComposerStaticInit35da7489a14b9aac977b1266e8075a08
         'SmartCrawl\\WPML\\Controller' => __DIR__ . '/../..' . '/includes/core/wpml/class-controller.php',
         'SmartCrawl\\Work_Unit' => __DIR__ . '/../..' . '/includes/core/class-work-unit.php',
         'SmartCrawl\\Youtube_Data_Fetcher' => __DIR__ . '/../..' . '/includes/core/class-youtube-data-fetcher.php',
-        'Smartcrawl_Vendor\\Detection\\MobileDetect' => __DIR__ . '/../..' . '/vendor_prefixed/mobiledetect/mobiledetectlib/src/MobileDetect.php',
         'Smartcrawl_Vendor\\MaxMind\\Db\\Reader' => __DIR__ . '/../..' . '/vendor_prefixed/maxmind-db/reader/src/MaxMind/Db/Reader.php',
         'Smartcrawl_Vendor\\MaxMind\\Db\\Reader\\Decoder' => __DIR__ . '/../..' . '/vendor_prefixed/maxmind-db/reader/src/MaxMind/Db/Reader/Decoder.php',
         'Smartcrawl_Vendor\\MaxMind\\Db\\Reader\\InvalidDatabaseException' => __DIR__ . '/../..' . '/vendor_prefixed/maxmind-db/reader/src/MaxMind/Db/Reader/InvalidDatabaseException.php',
@@ -311,7 +314,7 @@ class ComposerStaticInit35da7489a14b9aac977b1266e8075a08
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit35da7489a14b9aac977b1266e8075a08::$classMap;
+            $loader->classMap = ComposerStaticInite4423c17802da4157ae15308282e2501::$classMap;
 
         }, null, ClassLoader::class);
     }

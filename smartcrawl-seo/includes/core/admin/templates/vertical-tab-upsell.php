@@ -11,7 +11,6 @@ $tab_name           = empty( $tab_name ) ? '' : $tab_name;
 $is_active          = empty( $is_active ) ? false : $is_active;
 $tab_sections       = ! empty( $tab_sections ) && is_array( $tab_sections ) ? $tab_sections : array();
 $title_actions_left = empty( $title_actions_left ) ? false : $title_actions_left;
-$is_member          = ! empty( $_view['is_member'] );
 
 // Optional.
 $button_text = isset( $button_text ) ? $button_text : esc_html__( 'Save Settings', 'smartcrawl-seo' );

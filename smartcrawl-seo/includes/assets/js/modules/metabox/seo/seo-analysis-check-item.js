@@ -4,8 +4,12 @@ import AccordionItem from '../../../components/accordion-item';
 import AccordionItemOpenIndicator from '../../../components/accordion-item-open-indicator';
 import { __ } from '@wordpress/i18n';
 import Button from '../../../components/button';
+import SeoAnalysisAccordionContext from './seo-analysis-accordion-context';
+import GutenbergSeoAnalysisCheckItemAccordion from '../../sidebar/panels/seo/GutenbergSeoAnalysisCheckItemAccordion';
 
 export default class SeoAnalysisCheckItem extends React.Component {
+	static contextType = SeoAnalysisAccordionContext;
+
 	static defaultProps = {
 		id: '',
 		status: false,
@@ -28,6 +32,21 @@ export default class SeoAnalysisCheckItem extends React.Component {
 			onIgnore,
 			onUnignore,
 		} = this.props;
+
+		if (this.context && this.context.useReactAccordion) {
+			return (
+				<GutenbergSeoAnalysisCheckItemAccordion
+					id={id}
+					status={status}
+					ignored={ignored}
+					recommendation={recommendation}
+					statusMsg={statusMsg}
+					moreInfo={moreInfo}
+					onIgnore={onIgnore}
+					onUnignore={onUnignore}
+				/>
+			);
+		}
 
 		return (
 			<AccordionItem

@@ -63,7 +63,7 @@ class Para_Keywords extends Check {
 		/**
 		 * Convert subject into plain text to strip tags
 		 */
-		$this->state = $this->has_focus( Html::plaintext( $subject ) );
+		$this->state = $this->has_focus_loose( Html::plaintext( $subject ) );
 
 		return ! ! $this->state;
 	}

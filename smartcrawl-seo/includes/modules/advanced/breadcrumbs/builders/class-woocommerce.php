@@ -8,6 +8,8 @@
 
 namespace SmartCrawl\Modules\Advanced\Breadcrumbs\Builders;
 
+use SmartCrawl\Modules\Advanced\Breadcrumbs\Helper;
+
 /**
  * Woocommerce breadcrumb class.
  */
@@ -23,12 +25,23 @@ class Woocommerce extends Builder {
 	protected function prepare_items() {
 		$this->reset_items();
 
-		// Shop page crumb.
-		$this->set_shop_crumb();
+		if ( function_exists( '\is_shop' ) && \is_shop() ) {
+			$this->set_shop_crumb( true );
+			return;
+		}
 
 		if ( is_singular( 'product' ) ) {
+			// Set product category crumbs.
+			$this->set_product_category_crumbs();
+
 			// Set current product crumb.
-			$this->add_item( array( 'title' => get_the_title() ) );
+			if ( ! Helper::get_option( 'hide_post_title' ) ) {
+				$this->add_item(
+					array(
+						'title' => $this->get_label( 'post', get_the_title() ),
+					)
+				);
+			}
 		} elseif ( is_tax( array( 'product_cat', 'product_tag' ) ) ) {
 			// Product category and tag crumbs.
 			$this->set_taxonomy_crumbs();
@@ -59,6 +72,27 @@ class Woocommerce extends Builder {
 				'title' => $term->name,
 			)
 		);
+	}
+
+	/**
+	 * Set crumbs for product category items.
+	 *
+	 * @since 3.16.0
+	 *
+	 * @return void
+	 */
+	protected function set_product_category_crumbs() {
+		$category = $this->resolve_breadcrumb_term( 'product_cat' );
+
+		if ( $category instanceof \WP_Term ) {
+			$this->set_ancestor_crumbs( $category->term_id, 'product_cat' );
+			$this->add_item(
+				array(
+					'link'  => get_term_link( $category->term_id, 'product_cat' ),
+					'title' => $category->name,
+				)
+			);
+		}
 	}
 
 	/**

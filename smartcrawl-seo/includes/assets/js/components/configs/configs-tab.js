@@ -1,10 +1,10 @@
 import React from 'react';
 import ConfigsBoxHeader from './configs-box-header';
+import ConfigsFooter from './configs-footer';
 import { __, sprintf } from '@wordpress/i18n';
 import classnames from 'classnames';
 import Notice from '../notices/notice';
 import ConfigItem from './config-item';
-import ConfigsHubSyncLink from './configs-hub-sync-link';
 import { createInterpolateElement } from '@wordpress/element';
 import Pagination from '../navigations/pagination';
 import ConfigValues from '../../es6/config-values';
@@ -21,14 +21,12 @@ export default class ConfigsTab extends React.Component {
 		onUpdate: () => false,
 		onDownload: () => false,
 		onDelete: () => false,
-		triggerSync: () => false,
-	};
+		};
 
 	constructor(props) {
 		super(props);
 
 		this.configsPerPage = 10;
-		this.props.triggerSync();
 		this.state = {
 			currentPageNumber: 1,
 		};
@@ -53,7 +51,6 @@ export default class ConfigsTab extends React.Component {
 
 	render() {
 		const page = this.getConfigsPage();
-		const isMember = ConfigValues.get('is_member', 'config');
 		const configs = this.getConfigs();
 		const configsExist = Object.keys(configs).length > 0;
 
@@ -192,38 +189,8 @@ export default class ConfigsTab extends React.Component {
 								</React.Fragment>
 							)}
 
-							{isMember && (
-								<ConfigsHubSyncLink
-									onClick={() => this.props.triggerSync()}
+							<ConfigsFooter
 								/>
-							)}
-							{!isMember && (
-								<Notice
-									type="purple"
-									message={createInterpolateElement(
-										__(
-											'Tired of saving, downloading and uploading your configs across your sites? WPMU DEV members use The Hub to easily apply configs to multiple sites at once… Unlock now with Pro!<br/> <a>Try The Hub</a>',
-											'smartcrawl-seo'
-										),
-										{
-											br: <br />,
-											a: (
-												<a
-													target="_blank"
-													className="sui-button sui-button-purple"
-													href="https://wpmudev.com/project/smartcrawl-wordpress-seo/?utm_source=smartcrawl&utm_medium=plugin&utm_campaign=smartcrawl_configs_upsell_notice"
-													rel="noreferrer"
-												>
-													{__(
-														'Try The Hub',
-														'smartcrawl-seo'
-													)}
-												</a>
-											),
-										}
-									)}
-								/>
-							)}
 						</div>
 					</div>
 				</div>

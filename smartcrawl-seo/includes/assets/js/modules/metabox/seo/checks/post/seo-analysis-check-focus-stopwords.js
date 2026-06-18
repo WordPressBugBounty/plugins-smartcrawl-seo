@@ -42,9 +42,9 @@ export default class SeoAnalysisCheckFocusStopWords extends React.Component {
 							phrase
 					  )
 					: sprintf(
-							/* translators: %s: keyphrase phrases */
+							/* translators: %s: keyphrase or key phrase label */
 							__(
-								'Your focus %s contains some words that might be considered insignificant in a search query.',
+								'Your focus %s contains some words that might impact your SEO',
 								'wds'
 							),
 							phrase
@@ -65,7 +65,7 @@ export default class SeoAnalysisCheckFocusStopWords extends React.Component {
 		return (
 			<p>
 				{__(
-					'Stop words are words which can be considered insignificant in a search query, either because they are way too common, or because they do not convey much information. Such words are often filtered out from a search query. Ideally, you will want such words to not be a part of your article focus.',
+					'Stop words are words which can be considered insignificant in a search query, either because they are way too common, or because they do not convey much information. However, stop words should be used if it makes sense but try and avoid them in your URLs and title tags to improve clarity.',
 					'wds'
 				)}
 			</p>

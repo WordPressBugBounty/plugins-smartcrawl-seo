@@ -15,14 +15,14 @@ $body_template_args      = empty( $body_template_args ) ? array() : $body_templa
 $footer_template         = empty( $footer_template ) ? '' : $footer_template;
 $footer_template_args    = empty( $footer_template_args ) ? array() : $footer_template_args;
 $small                   = empty( $small ) ? false : $small;
-$is_member               = ! empty( $_view['is_member'] );
 ?>
 
 <div class="sui-modal <?php echo $small ? 'sui-modal-sm' : 'sui-modal-lg'; ?>">
 	<div
 		role="dialog"
 		id="<?php echo esc_attr( $id ); ?>"
-		class="sui-modal-content <?php echo esc_attr( $id ); ?>-dialog <?php echo $is_member ? 'is-member' : ''; ?>"
+		class="sui-modal-content <?php echo esc_attr( $id ); ?>-dialog
+		"
 		aria-modal="true"
 		aria-labelledby="<?php echo esc_attr( $id ); ?>-dialog-title"
 		aria-describedby="<?php echo esc_attr( $id ); ?>-dialog-description"

@@ -27,9 +27,6 @@ $lighthouse_report = empty( $lighthouse_report ) || ! $lighthouse_report->has_da
 	? false
 	: $lighthouse_report;
 $issue_count       = $lighthouse_report ? $lighthouse_report->get_failed_audits_count() : 0;
-$service           = Service::get( Service::SERVICE_SITE );
-$is_member         = $service->is_member();
-$reporting_enabled = Options::is_cron_enabled() && $is_member;
 $tooltip_text      = $lighthouse_report && $lighthouse_report->is_cooling_down()
 	? sprintf(
 		/* translators: 1: Remaining cool down minutes, 2: plugin title */
@@ -131,17 +128,7 @@ $tooltip_text      = $lighthouse_report && $lighthouse_report->is_cooling_down()
 
 				<span class="sui-icon-loader sui-loading" aria-hidden="true"></span>
 			</button>
-
-			<span>
-				<small>
-					<?php
-					echo empty( $reporting_enabled )
-						? esc_html__( 'Automatic SEO Reports are disabled', 'smartcrawl-seo' )
-						: esc_html__( 'Automatic SEO Reports are enabled', 'smartcrawl-seo' );
-					?>
-				</small>
-			</span>
-		</div>
+			</div>
 	<?php endif; ?>
 
 </section>

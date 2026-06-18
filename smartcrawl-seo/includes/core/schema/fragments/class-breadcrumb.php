@@ -40,7 +40,27 @@ class Breadcrumb extends Fragment {
 	 * @return mixed|void
 	 */
 	protected function get_raw() {
-		$crumbs = Controller::get()->get_current_builder()->get_items();
+		$controller = Controller::get();
+
+		if ( ! $controller->should_run() ) {
+			return false;
+		}
+
+		/**
+		 * Filter to disable Breadcrumbs schema output.
+		 *
+		 * Returning false from this filter will completely disable
+		 * the Structured Data (JSON-LD) output for SmartCrawl Breadcrumbs.
+		 *
+		 * @since 3.16.0
+		 *
+		 * @param bool $enabled Whether breadcrumb schema is enabled.
+		 */
+		if ( ! apply_filters( 'smartcrawl_breadcrumbs_schema_enabled', true ) ) {
+			return false;
+		}
+
+		$crumbs = $controller->get_current_builder()->get_items();
 		// No crumbs. Do nothing.
 		if ( empty( $crumbs ) ) {
 			return false;

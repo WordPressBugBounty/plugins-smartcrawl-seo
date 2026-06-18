@@ -7,13 +7,6 @@
 
 namespace SmartCrawl;
 
-use SmartCrawl\Services\Service;
-
-$service   = Service::get( Service::SERVICE_SITE );
-$is_member = $service->is_member();
-if ( $is_member ) {
-	return;
-}
 ?>
 
 <section

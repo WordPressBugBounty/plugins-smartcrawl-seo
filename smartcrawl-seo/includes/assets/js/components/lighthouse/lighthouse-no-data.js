@@ -9,8 +9,6 @@ import ConfigValues from '../../es6/config-values';
 import VerticalTab from '../vertical-tab';
 import UrlUtil from '../../utils/url-util';
 
-const isMember = ConfigValues.get('is_member', 'admin') === '1';
-
 export default class LighthouseNoData extends React.Component {
 	static defaultProps = {
 		startTime: '',

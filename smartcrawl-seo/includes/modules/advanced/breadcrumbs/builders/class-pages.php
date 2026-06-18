@@ -38,7 +38,7 @@ class Pages extends Builder {
 		// Current page data.
 		if ( ! is_front_page() && ! Helper::get_option( 'hide_post_title' ) ) {
 			$this->add_item(
-				array( 'title' => $this->get_label( 'page', get_the_title() ) )
+				array( 'title' => $this->get_label( 'page', single_post_title( '', false ) ) )
 			);
 		}
 	}

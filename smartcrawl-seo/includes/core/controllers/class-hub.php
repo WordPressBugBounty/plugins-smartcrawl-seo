@@ -71,7 +71,6 @@ class Hub extends Hub_Abstract {
 		}
 
 		$actions['wds-seo-summary'] = array( $this, 'ajax_seo_summary' );
-		$actions['wds-run-crawl']   = array( $this, 'ajax_run_crawl' );
 
 		$actions['wds-apply-config']  = array( $this, 'ajax_apply_config' );
 		$actions['wds-export-config'] = array( $this, 'ajax_export_config' );

@@ -50,11 +50,79 @@ class Controller extends Controllers\Submodule_Controller {
 	protected function init() {
 		parent::init();
 
+		if ( function_exists( '\is_woocommerce' ) ) {
+			add_filter( 'woocommerce_breadcrumb_main_term', array( $this, 'filter_woocommerce_breadcrumb_main_term' ), 10, 2 );
+		}
+
+		add_filter( 'get_the_terms', array( $this, 'prioritize_breadcrumb_term' ), 10, 3 );
+
 		if ( ! empty( $this->options['disable_woo'] ) ) {
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 		}
 
 		add_filter( 'smartcrawl_known_macros', array( $this, 'replace_macros' ), 10, 2 );
+	}
+
+    /**
+     * Use SmartCrawl primary category for WooCommerce breadcrumbs.
+     *
+     * @param \WP_Term $term Default main term selected by WooCommerce.
+     * @param array $terms All assigned product category terms.
+     *
+     * @return \WP_Term
+     * @since 3.16.0
+     */
+	public function filter_woocommerce_breadcrumb_main_term( $term, $terms = array() ) {
+		if ( ! $this->should_run() || ! $term instanceof \WP_Term || 'product_cat' !== $term->taxonomy ) {
+			return $term;
+		}
+
+		$post_id = get_the_ID();
+		if ( ! $post_id || 'product' !== get_post_type( $post_id ) ) {
+			return $term;
+		}
+
+		$resolved = Term_Resolver::get_term( $post_id, 'product_cat' );
+
+		return $resolved instanceof \WP_Term ? $resolved : $term;
+	}
+
+    /**
+     * Put the resolved breadcrumb term first for theme breadcrumb trails.
+     *
+     * @param \WP_Term[]|\WP_Error $terms Terms for the post.
+     * @param int $post_id Post ID.
+     * @param string $taxonomy Taxonomy name.
+     *
+     * @return \WP_Term[]|\WP_Error
+     * @since 3.16.0
+     */
+	public function prioritize_breadcrumb_term( $terms, $post_id, $taxonomy ) {
+		if ( ! $this->should_run() || is_wp_error( $terms ) || empty( $terms ) || is_admin() ) {
+			return $terms;
+		}
+
+		if ( ! in_array( $taxonomy, array( 'category', 'product_cat' ), true ) ) {
+			return $terms;
+		}
+
+		if ( ! is_singular() ) {
+			return $terms;
+		}
+
+		$resolved = Term_Resolver::get_term( $post_id, $taxonomy );
+		if ( ! $resolved instanceof \WP_Term ) {
+			return $terms;
+		}
+
+		$ordered = array( $resolved );
+		foreach ( $terms as $term ) {
+			if ( $term instanceof \WP_Term && (int) $term->term_id !== (int) $resolved->term_id ) {
+				$ordered[] = $term;
+			}
+		}
+
+		return $ordered;
 	}
 
 	/**
@@ -64,6 +132,12 @@ class Controller extends Controllers\Submodule_Controller {
 	 */
 	protected function terminate() {
 		parent::terminate();
+
+		if ( function_exists( '\is_woocommerce' ) ) {
+			remove_filter( 'woocommerce_breadcrumb_main_term', array( $this, 'filter_woocommerce_breadcrumb_main_term' ), 10 );
+		}
+
+		remove_filter( 'get_the_terms', array( $this, 'prioritize_breadcrumb_term' ), 10 );
 
 		remove_filter( 'smartcrawl_known_macros', array( $this, 'replace_macros' ), 10, 2 );
 	}
@@ -373,7 +447,17 @@ class Controller extends Controllers\Submodule_Controller {
 	 * @return bool True if sanitized successfully, otherwise false.
 	 */
 	public function sanitize_options( $input ) {
-		$old_options = $this->options;
+
+		if ( is_string( $input ) ) {
+			$decoded = json_decode( $input, true );
+			if ( is_array( $decoded ) ) {
+				$input = $decoded;
+			}
+		}
+
+		if ( ! is_array( $input ) ) {
+			return false;
+		}
 
 		if ( isset( $input['active'] ) ) {
 			$active = boolval( $input['active'] );
@@ -406,7 +490,7 @@ class Controller extends Controllers\Submodule_Controller {
 
 		$labels = array( 'post', 'page', 'archive', 'search', '404' );
 		foreach ( $labels as $key ) {
-			if ( isset( $input['labels'][ $key ] ) ) {
+			if ( isset( $input['labels'][ $key ] ) && is_array( $input['labels'] ) ) {
 				$this->options['labels'][ $key ] = \smartcrawl_sanitize_preserve_macros( $input['labels'][ $key ] );
 			}
 		}
@@ -414,7 +498,9 @@ class Controller extends Controllers\Submodule_Controller {
 		// Boolean fields.
 		$booleans = array( 'home_trail', 'hide_post_title', 'add_prefix', 'disable_woo' );
 		foreach ( $booleans as $key ) {
-			$this->options[ $key ] = (bool) $input[ $key ];
+			if ( isset( $input[ $key ] ) ) {
+				$this->options[ $key ] = (bool) $input[ $key ];
+			}
 		}
 
 		return true;

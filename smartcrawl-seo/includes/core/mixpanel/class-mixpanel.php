@@ -10,8 +10,7 @@ namespace SmartCrawl\Mixpanel;
 
 use SmartCrawl\Logger;
 use SmartCrawl\Singleton;
-use Smartcrawl_Vendor\Detection\MobileDetect;
-use WPMUDEV_Analytics;
+use WPMUDEV_Analytics_V4;
 
 /**
  * Mixpanel main class.
@@ -28,7 +27,7 @@ class Mixpanel {
 	/**
 	 * Mixpanel instance.
 	 *
-	 * @var WPMUDEV_Analytics
+	 * @var WPMUDEV_Analytics_V4
 	 */
 	private $mixpanel = null;
 
@@ -39,13 +38,13 @@ class Mixpanel {
 	 */
 	protected function __construct() {
 		if ( is_null( $this->mixpanel ) ) {
-			if ( ! class_exists( 'WPMUDEV_Analytics' ) ) {
+			if ( ! class_exists( 'WPMUDEV_Analytics_V4' ) ) {
 				require_once SMARTCRAWL_PLUGIN_DIR . 'external/wpmudev-analytics/autoload.php';
-			}
+			}   
 			$extra_options  = array(
 				'consumer' => 'socket',
 			);
-			$this->mixpanel = new WPMUDEV_Analytics( 'smartcrawl', 'SmartCrawl', 55, self::TOKEN, $extra_options );
+			$this->mixpanel = new WPMUDEV_Analytics_V4( 'smartcrawl', 'SmartCrawl', 55, self::TOKEN, $extra_options );
 			// Configure mixpanel.
 			$this->mixpanel->identify( $this->identity() );
 			$this->mixpanel->registerAll( $this->super_properties() );
@@ -59,7 +58,7 @@ class Mixpanel {
 	 *
 	 * @since 3.7.0
 	 *
-	 * @return WPMUDEV_Analytics
+	 * @return WPMUDEV_Analytics_V4
 	 */
 	public function tracker() {
 		return $this->mixpanel;
@@ -116,7 +115,7 @@ class Mixpanel {
 			'wp_type'            => is_multisite() ? 'multisite' : 'single',
 			'wp_version'         => $wp_version,
 			'device'             => $this->get_device_type(),
-			'user_agent'         => isset( $_SERVER['HTTP_USER_AGENT'] ) ? wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			'user_agent'         => $this->get_user_agent(),
 			'memory_limit'       => ini_get( 'memory_limit' ),
 			'max_execution_time' => ini_get( 'max_execution_time' ),
 		);
@@ -165,16 +164,66 @@ class Mixpanel {
 	}
 
 	/**
-	 * Get current device type.
+	 * Is Tablet
 	 *
-	 * @since 3.7.0
+	 * @return bool
+	 */
+	private function is_tablet() {
+		$user_agent = $this->get_user_agent();
+		if ( empty( $user_agent ) ) {
+			return false;
+		}
+
+		$tablet_pattern = '/(tablet|ipad|playbook|kindle|silk)/i';
+
+		return preg_match( $tablet_pattern, $user_agent );
+	}
+
+	/**
+	 * Is mobile
+	 *
+	 * @return bool
+	 */
+	private function is_mobile() {
+		$user_agent = $this->get_user_agent();
+		if ( empty( $user_agent ) ) {
+			return false;
+		}
+
+		$mobile_patten = '/Mobile|iP(hone|od|ad)|Android|BlackBerry|tablet|IEMobile|Kindle|NetFront|Silk|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune|playbook/i';
+
+		return preg_match( $mobile_patten, $user_agent );
+	}
+
+	/**
+
+	 * Get current device type.
 	 *
 	 * @return string
 	 */
 	private function get_device_type() {
-		$detector = new MobileDetect();
+		if ( $this->is_tablet() ) {
+			return 'tablet';
+		}
 
-		return ( $detector->isMobile() ? ( $detector->isTablet() ? 'Tablet' : 'Mobile' ) : 'Desktop' );
+		if ( $this->is_mobile() ) {
+			return 'mobile';
+		}
+
+		return 'desktop';
+	}
+
+	/**
+	 * Get sanitized user agent value.
+	 *
+	 * @return string
+	 */
+	private function get_user_agent() {
+		if ( empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
+			return '';
+		}
+
+		return sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) );
 	}
 
 	/**

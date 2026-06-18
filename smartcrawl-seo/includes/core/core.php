@@ -1141,11 +1141,13 @@ function smartcrawl_is_tracking_allowed() {
  */
 function smartcrawl_sui_class() {
 	$classes[] = defined( 'SMARTCRAWL_SUI_VERSION' ) && SMARTCRAWL_SUI_VERSION
-		? 'sui-' . str_replace( '.', '-', SMARTCRAWL_SUI_VERSION )
-		: '';
+			? 'sui-' . str_replace( '.', '-', SMARTCRAWL_SUI_VERSION )
+			: '';
 
-	$hide_branding = White_Label::get()->is_hide_wpmudev_branding();
-	if ( $hide_branding ) {
+	$hide_branding  = White_Label::get()->is_hide_wpmudev_branding();
+	$branding_image = apply_filters( 'wpmudev_branding_hero_image', '' );
+
+	if ( $hide_branding && ! empty( $branding_image ) ) {
 		$classes[] = 'wds-no-branding';
 	}
 

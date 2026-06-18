@@ -603,33 +603,7 @@
 	}
 
 	$(init);
-
-	window.Wds.reporting_schedule = function () {
-		function changeFrequency() {
-			var $radio = $(this),
-				frequency = $radio.val(),
-				$dowSelects = $('.wds-dow').hide();
-
-			$dowSelects.find('select').prop('disabled', true);
-			$dowSelects.filter('.' + frequency).show();
-			$dowSelects
-				.filter('.' + frequency)
-				.find('select')
-				.prop('disabled', false);
-		}
-
-		$(document).on(
-			'change',
-			'.wds-frequency-tabs .sui-tab-item > input[type="radio"]',
-			changeFrequency
-		);
-		$(
-			'.wds-frequency-tabs .sui-tab-item > input[type="radio"]:checked'
-		).each(function () {
-			changeFrequency.apply(this);
-		});
-	};
-
+	window.Wds.reporting_schedule = function () {};
 	window.Wds.manageNewFeatureStatus = function (step) {
 		$(document).ready(function () {
 			if (

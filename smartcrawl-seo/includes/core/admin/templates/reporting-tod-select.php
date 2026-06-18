@@ -10,11 +10,8 @@ $component = empty( $component ) ? '' : $component;
 if ( ! $component ) {
 	return;
 }
-$tod_value = empty( $tod_value ) ? false : $tod_value;
-
-$is_member   = ! empty( $_view['is_member'] );
+$tod_value   = empty( $tod_value ) ? false : $tod_value;
 $option_name = empty( $_view['option_name'] ) ? '' : $_view['option_name'];
-$disabled    = ( $is_member || 'sitemap-update' === $component ) ? '' : 'disabled';
 
 $midnight = strtotime( 'today' );
 
@@ -32,7 +29,6 @@ $time_label = empty( $timezone ) ? '' : sprintf( '%s (%s)', wp_date( 'h:i A' ), 
 ><?php esc_html_e( 'Time of Day', 'smartcrawl-seo' ); ?></label>
 
 <select
-	<?php echo esc_attr( $disabled ); ?>
 	class="sui-select"
 	id="<?php echo esc_attr( $select_id ); ?>"
 	data-minimum-results-for-search="-1"

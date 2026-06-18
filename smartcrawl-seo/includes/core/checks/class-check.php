@@ -257,6 +257,27 @@ abstract class Check {
 	}
 
 	/**
+	 * loose match keyphrase present when stop words and punctuation are ignored.
+	 *
+	 * @param string $raw Subject string.
+	 *
+	 * @return bool
+	 */
+	public function has_focus_loose( $raw ) {
+		$keyphrase_full = $this->get_raw_focus();
+		$keyphrase_str   = ! empty( $keyphrase_full ) ? implode( ' ', $keyphrase_full ) : implode( ' ', $this->get_focus() );
+
+		if ( empty( trim( $keyphrase_str ) ) ) {
+			return true;
+		}
+
+		$string    = String_Cache::get()->get_string( $raw, $this->get_language() );
+		$stopwords = $string->get_language_stopwords();
+
+		return String_Utils::has_keyphrase_loose( $raw, $keyphrase_str, $stopwords );
+	}
+
+	/**
 	 * Returns list of expected keywords
 	 *
 	 * @return array

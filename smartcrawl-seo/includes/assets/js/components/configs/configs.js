@@ -24,31 +24,6 @@ export default class Configs extends React.Component {
 		};
 	}
 
-	syncWithHub() {
-		this.setState(
-			{
-				syncing: true,
-			},
-			() => {
-				ConfigRequest.sync()
-					.then((data) => {
-						this.setConfigs(data.configs);
-					})
-					.catch(() => {
-						this.showErrorNotice(
-							__(
-								'There was an error syncing your configs with the hub.',
-								'smartcrawl-seo'
-							)
-						);
-					})
-					.finally(() => {
-						this.setState({ syncing: false });
-					});
-			}
-		);
-	}
-
 	render() {
 		const MainComponent = this.props.mainComponent;
 
@@ -64,8 +39,7 @@ export default class Configs extends React.Component {
 					onUpdate={(configId) => this.startUpdatingConfig(configId)}
 					onDownload={(configId) => this.downloadConfig(configId)}
 					onDelete={(configId) => this.startDeletingConfig(configId)}
-					triggerSync={() => this.syncWithHub()}
-				/>
+					/>
 
 				{this.maybeShowApplyModal()}
 				{this.maybeShowDeleteModal()}

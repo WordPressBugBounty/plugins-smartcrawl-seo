@@ -195,9 +195,11 @@ class Analysis extends Controller {
 	 * @return void
 	 */
 	public function add_quick_edit_focus_keyword_field( $column ) {
-		if ( 'seo' === $column ) {
-			Simple_Renderer::render( 'post-list/quick-edit-seo-analysis' );
+		if ( 'seo' !== $column || ! \user_can_see_seo_metabox() ) {
+			return;
 		}
+
+		Simple_Renderer::render( 'post-list/quick-edit-seo-analysis' );
 	}
 
 	/**

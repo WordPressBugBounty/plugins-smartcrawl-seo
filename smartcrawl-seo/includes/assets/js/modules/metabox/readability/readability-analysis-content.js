@@ -9,21 +9,45 @@ import ConfigValues from '../../../es6/config-values';
 import update from 'immutability-helper';
 import GutenbergEditor from '../../../es6/gutenberg-editor';
 import ClassicEditor from '../../../es6/classic-editor';
+import GutenbergReadabilityFleschPanel from '../../sidebar/panels/readability/GutenbergReadabilityFleschPanel';
 
 export default class ReadabilityAnalysisContent extends React.Component {
 	static defaultProps = {
 		ignored: false,
 		state: '',
+		useReactAccordion: false,
 	};
 
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			ignored: !!props.ignored,
+			checks: {
+				readability: {
+					ignored: !!props.ignored,
+				},
+			},
+		};
 
 		// Check if Gutenberg is active.
 		if (ConfigValues.get_bool('gutenberg_active', 'metabox')) {
 			this.editor = new GutenbergEditor();
 		} else {
 			this.editor = new ClassicEditor();
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		// Keep local ignored state in sync with upstream updates (e.g. refresh).
+		if (prevProps.ignored !== this.props.ignored) {
+			const ignored = !!this.props.ignored;
+			this.setState({
+				ignored,
+				checks: update(this.state.checks, {
+					readability: { ignored: { $set: ignored } },
+				}),
+			});
 		}
 	}
 
@@ -100,6 +124,7 @@ export default class ReadabilityAnalysisContent extends React.Component {
 			}
 		).then(() => {
 			this.setState({
+				ignored: true,
 				checks: update(this.state.checks, {
 					[id]: { ignored: { $set: true } },
 				}),
@@ -119,6 +144,7 @@ export default class ReadabilityAnalysisContent extends React.Component {
 			}
 		).then(() => {
 			this.setState({
+				ignored: false,
 				checks: update(this.state.checks, {
 					[id]: { ignored: { $set: false } },
 				}),
@@ -126,9 +152,57 @@ export default class ReadabilityAnalysisContent extends React.Component {
 		});
 	}
 
-	renderLevels() {
+	renderFleschExpandedBody() {
 		return (
-			<table className="sui-table">
+			<React.Fragment>
+				<strong>{__('Overview', 'smartcrawl-seo')}</strong>
+				<p className="sui-description">
+					{__(
+						'The Flesch-Kincaid readability tests are readability tests designed to indicate how difficult a passage is to understand. Here are the benchmarks.',
+						'smartcrawl-seo'
+					)}
+				</p>
+				{this.renderLevels()}
+
+				<strong>{__('How to fix', 'smartcrawl-seo')}</strong>
+				<p className="sui-description">
+					{__(
+						'Try to use shorter sentences, with less difficult words to improve readability.',
+						'smartcrawl-seo'
+					)}
+				</p>
+
+				<div className="wds-ignore-container">
+					<Button
+						className="wds-ignore"
+						color="ghost"
+						icon="sui-icon-eye-hide"
+						text={__('Ignore', 'smartcrawl-seo')}
+						onClick={() => this.handleIgnore()}
+					/>
+
+					<span className="sui-description">
+						{__(
+							'This will ignore warnings for this particular post.',
+							'smartcrawl-seo'
+						)}
+					</span>
+				</div>
+			</React.Fragment>
+		);
+	}
+
+	renderLevels() {
+		const { useReactAccordion } = this.props;
+
+		const table = (
+			<table
+				className={
+					useReactAccordion
+						? 'sui-table wds-readability-levels-table'
+						: 'sui-table'
+				}
+			>
 				<thead>
 					<tr>
 						<th>{__('Score', 'smartcrawl-seo')}</th>
@@ -154,10 +228,37 @@ export default class ReadabilityAnalysisContent extends React.Component {
 				</tbody>
 			</table>
 		);
+
+		if (useReactAccordion) {
+			return (
+				<div className="wds-readability-levels-table-wrap">{table}</div>
+			);
+		}
+
+		return table;
 	}
 
 	render() {
-		const { ignored, state, level } = this.props;
+		const { state, level, useReactAccordion } = this.props;
+		const { ignored } = this.state;
+
+		if (useReactAccordion) {
+			return (
+				<div className="wds-report-inner">
+					<div className="wds-seo-assessments-stack">
+						<GutenbergReadabilityFleschPanel
+							state={state}
+							ignored={ignored}
+							level={level}
+							onIgnore={() => this.handleIgnore()}
+							onUnignore={() => this.handleUnignore()}
+						>
+							{this.renderFleschExpandedBody()}
+						</GutenbergReadabilityFleschPanel>
+					</div>
+				</div>
+			);
+		}
 
 		return (
 			<div className="wds-report-inner">
@@ -195,12 +296,12 @@ export default class ReadabilityAnalysisContent extends React.Component {
 											icon="sui-icon-undo"
 											text={__(
 												'Restore',
-												'wds-texdomain'
+												'smartcrawl-seo'
 											)}
 											onClick={() =>
 												this.handleUnignore()
 											}
-										></Button>
+										/>
 									) : (
 										<React.Fragment>
 											<span
@@ -218,39 +319,7 @@ export default class ReadabilityAnalysisContent extends React.Component {
 							</React.Fragment>
 						}
 					>
-						<strong>{__('Overview', 'smartcrawl-seo')}</strong>
-						<p className="sui-description">
-							{__(
-								'The Flesch-Kincaid readability tests are readability tests designed to indicate how difficult a passage is to understand. Here are the benchmarks.',
-								'smartcrawl-seo'
-							)}
-						</p>
-						{this.renderLevels()}
-
-						<strong>{__('How to fix', 'smartcrawl-seo')}</strong>
-						<p className="sui-description">
-							{__(
-								'Try to use shorter sentences, with less difficult words to improve readability.',
-								'smartcrawl-seo'
-							)}
-						</p>
-
-						<div className="wds-ignore-container">
-							<Button
-								className="wds-ignore"
-								color="ghost"
-								icon="sui-icon-eye-hide"
-								text={__('Ignore', 'wds-texdomain')}
-								onClick={() => this.handleIgnore()}
-							></Button>
-
-							<span>
-								{__(
-									'This will ignore warnings for this particular post.',
-									'smartcrawl-seo'
-								)}
-							</span>
-						</div>
+						{this.renderFleschExpandedBody()}
 					</AccordionItem>
 				</div>
 			</div>

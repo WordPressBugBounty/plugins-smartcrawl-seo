@@ -128,10 +128,18 @@ abstract class Submodule_Controller extends Controller {
 			wp_send_json_error();
 		}
 
+		$input = null;
 		if ( isset( $_POST['active'] ) ) {
 			$input = array( 'active' => 'true' === sanitize_text_field( wp_unslash( $_POST['active'] ) ) );
 		} elseif ( isset( $_POST['options'] ) ) {
-			$input = stripslashes_deep( $_POST['options'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$raw = wp_unslash( $_POST['options'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+			if ( is_string( $raw ) ) {
+				$decoded = json_decode( $raw, true );
+				$input   = is_array( $decoded ) ? $decoded : $raw;
+			} else {
+				$input = stripslashes_deep( $raw ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			}
 		}
 
 		if ( empty( $input ) ) {

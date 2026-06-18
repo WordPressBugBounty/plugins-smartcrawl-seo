@@ -34,7 +34,7 @@ export default class UpsellNotice extends React.Component {
 						<div className="sui-notice-content">
 							<div className="sui-notice-message">
 								<span
-									className="sui-notice-icon sui-icon-info sui-md"
+									className="sui-notice-icon dashicons dashicons-info"
 									aria-hidden="true"
 								></span>
 
@@ -44,7 +44,7 @@ export default class UpsellNotice extends React.Component {
 										onClick={onDismiss}
 									>
 										<span
-											className="sui-icon-check"
+											className="dashicons dashicons-yes"
 											aria-hidden="true"
 										/>
 									</span>
