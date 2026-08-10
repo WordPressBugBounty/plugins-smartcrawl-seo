@@ -1317,6 +1317,7 @@ class Assets extends Controller {
 			'_wds_schema_types',
 			array(
 				'plugin_version'       => SMARTCRAWL_VERSION,
+				'nonce'                => wp_create_nonce( 'wds-schema-nonce' ),
 				'post_types'           => $post_types,
 				'post_formats'         => $post_formats,
 				'page_templates'       => $page_templates,

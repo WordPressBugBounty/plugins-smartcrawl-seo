@@ -31,7 +31,9 @@ export default class SchemaTypeLocations extends React.Component {
 			},
 			() => {
 				const ajaxURL = ConfigValues.get('ajax_url', 'schema_types');
+				const nonce = ConfigValues.get('nonce', 'schema_types');
 				$.get(ajaxURL + '?action=wds-format-schema-location', {
+					_wds_nonce: nonce,
 					conditions: this.props.conditions,
 				}).done((data) => {
 					this.setState({

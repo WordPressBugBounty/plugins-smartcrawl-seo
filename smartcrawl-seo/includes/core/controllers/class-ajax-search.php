@@ -35,12 +35,16 @@ class Ajax_Search extends Controller {
 	 * @return void
 	 */
 	public function search_post() {
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended
-		$search_query = \smartcrawl_get_array_value( $_GET, 'term' );
-		$post_type    = \smartcrawl_get_array_value( $_GET, 'type' );
-		$request_type = \smartcrawl_get_array_value( $_GET, 'request_type' );
+		check_ajax_referer( 'wds-admin-nonce', '_wds_nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
+
+		$search_query = sanitize_text_field( wp_unslash( (string) \smartcrawl_get_array_value( $_GET, 'term' ) ) );
+		$post_type    = sanitize_key( (string) \smartcrawl_get_array_value( $_GET, 'type' ) );
+		$request_type = sanitize_key( (string) \smartcrawl_get_array_value( $_GET, 'request_type' ) );
 		$post_id      = \smartcrawl_get_array_value( $_GET, 'id' );
-		// phpcs:enable
 
 		if ( empty( $search_query ) && empty( $post_id ) ) {
 			wp_send_json( array( 'results' => array() ) );
@@ -57,7 +61,9 @@ class Ajax_Search extends Controller {
 		);
 
 		if ( 'text' === $request_type && $post_id ) {
-			$args['post__in'] = is_array( $post_id ) ? $post_id : array( $post_id );
+			$args['post__in'] = is_array( $post_id )
+				? array_map( 'intval', $post_id )
+				: array( (int) $post_id );
 		}
 
 		$posts = get_posts( $args );
@@ -79,12 +85,16 @@ class Ajax_Search extends Controller {
 	 * @return void
 	 */
 	public function search_taxonomy_term() {
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended
-		$search_query = \smartcrawl_get_array_value( $_GET, 'term' );
-		$taxonomy     = \smartcrawl_get_array_value( $_GET, 'type' );
-		$request_type = \smartcrawl_get_array_value( $_GET, 'request_type' );
+		check_ajax_referer( 'wds-admin-nonce', '_wds_nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
+
+		$search_query = sanitize_text_field( wp_unslash( (string) \smartcrawl_get_array_value( $_GET, 'term' ) ) );
+		$taxonomy     = sanitize_key( (string) \smartcrawl_get_array_value( $_GET, 'type' ) );
+		$request_type = sanitize_key( (string) \smartcrawl_get_array_value( $_GET, 'request_type' ) );
 		$term_id      = \smartcrawl_get_array_value( $_GET, 'id' );
-		// phpcs:enable
 
 		$results = array();
 
@@ -99,7 +109,9 @@ class Ajax_Search extends Controller {
 			'order'      => 'ASC',
 		);
 		if ( 'text' === $request_type && $term_id ) {
-			$args['include'] = is_array( $term_id ) ? $term_id : array( $term_id );
+			$args['include'] = is_array( $term_id )
+				? array_map( 'intval', $term_id )
+				: array( (int) $term_id );
 			$args['number']  = is_array( $term_id ) ? count( $term_id ) : 1;
 		} else {
 			$args['search'] = $search_query;

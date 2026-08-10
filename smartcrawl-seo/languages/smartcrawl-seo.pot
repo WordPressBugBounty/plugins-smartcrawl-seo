@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the SmartCrawl Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: SmartCrawl Pro 3.16.2\n"
+"Project-Id-Version: SmartCrawl Pro 3.16.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/build\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-15T04:53:59+00:00\n"
+"POT-Creation-Date: 2026-08-04T06:33:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
@@ -582,15 +582,15 @@ msgstr ""
 msgid "%s Wizard: Schema"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:205
+#: includes/core/admin/settings/class-schema.php:220
 msgid "Post type"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:206
+#: includes/core/admin/settings/class-schema.php:221
 msgid "Show Globally"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:207
+#: includes/core/admin/settings/class-schema.php:222
 #: includes/core/admin/templates/dashboard/dashboard-widget-onpage.php:43
 #: includes/core/admin/templates/onpage/onpage-settings.php:64
 #: includes/core/admin/templates/onpage/onpage-settings.php:98
@@ -600,39 +600,39 @@ msgstr ""
 msgid "Homepage"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:208
+#: includes/core/admin/settings/class-schema.php:223
 msgid "Author role"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:209
+#: includes/core/admin/settings/class-schema.php:224
 msgid "Post format"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:210
+#: includes/core/admin/settings/class-schema.php:225
 msgid "Page template"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:211
+#: includes/core/admin/settings/class-schema.php:226
 msgid "Product type"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:245
+#: includes/core/admin/settings/class-schema.php:260
 msgid "Variable Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:246
+#: includes/core/admin/settings/class-schema.php:261
 msgid "Simple Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:247
+#: includes/core/admin/settings/class-schema.php:262
 msgid "Grouped Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:248
+#: includes/core/admin/settings/class-schema.php:263
 msgid "External Product"
 msgstr ""
 
-#: includes/core/admin/settings/class-schema.php:458
+#: includes/core/admin/settings/class-schema.php:484
 #: includes/core/admin/templates/metabox/metabox-advanced-indexing.php:84
 #: includes/modules/advanced/breadcrumbs/class-controller.php:317
 #: includes/assets/js/modules/metabox/advanced/indexing.js:82
@@ -4953,47 +4953,47 @@ msgstr ""
 msgid "Key invalid"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1475
+#: includes/core/controllers/class-assets.php:1476
 msgid "Analyzing data and preparing report..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1476
+#: includes/core/controllers/class-assets.php:1477
 msgid "Running SEO test..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1477
+#: includes/core/controllers/class-assets.php:1478
 msgid "Refreshing data. Please wait..."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1478
+#: includes/core/controllers/class-assets.php:1479
 msgid "The audit has been copied successfully."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1479
+#: includes/core/controllers/class-assets.php:1480
 msgid "Audit could not be copied to clipboard."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1716
+#: includes/core/controllers/class-assets.php:1717
 msgid "The URL field is empty. Please enter at least one URL and try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1717
+#: includes/core/controllers/class-assets.php:1718
 msgid "Submission Completed!"
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1718
+#: includes/core/controllers/class-assets.php:1719
 msgid "You cannot submit more than 100 URLs at once."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1719
+#: includes/core/controllers/class-assets.php:1720
 msgid "One or more URLs are invalid. Please check and try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1720
+#: includes/core/controllers/class-assets.php:1721
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: includes/core/controllers/class-assets.php:1721
+#: includes/core/controllers/class-assets.php:1722
 msgid "Rate limit exceeded. Please wait and try again later."
 msgstr ""
 

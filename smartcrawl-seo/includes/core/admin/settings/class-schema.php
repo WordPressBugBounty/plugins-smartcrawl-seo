@@ -143,7 +143,22 @@ class Schema extends Admin_Settings {
 	 * Send a formatted schema location as JSON response back to an Ajax request.
 	 */
 	public function format_schema_location() {
-		$conditions = wp_unslash( $_GET['conditions'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput
+		check_ajax_referer( 'wds-schema-nonce', '_wds_nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
+
+		$conditions = isset( $_GET['conditions'] ) ? wp_unslash( $_GET['conditions'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+		if ( ! is_array( $conditions ) ) {
+			wp_send_json(
+				array(
+					'full'    => '',
+					'summary' => '',
+				)
+			);
+		}
 
 		$count        = - 1;
 		$summary_item = false;
@@ -277,9 +292,14 @@ class Schema extends Admin_Settings {
 		}
 
 		if ( in_array( $lhs, \smartcrawl_frontend_post_types(), true ) ) {
-			$post = get_post( $rhs );
+			$post_id = (int) $rhs;
+			$post    = get_post( $post_id );
 
-			return $post ? $post->post_title : '';
+			if ( ! $post || ! current_user_can( 'read_post', $post_id ) ) {
+				return '';
+			}
+
+			return $post->post_title;
 		}
 
 		$taxonomies = $this->get_taxonomies_singular();
@@ -298,7 +318,13 @@ class Schema extends Admin_Settings {
 	 * Search and send post meta result as a JSON response back to an Ajax request.
 	 */
 	public function search_schema_post_meta() {
-		$search_query = \smartcrawl_get_array_value( $_GET, 'term' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		check_ajax_referer( 'wds-schema-nonce', '_wds_nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( null, 403 );
+		}
+
+		$search_query = sanitize_text_field( wp_unslash( (string) \smartcrawl_get_array_value( $_GET, 'term' ) ) );
 		$results      = array();
 		if ( empty( $search_query ) ) {
 			wp_send_json( array( 'results' => $results ) );

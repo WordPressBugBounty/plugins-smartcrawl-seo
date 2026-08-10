@@ -6,6 +6,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import FormField from '../form-field';
 import Select from '../input-fields/select';
 import ajaxUrl from 'ajaxUrl';
+import ConfigValues from '../../es6/config-values';
 
 export default class NewsPostType extends React.Component {
 	static defaultProps = {
@@ -114,19 +115,21 @@ export default class NewsPostType extends React.Component {
 
 	getAjaxSearchUrl(requestType = '') {
 		return sprintf(
-			'%1$s?action=wds_search_post&type=%2$s&request_type=%3$s',
+			'%1$s?action=wds_search_post&type=%2$s&request_type=%3$s&_wds_nonce=%4$s',
 			ajaxUrl,
 			this.props.name,
-			requestType
+			requestType,
+			ConfigValues.get('nonce', 'admin')
 		);
 	}
 
 	getTermAjaxSearchUrl(taxonomy, requestType = '') {
 		return sprintf(
-			'%1$s?action=wds-search-term&type=%2$s&request_type=%3$s',
+			'%1$s?action=wds-search-term&type=%2$s&request_type=%3$s&_wds_nonce=%4$s',
 			ajaxUrl,
 			taxonomy,
-			requestType
+			requestType,
+			ConfigValues.get('nonce', 'admin')
 		);
 	}
 

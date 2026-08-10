@@ -159,10 +159,12 @@ export default class SchemaTypeCondition extends React.Component {
 
 	searchSelectProps(placeholder, entityType, ajaxAction) {
 		const ajaxURL = ConfigValues.get('ajax_url', 'schema_types');
+		const nonce = ConfigValues.get('nonce', 'admin');
 		const params = new URLSearchParams();
 
 		params.append('action', ajaxAction);
 		params.append('type', entityType);
+		params.append('_wds_nonce', nonce);
 
 		const props = {
 			placeholder,

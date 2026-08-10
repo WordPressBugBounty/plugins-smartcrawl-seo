@@ -210,6 +210,11 @@ class SchemaPropertySimple extends React.Component {
 
 		if ('post_meta' === source) {
 			const ajaxURL = ConfigValues.get('ajax_url', 'schema_types');
+			const nonce = ConfigValues.get('nonce', 'schema_types');
+			const params = new URLSearchParams({
+				action: 'wds-search-post-meta',
+				_wds_nonce: nonce,
+			});
 			return (
 				<Select
 					key={key}
@@ -221,7 +226,7 @@ class SchemaPropertySimple extends React.Component {
 					onSelect={(selectValue) =>
 						this.handleValueChange(selectValue)
 					}
-					ajaxUrl={ajaxURL + '?action=wds-search-post-meta'}
+					ajaxUrl={ajaxURL + '?' + params.toString()}
 				/>
 			);
 		}

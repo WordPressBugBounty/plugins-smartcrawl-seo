@@ -8,7 +8,7 @@ Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 3.16.2
+Stable tag: 3.16.3
 License: GPL v3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -150,6 +150,10 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 6. Schema Type Builder
 
 == Changelog ==
+
+= 3.16.3 ( 2026-08-10 ) =
+
+- Fix: Improved security and access controls for AJAX handlers. (Credit: Ezekiel Victor)
 
 = 3.16.2 ( 2026-06-18 ) =
 
