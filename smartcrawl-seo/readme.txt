@@ -7,8 +7,8 @@ Author URI: https://wpmudev.com/
 Author: WPMU DEV
 Requires at least: 6.4
 Requires PHP: 7.4
-Tested up to: 6.8
-Stable tag: 3.16.3
+Tested up to: 7.1
+Stable tag: 3.16.4
 License: GPL v3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -150,6 +150,10 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 6. Schema Type Builder
 
 == Changelog ==
+
+= 3.16.4 ( 2026-08-19 ) =
+
+- Fix: SEO Health scans timing out in some cases.
 
 = 3.16.3 ( 2026-08-10 ) =
 

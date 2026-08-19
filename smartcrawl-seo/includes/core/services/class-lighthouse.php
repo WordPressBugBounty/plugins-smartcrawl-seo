@@ -208,6 +208,30 @@ class Lighthouse extends Service {
 			return false;
 		}
 
+		$code = (int) \smartcrawl_get_array_value( $results, 'code' );
+		if ( ! empty( $results['error'] ) || ( $code && 200 !== $code ) ) {
+			if ( \SmartCrawl\Lighthouse\Controller::ERROR_RESULT_NOT_FOUND === $code ) {
+				return false;
+			}
+
+			$results['error'] = true;
+			if ( empty( $results['message'] ) ) {
+				$results['message'] = esc_html__( 'We were not able to get results for your site', 'smartcrawl-seo' );
+			}
+
+			update_option( self::OPTION_ID_LAST_REPORT, $results, false );
+
+			return true;
+		}
+
+		// Hub may omit `data.time`; without it is_fresh()/has_data() never pass.
+		if ( empty( $results['data'] ) || ! is_array( $results['data'] ) ) {
+			$results['data'] = array();
+		}
+		if ( empty( $results['data']['time'] ) ) {
+			$results['data']['time'] = time();
+		}
+
 		update_option( self::OPTION_ID_LAST_REPORT, $results, false );
 
 		return true;
@@ -248,7 +272,7 @@ class Lighthouse extends Service {
 		}
 
 		$time = \smartcrawl_get_array_value( $last_report, array( 'data', 'time' ) );
-		$report->set_timestamp( $time );
+		$report->set_timestamp( $time ?: time() );
 		$report->populate( $device_report );
 
 		return $report;

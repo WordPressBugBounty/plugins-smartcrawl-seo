@@ -160,7 +160,16 @@ class Controller extends Controllers\Controller {
 			wp_send_json_success( array( 'finished' => false ) );
 		}
 
-		if ( $now >= $start_time + 90 ) {
+		$refreshed   = $lighthouse->refresh_report();
+		$last_report = $lighthouse->get_last_report();
+		$timed_out   = $now >= $start_time + 90;
+
+		if ( $refreshed && ( $last_report->has_errors() || $last_report->is_fresh() ) ) {
+			$lighthouse->stop();
+			wp_send_json_success( array( 'finished' => true ) );
+		}
+
+		if ( $timed_out ) {
 			// Too much time has passed, something might be wrong, force user to start over.
 			$lighthouse->stop();
 			$lighthouse->clear_last_report();
@@ -171,18 +180,7 @@ class Controller extends Controllers\Controller {
 			wp_send_json_success( array( 'finished' => true ) );
 		}
 
-		$lighthouse->refresh_report();
-		$last_report = $lighthouse->get_last_report();
-		if (
-			$last_report->get_error_code() === self::ERROR_RESULT_NOT_FOUND
-			|| ! $last_report->is_fresh()
-		) {
-			// Let's wait a little longer for the results to become available.
-			wp_send_json_success( array( 'finished' => false ) );
-		}
-
-		$lighthouse->stop();
-		wp_send_json_success( array( 'finished' => true ) );
+		wp_send_json_success( array( 'finished' => false ) );
 	}
 
 	/**

@@ -3,10 +3,10 @@
  * Plugin Name: SmartCrawl
  * Plugin URI: https://wpmudev.com/project/smartcrawl-wordpress-seo/
  * Description: Every SEO option that a site requires, in one easy bundle.
- * Version: 3.16.3
+ * Version: 3.16.4
  * Network: true
  * Requires at least: 6.4
- * Tested up to: 7.0
+ * Tested up to: 7.1
  * Requires PHP: 7.4
  * Text Domain: smartcrawl-seo
  * Author: WPMU DEV
